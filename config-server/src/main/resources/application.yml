@@ -1,0 +1,21 @@
+# 设置配置服务端口，默认8888
+server:
+  port: 8020
+
+# git仓库配置
+spring:
+  application:
+    name: config-server # 服务应用名称 qt-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/caidchen1988/qt-server
+          searchPaths: qt-server-config/config-repo
+          username: qt_config_server
+          password: qt_config_server@pass
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka/
