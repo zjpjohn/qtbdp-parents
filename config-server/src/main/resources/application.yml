@@ -5,15 +5,15 @@ server:
 # git仓库配置
 spring:
   application:
-    name: config-server # 服务应用名称 qt-server
+    name: config-server # 服务应用名称
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/caidchen1988/qt-server
-          searchPaths: qt-server-config/config-repo
-          username: qt_config_server
-          password: qt_config_server@pass
+          uri: https://github.com/caidchen1988/qtbdp-parents
+          searchPaths: config-repo
+#          username: qt_config_server
+#          password: qt_config_server@pass
 
 eureka:
   client:

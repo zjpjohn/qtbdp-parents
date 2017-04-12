@@ -1,18 +1,5 @@
-# 基础服务配置信息
-server:
-  port: 8020
 
-spring:
-  application:
-    name: base-service
-
----
-# 注册中心
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8010/eureka/
-
+# bootstrap.yml 先于 application.yml 加载；所以配置服务要先加载，否则报错
 # 增加关于RabbitMQ的连接和用户信息
 rabbitmq:
   host: ${rabbitmq.host}
