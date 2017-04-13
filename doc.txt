@@ -1,0 +1,13 @@
+# 目录说明
+qtbdp-parents # 父目录
+  |-- base-service  # 基础服务工程，包括：文件服务、支付服务、短信服务等
+  |-- config-repo   # 配置中心的动态配置信息，存储在github库中
+  |-- config-server # 配置中心，提供动态配置
+  |-- eureka-server # 注册中心，提供服务的注册发现；比如：qt-trading-web通过RPC调用base-server服务
+  |-- qt-trading-web # 钱塘交易中心，具体的web应用
+
+# 运行说明
+1. 启动eureka-server的EureKaServerApplication主函数，成功后直接访问地址：http://localhost:8010/
+2. 启动config-server的ConfigServerApplication主函数，成功后直接访问地址：http://localhost:8020/base-service/dev/master(确保能调用到配置信息)
+3. 启动base-service的BaseServiceApplication主函数
+4. 启动qt-trading-web的WebApplication主函数，成功后直接访问地址：http://localhost:8030/
