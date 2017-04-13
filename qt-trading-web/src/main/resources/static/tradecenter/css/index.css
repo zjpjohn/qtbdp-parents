@@ -1,0 +1,273 @@
+@charset "utf-8";
+/***************工业数据产品*********/
+.index_titles{
+    position:relative;
+    width:260px;
+    color: #2A97E7;
+    margin:0px auto;
+    margin-bottom:80px;
+    text-align:center;
+}
+.index_titles>i{
+   position:absolute;
+    border-bottom:1px solid #2A97E7;
+    border-right:1px solid #2A97E7;
+    background:#2A97E7;
+}
+.index_titles>.i1{
+    width:70px;
+    left:0px;
+    top:10px;
+}
+.index_titles>.i2{
+    width:70px;
+    right:0px;
+    top:10px;
+}
+.index_titles>.i3{
+    width:0px;
+    height:49px;
+    left:0px;
+    top:10px;
+}
+.index_titles>.i4{
+    width:0px;
+    height:49px;
+    right:0px;
+    top:10px;
+}
+.index_titles>.i5{
+    width:20px;
+    left:0px;
+    bottom:6px;
+}
+.index_titles>.i6{
+     width:20px;
+     right:0px;
+     bottom:6px;
+ }
+.index_titles>.i7{
+    width:6px;
+    height:7px;
+    left:0px;
+    bottom:6px;
+}
+.index_titles>p{
+    left: 62px;
+}
+.index_titles>h1{
+    margin-top:10px;
+}
+.production{
+    width:1200px;
+    margin:80px auto;
+    margin-bottom:64px;
+}
+.pro_list1{
+    border-bottom:1px solid #ddd;
+}
+.pro_list>li{
+    float:left;
+    border-right:1px solid #ddd;
+    width:179px;
+    height:190px;
+    padding:50px 60px;
+    padding-bottom:30px;
+    text-align:center;
+    line-height:20px;
+    color:#999;
+    position:relative;
+}
+.pro_list>li:last-child{
+    border-right:none;
+}
+.pro_list>li>i{
+    display:block;
+    width:51px;
+    height:51px;
+    margin:0px auto;
+    background-image:url("../images/jy_icon1.png" );
+}
+.pro_i1{
+    background-position:-37px -157px;
+}
+.pro_i2{
+    background-position:-37px -261px;
+}
+.pro_i3{
+    background-position:-40px -366px;
+}
+.pro_i4   {
+    background-position:-37px -471px;
+}
+.pro_i5{
+     background-position:-37px -576px;
+ }
+.pro_i6{
+    background-position:-41px -679px;
+}
+.pro_i7{
+    background-position:-41px -785px;
+}
+.pro_i8{
+    background-position:-40px -891px;
+}
+.pro_list>li>h3{
+    color:#2A97E7;
+    margin:20px auto;
+}
+.more_pro{
+    display:block;
+    width:124px;
+    text-align:center;
+    height:45px;
+    line-height:45px;
+    border:1px solid #2A97E7;
+    color:#2A97E7;
+    border-radius:4px;
+    margin:0px auto;
+    margin-top:50px;
+    font-size:16px;
+}
+.pro_mask{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    line-height:270px;
+    background:rgba(256,256,256,0.8);
+    cursor:pointer;
+    display:none;
+}
+.pro_mask>i{
+   display:inline-block;
+    width:41px;
+    height:41px;
+    margin:0px auto;
+    background:url("../images/jy_icon1.png" ) no-repeat -188px -60px;
+}
+.pro_list>li:hover .pro_mask{
+    display:block;
+}
+/***********平台优势****************/
+.advanige{
+    background:url("../images/index_bg1.jpg")no-repeat center center;
+   padding:50px 0px;
+}
+.advanige .index_titles{
+    color:#fff;
+    margin-bottom:60px;
+    width:200px;
+}
+.advanige .index_titles>i{
+    position:absolute;
+    border-bottom:1px solid #fff;
+    border-right:1px solid #fff;
+    background:#fff;
+}
+.advanige .index_titles>.i1,.advanige .index_titles>.i2{
+    width:50px;
+}
+.advanige .index_titles>h1{
+    color:#fff;
+}
+.adv_list{
+    width:1200px;
+    margin:0px auto;
+}
+.adv_list>li{
+    float:left;
+    width:274px;
+    height:255px;
+    padding:45px 53px;
+    background:#fff;
+    margin-right:30px;
+    margin-bottom:30px;
+}
+.adv_list>li:nth-child(3n){
+    margin-right:0px;
+}
+.adv_list p{
+    margin-top:32px;
+    margin-bottom:40px;
+}
+.adv_list b{
+    font-size:24px;
+    color:#38AFE5;
+}
+.adv_list ol>li{
+    line-height:30px;
+}
+/***********合作关系****************/
+.companion{
+    width:1200px;
+    margin:80px auto;
+}
+.companion .index_titles{
+    width:196px;
+}
+.companion .index_titles>.i1,.companion .index_titles>.i2{
+    width:40px;
+}
+.com_slide{
+    width:1200px;
+    overflow:hidden;
+}
+.com_list{
+    width:1863px;
+    position:relative;
+    left:0px;
+}
+.com_list>a{
+    float:left;
+    width:162px;
+    height:44px;
+    margin-right:45px;
+    background-image:url("../images/jy_icon1.png" );
+}
+.com_list>.a1{
+    background-position:-188px -161px;
+}
+.com_list>.a2{
+    background-position:-188px -261px;
+}
+.com_list>.a3{
+    background-position:-188px -362px;
+}
+.com_list>.a4{
+    background-position:-188px -467px;
+}
+.com_list>.a5{
+    background-position:-188px -566px;
+}
+.com_list>.a6{
+    background-position:-188px -681px;
+}
+.com_list>.a7{
+    background-position:-188px -771px;
+}
+.com_list>.a8{
+    background-position:-188px -851px;
+}
+.com_list>.a9{
+    background-position:-188px -920px;
+}
+.com_circle{
+    width:105px;
+    margin:0px auto;
+    margin-top:80px;
+}
+.com_circle>i{
+    float: left;
+    width: 13px;
+    height: 13px;
+    border:1px solid #0285CD;
+    border-radius:7px;
+    background: #fff;
+    margin: 0px 10px;
+    cursor:pointer;
+}
+.com_circle>i.active,.com_circle>i:hover{
+    background:#0285CD;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+
+<header class="floating top">
+    <a class="lf qt_logo icon"></a>
+    <div class="rt head_search floating">
+        <input type="text" placeholder="请输入查找内容" class="search_input lf"/>
+        <a href="javascript:;" class="search_btn rt">搜索</a>
+    </div>
+    <div class="head_fabu  floating">
+        <i class="lf icon"></i>
+        <div class="lf fabu_btns">
+            <p>发布</p>
+            <a href="javascript:;">项目发布</a>
+            <a href="javascript:;">需求发布</a>
+            <a href="javascript:;">加盟服务</a>
+        </div>
+    </div>
+</header>
+<!---导航栏-->
+<nav>
+    <div class="nav_con floating">
+        <p class="nav_list lf">
+            <a href="javascript:;" class="active">首页</a>
+            <a href="javascript:;">数据商城</a>
+            <a href="javascript:;">需求大厅</a>
+            <a href="javascript:;">数据合作</a>
+            <a href="javascript:;">关于我们</a>
+        </p>
+        <!--如果未登录-->
+        <!--  <p class="rt nav_list nav_rt">
+              <a href="javascript:;">登录</a>
+              <i>/</i>
+              <a href="javascript:;">注册</a>
+          </p>-->
+        <!--如果已登录-->
+        <div class="rt nav_haslogin floating">
+            <a href="javascript:;" class="lf user_img">
+                <img th:src="@{/tradecenter/images/user_img.jpg}" alt=""/>
+            </a>
+            <div class="lf user_center">
+                <p class="user_name">钱塘大数据<i></i></p>
+                <p class="nav_down">
+                    <a href="javascript:;">个人中心</a>
+                    <a href="javascript:;">退出登录</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+</html>

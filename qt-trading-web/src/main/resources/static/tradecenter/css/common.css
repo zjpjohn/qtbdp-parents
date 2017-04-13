@@ -1,0 +1,262 @@
+@charset "utf-8";
+body {
+	font: 14px "microsoft yahei", Arial, Helvetica, sans-serif;
+	color:#666;
+    margin:0px;
+    padding:0px;
+    min-width:1200px;
+}
+ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd {
+    margin:0px;
+    padding:0px;
+    border:none;
+    list-style:none;
+}
+h1,h2,h3,h4,h5,h6{
+	color:#333;
+}
+img{
+	vertical-align:middle;
+}
+input,textarea {
+	border:none;
+	padding:0;
+	margin:0;
+	font-family:"Microsoft Yahei";
+}
+.lf   {float:left;}
+.rt  {float:right;}
+.clear  {clear:both;}
+.floating:after{
+	content:'';
+	display:block;
+	clear:both;
+}
+a{
+	text-decoration:none;
+	color:#666;
+}
+i{
+	font-style:normal;
+}
+.lastb{
+	background-color: #ddd;
+    padding: 1px 4px;
+    font-weight: normal;
+}
+input::-webkit-input-placeholder {
+	font-family:'Microsoft Yahei';
+	padding-left:5px;
+}
+input:-moz-placeholder {
+	font-family:'Microsoft Yahei';
+	padding-left:5px;
+}
+input::-moz-placeholder {
+	font-family:'Microsoft Yahei';
+	padding-left:5px;
+}
+input:-ms-input-placeholder {
+	font-family:'Microsoft Yahei';
+	padding-left:5px;
+}
+.inline_block{
+	display:inline-block;
+	vertical-align:middle;
+}
+
+/******页头***********/
+.top{
+	width:1200px;
+	margin:35px auto;
+}
+.icon{
+	background-image:url("../images/jy_icon1.png");
+}
+.qt_logo{
+	width:344px;
+	height:40px;
+	background-position: -579px -60px;
+}
+.head_fabu{
+	width:252px;
+	margin:0px auto;
+}
+.head_fabu>i{
+	width:44px;
+	height:44px;
+	background-position: -36px -58px;
+	margin-right:10px;
+}
+.fabu_btns>p{
+	color:#010101;
+	line-height:25px;
+}
+.fabu_btns>a{
+	color:#999;
+	margin-right:10px;
+}
+.fabu_btns>a:last-child{
+	margin-right:0px;
+}
+.head_search{
+	width:285px;
+	height:40px;
+	border-radius:20px;
+	overflow:hidden;
+}
+.search_input{
+	width:220px;
+	height:40px;
+	line-height:40px;
+	text-indent:20px;
+	background:#F7F7F7;
+}
+.search_btn{
+	width:65px;
+	height:40px;
+	line-height:40px;
+	color:#fff;
+	text-align:center;
+	background-color:#0076C8;
+}
+nav{
+	background:#1A2730;
+	height:70px;
+}
+.nav_con{
+	width:1200px;
+	margin:0px auto;
+}
+.nav_list>a,.nav_rt>a{
+	margin-right:40px;
+	color:#fff;
+	font-size:18px;
+	padding:23px 0px;
+	line-height:70px;
+}
+.nav_rt>a{
+	margin-right:5px;
+	padding-left:5px;
+}
+.nav_list>a:hover,.nav_list>a.active{
+	color:#00BAFF;
+}
+.nav_haslogin{
+	margin-top:20px;
+}
+.user_img{
+	width:40px;
+	height:40px;
+	margin-right:10px;
+}
+.user_img>img{
+	width:100%;
+	height:100%;
+}
+.user_name{
+	position:relative;
+	padding-right:20px;
+	color:#fff;
+	margin-top:10px;
+}
+.user_name>i{
+	position:absolute;
+	right:0px;
+	top:7px;
+	width:0px;
+	height:0px;
+	border:5px solid transparent;
+	border-top-color:#fff;
+}
+.nav_haslogin:hover .user_name>i{
+	border-top-color:transparent;
+	border-bottom-color:#fff;
+	top:2px;
+}
+.nav_down{
+	background:#1A2730;
+	margin-top:20px;
+	padding-bottom:10px;
+	display:none;
+}
+.nav_down>a{
+	color:#fff;
+	display:block;
+	text-align:center;
+	line-height:30px;
+}
+.nav_down>a:hover{
+	color:#00BAFF;
+}
+.nav_haslogin:hover .nav_down{
+	display:block;
+}
+/***********页脚**************/
+.footer{
+	width:100%;
+	background:#1A2730;
+	color:#fff;
+	padding:50px 0px;
+}
+.footer_main{
+	width:1200px;
+	margin:0px auto;
+}
+.footer_main>li{
+	float:left;
+	padding:0px 80px;
+	height:165px;
+	border-right:1px solid #000;
+	border-left:1px solid #2D3E50;
+}
+.footer_main h2,.footer_main a{
+	color:#fff;
+}
+.footer_main>li:first-child{
+	padding-left:0px;
+	border-left:none;
+}
+.footer_main>li:last-child{
+	padding-right:30px;
+	border-right:none;
+}
+.footer_main h2{
+	font-weight:normal;
+	font-size:24px;
+	margin-bottom:40px;
+}
+.footer_main>li p{
+	line-height:30px;
+}
+.footer_main>li i{
+	display:inline-block;
+	vertical-align:middle;
+	width:24px;
+	height:24px;
+	margin-right:10px;
+	background-image:url("../images/jy_icon1.png" );
+}
+.footer_main .contactus i{
+	background-position:-349px -70px;
+}
+.footer_main .platform i{
+	background-position:-408px -70px;
+}
+.footer_main .cooperation i{
+	background-position:-467px -70px;
+}
+.footer_main .focusus i{
+	background-position:-290px -70px;
+}
+.platform p>a:first-child,.cooperation p>a:first-child{
+	margin-right:50px;
+}
+.footer_main .focusus h2{
+	margin-bottom:20px;
+}
+.qr_code{
+	width:105px;
+	height:105px;
+	margin-left:10px;
+}
