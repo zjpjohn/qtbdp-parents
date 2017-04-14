@@ -3,12 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <!-- 引入header布局 -->
-<head th:include="layout/top"></head>
+<head th:replace="layout/top :: head"></head>
 
 <body >
     <!--  页头 -->
     <div th:replace="layout/header" />
-
 
     <!-- banner图开始-->
     <div id="wrapper">
@@ -241,7 +240,7 @@
     <!--合作伙伴结束-->
 
     <!-- 页脚 -->
-    <footer th:replace="layout/footer :: footer"></footer>
+    <footer th:replace="layout/footer"></footer>
     <!-- 页脚结束 -->
 
     <script th:src="@{/tradecenter/js/jquery.banner.revolution.min.js}"></script>
