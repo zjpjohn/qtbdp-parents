@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>数据商城列表</title>
+    <meta name="keywords" content="钱塘大数据交易中心"/>
+    <meta name="description" content="钱塘大数据交易中心 数据商城"/>
+    <link rel="shortcut icon" type="image/x-icon" href="images/qiantang.ico"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/dataMartList.css"/>
+    <link rel="stylesheet" href="css/paging.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/layer.js"></script>
+</head>
+<body >
+    <!-- 页头-->
+    <header class="floating top">
+        <a class="lf qt_logo icon"></a>
+        <div class="rt head_search floating">
+            <input type="text" placeholder="请输入查找内容" class="search_input lf"/>
+            <a href="javascript:;" class="search_btn rt">搜索</a>
+        </div>
+        <div class="head_fabu  floating">
+            <i class="lf icon"></i>
+            <div class="lf fabu_btns">
+                <p>发布</p>
+                <a href="javascript:;">项目发布</a>
+                <a href="javascript:;">需求发布</a>
+                <a href="javascript:;">加盟服务</a>
+            </div>
+        </div>
+    </header>
+    <!--导航栏-->
+    <nav>
+        <div class="nav_con floating">
+            <p class="nav_list lf">
+                <a href="javascript:;">首页</a>
+                <a href="javascript:;" class="active">数据商城</a>
+                <a href="javascript:;">需求大厅</a>
+                <a href="javascript:;">数据合作</a>
+                <a href="javascript:;">关于我们</a>
+            </p>
+            <!--如果未登录-->
+            <!--  <p class="rt nav_list nav_rt">
+                  <a href="javascript:;">登录</a>
+                  <i>/</i>
+                  <a href="javascript:;">注册</a>
+              </p>-->
+            <!--如果已登录-->
+            <div class="rt nav_haslogin floating">
+                <a href="javascript:;" class="lf user_img">
+                    <img src="images/user_img.jpg" alt=""/>
+                </a>
+                <div class="lf user_center">
+                    <p class="user_name">钱塘大数据<i></i></p>
+                    <p class="nav_down">
+                        <a href="javascript:;">个人中心</a>
+                        <a href="javascript:;">退出登录</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!--页头结束-->
+
+    <!--banner图 -->
+    <div class="banner"></div>
+
+    <!--主体-->
+    <section class="datamart_main floating">
+        <!--左侧分类-->
+        <div class="lf main_lf">
+            <!--<p>全部分类</p>-->
+            <ul class="data_sort">
+                <li><a href="javascript:;" class="active" data-id="0">全部分类 </a></li>
+                <li><a href="javascript:;" data-id="0">知识专利 </a></li>
+                <li><a href="javascript:;" data-id="0">智能制造 </a></li>
+                <li><a href="javascript:;" data-id="0">物联网 </a></li>
+                <li><a href="javascript:;" data-id="0">工业参数 </a></li>
+                <li><a href="javascript:;" data-id="0">仪器仪表 </a></li>
+                <li><a href="javascript:;" data-id="0">先进制造 </a></li>
+                <li><a href="javascript:;" data-id="0">工业安全 </a></li>
+                <li><a href="javascript:;" data-id="0">政府监管 </a></li>
+                <li><a href="javascript:;" data-id="0">工业运行 </a></li>
+                <li><a href="javascript:;" data-id="0">物流数据 </a></li>
+                <li><a href="javascript:;" data-id="0">工业设计 </a></li>
+                <li><a href="javascript:;" data-id="0">学术教育 </a></li>
+                <li><a href="javascript:;" data-id="0">行业综合 </a></li>
+                <li><a href="javascript:;" data-id="0">其它 </a></li>
+            </ul>
+        </div>
+        <!--右侧-->
+        <div class="lf">
+            <!--右侧分类-->
+            <ul class="sub_sort">
+                <li class="priceStyle">
+                    <span>计价方式 ：</span>
+                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
+                    <a href="javascript:;" data-id="1">免费</a>
+                    <a href="javascript:;" data-id="2">收费</a>
+                </li>
+                <li class="dataFormat">
+                    <span>数据格式 ：</span>
+                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
+                    <a href="javascript:;" data-id="1">文件</a>
+                    <a href="javascript:;" data-id="2">API</a>
+                </li>
+                <li class="dataSource">
+                    <span>数据来源 ：</span>
+                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
+                    <a href="javascript:;" data-id="1">政府</a>
+                    <a href="javascript:;" data-id="2">机构</a>
+                    <a href="javascript:;" data-id="3">合作商</a>
+                    <a href="javascript:;" data-id="4">个人</a>
+                    <a href="javascript:;" data-id="5">其它</a>
+                </li>
+                <li class="dataSize">
+                    <span>数据大小 ：</span>
+                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
+                    <a href="javascript:;" data-id="1">100M以下</a>
+                    <a href="javascript:;" data-id="2">100M-500M</a>
+                    <a href="javascript:;" data-id="3">100M-500M</a>
+                    <a href="javascript:;" data-id="4">500M-1G</a>
+                    <a href="javascript:;" data-id="5">1G以上</a>
+                </li>
+                <li class="sortStyle">
+                    <span>排序方式 ：</span>
+                    <a href="javascript:;" class="a1 active" data-id="0">最新</a>
+                    <a href="javascript:;" data-id="1">价格</a>
+                    <a href="javascript:;" data-id="2">销量</a>
+                </li>
+            </ul>
+            <!--右侧分类-->
+            <ul class="datamart_list floating">
+                <li>
+                    <a href="javascript:;" class="list_img">
+                        <img src="images/datamart1.jpg" alt=""/>
+                    </a>
+                    <div class="list_main">
+                        <a href="javascript:;" class="list_title">华东图解 | 过年旅游成时尚</a>
+                        <p class="list_con">该数据包含了与电器相关的创意设计的产品信息，包括产品的照片和文字说明</p>
+
+                        <p class="list_bot floating">
+                            <span class="lf"> <i></i> 文件，个人，100M以下</span>
+                            <span class="rt free">免费</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <!-- 分页开始 -->
+            <div id="pageTool"></div>
+            <!-- 分页结束 -->
+        </div>
+    </section>
+
+
+    <!--页脚-->
+    <footer class="footer">
+        <ul class="footer_main floating">
+            <li class="contactus">
+                <h2><i></i>联系我们</h2>
+                <p>客服电话：0571-22872851</p>
+                <p>商务邮箱：qt@qtbigdata.com</p>
+                <p>网址：<a href="http://www.qtbigdata.com">www.qtbigdata.com</a></p>
+            </li>
+            <li class="platform">
+                <h2 ><i></i>平台功能</h2>
+                <p><a href="javascript:;">数据商城</a> <a href="javascript:;">需求大厅</a></p>
+                <p><a href="javascript:;">数据合作</a> <a href="javascript:;">关于我们</a></p>
+            </li>
+            <li class="cooperation">
+                <h2><i></i>合作共赢</h2>
+                <p><a href="javascript:;">在线咨询</a> <a href="javascript:;">用户协议</a></p>
+                <p><a href="javascript:;">建议反馈</a> <a href="javascript:;">新手指南</a></p>
+            </li>
+            <li class="focusus">
+                <h2><i></i>合作共赢</h2>
+                <img src="images/qr_code.png" alt="" class="qr_code"/>
+            </li>
+        </ul>
+    </footer>
+    <!--页脚结束-->
+    <script src="js/query.js"></script>
+    <script src="js/paging.js"></script>
+    <script src="js/dataMartList.js"></script>
+
+</body>
+</html>

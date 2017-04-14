@@ -38,10 +38,10 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring Boot中使用Swagger2构建RESTful APIs")
-                .description("基于Spring Cloud微服务架构源码查看地址：https://github.com/caidchen1988/qt-microservice-parents")
-                .termsOfServiceUrl("https://github.com/caidchen1988/qt-microservice-parents")
-                .contact("钱塘数据交易平台")
+                .title("【钱塘数据交易平台】 - 【web业务应用APIs】")
+                .description("基于Spring Cloud微服务架构源码查看地址：https://github.com/caidchen1988/qtbdp-parents")
+                .termsOfServiceUrl("https://github.com/caidchen1988/qtbdp-parents")
+                .contact("caidchen")
                 .version("v1.0")
                 .build();
     }

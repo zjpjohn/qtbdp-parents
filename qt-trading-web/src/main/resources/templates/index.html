@@ -9,29 +9,44 @@
     <!--  页头 -->
     <div th:replace="layout/header" />
 
-    <!-- banner图开始 -->
-    <div class="content_middle">
-        <a class="common btnLeft" href="javascript:;"></a>
-        <a class="common btnRight" href="javascript:;"></a>
-        <ul class="banner_imgs" id="bannerpic">
-            <li style="opacity:1">
-                <a href="javascript:;" th:style="'background:url(' + @{/tradecenter/images/index_banner1.jpg} + ') no-repeat top center'"></a>
-            </li>
-            <li>
-                <a href="javascript:;" th:style="'background:url(' + @{/tradecenter/images/index_banner1.jpg} + ') no-repeat top center'"></a>
-            </li>
-            <li>
-                <a href="javascript:;" th:style="'background:url(' + @{/tradecenter/images/index_banner1.jpg} + ') no-repeat top center'"></a>
-            </li>
-        </ul>
-        <p class="table" id="bannerbtn">
-            <a href="javascript:;" class="small_active"> <i></i> </a>
-            <a href="javascript:;"> <i></i> </a>
-            <a href="javascript:;"> <i></i> </a>
-        </p>
+
+    <!-- banner图开始-->
+    <div id="wrapper">
+        <div class="fullwidthbanner-container">
+            <div class="fullwidthbanner tp-simpleresponsive hovered" style="height: 765px;">
+                <ul>
+                    <li data-transition="3dcurtain-horizontal" data-slotamount="15" data-masterspeed="300">
+                        <div class="slotholder">
+                            <img th:src="@{/tradecenter/images/index_banner1.jpg}" alt="" />
+                        </div>
+                    </li>
+                    <li data-transition="3dcurtain-vertical" data-slotamount="15" data-masterspeed="300">
+                        <div class="slotholder">
+                            <img th:src="@{/tradecenter/images/slide1.jpg}" alt="" />
+                        </div>
+                    </li>
+                    <li data-transition="papercut" data-slotamount="15" data-masterspeed="300">
+                        <div class="slotholder">
+                            <img th:src="@{/tradecenter/images/slide2.jpg}" alt="" />
+                        </div>
+                    </li>
+                    <li data-transition="flyin" data-slotamount="15" data-masterspeed="300">
+                        <div class="slotholder">
+                            <img th:src="@{/tradecenter/images/slide3.jpg}" alt="" />
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="tp-bannertimer" ></div></div>
+            <div class="tp-bullets simplebullets round">
+
+            </div>
+            <div  class="tp-leftarrow tparrows"></div>
+            <div  class="tp-rightarrow tparrows"></div>
+        </div>
     </div>
-    <!-- banner结束 -->
-    <!-- 工业数据产品开始 -->
+    <!--banner结束-->
+    <!--工业数据产品开始-->
     <div class="production">
         <div class="index_titles">
             <p>PRODUCTION</p>
@@ -114,8 +129,8 @@
         </ul>
         <a href="javascript:;" class="more_pro">更多产品</a>
     </div>
-    <!-- 工业数据产品结束 -->
-    <!-- 平台优势 -->
+    <!--工业数据产品结束-->
+    <!--平台优势-->
     <div class="advanige">
         <div class="index_titles">
             <p>ADVANIGE</p>
@@ -190,8 +205,8 @@
             </li>
         </ul>
     </div>
-    <!-- 平台优势结束 -->
-    <!-- 合作伙伴 -->
+    <!--平台优势结束-->
+    <!--合作伙伴-->
     <div class="companion">
         <div class="index_titles">
             <p>COMPANION</p>
@@ -223,11 +238,13 @@
             <i></i>
         </p>
     </div>
-    <!-- 合作伙伴结束 -->
+    <!--合作伙伴结束-->
+
     <!-- 页脚 -->
     <footer th:replace="layout/footer :: footer"></footer>
     <!-- 页脚结束 -->
 
+    <script th:src="@{/tradecenter/js/jquery.banner.revolution.min.js}"></script>
     <script th:src="@{/tradecenter/js/banner.js}"></script>
     <script>
         //合作关系往左移

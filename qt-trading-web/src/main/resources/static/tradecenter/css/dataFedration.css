@@ -1,0 +1,90 @@
+@charset "utf-8";
+body{
+ background: #fafafa
+}
+.fredation_main{
+ width:1200px;
+ margin:20px auto;
+ padding-bottom:20px;
+}
+.chose_menu{
+  width: 1200px;
+  height: 125px;
+  border-bottom: 1px solid#ddd;
+  box-sizing:border-box;
+}
+.chose_menu>span{
+ float:left;
+  font-size:16px;
+  color:#333;
+  margin-right:10px;
+  padding:5px 10px;
+}
+.chose_menu>a{
+  float: left;
+  padding:7px 10px;
+  margin-right: 20px;
+ margin-bottom:20px;
+  border:1px solid #ddd;
+ cursor:pointer;
+}
+.chose_menu>a:hover,.chose_menu>a.active{
+  color:#fff;
+  background: #0076c8;
+}
+
+.prolist{
+  width: 1200px;
+  padding:20px 0px;
+}
+
+.prolist li{
+ float: left;
+ width: 283px;
+  height: 222px;
+  background: #fff;
+  margin-right: 22px;
+ margin-bottom:20px;
+}
+.prolist li:nth-child(4n){
+ margin-right: 0px;
+}
+.prolist li:hover{
+  box-shadow: 0px 0px 5px #999;
+  transition-duration: 0.5s;
+}
+
+.prolist_img{
+  display: block;
+  width: 100%;
+  height:135px;
+  border-bottom: 1px solid#ddd;
+ text-align:center;
+ line-height:135px;
+}
+.prolist_img>img{
+  max-width:100%;
+}
+.prolist p{
+  display: block;
+  width: 278px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color:black;
+  color:#333;
+}
+.prolist_fot{
+  width: 116px;
+  height: 16px;
+  margin: 0 auto;
+  color:#808080;
+}
+.prolist_fot i{
+  display: inline-block;
+  vertical-align:middle;
+  width: 15px;
+  height: 15px;
+  background: url(../images/flage.png) no-repeat;
+  margin-right:10px;
+}
