@@ -9,6 +9,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
+
 /**
  * 钱塘数据交易中心应用
  *
@@ -22,7 +23,10 @@ import org.springframework.http.HttpStatus;
 public class WebApplication {
 
     public static void main(String[] args) {
+
+
         SpringApplication.run(WebApplication.class, args);
+
     }
 
     /**
