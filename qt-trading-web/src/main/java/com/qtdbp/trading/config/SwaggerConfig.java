@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     /**
-     * apis 指定暴露rest接口的路劲
+     * apis 指定暴露rest接口的
      * @return
      */
     @Bean
