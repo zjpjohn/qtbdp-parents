@@ -16,9 +16,9 @@ spring:
     test-while-idle: true
     test-on-borrow: false
     test-on-return: false
-    url: jdbc:mysql://192.168.36.39:3306/test?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://192.168.36.38:3306/zj_industry_bigdata?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
-    password: Mysql@3306
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     pool-prepared-statements: true   # 打开PSCache
     max-open-prepared-statements: 20 # 并且指定每个连接上PSCache的大小
