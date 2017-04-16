@@ -1,5 +1,5 @@
-var type,priceStyle,dataFormat,dataSource,dataSize,sortStyle;
-//µã»÷×ó²àÊı¾İ´ó·ÖÀà
+ï»¿var type,priceStyle,dataFormat,dataSource,dataSize,sortStyle;
+//ç‚¹å‡»å·¦ä¾§æ•°æ®å¤§åˆ†ç±»
 $(".data_sort>li>a").unbind("click").click(function(){
     $(".data_sort>li>a").removeClass("active");
     $(this).addClass("active");
@@ -8,37 +8,37 @@ $(".data_sort>li>a").unbind("click").click(function(){
     type=$(this).attr("data-id");
     priceStyle=0;dataFormat=0;dataSource=0;dataSize=0;sortStyle=0;
 });
-//¼Æ¼Û·½Ê½
+//è®¡ä»·æ–¹å¼
 $(".priceStyle>li>a").unbind("click").click(function(){
     $(".priceStyle>li>a").removeClass("active");
     $(this).addClass("active");
     priceStyle=$(this).attr("data-id");
 });
-//Êı¾İ¸ñÊ½
+//æ•°æ®æ ¼å¼
 $(".dataFormat>li>a").unbind("click").click(function(){
     $(".dataFormat>li>a").removeClass("active");
     $(this).addClass("active");
     dataFormat=$(this).attr("data-id");
 });
-//Êı¾İÀ´Ô´
+//æ•°æ®æ¥æº
 $(".dataSource>li>a").unbind("click").click(function(){
     $(".dataSource>li>a").removeClass("active");
     $(this).addClass("active");
     dataSource=$(this).attr("data-id");
 });
-//Êı¾İ´óĞ¡
+//æ•°æ®å¤§å°
 $(".dataSize>li>a").unbind("click").click(function(){
     $(".dataSize>li>a").removeClass("active");
     $(this).addClass("active");
     dataSize=$(this).attr("data-id");
 });
-//ÅÅĞò·½Ê½
+//æ’åºæ–¹å¼
 $(".sortStyle>li>a").unbind("click").click(function(){
     $(".sortStyle>li>a").removeClass("active");
     $(this).addClass("active");
     sortStyle=$(this).attr("data-id");
 });
-//»ñÈ¡ÁĞ±íÊı¾İ
+//è·å–åˆ—è¡¨æ•°æ®
 function getData(){
     $.ajax({
         type:"GET",
@@ -59,9 +59,9 @@ function getData(){
         }
     });
 }
-//·ÖÒ³Ìõ   Êı¾İµÄ×ÜÌõÊı£ºcount
+//åˆ†é¡µæ¡   æ•°æ®çš„æ€»æ¡æ•°ï¼šcount
 $('#pageTool').Paging({pagesize:12,count:100,toolbar:true,callback:function(page,size,count){
-    //console.log(page);//µ±Ç°Ò³
-    //console.log(size);//Ã¿Ò³ÌõÊı
-    //console.log(count);//×ÜÒ³Êı
+    //console.log(page);//å½“å‰é¡µ
+    //console.log(size);//æ¯é¡µæ¡æ•°
+    //console.log(count);//æ€»é¡µæ•°
 }});

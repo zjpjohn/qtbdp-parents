@@ -1,4 +1,4 @@
-//获取联盟数据
+﻿//获取联盟数据
 function getData(){
 	$.ajax({
 		type:"GET",
