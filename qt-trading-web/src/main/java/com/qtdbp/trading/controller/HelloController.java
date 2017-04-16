@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ import java.util.Map;
  *
  * Created by dell on 2017/4/11.
  */
-@Api(description="首页业务数据处理")
+@ApiIgnore
 @Controller
 @Secured({"ADMIN"}) // 此方法只允许 ADMIN 角色访问
 @RequestMapping(value = "/hello")

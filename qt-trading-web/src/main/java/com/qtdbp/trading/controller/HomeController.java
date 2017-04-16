@@ -4,11 +4,12 @@ import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * Created by dell on 2017/4/11.
  */
-@Api(description="首页业务数据处理")
+@ApiIgnore
 @Controller
 public class HomeController {
 
