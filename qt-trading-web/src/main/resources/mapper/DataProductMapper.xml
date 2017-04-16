@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.trading.mapper.DataProductMapper">
+
+    <!-- 分页查询数据包产品 -->
+    <!--<select id="findProductsForPage" resultMap="BaseResultMap">
+        SELECT
+          p.id,
+          p.designation,
+          p.pic,
+          p.data_type_props,
+          p.introduce
+        FROM
+          data_product as p
+        WHERE
+          is_used = 1
+            &lt;!&ndash;<if test="designation != null and designation != ''">
+                AND designation like concat('%',concat(#{designation}, '%'))
+            </if>&ndash;&gt;
+        ORDER BY
+          addtime DESC
+          LIMIT #{page}, #{row}
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.qtdbp.trading.model.DataProductModel" >
+        <id column="Id" property="id" />
+        <result column="designation" property="designation" />
+        <result column="pic" property="pic" />
+        <result column="data_type_props" property="dataTypeProps" />
+        <result column="introduce" property="introduce" />
+    </resultMap>-->
+</mapper>

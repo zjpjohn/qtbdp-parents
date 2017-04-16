@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.trading.mapper.DataTypeMapper">
+
+    <!-- 查询所有数据类型 -->
+    <select id="findAll" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeModel">
+        select t.id,t.name from data_type as t where is_used = 1 order by sort asc
+    </select>
+
+    <!-- 查询所有属性数据 -->
+    <select id="findAttrAll" resultMap="DataTypeAttrsMap">
+        select id,attr_name from data_type_attr WHERE data_type_id = 0 AND is_used = 1 ORDER BY sort_order asc
+    </select>
+
+    <!-- 根据类目ID查询所有属性信息（注意：目前属性信息通用），并且嵌套查询属性值信息 -->
+    <select id="findAttrAllByTypeId" resultMap="DataTypeAttrsMap">
+        select id,attr_name from data_type_attr WHERE data_type_id = #{typeId} AND is_used = 1 ORDER BY sort_order asc
+    </select>
+
+    <resultMap type="com.qtdbp.trading.model.DataTypeAttrModel" id="DataTypeAttrsMap">
+        <id column="id" property="id"/>
+        <result column="attr_name" property="name"/>
+
+        <collection property="attrVals" ofType="com.qtdbp.trading.model.DataTypeAttrValModel" column="id" select="findAttrValByAttrId"></collection>
+    </resultMap>
+
+    <!-- 根据属性ID查询所有属性值 -->
+    <select id="findAttrValByAttrId" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeAttrValModel">
+      select v.id,v.attr_id,v.name from data_type_attr_val as v where attr_id = #{id} AND is_used = 1 ORDER BY sort_order asc
+    </select>
+</mapper>

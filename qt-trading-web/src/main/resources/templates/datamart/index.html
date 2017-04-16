@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- 引入header布局 -->
-    <top th:replace="layout/top :: top"></top>
+    <top th:replace="layout/top"></top>
     <!-- 页面自定义css、js  -->
     <title>数据商城列表</title>
     <meta name="keywords" content="钱塘大数据交易中心" />
@@ -30,7 +30,7 @@
             <!--<p>全部分类</p>-->
             <ul class="data_sort">
                 <li><a th:href="@{/datamart}" th:class="${currentid} ? null : 'active'" data-id="0">全部分类 </a></li>
-                <li th:each="list : ${typelist}">
+                <li th:each="list : ${typeModels}">
                     <a th:href="@{/datamart}+'/'+${list.id}" th:text="${list.name}" th:attr="data-id=${list.id}" th:class="${currentid} == ${list.id} ? 'active'">智能制造 </a>
                 </li>
             </ul>
@@ -39,35 +39,10 @@
         <div class="lf">
             <!--右侧分类-->
             <ul class="sub_sort">
-                <li class="priceStyle">
-                    <span>计价方式 ：</span>
-                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
-                    <a href="javascript:;" data-id="1">免费</a>
-                    <a href="javascript:;" data-id="2">收费</a>
-                </li>
-                <li class="dataFormat">
-                    <span>数据格式 ：</span>
-                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
-                    <a href="javascript:;" data-id="1">文件</a>
-                    <a href="javascript:;" data-id="2">API</a>
-                </li>
-                <li class="dataSource">
-                    <span>数据来源 ：</span>
-                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
-                    <a href="javascript:;" data-id="1">政府</a>
-                    <a href="javascript:;" data-id="2">机构</a>
-                    <a href="javascript:;" data-id="3">合作商</a>
-                    <a href="javascript:;" data-id="4">个人</a>
-                    <a href="javascript:;" data-id="5">其它</a>
-                </li>
-                <li class="dataSize">
-                    <span>数据大小 ：</span>
-                    <a href="javascript:;" class="a1 active" data-id="0">不限</a>
-                    <a href="javascript:;" data-id="1">100M以下</a>
-                    <a href="javascript:;" data-id="2">100M-500M</a>
-                    <a href="javascript:;" data-id="3">100M-500M</a>
-                    <a href="javascript:;" data-id="4">500M-1G</a>
-                    <a href="javascript:;" data-id="5">1G以上</a>
+                <li class="priceStyle" th:each="attr : ${attrModels}">
+                    <span th:text="${attr.name}+' ：'" th:object="${attr.attrVals}">计价方式 ：</span>
+                    <a href="javascript:;" class="a1 active" data-id="0" >不限</a>
+                    <a th:each="val : ${attr.attrVals}" href="javascript:;" th:text="${val.name}" th:attr="data-id=${val.id}">免费</a>
                 </li>
                 <li class="sortStyle">
                     <span>排序方式 ：</span>
@@ -80,11 +55,25 @@
             <ul class="datamart_list floating">
                 <li>
                     <a href="javascript:;" class="list_img">
-                        <img src="/tradecenter/images/datamart1.jpg" alt=""/>
+                        <img th:src="@{/tradecenter/images/datamart1.jpg}" alt=""/>
                     </a>
                     <div class="list_main">
                         <a href="javascript:;" class="list_title">华东图解 | 过年旅游成时尚</a>
                         <p class="list_con">该数据包含了与电器相关的创意设计的产品信息，包括产品的照片和文字说明</p>
+
+                        <p class="list_bot floating">
+                            <span class="lf"> <i></i> 文件，个人，100M以下</span>
+                            <span class="rt free">免费</span>
+                        </p>
+                    </div>
+                </li>
+                <li th:each="product : ${productModels}">
+                    <a href="javascript:;" class="list_img">
+                        <img th:src="@{product.pic}" alt=""/>
+                    </a>
+                    <div class="list_main">
+                        <a href="javascript:;" class="list_title" th:text="${product.designation}">华东图解 | 过年旅游成时尚</a>
+                        <p class="list_con" th:text="${product.introduce}">该数据包含了与电器相关的创意设计的产品信息，包括产品的照片和文字说明</p>
 
                         <p class="list_bot floating">
                             <span class="lf"> <i></i> 文件，个人，100M以下</span>

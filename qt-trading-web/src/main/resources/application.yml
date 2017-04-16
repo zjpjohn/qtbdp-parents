@@ -7,11 +7,24 @@ spring:
   profiles:
     active: dev   # 默认激活application-dev.yml配置
 
----
-# 配置mybatis解析xml路劲
+# ===================================================================
+# mybatis配置，包括分页插件配置如下
+# ===================================================================
 mybatis:
-  mapperLocations: classpath:mybatis/*.xml
+    type-aliases-package: com.qtdbp.trading.model
+    mapper-locations: classpath:mapper/*.xml
 
+mapper:
+    mappers:
+      - com.qtdbp.trading.utils.BaseMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
 
 ---
 # Thymeleaf的默认参数配置
