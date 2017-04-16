@@ -13,7 +13,37 @@
     <link rel="stylesheet" th:href="@{/tradecenter/css/paging.css}" />
 
     <script th:src="@{/tradecenter/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/tradecenter/js/jquery.tmpl.min.js}"></script>
     <script th:src="@{/tradecenter/js/layer.js}"></script>
+
+    <style>
+        .loadding {
+            position: relative;
+        }
+
+        .loadding > img {
+            width: 150px;
+            z-index: 10;
+            position: absolute;
+            top: 100px;
+            left: 40%;
+        }
+
+        .list_img
+        {
+            margin: 0 auto;
+            max-width: 303px;
+            max-height: 205px;
+            overflow: hidden;
+            position: relative;
+        }
+        .list_img>img
+        {
+            height: auto;
+            margin-top: -40%;
+            position: relative;
+        }
+    </style>
 </head>
 <body >
     <!-- 页头-->
@@ -52,8 +82,11 @@
                 </li>
             </ul>
             <!--右侧分类-->
-            <ul class="datamart_list floating">
-                <li>
+            <div id="loadding" class="loadding">
+                <img th:src="@{/tradecenter/images/loadding.gif}" alt="" />
+            </div>
+            <ul id="product_list" class="datamart_list floating">
+                <!--<li>
                     <a href="javascript:;" class="list_img">
                         <img th:src="@{/tradecenter/images/datamart1.jpg}" alt=""/>
                     </a>
@@ -66,22 +99,9 @@
                             <span class="rt free">免费</span>
                         </p>
                     </div>
-                </li>
-                <li th:each="product : ${productModels}">
-                    <a href="javascript:;" class="list_img">
-                        <img th:src="@{product.pic}" alt=""/>
-                    </a>
-                    <div class="list_main">
-                        <a href="javascript:;" class="list_title" th:text="${product.designation}">华东图解 | 过年旅游成时尚</a>
-                        <p class="list_con" th:text="${product.introduce}">该数据包含了与电器相关的创意设计的产品信息，包括产品的照片和文字说明</p>
-
-                        <p class="list_bot floating">
-                            <span class="lf"> <i></i> 文件，个人，100M以下</span>
-                            <span class="rt free">免费</span>
-                        </p>
-                    </div>
-                </li>
+                </li>-->
             </ul>
+
             <!-- 分页开始 -->
             <div id="pageTool"></div>
             <!-- 分页结束 -->
@@ -89,12 +109,38 @@
     </section>
 
 
+
     <!--页脚-->
     <footer th:replace="layout/footer"></footer>
     <!--页脚结束-->
     <script th:src="@{/tradecenter/js/query.js}"></script>
     <script th:src="@{/tradecenter/js/paging.js}"></script>
-    <script th:src="@{/tradecenter/js/dataMartList.js}"></script>
+    <script th:src="@{/tradecenter/js/page/datamart.js}"></script>
 
+    <!-- 数据包产品tpml模板 -->
+    <script id="tmpl_products" type="text/x-jquery-tmpl">
+        {{each(i,prod) list}}
+        <li>
+            <a href="javascript:;" class="list_img">
+                <img src="${prod.pic}" alt=""/>
+            </a>
+            <div class="list_main">
+                <a href="javascript:;" class="list_title">${prod.designation}</a>
+                <div class="list_con">${prod.introduce}</div>
+
+                <p class="list_bot floating">
+                    <span class="lf"> <i></i> 文件，个人，100M以下</span>
+                    <span class="rt free">免费</span>
+                </p>
+            </div>
+        </li>
+        {{/each}}
+    </script>
+
+    <script>
+        //获取列表数据
+        Datamart.products("/api/product?page=1", "#tmpl_products", "#product_list") ;
+        Datamart.paging("${page}") ;
+    </script>
 </body>
 </html>

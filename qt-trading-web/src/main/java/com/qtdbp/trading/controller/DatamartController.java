@@ -1,17 +1,13 @@
 package com.qtdbp.trading.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTypeAttrModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +22,6 @@ import java.util.List;
  * @create: 2017-04-15 12:48
  * To change this template use File | Settings | File Templates.
  */
-@Api(description = "数据商城业务处理")
 @Controller
 public class DatamartController {
 
@@ -49,7 +44,6 @@ public class DatamartController {
         return "datamart/index" ;
     }*/
 
-    @ApiOperation(value="数据商城页面，带参数typeID")
     @RequestMapping(value = "/datamart/{id}", method = RequestMethod.GET)
     public ModelAndView index(@PathVariable("id") int typeId) {
 
@@ -61,14 +55,13 @@ public class DatamartController {
         return result ;
     }
 
-    @ApiOperation(value="数据商城页面，带参数typeID")
     @RequestMapping(value = "/datamart", method = RequestMethod.GET)
     public ModelAndView index(DataProductModel productModel) {
 
-
         ModelAndView result = new ModelAndView(CURRENT_PAGE);
+        productModel.setRows(12); // 每页12条记录
         List<DataProductModel> productList = productService.findProductsForPage(productModel);
-        result.addObject("pageInfo", new PageInfo<DataProductModel>(productList));
+        result.addObject("pageInfo", new PageInfo<>(productList));
         result.addObject("queryParam", productModel);
         result.addObject("page", productModel.getPage());
         result.addObject("rows", productModel.getRows());
@@ -77,6 +70,7 @@ public class DatamartController {
 
         return result ;
     }
+
 
     /**
      * 初始化加载数据

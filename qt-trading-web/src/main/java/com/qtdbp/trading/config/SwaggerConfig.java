@@ -31,7 +31,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.qtdbp.trading.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.qtdbp.trading.api"))
                 .paths(PathSelectors.any())
                 .build();
     }
