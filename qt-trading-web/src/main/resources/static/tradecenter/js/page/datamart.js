@@ -1,5 +1,7 @@
 var Datamart = {
 
+    _change : true , // 条件是否变更，需要重新查询数据
+
     /**
      * 数据商城获取产品数据
      *
@@ -45,6 +47,9 @@ var Datamart = {
 
                     // 给参数赋数据总数，分页方法paging()用到
                     settings.count = data.pageInfo.total ;
+
+                    // 第一次加载数据，条件变更需要重新加载分页插件
+                    if(Datamart._change) Datamart.paging(settings) ;
                 }
             },
             error:function(data){
@@ -60,7 +65,7 @@ var Datamart = {
      * 分页条   数据的总条数：count
      * @param settings
      * {
-     *  url: "/api/product?page=",  // 请求地址
+     *  url: "/api/product",  // 请求地址
      *  count: 100,                 // 产品总记录数
      *  size: 12,                   // 每页记录数
      *  tmpl_id: #tmpl_products,    // jquery template 模板元素，如：#div_id 或 .class_name
@@ -82,7 +87,10 @@ var Datamart = {
             callback:function(page,size,count){
 
                 settings.curr_page = page ; // 当前页
-                Datamart.products(settings) ;
+
+                // 条件不变，无需重新查询数据
+                if(!Datamart._change) Datamart.products(settings) ;
+                Datamart._change = false ;
                 // console.log(page);//当前页
                 // console.log(size);//每页条数
                 // console.log(count);//总页数
@@ -131,6 +139,8 @@ var Datamart = {
 
                 // console.log("valIds: "+_vids);//vids
 
+                // 条件变更，数据重新查询
+                Datamart._change = true ;
                 Datamart.products(settings) ;
             }) ;
         })
