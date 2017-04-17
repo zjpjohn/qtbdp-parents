@@ -44,7 +44,7 @@ public class DataProductApi {
 
         ModelMap map = new ModelMap() ;
         // 设置默认每页显示记录数
-        if(productModel.getRows() == null && productModel.getRows() == 0) productModel.setRows(12);
+        if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
         List<DataProductModel> productList = productService.findProductsForPage(productModel);
         map.put("pageInfo", new PageInfo<>(productList));
         map.put("queryParam", productModel);
