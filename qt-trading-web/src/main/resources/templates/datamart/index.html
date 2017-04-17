@@ -137,10 +137,10 @@
         {{/each}}
     </script>
 
-    <script>
+    <script th:inline="javascript">
         //获取列表数据
-        Datamart.products("/api/product?page=1", "#tmpl_products", "#product_list") ;
-        Datamart.paging("${page}") ;
+        Datamart.products("/api/product?page="+[[${pageInfo.pageNum}]], "#tmpl_products", "#product_list") ;
+        Datamart.paging([[${pageInfo.total}]]) ;
     </script>
 </body>
 </html>
