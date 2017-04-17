@@ -3,30 +3,34 @@
 <mapper namespace="com.qtdbp.trading.mapper.DataProductMapper">
 
     <!-- 分页查询数据包产品 -->
-    <!--<select id="findProductsForPage" resultMap="BaseResultMap">
+    <select id="findProductsByCondtion" resultMap="BaseResultMap">
         SELECT
           p.id,
           p.designation,
           p.pic,
-          p.data_type_props,
-          p.introduce
+          p.introduce,
+          rel.attr_name,
+          rel.val_name
         FROM
-          data_product as p
+            data_product as p,
+            data_product_attr_relation as rel
         WHERE
-          is_used = 1
-            &lt;!&ndash;<if test="designation != null and designation != ''">
-                AND designation like concat('%',concat(#{designation}, '%'))
-            </if>&ndash;&gt;
+            p.id = rel.product_id
+            AND p.is_used = 1
+            <if test="valIds != null">
+                AND rel.val_id in (${valIds})
+            </if>
         ORDER BY
-          addtime DESC
-          LIMIT #{page}, #{row}
+          p.addtime DESC
     </select>
 
     <resultMap id="BaseResultMap" type="com.qtdbp.trading.model.DataProductModel" >
         <id column="Id" property="id" />
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
-        <result column="data_type_props" property="dataTypeProps" />
         <result column="introduce" property="introduce" />
-    </resultMap>-->
+        <result column="attr_name" property="attrName" />
+        <result column="val_name" property="valName" />
+    </resultMap>
+
 </mapper>

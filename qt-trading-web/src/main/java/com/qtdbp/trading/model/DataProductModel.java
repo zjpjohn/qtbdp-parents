@@ -1,6 +1,5 @@
 package com.qtdbp.trading.model;
 
-import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Date;
  * @create: 2017-04-16 10:00
  * To change this template use File | Settings | File Templates.
  */
-@Table(name="data_product")
+//@Table(name="data_product")
 public class DataProductModel extends BaseModel {
 
     private String designation ;    // 产品名称
@@ -33,6 +32,13 @@ public class DataProductModel extends BaseModel {
     private int isUsed ;            // 是否可用
     private String typeChain ;      // 类型链
     private String dataTypeProps ;  // 数据类型属性串
+
+    private int attrId ;        // 属性ID
+    private String attrName ;   // 属性名称
+    private int valId ;         // 属性值Id
+    private String valName ;    // 属性值名称
+
+    private String valIds ;     // 请求参数：属性值ID列表，如：1,2
 
     public String getDesignation() {
         return designation;
@@ -192,5 +198,45 @@ public class DataProductModel extends BaseModel {
 
     public void setDataTypeProps(String dataTypeProps) {
         this.dataTypeProps = dataTypeProps;
+    }
+
+    public int getAttrId() {
+        return attrId;
+    }
+
+    public void setAttrId(int attrId) {
+        this.attrId = attrId;
+    }
+
+    public String getAttrName() {
+        return attrName;
+    }
+
+    public void setAttrName(String attrName) {
+        this.attrName = attrName;
+    }
+
+    public int getValId() {
+        return valId;
+    }
+
+    public void setValId(int valId) {
+        this.valId = valId;
+    }
+
+    public String getValName() {
+        return valName;
+    }
+
+    public void setValName(String valName) {
+        this.valName = valName;
+    }
+
+    public String getValIds() {
+        return valIds;
+    }
+
+    public void setValIds(String valIds) {
+        this.valIds = valIds;
     }
 }

@@ -7,7 +7,7 @@ drop table if exists data_type_attr;
 
 create table data_type_attr
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    data_type_id         int                            null,
    attr_name            varchar(50)                    null,
    is_must              tinyint(4)                     null default '0',
@@ -24,7 +24,7 @@ drop table if exists data_type_attr_val;
 
 create table data_type_attr_val
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    attr_id              int                            null,
    attr_name            varchar(50)                    null,
    name                 varchar(50)                    null,
@@ -32,6 +32,25 @@ create table data_type_attr_val
    is_used              tinyint(4)                     not null default '1',
    constraint PK_DATA_TYPE_ATTR_VAL primary key clustered (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
+
+
+/*==============================================================*/
+/* Table: data_product_attr_relation  数据包产品属性关联表        */
+/*==============================================================*/
+drop table if exists data_product_attr_relation;
+
+create table data_product_attr_relation
+(
+   id                   int                            not null AUTO_INCREMENT,
+   product_id           int                            not null,
+   type_id              int                            null,
+   attr_id              int                            not null,
+   val_id               int                            not null,
+   attr_name            varchar(50)                    not null,
+   val_name             varchar(50)                    not null,
+   constraint PK_DATA_PRODUCT_PROP primary key clustered (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
+
 
 /*==============================================================*/
 /* Table: data_product   产品表新增字段data_type_props            */

@@ -3,6 +3,9 @@ package com.qtdbp.trading.mapper;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.utils.BaseMapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 数据包产品数据的CRUD操作
  *
@@ -14,9 +17,8 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
 
     /**
      * 分页查询数据包产品
-     * @param page 当前页
-     * @param row 每页记录数
+     * @param productModel 当前页
      * @return
      */
-//    List<DataProductModel> findProductsForPage(int page, int row) ;
+    List<DataProductModel> findProductsByCondtion(DataProductModel productModel) ;
 }

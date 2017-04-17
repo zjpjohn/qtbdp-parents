@@ -1,11 +1,9 @@
 package com.qtdbp.trading.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTypeAttrModel;
 import com.qtdbp.trading.model.DataTypeModel;
-import com.qtdbp.trading.service.DataProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,17 +30,6 @@ public class DatamartController {
 
     @Autowired
     private DataTypeMapper dataTypeMapper ;
-    @Autowired
-    private DataProductService productService ;
-
-    /*@ApiOperation(value="数据商城页面")
-    @RequestMapping(value = "/datamart", method = RequestMethod.GET)
-    public String index(Model model) {
-
-        this.initData(model) ;
-
-        return "datamart/index" ;
-    }*/
 
     @RequestMapping(value = "/datamart/{id}", method = RequestMethod.GET)
     public ModelAndView index(@PathVariable("id") int typeId) {
@@ -60,11 +47,6 @@ public class DatamartController {
 
         ModelAndView result = new ModelAndView(CURRENT_PAGE);
         productModel.setRows(12); // 每页12条记录
-        List<DataProductModel> productList = productService.findProductsForPage(productModel);
-        result.addObject("pageInfo", new PageInfo<>(productList));
-        result.addObject("queryParam", productModel);
-        result.addObject("page", productModel.getPage());
-        result.addObject("rows", productModel.getRows());
 
         this.initData(result) ;
 

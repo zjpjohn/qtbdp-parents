@@ -26,6 +26,6 @@
 
     <!-- 根据属性ID查询所有属性值 -->
     <select id="findAttrValByAttrId" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeAttrValModel">
-      select v.id,v.attr_id,v.name from data_type_attr_val as v where attr_id = #{id} AND is_used = 1 ORDER BY sort_order asc
+      select v.id,v.attr_id as attrId,v.name from data_type_attr_val as v where attr_id = #{id} AND is_used = 1 ORDER BY sort_order asc
     </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.qtdbp.trading.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
+import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.service.DataProductService;
 import io.swagger.annotations.Api;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 提供数据包产品API接口
@@ -35,12 +38,13 @@ public class DataProductApi {
     @ApiOperation(value="数据包产品数据接口，分页获取")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "数据包产品名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "valIds", value = "属性值Id列表vid1,vid2; 如：1,2", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：12）", defaultValue = "12", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelMap loadDataProducts(DataProductModel productModel) {
+    public ModelMap loadDataProducts(DataProductModel productModel) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
         // 设置默认每页显示记录数
