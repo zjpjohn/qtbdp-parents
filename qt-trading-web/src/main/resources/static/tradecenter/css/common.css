@@ -147,6 +147,7 @@ nav{
 }
 .nav_haslogin{
 	margin-top:20px;
+	height:50px;
 }
 .user_img{
 	width:40px;
@@ -185,7 +186,7 @@ nav{
 	top:50px;
 	padding-bottom:10px;
 	z-index:99;
-	width:90px;
+	width:100%;
 	background:#1A2730;
 	display:none;
 }

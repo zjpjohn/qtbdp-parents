@@ -5,26 +5,21 @@
     background:#FAFAFA url("../images/bg.jpg") no-repeat;
     padding-bottom: 180px;
 }
-
 .center_main{
     width:1200px;
     margin:0px auto;
     padding-top:20px;
-
 }
-
 .center_left{
     width:320px;
     height:659px;
     background: #fff;
 }
-
 .center_right{
     width:860px;
-    height:880px;
+    height:780px;
     background: #fff;
 }
-
 .headbg{
     width:158px;
     height:158px;
@@ -43,7 +38,6 @@
     margin: 14px;
     border-radius: 50%;
 }
-
 .pername{
     width:100%;
     text-align: center;
@@ -51,13 +45,11 @@
     font-size: 20px;
     margin-top: 14px;
 }
-
 .perphone{
     color:#999;
     font-size: 14px;
     margin-top: 8px;
 }
-
 .perdata{
     width:182px;
     line-height: 22px;
@@ -69,9 +61,7 @@
     display:inline-block;
     width:106px;
     line-height: 22px;
-
     color:#333;
-
 }
 .realrz>b{
     display:inline-block;
@@ -80,10 +70,7 @@
     background:url("../images/jy_icon1.png")-720px -336px no-repeat ;
     position: relative;
     top:2px;
-
-
 }
-
 .preinfo{
     display:inline-block;
     color:#fff;
@@ -93,13 +80,11 @@
     background: #0baefa;
     border-radius: 4px;
 }
-
 .realrz>a{
     padding-left: 2px;
     position: relative;
     top:-4px;
 }
-
 .pereach>li{
     float:left;
     width:100%;
@@ -108,8 +93,6 @@
     padding-left:40px;
     font-size: 18px;
 }
-
-
 .pereach>li>a{
     color:#666;
 }
@@ -120,58 +103,39 @@
     margin-right: 20px;
     position:relative;
     top:6px;
-
+    background-image:url("../images/jy_icon1.png");
 }
-
 .pereach>li:nth-child(1)>a>span{
-    background:url("../images/jy_icon1.png")-431px -337px no-repeat ;
+    background-position:-431px -337px ;
 }
 .pereach>li:nth-child(2)>a>span{
-    background:url("../images/jy_icon1.png")-481px -337px no-repeat ;
+    background-position:-481px -337px;
 }
 .pereach>li:nth-child(3)>a>span{
-    background:url("../images/jy_icon1.png")-531px -337px no-repeat ;
+    background-position:-531px -337px;
 }
 .pereach>li:nth-child(4)>a>span{
-    background:url("../images/jy_icon1.png")-581px -337px no-repeat ;
+    background-position:-581px -337px;
 }
 .pereach>li:nth-child(5)>a>span{
-    background:url("../images/jy_icon1.png")-627px -336px no-repeat ;
+    background-position:-627px -336px;
 }
 .pereach>li:nth-child(6)>a>span{
-    background:url("../images/jy_icon1.png")-672px -335px no-repeat ;
+    background-position:-672px -335px;
 }
 
 /******移入去状态*******/
-.pereach>li:hover{
-    background: #1A2730;
-    color:#fff;
-    font-size: 18px;
-}
-.pereach>li.active{
+.pereach>li:hover,.pereach>li.active{
     background: #1A2730;
     font-size: 18px;
 }
 
-.pereach>li:hover>a{
-    color:#fff;
-}
-.pereach>li.active>a{
+.pereach>li:hover>a,.pereach>li.active>a{
     color:#fff;
 }
 
 
-.pereach>li:hover>a>b{
-    display: inline-block;
-    width:0px;
-    height:0px;
-    border: 8px solid transparent;
-    border-left: 8px solid #fff;
-    float:right;
-    margin-right:20px;
-    margin-top: 26px;
-}
-.pereach>li.active>a>b{
+.pereach>li:hover>a>b,.pereach>li.active>a>b{
     display: inline-block;
     width:0px;
     height:0px;
@@ -182,46 +146,24 @@
     margin-top: 26px;
 }
 
-/******hover********/
-.pereach>li:nth-child(1):hover>a>span{
-    background:url("../images/jy_icon1.png")-431px -375px no-repeat ;
+/******hover  active********/
+.pereach>li:nth-child(1):hover>a>span,.pereach>li:nth-child(1).active>a>span{
+    background-position:-431px -375px;
 }
-.pereach>li:nth-child(2):hover>a>span{
-    background:url("../images/jy_icon1.png")-481px -375px no-repeat ;
+.pereach>li:nth-child(2):hover>a>span,.pereach>li:nth-child(2).active>a>span{
+    background-position:-481px -375px;
 }
-.pereach>li:nth-child(3):hover>a>span{
-    background:url("../images/jy_icon1.png")-531px -375px no-repeat ;
+.pereach>li:nth-child(3):hover>a>span,.pereach>li:nth-child(3).active>a>span{
+    background-position:-531px -375px ;
 }
-.pereach>li:nth-child(4):hover>a>span{
-    background:url("../images/jy_icon1.png")-581px -375px no-repeat ;
+.pereach>li:nth-child(4):hover>a>span,.pereach>li:nth-child(4).active>a>span{
+    background-position:-581px -375px;
 }
-.pereach>li:nth-child(5):hover>a>span{
-    background:url("../images/jy_icon1.png")-627px -375px no-repeat ;
+.pereach>li:nth-child(5):hover>a>span,.pereach>li:nth-child(5).active>a>span{
+    background-position:-627px -375px;
 }
-.pereach>li:nth-child(6):hover>a>span{
-    background:url("../images/jy_icon1.png")-672px -375px no-repeat ;
-}
-
-
-
-/******active********/
-.pereach>li:nth-child(1).active>a>span{
-    background:url("../images/jy_icon1.png")-431px -375px no-repeat ;
-}
-.pereach>li:nth-child(2).active>a>span{
-    background:url("../images/jy_icon1.png")-481px -375px no-repeat ;
-}
-.pereach>li:nth-child(3).active>a>span{
-    background:url("../images/jy_icon1.png")-531px -375px no-repeat ;
-}
-.pereach>li:nth-child(4).active>a>span{
-    background:url("../images/jy_icon1.png")-581px -375px no-repeat ;
-}
-.pereach>li:nth-child(5).active>a>span{
-    background:url("../images/jy_icon1.png")-627px -375px no-repeat ;
-}
-.pereach>li:nth-child(6).active>a>span{
-    background:url("../images/jy_icon1.png")-672px -375px no-repeat ;
+.pereach>li:nth-child(6):hover>a>span,.pereach>li:nth-child(6).active>a>span{
+    background-position:-672px -375px;
 }
 
 .pereach>li:last-child{
@@ -233,31 +175,13 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*****右侧div******/
 .center_right{
     position:relative;
 }
 .center_right>div{
     width:100%;
-    min-height:880px;
+    min-height:780px;
     background: #fff;
     position:absolute;
     top:0px;
@@ -267,7 +191,6 @@
 .center_right>div.active{
     display: block;
 }
-
 
 
 /*******我的账户********/
@@ -561,6 +484,192 @@
     color: #f00;
     display:none;
 }
+/***************概览****************/
+.center_right>.overview2{
+    background: #FAFAFA;
+}
+.view_top{
+    width:100%;
+    height:220px;
+    background:url("../images/view_bg.jpg") no-repeat center center;
+}
+.view_top>li{
+    float:left;
+    width:214px;
+    height:120px;
+    margin-top:50px;
+    text-align:center;
+    border-right:1px solid #ddd;
+    font-size:16px;
+}
+.view_top>li:last-child{
+    border:none;
+}
+.view_top h1{
+    font-weight:normal;
+    font-size:36px;
+    color:#0BAEFA;
+    margin:20px auto;
+}
+.view_top .color{
+    color:#0BAEFA;
+}
+.view_top p{
+    font-size:16px;
+    color:#000;
+}
+.overview2>div{
+    padding:20px;
+    background:#fff;
+    margin-top:20px;
+}
+.overview2 h2{
+    font-weight:normal;
+    font-size:18px;
+    color:#333;
+    padding-bottom:20px;
+    border-bottom:1px solid #ddd;
+}
+.center_tb{
+    border-collapse:collapse;
+    color:#333;
+    width:100%;
+}
+.center_tb a{
+    display:block;
+}
+.center_tb td,.center_tb th{
+    height:70px;
+    line-height:70px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+.overview2 thead td{
+    height:50px;
+    line-height:50px;
+    font-size:16px;
+    border-bottom:2px solid #ddd;
+}
+.nopaid,.noaudit{
+    color:#EC6C6C;
+}
+.paid{
+    color:#00CB94;
+}
+.gopay{
+    color:#FE8C42;
+}
+.download,.putaway,.gosee{
+    color:#0081CB;
+}
+.overview2 tbody tr:last-child td{
+    border-bottom:none;
+}
+.time_btn{
+    position:relative;
+    padding-right:10px;
+    width:260px;
+    cursor:pointer;
+}
+.time_btn>i{
+    position:absolute;
+    width:0px;
+    height:0px;
+    border:4px solid transparent;
+    right:110px;
+}
+.time_btn>i:first-child{
+    top:17px;
+}
+.time_btn>i:last-child{
+    top:27px;
+}
+.time_btn>i:first-child{
+    border-bottom-color:#999;
+}
+.time_btn>i:last-child{
+    border-top-color:#333;
+}
+.nodefault>i:first-child,.time_btn:hover>i:first-child{
+    border-bottom-color:#333;
+}
+.nodefault>i:last-child,.time_btn:hover>i:last-child{
+    border-top-color:#999;
+}
+.nodefault:hover>i:first-child{
+    border-bottom-color:#999;
+}
+.nodefault:hover>i:last-child{
+    border-top-color:#333;
+}
+/**************我的订单,我的发布*****************/
+.center_right>.rt_tbs{
+    width:820px;
+    padding:20px;
+}
+.rt_tbs .color{
+    color:#0081CB;
+}
+.rt_tbs h2{
+    font-weight:normal;
+    font-size:18px;
+    margin-bottom:20px;
+}
+.filter_btn{
+    margin-top:20px;
+    padding-top:20px;
+    border-bottom:1px solid #ddd;
+    border-top:1px solid #ddd;
+    margin-bottom:20px;
+}
+.filter_btn>a{
+    float:left;
+    font-size:18px;
+    margin-right:20px;
+    line-height:30px;
+}
+.filter_btn>a:hover,.filter_btn>a.active{
+    color:#0081CB;
+    border-bottom:2px solid #0081CB;
+}
+.id_btn{
+    width:60px;
+    border-bottom:2px solid #0081CB;
+}
+.id_btn>i{
+    right:15px;
+}
+.rt_tbs th{
+    height:50px;
+    line-height:50px;
+}
+.order_tb{
+    margin-top:40px;
+    display:none;
+}
+.order_tb.active{
+    display:block;
+}
+.nodata{
+    padding:40px 0px;
+    text-align:center;
+}
+.nodata>p{
+    margin-top:20px;
+}
+.nodata>a{
+    display:inline-block;
+    margin-top:20px;
+    width:120px;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    background:#0081CB;
+    color:#fff;
+    border-radius:4px;
+}
+
+
 
 
 
