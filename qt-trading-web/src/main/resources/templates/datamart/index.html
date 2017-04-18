@@ -42,7 +42,8 @@
 </head>
 <body >
     <!-- 页头-->
-    <div th:replace="layout/header" />
+    <!--<div th:replace="layout/header" />-->
+    <div th:include="layout/header::#head" ></div>
     <!--页头结束-->
 
     <!--banner图 -->
@@ -122,7 +123,6 @@
             <div class="list_main">
                 <a href="javascript:;" class="list_title">${prod.designation}</a>
                 <div class="list_con">${prod.introduce}</div>
-
                 <p class="list_bot floating">
                     <span class="lf"> <i></i> 文件，个人，100M以下</span>
                     <span class="rt free">免费</span>
@@ -137,7 +137,7 @@
         var settings = {
             url: "/api/product",            // 请求地址
             tmpl_id: "#tmpl_products" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-            target: "#product_list" ,       // 替换html元素，如：#div_id 或 .class_name
+            target: "#product_list" ,       // 替换html元素，如：#div_id 或 .class_name 此处ul的id
             pager_id: "#pageTool"           // 分页html元素标签
         }
 
