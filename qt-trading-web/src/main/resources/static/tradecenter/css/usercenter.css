@@ -216,6 +216,7 @@
 }
 .balance>span{
     margin-right: 10px;
+    cursor:pointer;
 }
 .gralmoney{
     color:#FF7200;
