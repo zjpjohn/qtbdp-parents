@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="utf-8"/>
     <!-- 引入header布局 -->
@@ -8,19 +9,20 @@
     <!-- 页面自定义css、js  -->
     <meta name="keywords" content="钱塘大数据交易中心"/>
     <meta name="description" content="钱塘大数据交易中心"/>
-    <link rel="stylesheet" th:href="@{/tradecenter/css/center.css}"/>
+    <link rel="stylesheet" th:href="@{/tradecenter/css/usercenter.css}"/>
     <script th:src="@{/tradecenter/js/jquery-1.11.1.min.js}"></script>
+<title>hello world</title>
 </head>
 <body>
-    <!--  页头 -->
-    <div th:replace="layout/header" />
-
+    <!--  页头开始 -->
+    <div th:include="layout/header::#head" ></div>
+    <!--  页头结束 -->
     <div class="cenAll">
         <div class="center_main">
             <div class="center_left lf">
                 <div class="headbg">
                     <a href="javascript:;">
-                        <img class="headpic" src="images/avatar1.jpg" alt=""/>
+                        <img class="headpic" th:src="@{/tradecenter/images/avatar1.jpg}" alt=""/>
                     </a>
                 </div>
                 <p class="pername "><a href="javascript:;">三生万物</a></p>
@@ -142,7 +144,7 @@
                 <!--个人信息-->
                 <div class="persinfo2 ">
                     <div class="headimgs">
-                        <img src="images/avatar1.jpg" alt="" class="peronimg"/>
+                        <img th:src="@{/tradecenter/images/avatar1.jpg}" alt="" class="peronimg"/>
                         <a href="javascript:;" class="inputimg">上传新的头像</a>
                         <a href="javascript:;" class="savechange rt">保存更改</a>
                     </div>
@@ -290,7 +292,7 @@
                                     </tbody>-->
                                     <tbody class="praticbody">
                                     <tr>
-                                        <td colspan="5"><img src="images/none.png" alt="" class="noneimg" /></td>
+                                        <td colspan="5"><img th:src="@{/tradecenter/images/none.png}" alt="" class="noneimg" /></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5">
@@ -374,7 +376,7 @@
                                 <td class="paid">已支付</td>
                                 <td>2016-12-01 10:06:34</td>
                                 <td>
-                                    <a href="javascript:;"class="download">下载</a>
+                                    <a href="javascript:;" class="download">下载</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -411,8 +413,8 @@
                             </tbody>
                         </table>
                         <div class="nodata">
-                            <img src="images/none.png" alt=""/>
-                            <p>暂时没有需求订单</p>
+                            <img th:src="@{/tradecenter/images/none.png}" alt=""/>
+                                <p>暂时没有需求订单</p>
                             <a href="javascript:;">前往需求大厅</a>
                         </div>
                     </div>
@@ -473,7 +475,7 @@
                                 <td class="putaway">已上架</td>
                                 <td>2016-12-01 10:06:34</td>
                                 <td>
-                                    <a href="javascript:;"class="gosee">下载</a>
+                                    <a href="javascript:;" class="gosee">下载</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -509,7 +511,7 @@
                             </tbody>
                         </table>
                         <div class="nodata">
-                            <img src="images/nodata.png" alt=""/>
+                            <img th:src="@{/tradecenter/images/none.png}" alt=""/>
                             <p>暂时没有需求订单</p>
                             <a href="javascript:;">前往需求大厅</a>
                         </div>
@@ -585,6 +587,7 @@
         });
 
         function check2(){
+            /*<![CDATA[*/
             var emalnum =/[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
             var result= emalnum.test($.trim($("#person_emal").val()));
             console.log(result);
@@ -598,6 +601,7 @@
                 $("#person_emal").next(".error").html("");
                 return true;
             }
+            /*]]>*/
         }
         $("#person_emal").blur(function(){
             check2();
