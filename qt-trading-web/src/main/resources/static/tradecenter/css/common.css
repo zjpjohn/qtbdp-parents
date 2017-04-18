@@ -71,7 +71,7 @@ input:-ms-input-placeholder {
 	margin:35px auto;
 }
 .icon{
-	background-image:url("../images/jy_icon1.png");
+	background-image:url("../images/icon.png");
 }
 .qt_logo{
 	width:344px;
@@ -245,7 +245,7 @@ nav{
 	width:24px;
 	height:24px;
 	margin-right:10px;
-	background-image:url("../images/jy_icon1.png" );
+	background-image:url("../images/icon.png" );
 }
 .footer_main .contactus i{
 	background-position:-349px -70px;

@@ -40,7 +40,7 @@ body{
 }
 .data_sort a:hover,.data_sort a.active{
     width:160px;
-    background:url("../images/jy_icon1.png" ) no-repeat -430px -153px;
+    background:url("../images/icon.png" ) no-repeat -430px -153px;
     color:#fff;
 }
 /****************右侧子分类*************/
@@ -65,7 +65,7 @@ body{
 }
 .sortStyle a{
     padding-right:20px;
-    background:url("../images/jy_icon1.png" ) no-repeat -781px -172px;
+    background:url("../images/icon.png" ) no-repeat -781px -172px;
 }
 .sortStyle a.active,.sortStyle a:hover{
     background-position:-720px -171px;
@@ -119,7 +119,7 @@ body{
     width:20px;
     height:20px;
     margin-right:10px;
-    background:url("../images/jy_icon1.png") no-repeat -938px -176px;
+    background:url("../images/icon.png") no-repeat -938px -176px;
 }
 .list_bot>.rt{
    color:#F49314;
