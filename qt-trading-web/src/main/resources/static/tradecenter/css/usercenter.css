@@ -223,7 +223,6 @@
 }
 .gralmoney{
     color:#FF7200;
-
 }
 
 .recharge{
@@ -433,8 +432,20 @@
     color:#fff;
     background: #78B3DD;
     border-radius: 4px;
+    position:relative;
+    top:10px;
+    overflow: hidden;
 }
+.inputimg>input{
+    font-size: 30px;
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    z-index: 999;
+    cursor: pointer;
+    opacity:0;
 
+}
 
 .savechange{
     display:inline-block;
