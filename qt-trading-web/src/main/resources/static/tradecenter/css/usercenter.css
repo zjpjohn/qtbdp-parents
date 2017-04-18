@@ -218,6 +218,9 @@
     margin-right: 10px;
     cursor:pointer;
 }
+.balance>span:first-child{
+    cursor:default;
+}
 .gralmoney{
     color:#FF7200;
 
