@@ -9,16 +9,6 @@
     <meta name="keywords" content="钱塘大数据交易中心"/>
     <meta name="description" content="钱塘大数据交易中心 数据商城"/>
     <link rel="stylesheet" th:href="@{/tradecenter/css/dataMartDetail.css}" />
-
-    <style>
-        .loadding {
-            margin: 0 auto;
-        }
-
-        .loadding > img {
-            width: 100px;
-        }
-    </style>
 </head>
 <body >
     <!-- 页头-->
@@ -34,8 +24,8 @@
             </p>
             <div class="lf detail_info">
                 <p class="rt" th:text="'更新时间：'+${#dates.format(prod.editorTime, 'yyyy/MMM/dd HH:mm')}"></p>
-                <h2 th:text="${prod.designation}">2015全国民航机场吞吐量（旅客/货邮）数据包</h2>
-                <p class="infos" th:utext="${prod.introduce}">该数据包汇总了全国所有的商标代理事务所相关信息，包括企业的基本情况、出资情况、地址、法人的相关信息、相关联系方式、基本情况、出资情况、地址、法人的相关信息等。</p>
+                <h2 th:text="${prod.designation}"></h2>
+                <div class="infos" th:utext="${prod.introduce}"></div>
                 <p class="p1">
                     <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')">文件格式：Excel</span>
                 </p>
@@ -91,13 +81,17 @@
             <div class="list_mask">
                 <p><i>￥1.00</i>（10积分）</p>
                 <a href="javacript:;" class="list_buy">购买</a>
-                <a href="javacript:;" class="list_see">查看详情</a>
+                <!--<a href="javacript:;" class="list_see">查看详情</a>-->
             </div>
         </li>
         {{/each}}
     </script>
 
     <script th:inline="javascript">
+        if($(".infos").html()>120){
+            $(".infos").html($(".infos").html().substring(0,120)+"...");
+        }
+
         // 页面请求参数
         var settings = {
             url: "/api/product/item",            // 请求地址
@@ -105,7 +99,7 @@
             target: "#item-info" ,       // 替换html元素，如：#div_id 或 .class_name
             pager_id: "#pageTool",           // 分页html元素标签
             params: [{key:"productId",value:[[${prod.id}]] }],
-            size: 5    // 每页显示20
+            size: 20    // 每页显示20
         }
 
         // 初始化数据
