@@ -1,0 +1,140 @@
+@charset "utf-8";
+.join_main{
+    width:660px;
+    margin:0px auto;
+}
+.red{
+    color:#F58181;
+}
+.tieshi{
+    margin:20px auto;
+    height:40px;
+    line-height:40px;
+    background:#E0EDF5;
+    color:#0081CB;
+}
+.tieshi>i{
+    display:inline-block;
+    vertical-align:middle;
+    width:30px;
+    height:25px;
+    background:url("../images/icon.png") no-repeat -812px -335px;
+}
+.joinform{
+    padding:25px;
+    background:#fff;
+}
+.formul>li{
+    margin-bottom:25px;
+}
+.formul>li>p{
+    margin-bottom:20px;
+    font-size:16px;
+    color:#333;
+    font-weight:bold;
+}
+.formul>li>p>i{
+    color:#F58181;
+}
+.formul>li>div>input{
+    width:600px;
+    height:36px;
+    line-height:36px;
+    text-indent:20px;
+    border:1px solid #ddd;
+    border-radius:4px;
+}
+.formul>li>div>input.err:focus,.formul>li>div>textarea.err:focus{
+    outline:1px solid #F47D7F;
+}
+.identity label{
+    margin-right:78px;
+}
+.servicetype label{
+    margin-right:46px;
+}
+.formul select{
+    width:290px;
+    height:36px;
+    line-height:36px;border:1px solid #ddd;
+    border-radius:4px;
+}
+#provinceId{
+    margin-right:20px;
+}
+.fields>div:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.fields label{
+    float:left;
+    width:95px;
+    line-height:35px;
+    margin-right:30px;
+}
+.fields>div>label:nth-child(5n){
+    margin-right:0px;
+}
+.formul textarea{
+    width:590px;
+    height:100px;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    resize: none;
+}
+.submit{
+    display:block;
+    width:120px;
+    height:45px;
+    line-height:45px;
+    text-align:center;
+    margin:0px auto;
+    background:#0076C8;
+    color:#fff;
+    margin-top:10px;
+    border-radius:4px;
+}
+.upimgs{
+    margin-right:10px;
+}
+.imgfile{
+    position: relative;
+    width: 70px;
+    height: 28px;
+    background-color: #0076C8;
+    overflow: hidden;
+    border-radius:4px;
+}
+.imgfile>a {
+    display: block;
+    line-height: 28px;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+}
+.upimg_rt{
+    color:#999;
+    margin-left:10px;
+}
+.upimg_rt>p{
+    margin-bottom:15px;
+}
+.upimg_rt>div{
+    margin-top:38px;
+}
+.imgfile>input{
+    opacity: 0;
+    width: 70px;
+    height: 28px;
+    left: 0;
+    top: 0;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+}
+.err_info{
+    text-align:center;
+}
