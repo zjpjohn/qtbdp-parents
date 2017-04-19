@@ -33,22 +33,24 @@ var pageData = {
         $.ajax({
             type:"GET",
             dataType:"json",
-            url: _u ,
+             url: _u ,
             ansync:true,
             xhrFields:{
                 withCredentials:true
             },
+           /* dataType:"jsonp",
+            jsonpCallback:"callback",*/
             beforeSend: function() {
                 _loadding.show() ;
             },
             success:function(data){
 
-                // console.log(data);
+                console.log(data);
 
                 if(data && data.pageInfo) {
                     // console.log(data.pageInfo);
                     //标题与内容剪切
-                    for(var i=0;i<data.pageInfo.list.length;i++){
+                    /*for(var i=0;i<data.pageInfo.list.length;i++){
                         if(data.pageInfo.list[i].designation && data.pageInfo.list[i].designation.length>12){
                             data.pageInfo.list[i].designation=data.pageInfo.list[i].designation.substring(0,14)+"...";
                         }
@@ -62,7 +64,7 @@ var pageData = {
                             var editorTime=new Date(data.pageInfo.list[i].editorTime);
                             data.pageInfo.list[i].editorTime=editorTime.getFullYear()+"/"+editorTime.getMonth()+"/"+editorTime.getDate()+" "+editorTime.getHours()+":"+editorTime.getMinutes()+":"+editorTime.getSeconds();
                         }
-                    }
+                    }*/
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo).appendTo(_target);
 
@@ -71,10 +73,7 @@ var pageData = {
                     settings.count = data.pageInfo.total ;
 
                     // 第一次加载数据，条件变更需要重新加载分页插件
-                    if(settings.pager_id){
-                        if(pageData._change) pageData.paging(settings) ;
-                    }
-
+                    if(pageData._change) pageData.paging(settings) ;
                 }
             },
             error:function(data){
@@ -220,5 +219,4 @@ var pageData = {
 
         return  result ;
     }
-
 };

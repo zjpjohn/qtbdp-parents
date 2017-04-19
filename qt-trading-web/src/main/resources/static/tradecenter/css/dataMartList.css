@@ -96,10 +96,16 @@
 .list_title{
     font-size:18px;
     color:#333;
+    width:25px;
+    height:283px;
+    pverflow:hidden;
 }
 .list_con{
     line-height:20px;
     margin:20px 0px 30px 0px;
+    width:40px;
+    height:283px;
+    pverflow:hidden;
 }
 .list_bot{
     font-size:12px;

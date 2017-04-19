@@ -13,8 +13,10 @@
     overflow:hidden;
 }
 .infos{
+    width:845px;
     height:40px;
     margin-bottom:15px;
+    overflow:hidden;
 }
 .detail_img>img{
    max-width:100%;
@@ -96,9 +98,15 @@
 }
 .infor_list>li>h2{
     font-weight:normal;
+    width:243px;
+    height:27px;
+    overflow:hidden;
 }
 .list_time{
     margin:15px 0px;
+    width:243px;
+    height:20px;
+    overflow:hidden;
 }
 .list_mask{
     position:absolute;
