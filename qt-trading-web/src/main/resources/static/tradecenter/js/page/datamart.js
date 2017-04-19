@@ -46,7 +46,7 @@ var Datamart = {
                 // console.log(data);
 
                 if(data && data.pageInfo) {
-                    console.log(data.pageInfo);
+                   // console.log(data.pageInfo);
                     //标题与内容剪切
                     for(var i=0;i<data.pageInfo.list.length;i++){
                         if(data.pageInfo.list[i].designation && data.pageInfo.list[i].designation.length>12){
@@ -59,7 +59,8 @@ var Datamart = {
                             data.pageInfo.list[i].itemName=data.pageInfo.list[i].itemName.substring(0,10)+"...";
                         }
                         if(data.pageInfo.list[i].editorTime){
-                            data.pageInfo.list[i].editorTime=new Date(data.pageInfo.list[i].editorTime);
+                            var editorTime=new Date(data.pageInfo.list[i].editorTime);
+                            data.pageInfo.list[i].editorTime=editorTime.getFullYear()+"/"+editorTime.getMonth()+"/"+editorTime.getDate()+" "+editorTime.getHours()+":"+editorTime.getMinutes()+":"+editorTime.getSeconds();
                         }
                     }
                     $(_target).empty() ;
