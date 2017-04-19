@@ -46,15 +46,21 @@ var Datamart = {
                 // console.log(data);
 
                 if(data && data.pageInfo) {
+                    console.log(data.pageInfo);
                     //标题与内容剪切
                     for(var i=0;i<data.pageInfo.list.length;i++){
-                        if(data.pageInfo.list[i].designation.length>12){
+                        if(data.pageInfo.list[i].designation && data.pageInfo.list[i].designation.length>12){
                             data.pageInfo.list[i].designation=data.pageInfo.list[i].designation.substring(0,14)+"...";
                         }
-                        if(data.pageInfo.list[i].introduce.length>40){
+                        if(data.pageInfo.list[i].introduce && data.pageInfo.list[i].introduce.length>40){
                             data.pageInfo.list[i].introduce=data.pageInfo.list[i].introduce.substring(0,40)+"...";
                         }
-
+                        if(data.pageInfo.list[i].itemName && data.pageInfo.list[i].itemName.length>10){
+                            data.pageInfo.list[i].itemName=data.pageInfo.list[i].itemName.substring(0,10)+"...";
+                        }
+                        if(data.pageInfo.list[i].editorTime){
+                            data.pageInfo.list[i].editorTime=new Date(data.pageInfo.list[i].editorTime);
+                        }
                     }
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo).appendTo(_target);

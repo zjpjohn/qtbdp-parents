@@ -1,16 +1,8 @@
 @charset "utf-8";
-body{
-    background:#FAFAFA;
-}
 .banner{
     width:100%;
     height:250px;
     background:url("../images/datamart_banner1.jpg") no-repeat center center;
-}
-.datamart_main{
-    width:1200px;
-    margin:0px auto;
-    padding:40px 0px;
 }
 /****************左侧分类*************/
 .main_lf{
@@ -71,18 +63,6 @@ body{
     background-position:-720px -171px;
 }
 /****************右侧列表*************/
-.loadding {
-    position: relative;
-}
-
-.loadding > img {
-    width: 150px;
-    z-index: 10;
-    position: absolute;
-    top: 100px;
-    left: 40%;
-}
-
 .list_img
 {
     width: 303px;

@@ -12,6 +12,10 @@
     border:1px solid #ddd;
     overflow:hidden;
 }
+.infos{
+    height:40px;
+    margin-bottom:15px;
+}
 .detail_img>img{
    max-width:100%;
 }
@@ -26,7 +30,7 @@
     margin-bottom:15px;
 }
 .detail_info>p{
-    margin-bottom:18px;
+    margin-bottom:17px;
 }
 .detail_info>p>span{
     margin-right:50px;
@@ -72,7 +76,7 @@
      background:url("../images/icon.png") no-repeat -786px -143px;
     cursor:pointer;
 }
-.filter>a.active{
+.filter>a.active,.filter>a:hover{
     background-position:-725px -143px;
     color:#0076CB;
 }
