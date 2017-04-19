@@ -24,7 +24,7 @@ var Datamart = {
         if(!settings.size) settings.size = 12 ;             // 默认12
         var _u = Datamart.join(settings) ; // 拼装URL
 
-        console.log(_u);
+       // console.log(_u);
 
         var _loadding = $("#loadding") ;
 
@@ -46,8 +46,19 @@ var Datamart = {
                 // console.log(data);
 
                 if(data && data.pageInfo) {
+                    //标题与内容剪切
+                    for(var i=0;i<data.pageInfo.list.length;i++){
+                        if(data.pageInfo.list[i].designation.length>12){
+                            data.pageInfo.list[i].designation=data.pageInfo.list[i].designation.substring(0,14)+"...";
+                        }
+                        if(data.pageInfo.list[i].introduce.length>40){
+                            data.pageInfo.list[i].introduce=data.pageInfo.list[i].introduce.substring(0,40)+"...";
+                        }
+
+                    }
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo).appendTo(_target);
+
 
                     // 给参数赋数据总数，分页方法paging()用到
                     settings.count = data.pageInfo.total ;
