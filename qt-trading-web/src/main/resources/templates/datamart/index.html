@@ -28,14 +28,8 @@
         {
             margin: 0 auto;
             max-width: 303px;
-            max-height: 205px;
+            height: 205px;
             overflow: hidden;
-            position: relative;
-        }
-        .list_img>img
-        {
-            height: auto;
-            margin-top: -40%;
             position: relative;
         }
     </style>
@@ -102,9 +96,7 @@
     <script id="tmpl_products" type="text/x-jquery-tmpl">
         {{each(i,prod) list}}
         <li>
-            <a href="/datamart/detail/${prod.id}" class="list_img">
-                <img src="${prod.pic}" alt=""/>
-            </a>
+            <a href="/datamart/detail/${prod.id}" class="list_img" style="background:url(${prod.pic}) no-repeat center center"> </a>
             <div class="list_main">
                 <a href="/datamart/detail/${prod.id}" class="list_title">${prod.designation}</a>
                 <div class="list_con">${prod.introduce}</div>
