@@ -12,6 +12,7 @@ var Datamart = {
      *  target: #product_list,      // 替换html元素，如：#div_id 或 .class_name
      *  curr_page: 1,               // 当前页数
      *  count: 100,                 // 总记录数
+     *  size: 12,                   // 每页记录数
      *  params:[{key:"page",value:"1"}] // 已数组的方式传参数，key 参数名，value 参数值
      * }
      */
@@ -19,8 +20,11 @@ var Datamart = {
 
         var _tmpl = settings.tmpl_id ;
         var _target = settings.target ;
-        if(!settings.curr_page) settings.curr_page = 1 ; // 默认1
+        if(!settings.curr_page) settings.curr_page = 1 ;    // 默认1
+        if(!settings.size) settings.size = 12 ;             // 默认12
         var _u = Datamart.join(settings) ; // 拼装URL
+
+        console.log(_u);
 
         var _loadding = $("#loadding") ;
 
@@ -65,12 +69,14 @@ var Datamart = {
      * 分页条   数据的总条数：count
      * @param settings
      * {
-     *  url: "/api/product",  // 请求地址
-     *  count: 100,                 // 产品总记录数
-     *  size: 12,                   // 每页记录数
+     *  url: "/api/product",        // 请求地址
      *  tmpl_id: #tmpl_products,    // jquery template 模板元素，如：#div_id 或 .class_name
-     *  target: #product_list       // 替换html元素，如：#div_id 或 .class_name
+     *  target: #product_list,      // 替换html元素，如：#div_id 或 .class_name
      *  pager_id: #pageTool         // 分页html元素标签
+     *  curr_page: 1,               // 当前页数
+     *  count: 100,                 // 总记录数
+     *  size: 12,                   // 每页记录数，默认12
+     *  params:[{key:"page",value:"1"}] // 已数组的方式传参数，key 参数名，value 参数值
      * }
      */
     paging : function (settings) {
@@ -79,6 +85,8 @@ var Datamart = {
         if(!_c) return ;
         var _s = settings.size ? settings.size : 12; // 默认每页12条
         var _pager = settings.pager_id ;
+
+        $(_pager).empty() ; // 清空原有分页插件
 
         $(_pager).Paging({
             pagesize: _s,
@@ -89,7 +97,9 @@ var Datamart = {
                 settings.curr_page = page ; // 当前页
 
                 // 条件不变，无需重新查询数据
-                if(!Datamart._change) Datamart.products(settings) ;
+                // if(!Datamart._change)
+                    Datamart.products(settings) ;
+
                 Datamart._change = false ;
                 // console.log(page);//当前页
                 // console.log(size);//每页条数
@@ -101,25 +111,21 @@ var Datamart = {
     /**
      * 绑定页面属性刷选信息，点击选中并加载产品数据
      * @param settings
+     *
      * {
-     *  url: "/api/product?page=",  // 请求地址
-     *  count: 100,                 // 产品总记录数
-     *  size: 12,                   // 每页记录数
+     *  url: "/api/product",        // 请求地址
      *  tmpl_id: #tmpl_products,    // jquery template 模板元素，如：#div_id 或 .class_name
-     *  target: #product_list       // 替换html元素，如：#div_id 或 .class_name
+     *  target: #product_list,      // 替换html元素，如：#div_id 或 .class_name
      *  pager_id: #pageTool         // 分页html元素标签
+     *  curr_page: 1,               // 当前页数
+     *  count: 100,                 // 总记录数
+     *  size: 12,                   // 每页记录数
      *  params:[{key:"page",value:"1"}] // 已数组的方式传参数，key 参数名，value 参数值
      * }
      */
     active : function (settings) {
 
         if(!settings) return ;
-
-        // 获取已选值
-        var _vids = "";
-        $("ul.sub_sort li a").each(function () {
-            _vids += $(this).attr("data-id")+"," ;
-        }) ;
 
         $("ul.sub_sort li").each(function () {
 
@@ -130,18 +136,36 @@ var Datamart = {
                 $_a.removeClass("active");
                 $(this).addClass("active");
 
-                // 组装属性值ID参数
-                _vids += $(this).attr("data-id");
-                if(!_vids) return ;
+                // 获取已选值
+                var _vids = "";
+                $("ul.sub_sort li a.active").each(function () {
+                    var _vid = $(this).attr("data-id") ;
+                    if(_vid) _vids += _vid + "," ;
+                }) ;
+                if(_vids && _vids.endsWith(",")) _vids = _vids.substr(0,_vids.length-1) ;
 
                 // 请求参数要http://localhost:8040/swagger-ui.html接口中的key一致
-                settings.params = [{key:"valIds",value:_vids}]
+                var _hasVids = false ;
+                if(settings.params) {
+                    // 存在key=valIds替换原有值，否则push
+                    $.each(settings.params, function (index, param) {
+                        var _key = param.key ;
+                        if(_key == "valIds") {
+                            _hasVids = true ;
+                            param.value = _vids ;
+                        }
+                    }) ;
+                } else {
+                    settings.params = [] ;// params不存在新建空json数组
+                }
+                if(!_hasVids) settings.params.push({key:"valIds",value:_vids}) ;
 
                 // console.log("valIds: "+_vids);//vids
 
                 // 条件变更，数据重新查询
                 Datamart._change = true ;
                 Datamart.products(settings) ;
+
             }) ;
         })
     },
@@ -155,7 +179,7 @@ var Datamart = {
 
         if(!settings) return ; // 参数为空
 
-        var result = settings.url +"?page="+settings.curr_page ;
+        var result = settings.url +"?page="+settings.curr_page+"&rows="+settings.size ;
 
         if(settings.params && settings.params.length > 0) {
             var _params_str = "" ;
@@ -164,9 +188,9 @@ var Datamart = {
                 var _key = param.key ;
                 var _val = param.value ;
 
-                // if(index+1 != array.length) _params_str += "&" ;
+                if(_val) _params_str += "&"+_key+"="+_val ;
 
-                _params_str += "&"+_key+"="+_val ;
+                // if(index+1 != array.length) _params_str += "&" ;
 
             }) ;
 

@@ -18,6 +18,7 @@ public class DataTypeAttrModel {
     private int isMulti ;   // 是否多选
     private int sort ;      // 排序
 
+    private String valName ;    // view object显示属性值数据
     private List<DataTypeAttrValModel> attrVals ; // 属性值列表
 
     public int getId() {
@@ -70,6 +71,14 @@ public class DataTypeAttrModel {
 
     public List<DataTypeAttrValModel> getAttrVals() {
         return attrVals;
+    }
+
+    public String getValName() {
+        return valName;
+    }
+
+    public void setValName(String valName) {
+        this.valName = valName;
     }
 
     public void setAttrVals(List<DataTypeAttrValModel> attrVals) {
