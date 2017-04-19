@@ -1,6 +1,10 @@
 package com.qtdbp.trading.model;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
+import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 数据包产品Model
@@ -24,21 +28,22 @@ public class DataProductModel extends BaseModel {
     private int provinceId ;        // 省份id
     private int isHuadong ;         // 是否华东
     private int userId ;            // 添加人
-    private Date addtime ;          // 添加时间
+    private Date addTime ;          // 添加时间
     private int editorId ;          // 编辑人id
     private Date editorTime ;       // 编辑时间
     private int sort ;              // 排序值
     private int rec ;               // 推荐值
     private int isUsed ;            // 是否可用
     private String typeChain ;      // 类型链
-    private String dataTypeProps ;  // 数据类型属性串
+    private String dataTypeProps ;  // 数据类型属性串pname:vname:pid:vid;pname1:vname1:pid1:vid1
 
     private int attrId ;        // 属性ID
     private String attrName ;   // 属性名称
     private int valId ;         // 属性值Id
     private String valName ;    // 属性值名称
+    private int buyCount ;      // 购买次数
 
-    private String valIds ;     // 请求参数：属性值ID列表，如：1,2
+    private String valIds ;     // 请求参数：属性值ID列表，如：1
 
     public String getDesignation() {
         return designation;
@@ -136,12 +141,12 @@ public class DataProductModel extends BaseModel {
         this.userId = userId;
     }
 
-    public Date getAddtime() {
-        return addtime;
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
     public int getEditorId() {
@@ -232,11 +237,12 @@ public class DataProductModel extends BaseModel {
         this.valName = valName;
     }
 
-    public String getValIds() {
-        return valIds;
+    public int getBuyCount() {
+        return buyCount;
     }
 
-    public void setValIds(String valIds) {
-        this.valIds = valIds;
+    public void setBuyCount(int buyCount) {
+        this.buyCount = buyCount;
     }
+
 }

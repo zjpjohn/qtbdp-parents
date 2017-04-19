@@ -12,9 +12,9 @@
         select id,attr_name from data_type_attr WHERE data_type_id = 0 AND is_used = 1 ORDER BY sort_order asc
     </select>
 
-    <!-- 根据类目ID查询所有属性信息（注意：目前属性信息通用），并且嵌套查询属性值信息 -->
-    <select id="findAttrAllByTypeId" resultMap="DataTypeAttrsMap">
-        select id,attr_name from data_type_attr WHERE data_type_id = #{typeId} AND is_used = 1 ORDER BY sort_order asc
+    <!-- 根据类目ID查询所有属性信息（注意：目前属性信息通用） -->
+    <select id="findAttrAllByTypeId" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeAttrModel">
+        select id,attr_name as name from data_type_attr WHERE data_type_id = 0 AND is_used = 1 ORDER BY sort_order asc
     </select>
 
     <resultMap type="com.qtdbp.trading.model.DataTypeAttrModel" id="DataTypeAttrsMap">

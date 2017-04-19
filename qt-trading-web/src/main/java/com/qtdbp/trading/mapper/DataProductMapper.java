@@ -1,7 +1,9 @@
 package com.qtdbp.trading.mapper;
 
+import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.utils.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -21,4 +23,18 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return
      */
     List<DataProductModel> findProductsByCondtion(DataProductModel productModel) ;
+
+    /**
+     * 单表查询数据包产品
+     * @param id
+     * @return
+     */
+    DataProductModel findProductsById(@Param("id") Integer id) ;
+
+    /**
+     * 分页查询数据条目
+     * @param item
+     * @return
+     */
+    List<DataItemModel> findItemsByProductId(DataItemModel item) ;
 }

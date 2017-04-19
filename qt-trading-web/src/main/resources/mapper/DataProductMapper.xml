@@ -3,34 +3,128 @@
 <mapper namespace="com.qtdbp.trading.mapper.DataProductMapper">
 
     <!-- 分页查询数据包产品 -->
-    <select id="findProductsByCondtion" resultMap="BaseResultMap">
-        SELECT
-          p.id,
-          p.designation,
-          p.pic,
-          p.introduce,
-          rel.attr_name,
-          rel.val_name
-        FROM
-            data_product as p,
-            data_product_attr_relation as rel
-        WHERE
-            p.id = rel.product_id
-            AND p.is_used = 1
-            <if test="valIds != null">
+    <select id="findProductsByCondtion" resultMap="ProductResultMap">
+        <choose>
+            <when test="valIds != null">
+            SELECT
+              p.id,
+              p.designation,
+              p.pic,
+              p.introduce,
+              rel.attr_name,
+              rel.val_name
+            FROM
+                data_product as p,
+                data_product_attr_relation as rel
+            WHERE
+                p.id = rel.product_id
+                AND p.is_used = 1
+                <if test="dataType != null and dataType != 0">
+                    AND p.data_type = ${dataType}
+                </if>
                 AND rel.val_id in (${valIds})
-            </if>
-        ORDER BY
-          p.addtime DESC
+            ORDER BY
+              p.addtime DESC
+            </when>
+            <otherwise>
+                SELECT
+                    p.id,
+                    p.designation,
+                    p.pic,
+                    p.introduce
+                FROM
+                    data_product as p
+                WHERE
+                  p.is_used = 1
+                  <if test="dataType != null and dataType != 0">
+                      AND p.data_type = ${dataType}
+                  </if>
+                ORDER BY
+                  p.addtime DESC
+            </otherwise>
+        </choose>
     </select>
 
-    <resultMap id="BaseResultMap" type="com.qtdbp.trading.model.DataProductModel" >
+    <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
         <id column="Id" property="id" />
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
         <result column="introduce" property="introduce" />
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
+    </resultMap>
+
+    <!-- 单表查询产品 -->
+    <select id="findProductsById" resultMap="ProductDetailResultMap">
+        SELECT
+        p.id,
+        p.designation,
+        p.pic,
+        p.introduce,
+        p.addtime,
+        p.editor_time,
+        p.score,
+        p.data_type_props,
+        p.p_score
+        FROM
+        data_product as p
+        WHERE
+        p.is_used = 1
+        AND p.id = ${id}
+        ORDER BY
+        p.addtime DESC
+    </select>
+
+    <resultMap id="ProductDetailResultMap" type="com.qtdbp.trading.model.DataProductModel" >
+        <id column="Id" property="id" />
+        <result column="designation" property="designation" />
+        <result column="pic" property="pic" />
+        <result column="introduce" property="introduce" />
+        <result column="addtime" property="addTime" />
+        <result column="editor_time" property="editorTime" />
+        <result column="score" property="score" />
+        <result column="data_type_props" property="dataTypeProps" />
+        <result column="p_score" property="pScore" />
+    
+        <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
+    </resultMap>
+
+    <!-- 通过产品ID计算订单购买数，其中product_type=1表示数据包产品,order_state = 3表示已完成交易 -->
+    <select id="findOrdersCountByProductId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      SELECT COUNT(*) FROM data_transaction_order  WHERE product_id = #{id} AND product_type = 1 AND order_state = 3
+    </select>
+
+
+
+    <!-- #################################################################### -->
+    <!-- #############################数据条目处理############################# -->
+    <!-- #################################################################### -->
+
+    <select id="findItemsByProductId" resultMap="ItemResultMap">
+        SELECT
+            i.id,
+            i.product_id,
+            i.item_name,
+            i.view_count,
+            i.download_count,
+            i.editor_time
+        FROM
+            data_item AS i
+        WHERE
+            i.is_used = 1
+        AND product_id = #{productId}
+        ORDER BY
+        i.editor_time desc
+    </select>
+
+    <resultMap id="ItemResultMap" type="com.qtdbp.trading.model.DataItemModel" >
+        <id column="Id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="item_name" property="itemName" />
+        <result column="view_count" property="viewCount" />
+        <result column="view_count" property="viewCount" />
+        <result column="download_count" property="downloadCount" />
+        <result column="editor_time" property="editorTime" />
     </resultMap>
 
 </mapper>
