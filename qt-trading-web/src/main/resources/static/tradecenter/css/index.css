@@ -86,7 +86,7 @@
     width:51px;
     height:51px;
     margin:0px auto;
-    background-image:url("../images/jy_icon1.png" );
+    background-image:url("../images/icon.png" );
 }
 .pro_i1{
     background-position:-37px -157px;
@@ -145,7 +145,7 @@
     width:41px;
     height:41px;
     margin:0px auto;
-    background:url("../images/jy_icon1.png" ) no-repeat -188px -60px;
+    background:url("../images/icon.png" ) no-repeat -188px -60px;
 }
 .pro_list>li:hover .pro_mask{
     display:block;
@@ -224,7 +224,7 @@
     width:162px;
     height:44px;
     margin-right:45px;
-    background-image:url("../images/jy_icon1.png" );
+    background-image:url("../images/icon.png" );
 }
 .com_list>.a1{
     background-position:-188px -161px;
