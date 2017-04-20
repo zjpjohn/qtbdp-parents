@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/convene.css">
+    <title>方案召集</title>
+</head>
+<body>
+<div class="schall">
+    <div class="scalmin">
+        <p class="scaltop">
+            <a href="javascript:;" class="active">方案召集</a>或
+            <a href="javascript:;" class="">数据众包</a>
+        </p>
+        <div class="scalsection">
+            <div class="scal_hint"> <span></span>  小贴士 : 被数据困扰 , 淹没在数海中 ? 发布方案召集 , 解决解决方案 ! (<i>*</i>为必填)</div>
+            <div class="scal_onself">
+                <p> <i>*</i> 数据名称</p>
+                <input type="text" name="designation" value="全国民航机场吞吐量"/>
+            </div>
+
+
+            <div class="scal_demand">
+                <p> <i>*</i> 产品介绍</p>
+                <textarea name=""  cols="30" name="description"  placeholder="一句话描述您的需求(不少于10字)" rows="10"></textarea>
+                <b>产品介绍不得少于10个字</b>
+            </div>
+            <!--上传数据-->
+            <div class="scal_onself">
+                <p> <i>*</i> 上传数据</p>
+                <div class="data_upload floating">
+                    <span class="uploadimg lf"></span>
+                    <input type="text" class="uploadtext lf"/>
+                    <div class="rt uploadclick">
+                        <a href="javascript:;">上传</a>
+                        <input type="file" class="uploadfile"/>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <div class="scal_cost">
+                <p> <i>*</i> 数据规模</p>
+                <input type="text" value=""  name="data_scale"/>
+                <select class="form-select inline-ele"  name="unit" id="unit">
+                    <option value="1">KB</option>
+                    <option value="2">MB</option>
+                    <option value="3">GB</option>
+                    <option value="4">TB</option>
+                    <option value="5">PB</option>
+                    <option value="6" selected="selected">条</option>
+                </select>
+            </div>
+
+            <div class="scal_data">
+                <p> <i>*</i> 数据维度</p>
+                <div class="form-field form-field-rc">
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="dimension" value="1" >
+                        <span>5个以下</span>
+                    </label>
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="dimension" value="2"   >
+                        <span>5-10个</span>
+                    </label>
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="dimension" value="3"   >
+                        <span>10-50个</span>
+                    </label>
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="dimension" value="4"  >
+                        <span>50-100个</span>
+                    </label>
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="dimension" value="5"  >
+                        <span>100-1000个</span>
+                    </label>
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="dimension" value="6"  >
+                        <span>100-1000个以上</span>
+                    </label>
+                </div>
+            </div>
+
+            <!--/***********/-->
+
+
+            <div class="scal_expect">
+                <p> <i>*</i>数据类型</p>
+                <div class="form-field form-field-rc">
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="1" >
+                        <span>知识/专利</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="2"   >
+                        <span>智能制造</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="3"   >
+                        <span>物联网</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="4"  >
+                        <span>先进制造</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>工业参数</span>
+                    </label>
+
+
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>仪器/仪表</span>
+                    </label>
+
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>工业安全</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>政府监管</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>学术/教育</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>工业运行</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>物流数据</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>工业设计</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>行业综合</span>
+                    </label>
+                    <label class="form-label-rc2">
+                        <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                        <span>其它</span>
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!--/***********/-->
+
+            <div class="scal_data">
+                <p> <i>*</i> 需求类型</p>
+                <div class="form-field form-field-rc">
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="demand_type" value="1" >
+                        <span>数据预处理</span>
+                    </label>
+                    <label class="form-label-rc">
+                        <input class="form-radio" type="radio"name="demand_type" value="2"   >
+                        <span>数据魔剑</span>
+                    </label>
+
+                </div>
+            </div>
+            <div class="scal_expect">
+                <p> <i>*</i>预期费用</p>
+                <div class="scal_money">
+                    <input type="text" name="exp_fee" value=""/>元
+                </div>
+
+            </div>
+
+            <div class="scal_begin">
+                <p> <i>*</i> 起止时间</p>
+                <input type="text" name="from_date" value=""/> <b></b>
+                <input type="text" name="to_date" value="">
+
+
+            </div>
+
+            <div class="scal_onself">
+                <p> <i>*</i>联系人</p>
+                <input type="text" name="contactsname" value=""/>
+            </div>
+            <div class="scal_onself">
+                <p> <i>*</i>联系电话</p>
+                <input type="text" name="contactsphone" value=""/>
+            </div>
+            <div class="scal_onself">
+                <p> <i>*</i>联系邮箱</p>
+                <input type="text" name="contactsemail" value=""/>
+                <b class="scalerror"> <i>*</i> 邮箱格式错误 请重新输入</b>
+            </div>
+            <p class="scalsubmit"><a href="javascript:;">发布</a>  </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+</html>
