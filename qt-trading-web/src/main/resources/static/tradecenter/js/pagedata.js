@@ -52,11 +52,11 @@ var pageData = {
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo, {
 
-                        _substr : function(str) {
-                            pageData._substr(str) ;
+                        _substr : function(str,n) {
+                           return pageData._substr(str,n) ;
                         },
                         _date : function (date) {
-                            pageData._formatedate(date) ;
+                            return pageData._formatedate(date) ;
                         }
 
                     }).appendTo(_target);
@@ -218,11 +218,11 @@ var pageData = {
      * @param str
      * @private
      */
-    _substr: function (str) {
-       /* if(str.length>n){
+    _substr: function (str,n) {
+        if(str.length>n){
             str=str.substring(0,n)+"...";
         }
-        return str;*/
+        return str;
     },
 
     /**
