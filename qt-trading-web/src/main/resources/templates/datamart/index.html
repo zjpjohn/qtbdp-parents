@@ -49,11 +49,12 @@
                 </li>
             </ul>
             <!--右侧分类-->
-            <ul id="product_list" class="datamart_list floating"></ul>
-
             <div id="loadding" class="loadding">
                 <img th:src="@{/tradecenter/images/loadding.gif}" alt="" />
             </div>
+            <ul id="product_list" class="datamart_list floating"></ul>
+
+
             <!-- 分页开始 -->
             <div id="pageTool"></div>
             <!-- 分页结束 -->
@@ -75,8 +76,8 @@
         <li>
             <a href="/datamart/detail/${prod.id}" class="list_img" style="background:url(${prod.pic}) no-repeat center center;background-size:cover;"> </a>
             <div class="list_main">
-                <a href="/datamart/detail/${prod.id}" class="list_title">${prod.designation}</a>
-                <div class="list_con">${prod.introduce}</div>
+                <a href="/datamart/detail/${prod.id}" class="list_title">${$item._substr(prod.designation,14)}</a>
+                <div class="list_con">${$item._substr(prod.introduce,35)}</div>
                 <p class="list_bot floating">
                     <span class="lf"> <i></i> 文件，个人，100M以下</span>
                     <span class="rt free">免费</span>
