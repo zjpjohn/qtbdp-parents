@@ -30,7 +30,11 @@ $(".convertye>a").click(function(){
     var convertye=$(this).attr("data-index");
     $("."+convertye+"2").addClass("active").siblings(".active").removeClass("active");
 });
-
+//我的订单与需求订单，数据众包与方案召集点击切换
+$(".filter_btn>a").unbind("click").click(function(){
+    $(this).addClass("active").siblings(".active").removeClass("active");
+    $($(this).attr("data-id")).addClass("active").siblings(".active").removeClass("active");
+});
 
 //个人信息 前端验证
 function check1(){
