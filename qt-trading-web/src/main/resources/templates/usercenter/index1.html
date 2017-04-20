@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8"/>
+    <!-- 引入header布局 -->
+    <top th:replace="layout/top :: top"></top>
+    <!-- 页面自定义css、js  -->
+    <title>个人中心</title>
+    <meta name="keywords" content="钱塘大数据交易中心"/>
+    <meta name="description" content="钱塘大数据交易中心"/>
+    <link rel="stylesheet" th:href="@{/tradecenter/css/usercenter.css}"/>
+
+</head>
+<body>
+    <!--  页头开始 -->
+    <div th:include="layout/header::#head" ></div>
+    <!--  页头结束 -->
+    <div class="cenAll">
+        <div class="center_main">
+            <div class="center_left lf">
+                <div class="headbg">
+                    <a href="javascript:;">
+                        <img class="headpic" th:src="@{/tradecenter/images/avatar1.jpg}" alt=""/>
+                    </a>
+                </div>
+                <p class="pername "><a href="javascript:;">三生万物</a></p>
+                <p class="pername perphone"><a href="javascript:;">18564852465</a></p>
+                <p class="perdata">
+                    <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
+                    <a class="preinfo rt" href="javascript:;">完善资料</a>
+                </p>
+
+                <ul class="pereach lf floating">
+                    <li data-class="overview" ><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
+                    <li data-class="persinfo"><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
+                    <li data-class="myaccount" style="display:none;"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
+                    <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
+                    <li data-class="myrelease" class="active "><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
+                    <li data-class="dataservice"><a href="javascript:;"><span></span> 成为数据服务商 <b></b> </a></li>
+
+                </ul>
+
+            </div>
+            <div class="center_right rt">
+                <!-- 概览开始-->
+                <div class="overview2 ">
+                    <ul class="view_top floating">
+                        <li>
+                            <h1>246</h1>
+                            <p class="color">积分</p>
+                        </li>
+                        <li>
+                            <h1>35</h1>
+                            <p>余额（元）</p>
+                        </li>
+                        <li>
+                            <h1>6</h1>
+                            <p>订单</p>
+                        </li>
+                        <li>
+                            <h1>5</h1>
+                            <p>发布</p>
+                        </li>
+                    </ul>
+                    <div>
+                        <h2>最新订单</h2>
+                        <table class="center_tb">
+                            <thead>
+                            <tr>
+                                <td>类型</td>
+                                <td>订单名称</td>
+                                <td>价格</td>
+                                <td>状态</td>
+                                <td class="time_btn"> <!--<td class="time_btn nodefault">-->
+                                    时间
+                                    <i></i>
+                                    <i></i>
+                                </td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody id="order_list1">
+                            <tr>
+                                <td>整包</td>
+                                <td>2015全国民航机场吞吐量</td>
+                                <td>￥128.00</td>
+                                <td class="nopaid">待支付</td>
+                                <td>2016-12-01 10:06:34</td>
+                                <td>
+                                    <a href="javascript:;" class="gopay">去支付</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>整包</td>
+                                <td>2015全国民航机场吞吐量</td>
+                                <td>￥128.00</td>
+                                <td class="paid">已支付</td>
+                                <td>2016-12-01 10:06:34</td>
+                                <td>
+                                    <a href="javascript:;" class="download">下载</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <h2>最新发布</h2>
+                        <table class="center_tb">
+                            <thead>
+                            <tr>
+                                <td>需求名称</td>
+                                <td>预算</td>
+                                <td>状态</td>
+                                <td class="time_btn now">时间 <i></i>  <i></i> </td>
+                                <td>操作</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>2015全国民航机场吞吐量</td>
+                                <td>￥128.00</td>
+                                <td class="noaudit">待审核</td>
+                                <td>2016-12-01 10:06:34</td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>中国医疗器械现状</td>
+                                <td>￥128.00</td>
+                                <td class="putaway">已上架</td>
+                                <td>2016-12-01 10:06:34</td>
+                                <td>
+                                    -
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 概览结束-->
+                <!--个人信息-->
+                <div class="persinfo2 ">
+                    <div class="headimgs">
+                        <img th:src="@{/tradecenter/images/avatar1.jpg}" alt="" class="peronimg"/>
+                        <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
+                        <a href="javascript:;" class="savechange rt">保存更改</a>
+                    </div>
+
+                    <div class="pars_infor">
+                        <p class="personal_name">昵称</p>
+                        <input type="text" class="personal_nameval"/>
+
+                        <p>手机号</p>
+                        <input type="text" class="pers_input" id="phoneNUM" value="18665351825"/>
+                        <a class="error">请输入正确的手机号码</a>
+
+
+                        <p class="pers_names">姓名</p>
+                        <input type="text" class="pers_input"/>
+                        <br/> <a href="javascript:;">去实名认证</a>
+
+                        <p class="pers_names">邮箱</p>
+                        <input type="text" class="pers_input" id="person_emal"/>
+                        <a class="error">请输入正确的邮箱</a>
+
+
+                        <p class="pers_names">用户类型</p>
+                        <input type="text" value="个人" class="pers_input"/>
+                        <br/> <a href="javascript:;">成为数据服务商</a>
+
+                        <p class="pers_names">密码</p>
+                        <input type="password" class="pers_input" value="123546"/>
+                        <br/> <a href="javascript:;">重置密码</a>
+
+                    </div>
+
+
+
+                </div>
+                <!-- 我的账户-->
+                <div class="myaccount2" style="display:none;">
+                    <p class="cenintegral">积分 : <span>246</span></p>
+                    <div class="balance">
+                        余额 : <span class="gralmoney"><i>35</i>元</span>
+                        <span class="recharge"> 充值</span>
+                        <span class=" deposit"> 提现</span>
+                        <span class=" convert"> 兑换积分</span>
+                        <span class="reminder"> (友情提示 ： 1元=10积分,使用积分更划算) </span>
+
+
+                    </div>
+
+                    <div>
+                        <p class="convertye">
+                            <a href="javascript:;"  class="active"  data-index="integralmx">积分明细</a>
+                            <a href="javascript:;" data-index="balancemx">余额明细</a>
+                        </p>
+                        <div class="detailswitcher">
+                            <div class="integralmx2 active">
+                                <table  class="particulars">
+                                    <thead class="pratichead">
+                                    <tr class="particularshead">
+                                        <td class="active">ID</td>
+                                        <td>积分</td>
+                                        <td>项目</td>
+                                        <td>时间</td>
+                                        <td>备注</td>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="praticbody">
+                                    <tr class="particularsbody">
+                                        <td>1</td>
+                                        <td>+50</td>
+                                        <td>注册</td>
+                                        <td>2016-12-01 10:06:34</td>
+                                        <td>赠送积分</td>
+                                    </tr>
+                                    <tr class="particularsbody">
+                                        <td>2</td>
+                                        <td>+50</td>
+                                        <td>注册</td>
+                                        <td>2016-12-01 10:06:34</td>
+                                        <td>赠送积分</td>
+                                    </tr>
+                                    <tr class="particularsbody">
+                                        <td>3</td>
+                                        <td>+50</td>
+                                        <td>注册</td>
+                                        <td>2016-12-01 10:06:34</td>
+                                        <td>赠送积分</td>
+                                    </tr>
+                                    </tbody>
+
+                                    <!--空白页面-->
+                                    <!--<tbody class="praticbody">
+                                    <tr>
+                                        <td colspan="5"><img src="images/none.png" alt="" class="noneimg" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <p class="presentmx">暂时没有明细 / 菜单 / 发布 ...</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <a href="javascript:;" class="leavedata">前往数据商城</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>-->
+                                </table>
+
+                            </div>
+
+                            <div class="balancemx2 ">
+                                <table  class="particulars">
+                                    <thead class="pratichead">
+                                    <tr class="particularshead">
+                                        <td class="active">ID</td>
+                                        <td>余额</td>
+                                        <td>项目</td>
+                                        <td>时间</td>
+                                        <td>备注</td>
+                                    </tr>
+                                    </thead>
+
+                                    <!--<tbody class="praticbody">
+                                        <tr class="particularsbody">
+                                            <td>1</td>
+                                            <td>+50</td>
+                                            <td>注册</td>
+                                            <td>2016-12-01 10:06:34</td>
+                                            <td>赠送积分</td>
+                                        </tr>
+                                        <tr class="particularsbody">
+                                            <td>2</td>
+                                            <td>+50</td>
+                                            <td>注册</td>
+                                            <td>2016-12-01 10:06:34</td>
+                                            <td>赠送积分</td>
+                                        </tr>
+                                        <tr class="particularsbody">
+                                            <td>3</td>
+                                            <td>+50</td>
+                                            <td>注册</td>
+                                            <td>2016-12-01 10:06:34</td>
+                                            <td>赠送积分</td>
+                                        </tr>
+                                    </tbody>-->
+                                    <tbody class="praticbody">
+                                    <tr>
+                                        <td colspan="5"><img th:src="@{/tradecenter/images/none.png}" alt="" class="noneimg" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <p class="presentmx">暂时没有明细 / 菜单 / 发布 ...</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <a href="javascript:;" class="leavedata">前往数据商城</a>
+                                        </td>
+                                    </tr>
+
+
+
+                                    </tbody>
+
+
+                                </table>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <!-- 我的订单开始-->
+                <div class="myorder2 rt_tbs">
+                    <h2>我的订单：<span class="color">6</span></h2>
+                    <p>
+                        数据订单：<span class="color">6</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        需求订单：<span class="color">-</span>
+                    </p>
+                    <p class="order_filter filter_btn floating">
+                        <a href="javascript:;" class="active" data-id="#dataorder">数据订单</a>
+                        <a href="javascript:;" data-id="#demandorder">需求订单</a>
+                    </p>
+                    <!-- 数据订单开始 -->
+                    <div id="dataorder" class="order_tb active">
+                        <!-- 分页开始 -->
+                        <div id="orderPage"></div>
+                        <!-- 分页结束 -->
+                        <table class="center_tb">
+                            <thead>
+                            <tr>
+                                <th class="time_btn id_btn">
+                                    ID
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>类型</th>
+                                <th>订单名称</th>
+                                <th>价格</th>
+                                <th>状态</th>
+                                <th class="time_btn">
+                                    时间
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>整包</td>
+                                <td>2015全国民航机场吞吐量</td>
+                                <td>￥128.00</td>
+                                <td class="nopaid">待支付</td>
+                                <td>2016-12-01 10:06:34</td>
+                                <td>
+                                    <a href="javascript:;" class="gopay">去支付</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>单个</td>
+                                <td>中国医疗器械行业现状</td>
+                                <td>￥128.00</td>
+                                <td class="paid">已支付</td>
+                                <td>2016-12-01 10:06:34</td>
+                                <td>
+                                    <a href="javascript:;" class="download">下载</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 数据订单结束 -->
+                    <!-- 需求订单开始 -->
+                    <div id="demandorder" class="order_tb">
+                        <!-- 分页开始 -->
+                        <div id="demandPage"></div>
+                        <!-- 分页结束 -->
+                        <table class="center_tb">
+                            <thead>
+                            <tr>
+                                <th class="time_btn id_btn">
+                                    ID
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>类型</th>
+                                <th>订单名称</th>
+                                <th>价格</th>
+                                <th>状态</th>
+                                <th class="time_btn">
+                                    时间
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- 没有数据 -->
+                            </tbody>
+                        </table>
+                        <div class="nodata">
+                            <img th:src="@{/tradecenter/images/none.png}" alt=""/>
+                                <p>暂时没有需求订单</p>
+                            <a href="javascript:;">前往需求大厅</a>
+                        </div>
+                    </div>
+                    <!-- 需求订单结束 -->
+                </div>
+                <!-- 我的订单结束-->
+                <!-- 我的发布开始-->
+                <div class="myrelease2 rt_tbs active">
+                    <h2>我的发布：<span class="color">5</span></h2>
+                    <p>
+                        数据众包：<span class="color">3</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        方案召集：<span class="color">2</span>
+                    </p>
+                    <p class="fabu_filter filter_btn floating">
+                        <a href="javascript:;" class="active" data-id="#crowdsourcing">数据众包</a>
+                        <a href="javascript:;" data-id="#scheme">方案召集</a>
+                    </p>
+                    <!-- 数据众包开始 -->
+                    <div id="crowdsourcing" class="order_tb active">
+                        <!-- 分页开始 -->
+                        <div id="crowdPage"></div>
+                        <!-- 分页结束 -->
+                        <table class="center_tb">
+                            <thead>
+                            <tr>
+                                <th class="time_btn id_btn">
+                                    ID
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>需求名称</th>
+                                <th>预算</th>
+                                <th>状态</th>
+                                <th class="time_btn">
+                                    时间
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="replace_crow">
+                                <!--<tr>
+                                    <td>1</td>
+                                    <td>2015全国民航机场吞吐量</td>
+                                    <td>￥128.00</td>
+                                    <td class="noaudit">已上架</td>
+                                    <td>21天后截止</td>
+                                    <td>
+                                        <a href="javascript:;" class="gosee">查看</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>中国医疗器械行业现状</td>
+                                    <td>￥128.00</td>
+                                    <td class="putaway">已上架</td>
+                                    <td>2016-12-01 10:06:34</td>
+                                    <td>
+                                        <a href="javascript:;" class="gosee">下载</a>
+                                    </td>
+                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 数据众包结束 -->
+                    <!-- 方案召集开始 -->
+                    <div id="scheme" class="order_tb">
+                        <!-- 分页开始 -->
+                        <div id="schemePage"></div>
+                        <!-- 分页结束 -->
+                        <table class="center_tb">
+                            <thead>
+                            <tr>
+                                <th class="time_btn id_btn">
+                                    ID
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>需求名称</th>
+                                <th>预算</th>
+                                <th>状态</th>
+                                <th class="time_btn">
+                                    时间
+                                    <i></i>
+                                    <i></i>
+                                </th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- 没有数据 -->
+                            </tbody>
+                        </table>
+                        <div class="nodata">
+                            <img th:src="@{/tradecenter/images/none.png}" alt=""/>
+                            <p>暂时没有需求订单</p>
+                            <a href="javascript:;">前往需求大厅</a>
+                        </div>
+                    </div>
+                    <!-- 方案召集结束 -->
+                </div>
+                <!-- 我的发布结束-->
+                <div class="dataservice2">成为数据服务商</div>
+                <!-- 订单支付开始 -->
+                <div class="orderpay rt_tbs">
+                    <h2>
+                        <i></i>
+                        订单支付
+                    </h2>
+                    <div>
+                        <h2>全国各地区调频广播频率表</h2>
+                        <h1 class="color">￥4593.60</h1>
+                        <p>订单编号：67849598623537298672</p>
+                        <p>订单类型：订单购买</p>
+                        <p>订单详情：<span class="color">整包</span></p>
+                        <p>购买数量：<span cladd="color">1</span>份</p>
+                        <p class="pay_btns">
+                            <a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>
+                            <a href="javascript:;" class="alibtn">支付宝付款</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- 订单支付结束 -->
+            </div>
+
+        </div>
+
+    </div>
+    <script id="tmpl_release" type="text/x-jquery-tmpl">
+
+        {{each(i,prod) list}}
+        <tr>
+            <td>${prod.unit}</td>
+            <td>${prod.designation}</td>
+            <td>${prod.expFee}</td>
+            <td class="noaudit">
+                if($(prod.isUsed)==1){
+                    已上架
+                }else if($(prod.isUsed)==0){
+                    待审核
+                }
+            </td>
+            <td>${prod.to_date}</td>
+            <td>
+                <a href="javascript:;" class="gosee">查看</a>
+            </td>
+        </tr>
+        {{/each}}
+
+
+
+    </script>
+
+    <!--我的订单  最新订单tpml模板 -->
+    <script id="tmpl_order" type="text/x-jquery-tmpl">
+        {{each(i,order) list}}
+         <tr>
+            <td>整包</td>
+            <td>2015全国民航机场吞吐量</td>
+            <td>￥128.00</td>
+            <td class="nopaid">待支付</td>
+            <td>2016-12-01 10:06:34</td>
+            <td>
+                <a href="javascript:;" class="gopay">去支付</a>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <!--我的订单   最新发布tpml模板 -->
+    <script id="tmpl_fabu" type="text/x-jquery-tmpl">
+        {{each(i,order) list}}
+         <tr>
+            <td>中国医疗器械现状</td>
+            <td>￥128.00</td>
+            <td class="putaway">已上架</td>
+            <td>2016-12-01 10:06:34</td>
+            <td>
+                -
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+
+
+    <script th:src="@{/tradecenter/js/pageData.js}"></script>
+    <script th:src="@{/tradecenter/js/usercenter.js}"></script>
+
+</body>
+</html>
