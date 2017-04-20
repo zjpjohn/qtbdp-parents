@@ -59,6 +59,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <!-- thymeleaf 关闭未结束标签检测-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
         <!-- 引入对Spring Security的依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,6 +106,7 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.1.0</version>
         </dependency>
+
 
     </dependencies>
 
