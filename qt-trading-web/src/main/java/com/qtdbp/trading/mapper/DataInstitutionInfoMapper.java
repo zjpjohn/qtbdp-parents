@@ -11,5 +11,5 @@ import java.util.List;
 public interface DataInstitutionInfoMapper extends BaseMapper<DataInstitutionInfoModel> {
 
     //分页查询服务商信息和类型
-    List<DataInstitutionInfoModel> selectInstitutionAndType(DataInstitutionInfoModel dm);
+    List<DataInstitutionInfoModel> selectInstitutionAndType(DataInstitutionInfoModel infoModel);
 }
