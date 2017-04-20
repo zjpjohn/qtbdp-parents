@@ -33,23 +33,14 @@
         </foreach>
     </insert>
 
-    <!-- 分页查询服务商信息和类型 -->
+    <!-- (当有dataType时根据dataType)分页查询服务商信息和类型 -->
     <select id="findDataInstitutionInfoByCondition" resultMap="InstitutionInfoMap">
         select dii.id,dii.designation,dii.picture,group_concat(dt.`name`) as typename
         from data_institution_info dii
         LEFT JOIN data_institution_type_relation ditr on dii.id=ditr.institution_id
         LEFT JOIN data_type dt on ditr.data_type=dt.id
-        GROUP BY dii.id,dii.designation,dii.picture
-    </select>
-
-    <!-- 根据typeId分页查询服务商信息和类型 -->
-    <select id="findDataInstitutionInfoByConditionAndTypeId" resultMap="InstitutionInfoMap">
-        select dii.id,dii.designation,dii.picture,group_concat(dt.`name`) as typename
-        from data_institution_info dii
-        LEFT JOIN data_institution_type_relation ditr on dii.id=ditr.institution_id
-        LEFT JOIN data_type dt on ditr.data_type=dt.id
         <where>
-            <if test="typeId != null">
+            <if test="dataType != null">
                 ditr.data_type=#{dataType}
             </if>
         </where>

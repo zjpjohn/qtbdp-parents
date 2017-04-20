@@ -32,10 +32,4 @@ public interface DataInstitutionInfoMapper {
      */
     void insertInstitutionTypeRelation(List<DataInstitutionTypeRelationModel> relationModels);
 
-    /**
-     * 根据typeId分页查询服务商信息和类型
-     * @param infoModel
-     * @return
-     */
-    List<DataInstitutionInfoModel> findDataInstitutionInfoByConditionAndTypeId(DataInstitutionInfoModel infoModel);
 }

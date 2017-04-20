@@ -17,7 +17,6 @@ public class DataInstitutionInfoService {
     @Autowired
     private DataInstitutionInfoMapper infoMapper;
 
-
     /**
      * 分页查询服务商信息和类型
      * @param infoModel
@@ -31,23 +30,5 @@ public class DataInstitutionInfoService {
         List<DataInstitutionInfoModel> infoModels = infoMapper.findDataInstitutionInfoByCondition(infoModel);
         return infoModels;
     }
-
-    /**
-     * 根据typeId分页查询服务商信息和类型
-     * @param infoModel
-     * @param typeId
-     * @return
-     */
-    public List<DataInstitutionInfoModel> findDataInstitutionInfoByConditionAndTypeId(DataInstitutionInfoModel infoModel){
-
-        if (infoModel.getPage() != null && infoModel.getRows() != null) {
-            PageHelper.startPage(infoModel.getPage(), infoModel.getRows());
-        }
-        List<DataInstitutionInfoModel> infoModels = infoMapper.findDataInstitutionInfoByConditionAndTypeId(infoModel);
-        return infoModels;
-    }
-
-
-
 
 }
