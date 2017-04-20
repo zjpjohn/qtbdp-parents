@@ -59,12 +59,12 @@
     border-radius:4px;
 }
 .filter{
-    margin-top:40px;
+    margin:40px 0px 20px 0px;
+    border-bottom:1px solid #ddd;
+
 }
 .infor_list{
-    margin:20px 0px;
     padding:20px 0px;
-    border-top:1px solid #ddd;
 }
 .filter>b{
     font-size:18px;

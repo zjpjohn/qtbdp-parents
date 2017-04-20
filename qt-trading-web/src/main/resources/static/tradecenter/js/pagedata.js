@@ -66,7 +66,7 @@ var pageData = {
                         }
                     }*/
                     $(_target).empty() ;
-                    $(_tmpl).tmpl(data.pageInfo).appendTo(_target);
+                    $(_tmpl).tmpl(data.pageInfo, pageData.cut()).appendTo(_target);
 
 
                     // 给参数赋数据总数，分页方法paging()用到
@@ -218,5 +218,9 @@ var pageData = {
         }
 
         return  result ;
+    },
+    
+    cut: function (param) {
+        console.log("param: "+param);//param
     }
 };
