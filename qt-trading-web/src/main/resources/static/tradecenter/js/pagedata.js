@@ -49,24 +49,17 @@ var pageData = {
 
                 if(data && data.pageInfo) {
                     // console.log(data.pageInfo);
-                    //标题与内容剪切
-                    /*for(var i=0;i<data.pageInfo.list.length;i++){
-                        if(data.pageInfo.list[i].designation && data.pageInfo.list[i].designation.length>12){
-                            data.pageInfo.list[i].designation=data.pageInfo.list[i].designation.substring(0,14)+"...";
-                        }
-                        if(data.pageInfo.list[i].introduce && data.pageInfo.list[i].introduce.length>40){
-                            data.pageInfo.list[i].introduce=data.pageInfo.list[i].introduce.substring(0,40)+"...";
-                        }
-                        if(data.pageInfo.list[i].itemName && data.pageInfo.list[i].itemName.length>10){
-                            data.pageInfo.list[i].itemName=data.pageInfo.list[i].itemName.substring(0,10)+"...";
-                        }
-                        if(data.pageInfo.list[i].editorTime){
-                            var editorTime=new Date(data.pageInfo.list[i].editorTime);
-                            data.pageInfo.list[i].editorTime=editorTime.getFullYear()+"/"+editorTime.getMonth()+"/"+editorTime.getDate()+" "+editorTime.getHours()+":"+editorTime.getMinutes()+":"+editorTime.getSeconds();
-                        }
-                    }*/
                     $(_target).empty() ;
-                    $(_tmpl).tmpl(data.pageInfo, pageData.cut()).appendTo(_target);
+                    $(_tmpl).tmpl(data.pageInfo, {
+
+                        _substr : function(str,n) {
+                           return pageData._substr(str,n) ;
+                        },
+                        _date : function (date) {
+                            return pageData._formatedate(date) ;
+                        }
+
+                    }).appendTo(_target);
 
 
                     // 给参数赋数据总数，分页方法paging()用到
@@ -219,8 +212,27 @@ var pageData = {
 
         return  result ;
     },
-    
-    cut: function (param) {
-        console.log("param: "+param);//param
+
+    /**
+     * 字符串处理
+     * @param str
+     * @private
+     */
+    _substr: function (str,n) {
+        if(str.length>n){
+            str=str.substring(0,n)+"...";
+        }
+        return str;
+    },
+
+    /**
+     * 时间格式转换
+     * @param date
+     * @private
+     */
+    _formatedate: function (date) {
+        var formatedate=new Date(date);
+        formatedate=formatedate.getFullYear()+"/"+formatedate.getMonth()+"/"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+       return formatedate;
     }
 };

@@ -11,15 +11,21 @@
     line-height:205px;
     border:1px solid #ddd;
     overflow:hidden;
+    position:relative;
+}
+.detail_img>img{
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
 }
 .infos{
     width:845px;
     height:40px;
     margin-bottom:15px;
     overflow:hidden;
-}
-.detail_img>img{
-   max-width:100%;
 }
 .detail_info{
     width:845px;
@@ -59,12 +65,14 @@
     border-radius:4px;
 }
 .filter{
-    margin:40px 0px 20px 0px;
+    margin-top:40px;
+    padding-bottom:20px;
     border-bottom:1px solid #ddd;
 
 }
 .infor_list{
     padding:20px 0px;
+    min-height:130px;
 }
 .filter>b{
     font-size:18px;

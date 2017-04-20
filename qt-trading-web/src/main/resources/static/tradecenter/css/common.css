@@ -276,9 +276,13 @@ nav{
 	margin-left:10px;
 }
 
-
+.loadding{
+	position:relative;
+}
 .loadding > img {
-	display:block;
-	width: 150px;
-	margin:40px auto;
+	position:absolute;
+	width:100px;
+	top:50px;
+	left:150px;
+	z-index:9;
 }
