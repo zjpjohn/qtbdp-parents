@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qtdbp.trading.mapper.DataSosInfoMapper">
+<mapper namespace="com.qtdbp.trading.mapper.DataBuyInfoMapper">
 
-    <!-- 分页查询需求订单 -->
-    <select id="findDataSosInfoByCondition" resultMap="SosInfoResultMap">
+    <!-- 分页查询数据众包 -->
+    <select id="findDataBuyInfoByCondition" resultMap="BuyInfoResultMap">
         SELECT
-            s.id,
-            s.designation,
-            s.description,
-            s.data_scale,
-            s.unit,
-            s.from_date,
-            s.to_date,
-            s.exp_fee,
-            s.contacts_name,
-            s.contacts_email,
-            s.contacts_phone,
-            s.addtime,
-            s.filePath,
-            s.data_type,
-            s.user_id
+            b.id,
+            b.designation,
+            b.description,
+            b.data_pattern,
+            b.data_scale,
+            b.unit,
+            b.exp_fee,
+            b.from_date,
+            b.to_date,
+            b.contacts_name,
+            b.contacts_email,
+            b.contacts_phone,
+            b.user_id,
+            b.addtime,
+            b.data_type
         FROM
-            data_sos_info AS s
+            data_buy_info AS b
         WHERE
-            s.is_used = 1
+            b.is_used = 1
         <if test="userId != null and userId != 0">
-        AND s.user_id = #{userId}
+        AND b.user_id = #{userId}
         </if>
         <if test="dataType != null and dataType != 0">
-            AND s.data_type = #{dataType}
+        AND b.data_type = #{dataType}
         </if>
         ORDER BY
-            s.addtime DESC
+            addtime DESC
     </select>
 
-    <resultMap id="SosInfoResultMap" type="com.qtdbp.trading.model.DataSosInfoModel" >
+    <resultMap id="BuyInfoResultMap" type="com.qtdbp.trading.model.DataBuyInfoModel" >
         <id column="id" property="id" />
         <result column="designation" property="designation" />
         <result column="description" property="description" />
+        <result column="data_pattern" property="dataPattern" />
         <result column="unit" property="unit" />
         <result column="from_date" property="fromDate" />
         <result column="to_date" property="toDate" />
@@ -46,9 +47,8 @@
         <result column="contacts_email" property="contactsEmail" />
         <result column="contacts_phone" property="contactsPhone" />
         <result column="addtime" property="addtime" />
-        <result column="filePath" property="filePath" />
-        <result column="data_type" property="dataType" />
         <result column="user_id" property="userId" />
+        <result column="data_type" property="dataType" />
     </resultMap>
 
 </mapper>
