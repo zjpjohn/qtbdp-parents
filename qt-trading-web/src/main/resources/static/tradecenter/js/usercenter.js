@@ -1,28 +1,63 @@
+$(document).ready(function(){
+    // 概览 最新订单
+    var settings = {
+        url: "/api/usercenter/neworders",      // 请求地址
+        tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
+        target: "#orderList1" ,       // 替换html元素id
+        // pager_id: "#pageTool",           // 分页
+        params: [{key:"userId",value:1 }]
+    }
+    pageData.products(settings) ;
+});
 /**点击切换右侧页面*/
-$(".pereach>li").unbind().click(function(){
+$(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
     var centerleft=$(this).attr("data-class");
     $("."+centerleft+"2").addClass("active").siblings(".active").removeClass("active");
-    var settings;
     switch (centerleft) {
         case "overview":
-            // 页面请求参数
+            // 概览 最新订单
             var settings = {
                 url: "/api/usercenter/neworders",      // 请求地址
-                tmpl_id: "#tmpl_order" ,     //  tmpl 模板元素id
-                target: "#order_list1" ,       // 替换html元素id
-               // pager_id: "#pageTool",           // 分页
-                params: [{key:"userId",value:[1] }]
+                tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
+                target: "#orderList1" ,       // 替换html元素id
+                // pager_id: "#pageTool",           // 分页
+                params: [{key:"userId",value:1 }]
             }
             pageData.products(settings) ;
             break;
         case "myorder":
+            //我的订单数据订单
+            $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
+            $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
+            var settings = {
+                url: "/api/usercenter/orders",
+                tmpl_id: "#tmpl_dataorder" ,
+                target: "#orderList2" ,
+                pager_id: "#orderPage2",
+                params: [{key:"productId",value:1 }],
+                size: 10
+            }
+            pageData.products(settings) ;
+            break;
+        case "demandorder":
+            //我的订单需求订单
+            var settings = {
+                url: "/api/usercenter/demandorders",
+                tmpl_id: "#tmpl_demandorder" ,
+                target: "#orderList3" ,
+                pager_id: "#demandPage",
+                params: [{key:"productId",value:1 }],
+                size: 10
+            }
+            pageData.products(settings) ;
             break;
         case "myrelease":
             break;
     }
-
 });
+
+
 
 //点击我的账户  余额明细、积分明细
 $(".convertye>a").click(function(){
@@ -30,11 +65,7 @@ $(".convertye>a").click(function(){
     var convertye=$(this).attr("data-index");
     $("."+convertye+"2").addClass("active").siblings(".active").removeClass("active");
 });
-//我的订单与需求订单，数据众包与方案召集点击切换
-$(".filter_btn>a").unbind("click").click(function(){
-    $(this).addClass("active").siblings(".active").removeClass("active");
-    $($(this).attr("data-id")).addClass("active").siblings(".active").removeClass("active");
-});
+
 
 //个人信息 前端验证
 function check1(){
