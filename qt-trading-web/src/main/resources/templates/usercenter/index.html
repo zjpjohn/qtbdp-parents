@@ -514,22 +514,22 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>整包</td>
-                <td>2015全国民航机场吞吐量</td>
-                <td>￥128.00</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
+                <td>￥${order.amount}</td>
                 {{if order.orderState==1}}
                     <td class="nopaid">待支付</td>
-                    <td>2016-12-01 10:06:34</td>
+                    <td>${$item._date(order.addtime)}</td>
                     <td>
                         <a href="javascript:;" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState==2}}
                      <td class="paid">已撤销</td>
-                     <td>2016-12-01 10:06:34</td>
+                     <td>${$item._date(order.addtime)}</td>
                      <td> - </td>
                 {{else order.orderState==3 }}
                      <td class="paid">已支付</td>
-                    <td>2016-12-01 10:06:34</td>
+                    <td>${$item._date(order.addtime)}</td>
                     <td>
                         <a href="javascript:;" class="download">下载</a>
                     </td>
@@ -564,22 +564,22 @@
             {{each(i,order) list}}
              <tr>
                 <td>i</td>
-                <td>整包</td>
-                <td>2015全国民航机场吞吐量</td>
-                <td>￥128.00</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
+                <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
-                    <td>2016-12-01 10:06:34</td>
+                    <td>${$item._date(order.addtime)}</td>
                     <td>
                         <a href="javascript:;" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
-                     <td>2016-12-01 10:06:34</td>
+                     <td>${$item._date(order.addtime)}</td>
                      <td> - </td>
                 {{else order.orderState == 3 }}
                      <td class="paid">已支付</td>
-                    <td>2016-12-01 10:06:34</td>
+                    <td>${$item._date(order.addtime)}</td>
                     <td>
                         <a href="javascript:;" class="download">下载</a>
                     </td>
@@ -604,22 +604,22 @@
             {{each(i,order) list}}
              <tr>
                 <td>i</td>
-                <td>整包</td>
-                <td>2015全国民航机场吞吐量</td>
-                <td>￥128.00</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
+                <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
-                    <td>2016-12-01 10:06:34</td>
+                    <td>${$item._date(order.addtime)}</td>
                     <td>
                         <a href="javascript:;" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
-                     <td>2016-12-01 10:06:34</td>
+                     <td>${$item._date(order.addtime)}</td>
                      <td> - </td>
                 {{else order.orderState == 3 }}
                      <td class="paid">已支付</td>
-                    <td>2016-12-01 10:06:34</td>
+                    <td>${$item._date(order.addtime)}</td>
                     <td>
                         <a href="javascript:;" class="download">下载</a>
                     </td>

@@ -1,3 +1,14 @@
+$(document).ready(function(){
+    // 概览 最新订单
+    var settings = {
+        url: "/api/usercenter/neworders",      // 请求地址
+        tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
+        target: "#orderList1" ,       // 替换html元素id
+        // pager_id: "#pageTool",           // 分页
+        params: [{key:"userId",value:1 }]
+    }
+    pageData.products(settings) ;
+});
 /**点击切换右侧页面*/
 $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
