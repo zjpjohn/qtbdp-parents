@@ -27,7 +27,7 @@ public class DataInstitutionInfoModel extends BaseModel{
     private String contactsName;//联系人姓名
     private String contactsPhone;//联系人手机
     private String contactsEmail;//联系人邮箱
-    private String contactsQQ;//联系人QQ
+    private String contactsQq;//联系人QQ
     private Integer userId;//添加人ID
     private Date addtime;//添加时间
     private Integer editorId;//
@@ -183,12 +183,12 @@ public class DataInstitutionInfoModel extends BaseModel{
         this.contactsEmail = contactsEmail;
     }
 
-    public String getContactsQQ() {
-        return contactsQQ;
+    public String getContactsQq() {
+        return contactsQq;
     }
 
-    public void setContactsQQ(String contactsQQ) {
-        this.contactsQQ = contactsQQ;
+    public void setContactsQq(String contactsQq) {
+        this.contactsQq = contactsQq;
     }
 
     public Integer getUserId() {
