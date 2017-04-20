@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.trading.mapper.DataInstitutionInfoMapper">
+
+    <!-- 成为数据加盟商 -->
+    <insert id="insertInstitution" parameterType="com.qtdbp.trading.model.DataInstitutionInfoModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO data_institution_info (
+        `type`,
+        designation,
+        service_type,
+        province_id,
+        city_id,
+        picture,
+        abstracts,
+        user_id,
+        addtime,
+        is_used
+        )
+        VALUES
+        (#{type}, #{designation}, #{serviceType}, #{provinceId}, #{cityId}, #{picture},#{abstracts}, #{userId}, now(), 0);
+    </insert>
+    <!-- 插入服务商和类型关联表，一对多关系，其中collection值包括：list(集合)、array(数组)、map(Map) -->
+    <insert id="insertInstitutionTypeRelation" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO data_institution_type_relation (institution_id, `data_type`)
+        VALUES
+        <foreach collection="list" item="rel" index="index" separator="," >
+            (#{rel.institutionId}, #{rel.dataType})
+        </foreach>
+    </insert>
+
+</mapper>

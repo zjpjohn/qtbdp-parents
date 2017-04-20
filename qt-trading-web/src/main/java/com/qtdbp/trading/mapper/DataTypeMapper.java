@@ -13,7 +13,6 @@ import java.util.List;
  * @create: 2017-04-15 13:22
  * To change this template use File | Settings | File Templates.
  */
-@Mapper
 public interface DataTypeMapper {
 
     /**

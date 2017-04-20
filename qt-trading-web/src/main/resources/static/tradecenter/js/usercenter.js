@@ -1,14 +1,3 @@
-$(document).ready(function(){
-    // 概览 最新订单
-    var settings = {
-        url: "/api/usercenter/neworders",      // 请求地址
-        tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
-        target: "#orderList1" ,       // 替换html元素id
-        // pager_id: "#pageTool",           // 分页
-        params: [{key:"userId",value:1 }]
-    }
-    pageData.products(settings) ;
-});
 /**点击切换右侧页面*/
 $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
@@ -52,12 +41,22 @@ $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
             }
             pageData.products(settings) ;
             break;
-        case "myrelease":
+        case "myrelease": //我的发布
+            //页面请求参数
+            var settings={
+                url: "/api/usercenter/buyInfos",            // 请求地址
+                tmpl_id: "#tmpl_release" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                target: "#replace_crow" ,       // 替换html元素，如：#div_id 或 .class_name
+                //pager_id: "#pageTool",           // 分页html元素标签
+                params: [{key:"userId	",value:1}]
+            }
+            // 初始化数据
+            pageData.products(settings) ;
+
             break;
     }
+
 });
-
-
 
 //点击我的账户  余额明细、积分明细
 $(".convertye>a").click(function(){
@@ -106,3 +105,12 @@ function check2(){
 $("#person_emal").blur(function(){
     check2();
 });
+
+//我的发布 右侧点击数据众包、召集方案 切换
+$(".filter_btn>a").click(function(){
+    $(this).addClass("active").siblings(".active").removeClass("active");
+    var  switcherdata=$(this).attr("data-id");
+    $(switcherdata).addClass("active").siblings(".active").removeClass("active");
+
+});
+

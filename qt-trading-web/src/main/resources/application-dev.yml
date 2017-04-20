@@ -5,6 +5,7 @@
 spring:
   thymeleaf:
     cache: false  # thymeleaf模板引擎是否开启缓存，开发时关闭
+    mode: LEGACYHTML5
   datasource:
     name: dataSource
     type: com.alibaba.druid.pool.DruidDataSource

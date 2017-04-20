@@ -19,7 +19,8 @@
             s.addtime,
             s.filePath,
             s.data_type,
-            s.user_id
+            s.user_id,
+            s.is_used
         FROM
             data_sos_info AS s
         WHERE
@@ -49,6 +50,7 @@
         <result column="filePath" property="filePath" />
         <result column="data_type" property="dataType" />
         <result column="user_id" property="userId" />
+        <result column="is_used" property="isUsed" />
     </resultMap>
 
 </mapper>
