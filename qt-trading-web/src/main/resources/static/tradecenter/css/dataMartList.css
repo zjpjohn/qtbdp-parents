@@ -107,7 +107,7 @@
     margin:20px 0px 30px 0px;
     width:283px;
     height:40px;
-    pverflow:hidden;
+    overflow:hidden;
 }
 .list_bot{
     font-size:12px;
