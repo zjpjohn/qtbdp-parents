@@ -5,7 +5,7 @@ $(".pereach>li").unbind().click(function(){
     $("."+centerleft+"2").addClass("active").siblings(".active").removeClass("active");
     var settings;
     switch (centerleft) {
-        case "overview":
+        case "overview": //概览
             // 页面请求参数
             var settings = {
                 url: "/api/usercenter/neworders",      // 请求地址
@@ -16,9 +16,20 @@ $(".pereach>li").unbind().click(function(){
             }
             pageData.products(settings) ;
             break;
-        case "myorder":
+        case "myorder": //我的订单
             break;
-        case "myrelease":
+        case "myrelease": //我的发布
+            //页面请求参数
+            var settings={
+                url: "/api/usercenter/buyInfos",            // 请求地址
+                tmpl_id: "#tmpl_release" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                target: "#replace_crow" ,       // 替换html元素，如：#div_id 或 .class_name
+                //pager_id: "#pageTool",           // 分页html元素标签
+                params: [{key:"userId	",value:1}]
+            }
+            // 初始化数据
+            pageData.products(settings) ;
+
             break;
     }
 
@@ -30,11 +41,7 @@ $(".convertye>a").click(function(){
     var convertye=$(this).attr("data-index");
     $("."+convertye+"2").addClass("active").siblings(".active").removeClass("active");
 });
-//我的订单与需求订单，数据众包与方案召集点击切换
-$(".filter_btn>a").unbind("click").click(function(){
-    $(this).addClass("active").siblings(".active").removeClass("active");
-    $($(this).attr("data-id")).addClass("active").siblings(".active").removeClass("active");
-});
+
 
 //个人信息 前端验证
 function check1(){
@@ -75,3 +82,12 @@ function check2(){
 $("#person_emal").blur(function(){
     check2();
 });
+
+//我的发布 右侧点击数据众包、召集方案 切换
+$(".filter_btn>a").click(function(){
+    $(this).addClass("active").siblings(".active").removeClass("active");
+    var  switcherdata=$(this).attr("data-id");
+    $(switcherdata).addClass("active").siblings(".active").removeClass("active");
+
+});
+
