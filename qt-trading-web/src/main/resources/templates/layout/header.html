@@ -24,7 +24,7 @@
 			<a th:href="@{/}" class="active">首页</a>
 			<a th:href="@{/datamart}">数据商城</a>
 			<a href="javascript:;">需求大厅</a>
-			<a href="javascript:;">数据合作</a>
+			<a href="javascript:;">数据联盟</a>
 			<a href="javascript:;">关于我们</a>
 		</p>
 		<!--如果未登录-->
@@ -51,3 +51,9 @@
 </nav>
 <!--页头结束-->
 </div>
+<script>
+	function nav(n){
+        $(".nav_list>a").removeClass("active");
+	    $(".nav_list>a:nth-child(n)").addClass("active");
+	}
+</script>
