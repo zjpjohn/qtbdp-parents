@@ -19,8 +19,8 @@
     <section class="mart_main main">
         <!-- 详情页信息 -->
         <div class="floating">
-            <p class="lf detail_img" style="url(@{${prod.pic}}) no-repeat center center;background-size:cover;">
-               <!-- <img th:src="@{${prod.pic}}" alt=""/>-->
+            <p class="lf detail_img">
+               <img th:src="@{${prod.pic}}" alt=""/>
             </p>
             <div class="lf detail_info">
                 <p class="rt" th:text="'更新时间：'+${#dates.format(prod.editorTime, 'yyyy/MMM/dd HH:mm')}"></p>
@@ -88,6 +88,7 @@
     </script>
 
     <script th:inline="javascript">
+        nav(2);
         if($(".infos").html()>120){
             $(".infos").html($(".infos").html().substring(0,120)+"...");
         }

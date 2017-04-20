@@ -49,11 +49,11 @@
 
 	</div>
 </nav>
-<!--页头结束-->
-</div>
 <script>
+    $(".nav_list>a").removeClass("active");
 	function nav(n){
-        $(".nav_list>a").removeClass("active");
-	    $(".nav_list>a:nth-child(n)").addClass("active");
+		$(".nav_list>a:nth-child("+n+")").addClass("active");
 	}
 </script>
+<!--页头结束-->
+</div>
