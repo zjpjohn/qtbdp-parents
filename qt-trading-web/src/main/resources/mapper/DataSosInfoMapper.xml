@@ -3,40 +3,48 @@
 <mapper namespace="com.qtdbp.trading.mapper.DataSosInfoMapper">
 
     <!-- 分页查询需求订单 -->
-    <select id="findDataSosInfoByCondition" resultMap="OrderResultMap">
+    <select id="findDataSosInfoByCondition" resultMap="SosInfoResultMap">
         SELECT
-            o.id,
-            o.product_type,
-            o.base_id,
-            o.content,
-            o.order_state,
-            o.institution_id,
-            o.addtime,
-            o.editor_time,
-            o.samplePath
+            s.id,
+            s.designation,
+            s.description,
+            s.data_scale,
+            s.unit,
+            s.from_date,
+            s.to_date,
+            s.exp_fee,
+            s.contacts_name,
+            s.contacts_email,
+            s.contacts_phone,
+            s.addtime,
+            s.filePath,
+            s.data_type
         FROM
-            data_authorize_order as o
+            data_sos_info AS s
         WHERE
-            user_id = #{userId}
-            AND product_type=#{productType}
-            <if test="orderState != null and orderState != 0">
-                AND order_state=#{orderState}
-            </if>
+            s.user_id = #{userId}
+        AND s.is_used = 1
+        <if test="dataType != null and dataType != 0">
+            AND s.data_type = #{dataType}
+        </if>
         ORDER BY
-          addtime DESC
+            s.addtime DESC
     </select>
 
-    <resultMap id="OrderResultMap" type="com.qtdbp.trading.model.DataSosInfoModel" >
+    <resultMap id="SosInfoResultMap" type="com.qtdbp.trading.model.DataSosInfoModel" >
         <id column="id" property="id" />
-        <result column="product_type" property="productType" />
-        <result column="base_id" property="baseId" />
-        <result column="content" property="content" />
-        <result column="order_state" property="orderState" />
-        <result column="institution_id" property="institutionId" />
-        <result column="order_state" property="orderState" />
+        <result column="designation" property="designation" />
+        <result column="description" property="description" />
+        <result column="unit" property="unit" />
+        <result column="from_date" property="fromDate" />
+        <result column="to_date" property="toDate" />
+        <result column="exp_fee" property="expFee" />
+        <result column="contacts_name" property="contactsName" />
+        <result column="contacts_email" property="contactsEmail" />
+        <result column="contacts_phone" property="contactsPhone" />
         <result column="addtime" property="addtime" />
-        <result column="editor_time" property="editorTime" />
-        <result column="samplePath" property="samplePath" />
+        <result column="filePath" property="filePath" />
+        <result column="data_type" property="dataType" />
     </resultMap>
 
 </mapper>
