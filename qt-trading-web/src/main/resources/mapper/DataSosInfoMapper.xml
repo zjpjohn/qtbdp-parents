@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.trading.mapper.DataSosInfoMapper">
+
+    <!-- 分页查询需求订单 -->
+    <select id="findDataSosInfoByCondition" resultMap="OrderResultMap">
+        SELECT
+            o.id,
+            o.product_type,
+            o.base_id,
+            o.content,
+            o.order_state,
+            o.institution_id,
+            o.addtime,
+            o.editor_time,
+            o.samplePath
+        FROM
+            data_authorize_order as o
+        WHERE
+            user_id = #{userId}
+            AND product_type=#{productType}
+            <if test="orderState != null and orderState != 0">
+                AND order_state=#{orderState}
+            </if>
+        ORDER BY
+          addtime DESC
+    </select>
+
+    <resultMap id="OrderResultMap" type="com.qtdbp.trading.model.DataSosInfoModel" >
+        <id column="id" property="id" />
+        <result column="product_type" property="productType" />
+        <result column="base_id" property="baseId" />
+        <result column="content" property="content" />
+        <result column="order_state" property="orderState" />
+        <result column="institution_id" property="institutionId" />
+        <result column="order_state" property="orderState" />
+        <result column="addtime" property="addtime" />
+        <result column="editor_time" property="editorTime" />
+        <result column="samplePath" property="samplePath" />
+    </resultMap>
+
+</mapper>

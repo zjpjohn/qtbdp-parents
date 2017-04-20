@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.trading.mapper.DataTransactionOrderMapper">
+
+    <!-- 最新5条数据订单 -->
+    <select id="findNewOrdersByUserId" resultMap="OrderResultMap">
+        SELECT
+            o.product_type,
+            o.product_id,
+            o.user_id,
+            o.order_no,
+            o.amount,
+            o.order_state,
+            o.addtime,
+            o.editor_time,
+            o.order_subject,
+            o.download_code,
+            o.download_url
+        FROM
+            data_transaction_order AS o
+        WHERE
+            user_id = #{uid}
+        ORDER BY
+            addtime DESC
+        Limit #{page}
+    </select>
+
+    <!-- 分页查询订单 -->
+    <select id="findOrdersByCondtion" resultMap="OrderResultMap">
+        SELECT
+        o.product_type,
+        o.product_id,
+        o.user_id,
+        o.order_no,
+        o.amount,
+        o.order_state,
+        o.addtime,
+        o.editor_time,
+        o.order_subject,
+        o.download_code,
+        o.download_url
+        FROM
+        data_transaction_order AS o
+        WHERE
+        user_id = #{userId}
+        <if test="orderState != null and orderState != 0">
+            AND o.order_state = #{orderState}
+        </if>
+        ORDER BY
+          addtime DESC
+    </select>
+
+    <resultMap id="OrderResultMap" type="com.qtdbp.trading.model.DataTransactionOrderModel" >
+        <id column="id" property="id" />
+        <result column="product_type" property="productType" />
+        <result column="product_id" property="productId" />
+        <result column="user_id" property="userId" />
+        <result column="order_no" property="orderNo" />
+        <result column="amount" property="amount" />
+        <result column="order_state" property="orderState" />
+        <result column="addtime" property="addtime" />
+        <result column="editor_time" property="editorTime" />
+        <result column="order_subject" property="orderSubject" />
+        <result column="download_code" property="downloadCode" />
+        <result column="download_url" property="downloadUrl" />
+    </resultMap>
+
+</mapper>

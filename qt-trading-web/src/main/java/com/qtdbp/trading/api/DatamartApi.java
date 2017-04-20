@@ -29,7 +29,7 @@ import java.util.List;
 @Api(description = "数据商城页面 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/product")
-public class DataProductApi {
+public class DatamartApi {
 
     @Autowired
     private DataProductService productService ;
@@ -52,13 +52,16 @@ public class DataProductApi {
 
         ModelMap map = new ModelMap() ;
         // 设置默认每页显示记录数
-        if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
-        List<DataProductModel> productList = productService.findProductsForPage(productModel);
-        map.put("pageInfo", new PageInfo<>(productList));
-        map.put("queryParam", productModel);
-        map.put("page", productModel.getPage());
-        map.put("rows", productModel.getRows());
-
+        try {
+            if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
+            List<DataProductModel> productList = productService.findProductsForPage(productModel);
+            map.put("pageInfo", new PageInfo<>(productList));
+            map.put("queryParam", productModel);
+            map.put("page", productModel.getPage());
+            map.put("rows", productModel.getRows());
+        } catch (Exception e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
         return map ;
     }
 
@@ -74,16 +77,19 @@ public class DataProductApi {
     })
     @ResponseBody
     @RequestMapping(value = "/item", method = RequestMethod.GET)
-    public ModelMap loadDataItems(DataItemModel item) {
+    public ModelMap loadDataItems(DataItemModel item) throws GlobalException {
         ModelMap map = new ModelMap() ;
         // 设置默认每页显示记录数
-        if(item.getRows() == null || item.getRows() == 0) item.setRows(20);
-        List<DataItemModel> itemList = productService.findItemsByProductIdForPage(item);
-        map.put("pageInfo", new PageInfo<>(itemList));
-        map.put("queryParam", item);
-        map.put("page", item.getPage());
-        map.put("rows", item.getRows());
-
+        try {
+            if(item.getRows() == null || item.getRows() == 0) item.setRows(20);
+            List<DataItemModel> itemList = productService.findItemsByProductIdForPage(item);
+            map.put("pageInfo", new PageInfo<>(itemList));
+            map.put("queryParam", item);
+            map.put("page", item.getPage());
+            map.put("rows", item.getRows());
+        } catch (Exception e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
         return map ;
     }
 }
