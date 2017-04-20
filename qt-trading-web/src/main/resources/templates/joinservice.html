@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <!-- 引入header布局 -->
+    <top th:replace="layout/top :: top"></top>
+    <!-- 页面自定义css、js  -->
+    <title>加盟服务商</title>
+    <meta name="keywords" content="钱塘大数据交易中心"/>
+    <meta name="description" content="钱塘大数据交易中心"/>
+    <link rel="stylesheet" th:href="@{/tradecenter/css/joinservice.css}"/>
+</head>
+<body >
+    <!--  页头开始 -->
+    <div th:include="layout/header::#head" ></div>
+    <!--  页头结束 -->
+
+    <section class="join_main">
+        <p class="tieshi">
+            <i></i>
+            小贴士：被数据困扰，淹没在数海中？发布方案召集，寻找解决方案！（<span class="red">*</span>为必填）
+        </p>
+        <form id="joinForm" class="joinform" enctype="multipart/form-data" method="post">
+            <ul class="formul">
+                <li class="identity">
+                    <p>
+                        <i>*</i>
+                        您的身份：
+                    </p>
+                    <div>
+                        <label>
+                            <input type="radio" name="type" value="1" checked="checked"/>
+                            <span>政府</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="type" value="2"/>
+                            <span>机构</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="type" value="3"/>
+                            <span>企业</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="type" value="4"/>
+                            <span>个人</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="type" value="5"/>
+                            <span>其他</span>
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <p>
+                        <i>*</i>
+                        您的名称：
+                    </p>
+                    <div>
+                        <input type="text" name="designation" id="designation"/>
+                    </div>
+                </li>
+                <li class="servicetype">
+                    <p>
+                        <i>*</i>
+                        服务类型：
+                    </p>
+                    <div>
+                        <label>
+                            <input type="radio" name="serviceType" value="1" checked="checked"/>
+                            <span>数据预处理</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="serviceType" value="2"/>
+                            <span>数据建模</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="serviceType" value="3"/>
+                            <span>技术服务</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="serviceType" value="4"/>
+                            <span>数据抓取</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="serviceType" value="0"/>
+                            <span>其它</span>
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <p>
+                        <i>*</i>
+                        所属区域：
+                    </p>
+                    <div id="city">
+                            <select name="province" class="prov"  id="provinceId">
+                            </select>
+                            <select name="city" class="city"  id="cityId">
+                            </select>
+                            <!--<select name="area" class="dist"  id="countyId"></select>-->
+                    </div>
+                </li>
+                <li class="fields">
+                    <p>
+                        <i>*</i>
+                        擅长领域：
+                    </p>
+                    <div>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="1"/>
+                            <span>知识/专利</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="2"/>
+                            <span>智能制造</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="3"/>
+                            <span>物联网</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="4"/>
+                            <span>工业参数</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="5"/>
+                            <span>仪器、仪表</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="6"/>
+                            <span>先进制造</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="7"/>
+                            <span>工业安全</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="8"/>
+                            <span>政府监管</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="9"/>
+                            <span>工业运行</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="10"/>
+                            <span>数据物流</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="11"/>
+                         <span>工业设计</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="12"/>
+                            <span>学术/教育</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="13"/>
+                            <span>行业综合</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="dataTypes"  value="14"/>
+                            <span>其他</span>
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <p>
+                        <i>*</i>
+                        您的介绍：
+                    </p>
+                    <div>
+                        <textarea name="abstracts" id="abstracts" placeholder="请输入10-1000字的介绍"></textarea>
+                    </div>
+                </li>
+                <li>
+                    <p>
+                        <i>*</i>
+                        大咖logo：
+                    </p>
+                    <div class="floating">
+                        <div class="lf upimgs">
+                            <a href="javascript:;" id="deleteA">×</a>
+                            <img width="120" height="120" value="" src="images/qtdata.png" id="pictureImg"/>
+                            <input type="hidden" id="picture" name="picture" value=""/>
+                        </div>
+
+                        <div class="lf upimg_rt">
+                            <p>图片格式：jpg、jpeg、gif、png图片2M以内</p>
+                            <p>尺寸：980*300</p>
+                            <div class="imgfile">
+                                <a class="up_btn">上 传</a>
+                                <input type="file" id="uploadImg"  name="picFile" size="1"/>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="red err_info">  </div>
+                    <a href="javascript:;" class="submit" id="formSubmit">提交</a>
+                </li>
+            </ul>
+        </form>
+    </section>
+
+    <!-- 页脚 -->
+    <footer th:replace="layout/footer"></footer>
+    <!-- 页脚结束 -->
+
+    <script th:src="@{/tradecenter/js/jquery.form.js}"></script>
+    <script th:src="@{/tradecenter/js/joinservice.js}"></script>
+    <script th:src="@{/tradecenter/jquery.cityselect.js}"></script>
+    <script>
+        $("#city").citySelect({
+            url:"js/city.min.js",
+            prov:"浙江", //省份
+            city:"杭州", //城市
+           // dist:"萧山区", //区县
+            nodata:"none" //当子集无数据时，隐藏select
+        });
+    </script>
+
+
+</body>
+</html>

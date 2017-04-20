@@ -50,10 +50,11 @@
         </p>
 
         <!-- 信息列表 -->
+        <ul id="item-info" class="infor_list floating"></ul>
+
         <div id="loadding" class="loadding">
             <img th:src="@{/tradecenter/images/loadding.gif}" alt="" />
         </div>
-        <ul id="item-info" class="infor_list floating"></ul>
 
         <!-- 分页开始 -->
         <div id="pageTool"></div>
@@ -65,8 +66,7 @@
     <!--页脚结束-->
     <script th:src="@{/tradecenter/js/query.js}"></script>
     <script th:src="@{/tradecenter/js/paging.js}"></script>
-    <!--<script th:src="@{/tradecenter/js/dataMartDetail.js}"></script>-->
-    <script th:src="@{/tradecenter/js/page/datamart.js}"></script>
+    <script th:src="@{/tradecenter/js/pagedata.js}"></script>
 
     <!-- 数据包产品tpml模板 -->
     <script id="tmpl_items" type="text/x-jquery-tmpl">
@@ -103,7 +103,7 @@
         }
 
         // 初始化数据
-        Datamart.products(settings) ;
+        pageData.products(settings) ;
     </script>
 </body>
 </html>

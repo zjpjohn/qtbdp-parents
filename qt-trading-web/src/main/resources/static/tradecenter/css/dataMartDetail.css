@@ -13,8 +13,10 @@
     overflow:hidden;
 }
 .infos{
+    width:845px;
     height:40px;
     margin-bottom:15px;
+    overflow:hidden;
 }
 .detail_img>img{
    max-width:100%;
@@ -57,12 +59,12 @@
     border-radius:4px;
 }
 .filter{
-    margin-top:40px;
+    margin:40px 0px 20px 0px;
+    border-bottom:1px solid #ddd;
+
 }
 .infor_list{
-    margin:20px 0px;
     padding:20px 0px;
-    border-top:1px solid #ddd;
 }
 .filter>b{
     font-size:18px;
@@ -96,9 +98,15 @@
 }
 .infor_list>li>h2{
     font-weight:normal;
+    width:243px;
+    height:27px;
+    overflow:hidden;
 }
 .list_time{
     margin:15px 0px;
+    width:243px;
+    height:20px;
+    overflow:hidden;
 }
 .list_mask{
     position:absolute;
@@ -138,4 +146,7 @@
 }
 .infor_list>li:hover .list_mask{
     display:block;
+}
+.liulan{
+    margin-right:20px;
 }
