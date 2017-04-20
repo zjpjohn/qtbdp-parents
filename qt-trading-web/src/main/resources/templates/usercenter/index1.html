@@ -545,21 +545,27 @@
         </div>
 
     </div>
+    <!--我的发布 -数据众包-->
     <script id="tmpl_release" type="text/x-jquery-tmpl">
-
         {{each(i,prod) list}}
         <tr>
-            <td>${prod.unit}</td>
-            <td>${prod.designation}</td>
+            <td>${prod.id}</td>
+            <td>${prod.designation}
+
+
+            </td>
             <td>${prod.expFee}</td>
             <td class="noaudit">
-                if($(prod.isUsed)==1){
+                {{if prod.isUsed==1}}
                     已上架
-                }else if($(prod.isUsed)==0){
+                    {{else}}
                     待审核
-                }
+                {{/if}}
+                {{if prod.isUsed==0}}
+                {{/if}}
+
             </td>
-            <td>${prod.to_date}</td>
+            <td> ${$item._formatedate(prod.to_date)}</td>
             <td>
                 <a href="javascript:;" class="gosee">查看</a>
             </td>
