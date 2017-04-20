@@ -20,7 +20,7 @@
         <!-- 详情页信息 -->
         <div class="floating">
             <p class="lf detail_img">
-                <img th:src="@{${prod.pic}}" alt=""/>
+               <img th:src="@{${prod.pic}}" alt=""/>
             </p>
             <div class="lf detail_info">
                 <p class="rt" th:text="'更新时间：'+${#dates.format(prod.editorTime, 'yyyy/MMM/dd HH:mm')}"></p>
@@ -50,11 +50,11 @@
         </p>
 
         <!-- 信息列表 -->
-        <ul id="item-info" class="infor_list floating"></ul>
-
         <div id="loadding" class="loadding">
             <img th:src="@{/tradecenter/images/loadding.gif}" alt="" />
         </div>
+
+        <ul id="item-info" class="infor_list floating"></ul>
 
         <!-- 分页开始 -->
         <div id="pageTool"></div>
@@ -72,8 +72,8 @@
     <script id="tmpl_items" type="text/x-jquery-tmpl">
         {{each(i,item) list}}
         <li>
-            <h2>${item.itemName}</h2>
-            <p class="list_time">日期：${item.editorTime}</p>
+            <h2>${$item._substr(item.itemName,10)}</h2>
+            <p class="list_time">日期：${$item._date(item.editorTime)}</p>
             <p>
                 <span class="liulan">浏览量：${item.viewCount}</span>
                 <span>销售量：${item.downloadCount}</span>
@@ -88,6 +88,7 @@
     </script>
 
     <script th:inline="javascript">
+        nav(2);
         if($(".infos").html()>120){
             $(".infos").html($(".infos").html().substring(0,120)+"...");
         }

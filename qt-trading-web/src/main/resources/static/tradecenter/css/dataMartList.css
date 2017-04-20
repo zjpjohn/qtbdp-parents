@@ -37,7 +37,7 @@
 }
 /****************右侧子分类*************/
 .sub_sort{
-    margin-bottom:40px;
+    padding-bottom:40px;
     border-bottom:1px solid #ddd;
 }
 .sub_sort>li{
@@ -76,6 +76,7 @@
 .datamart_list{
     width:970px;
     padding:30px 0px;
+    min-height:300px;
 }
 .datamart_list>li{
     float:left;
@@ -100,7 +101,7 @@
     color:#333;
     width:25px;
     height:283px;
-    pverflow:hidden;
+    overflow:hidden;
 }
 .list_con{
     line-height:20px;
