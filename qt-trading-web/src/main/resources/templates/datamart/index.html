@@ -20,7 +20,26 @@
     <!--页头结束-->
 
     <!--banner图 -->
-    <div class="banner"> </div>
+    <div class="banner">
+        <div class="banner_main">
+            <img th:src="@{/tradecenter/images/mart_bg.jpg}" alt="">
+            <p class="arrows">
+                <i class="blue"></i>
+                <i></i>
+                <i></i>
+            </p>
+            <p class="arrow floating">
+                <i></i>
+                <i></i>
+            </p>
+            <p class="hex"></p>
+            <p class="clock"></p>
+            <p class="square1 square"></p>
+            <p class="square2 square"></p>
+            <p class="exchange num_p">20000000</p>
+            <p class="capacity num_p">100G</p>
+        </div>
+    </div>
 
     <!--主体-->
     <section class="datamart_main floating main">
@@ -104,6 +123,67 @@
         pageData.products(settings) ;
 
         pageData.active(settings) ;
+
+        //banner动画
+        var n=1,deg1=0;deg2=0,plus=true,arrow=205,arrowLeft=882,plus2=true;
+        setInterval(function(){
+            n++;
+            if(n>3){
+                n=1;
+            }
+            $(".arrows>i:nth-child("+n+")").addClass("blue").siblings(".blue").removeClass("blue");
+            /*if($(".arrow").attr("class").indexOf("shrink")==-1){
+                $(".arrow").addClass("shrink");
+            }else{
+                $(".arrow").removeClass("shrink");
+            }*/
+            if($(".square").attr("class").indexOf("disappear")==-1){
+                $(".square").addClass("disappear");
+            }else{
+                $(".square").removeClass("disappear");
+            }
+        },500);
+        setInterval(function(){
+            deg1++;
+            if(deg1>360){
+                deg1=0;
+            }
+            if(deg2==45){
+                plus=false;
+            }else if( deg2==-45) {
+                plus=true;
+            }
+            if(plus){
+                deg2++;
+            }else {
+                deg2--;
+            }
+            $(".hex").css("transform","rotate("+deg1+"deg)");
+            $(".clock").css("transform","rotate("+deg2+"deg)");
+        },20);
+        setInterval(function(){
+            if(arrow==205){
+                plus2=false;
+            }else if( arrow==175) {
+                plus2=true;
+            }
+            if(plus2){
+                arrow++;
+                arrowLeft-=0.5;
+            }else {
+                arrow--;
+                arrowLeft+=0.5;
+            }
+            $(".arrow").css("width",arrow).css("left",arrowLeft);
+        },50);
+        setInterval(function(){
+            if(parseInt($(".exchange").html())<1000000000){
+                $(".exchange").html(parseInt($(".exchange").html())+parseInt(Math.random()*400+100));
+            }
+            if(parseInt($(".capacity").html())<10000){
+                $(".capacity").html(parseInt($(".capacity").html())+parseInt(Math.random()*10+1)+"G");
+            }
+        },2000);
     </script>
 </body>
 </html>
