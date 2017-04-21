@@ -25,7 +25,7 @@ public class DemandController {
      */
     private static final String PAGE_DEMAND_BUY = "demand/schemecalled" ;
 
-    @RequestMapping(value = "/datamart/sos/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/demand/sos/add", method = RequestMethod.GET)
     public ModelAndView addSosInfo() {
 
         ModelAndView result = new ModelAndView(PAGE_DEMAND_SOS);
@@ -33,7 +33,7 @@ public class DemandController {
         return result ;
     }
 
-    @RequestMapping(value = "/datamart/buy/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/demand/buy/add", method = RequestMethod.GET)
     public ModelAndView addBuyInfo() {
 
         ModelAndView result = new ModelAndView(PAGE_DEMAND_BUY);
