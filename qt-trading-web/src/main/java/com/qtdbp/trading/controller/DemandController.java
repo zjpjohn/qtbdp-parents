@@ -21,8 +21,10 @@ import java.util.List;
 @Controller
 public class DemandController {
 
-    //需求大厅页面
-    private static final String PAGE_DEMAND = "demand/demand" ;
+    /**
+     * 需求大厅 -- 首页
+     */
+    private static final String PAGE_DEMAND = "demand/index" ;
     /**
      * 需求大厅 -- 添加方案召集
      */
