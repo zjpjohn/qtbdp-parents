@@ -1,6 +1,11 @@
 package com.qtdbp.trading.model;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,35 +14,63 @@ import java.util.List;
  */
 public class DataInstitutionInfoModel extends BaseModel{
 
+    @ApiModelProperty(value = "身份类型（1政府、2机构、3企业、4个人、5其他）")
     private Integer type;//类型(1.企业 2.个人)
+    @ApiModelProperty(value = "企业名称")
     private String designation;//企业名称
+    @ApiModelProperty(hidden=true)
     private Integer greaterRegionId;//大区ID
+    @ApiModelProperty(value = "省ID")
     private Integer provinceId;//省ID
+    @ApiModelProperty(value = "市ID")
     private Integer cityId;//市ID
+    @ApiModelProperty(hidden=true)
     private String area;//地区
+    @ApiModelProperty(hidden=true)
     private String address;//地址
+    @ApiModelProperty(value = "服务类型（1：数据预处理 2：数据建模 3：技术服务）")
     private Integer serviceType;//服务类型（1：数据预处理 2：数据建模 3：技术服务）
+    @ApiModelProperty(value = "公司介绍")
     private String abstracts;//公司介绍
+    @ApiModelProperty(hidden=true)
     private String content;//服务说明和描述
+    @ApiModelProperty(hidden=true)
     private String records;//交易记录
+    @ApiModelProperty(hidden=true)
     private String evaluate;//交易评价
+    @ApiModelProperty(hidden=true)
     private String ensure;//交易保障
+    @ApiModelProperty(hidden=true)
     private String interview;//官方访谈
+    @ApiModelProperty(value = "公司图片")
     private String picture;//公司图片
+    @ApiModelProperty(value = "联系人姓名")
     private String contactsName;//联系人姓名
+    @ApiModelProperty(value = "联系人手机")
     private String contactsPhone;//联系人手机
+    @ApiModelProperty(value = "联系人邮箱")
     private String contactsEmail;//联系人邮箱
+    @ApiModelProperty(value = "联系人QQ")
     private String contactsQQ;//联系人QQ
+    @ApiModelProperty(value = "添加人ID")
     private Integer userId;//添加人ID
+    @ApiModelProperty(hidden=true)
     private Date addtime;//添加时间
+    @ApiModelProperty(hidden=true)
     private Integer editorId;//
+    @ApiModelProperty(hidden=true)
     private Date editorTime;
+    @ApiModelProperty(hidden=true)
     private Integer sort;//排序值
-    private Integer isUsed;//是否可用（0：不可用，1：可用）
+    @ApiModelProperty(hidden=true)
+    private Integer isUsed;//服务商状态（0待审核、1审核通过、2审核失败）
 
+    @ApiModelProperty(hidden=true)
     private Integer dataType;//数据类型id
 
+    @ApiModelProperty(hidden=true)
     private List<DataTypeModel> typeName;//类型名称集合
+    private List<DataInstitutionTypeRelationModel> relationModels ; // 服务商类型集合
 
     public Integer getType() {
         return type;
@@ -253,5 +286,13 @@ public class DataInstitutionInfoModel extends BaseModel{
 
     public void setTypeName(List<DataTypeModel> typeName) {
         this.typeName = typeName;
+    }
+
+    public List<DataInstitutionTypeRelationModel> getRelationModels() {
+        return relationModels;
+    }
+
+    public void setRelationModels(List<DataInstitutionTypeRelationModel> relationModels) {
+        this.relationModels = relationModels;
     }
 }

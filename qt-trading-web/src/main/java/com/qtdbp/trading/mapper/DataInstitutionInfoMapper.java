@@ -2,6 +2,7 @@ package com.qtdbp.trading.mapper;
 
 import com.qtdbp.trading.model.DataInstitutionInfoModel;
 import com.qtdbp.trading.model.DataInstitutionTypeRelationModel;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,13 +23,13 @@ public interface DataInstitutionInfoMapper {
     /**
      * 插入服务商
      * @param institutionInfoModel
-     * @return 服务商ID
+     * @return DataInstitutionInfoModel 插入成功服务商ID
      */
-    int insertInstitution(DataInstitutionInfoModel institutionInfoModel);
+    Integer insertInstitution(DataInstitutionInfoModel institutionInfoModel);
 
     /**
-     * 插入服务商数据类型关系数据
+     * 批量插入服务商数据类型关系数据
      * @param relationModels
      */
-    void insertInstitutionTypeRelation(List<DataInstitutionTypeRelationModel> relationModels);
+    void insertInstitutionTypeRelation(@Param("list") List<DataInstitutionTypeRelationModel> relationModels);
 }

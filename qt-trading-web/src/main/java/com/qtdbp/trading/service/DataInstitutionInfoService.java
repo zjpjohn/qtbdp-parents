@@ -1,7 +1,9 @@
 package com.qtdbp.trading.service;
 
+import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataInstitutionInfoMapper;
 import com.qtdbp.trading.model.DataInstitutionInfoModel;
+import com.qtdbp.trading.model.DataInstitutionTypeRelationModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +29,30 @@ public class DataInstitutionInfoService {
         return infoModels;
     }
 
+    /**
+     * 个人用户升级为服务商
+     * @param infoModel
+     * @return
+     * @throws GlobalException
+     */
+    public int insertInstitution(DataInstitutionInfoModel infoModel) throws GlobalException {
+
+        if(infoModel == null) throw new GlobalException("服务商数据为空");
+        int id = -1 ;
+
+        Integer count = infoMapper.insertInstitution(infoModel) ;
+        if(count != null && count > 0) {
+            id = infoModel.getId() ; // 返回服务商ID
+            List<DataInstitutionTypeRelationModel> relationModels = infoModel.getRelationModels() ;
+            if(relationModels != null && !relationModels.isEmpty()) {
+                // 通过jdk1.8特性，给关联表赋值
+                relationModels.forEach(rel -> rel.setInstitutionId(infoModel.getId()));
+
+                infoMapper.insertInstitutionTypeRelation(relationModels);
+            }
+        }
+
+        return id ;
+    }
 
 }
