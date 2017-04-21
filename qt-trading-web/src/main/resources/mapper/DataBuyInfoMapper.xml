@@ -51,4 +51,37 @@
         <result column="data_type" property="dataType" />
     </resultMap>
 
+    <!-- 添加数据众包 -->
+    <insert id="insertDataBuyInfo" parameterType="com.qtdbp.trading.model.DataBuyInfoModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO data_buy_info (
+            designation,
+            description,
+            data_pattern,
+            user_id,
+            data_scale,
+            unit,
+            exp_fee,
+            from_date,
+            to_date,
+            contacts_phone,
+            addtime,
+            is_used,
+            contacts_name,
+            contacts_email,
+            data_type,
+            data_type_sub
+        )
+        VALUES
+        (
+            #{designation},#{description},#{dataPattern},#{userId},
+            #{dataScale},#{unit},#{expFee},
+            #{fromDate},#{toDate},#{contactsPhone},now(),0,#{contactsName},#{contactsEmail},
+            #{dataType},#{dataTypeSub}
+        )
+    </insert>
 </mapper>
