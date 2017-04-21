@@ -93,7 +93,11 @@ var pageData = {
     paging : function (settings) {
 
         var _c = settings.count ;
-        if(!_c) return ;
+        if(_c == 0){
+
+        }else if(!_c){
+            return
+        }
         var _s = settings.size ? settings.size : 12; // 默认每页12条
         var _pager = settings.pager_id ;
 

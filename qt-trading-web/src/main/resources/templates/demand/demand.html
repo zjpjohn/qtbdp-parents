@@ -18,54 +18,7 @@
 
 <body >
     <!-- 页头-->
-    <header class="floating top">
-        <a class="lf qt_logo icon"></a>
-        <div class="rt head_search floating">
-            <input type="text" placeholder="请输入查找内容" class="search_input lf"/>
-            <a href="javascript:;" class="search_btn rt">搜索</a>
-        </div>
-        <div class="head_fabu  floating">
-            <i class="lf icon"></i>
-            <div class="lf fabu_btns">
-                <p>发布</p>
-                <a href="javascript:;">项目发布</a>
-                <a href="javascript:;">需求发布</a>
-                <a href="javascript:;">加盟服务</a>
-            </div>
-        </div>
-    </header>
-    <!--导航栏-->
-    <nav>
-        <div class="nav_con floating">
-            <p class="nav_list lf">
-                <a href="javascript:;">首页</a>
-                <a href="javascript:;" class="active">数据商城</a>
-                <a href="javascript:;">需求大厅</a>
-                <a href="javascript:;">数据合作</a>
-                <a href="javascript:;">关于我们</a>
-            </p>
-            <!--如果未登录-->
-            <!--  <p class="rt nav_list nav_rt">
-                  <a href="javascript:;">登录</a>
-                  <i>/</i>
-                  <a href="javascript:;">注册</a>
-              </p>-->
-            <!--如果已登录-->
-            <div class="rt nav_haslogin floating">
-                <a href="javascript:;" class="lf user_img">
-                    <img src="images/user_img.jpg" alt=""/>
-                </a>
-                <div class="lf user_center">
-                    <p class="user_name">钱塘大数据<i></i></p>
-                    <p class="nav_down">
-                        <a href="javascript:;">个人中心</a>
-                        <a href="javascript:;">退出登录</a>
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </nav>
+    <div th:include="layout/header::#head" ></div>
     <!--页头结束-->
 
     <!--banner图 -->
@@ -78,29 +31,16 @@
             <!--数据类型筛选-->
             <p class="chose_menu floating">
                 <span>服务范围&nbsp;&nbsp;：</span>
-                <a class="active" data-id="0">不限</a>
-                <a data-id="1">知识专利</a>
-                <a data-id="2">智能制造</a>
-                <a data-id="3">物联网</a>
-                <a data-id="4">工业参数</a>
-                <a data-id="5">仪器仪表</a>
-                <a data-id="6">先进制造</a>
-                <a data-id="7">工业安全</a>
-                <a data-id="8">政府监管</a>
-                <a data-id="9">工业运行</a>
-                <a data-id="10">物流 数据</a>
-                <a data-id="11">工业设计</a>
-                <a data-id="12">学术教育</a>
-                <a data-id="13">行业综合</a>
-                <a data-id="14">其他</a>
+                <a th:class="${currentid} ? null : 'active'" data-id="0" th:href="@{/demand}">不限</a>
+                <a th:each="val : ${typeModels}" th:href="@{/demand}+'/'+${val.id}" th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'">智能制造</a>
             </p>
             <p class="filters">
                 <a data-id="1" class="active">数据众包</a>
-                <a data-id="2">方案召集</a>
+                <a data-id="2"  >方案召集</a>
             </p>
             <!-- 数据列表 -->
-            <ul class="data_list">
-                <li>
+            <ul class="data_list" id="data_list">
+<!--                <li>
                     <div class="lf">
                         <p class="list_title">现有安全隐患、销号公司数据整理 <span>218天后截止</span> </p>
                         <p class="list_info">2017-2022年中国铜业机械行业发展前景分析，包括中国铜业机械行业发展环境分析、中国铜业机械行业发展分析、中国铜业机械行业经济运行分析、中国铜业...</p>
@@ -115,23 +55,7 @@
                         <p> 0人已经接单</p>
                         <a href="javascript:;"> 立即接单</a>
                     </div>
-                </li>
-                <li>
-                    <div class="lf">
-                        <p class="list_title">现有安全隐患、销号公司数据整理 <span>218天后截止</span> </p>
-                        <p class="list_info">2017-2022年中国铜业机械行业发展前景分析，包括中国铜业机械行业发展环境分析、中国铜业机械行业发展分析、中国铜业机械行业经济运行分析、中国铜业...</p>
-                        <p class="list_bot">
-                            <span>数据规模：8000条</span>
-                            <span>数据类型：知识专利</span>
-                            <span>需求类型：数据预处理</span>
-                        </p>
-                    </div>
-                    <div class="rt list_rt">
-                        <h1>￥5000.00</h1>
-                        <p> 0人已经接单</p>
-                        <a href="javascript:;"> 立即接单</a>
-                    </div>
-                </li>
+                </li>-->
             </ul>
             <!-- 分页开始 -->
             <div id="pageTool"></div>
@@ -152,38 +76,50 @@
         </div>
     </section>
 
-
     <!--页脚-->
-    <footer class="footer">
-        <ul class="footer_main floating">
-            <li class="contactus">
-                <h2><i></i>联系我们</h2>
-                <p>客服电话：0571-22872851</p>
-                <p>商务邮箱：qt@qtbigdata.com</p>
-                <p>网址：<a href="http://www.qtbigdata.com">www.qtbigdata.com</a></p>
-            </li>
-            <li class="platform">
-                <h2 ><i></i>平台功能</h2>
-                <p><a href="javascript:;">数据商城</a> <a href="javascript:;">需求大厅</a></p>
-                <p><a href="javascript:;">数据合作</a> <a href="javascript:;">关于我们</a></p>
-            </li>
-            <li class="cooperation">
-                <h2><i></i>合作共赢</h2>
-                <p><a href="javascript:;">在线咨询</a> <a href="javascript:;">用户协议</a></p>
-                <p><a href="javascript:;">建议反馈</a> <a href="javascript:;">新手指南</a></p>
-            </li>
-            <li class="focusus">
-                <h2><i></i>合作共赢</h2>
-                <img src="images/qr_code.png" alt="" class="qr_code"/>
-            </li>
-        </ul>
-    </footer>
+    <footer th:replace="layout/footer"></footer>
     <!--页脚结束-->
-    <script src="js/query.js"></script>
-    <script src="js/paging.js"></script>
-    <script src="js/demand.js"></script>
+    <script th:src="@{/tradecenter/js/query.js}"></script>
+    <script th:src="@{/tradecenter/js/paging.js}"></script>
+    <script th:src="@{/tradecenter/js/demand.js}"></script>
+    <script th:src="@{/tradecenter/js/pagedata.js}"></script>
+    <script id="tmpl_demand" type="text/x-jquery-tmpl">
+        {{each(i,prod) list}}
+        <li>
+            <div class="lf">
+                <p class="list_title">${prod.designation} <span>218天后截止</span> </p>
+                <p class="list_info">${prod.description}</p>
+                <p class="list_bot">
+                    <span>数据规模：${prod.dataScale}条</span>
+                    <span>数据类型：${prod.dataType}</span>
+                    <span>需求类型：${prod.subjectType}</span>
+                </p>
+            </div>
+            <div class="rt list_rt">
+                <h1>￥${prod.expFee}</h1>
+                <p> 0人已经接单</p>
+                <a href="javascript:;"> 立即接单</a>
+            </div>
+         </li>
+        {{/each}}
+    </script>
+    <script th:inline="javascript">
+        // 页面请求参数
+        var settings = {
+            url: "/api/demand/buyInfos",            // 请求地址
+            tmpl_id: "#tmpl_demand" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+            target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
+            pager_id: "#pageTool",           // 分页html元素标签
+            params: [{key:"dataType",value:[[${currentid}]] }]
+        }
+
+        // 初始化数据
+        pageData.products(settings) ;
+
+        pageData.active(settings) ;
+    </script>
     <script>
-        nav(4);
+      //  nav(4);
     </script>
 
 </body>

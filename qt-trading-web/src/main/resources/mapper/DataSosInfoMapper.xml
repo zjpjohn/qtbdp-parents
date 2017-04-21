@@ -40,6 +40,7 @@
         <result column="designation" property="designation" />
         <result column="description" property="description" />
         <result column="unit" property="unit" />
+        <result column="data_scale" property="dataScale" />
         <result column="from_date" property="fromDate" />
         <result column="to_date" property="toDate" />
         <result column="exp_fee" property="expFee" />
