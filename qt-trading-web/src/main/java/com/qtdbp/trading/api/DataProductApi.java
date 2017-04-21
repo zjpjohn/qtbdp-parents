@@ -26,10 +26,10 @@ import java.util.List;
  * @create: 2017-04-16 16:02
  * To change this template use File | Settings | File Templates.
  */
-@Api(description = "数据商城页面 - 业务API接口")
+@Api(description = "数据包产品 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/product")
-public class DatamartApi {
+public class DataProductApi {
 
     @Autowired
     private DataProductService productService ;
