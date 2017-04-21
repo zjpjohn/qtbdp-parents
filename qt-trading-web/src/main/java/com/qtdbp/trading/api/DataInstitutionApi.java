@@ -26,8 +26,14 @@ public class DataInstitutionApi {
     @Autowired
     private DataInstitutionInfoService infoService;
 
+    /**
+     * 当有dataType参数时，根据服务商类型过滤数据
+     * @param infoModel
+     * @return
+     */
     @ApiOperation(value = "获取服务商信息接口，分页获取")
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "dataType", value = "服务商类型", defaultValue = "1", dataType = "Integer", required = false, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：20）", defaultValue = "20", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
@@ -45,27 +51,5 @@ public class DataInstitutionApi {
 
         return map;
     }
-
-    @ApiOperation(value = "根据服务商类型获取服务商信息接口，分页获取")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "dataType", value = "服务商类型", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：20）", defaultValue = "20", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @ResponseBody
-    @RequestMapping(value = "/infoByDataType", method = RequestMethod.GET)
-    public ModelMap loadDataInstitutionInfoByType(DataInstitutionInfoModel infoModel) {
-
-        ModelMap map = new ModelMap();
-        List<DataInstitutionInfoModel> list = infoService.findDataInstitutionInfoByCondition(infoModel);
-        PageInfo pageInfo = new PageInfo<>(list);
-        map.put("pageInfo", pageInfo);
-        map.put("queryParam", infoModel);
-        map.put("page", infoModel.getPage());
-        map.put("rows", infoModel.getRows());
-
-        return map;
-    }
-
 
 }
