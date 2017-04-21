@@ -3,24 +3,16 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.model.DataAuthorizeOrderModel;
-import com.qtdbp.trading.model.DataBuyInfoModel;
-import com.qtdbp.trading.model.DataSosInfoModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
-import com.qtdbp.trading.service.DataAuthorizeOrderService;
-import com.qtdbp.trading.service.DataBuyInfoService;
-import com.qtdbp.trading.service.DataSosInfoService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -88,6 +80,21 @@ public class DataTradeApi {
             throw new GlobalException(e.getMessage()) ;
         }
 
+        return map ;
+    }
+
+    @ApiOperation(value="添加新订单API接口")
+    @RequestMapping(value = "/orders", method = RequestMethod.POST)
+    public ModelMap addDataOrders(@RequestBody DataTransactionOrderModel orderModel) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            int id = orderService.insertOrder(orderModel) ;
+            map.put("code", HttpStatus.OK.value());
+            map.put("id", id);
+        } catch (Exception e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
         return map ;
     }
 }

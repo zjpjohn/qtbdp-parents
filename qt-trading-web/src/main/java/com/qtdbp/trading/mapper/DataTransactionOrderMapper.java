@@ -26,8 +26,15 @@ public interface DataTransactionOrderMapper {
     /**
      * 分页获取订单数据
      * @param order
-     *  @param state 订单状态（1待支付、2已撤销、3已支付）,不传表示所有
+     * 其中order.order_state 订单状态（1待支付、2已撤销、3已支付）,不传表示所有
      * @return
      */
     List<DataTransactionOrderModel> findOrdersByCondtion(DataTransactionOrderModel order) ;
+
+    /**
+     * 添加新订单
+     * @param orderModel
+     * @return 记录数，成功返回1
+     */
+    Integer insertOrder(DataTransactionOrderModel orderModel) ;
 }
