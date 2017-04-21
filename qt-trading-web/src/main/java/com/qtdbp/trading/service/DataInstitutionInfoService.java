@@ -1,5 +1,6 @@
 package com.qtdbp.trading.service;
 
+import com.github.pagehelper.PageHelper;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataInstitutionInfoMapper;
 import com.qtdbp.trading.model.DataInstitutionInfoModel;
@@ -23,9 +24,12 @@ public class DataInstitutionInfoService {
      * @param infoModel
      * @return
      */
-    public List<DataInstitutionInfoModel> selectInstitutionAndType(DataInstitutionInfoModel infoModel){
+    public List<DataInstitutionInfoModel> findDataInstitutionInfoByCondition(DataInstitutionInfoModel infoModel){
 
-        List<DataInstitutionInfoModel> infoModels = infoMapper.selectInstitutionAndType(infoModel);
+        if (infoModel.getPage() != null && infoModel.getRows() != null) {
+            PageHelper.startPage(infoModel.getPage(), infoModel.getRows());
+        }
+        List<DataInstitutionInfoModel> infoModels = infoMapper.findDataInstitutionInfoByCondition(infoModel);
         return infoModels;
     }
 

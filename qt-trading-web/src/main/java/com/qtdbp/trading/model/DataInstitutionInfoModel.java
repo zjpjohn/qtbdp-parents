@@ -51,7 +51,7 @@ public class DataInstitutionInfoModel extends BaseModel{
     @ApiModelProperty(value = "联系人邮箱")
     private String contactsEmail;//联系人邮箱
     @ApiModelProperty(value = "联系人QQ")
-    private String contactsQQ;//联系人QQ
+    private String contactsQq;//联系人QQ
     @ApiModelProperty(value = "添加人ID")
     private Integer userId;//添加人ID
     @ApiModelProperty(hidden=true)
@@ -216,12 +216,12 @@ public class DataInstitutionInfoModel extends BaseModel{
         this.contactsEmail = contactsEmail;
     }
 
-    public String getContactsQQ() {
-        return contactsQQ;
+    public String getContactsQq() {
+        return contactsQq;
     }
 
-    public void setContactsQQ(String contactsQQ) {
-        this.contactsQQ = contactsQQ;
+    public void setContactsQq(String contactsQq) {
+        this.contactsQq = contactsQq;
     }
 
     public Integer getUserId() {

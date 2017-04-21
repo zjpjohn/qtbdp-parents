@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- 引入header布局 -->
+	<top th:replace="layout/top"></top>
+	<!-- 页面自定义css、js  -->
+	<title>数据联盟</title>
+	<meta name="keywords" content="钱塘大数据交易中心"/>
+	<meta name="description" content="钱塘大数据交易中心 数据商城"/>
+	<link rel="stylesheet" th:href="@{/tradecenter/css/dataFedration.css}" />
+</head>
+<body >
+	<!-- 页头-->
+	<div th:include="layout/header::#head" ></div>
+	<!--页头结束-->
+
+	<!--banner图 -->
+	<div class="banner"></div>
+
+	<!--主体-->
+	<section class="fredation_main main">
+		<p class="chose_menu floating">
+			<span>服务范围&nbsp;&nbsp;：</span>
+			<a th:class="${currentid} ? null : 'active'" data-id="0" th:href="@{/fedration}">不限</a>
+			<a th:each="val : ${typeModels}" th:href="@{/fedration}+'/'+${val.id}" th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'">智能制造</a>
+
+<!--			<a th:href="@{/datamart}+'/'+${list.id}" th:text="${list.name}" th:attr="data-id=${list.id}" th:class="${currentid} == ${list.id} ? 'active'">智能制造 </a>
+			<a data-id="1">知识专利</a>
+			<a data-id="2">智能制造</a>
+			<a data-id="3">物联网</a>
+			<a data-id="4">工业参数</a>
+			<a data-id="5">仪器仪表</a>
+			<a data-id="6">先进制造</a>
+			<a data-id="7">工业安全</a>
+			<a data-id="8">政府监管</a>
+			<a data-id="9">工业运行</a>
+			<a data-id="10">物流 数据</a>
+			<a data-id="11">工业设计</a>
+			<a data-id="12">学术教育</a>
+			<a data-id="13">行业综合</a>
+			<a data-id="14">其他</a>-->
+		</p>
+
+		<ul class="prolist floating" id="institution_list">
+<!--			<li>
+				<a href="javascript:;" class="prolist_img">
+					<img th:src="@{/tradecenter/images/prolist_1.png}" alt=""/>
+				</a>
+				<p>广东叁玖捌大数据科技有限公司</p>
+				<div class="prolist_fot">
+					<i></i>物联网&nbsp;,&nbsp;其他
+				</div>
+			</li>-->
+
+
+		</ul>
+
+		<!-- 分页开始 -->
+		<div id="pageTool"></div>
+		<!-- 分页结束 -->
+	</section>
+	<!--页脚-->
+	<footer th:replace="layout/footer"></footer>
+	<!--页脚结束-->
+	<script th:src="@{/tradecenter/js/query.js}"></script>
+	<script th:src="@{/tradecenter/js/paging.js}"></script>
+	<script th:src="@{/tradecenter/js/pagedata.js}"></script>
+
+	<!-- 数据包产品tpml模板 -->
+	<script id="tmpl_institution" type="text/x-jquery-tmpl">
+        {{each(i,prod) list}}
+        <li>
+			<a href="javascript:;" class="prolist_img">
+				<img src="${prod.picture}" alt=""/>
+			</a>
+			<p>${prod.designation}</p>
+			<div class="prolist_fot">
+				{{each(i,abc) prod.typeName}}
+					<i></i>${abc.name}
+				{{/each}}
+			</div>
+		</li>
+        {{/each}}
+    </script>
+	<script th:inline="javascript">
+		// 页面请求参数
+		var settings = {
+			url: "/api/institution/info",            // 请求地址
+			tmpl_id: "#tmpl_institution" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+			target: "#institution_list" ,       // 替换html元素，如：#div_id 或 .class_name
+			pager_id: "#pageTool",           // 分页html元素标签
+			params: [{key:"dataType",value:[[${currentid}]] }]
+		}
+
+		// 初始化数据
+		pageData.products(settings) ;
+
+		pageData.active(settings) ;
+	</script>
+
+</body>
+</html>

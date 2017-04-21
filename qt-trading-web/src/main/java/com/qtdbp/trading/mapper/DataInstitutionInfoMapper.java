@@ -15,10 +15,10 @@ public interface DataInstitutionInfoMapper {
 
     /**
      * 分页查询服务商信息和类型
-     * @param dm
+     * @param infoModel
      * @return
      */
-    List<DataInstitutionInfoModel> selectInstitutionAndType(DataInstitutionInfoModel dm);
+    List<DataInstitutionInfoModel> findDataInstitutionInfoByCondition(DataInstitutionInfoModel infoModel);
 
     /**
      * 插入服务商
