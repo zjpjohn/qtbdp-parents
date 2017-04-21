@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 public class DataInstitutionController {
 
-    private static final String PAGE_DATAMART_FEDRATION = "datamart/fredation";
+    private static final String PAGE_DATAMART_FEDRATION = "institution/fredation";
 
     @Autowired
     private DataTypeMapper dataTypeMapper ;

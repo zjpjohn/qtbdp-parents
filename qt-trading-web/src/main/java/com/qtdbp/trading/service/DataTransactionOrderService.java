@@ -1,7 +1,9 @@
 package com.qtdbp.trading.service;
 
 import com.github.pagehelper.PageHelper;
+import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
+import com.qtdbp.trading.model.DataSosInfoModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +44,22 @@ public class DataTransactionOrderService {
             PageHelper.startPage(order.getPage(), order.getRows());
         }
         return orderMapper.findOrdersByCondtion(order);
+    }
+
+    /**
+     * 添加新订单
+     * @param order
+     * @return 成功返回ID,失败返回-1
+     * @throws GlobalException
+     */
+    public int insertOrder(DataTransactionOrderModel order) throws GlobalException {
+
+        if(order == null) throw new GlobalException("订单数据为空") ;
+
+        Integer count = orderMapper.insertOrder(order) ;
+
+        if(count != null && count > 0) return order.getId() ;
+
+        return -1 ;
     }
 }

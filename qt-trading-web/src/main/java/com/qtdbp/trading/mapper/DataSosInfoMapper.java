@@ -19,4 +19,11 @@ public interface DataSosInfoMapper {
      * @return
      */
     List<DataSosInfoModel> findDataSosInfoByCondition(DataSosInfoModel sosInfoModel) ;
+
+    /**
+     * 添加方案召集
+     * @param sosInfoModel
+     * @return 记录数，成功返回1
+     */
+    Integer insertDataSosInfo(DataSosInfoModel sosInfoModel) ;
 }

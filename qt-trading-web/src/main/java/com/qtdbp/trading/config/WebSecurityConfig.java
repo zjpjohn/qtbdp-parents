@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/").permitAll() //退出登录后的默认网址是”/home”
                 .invalidateHttpSession(true)
                 .and()
+                .csrf().disable() // 关闭crsf() 防止post请求405
                 .rememberMe()//登录后记住用户，下次自动登录,数据库中必须存在名为persistent_logins的表
                 .tokenValiditySeconds(1209600) ;
     }

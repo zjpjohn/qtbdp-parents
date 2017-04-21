@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <title>需求大厅</title>
+    <!-- 引入header布局 -->
+    <top th:replace="layout/top :: top"></top>
+    <!-- 页面自定义css、js  -->
+    <meta name="keywords" content="钱塘大数据交易中心" />
+    <meta name="description" content="钱塘大数据交易中心 数据商城" />
+
+    <link rel="stylesheet" th:href="@{/tradecenter/css/demand.css}" />
+</head>
+
+<body >
+    <!-- 页头-->
+    <div th:include="layout/header::#head" ></div>
+    <!--页头结束-->
+
+    <!--banner图 -->
+    <div class="banner"></div>
+
+    <!--主体-->
+    <section class="demand_main floating main">
+        <!--左侧-->
+        <div class="lf main_lf">
+            <!--数据类型筛选-->
+            <p class="chose_menu floating">
+                <span>服务范围&nbsp;&nbsp;：</span>
+                <a th:class="${currentid} ? null : 'active'" data-id="0" th:href="@{/demand}">不限</a>
+                <a th:each="val : ${typeModels}" th:href="@{/demand}+'/'+${val.id}" th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'">智能制造</a>
+            </p>
+            <p class="filters">
+                <a data-id="1" class="active">数据众包</a>
+                <a data-id="2"  >方案召集</a>
+            </p>
+            <!-- 数据列表 -->
+            <ul class="data_list" id="data_list"></ul>
+            <!-- 分页开始 -->
+            <div id="pageTool"></div>
+            <!-- 分页结束 -->
+        </div>
+        <!--右侧-->
+        <div class="rt main_rt">
+            <div class="demand_fabu">
+                <p>有问题？</p>
+                <p>就来这里发布需求</p>
+                <p>个性需求 我来定制</p>
+                <a href="javasctipt:;">立即发布需求</a>
+            </div>
+            <div class="demand_suc">
+                <p>现有安全隐患、销号公司数据整理</p>
+                <p>￥5000.00</p>
+            </div>
+        </div>
+    </section>
+
+    <!--页脚-->
+    <footer th:replace="layout/footer"></footer>
+    <!--页脚结束-->
+    <script th:src="@{/tradecenter/js/query.js}"></script>
+    <script th:src="@{/tradecenter/js/paging.js}"></script>
+    <script th:src="@{/tradecenter/js/demand.js}"></script>
+    <script th:src="@{/tradecenter/js/pagedata.js}"></script>
+    <script id="tmpl_demand" type="text/x-jquery-tmpl">
+        {{each(i,prod) list}}
+        <li>
+            <div class="lf">
+                <p class="list_title">${prod.designation} <span>218天后截止</span> </p>
+                <p class="list_info">${prod.description}</p>
+                <p class="list_bot">
+                    <span>数据规模：${prod.dataScale}条</span>
+                    <span>数据类型：${prod.dataType}</span>
+                    <span>需求类型：${prod.subjectType}</span>
+                </p>
+            </div>
+            <div class="rt list_rt">
+                <h1>￥${prod.expFee}</h1>
+                <p> 0人已经接单</p>
+                <a href="javascript:;"> 立即接单</a>
+            </div>
+         </li>
+        {{/each}}
+    </script>
+    <script th:inline="javascript">
+        // 页面请求参数
+        var settings = {
+            url: "/api/demand/buyInfos",            // 请求地址
+            tmpl_id: "#tmpl_demand" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+            target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
+            pager_id: "#pageTool",           // 分页html元素标签
+            params: [{key:"dataType",value:[[${currentid}]] }]
+        }
+
+        // 初始化数据
+        pageData.products(settings) ;
+
+        pageData.active(settings) ;
+    </script>
+</body>
+</html>

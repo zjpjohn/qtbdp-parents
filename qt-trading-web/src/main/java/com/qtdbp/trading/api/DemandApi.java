@@ -6,38 +6,32 @@ import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataAuthorizeOrderModel;
 import com.qtdbp.trading.model.DataBuyInfoModel;
 import com.qtdbp.trading.model.DataSosInfoModel;
-import com.qtdbp.trading.model.DataTransactionOrderModel;
 import com.qtdbp.trading.service.DataAuthorizeOrderService;
 import com.qtdbp.trading.service.DataBuyInfoService;
 import com.qtdbp.trading.service.DataSosInfoService;
-import com.qtdbp.trading.service.DataTransactionOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * 个人中心API
+ * 需求接口
+ * 包括：数据众包、方案召集
  *
  * @author: caidchen
- * @create: 2017-04-19 13:21
+ * @create: 2017-04-21 13:02
  * To change this template use File | Settings | File Templates.
  */
-@Api(description = "个人中心页面 - 业务API接口")
+@Api(description = "数据需求 - 业务API接口，包括：数据众包、方案召集")
 @RestController
-@RequestMapping(value = "/api/usercenter")
-public class UserCenterApi {
-
-    @Autowired
-    private DataTransactionOrderService orderService ;
+@RequestMapping(value = "/api/demand")
+public class DemandApi {
 
     @Autowired
     private DataAuthorizeOrderService demandOrderService ;
@@ -48,57 +42,6 @@ public class UserCenterApi {
     @Autowired
     private DataBuyInfoService buyInfoService ;
 
-    //===================================================================
-    // 订单API接口
-    //===================================================================
-
-    @ApiOperation(value="最新前5条订单数据接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "page", value = "前几条数据（如：5）", defaultValue = "5", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @ResponseBody
-    @RequestMapping(value = "/neworders", method = RequestMethod.GET)
-    public ModelMap loadDataNewOrders(int userId, int page) throws GlobalException {
-
-        ModelMap map = new ModelMap() ;
-        // 设置默认每页显示记录数
-        try {
-            List<DataTransactionOrderModel> orderModelList = orderService.findNewOrdersByUserId(userId, page);
-            map.put("pageInfo", new PageInfo<>(orderModelList));
-        } catch (Exception e) {
-            throw new GlobalException(e.getMessage()) ;
-        }
-
-        return map ;
-    }
-
-    @ApiOperation(value="订单数据接口，分页获取")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "orderState", value = "订单状态（1待支付、2已撤销、3已支付）,不传表示所有", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：10）", defaultValue = "10", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @ResponseBody
-    @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public ModelMap loadDataOrders(DataTransactionOrderModel orderModel) throws GlobalException {
-
-        ModelMap map = new ModelMap() ;
-        // 设置默认每页显示记录数
-        try {
-            if (orderModel.getRows() == null || orderModel.getRows() == 0) orderModel.setRows(10);
-            List<DataTransactionOrderModel> orderModelList = orderService.findOrdersForPage(orderModel);
-            map.put("pageInfo", new PageInfo<>(orderModelList));
-            map.put("queryParam", orderModel);
-            map.put("page", orderModel.getPage());
-            map.put("rows", orderModel.getRows());
-        } catch (Exception e) {
-            throw new GlobalException(e.getMessage()) ;
-        }
-
-        return map ;
-    }
 
     //===================================================================
     // 需求订单API接口
@@ -128,8 +71,8 @@ public class UserCenterApi {
 
     @ApiOperation(value="需求订单数据接口，分页获取")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "productType", value = "产品类型（1数据众包、2方案召集）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "productType", value = "产品类型（1数据众包、2方案召集）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "orderState", value = "订单状态（1待支付、2已撤销、3已支付）,不传表示所有", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：10）", defaultValue = "10", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
@@ -185,6 +128,21 @@ public class UserCenterApi {
         return map ;
     }
 
+    @ApiOperation(value="添加方案召集API接口")
+    @RequestMapping(value = "/sosInfos", method = RequestMethod.POST)
+    public ModelMap addDataSosInfos(@RequestBody DataSosInfoModel sosInfoModel) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            int id = sosInfoService.insertDataSosInfo(sosInfoModel) ;
+            map.put("code", HttpStatus.OK.value());
+            map.put("id", id);
+        } catch (Exception e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map ;
+    }
+
     //===================================================================
     // 数据众包API接口
     //===================================================================
@@ -215,4 +173,20 @@ public class UserCenterApi {
 
         return map ;
     }
+
+    @ApiOperation(value="添加数据众包API接口")
+    @RequestMapping(value = "/buyInfos", method = RequestMethod.POST)
+    public ModelMap addDataBuyInfos(@RequestBody DataBuyInfoModel buyInfoModel) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            int id = buyInfoService.insertDataBuyInfo(buyInfoModel) ;
+            map.put("code", HttpStatus.OK.value());
+            map.put("id", id);
+        } catch (Exception e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map ;
+    }
+
 }

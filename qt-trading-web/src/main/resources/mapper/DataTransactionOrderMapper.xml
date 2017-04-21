@@ -65,4 +65,51 @@
         <result column="download_url" property="downloadUrl" />
     </resultMap>
 
+    <!-- 添加订单 -->
+    <insert id="insertOrder" parameterType="com.qtdbp.trading.model.DataTransactionOrderModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO data_transaction_order (
+            product_type,
+            product_id,
+            user_id,
+            sell_user_id,
+            order_no,
+            order_subject,
+            order_content,
+            amount,
+            receive_way,
+            receive_email,
+            order_state,
+            addtime,
+            download_url,
+            download_code,
+            receive_name,
+            contact_phone,
+            trade_no
+        )
+        VALUES (
+            #{productType},
+            #{productId},
+            #{userId},
+            #{sellerUserId},
+            #{orderNo},
+            #{orderSubject},
+            #{orderContent},
+            #{amount},
+            #{receiveWay},
+            #{receiveEmail},
+            #{orderState},
+            now(),
+            #{downloadUrl},
+            #{downloadCode},
+            #{receiveName},
+            #{contactPhone},
+            #{tradeNo}
+        )
+    </insert>
+
 </mapper>
