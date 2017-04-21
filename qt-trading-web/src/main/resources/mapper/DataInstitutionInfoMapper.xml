@@ -10,20 +10,24 @@
         </selectKey>
 
         INSERT INTO data_institution_info (
-        `type`,
-        designation,
-        service_type,
-        province_id,
-        city_id,
-        picture,
-        abstracts,
-        user_id,
-        addtime,
-        is_used
-        )
-        VALUES
-        (#{type}, #{designation}, #{serviceType}, #{provinceId}, #{cityId}, #{picture},#{abstracts}, #{userId}, now(), 0);
+            `type`,
+            designation,
+            service_type,
+            province_id,
+            city_id,
+            picture,
+            abstracts,
+            user_id,
+            addtime,
+            is_used,
+            contacts_email,
+            contacts_name,
+            contacts_phone,
+            contacts_QQ
+        ) VALUES
+          (#{type},#{designation},#{serviceType},#{provinceId}, #{cityId}, #{picture},#{abstracts},#{userId},now(), 0, #{contactsEmail},#{contactsName},#{contactsPhone},#{contactsQq});
     </insert>
+
     <!-- 插入服务商和类型关联表，一对多关系，其中collection值包括：list(集合)、array(数组)、map(Map) -->
     <insert id="insertInstitutionTypeRelation" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO data_institution_type_relation (institution_id, `data_type`)

@@ -1,5 +1,7 @@
 package com.qtdbp.trading.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 /**
@@ -11,14 +13,17 @@ import javax.persistence.*;
  */
 public class BaseModel {
 
+    @ApiModelProperty(hidden=true)
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ApiModelProperty(hidden=true)
     @Transient
     private Integer page = 1;
 
+    @ApiModelProperty(hidden=true)
     @Transient
     private Integer rows ;
 
