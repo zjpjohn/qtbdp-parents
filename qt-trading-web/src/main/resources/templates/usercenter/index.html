@@ -11,7 +11,6 @@
     <meta name="keywords" content="钱塘大数据交易中心"/>
     <meta name="description" content="钱塘大数据交易中心"/>
     <link rel="stylesheet" th:href="@{/tradecenter/css/usercenter.css}"/>
-    <script th:src="@{/tradecenter/js/jquery-1.11.1.min.js}"></script>
 </head>
 <body>
     <!--  页头开始 -->
@@ -65,7 +64,7 @@
                         </li>
                     </ul>
                     <div>
-                        <h2>最新订单</h2>
+                        <h2> <a href="javascript:;" id="moreOrder" data-class="myorder">更多</a> 最新订单 </h2>
                         <table class="center_tb">
                             <thead>
                             <tr>
@@ -81,27 +80,8 @@
                                 <td>操作</td>
                             </tr>
                             </thead>
-                            <tbody id="order_list1">
-                            <tr>
-                                <td>整包</td>
-                                <td>2015全国民航机场吞吐量</td>
-                                <td>￥128.00</td>
-                                <td class="nopaid">待支付</td>
-                                <td>2016-12-01 10:06:34</td>
-                                <td>
-                                    <a href="javascript:;" class="gopay">去支付</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>整包</td>
-                                <td>2015全国民航机场吞吐量</td>
-                                <td>￥128.00</td>
-                                <td class="paid">已支付</td>
-                                <td>2016-12-01 10:06:34</td>
-                                <td>
-                                    <a href="javascript:;" class="download">下载</a>
-                                </td>
-                            </tr>
+                            <tbody id="orderList1">
+
                             </tbody>
                         </table>
                     </div>
@@ -328,63 +308,42 @@
                         需求订单：<span class="color">-</span>
                     </p>
                     <p class="order_filter filter_btn floating">
-                        <a href="javascript:;" class="active" data-id="#dataorder">数据订单</a>
-                        <a href="javascript:;" data-id="#demandorder">需求订单</a>
+                        <a href="javascript:;" class="active" data-class="myorder">数据订单</a>
+                        <a href="javascript:;" data-class="demandorder">需求订单</a>
                     </p>
                     <!-- 数据订单开始 -->
-                    <div id="dataorder" class="order_tb active">
+                    <div class="myorder2 order_tb active">
                         <!-- 分页开始 -->
-                        <div id="orderPage"></div>
+                        <div id="orderPage2"></div>
                         <!-- 分页结束 -->
                         <table class="center_tb">
                             <thead>
-                            <tr>
-                                <th class="time_btn id_btn">
-                                    ID
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>类型</th>
-                                <th>订单名称</th>
-                                <th>价格</th>
-                                <th>状态</th>
-                                <th class="time_btn">
-                                    时间
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>操作</th>
-                            </tr>
+                                <tr>
+                                    <th class="time_btn id_btn">
+                                        ID
+                                        <i></i>
+                                        <i></i>
+                                    </th>
+                                    <th>类型</th>
+                                    <th>订单名称</th>
+                                    <th>价格</th>
+                                    <th>状态</th>
+                                    <th class="time_btn">
+                                        时间
+                                        <i></i>
+                                        <i></i>
+                                    </th>
+                                    <th>操作</th>
+                                </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>整包</td>
-                                <td>2015全国民航机场吞吐量</td>
-                                <td>￥128.00</td>
-                                <td class="nopaid">待支付</td>
-                                <td>2016-12-01 10:06:34</td>
-                                <td>
-                                    <a href="javascript:;" class="gopay">去支付</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>单个</td>
-                                <td>中国医疗器械行业现状</td>
-                                <td>￥128.00</td>
-                                <td class="paid">已支付</td>
-                                <td>2016-12-01 10:06:34</td>
-                                <td>
-                                    <a href="javascript:;" class="download">下载</a>
-                                </td>
-                            </tr>
+                            <tbody id="orderList2">
+
                             </tbody>
                         </table>
                     </div>
                     <!-- 数据订单结束 -->
                     <!-- 需求订单开始 -->
-                    <div id="demandorder" class="order_tb">
+                    <div class="demandorder2 order_tb">
                         <!-- 分页开始 -->
                         <div id="demandPage"></div>
                         <!-- 分页结束 -->
@@ -408,15 +367,10 @@
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <!-- 没有数据 -->
+                            <tbody id="orderList3">
+
                             </tbody>
                         </table>
-                        <div class="nodata">
-                            <img th:src="@{/tradecenter/images/none.png}" alt=""/>
-                                <p>暂时没有需求订单</p>
-                            <a href="javascript:;">前往需求大厅</a>
-                        </div>
                     </div>
                     <!-- 需求订单结束 -->
                 </div>
@@ -545,24 +499,50 @@
         </div>
 
     </div>
+    <script th:src="@{/tradecenter/js/query.js}"></script>
+    <script th:src="@{/tradecenter/js/paging.js}"></script>
+    <script th:src="@{/tradecenter/js/pageData.js}"></script>
+
+    <!--<div class="nodata">
+        <img th:src="@{/tradecenter/images/none.png}" alt=""/>
+        <p>暂时没有需求订单</p>
+        <a href="javascript:;">前往需求大厅</a>
+    </div>-->
 
     <!-- 最新订单tpml模板 -->
-    <script id="tmpl_order" type="text/x-jquery-tmpl">
-        {{each(i,order) list}}
-         <tr>
-            <td>整包</td>
-            <td>2015全国民航机场吞吐量</td>
-            <td>￥128.00</td>
-            <td class="nopaid">待支付</td>
-            <td>2016-12-01 10:06:34</td>
-            <td>
-                <a href="javascript:;" class="gopay">去支付</a>
-            </td>
-        </tr>
-        {{/each}}
+    <script id="tmpl_neworder" type="text/x-jquery-tmpl">
+        {{if list.length > 0}}
+            {{each(i,order) list}}
+             <tr>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
+                <td>￥${order.amount}</td>
+                {{if order.orderState==1}}
+                    <td class="nopaid">待支付</td>
+                    <td>${$item._date(order.addtime)}</td>
+                    <td>
+                        <a href="javascript:;" class="gopay">去支付</a>
+                    </td>
+                {{else order.orderState==2}}
+                     <td class="paid">已撤销</td>
+                     <td>${$item._date(order.addtime)}</td>
+                     <td> - </td>
+                {{else order.orderState==3 }}
+                     <td class="paid">已支付</td>
+                    <td>${$item._date(order.addtime)}</td>
+                    <td>
+                        <a href="javascript:;" class="download">下载</a>
+                    </td>
+                {{/if}}
+            </tr>
+            {{/each}}
+        {{else}}
+            暂时没有最新订单
+        {{/if}}
     </script>
     <!-- 最新发布tpml模板 -->
     <script id="tmpl_fabu" type="text/x-jquery-tmpl">
+     {{if list.length > 0}}
         {{each(i,order) list}}
          <tr>
             <td>中国医疗器械现状</td>
@@ -574,8 +554,91 @@
             </td>
         </tr>
         {{/each}}
+    {{ else }}
+        暂时没有最新发布
+    {{ /if }}
     </script>
-    <script th:src="@{/tradecenter/js/pageData.js}"></script>
+    <!-- 我的订单数据订单tpml模板 -->
+    <script id="tmpl_dataorder" type="text/x-jquery-tmpl">
+        {{if list.length > 0}}
+            {{each(i,order) list}}
+             <tr>
+                <td>i</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
+                <td>￥${order.amount}</td>
+                {{if order.orderState == 1 }}
+                    <td class="nopaid">待支付</td>
+                    <td>${$item._date(order.addtime)}</td>
+                    <td>
+                        <a href="javascript:;" class="gopay">去支付</a>
+                    </td>
+                {{else order.orderState == 2 }}
+                     <td class="paid">已撤销</td>
+                     <td>${$item._date(order.addtime)}</td>
+                     <td> - </td>
+                {{else order.orderState == 3 }}
+                     <td class="paid">已支付</td>
+                    <td>${$item._date(order.addtime)}</td>
+                    <td>
+                        <a href="javascript:;" class="download">下载</a>
+                    </td>
+                {{/if}}
+            </tr>
+            {{/each}}
+        {{else}}
+            <tr>
+                <td colspan="8" class="noline">
+                     <div class="nodata">
+                        <img src="/tradecenter/images/none.png" alt=""/>
+                            <p>暂时数据订单</p>
+                            <a href="javascript:;">前往数据商城</a>
+                    </div>
+                </td>
+            </tr>
+        {{/if}}
+    </script>
+    <!-- 我的订单需求订单tpml模板 -->
+    <script id="tmpl_demandorder" type="text/x-jquery-tmpl">
+        {{if list.length > 0}}
+            {{each(i,order) list}}
+             <tr>
+                <td>i</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
+                <td>￥${order.amount}</td>
+                {{if order.orderState == 1 }}
+                    <td class="nopaid">待支付</td>
+                    <td>${$item._date(order.addtime)}</td>
+                    <td>
+                        <a href="javascript:;" class="gopay">去支付</a>
+                    </td>
+                {{else order.orderState == 2 }}
+                     <td class="paid">已撤销</td>
+                     <td>${$item._date(order.addtime)}</td>
+                     <td> - </td>
+                {{else order.orderState == 3 }}
+                     <td class="paid">已支付</td>
+                    <td>${$item._date(order.addtime)}</td>
+                    <td>
+                        <a href="javascript:;" class="download">下载</a>
+                    </td>
+                {{/if}}
+            </tr>
+            {{/each}}
+        {{else}}
+            <tr>
+                <td colspan="8" class="noline">
+                     <div class="nodata">
+                        <img src="/tradecenter/images/none.png" alt=""/>
+                            <p>暂时需求订单</p>
+                            <a href="javascript:;">前往需求大厅</a>
+                    </div>
+                </td>
+            </tr>
+        {{/if}}
+    </script>
+
     <script th:src="@{/tradecenter/js/usercenter.js}"></script>
 
 </body>
