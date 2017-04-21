@@ -9,11 +9,13 @@ $(document).ready(function(){
     }
     pageData.products(settings) ;
 });
+
 /**点击切换右侧页面*/
 $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
     var centerleft=$(this).attr("data-class");
     $("."+centerleft+"2").addClass("active").siblings(".active").removeClass("active");
+    console.log(centerleft);
     switch (centerleft) {
         case "overview":
             // 概览 最新订单
@@ -52,22 +54,43 @@ $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
             }
             pageData.products(settings) ;
             break;
-        case "myrelease": //我的发布
+        case "myrelease": //我的发布 数据众包
             //页面请求参数
             var settings={
-                url: "/api/usercenter/buyInfos",            // 请求地址
+                url: "/api/demand/buyInfos",            // 请求地址
                 tmpl_id: "#tmpl_release" ,     // jquery template 模板元素，如：#div_id 或 .class_name
                 target: "#replace_crow" ,       // 替换html元素，如：#div_id 或 .class_name
-                //pager_id: "#pageTool",           // 分页html元素标签
-                params: [{key:"userId	",value:1}]
+                pager_id: "#crowdPage",           // 分页html元素标签
+                params: [{key:"crowdPage",value:1}],
+                size: 10
             }
             // 初始化数据
             pageData.products(settings) ;
 
             break;
+        case "schemes": //我的发布  方案召集
+            console.log(66);
+            //页面请求参数
+            var settings={
+                url: "/api/demand/sosInfos",            // 请求地址
+                tmpl_id: "#tmpl_scheme" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                target: "#tmpl_project" ,       // 替换html元素，如：#div_id 或 .class_name
+                pager_id: "#schemePage",           // 分页html元素标签
+                params: [{key:"crowdPage",value:1}],
+                size: 10
+            }
+            // 初始化数据
+            pageData.products(settings) ;
+            break;
+
+
     }
 
 });
+
+
+
+
 
 //点击我的账户  余额明细、积分明细
 $(".convertye>a").click(function(){
