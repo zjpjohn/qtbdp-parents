@@ -174,4 +174,19 @@ public class DemandApi {
         return map ;
     }
 
+    @ApiOperation(value="添加数据众包API接口")
+    @RequestMapping(value = "/buyInfos", method = RequestMethod.POST)
+    public ModelMap addDataBuyInfos(@RequestBody DataBuyInfoModel buyInfoModel) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            int id = buyInfoService.insertDataBuyInfo(buyInfoModel) ;
+            map.put("code", HttpStatus.OK.value());
+            map.put("id", id);
+        } catch (Exception e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map ;
+    }
+
 }

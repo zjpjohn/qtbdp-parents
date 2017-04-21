@@ -19,4 +19,11 @@ public interface DataBuyInfoMapper {
      * @return
      */
     List<DataBuyInfoModel> findDataBuyInfoByCondition(DataBuyInfoModel buyInfoModel) ;
+
+    /**
+     * 添加数据众包
+     * @param buyInfoModel
+     * @return 记录数，成功返回1
+     */
+    Integer insertDataBuyInfo(DataBuyInfoModel buyInfoModel) ;
 }

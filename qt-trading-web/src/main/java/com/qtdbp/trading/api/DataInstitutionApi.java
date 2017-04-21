@@ -28,6 +28,10 @@ public class DataInstitutionApi {
     @Autowired
     private DataInstitutionInfoService infoService;
 
+    //===================================================================
+    // 服务商API接口
+    //===================================================================
+
     /**
      * 当有dataType参数时，根据服务商类型过滤数据
      * @param infoModel
@@ -54,34 +58,6 @@ public class DataInstitutionApi {
         return map;
     }
 
-    @ApiOperation(value = "根据服务商类型获取服务商信息接口，分页获取")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "dataType", value = "服务商类型", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：20）", defaultValue = "20", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @ResponseBody
-    @RequestMapping(value = "/infoByDataType", method = RequestMethod.GET)
-    public ModelMap loadDataInstitutionInfoByType(DataInstitutionInfoModel infoModel) {
-
-        ModelMap map = new ModelMap();
-        List<DataInstitutionInfoModel> list = infoService.findDataInstitutionInfoByCondition(infoModel);
-        PageInfo pageInfo = new PageInfo<>(list);
-        map.put("pageInfo", pageInfo);
-        map.put("queryParam", infoModel);
-        map.put("page", infoModel.getPage());
-        map.put("rows", infoModel.getRows());
-
-        return map;
-    }
-
-    @Autowired
-    private DataInstitutionInfoService institutionInfoService ;
-
-    //===================================================================
-    // 服务商API接口
-    //===================================================================
-
     @ApiOperation(value="个人用户升级为服务商API接口")
     @RequestMapping(value = "/institution", method = RequestMethod.POST)
     public ModelMap addDataInstitutionInfo(@RequestBody DataInstitutionInfoModel institutionInfoModel) throws GlobalException {
@@ -89,7 +65,7 @@ public class DataInstitutionApi {
         ModelMap map = new ModelMap() ;
         // 设置默认每页显示记录数
         try {
-            int id = institutionInfoService.insertInstitution(institutionInfoModel) ;
+            int id = infoService.insertInstitution(institutionInfoModel) ;
 
             map.put("code", HttpStatus.OK.value());
             map.put("id", id);

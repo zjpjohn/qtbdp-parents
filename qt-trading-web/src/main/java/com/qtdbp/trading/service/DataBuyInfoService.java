@@ -1,8 +1,10 @@
 package com.qtdbp.trading.service;
 
 import com.github.pagehelper.PageHelper;
+import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataBuyInfoMapper;
 import com.qtdbp.trading.model.DataBuyInfoModel;
+import com.qtdbp.trading.model.DataSosInfoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,22 @@ public class DataBuyInfoService {
         }
 
         return buyInfoMapper.findDataBuyInfoByCondition(buyInfoModel);
+    }
+
+    /**
+     * 添加数据众包
+     * @param buyInfoModel
+     * @return 成功返回ID,失败返回-1
+     * @throws GlobalException
+     */
+    public int insertDataBuyInfo(DataBuyInfoModel buyInfoModel) throws GlobalException {
+
+        if(buyInfoModel == null) throw new GlobalException("数据众包数据为空") ;
+
+        Integer count = buyInfoMapper.insertDataBuyInfo(buyInfoModel) ;
+
+        if(count != null && count > 0) return buyInfoModel.getId() ;
+
+        return -1 ;
     }
 }
