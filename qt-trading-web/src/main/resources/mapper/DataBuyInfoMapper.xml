@@ -19,16 +19,20 @@
             b.contacts_phone,
             b.user_id,
             b.addtime,
-            b.data_type
+            b.data_type,
+            b.is_used
         FROM
             data_buy_info AS b
         WHERE
-            b.is_used = 1
+            1=1
+        <if test="isUsed != null">
+          AND b.is_used = #{isUsed}
+        </if>
         <if test="userId != null and userId != 0">
-        AND b.user_id = #{userId}
+          AND b.user_id = #{userId}
         </if>
         <if test="dataType != null and dataType != 0">
-        AND b.data_type = #{dataType}
+          AND b.data_type = #{dataType}
         </if>
         ORDER BY
             addtime DESC
@@ -50,6 +54,7 @@
         <result column="addtime" property="addtime" />
         <result column="user_id" property="userId" />
         <result column="data_type" property="dataType" />
+        <result column="is_used" property="isUsed" />
     </resultMap>
 
     <!-- 添加数据众包 -->

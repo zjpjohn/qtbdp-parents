@@ -24,9 +24,12 @@
         FROM
             data_sos_info AS s
         WHERE
-            s.is_used = 1
+            1=1
+        <if test="isUsed != null">
+          AND s.is_used = #{isUsed}
+        </if>
         <if test="userId != null and userId != 0">
-        AND s.user_id = #{userId}
+          AND s.user_id = #{userId}
         </if>
         <if test="dataType != null and dataType != 0">
             AND s.data_type = #{dataType}
