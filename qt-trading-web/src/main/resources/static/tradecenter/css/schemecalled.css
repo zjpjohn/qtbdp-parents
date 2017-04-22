@@ -89,6 +89,8 @@
 .scal_demand>textarea{
     width:620px;
     height:136px;
+    line-height:25px;
+    text-indent:10px;
     border:1px solid #E6E6E6;
     resize:none;
 }
@@ -123,7 +125,7 @@
 .scal_begin>input{
     width:272px;
     line-height: 40px;
-
+    background:url("../images/datePicker.gif") no-repeat 245px 10px;
 
 }
 .scal_begin>b{
@@ -135,28 +137,20 @@
 }
 
 .scalerror{
-    font-weight:normal;
-    display:inline-block;
-    width:580px;
     text-align: center;
     margin-top:20px;
     color: #f87070;
 }
 .scalsubmit{
+    display:block;
     width:125px;
-    margin:0px auto;
-    margin-top: -20px;
-}
-.scalsubmit>a{
-    display:inline-block;
-    width:125px;
+    margin:20px auto;
     line-height:45px;
     text-align: center;
     color:#fff;
     background: #0076C8;
     border-radius: 4px;
     font-size: 18px;
-
 }
 .scal_money>input{
     border: 1px solid #E6E6E6;
@@ -174,7 +168,9 @@
 
     margin-bottom: 20px;
 }
-
+.scalsection input.err:focus,.scalsection textarea.err:focus{
+    outline:1px solid #F47D7F;
+}
 
 
 

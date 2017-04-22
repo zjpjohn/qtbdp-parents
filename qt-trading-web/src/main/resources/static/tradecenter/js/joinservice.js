@@ -115,10 +115,6 @@ function checkJoin(){
         $(".err_info").html("*请上传图片");
         return false;
     }
-
-    //将表单提交按钮设置为不可用，这样就可以避免用户再次点击提交按钮
-    $("#formSubmit").addClass("disabled");
-    //返回true让表单可以正常提交
     return true;
 
 }
