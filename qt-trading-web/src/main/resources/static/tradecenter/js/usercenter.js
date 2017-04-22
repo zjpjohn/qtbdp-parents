@@ -8,6 +8,16 @@ $(document).ready(function(){
         params: [{key:"userId",value:1 }]
     }
     pageData.products(settings) ;
+
+    //最新发布
+    var settings = {
+        url: "/api/demand/demandorders",
+        tmpl_id: "#tmpl_newfabu" ,
+        target: "#newfabuList" ,
+        // pager_id: "#pageTool",
+        params: [{key:"userId",value:1 }]
+    }
+    pageData.products(settings) ;
 });
 
 /**点击切换右侧页面*/
@@ -137,13 +147,4 @@ function check2(){
 $("#person_emal").blur(function(){
     check2();
 });
-
-//我的发布 右侧点击数据众包、召集方案 切换
-$(".filter_btn>a").click(function(){
-    $(this).addClass("active").siblings(".active").removeClass("active");
-    var  switcherdata=$(this).attr("data-id");
-    $(switcherdata).addClass("active").siblings(".active").removeClass("active");
-
-});
-
 
