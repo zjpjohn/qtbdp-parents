@@ -35,7 +35,7 @@
 
                 <ul class="pereach lf floating">
                     <li data-class="overview" class="active"><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
-                    <li data-class="persinfo" class="active "><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
+                    <li data-class="persinfo"><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
                     <li data-class="myaccount" style="display:none"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
                     <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
                     <li data-class="myrelease"><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
@@ -88,7 +88,7 @@
                         </table>
                     </div>
                     <div>
-                        <h2>最新发布</h2>
+                        <h2><a href="javascript:;" id="morefabu" data-class="myrelease">更多</a>最新发布</h2>
                         <table class="center_tb">
                             <thead>
                             <tr>
@@ -435,7 +435,7 @@
 
     </div>
     <script th:src="@{/tradecenter/js/query.js}"></script>
-    <script th:src="@{/tradecenter/js/paging.js}"></script>
+    <script th:src="@{/tradecenter/js/paging2.js}"></script>
     <script th:src="@{/tradecenter/js/pageData.js}"></script>
     <!--个人中心-个人信息-->
     <script id="tmpl_personals" type="text/x-jquery-tmpl">
@@ -524,7 +524,7 @@
             {{else prod.isUsed==0}}
                 <td class="audting"> 待审核</td>
             {{else prod.isUsed==2}}
-                    <td class="noaudit"> 审核未通过</td>
+                 <td class="noaudit"> 审核未通过</td>
             {{/if}}
             <td> ${$item._date(prod.toDate)}</td>
             <td>-</td>
