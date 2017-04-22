@@ -184,7 +184,22 @@ var pageData = {
             }) ;
         })
     },
-
+    /**
+     * 一级筛选，点击选中并加载数据
+     * @param settings
+     */
+    filter:function(settings){
+        if(!settings.filter_elm) return ;
+       $(settings.filter_elm).click(function(){
+           console.log(1);
+           $(this).addClass("active").siblings(".active").removeClass("active");
+            var val= $(this).attr("data-id");
+           settings.params[0].value=$(this).attr("data-id");
+           settings.curr_page = 1;
+           pageData._change = true ;
+           pageData.products(settings) ;
+       });
+    },
     /**
      * 拼接url请求参数
      * @param settings
