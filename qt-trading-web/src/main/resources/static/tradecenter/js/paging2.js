@@ -153,7 +153,7 @@
 		},
 		bindToolbar: function() {
 			var _this = this;
-			var html = $('<li class="ui-paging-toolbar floating"><p class="lf">共有 <b>'+this.settings.pagesize*this.pagecount+'</b>条数据&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页展示 <select class="ui-select-pagesize"></select></p> <div class="rt">当前 <input type="text" class="ui-paging-count"/>  / '+this.pagecount+'</div></li>');
+			var html = $('<li class="ui-paging-toolbar floating"><p class="lf">共有 <b>'+this.count+'</b>条数据&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页展示 <select class="ui-select-pagesize"></select></p> <div class="rt">当前 <input type="text" class="ui-paging-count"/>  / '+this.pagecount+'</div></li>');
 			var sel = $('.ui-select-pagesize', html);
 			var str = '';
 			/*for (var i = 0, l = this.settings.pageSizeList.length; i < l; i++) {
