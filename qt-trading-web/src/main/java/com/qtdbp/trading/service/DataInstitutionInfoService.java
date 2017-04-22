@@ -7,6 +7,7 @@ import com.qtdbp.trading.model.DataInstitutionInfoModel;
 import com.qtdbp.trading.model.DataInstitutionTypeRelationModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,10 +36,13 @@ public class DataInstitutionInfoService {
 
     /**
      * 个人用户升级为服务商
+     *
+     * 支持事务机制
      * @param infoModel
      * @return
      * @throws GlobalException
      */
+    @Transactional
     public int insertInstitution(DataInstitutionInfoModel infoModel) throws GlobalException {
 
         if(infoModel == null) throw new GlobalException("服务商数据为空");
