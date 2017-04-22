@@ -16,8 +16,8 @@
 }
 .center_right{
     width:860px;
-    height:780px;
     background: #fff;
+
 }
 .headbg{
     width:158px;
@@ -180,7 +180,7 @@
 }
 .center_right>div{
     width:100%;
-    min-height:780px;
+    min-height:680px;
     background: #fff;
     position:absolute;
     top:0px;
