@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // 概览 最新订单
-    var settings = {
+    /*var settings = {
         url: "/api/trade/neworders",      // 请求地址
         tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
         target: "#orderList1" ,       // 替换html元素id
@@ -15,7 +15,15 @@ $(document).ready(function(){
         target: "#newfabuList" ,
         params: [{key:"userId",value:1 }]
     }
+    pageData.products(settings) ;*/
+    var settings={
+        url: "/api/user",            // 请求地址
+        tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+        target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
+        params: [{key:"id",value:1}],
+    }
     pageData.products(settings) ;
+
 });
 
 /**点击切换右侧页面*/
@@ -78,6 +86,9 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
 
             break;
         case "schemes": //我的发布  方案召集
+            $(".pereach>li:nth-child(5)").addClass("active").siblings().removeClass("active");
+            $(".fabu_filter>a:nth-child(2)").addClass("active").siblings().removeClass("active");
+
             //页面请求参数
             var settings={
                 url: "/api/demand/sosInfos",            // 请求地址
@@ -89,6 +100,15 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
             }
             // 初始化数据
 
+            pageData.products(settings) ;
+            break;
+        case "persinfo"://个人信息
+            var settings={
+                url: "/api/user",            // 请求地址
+                tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
+                params: [{key:"id",value:1}],
+            }
             pageData.products(settings) ;
             break;
 
@@ -148,3 +168,59 @@ $("#person_emal").blur(function(){
     check2();
 });
 
+
+/*
+//我的发布 右侧点击数据众包、召集方案 切换
+$(".filter_btn>a").click(function(){
+    $(this).addClass("active").siblings(".active").removeClass("active");
+    var  switcherdata=$(this).attr("data-id");
+    $(switcherdata).addClass("active").siblings(".active").removeClass("active");
+
+});
+*/
+
+
+
+var usercenter = {
+
+    userSubmit: function () {
+
+        $("#personaldata").on("click","#savealter",function(){
+
+            var _data = usercenter._formatparam($("#perdetail").serialize()) ;
+            console.log("_data："+_data);
+
+            $.ajax({
+                type:"put",
+                dataType:"json",
+                url:"/api/user"  ,
+                contentType:"application/json",
+                // ansync:true,
+                // xhrFields:{
+                //     withCredentials:true
+                // },
+                data: _data ,
+                success:function(data){
+                    console.log("success: "+data.success);
+                },
+                error:function(data){
+
+                    // console.log(data);
+                }
+            })
+        });
+    },
+
+    _formatparam :function (param) {
+
+        if(!param) return ;
+        var _data = {} ;
+        //_data["id"] = 1 ; // 测试
+        var _keys = param.split("&") ;
+        _keys.forEach(function(val,index){
+            var _attrs = val.split("=") ;
+            _data[_attrs[0]] = _attrs[1] ;
+        }) ;
+        return JSON.stringify(_data);
+    }
+}
