@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.trading.mapper.DataUserInfoMapper">
+
+    <!-- 查询用户基本信息 -->
+    <select id="findDataUserInfoById" resultMap="UserInfoResultMap">
+        SELECT
+            u.id,
+            u.user_type,
+            u.email,
+            u.real_name,
+            u.phone,
+            u.pwd,
+            u.sso_user_id,
+            u.head,
+            u.nick
+        FROM
+            data_user_info AS u
+        WHERE
+            u.sso_user_id = #{sosInfo}
+    </select>
+
+    <resultMap id="UserInfoResultMap" type="com.qtdbp.trading.model.DataUserInfoModel" >
+        <id column="id" property="id" />
+        <result column="user_type" property="userType" />
+        <result column="email" property="email" />
+        <result column="real_name" property="realName" />
+        <result column="pwd" property="pwd" />
+        <result column="sso_user_id" property="ssoUserId" />
+        <result column="head" property="head" />
+        <result column="nick" property="nick" />
+    </resultMap>
+
+
+    <!-- 修改用户基本信息 -->
+    <update id="updateDataUserInfo"  parameterType="com.qtdbp.trading.model.DataUserInfoModel">
+        UPDATE data_user_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="realName != null">real_name = #{realName},</if>
+            <if test="head != null">head = #{head},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="nick != null">nick = #{nick}</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -63,11 +63,9 @@ public class DataInstitutionApi {
     public ModelMap addDataInstitutionInfo(@RequestBody DataInstitutionInfoModel institutionInfoModel) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
-        // 设置默认每页显示记录数
         try {
             int id = infoService.insertInstitution(institutionInfoModel) ;
-
-            map.put("code", HttpStatus.OK.value());
+            map.put("success", id>0?true:false);
             map.put("id", id);
         } catch (Exception e) {
             throw new GlobalException(e.getMessage()) ;
