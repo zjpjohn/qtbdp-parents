@@ -94,9 +94,9 @@ var pageData = {
 
         var _c = settings.count ;
         if(_c == 0){
-
+            return;
         }else if(!_c){
-            return
+            return;
         }
         var _s = settings.size ? settings.size : 12; // 默认每页12条
         var _pager = settings.pager_id ;
@@ -249,7 +249,7 @@ var pageData = {
      */
     _formatedate: function (date) {
         var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"/"+formatedate.getMonth()+"/"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+        formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
        return formatedate;
     }
 };
