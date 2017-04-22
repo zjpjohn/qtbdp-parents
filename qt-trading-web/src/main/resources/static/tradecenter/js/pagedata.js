@@ -94,9 +94,9 @@ var pageData = {
 
         var _c = settings.count ;
         if(_c == 0){
-
+            return;
         }else if(!_c){
-            return
+            return;
         }
         var _s = settings.size ? settings.size : 12; // 默认每页12条
         var _pager = settings.pager_id ;
@@ -184,7 +184,22 @@ var pageData = {
             }) ;
         })
     },
-
+    /**
+     * 一级筛选，点击选中并加载数据
+     * @param settings
+     */
+    filter:function(settings){
+        if(!settings.filter_elm) return ;
+       $(settings.filter_elm).click(function(){
+           console.log(1);
+           $(this).addClass("active").siblings(".active").removeClass("active");
+            var val= $(this).attr("data-id");
+           settings.params[0].value=$(this).attr("data-id");
+           settings.curr_page = 1;
+           pageData._change = true ;
+           pageData.products(settings) ;
+       });
+    },
     /**
      * 拼接url请求参数
      * @param settings
@@ -234,7 +249,7 @@ var pageData = {
      */
     _formatedate: function (date) {
         var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"/"+formatedate.getMonth()+"/"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+        formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
        return formatedate;
     }
 };

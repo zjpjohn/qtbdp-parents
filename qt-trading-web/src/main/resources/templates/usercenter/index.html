@@ -23,7 +23,7 @@
             <div class="center_left lf">
                 <div class="headbg">
                     <a href="javascript:;">
-                        <img class="headpic" th:src="@{/tradecenter/images/avatar1.jpg}" alt=""/>
+                        <img class="headpic" th:src="@{/tradecenter/images/user_img.png}" alt="" onerror="this.src='/tradecenter/images/user_img.png'"/>
                     </a>
                 </div>
                 <p class="pername "><a href="javascript:;">三生万物</a></p>
@@ -34,12 +34,12 @@
                 </p>
 
                 <ul class="pereach lf floating">
-                    <li data-class="overview" class="active "><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
+                    <li data-class="overview" class="active"><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
                     <li data-class="persinfo"><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
-                    <li data-class="myaccount"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
+                    <li data-class="myaccount" style="display:none"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
                     <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
                     <li data-class="myrelease"><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
-                    <li data-class="dataservice"><a href="javascript:;"><span></span> 成为数据服务商 <b></b> </a></li>
+                    <li data-class="dataservice"><a href="/joinservive"><span></span> 成为数据服务商 <b></b> </a></li>
 
                 </ul>
 
@@ -88,7 +88,7 @@
                         </table>
                     </div>
                     <div>
-                        <h2>最新发布</h2>
+                        <h2><a href="javascript:;" id="morefabu" data-class="myrelease">更多</a>最新发布</h2>
                         <table class="center_tb">
                             <thead>
                             <tr>
@@ -99,32 +99,15 @@
                                 <td>操作</td>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>2015全国民航机场吞吐量</td>
-                                <td>￥128.00</td>
-                                <td class="noaudit">待审核</td>
-                                <td>2016-12-01 10:06:34</td>
-                                <td>
-                                    -
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>中国医疗器械现状</td>
-                                <td>￥128.00</td>
-                                <td class="putaway">已上架</td>
-                                <td>2016-12-01 10:06:34</td>
-                                <td>
-                                    -
-                                </td>
-                            </tr>
+                            <tbody id="newfabuList">
+
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <!-- 概览结束-->
                 <!--个人信息-->
-                <div class="persinfo2 ">
+                <div class="persinfo2" id="personaldata">
                     <div class="headimgs">
                         <img th:src="@{/tradecenter/images/avatar1.jpg}" alt="" class="peronimg"/>
                         <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
@@ -163,7 +146,7 @@
 
                 </div>
                 <!-- 我的账户-->
-                <div class="myaccount2">
+                <div class="myaccount2" style="display:none">
                     <p class="cenintegral">积分 : <span>246</span></p>
                     <div class="balance">
                         余额 : <span class="gralmoney"><i>35</i>元</span>
@@ -288,9 +271,6 @@
                     </p>
                     <!-- 数据订单开始 -->
                     <div class="myorder2 order_tb active">
-                        <!-- 分页开始 -->
-                        <div id="orderPage2"></div>
-                        <!-- 分页结束 -->
                         <table class="center_tb">
                             <thead>
                                 <tr>
@@ -315,13 +295,13 @@
 
                             </tbody>
                         </table>
+                        <!-- 分页开始 -->
+                        <div id="orderPage2"></div>
+                        <!-- 分页结束 -->
                     </div>
                     <!-- 数据订单结束 -->
                     <!-- 需求订单开始 -->
                     <div class="demandorder2 order_tb">
-                        <!-- 分页开始 -->
-                        <div id="demandPage"></div>
-                        <!-- 分页结束 -->
                         <table class="center_tb">
                             <thead>
                             <tr>
@@ -346,6 +326,9 @@
 
                             </tbody>
                         </table>
+                        <!-- 分页开始 -->
+                        <div id="demandPage"></div>
+                        <!-- 分页结束 -->
                     </div>
                     <!-- 需求订单结束 -->
                 </div>
@@ -359,11 +342,11 @@
                         方案召集：<span class="color">2</span>
                     </p>
                     <p class="fabu_filter filter_btn floating">
-                        <a href="javascript:;" class="active" data-id="#crowdsourcing">数据众包</a>
-                        <a href="javascript:;" data-id="#scheme">方案召集</a>
+                        <a href="javascript:;" class="active" data-class="myrelease">数据众包</a>
+                        <a href="javascript:;" data-class="schemes">方案召集</a>
                     </p>
                     <!-- 数据众包开始 -->
-                    <div id="crowdsourcing" class="order_tb active">
+                    <div class="myrelease2 order_tb active">
 
                         <table class="center_tb">
                             <thead>
@@ -393,7 +376,7 @@
                     </div>
                     <!-- 数据众包结束 -->
                     <!-- 方案召集开始 -->
-                    <div id="scheme" class="order_tb">
+                    <div class="order_tb schemes2">
 
                         <table class="center_tb">
                             <thead>
@@ -415,17 +398,12 @@
                             </tr>
                             </thead>
                             <tbody id="tmpl_project">
-                            <!-- 没有数据 -->
+
                             </tbody>
                         </table>
                         <!-- 分页开始 -->
                         <div id="schemePage"></div>
                         <!-- 分页结束 -->
-                        <!--<div class="nodata">
-                            <img th:src="@{/tradecenter/images/none.png}" alt=""/>
-                            <p>暂时没有需求订单</p>
-                            <a href="javascript:;">前往需求大厅</a>
-                        </div>-->
                     </div>
                     <!-- 方案召集结束 -->
                 </div>
@@ -457,87 +435,50 @@
 
     </div>
     <script th:src="@{/tradecenter/js/query.js}"></script>
-    <script th:src="@{/tradecenter/js/paging.js}"></script>
+    <script th:src="@{/tradecenter/js/paging2.js}"></script>
     <script th:src="@{/tradecenter/js/pageData.js}"></script>
+    <!--个人中心-个人信息-->
+    <script id="tmpl_personals" type="text/x-jquery-tmpl">
+        <!--<div class="headimgs">
+            <img th:src="@{/tradecenter/images/avatar1.jpg}" alt="" class="peronimg"/>
+            <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
+            <a href="javascript:;" class="savechange rt">保存更改</a>
+        </div>
 
-    <!--我的发布  方案召集-->
-    <script id="tmpl_scheme" type="text/x-jquery-tmpl">
-    {{if list.length>0}}
-        {{each(i,prod) list}}
-        <tr>
-            <td>${prod.id}</td>
-            <td>
-                ${$item._substr(prod.designation,18)}
-            </td>
-            <td>￥${prod.expFee}</td>
-            {{if prod.isUsed==1}}
-                <td class="putaway"> 已上架</td>
-                {{else prod.isUsed==0}}
-                    <td class="gopay"> 待审核</td>
-                {{else prod.isUsed==2}}
-                    <td class="noaudit"> 审核未通过</td>
+        <div class="pars_infor">
+            <p class="personal_name">昵称</p>
+            <input type="text" class="personal_nameval"/>
 
-            {{/if}}
-            <td> ${$item._date(prod.toDate)}</td>
-            <td>
-                <a href="javascript:;" class="gosee">-</a>
-            </td>
-        </tr>
-        {{/each}}
+            <p>手机号</p>
+            <input type="text" class="pers_input" id="phoneNUM" value="18665351825"/>
+            <a class="error">请输入正确的手机号码</a>
 
-        {{else}}
-            <tr>
-                <td colspan="8" class="noline">
-                     <div class="nodata">
-                        <img src="/tradecenter/images/none.png" alt=""/>
-                            <p>暂时数据订单</p>
-                            <a href="javascript:;">前往数据商城</a>
-                    </div>
-                </td>
-            </tr>
-    {{/if}}
+
+            <p class="pers_names">姓名</p>
+            <input type="text" class="pers_input"/>
+            <br/> <a href="javascript:;">去实名认证</a>
+
+            <p class="pers_names">邮箱</p>
+            <input type="text" class="pers_input" id="person_emal"/>
+            <a class="error">请输入正确的邮箱</a>
+
+
+            <p class="pers_names">用户类型</p>
+            <input type="text" value="个人" class="pers_input"/>
+            <br/> <a href="javascript:;">成为数据服务商</a>
+
+            <p class="pers_names">密码</p>
+            <input type="password" class="pers_input" value="123546"/>
+            <br/> <a href="javascript:;">重置密码</a>
+
+        </div>-->
+
 
     </script>
-    <!--我的发布 -数据众包-->
-    <script id="tmpl_release" type="text/x-jquery-tmpl">
-    {{if list.length>0}}
-        {{each(i,prod) list}}
-        <tr>
-            <td>${prod.id}</td>
-            <td>
-                ${$item._substr(prod.designation,18)}
-            </td>
-            <td>￥${prod.expFee}</td>
 
-            {{if prod.isUsed==1}}
-                <td class="putaway"> 已上架</td>
-                {{else prod.isUsed==0}}
-                    <td class="gopay"> 待审核</td>
 
-                {{else prod.isUsed==2}}
-                    <td class="noaudit"> 审核未通过</td>
 
-            {{/if}}
 
-            <td> ${$item._date(prod.toDate)}</td>
-            <td>
-                <a href="javascript:;" class="gosee">-</a>
-            </td>
-        </tr>
-        {{/each}}
-
-        {{else}}
-            <tr>
-                <td colspan="8" class="noline">
-                     <div class="nodata">
-                        <img src="/tradecenter/images/none.png" alt=""/>
-                            <p>暂时数据订单</p>
-                            <a href="javascript:;">前往数据商城</a>
-                    </div>
-                </td>
-            </tr>
-    {{/if}}
-    </script>
     <!-- 最新订单tpml模板 -->
     <script id="tmpl_neworder" type="text/x-jquery-tmpl">
         {{if list.length > 0}}
@@ -570,22 +511,28 @@
         {{/if}}
     </script>
     <!-- 最新发布tpml模板 -->
-    <script id="tmpl_fabu" type="text/x-jquery-tmpl">
-     {{if list.length > 0}}
-        {{each(i,order) list}}
-         <tr>
-            <td>中国医疗器械现状</td>
-            <td>￥128.00</td>
-            <td class="putaway">已上架</td>
-            <td>2016-12-01 10:06:34</td>
+    <script id="tmpl_newfabu" type="text/x-jquery-tmpl">
+     {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
             <td>
-                -
+                ${$item._substr(prod.designation,18)}
             </td>
+            <td>￥${prod.expFee}</td>
+            {{if prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+            {{else prod.isUsed==0}}
+                <td class="audting"> 待审核</td>
+            {{else prod.isUsed==2}}
+                 <td class="noaudit"> 审核未通过</td>
+            {{/if}}
+            <td> ${$item._date(prod.toDate)}</td>
+            <td>-</td>
         </tr>
         {{/each}}
-    {{ else }}
+    {{else}}
         暂时没有最新发布
-    {{ /if }}
+    {{/if}}
     </script>
     <!-- 我的订单数据订单tpml模板 -->
     <script id="tmpl_dataorder" type="text/x-jquery-tmpl">
@@ -667,6 +614,73 @@
             </tr>
         {{/if}}
     </script>
+    <!--我的发布 -数据众包-->
+    <script id="tmpl_release" type="text/x-jquery-tmpl">
+       {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
+            <td>${prod.id}</td>
+            <td>
+                ${$item._substr(prod.designation,18)}
+            </td>
+            <td>￥${prod.expFee}</td>
+            {{if prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+            {{else prod.isUsed==0}}
+                <td class="audting"> 待审核</td>
+            {{else prod.isUsed==2}}
+                 <td class="noaudit"> 审核未通过</td>
+            {{/if}}
+                <td> ${$item._date(prod.toDate)}</td>
+                <td>-</td>
+        </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+            <td colspan="6" class="noline">
+                 <div class="nodata">
+                    <img src="/tradecenter/images/none.png" alt=""/>
+                        <p>暂时没有发布数据众包</p>
+                        <a href="javascript:;">前往发布数据众包</a>
+                </div>
+            </td>
+        </tr>
+    {{/if}}
+    </script>
+    <!--我的发布  方案召集-->
+    <script id="tmpl_scheme" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
+            <td>${prod.id}</td>
+            <td>
+                ${$item._substr(prod.designation,18)}
+            </td>
+            <td>￥${prod.expFee}</td>
+            {{if prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+            {{else prod.isUsed==0}}
+                <td class="audting"> 待审核</td>
+            {{else prod.isUsed==2}}
+                 <td class="noaudit"> 审核未通过</td>
+            {{/if}}
+            <td> ${$item._date(prod.toDate)}</td>
+            <td>-</td>
+        </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+            <td colspan="6" class="noline">
+                 <div class="nodata">
+                    <img src="/tradecenter/images/none.png" alt=""/>
+                        <p>暂时没有发布方案召集</p>
+                        <a href="javascript:;">前往发布方案召集</a>
+                </div>
+            </td>
+        </tr>
+    {{/if}}
+    </script>
+
 
     <script th:src="@{/tradecenter/js/usercenter.js}"></script>
 

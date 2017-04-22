@@ -4,10 +4,12 @@
 
 <head>
     <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <title>加盟服务商</title>
     <!-- 引入header布局 -->
     <top th:replace="layout/top :: top"></top>
     <!-- 页面自定义css、js  -->
-    <title>加盟服务商</title>
     <meta name="keywords" content="钱塘大数据交易中心"/>
     <meta name="description" content="钱塘大数据交易中心"/>
     <link rel="stylesheet" th:href="@{/tradecenter/css/joinservice.css}"/>
@@ -183,7 +185,7 @@
                     <div class="floating">
                         <div class="lf upimgs">
                             <a href="javascript:;" id="deleteA">×</a>
-                            <img width="120" height="120" value="" src="images/qtdata.png" id="pictureImg"/>
+                            <img width="120" height="120" value="" src="/tradecenter/images/qtdata.png" id="pictureImg"/>
                             <input type="hidden" id="picture" name="picture" value=""/>
                         </div>
 
@@ -210,11 +212,11 @@
     <!-- 页脚结束 -->
 
     <script th:src="@{/tradecenter/js/jquery.form.js}"></script>
+    <script th:src="@{/tradecenter/js/jquery.cityselect.js}"></script>
     <script th:src="@{/tradecenter/js/joinservice.js}"></script>
-    <script th:src="@{/tradecenter/jquery.cityselect.js}"></script>
     <script>
         $("#city").citySelect({
-            url:"js/city.min.js",
+            url:"/tradecenter/js/city.min.js",
             prov:"浙江", //省份
             city:"杭州", //城市
            // dist:"萧山区", //区县

@@ -12,13 +12,12 @@
 }
 .center_left{
     width:320px;
-    height:659px;
     background: #fff;
 }
 .center_right{
     width:860px;
-    height:780px;
     background: #fff;
+
 }
 .headbg{
     width:158px;
@@ -181,7 +180,7 @@
 }
 .center_right>div{
     width:100%;
-    min-height:780px;
+    min-height:680px;
     background: #fff;
     position:absolute;
     top:0px;
@@ -371,37 +370,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /********************个人信息********************/
 .persinfo2{
     padding:30px 26px;
@@ -571,7 +539,7 @@
 .paid{
     color:#00CB94;
 }
-.gopay{
+.gopay,.audting{
     color:#FE8C42;
 }
 .download,.putaway,.gosee{
@@ -583,7 +551,7 @@
 .time_btn{
     position:relative;
     padding-right:10px;
-    width:260px;
+    width:245px;
     cursor:pointer;
 }
 .time_btn>i{
@@ -635,7 +603,6 @@
     padding-top:20px;
     border-bottom:1px solid #ddd;
     border-top:1px solid #ddd;
-    margin-bottom:20px;
 }
 .filter_btn>a{
     float:left;
@@ -660,10 +627,15 @@
 }
 .order_tb{
     margin-top:40px;
+    position:relative;
     display:none;
+    padding-top:20px;
 }
 .order_tb.active{
     display:block;
+}
+.order_tb>div{
+    margin:40px auto;
 }
 .nodata{
     padding:40px 0px;
@@ -739,16 +711,53 @@
     margin-top:5px;
     margin-right:10px;
 }
+tbody{
+    line-height:50px;
+}
 
-
-
-
-
-
-
-
-
-
+/******个人中心分页改写*********/
+.ui-paging-container{
+    font-size:14px;
+}
+.ui-paging-container ul {
+    text-align: right;
+}
+.ui-paging-container li.ui-paging-toolbar{
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    color: #333;
+    width:100%;
+}
+.ui-paging-container li.ui-paging-toolbar select{
+    height:18px;
+    color:#0081CB;
+}
+.ui-paging-container li.ui-paging-toolbar input{
+    height:15px;
+}
+.ui-paging-container li.ui-paging-toolbar>.rt{
+    margin-right:80px;
+}
+.left_page,.right_page{
+    position:absolute;
+    top: -20px;
+}
+.left_page{
+    right:38px;
+}
+.right_page{
+    right:10px;
+}
+.ui-paging-container li.page_arrow{
+    padding:0px 6px;
+}
+.ui-paging-container li.ui-pager-disabled.page_arrow, .ui-paging-container li.ui-pager-disabled.page_arrow:hover {
+    background-color: #fff;
+    cursor: default;
+    border: 1px solid #ddd;
+    color: #ddd;
+}
 
 
 

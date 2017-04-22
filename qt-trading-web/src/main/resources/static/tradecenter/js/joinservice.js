@@ -75,7 +75,7 @@ $("#uploadImg").change(function(){
 $("#deleteA").unbind("click").click(function(){
     imgName="";
     $("#picture").val("");
-    $("#pictureImg").attr("src","images/qtdata.png");
+    $("#pictureImg").attr("src","/tradecenter/images/qtdata.png");
 });
 //表单提交前验证
 function checkJoin(){
@@ -98,7 +98,6 @@ function checkJoin(){
         $("#designation").addClass("err").focus();
         return false;
     }
-    console.log(dataTypes);
     if(!dataTypes){
         $(".err_info").html("*请选择您的擅长领域");
         return false;
@@ -130,7 +129,7 @@ $("#formSubmit").unbind("click").click(function(){
     $(".err_info").html("");
     var options = {
         dataType: "text",
-        // url: "/publish/bigShotInsert",
+        url: "/api/institution/institution",
         type: "post",
         async:false,
         data: {},
@@ -139,7 +138,7 @@ $("#formSubmit").unbind("click").click(function(){
                 {title:"",btn:["确定"]},
                 function(index){
                     layer.close(index);
-                    location.href="/institution";
+                    location.href="/fedration";
                 });
         }
     };

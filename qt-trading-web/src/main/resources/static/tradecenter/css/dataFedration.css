@@ -38,7 +38,7 @@
 .prolist li{
  float: left;
  width: 283px;
-  height: 222px;
+  height: 235px;
   background: #fff;
   margin-right: 22px;
  margin-bottom:20px;
@@ -58,24 +58,26 @@
   border-bottom: 1px solid#ddd;
  text-align:center;
  line-height:135px;
+ overflow: hidden;
 }
 .prolist_img>img{
   max-width:100%;
 }
-.prolist p{
+.list_title{
   display: block;
   width: 278px;
   height: 50px;
   text-align: center;
   line-height: 50px;
-  color:black;
   color:#333;
 }
 .prolist_fot{
-  width: 116px;
-  height: 16px;
+  padding:0px 10px;
+  text-align:center;
+  height: 35px;
   margin: 0 auto;
   color:#808080;
+
 }
 .prolist_fot i{
   display: inline-block;
