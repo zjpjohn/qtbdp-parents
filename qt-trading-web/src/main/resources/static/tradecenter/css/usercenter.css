@@ -719,6 +719,9 @@ tbody{
 .ui-paging-container{
     font-size:14px;
 }
+.ui-paging-container ul {
+    text-align: right;
+}
 .ui-paging-container li.ui-paging-toolbar{
     position: absolute;
     top: -20px;
