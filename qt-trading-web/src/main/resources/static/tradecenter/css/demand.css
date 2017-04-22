@@ -37,6 +37,7 @@
 }
 .filters>a{
     padding:5px 10px;
+    cursor:pointer;
 }
 .filters>a.active,.filters>a:hover{
     color:#fff;
