@@ -34,9 +34,9 @@
                 </p>
 
                 <ul class="pereach lf floating">
-                    <li data-class="overview" class="active "><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
-                    <li data-class="persinfo"><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
-                    <li data-class="myaccount"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
+                    <li data-class="overview" ><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
+                    <li data-class="persinfo" class="active "><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
+                    <li data-class="myaccount" style="display:none"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
                     <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
                     <li data-class="myrelease"><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
                     <li data-class="dataservice"><a href="javascript:;"><span></span> 成为数据服务商 <b></b> </a></li>
@@ -46,7 +46,7 @@
             </div>
             <div class="center_right rt">
                 <!-- 概览开始-->
-                <div class="overview2 active">
+                <div class="overview2 ">
                     <ul class="view_top floating">
                         <li>
                             <h1>246</h1>
@@ -124,7 +124,7 @@
                 </div>
                 <!-- 概览结束-->
                 <!--个人信息-->
-                <div class="persinfo2 ">
+                <div class="persinfo2 active " id="personaldata">
                     <div class="headimgs">
                         <img th:src="@{/tradecenter/images/avatar1.jpg}" alt="" class="peronimg"/>
                         <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
@@ -163,7 +163,7 @@
 
                 </div>
                 <!-- 我的账户-->
-                <div class="myaccount2">
+                <div class="myaccount2" style="display:none">
                     <p class="cenintegral">积分 : <span>246</span></p>
                     <div class="balance">
                         余额 : <span class="gralmoney"><i>35</i>元</span>
@@ -459,6 +459,13 @@
     <script th:src="@{/tradecenter/js/query.js}"></script>
     <script th:src="@{/tradecenter/js/paging.js}"></script>
     <script th:src="@{/tradecenter/js/pageData.js}"></script>
+    <!--个人中心-个人信息-->
+    <script id="tmpl_personals">
+
+
+
+    </script>
+
 
     <!--我的发布  方案召集-->
     <script id="tmpl_scheme" type="text/x-jquery-tmpl">
