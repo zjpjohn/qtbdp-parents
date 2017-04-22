@@ -98,7 +98,6 @@ function checkJoin(){
         $("#designation").addClass("err").focus();
         return false;
     }
-    console.log(dataTypes);
     if(!dataTypes){
         $(".err_info").html("*请选择您的擅长领域");
         return false;
@@ -139,7 +138,7 @@ $("#formSubmit").unbind("click").click(function(){
                 {title:"",btn:["确定"]},
                 function(index){
                     layer.close(index);
-                    location.href="/institution";
+                    location.href="/fedration";
                 });
         }
     };
