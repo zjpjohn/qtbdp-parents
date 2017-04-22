@@ -1,7 +1,7 @@
 $(document).ready(function(){
     // 概览 最新订单
     var settings = {
-        url: "/api/usercenter/neworders",      // 请求地址
+        url: "/api/trade/neworders",      // 请求地址
         tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
         target: "#orderList1" ,       // 替换html元素id
         // pager_id: "#pageTool",           // 分页
@@ -19,7 +19,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
         case "overview":
             // 概览 最新订单
             var settings = {
-                url: "/api/usercenter/neworders",      // 请求地址
+                url: "/api/trade/neworders",      // 请求地址
                 tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
                 target: "#orderList1" ,       // 替换html元素id
                 // pager_id: "#pageTool",           // 分页
@@ -32,7 +32,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
             $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
             $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
             var settings = {
-                url: "/api/usercenter/orders",
+                url: "/api/trade/orders",
                 tmpl_id: "#tmpl_dataorder" ,
                 target: "#orderList2" ,
                 pager_id: "#orderPage2",
@@ -44,7 +44,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
         case "demandorder":
             //我的订单需求订单
             var settings = {
-                url: "/api/usercenter/demandorders",
+                url: "/api/demand/demandorders",
                 tmpl_id: "#tmpl_demandorder" ,
                 target: "#orderList3" ,
                 pager_id: "#demandPage",
