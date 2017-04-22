@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -90,7 +89,7 @@ public class DataTradeApi {
         ModelMap map = new ModelMap() ;
         try {
             int id = orderService.insertOrder(orderModel) ;
-            map.put("code", HttpStatus.OK.value());
+            map.put("success", id>0?true:false);
             map.put("id", id);
         } catch (Exception e) {
             throw new GlobalException(e.getMessage()) ;

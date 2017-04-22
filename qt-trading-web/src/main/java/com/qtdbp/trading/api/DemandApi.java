@@ -135,7 +135,7 @@ public class DemandApi {
         ModelMap map = new ModelMap() ;
         try {
             int id = sosInfoService.insertDataSosInfo(sosInfoModel) ;
-            map.put("code", HttpStatus.OK.value());
+            map.put("success", id>0?true:false);
             map.put("id", id);
         } catch (Exception e) {
             throw new GlobalException(e.getMessage()) ;
@@ -181,7 +181,7 @@ public class DemandApi {
         ModelMap map = new ModelMap() ;
         try {
             int id = buyInfoService.insertDataBuyInfo(buyInfoModel) ;
-            map.put("code", HttpStatus.OK.value());
+            map.put("success", id>0?true:false);
             map.put("id", id);
         } catch (Exception e) {
             throw new GlobalException(e.getMessage()) ;

@@ -58,6 +58,11 @@ create table data_product_attr_relation
 ALTER TABLE data_product ADD data_type_props VARCHAR(1000) ;
 
 /*==============================================================*/
+/* Table: data_user_info   用户表新增系统用户ID、昵称              */
+/*==============================================================*/
+ALTER TABLE data_user_info ADD nick VARCHAR(50), sso_user_id VARCHAR(100) ;
+
+/*==============================================================*/
 /*                         基础数据                              */
 /*==============================================================*/
 INSERT INTO `data_type_attr` VALUES (1, 0, '计价方式', 0, 0, 0, 1);
