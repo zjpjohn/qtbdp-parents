@@ -31,12 +31,12 @@
             <!--数据类型筛选-->
             <p class="chose_menu floating">
                 <span>服务范围&nbsp;&nbsp;：</span>
-                <a th:class="${currentid} ? null : 'active'" data-id="0" th:href="@{/demand}">不限</a>
-                <a th:each="val : ${typeModels}" th:href="@{/demand}+'/'+${val.id}" th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'">智能制造</a>
+                <a th:class="${currentid} ? null : 'active'" data-id="0" th:href="@{/demand}" id="limit" onclick="return getDataByDataType(this);">不限</a>
+                <a th:each="val : ${typeModels}" th:href="@{/demand}+'/'+${val.id}" th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'" onclick="return getDataByDataType(this);">智能制造</a>
             </p>
             <p class="filters">
-                <a data-id="1" class="active">数据众包</a>
-                <a data-id="2"  >方案召集</a>
+                <a data-id="1" class="active" id="buyInfo">数据众包</a>
+                <a data-id="2" id="sosInfo">方案召集</a>
             </p>
             <!-- 数据列表 -->
             <ul class="data_list" id="data_list"></ul>
@@ -66,16 +66,16 @@
     <script th:src="@{/tradecenter/js/paging.js}"></script>
     <script th:src="@{/tradecenter/js/demand.js}"></script>
     <script th:src="@{/tradecenter/js/pagedata.js}"></script>
-    <script id="tmpl_demand" type="text/x-jquery-tmpl">
+    <!-- 数据众包模板 -->
+    <script id="tmpl_demand_buyInfos" type="text/x-jquery-tmpl">
         {{each(i,prod) list}}
         <li>
             <div class="lf">
-                <p class="list_title">${prod.designation} <span>218天后截止</span> </p>
+                <p class="list_title">${prod.designation} <span>${$item._surplusDays(prod.toDate)}天后截止</span> </p>
                 <p class="list_info">${prod.description}</p>
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
                     <span>数据类型：${prod.dataType}</span>
-                    <span>需求类型：${prod.subjectType}</span>
                 </p>
             </div>
             <div class="rt list_rt">
@@ -86,20 +86,101 @@
          </li>
         {{/each}}
     </script>
+    <!-- 方案召集模板 -->
+    <script id="tmpl_demand_sosInfos" type="text/x-jquery-tmpl">
+        {{each(i,prod) list}}
+        <li>
+            <div class="lf">
+                <p class="list_title">${prod.designation} <span>${$item._surplusDays(prod.toDate)}天后截止</span> </p>
+                <p class="list_info">${prod.description}</p>
+                <p class="list_bot">
+                    <span>数据规模：${prod.dataScale}条</span>
+                    <span>数据类型：${prod.dataType}</span>
+                    <span>需求类型：${prod.demandType}</span>
+                </p>
+            </div>
+            <div class="rt list_rt">
+                <h1>￥${prod.expFee}</h1>
+                <p> 0人已经接单</p>
+                <a href="javascript:;"> 立即接单</a>
+            </div>
+         </li>
+        {{/each}}
+    </script>
+
     <script th:inline="javascript">
+
         // 页面请求参数
         var settings = {
             url: "/api/demand/buyInfos",            // 请求地址
-            tmpl_id: "#tmpl_demand" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+            tmpl_id: "#tmpl_demand_buyInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+            target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
+            pager_id: "#pageTool",           // 分页html元素标签
+            params: [{key:"dataType",value:[[${currentid}]] }]
+        }
+
+        var settings_sos = {
+            url: "/api/demand/sosInfos",            // 请求地址
+            tmpl_id: "#tmpl_demand_sosInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
             target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
             pager_id: "#pageTool",           // 分页html元素标签
             params: [{key:"dataType",value:[[${currentid}]] }]
         }
 
         // 初始化数据
-        pageData.products(settings) ;
+/*        pageData.products(settings) ;
 
-        pageData.active(settings) ;
+        pageData.products(settings_sos) ;
+
+        pageData.active(settings) ;*/
+        var flag = $("#buyInfo").is(".active");
+        if(flag){
+            pageData.products(settings) ;
+        }else{
+            pageData.products(settings_sos) ;
+        }
+
+    </script>
+    <script>
+        function changeDate(){
+            var flag = $("#buyInfo").is(".active");
+            if(flag){
+                pageData.products(settings) ;
+            }else{
+                var dataTypeNew = null;
+                var settings_sos_new = {
+                    url: "/api/demand/sosInfos",            // 请求地址
+                    tmpl_id: "#tmpl_demand_sosInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                    target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
+                    pager_id: "#pageTool",           // 分页html元素标签
+                    params: [{key:"dataType",value:dataTypeNew }]
+                }
+                pageData.products(settings_sos_new) ;
+                $("#limit").addClass("active");
+            }
+        }
+
+        function getDataByDataType(data) {
+            var flag = $("#buyInfo").is(".active");
+            if(flag){
+                return true;
+            }else {
+                var dataTypeNew = $(data).attr("data-id");
+                if(dataTypeNew == 0){
+                    dataTypeNew = null;
+                }
+                var settings_sos_new = {
+                    url: "/api/demand/sosInfos",            // 请求地址
+                    tmpl_id: "#tmpl_demand_sosInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                    target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
+                    pager_id: "#pageTool",           // 分页html元素标签
+                    params: [{key:"dataType",value:dataTypeNew }]
+                }
+                pageData.products(settings_sos_new) ;
+                return false;
+            }
+        }
+
     </script>
 </body>
 </html>

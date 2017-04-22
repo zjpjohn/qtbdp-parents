@@ -55,6 +55,9 @@ var pageData = {
                         },
                         _date : function (date) {
                             return pageData._formatedate(date) ;
+                        },
+                        _surplusDays : function (toDate) {
+                            return pageData._getSurplusDays(toDate);
                         }
 
                     }).appendTo(_target);
@@ -93,11 +96,7 @@ var pageData = {
     paging : function (settings) {
 
         var _c = settings.count ;
-        if(_c == 0){
-            return;
-        }else if(!_c){
-            return;
-        }
+        if(!_c) return ;
         var _s = settings.size ? settings.size : 12; // 默认每页12条
         var _pager = settings.pager_id ;
 
@@ -251,5 +250,14 @@ var pageData = {
         var formatedate=new Date(date);
         formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
        return formatedate;
+    },
+
+    /**
+     * 计算数据众包的到期天数
+     */
+    _getSurplusDays: function (toDate) {
+        var date = new Date().getTime();
+        var days = parseInt((toDate-date)/(24*3600*1000));
+        return days;
     }
 };
