@@ -4,7 +4,6 @@ $(document).ready(function(){
         url: "/api/trade/neworders",      // 请求地址
         tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
         target: "#orderList1" ,       // 替换html元素id
-        // pager_id: "#pageTool",           // 分页
         params: [{key:"userId",value:1 }]
     }
     pageData.products(settings) ;
@@ -14,14 +13,13 @@ $(document).ready(function(){
         url: "/api/demand/demandorders",
         tmpl_id: "#tmpl_newfabu" ,
         target: "#newfabuList" ,
-        // pager_id: "#pageTool",
         params: [{key:"userId",value:1 }]
     }
     pageData.products(settings) ;
 });
 
 /**点击切换右侧页面*/
-$(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
+$(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
     var centerleft=$(this).attr("data-class");
     $("."+centerleft+"2").addClass("active").siblings(".active").removeClass("active");
@@ -64,6 +62,8 @@ $(".pereach>li,.filter_btn>a,#moreOrder").unbind().click(function(){
             pageData.products(settings) ;
             break;
         case "myrelease": //我的发布 数据众包
+            $(".pereach>li:nth-child(5)").addClass("active").siblings().removeClass("active");
+            $(".fabu_filter>a:first-child").addClass("active").siblings().removeClass("active");
             //页面请求参数
             var settings={
                 url: "/api/demand/buyInfos",            // 请求地址
