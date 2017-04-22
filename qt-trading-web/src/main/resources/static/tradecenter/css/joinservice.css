@@ -98,6 +98,11 @@
 }
 .upimgs{
     margin-right:10px;
+    position:relative;
+}
+.upimgs>a{
+    position:absolute;
+    right:5px;
 }
 .imgfile{
     position: relative;

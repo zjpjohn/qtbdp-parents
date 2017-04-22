@@ -75,7 +75,7 @@ $("#uploadImg").change(function(){
 $("#deleteA").unbind("click").click(function(){
     imgName="";
     $("#picture").val("");
-    $("#pictureImg").attr("src","images/qtdata.png");
+    $("#pictureImg").attr("src","/tradecenter/images/qtdata.png");
 });
 //表单提交前验证
 function checkJoin(){
@@ -130,7 +130,7 @@ $("#formSubmit").unbind("click").click(function(){
     $(".err_info").html("");
     var options = {
         dataType: "text",
-        // url: "/publish/bigShotInsert",
+        url: "/api/institution/institution",
         type: "post",
         async:false,
         data: {},
