@@ -248,30 +248,6 @@
                                         <td>备注</td>
                                     </tr>
                                     </thead>
-
-                                    <!--<tbody class="praticbody">
-                                        <tr class="particularsbody">
-                                            <td>1</td>
-                                            <td>+50</td>
-                                            <td>注册</td>
-                                            <td>2016-12-01 10:06:34</td>
-                                            <td>赠送积分</td>
-                                        </tr>
-                                        <tr class="particularsbody">
-                                            <td>2</td>
-                                            <td>+50</td>
-                                            <td>注册</td>
-                                            <td>2016-12-01 10:06:34</td>
-                                            <td>赠送积分</td>
-                                        </tr>
-                                        <tr class="particularsbody">
-                                            <td>3</td>
-                                            <td>+50</td>
-                                            <td>注册</td>
-                                            <td>2016-12-01 10:06:34</td>
-                                            <td>赠送积分</td>
-                                        </tr>
-                                    </tbody>-->
                                     <tbody class="praticbody">
                                     <tr>
                                         <td colspan="5"><img th:src="@{/tradecenter/images/none.png}" alt="" class="noneimg" /></td>
@@ -296,9 +272,6 @@
                             </div>
 
                         </div>
-
-
-
                     </div>
                 </div>
                 <!-- 我的订单开始-->
@@ -391,9 +364,7 @@
                     </p>
                     <!-- 数据众包开始 -->
                     <div id="crowdsourcing" class="order_tb active">
-                        <!-- 分页开始 -->
-                        <div id="crowdPage"></div>
-                        <!-- 分页结束 -->
+
                         <table class="center_tb">
                             <thead>
                             <tr>
@@ -413,36 +384,17 @@
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2015全国民航机场吞吐量</td>
-                                <td>￥128.00</td>
-                                <td class="noaudit">已上架</td>
-                                <td>21天后截止</td>
-                                <td>
-                                    <a href="javascript:;" class="gosee">查看</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>中国医疗器械行业现状</td>
-                                <td>￥128.00</td>
-                                <td class="putaway">已上架</td>
-                                <td>2016-12-01 10:06:34</td>
-                                <td>
-                                    <a href="javascript:;" class="gosee">下载</a>
-                                </td>
-                            </tr>
-                            </tbody>
+                            <tbody id="replace_crow"></tbody>
                         </table>
+
+                        <!-- 分页开始 -->
+                        <div id="crowdPage"></div>
+                        <!-- 分页结束 -->
                     </div>
                     <!-- 数据众包结束 -->
                     <!-- 方案召集开始 -->
                     <div id="scheme" class="order_tb">
-                        <!-- 分页开始 -->
-                        <div id="schemePage"></div>
-                        <!-- 分页结束 -->
+
                         <table class="center_tb">
                             <thead>
                             <tr>
@@ -462,15 +414,18 @@
                                 <th>操作</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tmpl_project">
                             <!-- 没有数据 -->
                             </tbody>
                         </table>
-                        <div class="nodata">
+                        <!-- 分页开始 -->
+                        <div id="schemePage"></div>
+                        <!-- 分页结束 -->
+                        <!--<div class="nodata">
                             <img th:src="@{/tradecenter/images/none.png}" alt=""/>
                             <p>暂时没有需求订单</p>
                             <a href="javascript:;">前往需求大厅</a>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- 方案召集结束 -->
                 </div>
@@ -505,12 +460,84 @@
     <script th:src="@{/tradecenter/js/paging.js}"></script>
     <script th:src="@{/tradecenter/js/pageData.js}"></script>
 
-    <!--<div class="nodata">
-        <img th:src="@{/tradecenter/images/none.png}" alt=""/>
-        <p>暂时没有需求订单</p>
-        <a href="javascript:;">前往需求大厅</a>
-    </div>-->
+    <!--我的发布  方案召集-->
+    <script id="tmpl_scheme" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
+            <td>${prod.id}</td>
+            <td>
+                ${$item._substr(prod.designation,18)}
+            </td>
+            <td>￥${prod.expFee}</td>
+            {{if prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+                {{else prod.isUsed==0}}
+                    <td class="gopay"> 待审核</td>
+                {{else prod.isUsed==2}}
+                    <td class="noaudit"> 审核未通过</td>
 
+            {{/if}}
+            <td> ${$item._date(prod.toDate)}</td>
+            <td>
+                <a href="javascript:;" class="gosee">-</a>
+            </td>
+        </tr>
+        {{/each}}
+
+        {{else}}
+            <tr>
+                <td colspan="8" class="noline">
+                     <div class="nodata">
+                        <img src="/tradecenter/images/none.png" alt=""/>
+                            <p>暂时数据订单</p>
+                            <a href="javascript:;">前往数据商城</a>
+                    </div>
+                </td>
+            </tr>
+    {{/if}}
+
+    </script>
+    <!--我的发布 -数据众包-->
+    <script id="tmpl_release" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
+            <td>${prod.id}</td>
+            <td>
+                ${$item._substr(prod.designation,18)}
+            </td>
+            <td>￥${prod.expFee}</td>
+
+            {{if prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+                {{else prod.isUsed==0}}
+                    <td class="gopay"> 待审核</td>
+
+                {{else prod.isUsed==2}}
+                    <td class="noaudit"> 审核未通过</td>
+
+            {{/if}}
+
+            <td> ${$item._date(prod.toDate)}</td>
+            <td>
+                <a href="javascript:;" class="gosee">-</a>
+            </td>
+        </tr>
+        {{/each}}
+
+        {{else}}
+            <tr>
+                <td colspan="8" class="noline">
+                     <div class="nodata">
+                        <img src="/tradecenter/images/none.png" alt=""/>
+                            <p>暂时数据订单</p>
+                            <a href="javascript:;">前往数据商城</a>
+                    </div>
+                </td>
+            </tr>
+    {{/if}}
+    </script>
     <!-- 最新订单tpml模板 -->
     <script id="tmpl_neworder" type="text/x-jquery-tmpl">
         {{if list.length > 0}}
