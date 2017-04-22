@@ -125,7 +125,7 @@
                 <!-- 概览结束-->
                 <!--个人信息-->
                 <div class="persinfo2 active " id="personaldata">
-                    <div class="headimgs">
+                    <!--<div class="headimgs">
                         <img th:src="@{/tradecenter/images/avatar1.jpg}" alt="" class="peronimg"/>
                         <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
                         <a href="javascript:;" class="savechange rt">保存更改</a>
@@ -157,7 +157,7 @@
                         <input type="password" class="pers_input" value="123546"/>
                         <br/> <a href="javascript:;">重置密码</a>
 
-                    </div>
+                    </div>-->
 
 
 
@@ -394,7 +394,6 @@
                     <!-- 数据众包结束 -->
                     <!-- 方案召集开始 -->
                     <div id="scheme" class="order_tb">
-
                         <table class="center_tb">
                             <thead>
                             <tr>
@@ -460,8 +459,40 @@
     <script th:src="@{/tradecenter/js/paging.js}"></script>
     <script th:src="@{/tradecenter/js/pageData.js}"></script>
     <!--个人中心-个人信息-->
-    <script id="tmpl_personals">
+    <script id="tmpl_personals" type="text/x-jquery-tmpl">
+        <div class="headimgs">
+            <img th:src="@{/tradecenter/images/avatar1.jpg}" alt="" class="peronimg"/>
+            <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
+            <a href="javascript:;" class="savechange rt">保存更改</a>
+        </div>
 
+        <div class="pars_infor">
+            <p class="personal_name">昵称</p>
+            <input type="text" class="personal_nameval"/>
+
+            <p>手机号</p>
+            <input type="text" class="pers_input" id="phoneNUM" value="18665351825"/>
+            <a class="error">请输入正确的手机号码</a>
+
+
+            <p class="pers_names">姓名</p>
+            <input type="text" class="pers_input"/>
+            <br/> <a href="javascript:;">去实名认证</a>
+
+            <p class="pers_names">邮箱</p>
+            <input type="text" class="pers_input" id="person_emal"/>
+            <a class="error">请输入正确的邮箱</a>
+
+
+            <p class="pers_names">用户类型</p>
+            <input type="text" value="个人" class="pers_input"/>
+            <br/> <a href="javascript:;">成为数据服务商</a>
+
+            <p class="pers_names">密码</p>
+            <input type="password" class="pers_input" value="123546"/>
+            <br/> <a href="javascript:;">重置密码</a>
+
+        </div>
 
 
     </script>
