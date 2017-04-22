@@ -37,4 +37,5 @@ $(".filters>a").unbind("click").click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
     type=$(this).attr("data-id");//数据众包、方案召集
     dataType=$(".chose_menu>.active").attr("data-id");//数据类型
+    changeDate();
 });

@@ -33,7 +33,7 @@ var pageData = {
         $.ajax({
             type:"GET",
             dataType:"json",
-             url: _u ,
+            url: _u ,
             ansync:true,
             xhrFields:{
                 withCredentials:true

@@ -49,8 +49,8 @@ public class DemandApi {
 
     @ApiOperation(value="最新前5条需求订单数据接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "productType", value = "产品类型（1数据众包、2方案召集）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "productType", value = "产品类型（1数据众包、2方案召集）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "前几条数据（如：5）", defaultValue = "5", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
@@ -105,6 +105,7 @@ public class DemandApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1），不传查询所有类型", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "isUsed", value = "方案召集状态（0待审核、1审核通过、2审核失败）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：10）", defaultValue = "10", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
@@ -151,6 +152,7 @@ public class DemandApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1），不传查询所有类型", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "isUsed", value = "数据众包状态（0待审核、1审核通过、2审核失败）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：10）", defaultValue = "10", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })

@@ -17,7 +17,7 @@
         FROM
             data_user_info AS u
         WHERE
-            u.sso_user_id = #{sosInfo}
+            u.id = #{id}
     </select>
 
     <resultMap id="UserInfoResultMap" type="com.qtdbp.trading.model.DataUserInfoModel" >
