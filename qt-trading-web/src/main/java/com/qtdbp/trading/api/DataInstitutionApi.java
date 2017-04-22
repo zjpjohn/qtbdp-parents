@@ -59,7 +59,7 @@ public class DataInstitutionApi {
     }
 
     @ApiOperation(value="个人用户升级为服务商API接口")
-    @RequestMapping(value = "/institution", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelMap addDataInstitutionInfo(@RequestBody DataInstitutionInfoModel institutionInfoModel) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
