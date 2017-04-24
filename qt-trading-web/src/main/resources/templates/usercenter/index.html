@@ -39,14 +39,14 @@
                     <li data-class="myaccount" style="display:none"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
                     <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
                     <li data-class="myrelease"><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
-                    <li data-class="dataservice"><a href="/joinservive"><span></span> 成为数据服务商 <b></b> </a></li>
+                    <li data-class="dataservice" id="joinservice2"><a th:href="@{/joinservice}"><span></span> 成为数据服务商 <b></b> </a></li>
 
                 </ul>
 
             </div>
             <div class="center_right rt">
                 <!-- 概览开始-->
-                <div class="overview2 ">
+                <div class="overview2 active">
                     <ul class="view_top floating">
                         <li>
                             <h1>246</h1>
@@ -107,7 +107,7 @@
                 </div>
                 <!-- 概览结束-->
                 <!--个人信息-->
-                <div class="persinfo2 active" id="personaldata">
+                <div class="persinfo2 " id="personaldata">
                     <!--<div class="headimgs">
                         <img src="" alt="" class="peronimg"/>
                         <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
@@ -423,7 +423,7 @@
                         <p>订单详情：<span class="color">整包</span></p>
                         <p>购买数量：<span cladd="color">1</span>份</p>
                         <p class="pay_btns">
-                            <a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>
+                            <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
                             <a href="javascript:;" class="alibtn">支付宝付款</a>
                         </p>
                     </div>
