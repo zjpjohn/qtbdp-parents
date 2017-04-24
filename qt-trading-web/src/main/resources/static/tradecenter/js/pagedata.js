@@ -58,6 +58,9 @@ var pageData = {
                         },
                         _surplusDays : function (toDate) {
                             return pageData._getSurplusDays(toDate);
+                        },
+                        _time : function(time){
+                            return pageData._calculateTime(time);
                         }
 
                     }).appendTo(_target);
@@ -263,6 +266,10 @@ var pageData = {
         var date = new Date().getTime();
         var days = parseInt((toDate-date)/(24*3600*1000));
         return days<0?"--":days;
+    },
+    _calculateTime:function(time){
+        var calculateTime=getDateDiff(time);
+        return calculateTime;
     }
 
 };

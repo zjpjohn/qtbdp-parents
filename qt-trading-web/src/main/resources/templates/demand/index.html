@@ -28,11 +28,11 @@
     <section class="demand_main floating main">
         <!--左侧-->
         <div class="lf main_lf">
-            <!--数据类型筛选-->
+            <!--数据类型筛选th:href="@{/demand}+'/'+${val.id}"   th:href="@{/demand}" -->
             <p class="chose_menu floating">
                 <span>服务范围&nbsp;&nbsp;：</span>
-                <a th:class="${currentid} ? null : 'active'" data-id="0" th:href="@{/demand}" id="limit" onclick="return getDataByDataType(this);">不限</a>
-                <a th:each="val : ${typeModels}" th:href="@{/demand}+'/'+${val.id}" th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'" onclick="return getDataByDataType(this);">智能制造</a>
+                <a th:class="${currentid} ? null : 'active'" data-id="0"  id="limit" onclick="return getDataByDataType(this);">不限</a>
+                <a th:each="val : ${typeModels}"  th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'" onclick="return getDataByDataType(this);">智能制造</a>
             </p>
             <p class="filters">
                 <a data-id="1" class="active" id="buyInfo">数据众包</a>
@@ -50,7 +50,7 @@
                 <p>有问题？</p>
                 <p>就来这里发布需求</p>
                 <p>个性需求 我来定制</p>
-                <a href="javasctipt:;">立即发布需求</a>
+                <a th:href="@{/demand/buy/add}">立即发布需求</a>
             </div>
             <div class="demand_suc">
                 <p>现有安全隐患、销号公司数据整理</p>
@@ -66,16 +66,20 @@
     <script th:src="@{/tradecenter/js/paging.js}"></script>
     <script th:src="@{/tradecenter/js/demand.js}"></script>
     <script th:src="@{/tradecenter/js/pagedata.js}"></script>
+    <script th:src="@{/tradecenter/js/timeFormat.js}"></script>
+
     <!-- 数据众包模板 -->
     <script id="tmpl_demand_buyInfos" type="text/x-jquery-tmpl">
         {{each(i,prod) list}}
         <li>
             <div class="lf">
-                <p class="list_title">${prod.designation} <span>${$item._surplusDays(prod.toDate)}天后截止</span> </p>
+                <p class="list_title">${prod.designation} <span>${$item._time(prod.toDate)}</span> </p>
                 <p class="list_info">${$item._substr(prod.description,100)}</p>
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
-                    <span>数据类型：${dataTypeJson[prod.dataType]}</span>
+                    <span>数据类型：${prod.dataType}</span>
+                    <span>数据格式：${prod.dataPattern}</span>
+
                 </p>
             </div>
             <div class="rt list_rt">
@@ -87,20 +91,22 @@
         {{/each}}
     </script>
     <!-- 方案召集模板 -->
+    <!--${$item._surplusDays(prod.toDate)}-->
     <script id="tmpl_demand_sosInfos" type="text/x-jquery-tmpl">
         {{each(i,prod) list}}
         <li>
             <div class="lf">
-                <p class="list_title">${prod.designation} <span>${$item._surplusDays(prod.toDate)}天后截止</span> </p>
-                <p class="list_info">${prod.description}</p>
+                <p class="list_title">${prod.designation} <span> ${$item._date(prod.toDate)}截止</span> </p>
+                <p class="list_info">${$item._substr(prod.description,100)}</p>
+
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
-                    <span>数据类型：${dataTypeJson[prod.dataType]}</span>
-                    <span>需求类型：${prod.demandType==1?"数据预处理":"数据建模"}</span>
+                    <span>数据类型：${prod.dataType}</span>
+                    <span>需求类型：${prod.demandType}</span>
                 </p>
             </div>
             <div class="rt list_rt">
-                <h1>￥${prod.expFee}</h1>
+                <h1>${prod.expFee}</h1>
                 <p> 0人已经接单</p>
                 <a href="javascript:;"> 立即接单</a>
             </div>
@@ -110,19 +116,7 @@
 
     <script th:inline="javascript">
 
-        /**
-         * 解决页面数据类型显示数字的问题
-         */
-        //获取后台传来的数据类型数组
-        var typeModels = [[${typeModels}]];
-        //创建一个json对象放入对应的数据类型，当在页面显示数据类型的时候直接根据dataType取对应的数据类型名字
-        var dataTypeJson = {};
-        for(var i = 0; i<typeModels.length; i++){
-            var obj = typeModels[i];
-            dataTypeJson[obj.id]=obj.name;
-        }
-
-        // 页面请求参数
+        // 页面请求参数 数据众包
         var settings = {
             url: "/api/demand/buyInfos",            // 请求地址
             tmpl_id: "#tmpl_demand_buyInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
@@ -130,7 +124,7 @@
             pager_id: "#pageTool",           // 分页html元素标签
             params: [{key:"dataType",value:[[${currentid}]] }]
         }
-
+        //方案召集
         var settings_sos = {
             url: "/api/demand/sosInfos",            // 请求地址
             tmpl_id: "#tmpl_demand_sosInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
@@ -147,15 +141,13 @@
         pageData.active(settings) ;*/
         var flag = $("#buyInfo").is(".active");
         if(flag){
-            pageData.products(settings) ;
+            pageData.products(settings);
         }else{
             pageData.products(settings_sos) ;
         }
 
     </script>
     <script>
-
-
         function changeDate(){
             var flag = $("#buyInfo").is(".active");
             if(flag){
@@ -175,10 +167,26 @@
         }
 
         function getDataByDataType(data) {
+            //数据众包 路径
             var flag = $("#buyInfo").is(".active");
             if(flag){
-                return true;
+                var dataTypeNew2= $(data).attr("data-id");
+                if(dataTypeNew2 == 0){
+                    dataTypeNew2 = null;
+                }
+                var settings = {
+                    url: "/api/demand/buyInfos",            // 请求地址
+                    tmpl_id: "#tmpl_demand_buyInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                    target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
+                    pager_id: "#pageTool",           // 分页html元素标签
+                    params: [{key:"dataType",value:dataTypeNew2 }]
+                }
+                pageData.products(settings) ;
+                return false;
+
+
             }else {
+                //方案召集 路径
                 var dataTypeNew = $(data).attr("data-id");
                 if(dataTypeNew == 0){
                     dataTypeNew = null;
@@ -194,7 +202,7 @@
                 return false;
             }
         }
-
+        nav(3);
     </script>
 </body>
 </html>
