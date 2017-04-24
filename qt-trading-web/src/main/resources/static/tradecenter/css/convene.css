@@ -85,7 +85,7 @@
     box-sizing: border-box;
 }
 
-/*上传数据*/
+/*锟较达拷锟斤拷锟斤拷*/
 .data_upload{
     width:620px;
     height:40px;
@@ -238,7 +238,9 @@
 
     margin-bottom: 20px;
 }
-
+.scalsection input.err:focus,.scalsection textarea.err:focus{
+    outline:1px solid #F47D7F;
+}
 
 
 
