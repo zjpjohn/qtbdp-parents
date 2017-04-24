@@ -89,6 +89,66 @@ function checkData(){
     return true;
 }
 
+
+var crowsubmit={
+    scheme:function(){
+        $("#formSubmit").unbind("click").click(function(){
+            if(!checkData()){
+                return false;
+            }
+            var _data = crowsubmit._formatparam($("#schemeForm").serialize()) ;
+            console.log("_data："+_data);
+
+            if($(this).attr("class").indexOf("disabled")==-1){
+                var me=this;
+                $.ajax({
+                    dataType: "text",
+                    url: "/api/demand/buyInfos",
+                    type: "post",
+                    contentType:"application/json",
+                    data: _data,
+                    success: function(data){
+                        console.log(data);
+                        alert("提交成功");
+                    },
+                    error:function(data){
+                        console.log("提交失败");
+                    }
+                });
+            }
+
+        });
+    },
+    _formatparam :function (param) {
+
+        if(!param) return ;
+        var _data = {} ;
+        var _keys = param.split("&") ;
+        _keys.forEach(function(val,index){
+            var _attrs = val.split("=") ;
+            _data[_attrs[0]] = _attrs[1] ;
+        }) ;
+        return JSON.stringify(_data);
+    }
+}
+
+
+$(function(){
+    crowsubmit.scheme();
+});
+
+//导航选中
+nav(3);
+
+
+
+
+
+
+
+
+
+/*
 $("#formSubmit").unbind("click").click(function(){
     if( !checkData() ){
         return false;
@@ -114,5 +174,5 @@ $("#formSubmit").unbind("click").click(function(){
         $("#schemeForm").ajaxSubmit(options);
     }
 
-});
+});*/
 
