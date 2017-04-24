@@ -55,6 +55,9 @@ var pageData = {
                         },
                         _date : function (date) {
                             return pageData._formatedate(date) ;
+                        },
+                        _surplusDays : function (toDate) {
+                            return pageData._getSurplusDays(toDate);
                         }
 
                     }).appendTo(_target);
@@ -251,5 +254,15 @@ var pageData = {
         var formatedate=new Date(date);
         formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
        return formatedate;
+    },
+
+    /**
+     * 计算数据众包的到期天数
+     */
+    _getSurplusDays: function (toDate) {
+        var date = new Date().getTime();
+        var days = parseInt((toDate-date)/(24*3600*1000));
+        return days<0?"--":days;
     }
+
 };

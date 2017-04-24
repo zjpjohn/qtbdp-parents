@@ -3,6 +3,7 @@ package com.qtdbp.trading.mapper;
 import com.qtdbp.trading.model.DataBuyInfoModel;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 数据众包数据库CRUD操作
@@ -26,4 +27,11 @@ public interface DataBuyInfoMapper {
      * @return 记录数，成功返回1
      */
     Integer insertDataBuyInfo(DataBuyInfoModel buyInfoModel) ;
+
+    /**
+     * 获取个人中心我的发布信息
+     * @param buyInfoModel
+     * @return
+     */
+    Map<String,Integer> findBuyInfoAndSosInfo(DataBuyInfoModel buyInfoModel);
 }

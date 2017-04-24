@@ -90,4 +90,11 @@
             #{dataType},#{dataTypeSub}
         )
     </insert>
+
+    <!-- 获取个人中心我的发布信息 -->
+    <select id="findBuyInfoAndSosInfo"  resultType="java.util.HashMap">
+        select t1.buyinfo,t2.sosinfo, t1.buyinfo+t2.sosinfo as num from
+          (select count(*) buyinfo from data_buy_info where user_id=${userId}) t1,
+          (select count(*) sosinfo from data_sos_info where user_id=${userId}) t2;
+    </select>
 </mapper>

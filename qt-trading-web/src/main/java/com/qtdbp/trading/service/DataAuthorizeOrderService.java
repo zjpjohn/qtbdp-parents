@@ -1,6 +1,7 @@
 package com.qtdbp.trading.service;
 
 import com.github.pagehelper.PageHelper;
+import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataAuthorizeOrderMapper;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
 import com.qtdbp.trading.model.DataAuthorizeOrderModel;
@@ -8,7 +9,9 @@ import com.qtdbp.trading.model.DataTransactionOrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 需求订单数据服务
@@ -45,5 +48,17 @@ public class DataAuthorizeOrderService {
             PageHelper.startPage(order.getPage(), order.getRows());
         }
         return orderMapper.findDemandOrdersByCondtion(order);
+    }
+
+    /**
+     * 获取个人中心我的订单信息
+     * @param order
+     * @return
+     */
+    public Map<String, Integer> findAllOrderInfo(DataAuthorizeOrderModel order) throws GlobalException {
+        if(order.getUserId() == null) throw new GlobalException("用户Id为空") ;
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map = orderMapper.findAllOrderInfo(order);
+        return map;
     }
 }
