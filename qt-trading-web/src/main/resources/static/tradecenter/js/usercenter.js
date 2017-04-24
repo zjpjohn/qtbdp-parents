@@ -16,17 +16,34 @@ $(document).ready(function(){
         params: [{key:"userId",value:1 }]
     }
     pageData.products(settings) ;*/
-    var settings={
-        url: "/api/user",            // 请求地址
-        tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-        target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
-        params: [{key:"id",value:1}],
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
     }
-    pageData.products(settings) ;
+
+
+    if(getQueryString("order")=="4"){
+        $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
+        $(".orderpay").addClass("active").siblings(".active").removeClass("active");
+
+    }else{
+        var settings={
+            url: "/api/user",            // 请求地址
+            tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+            target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
+            params: [{key:"id",value:1}],
+        }
+        pageData.products(settings) ;
+
+    }
+
 
 });
 
 /**点击切换右侧页面*/
+
 $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
     var centerleft=$(this).attr("data-class");
@@ -117,7 +134,9 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
 });
 
 
-
+$(".pereach>li:nth-child(6)").click(function(){
+    location.href="/joinservice";
+});
 
 
 //点击我的账户  余额明细、积分明细
@@ -219,3 +238,9 @@ var usercenter = {
         return JSON.stringify(_data);
     }
 }
+
+
+
+
+
+
