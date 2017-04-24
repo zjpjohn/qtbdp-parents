@@ -59,6 +59,7 @@
  text-align:center;
  line-height:135px;
  overflow: hidden;
+    cursor: default;
 }
 .prolist_img>img{
   max-width:100%;
@@ -70,6 +71,7 @@
   text-align: center;
   line-height: 50px;
   color:#333;
+  cursor: default;
 }
 .prolist_fot{
   padding:0px 10px;
