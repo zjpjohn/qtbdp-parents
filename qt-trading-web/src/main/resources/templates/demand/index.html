@@ -75,7 +75,7 @@
                 <p class="list_info">${$item._substr(prod.description,100)}</p>
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
-                    <span>数据类型：${prod.dataType}</span>
+                    <span>数据类型：${dataTypeJson[prod.dataType]}</span>
                 </p>
             </div>
             <div class="rt list_rt">
@@ -95,8 +95,8 @@
                 <p class="list_info">${prod.description}</p>
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
-                    <span>数据类型：${prod.dataType}</span>
-                    <span>需求类型：${prod.demandType}</span>
+                    <span>数据类型：${dataTypeJson[prod.dataType]}</span>
+                    <span>需求类型：${prod.demandType==1?"数据预处理":"数据建模"}</span>
                 </p>
             </div>
             <div class="rt list_rt">
@@ -109,6 +109,18 @@
     </script>
 
     <script th:inline="javascript">
+
+        /**
+         * 解决页面数据类型显示数字的问题
+         */
+        //获取后台传来的数据类型数组
+        var typeModels = [[${typeModels}]];
+        //创建一个json对象放入对应的数据类型，当在页面显示数据类型的时候直接根据dataType取对应的数据类型名字
+        var dataTypeJson = {};
+        for(var i = 0; i<typeModels.length; i++){
+            var obj = typeModels[i];
+            dataTypeJson[obj.id]=obj.name;
+        }
 
         // 页面请求参数
         var settings = {
@@ -142,6 +154,8 @@
 
     </script>
     <script>
+
+
         function changeDate(){
             var flag = $("#buyInfo").is(".active");
             if(flag){

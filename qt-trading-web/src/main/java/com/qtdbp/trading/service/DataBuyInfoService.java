@@ -8,7 +8,9 @@ import com.qtdbp.trading.model.DataSosInfoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 数据众包服务
@@ -51,5 +53,15 @@ public class DataBuyInfoService {
         if(count != null && count > 0) return buyInfoModel.getId() ;
 
         return -1 ;
+    }
+
+    /**
+     * 获取个人中心我的发布信息
+     */
+    public Map findBuyInfoAndSosInfo(DataBuyInfoModel buyInfoModel) throws GlobalException {
+        if(buyInfoModel.getUserId() == null) throw new GlobalException("用户Id为空") ;
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map = buyInfoMapper.findBuyInfoAndSosInfo(buyInfoModel);
+        return map;
     }
 }
