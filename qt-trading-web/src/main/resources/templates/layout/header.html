@@ -1,7 +1,7 @@
 <div  id="head">
 <!-- 页头-->
 <header xmlns:th="http://www.thymeleaf.org"  class="floating top">
-	<a class="lf qt_logo icon"></a>
+	<a class="lf qt_logo icon" th:href="@{/}"></a>
 	<div class="rt head_search floating">
 		<input type="text" placeholder="请输入查找内容" class="search_input lf"/>
 		<a href="javascript:;"  class="search_btn rt">搜索</a>
@@ -10,8 +10,8 @@
 		<i class="lf icon"></i>
 		<div class="lf fabu_btns">
 			<p>发布</p>
-			<a href="javascript:;">数据发布</a>
-			<a href="/demand/buy/add">需求发布</a>
+			<a>数据发布</a>
+			<a th:href="@{/demand/buy/add}">需求发布</a>
 			<a href="/joinservice">加盟服务</a>
 		</div>
 	</div>
@@ -41,7 +41,7 @@
 			<div class="lf user_center">
 				<p class="user_name">钱塘大数据<i></i></p>
 				<p class="nav_down">
-					<a href="javascript:;">个人中心</a>
+					<a th:href="@{/usercenter}">个人中心</a>
 					<a href="javascript:;">退出登录</a>
 				</p>
 			</div>
@@ -51,6 +51,7 @@
 </nav>
 <script>
     $(".nav_list>a").removeClass("active");
+
 	function nav(n){
 		$(".nav_list>a:nth-child("+n+")").addClass("active");
 	}
