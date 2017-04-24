@@ -34,6 +34,8 @@ $(".chose_menu>a").unbind("click").click(function(){
 });
 //数据众包、方案召集
 $(".filters>a").unbind("click").click(function(){
+    $(".chose_menu>a").removeClass("active");
+    $("#limit").addClass("active");
     $(this).addClass("active").siblings(".active").removeClass("active");
     type=$(this).attr("data-id");//数据众包、方案召集
     dataType=$(".chose_menu>.active").attr("data-id");//数据类型
