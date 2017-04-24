@@ -111,34 +111,60 @@ function checkJoin(){
         $("#abstracts").addClass("err").focus();
         return false;
     }
-    if(picture==""){
+    /*if(picture==""){
         $(".err_info").html("*请上传图片");
         return false;
-    }
+    }*/
     return true;
 
 }
-$("#formSubmit").unbind("click").click(function(){
-    if( !checkJoin() ){
-        return false;
-    }
-    $(".err_info").html("");
-    var options = {
-        dataType: "text",
-        url: "/api/institution/institution",
-        type: "post",
-        async:false,
-        data: {},
-        success: function(){
-            layer.confirm("您的会员信息提交成功，请保持联系方式畅通，我们会尽快与您联系",
-                {title:"",btn:["确定"]},
-                function(index){
-                    layer.close(index);
-                    location.href="/fedration";
+
+var joinsubmit={
+    scheme:function(){
+        $("#formSubmit").unbind("click").click(function(){
+            console.log(33);
+            if(!checkJoin()){
+                return false;
+            }
+            var _data = joinsubmit._formatparam($("#joinForm").serialize()) ;
+            console.log("_data："+_data);
+
+            if($(this).attr("class").indexOf("disabled")==-1){
+                var me=this;
+                $.ajax({
+                    dataType: "text",
+                    url: "/api/institution",
+                    type: "post",
+                    contentType:"application/json",
+                    data: _data,
+                    success: function(data){
+                        console.log(data);
+                        alert("提交成功");
+                    },
+                    error:function(data){
+                        console.log("提交失败");
+                    }
                 });
-        }
-    };
-    $("#joinForm").ajaxSubmit(options);
+            }
+
+        });
+    },
+    _formatparam :function (param) {
+
+        if(!param) return ;
+        var _data = {} ;
+        var _keys = param.split("&") ;
+        _keys.forEach(function(val,index){
+            var _attrs = val.split("=") ;
+            _data[_attrs[0]] = _attrs[1] ;
+        }) ;
+        return JSON.stringify(_data);
+    }
+}
+
+
+$(function(){
+    joinsubmit.scheme();
 });
 
 
