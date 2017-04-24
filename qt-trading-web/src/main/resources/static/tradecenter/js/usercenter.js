@@ -195,10 +195,6 @@ var usercenter = {
                 dataType:"json",
                 url:"/api/user"  ,
                 contentType:"application/json",
-                // ansync:true,
-                // xhrFields:{
-                //     withCredentials:true
-                // },
                 data: _data ,
                 success:function(data){
                     console.log("success: "+data.success);
@@ -215,7 +211,6 @@ var usercenter = {
 
         if(!param) return ;
         var _data = {} ;
-        //_data["id"] = 1 ; // 测试
         var _keys = param.split("&") ;
         _keys.forEach(function(val,index){
             var _attrs = val.split("=") ;
