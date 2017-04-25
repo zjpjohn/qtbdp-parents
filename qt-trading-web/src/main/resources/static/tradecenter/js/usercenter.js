@@ -1,10 +1,10 @@
 $(document).ready(function(){
     // 概览 最新订单
-    /*var settings = {
+    var settings = {
         url: "/api/trade/neworders",      // 请求地址
         tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
         target: "#orderList1" ,       // 替换html元素id
-        params: [{key:"userId",value:1 }]
+        params: [{key:"userId",value:userId }]
     }
     pageData.products(settings) ;
 
@@ -13,9 +13,12 @@ $(document).ready(function(){
         url: "/api/demand/demandorders",
         tmpl_id: "#tmpl_newfabu" ,
         target: "#newfabuList" ,
-        params: [{key:"userId",value:1 }]
+        params: [{key:"userId",value:userId }]
     }
-    pageData.products(settings) ;*/
+    pageData.products(settings) ;
+
+
+
 
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
