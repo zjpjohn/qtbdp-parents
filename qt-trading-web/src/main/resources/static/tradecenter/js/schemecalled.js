@@ -139,7 +139,7 @@ $(function(){
 
 //导航选中
 nav(3);
-head(3);
+head(2);
 
 
 
