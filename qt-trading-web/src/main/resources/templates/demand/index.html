@@ -77,9 +77,8 @@
                 <p class="list_info">${$item._substr(prod.description,100)}</p>
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
-                    <span>数据类型：${prod.dataType}</span>
-                    <span>数据格式：${prod.dataPattern}</span>
-
+                    <span>数据类型：${$item._switchtype(prod.dataType)}</span>
+                    <span>数据格式：${$item._switchlayout(prod.dataPattern)}</span>
                 </p>
             </div>
             <div class="rt list_rt">
@@ -101,8 +100,8 @@
 
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
-                    <span>数据类型：${prod.dataType}</span>
-                    <span>需求类型：${prod.demandType}</span>
+                    <span>数据类型：${$item._switchtype(prod.dataType)}</span>
+                    <span>需求类型：${$item._demands(prod.demandType)}</span>
                 </p>
             </div>
             <div class="rt list_rt">
