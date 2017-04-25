@@ -22,12 +22,12 @@
         <div class="center_main">
             <div class="center_left lf">
                 <div class="headbg">
-                    <a href="javascript:;">
-                        <img class="headpic" th:src="@{/tradecenter/images/user_img.png}" alt="" onerror="this.src='/tradecenter/images/user_img.png'"/>
+                    <a>
+                        <img class="headpic" th:src="@{${user.head} ? ${user.head} : '/tradecenter/images/user_img.png'}" alt=""/>
                     </a>
                 </div>
-                <p class="pername "><a href="javascript:;">三生万物</a></p>
-                <p class="pername perphone"><a href="javascript:;">18564852465</a></p>
+                <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
+                <p class="pername perphone"><a th:text="${user.phone}">18564852465</a></p>
                 <p class="perdata">
                     <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
                     <a class="preinfo rt" href="javascript:;">完善资料</a>
@@ -39,7 +39,7 @@
                     <li data-class="myaccount" style="display:none"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
                     <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
                     <li data-class="myrelease"><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
-                    <li data-class="dataservice" id="joinservice2"><a th:href="@{/joinservice}"><span></span> 成为数据服务商 <b></b> </a></li>
+                    <li data-class="dataservice" id="joinservice2"><a th:href="@{/institution/add}"><span></span> 成为数据服务商 <b></b> </a></li>
 
                 </ul>
 
@@ -246,8 +246,6 @@
                                         </td>
                                     </tr>
 
-
-
                                     </tbody>
 
 
@@ -408,7 +406,7 @@
                     <!-- 方案召集结束 -->
                 </div>
                 <!-- 我的发布结束-->
-                <div class="dataservice2">成为数据服务商</div>
+                <div >成为数据服务商</div>
                 <!-- 订单支付开始 -->
                 <div class="orderpay rt_tbs">
                     <h2>
@@ -683,9 +681,14 @@
     {{/if}}
     </script>
 
+    <script>
 
+        var userId=$("#userId").val();
+
+    </script>
     <script th:src="@{/tradecenter/js/usercenter.js}"></script>
     <script>
+
         usercenter.userSubmit() ;
     </script>
 </body>

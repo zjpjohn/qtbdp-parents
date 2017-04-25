@@ -33,7 +33,8 @@ $(document).ready(function(){
             url: "/api/user",            // 请求地址
             tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
             target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
-            params: [{key:"id",value:1}],
+            params: [{key:"id",value:userId}],
+
         }
         pageData.products(settings) ;
 
@@ -56,7 +57,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
                 tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
                 target: "#orderList1" ,       // 替换html元素id
                 // pager_id: "#pageTool",           // 分页
-                params: [{key:"userId",value:1 }]
+                params: [{key:"userId",value:userId }]
             }
             pageData.products(settings) ;
             break;
@@ -69,7 +70,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
                 tmpl_id: "#tmpl_dataorder" ,
                 target: "#orderList2" ,
                 pager_id: "#orderPage2",
-                params: [{key:"productId",value:1 }],
+                params: [{key:"productId",value:userId }],
                 size: 10
             }
             pageData.products(settings) ;
@@ -81,7 +82,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
                 tmpl_id: "#tmpl_demandorder" ,
                 target: "#orderList3" ,
                 pager_id: "#demandPage",
-                params: [{key:"productId",value:1 }],
+                params: [{key:"productId",value:userId }],
                 size: 10
             }
             pageData.products(settings) ;
@@ -95,7 +96,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
                 tmpl_id: "#tmpl_release" ,     // jquery template 模板元素，如：#div_id 或 .class_name
                 target: "#replace_crow" ,       // 替换html元素，如：#div_id 或 .class_name
                 pager_id: "#crowdPage",           // 分页html元素标签
-                params: [{key:"userId",value:1}],
+                params: [{key:"userId",value:userId}],
                 size: 10
             }
             // 初始化数据
@@ -112,7 +113,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
                 tmpl_id: "#tmpl_scheme" ,     // jquery template 模板元素，如：#div_id 或 .class_name
                 target: "#tmpl_project" ,       // 替换html元素，如：#div_id 或 .class_name
                 pager_id: "#schemePage",           // 分页html元素标签
-                params: [{key:"userId",value:1}],
+                params: [{key:"userId",value:userId}],
                 size: 10
             }
             // 初始化数据
@@ -124,7 +125,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
                 url: "/api/user",            // 请求地址
                 tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
                 target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
-                params: [{key:"id",value:1}],
+                params: [{key:"id",value:userId}],
             }
             pageData.products(settings) ;
             break;
@@ -133,9 +134,10 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
 
 });
 
-
+//点击成为数据服务商 整个li可以跳转
 $(".pereach>li:nth-child(6)").click(function(){
-    location.href="/joinservice";
+    location.href="/institution/add";
+
 });
 
 
