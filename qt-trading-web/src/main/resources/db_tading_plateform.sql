@@ -63,6 +63,11 @@ ALTER TABLE data_product ADD data_type_props VARCHAR(1000) ;
 ALTER TABLE data_user_info ADD nick VARCHAR(50), sso_user_id VARCHAR(100) ;
 
 /*==============================================================*/
+/* Table: data_institution_type_relation  修改字段不为空          */
+/*==============================================================*/
+ALTER TABLE data_institution_type_relation MODIFY institution_id INT NOT NULL, MODIFY data_type INT NOT NULL;
+
+/*==============================================================*/
 /*                         基础数据                              */
 /*==============================================================*/
 INSERT INTO `data_type_attr` VALUES (1, 0, '计价方式', 0, 0, 0, 1);

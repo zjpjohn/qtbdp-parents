@@ -44,3 +44,13 @@ logging:
   file: out/my-dev.log
   level:
     com.qtdbp.trading: TRACE
+
+# ===================================================================
+# sso单点登录配置
+# ===================================================================
+sso:
+  key: eada1cfcc5d247d49d3c3494b7360f24
+  host: http://sso.qtbigdata.com/
+  loginUrl: http://sso.qtbigdata.com/sso/action/goLogin?retUrl=
+  registerUrl: http://sso.qtbigdata.com/sso/action/goRegister?retUrl=
+  callback: http://jytest.qtbigdata.com/token
