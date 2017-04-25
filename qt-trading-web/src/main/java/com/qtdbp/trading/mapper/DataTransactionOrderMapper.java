@@ -44,4 +44,11 @@ public interface DataTransactionOrderMapper {
      * @return
      */
     List<DataTransactionOrderModel> findOrderByUserIdAndProductIdAndType(DataTransactionOrderModel order);
+
+    /**
+     * 更新订单状态
+     * @param order
+     * @return
+     */
+    Integer updateOrder(DataTransactionOrderModel order);
 }

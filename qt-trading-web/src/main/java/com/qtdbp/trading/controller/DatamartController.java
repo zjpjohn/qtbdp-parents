@@ -4,9 +4,12 @@ import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataProductModel;
+import com.qtdbp.trading.model.DataTransactionOrderModel;
 import com.qtdbp.trading.model.DataTypeAttrModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
+import com.qtdbp.trading.service.DataTransactionOrderService;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,10 +39,15 @@ public class DatamartController extends BaseController {
 
     private static final String PAGE_DATAMART_DETAIL = "datamart/detail" ;
 
+    private static final String PAGE_USERCENTER = "usercenter/index";
+
     @Autowired
     private DataTypeMapper dataTypeMapper ;
     @Autowired
     private DataProductService productService ;
+
+    @Autowired
+    private DataTransactionOrderService orderService ;
 
     @RequestMapping(value = "/datamart/{id}", method = RequestMethod.GET)
     public ModelAndView index(@PathVariable("id") int typeId) {
@@ -113,5 +121,31 @@ public class DatamartController extends BaseController {
 
         result.addObject("typeModels", typeModels);
         result.addObject("attrModels", attrModels) ;
+    }
+
+    @RequestMapping(value = "/getOrderInfoAndGoto/{userId}/{productId}/{productType}", method = RequestMethod.GET)
+    public ModelAndView getOrderInfoAndGoto(@PathVariable("userId") Integer userId,
+                                            @PathVariable("productId") Integer productId,
+                                            @PathVariable("productType") Integer productType, HttpServletRequest request){
+        String order = request.getParameter("order");
+        ModelAndView modelAndView = new ModelAndView(PAGE_USERCENTER);
+        DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
+        if(userId != null && productId != null && productType != null){
+            orderModel.setUserId(userId);
+            orderModel.setProductId(productId);
+            int type = productType;
+            orderModel.setProductType((byte)type);
+            try {
+                Map<String, Object> map = orderService.insertNewOrder(orderModel);
+                if( map != null){
+                    modelAndView.addObject("order",order);
+                    modelAndView.addObject("orderState",map.get("orderState"));
+                    modelAndView.addObject("pojo",map.get("orderState"));
+                }
+            } catch (GlobalException e) {
+                e.printStackTrace();
+            }
+        }
+        return modelAndView;
     }
 }
