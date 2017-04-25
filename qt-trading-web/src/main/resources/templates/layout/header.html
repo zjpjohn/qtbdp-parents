@@ -20,7 +20,7 @@
 <!--导航栏-->
 <nav xmlns:th="http://www.thymeleaf.org">
 	<div class="nav_con floating">
-		<p class="nav_list lf">
+		<p class="nav_list nav_list1 lf">
 			<a th:href="@{/}" class="active">首页</a>
 			<a th:href="@{/datamart}">数据商城</a>
 			<a th:href="@{/demand}">需求大厅</a>
@@ -52,9 +52,9 @@
 </nav>
 <script>
 
-    $(".nav_list>a").removeClass("active");
+    $(".nav_list1>a").removeClass("active");
 	function nav(n){
-		$(".nav_list>a:nth-child("+n+")").addClass("active");
+		$(".nav_list1>a:nth-child("+n+")").addClass("active");
 	}
 
     $(".fabu_btns>a").removeClass("active");

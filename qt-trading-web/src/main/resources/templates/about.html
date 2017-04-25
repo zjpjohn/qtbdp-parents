@@ -3,6 +3,9 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <title>关于我们</title>
     <!-- 引入header布局 -->
     <top th:replace="layout/top :: top"></top>
     <!-- 页面自定义css、js  -->
@@ -13,7 +16,7 @@
 </head>
 <body>
     <!--  页头 -->
-    <div th:replace="layout/header" />
+    <div th:replace="layout/header"></div>
 
     <div class="about_bg1">
         <div class="bg1_con_box">
@@ -75,7 +78,7 @@
         	<p>平台数据的撮合，许可交易非常简单：双方把上述信息免费发布并委托给本平台后双方通过平台联系和沟通；</p>
         	<p>平台则负责双方撮合、许可、交易过程中的数据项目信息真实性确认、竞价支持、评估支持、征信支持、法律支持等；</p>
         	<p>撮合、许可，交易后的资金托管支持、支付安全支持、投资理财支持等等，并收取一定的佣金。</p>
-        	<img src="images/line-2.png"  style="position: absolute;left: -362px;top:70px">
+        	<img th:src="@{/tradecenter/images/line_2.png}" style="position: absolute;left: -362px;top:70px">
         </div>
          <div class="start_box">
         	<a href="javascript:;" class="start">开始交易</a>
@@ -110,7 +113,7 @@
                 浙江省杭州市萧山科技城传化科创大厦B座5楼
             </p>
             <p>
-                <img src="images/qr_code.png" alt=""/>
+                <img th:src="@{/tradecenter/images/qr_code.png}" alt=""/>
             </p>
             <p class="btn_p">
                 <a href="javascript:;">用户协议</a>
