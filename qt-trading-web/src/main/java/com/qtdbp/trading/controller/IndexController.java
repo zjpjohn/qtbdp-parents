@@ -1,6 +1,7 @@
 package com.qtdbp.trading.controller;
 
-import io.swagger.annotations.Api;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @create: 2017-04-13 13:27
  * To change this template use File | Settings | File Templates.
  */
-@Api(description = "首页业务数据处理")
 @Controller
-public class IndexController {
+public class IndexController extends BaseController {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String index() {

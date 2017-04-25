@@ -23,9 +23,10 @@ public class SecurityUser extends SysUser implements UserDetails {
         if(suser != null)
         {
             this.setId(suser.getId());
-            this.setUser_name(suser.getUser_name());
+            this.setUserName(suser.getUserName());
             this.setPassword(suser.getPassword());
             this.setDate(suser.getDate());
+            this.setHead(suser.getHead());
             this.setSysRoles(suser.getSysRoles());
             this.setSysPermissions(suser.getSysPermissions());
         }
@@ -54,7 +55,7 @@ public class SecurityUser extends SysUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return super.getUser_name();
+        return super.getUserName();
     }
 
     @Override
