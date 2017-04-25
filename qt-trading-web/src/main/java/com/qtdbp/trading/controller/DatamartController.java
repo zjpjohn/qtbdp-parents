@@ -27,7 +27,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class DatamartController {
+public class DatamartController extends BaseController {
 
     /**
      * 数据商城首页
