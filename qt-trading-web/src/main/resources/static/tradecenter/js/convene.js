@@ -157,9 +157,11 @@ var consubmit={
 
 $(function(){
     consubmit.scheme();
+
+    //导航选中
+    nav(3);
 });
-//导航选中
-nav(3);
+
 
 
 
