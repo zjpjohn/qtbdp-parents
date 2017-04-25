@@ -7,7 +7,9 @@
         SELECT
             u.id,
             u.nick,
-            u.head
+            u.head,
+            u.real_name,
+            u.phone
         FROM
             data_user_info AS u
         WHERE
@@ -19,5 +21,7 @@
         <result column="nick" property="userName" />
         <result column="pwd" property="password" />
         <result column="head" property="head" />
+        <result column="real_name" property="realName" />
+        <result column="phone" property="phone" />
     </resultMap>
 </mapper>
