@@ -44,7 +44,7 @@ public class FdfsUploadService {
      */
     public String uploadFile(MultipartFile file) throws IOException {
         StorePath storePath = storageClient.uploadFile(file.getInputStream(),file.getSize(), FilenameUtils.getExtension(file.getOriginalFilename()),null);
-        return getResAccessUrl(storePath);
+        return getAccessUrl(storePath);
     }
 
     /**
@@ -60,9 +60,22 @@ public class FdfsUploadService {
         return getResAccessUrl(storePath);
     }
 
-    // 封装图片完整URL地址
+    /**
+     * 封装图片完整URL地址
+     * @param storePath
+     * @return
+     */
     private String getResAccessUrl(StorePath storePath) {
         return AppConstants.HTTP_PRODOCOL+appConfig.getFdfsHost() + ":" + appConfig.getFdfsStoragePort() + "/" + storePath.getFullPath();
+    }
+
+    /**
+     * 返回相对地址
+     * @param storePath
+     * @return
+     */
+    private String getAccessUrl(StorePath storePath) {
+        return storePath.getFullPath();
     }
 
     /**
