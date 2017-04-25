@@ -1,6 +1,15 @@
-/**
- * Created by dell on 2017/4/24.
- */
+//导航选中
+nav(3);
+fabuHover(3);
+function dateForMat(myDate){
+    var myDate=new Date(myDate);
+    var nowY = myDate.getFullYear();
+    var nowM = myDate.getMonth()+1;
+    var nowD = myDate.getDate();
+    var date = nowY+"-"+(nowM<10 ? "0" + nowM : nowM)+"-"+(nowD<10 ? "0"+ nowD : nowD);
+    return date;
+}
+$("#fromDate").val(dateForMat(new Date()));//初始化开始时间
 
 function checkData(){
     var designation = $("#designation").val();
@@ -67,7 +76,7 @@ function checkData(){
         return false;
     }
    if(toDate==""){
-        $(".scalerror").html("*请输入结束时间");
+        $(".scalerror").html("*请输入截至时间");
         $("#toDate").addClass("err").focus();
         return false;
     }
@@ -131,7 +140,12 @@ var consubmit={
                     data: _data,
                     success: function(data){
                         console.log(data);
-                        alert("提交成功");
+                        layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
+                            {title:"",btn:["确定"]},
+                            function(index){
+                                layer.close(index);
+                                location.href="/demand";
+                            });
                     },
                     error:function(data){
                         console.log("提交失败");
@@ -157,55 +171,4 @@ var consubmit={
 
 $(function(){
     consubmit.scheme();
-
-    //导航选中
-    nav(3);
-    head(2);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

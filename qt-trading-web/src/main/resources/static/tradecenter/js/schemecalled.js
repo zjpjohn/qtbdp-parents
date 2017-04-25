@@ -1,3 +1,6 @@
+//导航选中
+nav(3);
+fabuHover(3);
 //时间显示格式
 function dateForMat(myDate){
     var myDate=new Date(myDate);
@@ -8,7 +11,6 @@ function dateForMat(myDate){
     return date;
 }
 $("#fromDate").val(dateForMat(new Date()));//初始化开始时间
-$("#toDate").val(dateForMat(new Date()));//初始化结束时间
 
 //表单提交前验证
 function checkData(){
@@ -47,6 +49,11 @@ function checkData(){
         $("#dataScale").addClass("err").focus();
         return false;
     }
+    if(!(/^[0-9]+([.][0-9]{0,2}){0,1}$/.test(dataScale))){
+        $(".scalerror").html("*请输入正确的数据规模");
+        $("#dataScale").addClass("err").focus();
+        return false;
+    }
     if(!dataType){
         $(".scalerror").html("*请选择数据类型");
         return false;
@@ -59,6 +66,11 @@ function checkData(){
     if(!(/^[0-9]+([.][0-9]{0,2}){0,1}$/.test(expFee))){
         $(".scalerror").html("*请输入正确的预期费用");
         $("#expFee").addClass("err").focus();
+        return false;
+    }
+    if(toDate=="" ){
+        $(".scalerror").html("*请输入截至日期");
+        $("#toDate").addClass("err").focus();
         return false;
     }
     if(contactsName=="" ){
@@ -109,7 +121,12 @@ var crowsubmit={
                     data: _data,
                     success: function(data){
                         console.log(data);
-                        alert("提交成功");
+                        layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
+                            {title:"",btn:["确定"]},
+                            function(index){
+                                layer.close(index);
+                                location.href="/demand";
+                            });
                     },
                     error:function(data){
                         console.log("提交失败");
@@ -137,43 +154,4 @@ $(function(){
     crowsubmit.scheme();
 });
 
-//导航选中
-nav(3);
-head(2);
-
-
-
-
-
-
-
-
-
-/*
-$("#formSubmit").unbind("click").click(function(){
-    if( !checkData() ){
-        return false;
-    }
-    $(".scalerror").html("");
-    if($(this).attr("class").indexOf("disabled")==-1){
-        $(this).addClass("disabled");
-        var options = {
-            dataType: "text",
-            url: "/api/demand/buyInfos",
-            type: "post",
-            async:false,
-            data: {},
-            success: function(){
-                layer.confirm("您已成功发布数据众包，正在提交审核审核，请耐心等待结果",
-                    {title:"",btn:["确定"]},
-                    function(index){
-                        layer.close(index);
-                        location.href="/demand";
-                    });
-            }
-        };
-        $("#schemeForm").ajaxSubmit(options);
-    }
-
-});*/
 

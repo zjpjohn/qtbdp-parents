@@ -27,7 +27,8 @@ spring:
     max-open-prepared-statements: 20 # 并且指定每个连接上PSCache的大小
     connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     filters: stat,wall,log4j         # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-
+  jmx: # 必须关闭jms，否则启动报错
+    enabled: false
 
 # ===================================================================
 # Eureka注册中心配置
@@ -54,3 +55,26 @@ sso:
   loginUrl: http://sso.qtbigdata.com/sso/action/goLogin?retUrl=
   registerUrl: http://sso.qtbigdata.com/sso/action/goRegister?retUrl=
   callback: http://jytest.qtbigdata.com/token
+
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  soTimeout: 1501
+  connectTimeout: 601
+  thumbImage:             #缩略图生成参数
+    width: 150
+    height: 150
+  trackerList:            #TrackerList参数,支持多个
+    - 192.168.36.39:22122
+    #- 192.168.36.39:22123
+  pool:
+      #从池中借出的对象的最大数目
+      maxTotal: 153
+      #获取连接时的最大等待毫秒数100
+      maxWaitMillis: 102
+
+# fdfs upload 文件上传配置信息
+fdfs-upload:
+  port: 2300
+  host: 192.168.36.39

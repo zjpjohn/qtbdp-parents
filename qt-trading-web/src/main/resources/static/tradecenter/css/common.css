@@ -104,8 +104,9 @@ input:-ms-input-placeholder {
 .fabu_btns>a{
 	color:#999;
 	margin-right:10px;
+	cursor:pointer;
 }
-.fabu_btns>a.active{
+.fabu_btns>a.active,.fabu_btns>a:hover{
 	color:#0076C9;
 }
 .fabu_btns>a:last-child{

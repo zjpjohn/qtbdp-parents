@@ -106,7 +106,23 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.1.0</version>
         </dependency>
-
+        <!-- 依赖阿里云图片OSS服务 -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qtd</groupId>
+            <artifactId>utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- 依赖FastDFS客户端，文件上传 -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.25.3-RELEASE</version>
+        </dependency>
 
     </dependencies>
 
@@ -134,4 +150,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Internal Releases</name>
+            <url>http://192.168.36.37:8688/nexus/content/repositories/releases
+            </url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Internal snapshots</name>
+            <url>http://192.168.36.37:8688/nexus/content/repositories/snapshots
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
