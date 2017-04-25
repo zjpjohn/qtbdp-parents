@@ -1,5 +1,7 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.constants.SysRoleContants;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,8 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * Created by dell on 2017/4/17.
  */
+@Secured({SysRoleContants.ROLE_USER})
 @Controller
-public class UserCenterController {
+public class UserCenterController extends BaseController {
 
     /**
      * 数据商城首页

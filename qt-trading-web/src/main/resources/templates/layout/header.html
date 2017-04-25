@@ -25,36 +25,43 @@
 			<a th:href="@{/datamart}">数据商城</a>
 			<a th:href="@{/demand}">需求大厅</a>
 			<a th:href="@{/fedration}">数据联盟</a>
-			<a href="javascript:;">关于我们</a>
+			<a th:href="@{/about}">关于我们</a>
 		</p>
-		<!--如果未登录-->
-	  <!--  <p class="rt nav_list nav_rt">
-			<a href="javascript:;">登录</a>
-			<i>/</i>
-			<a href="javascript:;">注册</a>
-		</p>-->
 		<!--如果已登录-->
-		<div class="rt nav_haslogin floating">
+		<div class="rt nav_haslogin floating" th:if="${session.user}">
 			<a href="javascript:;" class="lf user_img">
-				<img th:src="@{/tradecenter/images/user_img.png}" alt="" onerror="this.src='/tradecenter/images/user_img.png'"/>
+				<img th:src="@{${session.user.head} ? ${session.user.head} : '/tradecenter/images/user_img.png'} " alt=""/>
 			</a>
 			<div class="lf user_center">
-				<p class="user_name">钱塘大数据<i></i></p>
+				<p class="user_name" th:text="${session.user.userName}">钱塘数据<i></i></p>
 				<p class="nav_down">
 					<a th:href="@{/usercenter}">个人中心</a>
-					<a href="javascript:;">退出登录</a>
+					<a th:href="@{/logout}">退出登录</a>
 				</p>
 			</div>
 		</div>
-
+		<!--如果未登录-->
+		<div th:unless="${session.user}">
+			<p class="rt nav_list nav_rt">
+				<a th:href="@{/login}">登录</a>
+				<i>/</i>
+				<a th:href="@{/register}">注册</a>
+			</p>
+		</div>
 	</div>
 </nav>
 <script>
-    $(".nav_list>a").removeClass("active");
 
+    $(".nav_list>a").removeClass("active");
 	function nav(n){
 		$(".nav_list>a:nth-child("+n+")").addClass("active");
 	}
+
+    $(".fabu_btns>a").removeClass("active");
+	function head(n){
+		$(".fabu_btns>a:nth-child("+n+")").addClass("active");
+	}
+
 </script>
 <!--页头结束-->
 </div>

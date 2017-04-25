@@ -14,9 +14,10 @@ import java.util.Set;
 public class SysUser implements java.io.Serializable {
 
     private Integer id;
-    private String user_name; //用户名
+    private String userName; //用户名
     @JsonIgnore
     private String password; //用户密码
+    private String head ;    // 头像
     private Date date;       //时间
 
     @JsonIgnore
@@ -24,10 +25,11 @@ public class SysUser implements java.io.Serializable {
     @JsonIgnore
     private Set<SysPermission> sysPermissions = new HashSet<>(0);// 所对应的权限集合
 
-    public SysUser(String userName, String password, Date date, Set<SysRole> sysRoles, Set<SysPermission> sysPermissions) {
-        this.user_name = userName;
+    public SysUser(String userName, String password, Date date, String head, Set<SysRole> sysRoles, Set<SysPermission> sysPermissions) {
+        this.userName = userName;
         this.password = password;
         this.date = date;
+        this.head = head ;
         this.sysRoles = sysRoles;
         this.sysPermissions = sysPermissions ;
     }
@@ -43,12 +45,12 @@ public class SysUser implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -81,5 +83,13 @@ public class SysUser implements java.io.Serializable {
 
     public void setSysPermissions(Set<SysPermission> sysPermissions) {
         this.sysPermissions = sysPermissions;
+    }
+
+    public String getHead() {
+        return head;
+    }
+
+    public void setHead(String head) {
+        this.head = head;
     }
 }
