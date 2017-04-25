@@ -89,11 +89,12 @@
     width:100%;
     line-height:60px;
     box-sizing: border-box;
-    padding-left:40px;
     font-size: 18px;
 }
 .pereach>li>a{
     color:#666;
+    display: block;
+    padding-left: 40px;
 }
 .pereach>li>a>span{
     display:inline-block;
@@ -172,7 +173,9 @@
 .pereach>li:last-child:hover{
     background:#3174C2;
 }
-
+.pereach>li:hover{
+    cursor: pointer;
+}
 
 /*****右侧div******/
 .center_right{
@@ -493,6 +496,7 @@
     font-size:36px;
     color:#0BAEFA;
     margin:20px auto;
+    height:47px;
 }
 .view_top .color{
     color:#0BAEFA;

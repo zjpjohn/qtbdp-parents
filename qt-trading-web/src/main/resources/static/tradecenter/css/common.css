@@ -71,11 +71,13 @@ input:-ms-input-placeholder {
 	padding:40px 0px;
 }
 /******页头***********/
+#head{
+    background:#fff;
+}
 .top{
 	width: 1200px;
 	margin: 0px auto;
 	padding: 35px 0px;
-	background: #fff;
 }
 .icon{
 	background-image:url("../images/icon.png");
@@ -102,8 +104,9 @@ input:-ms-input-placeholder {
 .fabu_btns>a{
 	color:#999;
 	margin-right:10px;
+	cursor:pointer;
 }
-.fabu_btns>a.active{
+.fabu_btns>a.active,.fabu_btns>a:hover{
 	color:#0076C9;
 }
 .fabu_btns>a:last-child{
@@ -160,9 +163,10 @@ nav{
 	height:50px;
 }
 .user_img{
-	width:40px;
-	height:40px;
-	margin-right:10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
 }
 .user_img>img{
 	width:100%;
@@ -174,7 +178,6 @@ nav{
 }
 .user_name{
 	position:relative;
-	padding-right:20px;
 	color:#fff;
 	margin-top:10px;
 	text-align: center;

@@ -37,4 +37,11 @@ public interface DataTransactionOrderMapper {
      * @return 记录数，成功返回1
      */
     Integer insertOrder(DataTransactionOrderModel orderModel) ;
+
+    /**
+     * 根据用户名和产品id和产品类型查询是否有该条记录
+     * @param order
+     * @return
+     */
+    List<DataTransactionOrderModel> findOrderByUserIdAndProductIdAndType(DataTransactionOrderModel order);
 }

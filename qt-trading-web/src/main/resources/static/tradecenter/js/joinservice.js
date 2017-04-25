@@ -1,4 +1,6 @@
-
+//导航选中
+nav(4);
+fabuHover(4);
 //检验用户是否加盟为数据服务商
 function checkIsAddInstitution(){
     var result = true;
@@ -81,6 +83,7 @@ $("#deleteA").unbind("click").click(function(){
 function checkJoin(){
     var type=$('input:radio[name="type"]:checked').val();//身份选择
     var designation = $("#designation").val();//名称
+    var serviceType=$('input:radio[name="serviceType"]:checked').val();//服务类型
     var dataTypes = $('input:checkbox[name="dataTypes"]:checked').val();//擅长领域选择
     var abstracts=$("#abstracts").val();//您的介绍
     var picture = $("#picture").val();//图片路径
@@ -98,6 +101,10 @@ function checkJoin(){
         $("#designation").addClass("err").focus();
         return false;
     }
+    if(!serviceType){
+        $(".err_info").html("*请选择服务类型");
+        return false;
+    }
     if(!dataTypes){
         $(".err_info").html("*请选择您的擅长领域");
         return false;
@@ -111,10 +118,10 @@ function checkJoin(){
         $("#abstracts").addClass("err").focus();
         return false;
     }
-    /*if(picture==""){
+    if(picture==""){
         $(".err_info").html("*请上传图片");
         return false;
-    }*/
+    }
     return true;
 
 }
@@ -139,7 +146,12 @@ var joinsubmit={
                     data: _data,
                     success: function(data){
                         console.log(data);
-                        alert("提交成功");
+                        layer.confirm("您已成功提交信息，请耐心等待审核结果",
+                            {title:"",btn:["确定"]},
+                            function(index){
+                                layer.close(index);
+                                location.href="/fedration";
+                            });
                     },
                     error:function(data){
                         console.log("提交失败");

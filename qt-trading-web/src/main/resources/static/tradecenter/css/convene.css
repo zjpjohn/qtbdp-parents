@@ -187,7 +187,7 @@
 .scal_begin>input{
     width:272px;
     line-height: 40px;
-
+    background:url("../images/datePicker.gif") no-repeat 245px 10px;
 
 }
 .scal_begin>b{

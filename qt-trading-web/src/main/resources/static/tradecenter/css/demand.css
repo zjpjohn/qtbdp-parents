@@ -62,11 +62,16 @@
    width:590px;
 }
 .list_title{
-    font-weight:normal;
+    font-weight:bold;
+    color:#000000;
+    font-size: 18px;
+}
+.list_title>span{
+    font-weight: normal;
 }
 .list_title>span{
     font-size:14px;
-    color:#F25353;
+    color:#0076C9;
     margin-left: 20px;
 }
 .list_info{
@@ -74,6 +79,8 @@
     line-height:20px;
     margin-top:20px;
     margin-bottom:30px;
+    color:#666;
+
 }
 .list_bot>span:nth-child(2){
     margin:0px 60px;

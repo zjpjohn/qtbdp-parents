@@ -3,13 +3,16 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head lang="en">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <title>方案召集</title>
     <!-- 引入header布局 -->
     <top th:replace="layout/top :: top"></top>
     <!-- 页面自定义css、js  -->
-    <title>方案召集</title>
-
     <link rel="stylesheet" th:href="@{/tradecenter/css/convene.css}"/>
-    <link rel="stylesheet" th:href="@{/tradecenter/css/jquery.datetimepicker.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/tradecenter/css/jquery.datetimepicker.css}"/>-->
+    <script th:src="@{/tradecenter/js/DatePicker/WdatePicker.js}"></script>
 
 </head>
 <body>
@@ -190,8 +193,11 @@
 
             <div class="scal_begin">
                 <p> <i>*</i> 起止时间</p>
-                <input type="text" id="fromDate" name="fromDate" value="" class="abouttime"/> <b></b>
-                <input type="text" id="toDate" name="toDate" value="" class="abouttime"/>
+                <input type="text" name="fromDate" id="fromDate" onfocus="WdatePicker({skin:'whyGreen',readOnly:true,minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'toDate\',{d:-1})}'})"/>
+                <b></b>
+                <input type="text" name="toDate" id="toDate" onfocus="WdatePicker({skin:'whyGreen',readOnly:true,minDate:'#F{$dp.$D(\'fromDate\',{d:+1})}'})"/>
+                <!--<input type="text" id="fromDate" name="fromDate" value="" class="abouttime"/> <b></b>
+                <input type="text" id="toDate" name="toDate" value="" class="abouttime"/>-->
             </div>
 
             <div class="scal_onself">
@@ -219,7 +225,7 @@
 <!-- 页脚 -->
 <footer th:replace="layout/footer"></footer>
 <!-- 页脚结束 -->
-<script th:src="@{/tradecenter/js/jquery.datetimepicker.full.js}"></script>
+<!--<script th:src="@{/tradecenter/js/jquery.datetimepicker.full.js}"></script>-->
 <script th:src="@{/tradecenter/js/convene.js}"></script>
 
 
