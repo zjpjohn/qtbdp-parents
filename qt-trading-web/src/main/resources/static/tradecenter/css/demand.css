@@ -37,6 +37,7 @@
 }
 .filters>a{
     padding:5px 10px;
+    cursor:pointer;
 }
 .filters>a.active,.filters>a:hover{
     color:#fff;
@@ -66,6 +67,7 @@
 .list_title>span{
     font-size:14px;
     color:#F25353;
+    margin-left: 20px;
 }
 .list_info{
     height:40px;

@@ -3,30 +3,36 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head lang="en">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <title>发布数据众包</title>
     <!-- 引入header布局 -->
     <top th:replace="layout/top :: top"></top>
     <!-- 页面自定义css、js  -->
-    <title>数据众包</title>
-    <link rel="stylesheet" href="@{/tradecenter/css/schemecalled.css}"/>
-
-
+    <link rel="stylesheet" th:href="@{/tradecenter/css/schemecalled.css}"/>
+    <script th:src="@{/tradecenter/js/DatePicker/WdatePicker.js}"></script>
 </head>
 <body>
+    <!--  页头开始 -->
+    <div th:include="layout/header::#head" ></div>
+    <!--  页头结束 -->
+
     <div class="schall">
         <div class="scalmin">
             <p class="scaltop">
-                <a href="javascript:;" class="">方案召集</a>或
-                <a href="javascript:;" class="active">数据众包</a>
+                <a th:href="@{/demand/sos/add}" class="">方案召集</a>或
+                <a th:href="@{/demand/buy/add}" class="active">数据众包</a>
             </p>
-            <div class="scalsection">
-                <div class="scal_hint"> <span></span>  小贴士 : 被数据困扰,淹没在数海中?发布方案召集,解决解决方案!(<i>*</i>为必填)</div>
+            <form class="scalsection" id="schemeForm">
+                <div class="scal_hint"> <span></span>  小贴士 ： 被数据困扰，淹没在数海中？发布方案召集,解决解决方案！（<i>*</i>为必填）</div>
                 <div class="scal_onself">
                     <p> <i>*</i> 数据名称</p>
-                    <input type="text" name="designation" value="全国民航机场吞吐量"/>
+                    <input type="text" name="designation" id="designation"/>
                 </div>
                 <div class="scal_demand">
                     <p> <i>*</i> 需求描述</p>
-                    <textarea name=""  cols="30" name="description" placeholder="一句话描述您的需求(不少于10字)"  rows="10"></textarea>
+                    <textarea name=""  cols="30" name="description" id="description" placeholder="一句话描述您的需求(不少于10字)"  rows="10"></textarea>
                     <b>需求描述不得少于10个字</b>
                 </div>
                 <div class="scal_data">
@@ -56,7 +62,7 @@
                 </div>
                 <div class="scal_cost">
                     <p> <i>*</i> 数据规模</p>
-                    <input type="text" value=""/>
+                    <input type="text"  name="dataScale" id="dataScale"/>
                     <select class="form-select inline-ele"  name="unit" id="unit">
                         <option value="1">KB</option>
                         <option value="2">MB</option>
@@ -73,62 +79,62 @@
                     <p> <i>*</i>数据类型</p>
                     <div class="form-field form-field-rc">
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="1" >
+                            <input class="form-radio" type="radio"name="dataType" value="1" >
                             <span>知识/专利</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="2"   >
+                            <input class="form-radio" type="radio"name="dataType" value="2"   >
                             <span>智能制造</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="3"   >
+                            <input class="form-radio" type="radio"name="dataType" value="3"   >
                             <span>物联网</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="4"  >
+                            <input class="form-radio" type="radio"name="dataType" value="4"  >
                             <span>先进制造</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>工业参数</span>
                         </label>
 
 
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>仪器/仪表</span>
                         </label>
 
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>工业安全</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>政府监管</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>学术/教育</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>工业运行</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>物流数据</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>工业设计</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>行业综合</span>
                         </label>
                         <label class="form-label-rc2">
-                            <input class="form-radio" type="radio"name="dataPattern" value="5"  >
+                            <input class="form-radio" type="radio"name="dataType" value="5"  >
                             <span>其它</span>
                         </label>
 
@@ -141,39 +147,43 @@
                 <div class="scal_expect">
                     <p> <i>*</i>预期费用</p>
                     <div class="scal_money">
-                        <input type="text" name="expFee" value=""/>元
+                        <input type="text" name="expFee" id="expFee" value=""/>元
                     </div>
 
                 </div>
 
                 <div class="scal_begin">
                     <p> <i>*</i> 起止时间</p>
-                    <input type="text" name="fromDate" value=""/> <b></b>
-                    <input type="text" name="toDate" value="">
-
-
+                    <input type="text" name="fromDate" id="fromDate"/>
+                    <b></b>
+                    <input type="text" name="toDate" id="toDate" onfocus="WdatePicker({skin:'whyGreen',readOnly:true,minDate:'%y-%M-#{%d+1}'})"  />
                 </div>
 
                 <div class="scal_onself">
                     <p> <i>*</i>联系人</p>
-                    <input type="text" name="contacts_name" value=""/>
+                    <input type="text" name="contacts_name" id="contactsName" value=""/>
                 </div>
                 <div class="scal_onself">
                     <p> <i>*</i>联系电话</p>
-                    <input type="text" name="contacts_phone" value=""/>
+                    <input type="text" name="contacts_phone" id="contactsPhone" value=""/>
                 </div>
                 <div class="scal_onself">
                     <p> <i>*</i>联系邮箱</p>
-                    <input type="text" name="contacts_phone" value=""/>
-                    <b class="scalerror"> <i>*</i> 邮箱格式错误 请重新输入</b>
+                    <input type="text" name="contacts_email" id="contactsEmail" value=""/>
                 </div>
-                <p class="scalsubmit"><a href="javascript:;">发布</a>  </p>
+                <p class="scalerror"></p>
+                <a href="javascript:;" class="scalsubmit" id="formSubmit">发布</a>
 
-            </div>
+            </form>
 
 
         </div>
 
     </div>
+    <!-- 页脚 -->
+    <footer th:replace="layout/footer"></footer>
+    <!-- 页脚结束 -->
+    <script th:src="@{/tradecenter/js/jquery.form.js}"></script>
+    <script th:src="@{/tradecenter/js/schemecalled.js}"></script>
 </body>
 </html>

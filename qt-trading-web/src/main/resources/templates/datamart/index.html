@@ -95,7 +95,7 @@
     <script id="tmpl_products" type="text/x-jquery-tmpl">
         {{each(i,prod) list}}
         <li>
-            <a href="/datamart/detail/${prod.id}" class="list_img" style="background:url(${prod.pic}) no-repeat center center;background-size:cover;"> </a>
+            <a href="/datamart/detail/${prod.id}" class="list_img" target="_blank" style="background:url(${prod.pic}) no-repeat center center;background-size:cover;"> </a>
             <div class="list_main">
                 <a href="/datamart/detail/${prod.id}" class="list_title">${$item._substr(prod.designation,14)}</a>
                 <div class="list_con">${$item._substr(prod.introduce,35)}</div>

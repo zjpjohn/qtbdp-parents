@@ -3,7 +3,9 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.model.DataAuthorizeOrderModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
+import com.qtdbp.trading.service.DataAuthorizeOrderService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 订单接口
@@ -29,6 +32,9 @@ public class DataTradeApi {
 
     @Autowired
     private DataTransactionOrderService orderService ;
+
+    @Autowired
+    private DataAuthorizeOrderService demandOrderService ;
 
     //===================================================================
     // 订单API接口
@@ -95,5 +101,24 @@ public class DataTradeApi {
             throw new GlobalException(e.getMessage()) ;
         }
         return map ;
+    }
+
+
+    @ApiOperation(value = "统计订单数量数据接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+    })
+    @ResponseBody
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public ModelMap loadAllOrderInfo(DataAuthorizeOrderModel orderModel) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            Map<String, Integer> orderMap = demandOrderService.findAllOrderInfo(orderModel) ;
+            map.put("pageInfo", orderMap);
+        } catch (GlobalException e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map;
     }
 }

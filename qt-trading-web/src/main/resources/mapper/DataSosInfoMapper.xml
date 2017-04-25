@@ -10,6 +10,7 @@
             s.description,
             s.data_scale,
             s.unit,
+            s.demand_type,
             s.from_date,
             s.to_date,
             s.exp_fee,
@@ -44,6 +45,7 @@
         <result column="description" property="description" />
         <result column="unit" property="unit" />
         <result column="data_scale" property="dataScale" />
+        <result column="demand_type" property="demandType" />
         <result column="from_date" property="fromDate" />
         <result column="to_date" property="toDate" />
         <result column="exp_fee" property="expFee" />

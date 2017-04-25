@@ -19,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 需求接口
@@ -189,6 +190,24 @@ public class DemandApi {
             throw new GlobalException(e.getMessage()) ;
         }
         return map ;
+    }
+
+    @ApiOperation(value = "统计方案召集和数据众包数量数据接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+    })
+    @ResponseBody
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public ModelMap loadAllbuyAndSosInfo(DataBuyInfoModel buyInfoModel) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            Map<String, Integer> orderMap = buyInfoService.findBuyInfoAndSosInfo(buyInfoModel);
+            map.put("pageInfo", orderMap);
+        } catch (GlobalException e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map;
     }
 
 }

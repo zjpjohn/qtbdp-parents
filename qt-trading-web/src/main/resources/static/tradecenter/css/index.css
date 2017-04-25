@@ -116,6 +116,9 @@
     color:#2A97E7;
     margin:20px auto;
 }
+.pro_list>li>a:hover{
+    display:inline-block;
+}
 .more_pro{
     display:block;
     width:124px;
@@ -225,6 +228,7 @@
     height:44px;
     margin-right:45px;
     background-image:url("../images/icon.png" );
+    cursor:default;
 }
 .com_list>.a1{
     background-position:-188px -161px;

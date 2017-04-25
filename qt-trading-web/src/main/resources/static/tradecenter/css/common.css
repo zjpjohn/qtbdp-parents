@@ -101,6 +101,9 @@ input:-ms-input-placeholder {
 	color:#999;
 	margin-right:10px;
 }
+.fabu_btns>a.active{
+	color:#0076C9;
+}
 .fabu_btns>a:last-child{
 	margin-right:0px;
 }

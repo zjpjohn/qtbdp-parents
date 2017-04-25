@@ -4,6 +4,7 @@ import com.qtdbp.trading.model.DataAuthorizeOrderModel;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 需求订单数据库CURD操作
@@ -29,4 +30,12 @@ public interface DataAuthorizeOrderMapper {
      * @return
      */
     List<DataAuthorizeOrderModel> findDemandOrdersByCondtion(DataAuthorizeOrderModel demandOrder) ;
+
+    /**
+     * 获取个人中心我的订单信息
+     * @param demandOrder
+     * @return
+     */
+    Map<String, Integer> findAllOrderInfo(DataAuthorizeOrderModel demandOrder);
+
 }
