@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by liyang on 2017/4/24.
  */
 @Controller
-public class AboutController {
+public class AboutController extends BaseController {
 
     private static final String  PAGE_ABOUT = "about";
 

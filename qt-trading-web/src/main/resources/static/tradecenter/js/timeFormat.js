@@ -21,14 +21,19 @@ function getDateDiff(dateTimeStamp){
     var month = day * 30;
     var now = new Date().getTime();
     var diffValue =dateTimeStamp - now ;
-    if(diffValue < 0){return result="已截止";}
+    if(diffValue < 0){
+        return result="已截止";
+    }
     var monthC =diffValue/month;
     var weekC =diffValue/(7*day);
     var dayC =diffValue/day;
     var hourC =diffValue/hour;
     var minC =diffValue/minute;
+    //截至日期换算
+    /*new Date(dateTimeStamp).Format("yyyy-MM-dd")+"截止"*/
     if(dayC>=1) {
-        result=""+ new Date(dateTimeStamp).Format("yyyy-MM-dd")+"截止";
+        result=""+ parseInt(dayC)+"天后截止";
+
     }
     else if(hourC>=1) {
         result=""+ parseInt(hourC) +"小时后截止";

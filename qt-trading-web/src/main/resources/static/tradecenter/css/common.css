@@ -71,11 +71,13 @@ input:-ms-input-placeholder {
 	padding:40px 0px;
 }
 /******页头***********/
+#head{
+    background:#fff;
+}
 .top{
 	width: 1200px;
 	margin: 0px auto;
 	padding: 35px 0px;
-	background: #fff;
 }
 .icon{
 	background-image:url("../images/icon.png");

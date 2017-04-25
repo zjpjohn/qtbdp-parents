@@ -1,4 +1,41 @@
 $(document).ready(function(){
+    //订单数量
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        url: "/api/trade/count" ,
+        ansync:true,
+        data:{
+            userId:userId
+        },
+        xhrFields:{
+            withCredentials:true
+        },
+        success:function(data){
+            $(".allorders").html(data.pageInfo.authorizeOrder+data.pageInfo.transactionOrder);
+            $(".dataorders").html(data.pageInfo.authorizeOrder);
+            $(".demandorders").html(data.pageInfo.transactionOrder);
+        }
+    });
+    //发布数量
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        url: "/api/demand/count" ,
+        ansync:true,
+        data:{
+            userId:userId
+        },
+        xhrFields:{
+            withCredentials:true
+        },
+        success:function(data){
+            $(".allfabus").html(data.pageInfo.num);
+            $(".crowdings").html(data.pageInfo.buyinfo);
+            $(".schemes").html(data.pageInfo.sosinfo);
+        }
+    });
+
     // 概览 最新订单
     var settings = {
         url: "/api/trade/neworders",      // 请求地址
@@ -8,7 +45,7 @@ $(document).ready(function(){
     }
     pageData.products(settings) ;
 
-    //最新发布
+    //概览 最新发布
     var settings = {
         url: "/api/demand/demandorders",
         tmpl_id: "#tmpl_newfabu" ,
@@ -26,7 +63,7 @@ $(document).ready(function(){
         if (r != null) return unescape(r[2]); return null;
     }
 
-
+    //如果是支付订单
     if(getQueryString("order")=="4"){
         $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
         $(".orderpay").addClass("active").siblings(".active").removeClass("active");
@@ -45,6 +82,26 @@ $(document).ready(function(){
 
 
 });
+//获取概览数据封装
+function userGailan(url,id){
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        url: url ,
+        ansync:true,
+        data:{
+            userId:userId
+        },
+        xhrFields:{
+            withCredentials:true
+        },
+        success:function(data){
+            console.log(data);
+            $(id).html(data);
+        }
+    });
+}
+
 
 /**点击切换右侧页面*/
 
