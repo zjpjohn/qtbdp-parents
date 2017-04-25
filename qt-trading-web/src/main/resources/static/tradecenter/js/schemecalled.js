@@ -1,6 +1,4 @@
-//导航选中
-nav(3);
-fabuHover(3);
+
 //时间显示格式
 function dateForMat(myDate){
     var myDate=new Date(myDate);
@@ -152,6 +150,9 @@ var crowsubmit={
 
 $(function(){
     crowsubmit.scheme();
+    //导航选中
+    nav(3);
+    fabuHover(3);
 });
 
 

@@ -1,6 +1,4 @@
-//导航选中
-nav(3);
-fabuHover(3);
+
 function dateForMat(myDate){
     var myDate=new Date(myDate);
     var nowY = myDate.getFullYear();
@@ -171,4 +169,7 @@ var consubmit={
 
 $(function(){
     consubmit.scheme();
+    //导航选中
+    nav(3);
+    fabuHover(3);
 });

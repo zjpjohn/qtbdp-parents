@@ -8,18 +8,13 @@
 	</div>
 	<div class="head_fabu  floating">
 		<i class="lf icon"></i>
-		<div class="lf fabu_btns" th:if="${user}">
+		<div class="lf fabu_btns">
 			<p>发布</p>
 			<a th:href="@{/demand/sos/add}">需求发布</a>
 			<a th:href="@{/institution/add}">加盟服务</a>
 			<!--<a>数据发布</a>-->
 		</div>
-        <div class="lf fabu_btns nologin" th:unless="${user}">
-            <p>发布</p>
-            <a>需求发布</a>
-            <a>数据发布</a>
-            <a>加盟服务</a>
-        </div>
+
 	</div>
 </header>
 
@@ -65,19 +60,7 @@
 	function fabuHover(n){
 		$(".fabu_btns>a:nth-child("+n+")").addClass("active");
 	}
-    $(".fabu_btns.nologin>a").unbind("click").click(function(){
-        layer.confirm(
-            "您还没有登录，请先登录！",
-            {
-                title:"" ,
-                btn:["登录","取消"]
-            },function(index){
-                layer.close(index);
-                location.href="/login";
-            },function(index){
-                layer.close(index);
-            })
-    });
+
 
 </script>
 <!--页头结束-->

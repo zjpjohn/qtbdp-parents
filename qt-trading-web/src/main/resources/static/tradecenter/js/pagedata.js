@@ -70,7 +70,12 @@ var pageData = {
                         },
                         _demands :function(demand){
                             return pageData._demandType(demand);
+                        },
+                        _repstr :function(str2,i){
+                            return pageData._replacestr(str2,i);
                         }
+
+
 
 
 
@@ -257,12 +262,24 @@ var pageData = {
      * @param str
      * @private
      */
+
     _substr: function (str,n) {
         if(str.length>n){
             str=str.substring(0,n)+"...";
         }
+        str.replace("<p>","").replace("</p>","");
         return str;
     },
+    //数据内 p 标签截取
+    _replacestr: function (str2,i) {
+        str2=str2.replace("<p>","").replace("</p>","");
+        if(str2.length>i){
+            str2=str2.substring(0,i)+"...";
+        }
+
+        return str2;
+    },
+
 
     /**
      * 时间格式转换
