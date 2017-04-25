@@ -19,7 +19,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class DemandController {
+public class DemandController extends BaseController {
 
     /**
      * 需求大厅 -- 首页
