@@ -50,11 +50,17 @@
 	</div>
 </nav>
 <script>
-    $(".nav_list>a").removeClass("active");
 
+    $(".nav_list>a").removeClass("active");
 	function nav(n){
 		$(".nav_list>a:nth-child("+n+")").addClass("active");
 	}
+
+    $(".fabu_btns>a").removeClass("active");
+	function head(n){
+		$(".fabu_btns>a:nth-child("+n+")").addClass("active");
+	}
+
 </script>
 <!--页头结束-->
 </div>
