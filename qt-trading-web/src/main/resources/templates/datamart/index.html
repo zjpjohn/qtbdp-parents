@@ -98,7 +98,7 @@
             <a href="/datamart/detail/${prod.id}" class="list_img" target="_blank" style="background:url(${prod.pic}) no-repeat center center;background-size:cover;"> </a>
             <div class="list_main">
                 <a href="/datamart/detail/${prod.id}" class="list_title">${$item._substr(prod.designation,14)}</a>
-                <div class="list_con">${$item._substr(prod.introduce,35)}</div>
+                <div class="list_con">${$item._repstr(prod.introduce,35)}</div>
                 <p class="list_bot floating">
                     <span class="lf"> <i></i> 文件，个人，100M以下</span>
                     <span class="rt free">免费</span>
@@ -184,6 +184,8 @@
                 $(".capacity").html(parseInt($(".capacity").html())+parseInt(Math.random()*10+1)+"G");
             }
         },2000);
+
+
     </script>
 </body>
 </html>
