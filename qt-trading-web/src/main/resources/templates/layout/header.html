@@ -10,9 +10,9 @@
 		<i class="lf icon"></i>
 		<div class="lf fabu_btns" th:if="${user}">
 			<p>发布</p>
-			<a href="javascript:;">需求发布</a>
-			<a th:href="@{/demand/buy/add}">数据发布</a>
+			<a th:href="@{/demand/sos/add}">需求发布</a>
 			<a th:href="@{/institution/add}">加盟服务</a>
+			<a>数据发布</a>
 		</div>
         <div class="lf fabu_btns nologin" th:unless="${user}">
             <p>发布</p>

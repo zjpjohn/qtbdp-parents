@@ -54,6 +54,9 @@ $(document).ready(function(){
     }
     pageData.products(settings) ;
 
+
+
+
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -64,6 +67,16 @@ $(document).ready(function(){
     if(getQueryString("order")=="4"){
         $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
         $(".orderpay").addClass("active").siblings(".active").removeClass("active");
+
+    }else{
+        var settings={
+            url: "/api/user",            // 请求地址
+            tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+            target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
+            params: [{key:"id",value:userId}],
+
+        }
+        pageData.products(settings) ;
 
     }
 
@@ -100,10 +113,10 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
         case "overview":
             // 概览 最新订单
             var settings = {
-                url: "/api/trade/neworders",
-                tmpl_id: "#tmpl_neworder" ,
-                target: "#orderList1" ,
-                // pager_id: "#pageTool",
+                url: "/api/trade/neworders",      // 请求地址
+                tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
+                target: "#orderList1" ,       // 替换html元素id
+                // pager_id: "#pageTool",           // 分页
                 params: [{key:"userId",value:userId }]
             }
             pageData.products(settings) ;
@@ -156,10 +169,10 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
 
             //页面请求参数
             var settings={
-                url: "/api/demand/sosInfos",
-                tmpl_id: "#tmpl_scheme" ,
-                target: "#tmpl_project" ,
-                pager_id: "#schemePage",
+                url: "/api/demand/sosInfos",            // 请求地址
+                tmpl_id: "#tmpl_scheme" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                target: "#tmpl_project" ,       // 替换html元素，如：#div_id 或 .class_name
+                pager_id: "#schemePage",           // 分页html元素标签
                 params: [{key:"userId",value:userId}],
                 size: 10
             }
@@ -169,15 +182,21 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
             break;
         case "persinfo"://个人信息
             var settings={
-                url: "/api/user",
-                tmpl_id: "#tmpl_personals" ,
-                target: "#personaldata" ,
+                url: "/api/user",            // 请求地址
+                tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+                target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
                 params: [{key:"id",value:userId}],
             }
             pageData.products(settings) ;
             break;
 
     }
+
+});
+
+//点击成为数据服务商 整个li可以跳转
+$(".pereach>li:nth-child(6)").click(function(){
+    location.href="/institution/add";
 
 });
 
@@ -229,6 +248,19 @@ function check2(){
 $("#person_emal").blur(function(){
     check2();
 });
+
+
+/*
+//我的发布 右侧点击数据众包、召集方案 切换
+$(".filter_btn>a").click(function(){
+    $(this).addClass("active").siblings(".active").removeClass("active");
+    var  switcherdata=$(this).attr("data-id");
+    $(switcherdata).addClass("active").siblings(".active").removeClass("active");
+
+});
+*/
+
+
 
 var usercenter = {
 

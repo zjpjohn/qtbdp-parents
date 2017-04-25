@@ -112,4 +112,23 @@
         )
     </insert>
 
+    <!--根据用户名和产品id和产品类型查询是否有该条记录-->
+    <select id="findOrderByUserIdAndProductIdAndType" resultMap="OrderResultMap">
+        select o.id,
+        o.product_type,
+        o.product_id,
+        o.user_id,
+        o.order_no,
+        o.amount,
+        o.order_state,
+        o.addtime,
+        o.editor_time,
+        o.order_subject,
+        o.download_code,
+        o.download_url from data_transaction_order as o
+        where o.user_id=${userId}
+        and o.product_id=${productId}
+        and o.product_type=${productType}
+    </select>
+
 </mapper>

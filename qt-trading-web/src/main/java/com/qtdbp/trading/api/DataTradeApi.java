@@ -3,18 +3,28 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.model.AlipayModel;
 import com.qtdbp.trading.model.DataAuthorizeOrderModel;
+import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
 import com.qtdbp.trading.service.DataAuthorizeOrderService;
+import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import net.sinofool.alipay.AlipayConfig;
+import org.bouncycastle.jcajce.provider.asymmetric.RSA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +39,9 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/api/trade")
 public class DataTradeApi {
+
+    @Autowired
+    private DataProductService productService;
 
     @Autowired
     private DataTransactionOrderService orderService ;
@@ -121,4 +134,18 @@ public class DataTradeApi {
         }
         return map;
     }
+
+    @ApiOperation(value =  "根据用户信息增加新订单数据接口")
+    @RequestMapping(value = "/addNewOrders", method = RequestMethod.POST)
+    public ModelMap addNewDataOrders(@RequestBody DataTransactionOrderModel orderModel) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        //获取订单号
+        String orderNo = orderService.getOrderNo();
+        orderModel.setOrderNo(orderNo);
+        Map<String, Object> resultMap = orderService.insertNewOrder(orderModel);
+        map.put("pageInfor",resultMap);
+        return map ;
+    }
+
 }
