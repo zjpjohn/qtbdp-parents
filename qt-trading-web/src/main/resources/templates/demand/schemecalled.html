@@ -154,9 +154,9 @@
 
                 <div class="scal_begin">
                     <p> <i>*</i> 起止时间</p>
-                    <input type="text" name="fromDate" id="fromDate"/>
+                    <input type="text" name="fromDate" id="fromDate" onfocus="WdatePicker({skin:'whyGreen',readOnly:true,minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'toDate\',{d:-1})}'})"/>
                     <b></b>
-                    <input type="text" name="toDate" id="toDate" onfocus="WdatePicker({skin:'whyGreen',readOnly:true,minDate:'%y-%M-#{%d+1}'})"  />
+                    <input type="text" name="toDate" id="toDate" onfocus="WdatePicker({skin:'whyGreen',readOnly:true,minDate:'#F{$dp.$D(\'fromDate\',{d:+1})}'})"/>
                 </div>
 
                 <div class="scal_onself">
