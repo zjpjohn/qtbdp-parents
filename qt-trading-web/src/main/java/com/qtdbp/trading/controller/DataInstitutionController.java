@@ -16,7 +16,7 @@ import java.util.List;
  * Created by liyang on 2017/4/20.
  */
 @Controller
-public class DataInstitutionController {
+public class DataInstitutionController extends BaseController {
 
     private static final String PAGE_DATAMART_FEDRATION = "institution/fredation";
 
