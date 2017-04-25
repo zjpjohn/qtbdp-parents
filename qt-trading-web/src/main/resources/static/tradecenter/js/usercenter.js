@@ -34,6 +34,7 @@ $(document).ready(function(){
             tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
             target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
             params: [{key:"id",value:1}],
+
         }
         pageData.products(settings) ;
 
@@ -133,9 +134,9 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
 
 });
 
-
+//点击成为数据服务商 整个li可以跳转
 $(".pereach>li:nth-child(6)").click(function(){
-    location.href="/joinservice";
+    location.href="/institution/add";
 });
 
 
