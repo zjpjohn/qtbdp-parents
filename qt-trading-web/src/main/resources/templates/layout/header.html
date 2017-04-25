@@ -28,12 +28,12 @@
 			<a th:href="@{/about}">关于我们</a>
 		</p>
 		<!--如果已登录-->
-		<div class="rt nav_haslogin floating" th:if="${session.user}">
+		<div class="rt nav_haslogin floating" th:if="${user}">
 			<a href="javascript:;" class="lf user_img">
-				<img th:src="@{${session.user.head} ? ${session.user.head} : '/tradecenter/images/user_img.png'} " alt=""/>
+				<img th:src="@{${user.head} ? ${user.head} : '/tradecenter/images/user_img.png'} " alt=""/>
 			</a>
 			<div class="lf user_center">
-				<p class="user_name" th:text="${session.user.userName}">钱塘数据<i></i></p>
+				<p class="user_name" th:text="${user.userName}">钱塘数据<i></i></p>
 				<p class="nav_down">
 					<a th:href="@{/usercenter}">个人中心</a>
 					<a th:href="@{/logout}">退出登录</a>
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<!--如果未登录-->
-		<div th:unless="${session.user}">
+		<div th:unless="${user}">
 			<p class="rt nav_list nav_rt">
 				<a th:href="@{/login}">登录</a>
 				<i>/</i>
