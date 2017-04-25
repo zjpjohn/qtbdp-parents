@@ -30,7 +30,7 @@
                 <h2 th:text="${prod.designation}"></h2>
                 <div class="infos" th:utext="${prod.introduce}"></div>
                 <p class="p1">
-                    <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')">文件格式：Excel</span>
+                    <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')"></span>
                 </p>
                 <p class="p2">
                     <i th:text="'￥'+${#numbers.formatDecimal(prod.pScore, 0, 2)}+' / 整包'">￥200.00 / 整包</i>
