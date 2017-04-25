@@ -4,6 +4,20 @@
     height:250px;
     background:url("../images/fredation_bg.jpg") no-repeat center center;
 }
+.banner>p{
+    width:1200px;
+    height:250px;
+    margin:0px auto;
+    position:relative;
+}
+.joinus_btn{
+    position:absolute;
+    width:186px;
+    height:40px;
+    left: 745px;
+    top: 156px;
+}
+/*************************/
 .chose_menu{
   width: 1200px;
   height: 125px;
