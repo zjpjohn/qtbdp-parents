@@ -5,10 +5,14 @@ import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
 import com.qtdbp.trading.model.DataSosInfoModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
+import org.omg.CORBA.OBJECT_NOT_EXIST;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 订单数据服务
@@ -62,4 +66,55 @@ public class DataTransactionOrderService {
 
         return -1 ;
     }
+
+    /**
+     * 根据用户名id和产品id和产品类型来判断是否插入新纪录
+     * @param orderModel
+     * @return
+     * @throws GlobalException
+     */
+
+    public Map<String, Object> insertNewOrder(DataTransactionOrderModel orderModel) throws GlobalException {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<DataTransactionOrderModel> list = new ArrayList<>();
+        if(orderModel.getUserId() != null && orderModel.getProductId() != null && orderModel.getProductType() != null){
+            list = orderMapper.findOrderByUserIdAndProductIdAndType(orderModel);
+            if(list != null && list.size()>0){
+                for(DataTransactionOrderModel order : list){
+                    Byte orderState = order.getOrderState();
+                    if(orderState == 1){//待支付
+                        map.put("orderState","1");
+                        map.put("pojo", order);
+                    }else if(orderState == 2){//已撤销
+                        int id = orderMapper.insertOrder(orderModel) ;
+                        orderModel.setId(id);
+                        map.put("orderState", "2");
+                        map.put("pojo", orderModel);
+                    }else{//已支付
+                        map.put("orderState","3");
+                        map.put("pojo", order);
+                    }
+                }
+            }else{
+                int id = orderMapper.insertOrder(orderModel) ;
+                orderModel.setId(id);
+                map.put("orderState", "4");
+                map.put("pojo", orderModel);
+            }
+        }else{
+            throw new GlobalException("订单数据的userId或productId或productType为空") ;
+        }
+        return map;
+    }
+
+    /**
+     * 生成订单号
+     * @return
+     */
+    public String getOrderNo() {
+        String orderNo = String.valueOf(System.currentTimeMillis())+Math.round(Math.random() * 9000 + 1000);
+        return  orderNo;
+    }
+
 }
