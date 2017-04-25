@@ -61,7 +61,23 @@ var pageData = {
                         },
                         _time : function(time){
                             return pageData._calculateTime(time);
+                        },
+                        _switchtype :function(data){
+                            return pageData._dataType(data);
+                        },
+                        _switchlayout :function(format){
+                            return pageData._dataFormat(format);
+                        },
+                        _demands :function(demand){
+                            return pageData._demandType(demand);
                         }
+
+
+
+
+
+
+
 
                     }).appendTo(_target);
 
@@ -267,9 +283,112 @@ var pageData = {
         var days = parseInt((toDate-date)/(24*3600*1000));
         return days<0?"--":days;
     },
+    //计算数据众包截至时间
     _calculateTime:function(time){
         var calculateTime=getDateDiff(time);
         return calculateTime;
-    }
+    },
+
+//需求大厅 数据类型
+    _dataType: function(data){
+        var datanum="";
+        switch(data){
+            case 1:
+                datanum="知识/专利";
+                break;
+            case 2:
+                datanum="智能制造";
+                break;
+            case 3:
+                datanum="物联网";
+                break;
+            case 4:
+                datanum="先进制造";
+                break;
+            case 5:
+                datanum="工业参数";
+                break;
+
+            case 6:
+                datanum="仪器/仪表 ";
+                break;
+            case 7:
+                datanum="工业安全";
+                break;
+            case 8:
+                datanum="政府监管 ";
+                break;
+
+            case 9:
+                datanum="学术/教育";
+                break;
+            case 10:
+                datanum="工业运行";
+                break;
+            case 11:
+                datanum="物流数据";
+                break;
+
+            case 12:
+                datanum="工业设计";
+                break;
+            case 13:
+                datanum="行业综合";
+                break;
+
+            default :
+                datanum="其它";
+                break;
+
+        }
+         return datanum;
+    },
+
+
+//需求大厅 数据众包数据格式
+    _dataFormat: function(format){
+        var dataFor="";
+        switch(format){
+            case 1:
+                dataFor="视频";
+                break;
+            case 2:
+                dataFor="音频";
+                break;
+            case 3:
+                dataFor="文本";
+                break;
+            case 4:
+                dataFor="图像";
+                break;
+            default:
+                dataFor="其它";
+                break;
+
+        }
+        return dataFor;
+    },
+    //需求大厅  方案召集需求类型
+    _demandType: function(demand){
+        var demandtypes="";
+        switch(demand){
+            case 1:
+                demandtypes="数据预处理";
+                break;
+            case 2:
+                demandtypes="数据建模";
+                break;
+
+
+        }
+        return demandtypes;
+    },
+
 
 };
+
+
+
+
+
+
