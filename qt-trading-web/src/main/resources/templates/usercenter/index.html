@@ -27,7 +27,7 @@
                     </a>
                 </div>
                 <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
-                <p class="pername perphone"><a th:text="${user.phone}">18564852465</a></p>
+                <p class="pername perphone"><a th:text="${user.phone}"></a></p>
                 <p class="perdata">
                     <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
                     <a class="preinfo rt" href="javascript:;">完善资料</a>
@@ -57,11 +57,11 @@
                             <p>余额（元）</p>
                         </li>
                         <li>
-                            <h1 class="allOrders"></h1>
+                            <h1 class="allorders"></h1>
                             <p>订单</p>
                         </li>
                         <li>
-                            <h1 id="allFabus"></h1>
+                            <h1 class="allfabus"></h1>
                             <p>发布</p>
                         </li>
                     </ul>
@@ -222,7 +222,7 @@
                 </div>
                 <!-- 我的订单开始-->
                 <div class="myorder2 rt_tbs">
-                    <h2>我的订单：<span class="color allOrders">6</span></h2>
+                    <h2>我的订单：<span class="color allorders"></span></h2>
                     <p>
                         数据订单：<span class="color dataorders">6</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -298,11 +298,11 @@
                 <!-- 我的订单结束-->
                 <!-- 我的发布开始-->
                 <div class="myrelease2 rt_tbs">
-                    <h2>我的发布：<span class="color">5</span></h2>
+                    <h2>我的发布：<span class="color allfabus"></span></h2>
                     <p>
-                        数据众包：<span class="color">3</span>
+                        数据众包：<span class="color crowdings"></span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        方案召集：<span class="color">2</span>
+                        方案召集：<span class="color schemes"></span>
                     </p>
                     <p class="fabu_filter filter_btn floating">
                         <a href="javascript:;" class="active" data-class="myrelease">数据众包</a>

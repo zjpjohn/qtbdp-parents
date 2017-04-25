@@ -1,4 +1,40 @@
 $(document).ready(function(){
+    //订单数量
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        url: "/api/trade/count" ,
+        ansync:true,
+        data:{
+            userId:userId
+        },
+        xhrFields:{
+            withCredentials:true
+        },
+        success:function(data){
+            $(".allorders").html(data.pageInfo.authorizeOrder+data.pageInfo.transactionOrder);
+            $(".dataorders").html(data.pageInfo.authorizeOrder);
+            $(".demandorders").html(data.pageInfo.transactionOrder);
+        }
+    });
+    //发布数量
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        url: "/api/demand/count" ,
+        ansync:true,
+        data:{
+            userId:userId
+        },
+        xhrFields:{
+            withCredentials:true
+        },
+        success:function(data){
+            $(".allfabus").html(data.pageInfo.num);
+            $(".crowdings").html(data.pageInfo.buyinfo);
+            $(".schemes").html(data.pageInfo.sosinfo);
+        }
+    });
 
     // 概览 最新订单
     var settings = {
