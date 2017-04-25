@@ -23,10 +23,13 @@ public class SecurityUser extends SysUser implements UserDetails {
         if(suser != null)
         {
             this.setId(suser.getId());
-            this.setUserName(suser.getUserName());
+            // 如果nick为空，取账户名
+            this.setUserName(suser.getUserName() == null ? suser.getRealName() : suser.getUserName());
             this.setPassword(suser.getPassword());
             this.setDate(suser.getDate());
             this.setHead(suser.getHead());
+            this.setPhone(suser.getPhone());
+            this.setRealName(suser.getRealName());
             this.setSysRoles(suser.getSysRoles());
             this.setSysPermissions(suser.getSysPermissions());
         }

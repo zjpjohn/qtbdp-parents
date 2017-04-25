@@ -62,6 +62,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     private SysUser buildSysUser(SysUser user) {
         user.setPassword("123456"); //123456
+        // 目前定死
         Set<SysRole> sysRoles = new HashSet<SysRole>();
         SysRole sysRole = new SysRole() ;
         sysRole.setName("USER"); // ADMIN
