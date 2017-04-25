@@ -19,17 +19,21 @@ public class SysUser implements java.io.Serializable {
     private String password; //用户密码
     private String head ;    // 头像
     private Date date;       //时间
+    private String phone ;   // 手机号
+    private String realName; // 姓名
 
     @JsonIgnore
     private Set<SysRole> sysRoles = new HashSet<>(0);// 所对应的角色集合
     @JsonIgnore
     private Set<SysPermission> sysPermissions = new HashSet<>(0);// 所对应的权限集合
 
-    public SysUser(String userName, String password, Date date, String head, Set<SysRole> sysRoles, Set<SysPermission> sysPermissions) {
+    public SysUser(String userName, String password, Date date, String head,String realName,String phone, Set<SysRole> sysRoles, Set<SysPermission> sysPermissions) {
         this.userName = userName;
         this.password = password;
         this.date = date;
         this.head = head ;
+        this.realName = realName ;
+        this.phone = phone ;
         this.sysRoles = sysRoles;
         this.sysPermissions = sysPermissions ;
     }
@@ -91,5 +95,21 @@ public class SysUser implements java.io.Serializable {
 
     public void setHead(String head) {
         this.head = head;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

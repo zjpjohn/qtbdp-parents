@@ -29,6 +29,7 @@ public class BaseController {
             logger.info("nick:"+ user.getUserName());
             logger.info("head:"+ user.getHead());
             logger.info("id: "+ user.getId());
+            logger.info("phone: "+ user.getPhone());
         }
         return user;
     }
