@@ -172,7 +172,9 @@
 .pereach>li:last-child:hover{
     background:#3174C2;
 }
-
+.pereach>li:hover{
+    cursor: pointer;
+}
 
 /*****右侧div******/
 .center_right{
