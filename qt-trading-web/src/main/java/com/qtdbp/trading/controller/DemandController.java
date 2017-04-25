@@ -38,6 +38,10 @@ public class DemandController {
     @Autowired
     private DataTypeMapper dataTypeMapper ;
 
+    /**
+     * 添加方案召集操作
+     * @return
+     */
     @RequestMapping(value = "/demand/sos/add", method = RequestMethod.GET)
     public ModelAndView addSosInfo() {
 
@@ -46,6 +50,10 @@ public class DemandController {
         return result ;
     }
 
+    /**
+     * 添加数据众包操作
+     * @return
+     */
     @RequestMapping(value = "/demand/buy/add", method = RequestMethod.GET)
     public ModelAndView addBuyInfo() {
 

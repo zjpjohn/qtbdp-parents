@@ -1,7 +1,6 @@
 package com.qtdbp.trading.controller;
 
 import com.qtdbp.trading.mapper.DataTypeMapper;
-import com.qtdbp.trading.model.DataTypeAttrModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +19,11 @@ import java.util.List;
 public class DataInstitutionController {
 
     private static final String PAGE_DATAMART_FEDRATION = "institution/fredation";
+
+    /**
+     * 升级为服务商
+     */
+    private static final String PAGE_DATAMART_FEDRATION_ADD = "institution/add";
 
     @Autowired
     private DataTypeMapper dataTypeMapper ;
@@ -44,6 +48,17 @@ public class DataInstitutionController {
         mv.addObject("currentid", dataType) ;
         this.initData(mv) ;
         return mv;
+    }
+
+    /**
+     * 个人用户升级成服务商
+     * @return
+     */
+    @RequestMapping(value = "/institution/add",method = RequestMethod.GET)
+    public ModelAndView add() {
+        ModelAndView mv = new ModelAndView(PAGE_DATAMART_FEDRATION_ADD);
+
+        return mv ;
     }
 
     /**
