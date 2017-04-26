@@ -128,7 +128,7 @@ $("#filePath").change(function() {
    // var _data = form.get("filePath") ;
     //console.log(form.get("file"));
     var form = new FormData();
-    form.append("file",$("#filePath").val());
+    form.append("file",$("#filePath")[0].files[0]);
 
     $.ajax({
         url: "/api/upload/file",
