@@ -120,7 +120,8 @@ public class DataTransactionOrderService {
             Integer count = orderMapper.insertOrder(orderModel) ;
             if(count == null || count < 0) throw new GlobalException("订单创建失败，请重新操作") ;
         } else {
-            throw new GlobalException("订单已创建，请前往【个人中心】- 【我的订单】中查看") ;
+           // throw new GlobalException("订单已创建，请前往【个人中心】- 【我的订单】中查看") ;
+            orderModel = list.get(0);
         }
 
         return orderModel ;
