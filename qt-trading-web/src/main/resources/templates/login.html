@@ -2,28 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>钱塘大数据-SSO授权登录</title>
     </head>
     <body>
+        <!-- 通过授权后，自动登陆 -->
+        <div th:if="${auto}">
+            <div th:if="${param.error}">
+                用户名或密码错
+            </div>
+            <div th:if="${param.logout}">
+                您已注销成功
+            </div>
 
-        <div th:if="${param.error}">
-            用户名或密码错
+            <h2>登录跳转中...</h2>
+
+            <form id="login" th:action="@{/login}" method="post" style="display: none">
+                <input type="hidden" name="username" th:value="${ssoId}"/>
+                <input type="hidden" name="password" value="123456"/>
+                <input type="submit"/>
+            </form>
+            <script th:inline="javascript">
+               document.getElementById("login").submit() ;
+            </script>
         </div>
-        <div th:if="${param.logout}">
-            您已注销成功
+        <!-- 首次授权 -->
+        <div th:unless="${auto}">
+            <form id="login" th:action="@{/token}" th:object="${user}" method="post" style="display: none">
+                <label> ssoId:  <input type="hidden" th:field="*{ssoUserId}"/> </label>
+                <label> 账号 :    <input type="hidden" th:field="*{phone}"/> </label>
+                <label> 昵称 :    <input type="hidden" th:field="*{nick}"/> </label>
+                <label> 头像 :    <input type="hidden" th:field="*{head}"/> </label>
+                <input type="submit" value="授权"/>
+            </form>
+            <script th:inline="javascript">
+                document.getElementById("login").submit() ;
+            </script>
         </div>
-
-        <h2>登录跳转中...</h2>
-
-        <form id="login" th:action="@{/login}" method="post" style="display: none">
-            <div><label> 用户名 : <input type="text" name="username" th:value="${ssoId}"/> </label></div>
-            <div><label> 密  码 : <input type="password" name="password" value="123456"/> </label></div>
-            <div><input type="checkbox" name="remember-me" value="true" th:checked="checked"/><p>记住我</p></div>
-            <div><input type="submit" value="登录"/></div>
-        </form>
-        <script th:inline="javascript">
-            var auto = [[${auto}]];
-            if(auto) document.getElementById("login").submit() ;
-        </script>
     </body>
 </html>

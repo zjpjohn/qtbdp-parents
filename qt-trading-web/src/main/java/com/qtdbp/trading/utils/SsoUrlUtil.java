@@ -5,6 +5,8 @@ import com.qtdbp.trading.exception.GlobalException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * sso授权地址工具类
@@ -37,6 +39,26 @@ public class SsoUrlUtil {
 		if(ssoUserId == null) throw new GlobalException("系统用户不存在，请重新登陆") ;
 
 		return ssoUserId ;
+	}
+
+	/**
+	 * 获取SSO授权Cookies中的用户信息
+	 * @param request
+	 * @return
+	 * @throws GlobalException
+	 */
+	public static Map<String,String> tokenParams(HttpServletRequest request) throws GlobalException {
+
+		Cookie[] cookies = request.getCookies() ;
+		if(cookies == null) throw new GlobalException("用户未登录，请先登录") ;
+
+		Map<String,String> map = new HashMap<>() ;
+
+		for(Cookie cookie : cookies){
+			map.put(cookie.getName(), cookie.getValue()) ;
+		}
+
+		return map ;
 	}
 
 	/**

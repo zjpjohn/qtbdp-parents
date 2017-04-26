@@ -47,37 +47,39 @@ $("#uploadImg").change(function(){
         layer.msg("请勿上传同一张图片",{icon:5});
         return false;
     }
-    var currentTempPath = $("#uploadImg").val();//用户需要上传的本机路径
-    if (undefined != currentTempPath && "" != currentTempPath) {
-        //表单提交参数
-        var options = {
-            dataType: "json",
-            url: "/upload/uploadPic",//上传图片路径
+    var imgForm = new FormData();
+    imgForm.append("img", $("#uploadImg")[0].files[0]);
+        $.ajax({
+            url: "/api/upload/img",
             type: "post",
-            async:false,
-            success: function(data){
+            xhrFields:{withCredentials:true},
+            processData:false,
+            contentType:false,
+            data:imgForm,
+            success: function (data) {
                 imgName=tValue;
-                if(data['path']!=""){
-                    imgUrl=data['path'];
-                    $("#picture").val(data['path']);
-                    $("#pictureImg").attr("src",data['path']);
+                if(data.img){
+                    imgUrl=data.img;
+                    $("#picture").val(data.img);
+                    $("#pictureImg").attr("src",data.img);
+                    $("#deleteA").show();
                 }
             },
             error: function(data) {
                 layer.msg("图片上传失败",{icon:5});
                 console.log(data);
             }
-        };
-        //ajax提交
-        $("#formSubmit").ajaxSubmit(options);
-    }
+        })
 });
 
 //点击叉叉删除上传的图片
 $("#deleteA").unbind("click").click(function(){
-    imgName="";
-    $("#picture").val("");
-    $("#pictureImg").attr("src","/tradecenter/images/qtdata.png");
+    if(imgName!=""){
+        imgName="";
+        $("#picture").val("");
+        $("#pictureImg").attr("src","/tradecenter/images/qtdata.png");
+        $("#deleteA").hide();
+    }
 });
 //表单提交前验证
 function checkJoin(){
@@ -88,10 +90,6 @@ function checkJoin(){
     var abstracts=$("#abstracts").val();//您的介绍
     var picture = $("#picture").val();//图片路径
 
-   /* if(!checkIsAddInstitution()){
-        layer.msg("您已经是会员用户了",{icon:5});
-        return false;
-    }*/
     if(!type){
         $(".err_info").html("*请选择您的身份");
         return false;
@@ -129,12 +127,10 @@ function checkJoin(){
 var joinsubmit={
     scheme:function(){
         $("#formSubmit").unbind("click").click(function(){
-            console.log(33);
             if(!checkJoin()){
                 return false;
             }
             var _data = joinsubmit._formatparam($("#joinForm").serialize()) ;
-            console.log("_data："+_data);
 
             if($(this).attr("class").indexOf("disabled")==-1){
                 var me=this;
@@ -145,13 +141,8 @@ var joinsubmit={
                     contentType:"application/json",
                     data: _data,
                     success: function(data){
-                        console.log(data);
-                        layer.confirm("您已成功提交信息，请耐心等待审核结果",
-                            {title:"",btn:["确定"]},
-                            function(index){
-                                layer.close(index);
-                                location.href="/fedration";
-                            });
+                        layer.msg("您已成功提交信息，请耐心等待审核结果",{icon:6});
+                        location.href="/fedration";
                     },
                     error:function(data){
                         console.log("提交失败");

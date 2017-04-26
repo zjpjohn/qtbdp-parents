@@ -30,6 +30,11 @@ public class SsoConstants {
     public static final String SSO_COOKIE_NAME_HEAD = "head" ;
 
     /**
+     * sso统一授权系统账号在Cookie中存储的name
+     */
+    public static final String SSO_COOKIE_NAME_USER_NAME = "jiupai_username" ;
+
+    /**
      * 用户授权信息
      */
     public static final String SSO_USER = "user" ;

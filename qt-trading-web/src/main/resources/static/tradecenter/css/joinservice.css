@@ -102,8 +102,11 @@
     position:relative;
 }
 .upimgs>a{
-    position:absolute;
-    right:5px;
+    position: absolute;
+    right: 0px;
+    color: #fff;
+    background: #ddd;
+    padding: 0px 3px;
 }
 .imgfile{
     position: relative;
@@ -143,4 +146,7 @@
 }
 .err_info{
     text-align:center;
+}
+#deleteA{
+    display:none;
 }
