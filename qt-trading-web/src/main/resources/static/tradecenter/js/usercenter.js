@@ -123,7 +123,7 @@ function userGailan(url,id){
 
 /**点击切换右侧页面*/
 
-$(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
+$(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click(function(){
     $(this).addClass("active").siblings(".active").removeClass("active");
     var centerleft=$(this).attr("data-class");
     $("."+centerleft+"2").addClass("active").siblings(".active").removeClass("active");
@@ -199,6 +199,8 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu").unbind().click(function(){
             pageData.products(settings) ;
             break;
         case "persinfo"://个人信息
+            $(".pereach>li:nth-child(2)").addClass("active").siblings().removeClass("active");
+
             var settings={
                 url: "/api/user",            // 请求地址
                 tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
@@ -269,6 +271,39 @@ $("#person_emal").blur(function(){
 
 
 
+
+//个人信息 头像修改
+var headUrl="";
+
+$(document).on("change","#upheadimg",function() {
+    var form = new FormData();
+    form.append("img",$("#upheadimg")[0].files[0]);
+
+    $.ajax({
+        url: "/api/upload/img",
+        type: "post",
+        xhrFields:{withCredentials:true},
+        processData:false,
+        contentType:false,
+        data:form,
+        success: function (data) {
+            console.log(data);
+            headUrl=data.img;
+            console.log(headUrl);
+            //$("#upheadimg").val(headUrl);
+            $(".headimgs>img").attr("src",headUrl);
+            $("#realHead").val(headUrl);
+        }
+    })
+});
+
+
+
+
+
+
+
+//信息修改 保存
 var usercenter = {
 
     userSubmit: function () {
@@ -282,7 +317,7 @@ var usercenter = {
                 type:"put",
                 dataType:"json",
                 url:"/api/user"  ,
-                contentType:"application/json",
+                contentType:"application/json; charset=utf-8",
                 data: _data ,
                 success:function(data){
                     console.log("success: "+data.success);
@@ -307,7 +342,6 @@ var usercenter = {
         return JSON.stringify(_data);
     }
 }
-
 
 
 
