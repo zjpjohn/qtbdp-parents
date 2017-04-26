@@ -161,59 +161,66 @@ public class DataTradeApi {
      */
     @ApiOperation(value = "调用支付宝接口", notes = "{}")
     @RequestMapping(value = "/alipayapi", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public ResponseEntity<HttpEntity> openAlipay(@RequestBody AlipayModel alipayModel) {
+    public ModelMap openAlipay(@RequestBody AlipayModel alipayModel) {
+
+
+        ModelMap result = new ModelMap() ;
+
         Map<String, Object> map = new HashMap<>();
         // 请求参数
         BigDecimal amount = alipayModel.getAmount();
         if (null == amount || amount.equals(BigDecimal.ZERO)) {
-            new ResponseEntity(map, HttpStatus.OK);
-        }
 
-        //	TODO 添加订单
+        } else {
 
-        // 商户订单号，商户网站订单系统中唯一订单号，必填
-        String orderNo = alipayModel.getOrderNo();
-        // 订单名称，必填
-        String subject = alipayModel.getSubject();
-        // 付款金额，必填
-        String total_fee = amount.toString();
-        // 商品描述，可空
-        String body = alipayModel.getBody();
+            //	TODO 添加订单
 
-        //加签
-        String needsign= DataTradeApi.getOrderInfo2(subject,body,orderNo,total_fee);
-        String mysign = RSA.sign(needsign, AlipayConfig.private_key, AlipayConfig.input_charset);
+            // 商户订单号，商户网站订单系统中唯一订单号，必填
+            String orderNo = alipayModel.getOrderNo();
+            // 订单名称，必填
+            String subject = alipayModel.getSubject();
+            // 付款金额，必填
+            String total_fee = amount.toString();
+            // 商品描述，可空
+            String body = alipayModel.getBody();
+
+            //加签
+            String needsign = DataTradeApi.getOrderInfo2(subject, body, orderNo, total_fee);
+            String mysign = RSA.sign(needsign, AlipayConfig.private_key, AlipayConfig.input_charset);
 
 
-        // 防钓鱼时间戳
+            // 防钓鱼时间戳
 //		AlipayConfig.anti_phishing_key = AlipaySubmit.query_timestamp();
 
-        // 把请求参数打包成数组
-        Map<String, String> sParaTemp = new HashMap<String, String>();
-        sParaTemp.put("service", AlipayConfig.service);
-        sParaTemp.put("partner", AlipayConfig.partner);
-        sParaTemp.put("seller_id", AlipayConfig.seller_id);
-        sParaTemp.put("_input_charset", AlipayConfig.input_charset);
-        sParaTemp.put("payment_type", AlipayConfig.payment_type);
-        sParaTemp.put("notify_url", AlipayConfig.notify_url);
-        sParaTemp.put("return_url", AlipayConfig.return_url);
-        sParaTemp.put("anti_phishing_key", AlipayConfig.anti_phishing_key);
-        sParaTemp.put("exter_invoke_ip", AlipayConfig.exter_invoke_ip);
-        sParaTemp.put("out_trade_no", orderNo);
-        sParaTemp.put("subject", subject);
-        sParaTemp.put("total_fee", total_fee);
-        sParaTemp.put("body", body);
-        sParaTemp.put("extra_common_param", alipayModel.getReturnUrl());
-        // 其他业务参数根据在线开发文档，添加参数.文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.O9yorI&treeId=62&articleId=103740&docType=1
-        // 如sParaTemp.put("参数名","参数值");
+            // 把请求参数打包成数组
+            Map<String, String> sParaTemp = new HashMap<String, String>();
+            sParaTemp.put("service", AlipayConfig.service);
+            sParaTemp.put("partner", AlipayConfig.partner);
+            sParaTemp.put("seller_id", AlipayConfig.seller_id);
+            sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+            sParaTemp.put("payment_type", AlipayConfig.payment_type);
+            sParaTemp.put("notify_url", AlipayConfig.notify_url);
+            sParaTemp.put("return_url", AlipayConfig.return_url);
+            sParaTemp.put("anti_phishing_key", AlipayConfig.anti_phishing_key);
+            sParaTemp.put("exter_invoke_ip", AlipayConfig.exter_invoke_ip);
+            sParaTemp.put("out_trade_no", orderNo);
+            sParaTemp.put("subject", subject);
+            sParaTemp.put("total_fee", total_fee);
+            sParaTemp.put("body", body);
+            sParaTemp.put("extra_common_param", alipayModel.getReturnUrl());
+            // 其他业务参数根据在线开发文档，添加参数.文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.O9yorI&treeId=62&articleId=103740&docType=1
+            // 如sParaTemp.put("参数名","参数值");
 
-        // 建立请求
-        String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
-        map.put("sHtmlText", sHtmlText);
-
+            // 建立请求
+            String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+            map.put("sHtmlText", sHtmlText);
+        }
         // 保存支付记录
         // hysWebMeetingAliService.insertSelective(sParaTemp);
-        return new ResponseEntity(map, HttpStatus.OK);
+
+        result.put("pageInfo", new ResponseEntity(map, HttpStatus.OK).getBody());
+
+        return result ;
 
     }
 
