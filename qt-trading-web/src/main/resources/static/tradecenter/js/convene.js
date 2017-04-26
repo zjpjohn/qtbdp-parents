@@ -121,11 +121,14 @@ $(".abouttime").datetimepicker({
 $.datetimepicker.setLocale('ch');
 */
 //上传文件
+
 var headUrl="";
 $("#filePath").change(function() {
-    var form = new FormData($("#formsubmits")[0]);
-    var _data = form.get("filePath") ;
+   // var form = new FormData($("#formsubmits")[0]);
+   // var _data = form.get("filePath") ;
     //console.log(form.get("file"));
+    var form = new FormData();
+    form.append("file",$("#filePath").val());
 
     $.ajax({
         url: "/api/upload/file",
@@ -145,6 +148,7 @@ $("#filePath").change(function() {
         }
     })
 });
+
 
 
 
