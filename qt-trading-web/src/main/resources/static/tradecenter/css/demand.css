@@ -111,6 +111,12 @@
     color:#fff;
     border-radius:4px;
 }
+.list_rt>a.over{
+    background:#ddd;
+}
+.list_title>span.over{
+    color:#F25353;
+}
 /*********右侧****************/
 .demand_fabu{
     height:210px;
