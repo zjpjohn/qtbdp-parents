@@ -3,16 +3,13 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.mapper.DataInstitutionInfoMapper;
 import com.qtdbp.trading.model.DataInstitutionInfoModel;
 import com.qtdbp.trading.service.DataInstitutionInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,6 +67,26 @@ public class DataInstitutionApi {
         } catch (Exception e) {
             throw new GlobalException(e.getMessage()) ;
         }
+
+        return map ;
+    }
+
+    @ApiOperation(value="用户是否服务商, 并返回服务商信息")
+    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    @RequestMapping(value = "/exist", method = RequestMethod.GET)
+    public ModelMap isDataInstitutionInfo(Integer userId) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        DataInstitutionInfoModel infoModel ;
+        try {
+            infoModel = infoService.findDataInstitutionByUserId(userId) ;
+        } catch (Exception e) {
+            throw new GlobalException(e.getMessage()) ;
+        }
+        if(infoModel != null)
+            map.put("isExist", true);
+        else
+            map.put("isExist", false);
 
         return map ;
     }

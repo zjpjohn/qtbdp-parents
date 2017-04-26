@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 21:37
  * To change this template use File | Settings | File Templates.
  */
-@Mapper
+@Deprecated
 public interface UserMapper {
 
     /**

@@ -63,4 +63,16 @@ public class DataInstitutionInfoService {
         return id ;
     }
 
+    /**
+     * 用户是否服务商
+     * @param userId
+     * @return 服务商信息
+     * @throws GlobalException
+     */
+    public DataInstitutionInfoModel findDataInstitutionByUserId(Integer userId) throws GlobalException {
+
+        if(userId == null) throw new GlobalException("用户ID为空");
+
+        return infoMapper.findDataInstitutionInfoByUserId(userId) ;
+    }
 }

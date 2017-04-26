@@ -9,10 +9,7 @@ import org.omg.CORBA.OBJECT_NOT_EXIST;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 订单数据服务
@@ -106,6 +103,17 @@ public class DataTransactionOrderService {
             throw new GlobalException("订单数据的userId或productId或productType为空") ;
         }
         return map;
+    }
+
+    public Integer updateOrder(String orderNo, String tradeNo){
+        DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
+        orderModel.setOrderState((byte)3);//改变支付状态
+        orderModel.setPayTime(new Date());//加入付款时间
+        orderModel.setFinishTime(new Date());//加入订单完成时间
+        orderModel.setTradeNo(tradeNo);//加入交易流水号
+        orderModel.setOrderNo(orderNo);//订单号
+        Integer i = orderMapper.updateOrder(orderModel);
+        return i;
     }
 
     /**
