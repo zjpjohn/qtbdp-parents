@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * 创建回调类ComputeClientHystrix，实现@FeignClient的接口。
  * Created by dell on 2017/4/7.
  */
+@Deprecated
 @Component
 public class FileUploadHystrix implements FileUploadController {
 

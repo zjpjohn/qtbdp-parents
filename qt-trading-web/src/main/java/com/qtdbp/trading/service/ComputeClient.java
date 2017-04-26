@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @FeignClient("base-service")注解来绑定该接口对应pro-service服务,@FeignClient注解中的fallback属性指定回调类
  * Created by dell on 2017/4/7.
  */
+@Deprecated
 @FeignClient(value = "base-service", fallback = ComputeClientHystrix.class)
 public interface ComputeClient {
 

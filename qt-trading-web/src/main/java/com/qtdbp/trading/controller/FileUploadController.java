@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Time: 23:21
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 @FeignClient(value = "PRO-SERVICE", fallback = FileUploadHystrix.class)
 public interface FileUploadController {
 
