@@ -11,7 +11,7 @@
 		<div class="lf fabu_btns">
 			<p>发布</p>
 			<a th:href="@{/demand/sos/add}">需求发布</a>
-			<a th:href="@{/institution/add}">加盟服务</a>
+			<a onclick="joinservice();">加盟服务</a>
 			<!--<a>数据发布</a>-->
 		</div>
 
@@ -53,7 +53,11 @@
 	</div>
 
 </nav>
+
+<script th:src="@{/tradecenter/js/layer.js}"></script>
 <script>
+    var userId=$("#userId").val();
+
 	function nav(n){
 		$(".nav_list1>a:nth-child("+n+")").addClass("active");
 	}
@@ -61,7 +65,32 @@
 		$(".fabu_btns>a:nth-child("+n+")").addClass("active");
 	}
 
+	function joinservice() {
+        if (!userId) {
+            location.href = "/login";
+        } else {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/api/institution/exist",
+                ansync: true,
+                xhrFields: {
+                    widthCredentials: true
+                },
+                data: {
+                    userId: userId
+                },
+                success: function (data) {
+                    if (data.isExist) {
+                        layer.msg("您已经加盟数据服务商了", {icon: 6});
+                    } else {
+                        location.href = "/institution/add";
+                    }
+                }
+            });
+        }
 
+    }
 </script>
 <!--页头结束-->
 </div>

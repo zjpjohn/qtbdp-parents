@@ -15,13 +15,13 @@
 </head>
 <body >
 	<!-- 页头-->
-	<div th:include="layout/header::#head" ></div>
+	<div th:replace="layout/header" /></div>
 	<!--页头结束-->
 
 	<!--banner图 -->
 	<div class="banner">
 		<p>
-			<a th:href="@{/institution/add}" class="joinus_btn"></a>
+			<a class="joinus_btn" onclick="joinservice();"></a>
 		</p>
 	</div>
 

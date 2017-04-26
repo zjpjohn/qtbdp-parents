@@ -16,9 +16,9 @@
 
 </head>
 <body>
-<!--  页头开始 -->
-<div th:include="layout/header::#head" ></div>
-<!--  页头结束 -->
+    <!--  页头开始 -->
+    <div th:replace="layout/header" /></div>
+    <!--  页头结束 -->
 
 <form class="schall" id="formsubmits">
     <div class="scalmin">
@@ -44,10 +44,10 @@
                 <p> <i>*</i> 上传数据</p>
                 <div class="data_upload floating">
                     <span class="uploadimg lf"></span>
-                    <input type="text"  class="uploadtext lf"/>
+                    <input type="text"  class="uploadtext lf" id="uploadtext" name="filePath"/>
                     <div class="rt uploadclick">
                         <a href="javascript:;">上传</a>
-                        <input type="file" id="filePath" name="filePath" class="uploadfile"/>
+                        <input type="file" id="filePath" name="file" class="uploadfile"/>
                     </div>
                 </div>
 

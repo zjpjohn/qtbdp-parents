@@ -12,7 +12,7 @@ $("#fromDate").val(dateForMat(new Date()));//初始化开始时间
 function checkData(){
     var designation = $("#designation").val();
     var description = $("#description").val();
-    var uploadtext = $(".uploadtext").val();
+    var filePath = $("#filePath").val();
     var dataScale = $("#dataScale").val();
 
     var dimension=$('input:radio[name="dimension"]:checked').val();
@@ -37,7 +37,7 @@ function checkData(){
         $("#datadescribe").addClass("err").focus();
         return false;
     }
-    if(uploadtext=="" ){
+    if(filePath=="" ){
         $(".scalerror").html("*请上传正确文件格式！支持的格式：docx，doc，xls，xlsx，pdf，txt，sql");
         $(".uploadtext").addClass("err").focus();
         return false;
@@ -109,6 +109,7 @@ function checkData(){
 
 
 }
+/*
 $(".abouttime").datetimepicker({
     lang:'ch',
     format:'Y-m-d h:i:s',
@@ -118,6 +119,38 @@ $(".abouttime").datetimepicker({
     todayButton:true
 });
 $.datetimepicker.setLocale('ch');
+*/
+//上传文件
+
+var headUrl="";
+$("#filePath").change(function() {
+   // var form = new FormData($("#formsubmits")[0]);
+   // var _data = form.get("filePath") ;
+    //console.log(form.get("file"));
+    var form = new FormData();
+    form.append("file",$("#filePath").val());
+
+    $.ajax({
+        url: "/api/upload/file",
+        type: "post",
+        xhrFields:{withCredentials:true},
+        processData:false,
+        contentType:false,
+        data:form,
+        success: function (data) {
+            console.log(data);
+            headUrl=data.file;
+            console.log(headUrl);
+
+            $("#filePath").attr("value",headUrl);
+            $("#uploadtext").val(headUrl);
+
+        }
+    })
+});
+
+
+
 
 var consubmit={
     scheme:function(){
@@ -138,12 +171,12 @@ var consubmit={
                     data: _data,
                     success: function(data){
                         console.log(data);
-                        layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
+                        /*layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
                             {title:"",btn:["确定"]},
                             function(index){
                                 layer.close(index);
                                 location.href="/demand";
-                            });
+                            });*/
                     },
                     error:function(data){
                         console.log("提交失败");
@@ -165,6 +198,11 @@ var consubmit={
         return JSON.stringify(_data);
     }
 }
+
+
+
+
+
 
 
 $(function(){

@@ -18,7 +18,7 @@
 
 <body >
     <!-- 页头-->
-    <div th:include="layout/header::#head" ></div>
+    <div th:replace="layout/header" /></div>
     <!--页头结束-->
 
     <!--banner图 -->
@@ -66,6 +66,7 @@
     <script th:src="@{/tradecenter/js/paging.js}"></script>
     <script th:src="@{/tradecenter/js/pagedata.js}"></script>
     <script th:src="@{/tradecenter/js/timeFormat.js}"></script>
+    <script th:src="@{/tradecenter/js/demand.js}"></script>
 
     <!-- 数据众包模板 -->
     <script id="tmpl_demand_buyInfos" type="text/x-jquery-tmpl">
@@ -92,7 +93,7 @@
                 {{if $item._time(prod.toDate)=="已截止"}}
                  <a class="over">接单结束</a>
                 {{else}}
-                <a href="javascript:;">立即接单</a>
+                <a href="javascript:;" onclick="receiveOrder();">立即接单</a>
                 {{/if}}
             </div>
          </li>
@@ -125,59 +126,11 @@
                {{if $item._time(prod.toDate)=="已截止"}}
                  <a class="over">接单结束</a>
                 {{else}}
-                <a href="javascript:;">立即接单</a>
+                <a href="javascript:;" onclick="receiveOrder();">立即接单</a>
                 {{/if}}
             </div>
          </li>
         {{/each}}
-    </script>
-
-    <script th:inline="javascript">
-        function getData(dataType){
-            // 数据众包
-            var settings = {
-                url: "/api/demand/buyInfos",
-                tmpl_id: "#tmpl_demand_buyInfos" ,
-                target: "#data_list" ,
-                pager_id: "#pageTool",
-                params: [{key:"dataType",value:dataType }]
-            }
-            //方案召集
-            var settings_sos = {
-                url: "/api/demand/sosInfos",
-                tmpl_id: "#tmpl_demand_sosInfos" ,
-                target: "#data_list" ,
-                pager_id: "#pageTool",
-                params: [{key:"dataType",value:dataType }]
-            }
-            var flag = $("#buyInfo").is(".active");
-            if(flag){
-                pageData.products(settings);
-            }else{
-                pageData.products(settings_sos) ;
-            }
-        }
-        getData(null);
-
-    </script>
-    <script>
-        //数据众包、方案召集切换
-         $(".filters>a").unbind("click").click(function(){
-             $(".chose_menu>a").removeClass("active");
-             $("#limit").addClass("active");
-             $(this).addClass("active").siblings(".active").removeClass("active");
-             getData(null);
-         });
-         //服务范围点击
-        function getDataByDataType(data) {
-            $(this).addClass("active").siblings(".active").removeClass("active");
-            var dataTypeNew= $(data).attr("data-id");
-            if(dataTypeNew == 0){
-                dataTypeNew = null;
-            }
-            getData(dataTypeNew);
-        }
-        nav(3);
     </script>
 </body>
 </html>
