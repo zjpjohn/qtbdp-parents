@@ -141,9 +141,10 @@ $("#filePath").change(function() {
             console.log(data);
             headUrl=data.file;
             console.log(headUrl);
-
             $("#filePath").attr("value",headUrl);
             $("#uploadtext").val(headUrl);
+
+
 
         }
     })
@@ -171,12 +172,12 @@ var consubmit={
                     data: _data,
                     success: function(data){
                         console.log(data);
-                        /*layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
+                        layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
                             {title:"",btn:["确定"]},
                             function(index){
                                 layer.close(index);
                                 location.href="/demand";
-                            });*/
+                            });
                     },
                     error:function(data){
                         console.log("提交失败");
