@@ -5,9 +5,13 @@ import com.qtdbp.trading.mapper.DataUserInfoMapper;
 import com.qtdbp.trading.mapper.SysUserMapper;
 import com.qtdbp.trading.model.DataUserInfoModel;
 import com.qtdbp.trading.service.security.model.SysUser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * 个人用户服务
@@ -47,12 +51,19 @@ public class DataUserInfoService {
 
         if(userInfoModel == null) throw new GlobalException("用户信息数据为空") ;
 
+        try {
+            String head = StringUtils.isEmpty(userInfoModel.getHead()) ? null : URLDecoder.decode(userInfoModel.getHead(), "UTF-8") ;
+            userInfoModel.setHead(head);
+        } catch (UnsupportedEncodingException e) {
+            throw new GlobalException("头像解析出错，请重新操作") ;
+        }
         Integer count = userInfoMapper.updateDataUserInfo(userInfoModel) ;
 
         if(count != null && count > 0) return true ;
 
         return false ;
     }
+
 
     /**
      * 添加新用户
