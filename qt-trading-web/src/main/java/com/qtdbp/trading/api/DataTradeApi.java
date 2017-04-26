@@ -14,6 +14,7 @@ import com.qtdbp.trading.model.DataTransactionOrderModel;
 import com.qtdbp.trading.service.DataAuthorizeOrderService;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
+import com.qtdbp.trading.utils.AliPayOrderUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -143,23 +144,11 @@ public class DataTradeApi {
         return map;
     }
 
-    @ApiOperation(value =  "根据用户信息增加新订单数据接口")
-    @RequestMapping(value = "/addNewOrders", method = RequestMethod.POST)
-    public ModelMap addNewDataOrders(@RequestBody DataTransactionOrderModel orderModel) throws GlobalException {
-
-        ModelMap map = new ModelMap() ;
-        //获取订单号
-        String orderNo = orderService.getOrderNo();
-        orderModel.setOrderNo(orderNo);
-        Map<String, Object> resultMap = orderService.insertNewOrder(orderModel);
-        map.put("pageInfo",resultMap);
-        return map ;
-    }
-
     /**
      * 调用支付宝接口
      */
     @ApiOperation(value = "调用支付宝接口", notes = "{}")
+    @ResponseBody
     @RequestMapping(value = "/alipayapi", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public ModelMap openAlipay(@RequestBody AlipayModel alipayModel) {
 
@@ -185,9 +174,8 @@ public class DataTradeApi {
             String body = alipayModel.getBody();
 
             //加签
-            String needsign = DataTradeApi.getOrderInfo2(subject, body, orderNo, total_fee);
+            String needsign = AliPayOrderUtil.getOrderInfo2(subject, body, orderNo, total_fee);
             String mysign = RSA.sign(needsign, AlipayConfig.private_key, AlipayConfig.input_charset);
-
 
             // 防钓鱼时间戳
 //		AlipayConfig.anti_phishing_key = AlipaySubmit.query_timestamp();
@@ -219,69 +207,17 @@ public class DataTradeApi {
         // hysWebMeetingAliService.insertSelective(sParaTemp);
 
         result.put("pageInfo", new ResponseEntity(map, HttpStatus.OK).getBody());
+        result.put("status", new ResponseEntity(map, HttpStatus.OK).getStatusCode());
 
         return result ;
 
     }
 
     /**
-     * create the order info. 创建订单信息
-     *
-     */
-    public static String getOrderInfo2(String subject, String body,String orderNo,String price) {
-
-        // 签约合作者身份ID
-        String orderInfo = "partner=" + "\"" + AlipayConfig.partner + "\"";
-
-        // 签约卖家支付宝账号
-        orderInfo += "&seller_id=" + "\"" + AlipayConfig.seller_id + "\"";
-
-        // 商户网站唯一订单号
-        orderInfo += "&out_trade_no=" + "\"" + orderNo + "\"";
-
-        // 商品名称
-        orderInfo += "&subject=" + "\"" + subject + "\"";
-
-        // 商品详情
-        orderInfo += "&body=" + "\"" + body + "\"";
-
-        // 商品金额
-        orderInfo += "&total_fee=" + "\"" + price + "\"";
-
-        // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + AlipayConfig.notify_url + "\"";
-
-        // 服务接口名称， 固定值
-        orderInfo += "&service="+"\""+AlipayConfig.service+"\"";
-
-        // 支付类型， 固定值
-        orderInfo += "&payment_type=\"1\"";
-
-        // 参数编码， 固定值
-        orderInfo += "&_input_charset=\"utf-8\"";
-
-        // 设置未付款交易的超时时间
-        // 默认30分钟，一旦超时，该笔交易就会自动被关闭。
-        // 取值范围：1m～15d。
-        // m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。
-        // 该参数数值不接受小数点，如1.5h，可转换为90m。
-        orderInfo += "&it_b_pay=\"30m\"";
-
-        // extern_token为经过快登授权获取到的alipay_open_id,带上此参数用户将使用授权的账户进行支付
-        // orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
-
-        // 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
-        orderInfo += "&return_url="+"\""+AlipayConfig.return_url+"\"";
-        orderInfo += "&sign_type="+"\"RSA\"";
-
-        return orderInfo;
-    }
-
-    /**
      * 支付回调
      */
     @ApiOperation(value = "支付宝异步回调", notes = "{}")
-    @PostMapping(value = "/alipay/toNotify_url")
+    @PostMapping(value = "/alipay/toNotifyUrl")
     public void verifyOrderNum(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         Map<String,String> params = new HashMap<String,String>();
         Map requestParams = request.getParameterMap();

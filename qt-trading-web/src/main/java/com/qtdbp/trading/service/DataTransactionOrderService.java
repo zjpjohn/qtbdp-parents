@@ -1,14 +1,18 @@
 package com.qtdbp.trading.service;
 
 import com.github.pagehelper.PageHelper;
+import com.qtdbp.trading.constants.AppConstants;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
+import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataSosInfoModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
 import org.omg.CORBA.OBJECT_NOT_EXIST;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -23,6 +27,9 @@ public class DataTransactionOrderService {
 
     @Autowired
     private DataTransactionOrderMapper orderMapper ;
+
+    @Autowired
+    private DataProductService productService ;
 
 
     /**
@@ -70,39 +77,53 @@ public class DataTransactionOrderService {
      * @return
      * @throws GlobalException
      */
+    @Transactional
+    public DataTransactionOrderModel insertNewOrder(DataTransactionOrderModel orderModel) throws GlobalException {
 
-    public Map<String, Object> insertNewOrder(DataTransactionOrderModel orderModel) throws GlobalException {
+        if(orderModel == null) throw new GlobalException("订单数据为空，请重新操作") ;
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        List<DataTransactionOrderModel> list = new ArrayList<>();
-        if(orderModel.getUserId() != null && orderModel.getProductId() != null && orderModel.getProductType() != null){
-            list = orderMapper.findOrderByUserIdAndProductIdAndType(orderModel);
-            if(list != null && list.size()>0){
-                for(DataTransactionOrderModel order : list){
-                    Byte orderState = order.getOrderState();
-                    if(orderState == 1){//待支付
-                        map.put("orderState","1");
-                        map.put("pojo", order);
-                    }else if(orderState == 2){//已撤销
-                        int id = orderMapper.insertOrder(orderModel) ;
-                        orderModel.setId(id);
-                        map.put("orderState", "2");
-                        map.put("pojo", orderModel);
-                    }else{//已支付
-                        map.put("orderState","3");
-                        map.put("pojo", order);
-                    }
+        if(orderModel.getProductId() == null) throw new GlobalException("此产品不存在，请选择其他产品购买") ;
+
+        List<DataTransactionOrderModel> list = orderMapper.findOrderByUserIdAndProductIdAndType(orderModel);
+        // 如果当前用户已经购买了此数据包产品，则无需购买
+        boolean canBuy = true ;
+        if(list != null && !list.isEmpty()) {
+            for(DataTransactionOrderModel order : list){
+                // 只要有一条订单待支付或已支付，则不能购买
+                if(order.getOrderState().intValue() == AppConstants.ORDER_STATE_PAYING
+                        || order.getOrderState().intValue() == AppConstants.ORDER_STATE_PAYED) {
+                    canBuy = false;
+                    break;
                 }
-            }else{
-                int id = orderMapper.insertOrder(orderModel) ;
-                orderModel.setId(id);
-                map.put("orderState", "4");
-                map.put("pojo", orderModel);
             }
-        }else{
-            throw new GlobalException("订单数据的userId或productId或productType为空") ;
         }
-        return map;
+
+        if(canBuy) {
+            // 封装订单数据
+            DataProductModel product = null ;
+            BigDecimal amount ;
+            if(orderModel.getProductType() == AppConstants.PRODUCT_TYPE_PACKAGE){ //数据包
+                product = productService.findProductById(orderModel.getProductId());
+                if(product == null) throw new GlobalException("此产品不存在，请选择其他产品购买") ;
+
+                orderModel.setOrderSubject(product.getDesignation());
+                amount = new BigDecimal(product.getpScore()) ;
+            } else {
+                //数据条目，默认数据条目1.00
+                amount = new BigDecimal(1) ;
+
+            }
+            orderModel.setOrderState((byte)AppConstants.ORDER_STATE_PAYING);
+            orderModel.setOrderNo(getOrderNo());
+            orderModel.setAmount(amount);
+            // 调用订单插入操作
+            Integer count = orderMapper.insertOrder(orderModel) ;
+            if(count == null || count < 0) throw new GlobalException("订单创建失败，请重新操作") ;
+        } else {
+            throw new GlobalException("订单已创建，请前往【个人中心】- 【我的订单】中查看") ;
+        }
+
+        return orderModel ;
     }
 
     public Integer updateOrder(String orderNo, String tradeNo){
@@ -111,7 +132,6 @@ public class DataTransactionOrderService {
         orderModel.setPayTime(new Date());//加入付款时间
         orderModel.setFinishTime(new Date());//加入订单完成时间
         orderModel.setTradeNo(tradeNo);//加入交易流水号
-        orderModel.setOrderNo(orderNo);//订单号
         Integer i = orderMapper.updateOrder(orderModel);
         return i;
     }

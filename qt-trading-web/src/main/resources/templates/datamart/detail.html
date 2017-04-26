@@ -15,7 +15,7 @@
 </head>
 <body >
     <!-- 页头-->
-    <div th:replace="layout/header" /></div>
+    <div th:include="layout/header::#head" ></div>
     <!--页头结束-->
 
     <!--主体-->
@@ -83,7 +83,7 @@
             </p>
             <div class="list_mask">
                 <p><i>￥1.00</i>（10积分）</p>
-                <a href="javacript:;" class="list_buy">购买</a>
+                <a href="javacript:;" class="list_buy" >购买</a>
                 <!--<a href="javacript:;" class="list_see">查看详情</a>-->
             </div>
         </li>
@@ -109,10 +109,13 @@
         // 初始化数据
         pageData.products(settings) ;
 
-
-        //点击购买数据众包
+        //点击购买数据包
         $("#buydata").click(function(){
-            location.href="/getOrderInfoAndGoto/{userId}/{productId}/{productType}?order=4";
+            location.href="/getOrderInfoAndGoto/"+[[${prod.id}]]+"/2?order=4" ;
+        });
+
+        //点击购买数据条目
+        $(".list_buy").click(function () {
 
         });
     </script>

@@ -1,7 +1,7 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.constants.AppConstants;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
@@ -9,7 +9,7 @@ import com.qtdbp.trading.model.DataTypeAttrModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import com.qtdbp.trading.service.security.model.SysUser;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -123,29 +123,44 @@ public class DatamartController extends BaseController {
         result.addObject("attrModels", attrModels) ;
     }
 
-    @RequestMapping(value = "/getOrderInfoAndGoto/{userId}/{productId}/{productType}", method = RequestMethod.GET)
-    public ModelAndView getOrderInfoAndGoto(@PathVariable("userId") Integer userId,
-                                            @PathVariable("productId") Integer productId,
-                                            @PathVariable("productType") Integer productType, HttpServletRequest request){
-        String order = request.getParameter("order");
-        ModelAndView modelAndView = new ModelAndView(PAGE_USERCENTER);
-        DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
-        if(userId != null && productId != null && productType != null){
-            orderModel.setUserId(userId);
-            orderModel.setProductId(productId);
-            int type = productType;
-            orderModel.setProductType((byte)type);
-            try {
-                Map<String, Object> map = orderService.insertNewOrder(orderModel);
-                if( map != null){
-                    modelAndView.addObject("order",order);
-                    modelAndView.addObject("orderState",map.get("orderState"));
-                    modelAndView.addObject("pojo",map.get("orderState"));
-                }
-            } catch (GlobalException e) {
-                e.printStackTrace();
-            }
+    /**
+     * 创建订单并且跳转到个人中心
+     * @param productId
+     * @param productType
+     * @return
+     */
+    @RequestMapping(value = "/getOrderInfoAndGoto/{productId}/{productType}", method = RequestMethod.GET)
+    public ModelAndView getOrderInfoAndGoto(@PathVariable("productId") String productId,
+                                            @PathVariable("productType") String productType) throws GlobalException {
+
+        ModelAndView view = new ModelAndView();
+        view.setViewName(PAGE_USERCENTER);
+
+        // 未登陆请先登录
+        SysUser user = getPrincipal() ;
+        if(user == null) {
+            view.setViewName("login");
+            return view;
         }
-        return modelAndView;
+
+        if(productId == null || "0".equals(productId)) throw new GlobalException("此产品不存在，请选择其他产品购买") ;
+        int type = productType != null ? Integer.parseInt(productType) : AppConstants.PRODUCT_TYPE_PACKAGE ;
+        int prodId = Integer.parseInt(productId) ;
+
+        DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
+        orderModel.setUserId(user.getId());
+        orderModel.setProductId(prodId);
+        orderModel.setProductType((byte)type);
+
+        try {
+            DataTransactionOrderModel result = orderService.insertNewOrder(orderModel);
+            view.addObject("order", result);
+        } catch (GlobalException e) {
+            e.printStackTrace();
+            // TODO: 2017/4/26 跳转到我的订单页面
+           // view.setViewName(PAGE_USERCENTER);
+        }
+
+        return view;
     }
 }
