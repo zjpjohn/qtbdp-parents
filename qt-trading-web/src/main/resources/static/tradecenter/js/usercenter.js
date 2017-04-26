@@ -321,6 +321,11 @@ var usercenter = {
                 data: _data ,
                 success:function(data){
                     console.log("success: "+data.success);
+                    layer.confirm("修改信息成功",
+                        {title:"",btn:["确定"]},
+                        function(index){
+                            layer.close(index);
+                        });
                 },
                 error:function(data){
 
