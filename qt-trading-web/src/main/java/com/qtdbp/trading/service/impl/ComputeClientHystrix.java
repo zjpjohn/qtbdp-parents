@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 创建回调类ComputeClientHystrix，实现@FeignClient的接口。
  * Created by dell on 2017/4/7.
  */
+@Deprecated
 @Component
 public class ComputeClientHystrix implements ComputeClient {
 

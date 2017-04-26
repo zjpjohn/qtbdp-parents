@@ -24,4 +24,12 @@ public interface DataUserInfoMapper {
      * @return
      */
     Integer updateDataUserInfo(DataUserInfoModel userInfoModel) ;
+
+    /**
+     * 添加用户
+     * @param userInfoModel
+     * @return
+     */
+    Integer insertDataUserInfo(DataUserInfoModel userInfoModel) ;
+
 }

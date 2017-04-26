@@ -54,7 +54,7 @@ sso:
   host: http://sso.qtbigdata.com/
   loginUrl: http://sso.qtbigdata.com/sso/action/goLogin?retUrl=
   registerUrl: http://sso.qtbigdata.com/sso/action/goRegister?retUrl=
-  callback: http://jytest.qtbigdata.com/token
+  callback: http://jytest.qtbigdata.com/callback
 
 # ===================================================================
 # 分布式文件系统FDFS配置

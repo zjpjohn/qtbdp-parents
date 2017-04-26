@@ -44,4 +44,28 @@
         WHERE id = #{id}
     </update>
 
+    <!-- 添加用户 -->
+    <insert id="insertDataUserInfo" parameterType="com.qtdbp.trading.model.DataUserInfoModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO data_user_info (
+            user_type,
+            email,
+            pwd,
+            company_designation,
+            real_name,
+            phone,
+            addtime,
+            is_used,
+            head,
+            sso_user_id,
+            nick
+        )
+        VALUES
+        (#{userType}, #{email}, #{pwd}, #{companyDesignation}, #{realName}, #{phone}, now(), 1, #{head}, #{ssoUserId}, #{nick})
+    </insert>
+
 </mapper>

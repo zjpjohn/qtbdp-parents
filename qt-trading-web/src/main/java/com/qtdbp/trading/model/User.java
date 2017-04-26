@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Time: 21:37
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 @ApiModel(value = "User", description = "用户详细实体user")
 public class User {
 
