@@ -296,3 +296,95 @@ nav{
 	left:150px;
 	z-index:9;
 }
+/**********侧边栏***************/
+.lqb_slide {
+	display: block;
+	width: 52px;
+	height: 160px;
+	position: fixed;
+	right: 0px;
+	top: 205px;
+	padding-top: 25px;
+	z-index: 999; }
+.lqb_slide .lqb_slk {
+	position: relative; }
+.lqb_slide .lqb_slk .box {
+	position: absolute;
+	z-index: 1000; }
+.lqb_slide .lqb_slk a {
+	display: block;
+	width: 52px;
+	height: 52px;
+	margin-bottom: 5px;
+	background-image:url("../images/icon.png");
+}
+.lqb_slide .phone .box {
+	background: url("../images/phone_bg.png") left top no-repeat;
+	border: medium none;
+	font-size: 12px;
+	left: -150px;
+	line-height: 1.5em;
+	padding: 5px 0px 0 0;
+	text-align: center;
+	top: 0px;
+	width: 153px;
+	height: 51px;
+	display:none;
+}
+.lqb_slide .phone .box a {
+	height: auto;
+	color: #f08012;
+	font-size: 14px; }
+.lqb_slide .phone .box p {
+	padding: 2px 10px;
+	font-size: 12px;
+	white-space: nowrap;
+	text-align: left; }
+.lqb_slide .phone .box p.sogTel {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #f08012; }
+.lqb_slide .phone .box p.ogTel {
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #f08012;
+	margin: 0 5px; }
+.lqb_slide .phone:hover .box {
+	display:block;
+}
+.lqb_slide .weixin .box {
+	width: 132px;
+	height: 116px;
+	left: -130px;
+	top: 0px;
+	border: none;
+	background: url(../images/ewm_bg.png) left top no-repeat;
+	display:none;
+}
+.lqb_slide .weixin .box img {
+	display: block;
+	clear: both;
+	width: 90px;
+	height: 90px;
+	margin: 13px auto auto 14px; }
+.lqb_slide .weixin:hover .box {
+	display:block;
+}
+.phone a{
+	background-position:-654px -515px;
+}
+.phone:hover a{
+	background-position:-654px -436px;
+}
+.QQ a{
+	background-position:-742px -515px;
+}
+.QQ:hover a{
+	background-position:-742px -436px;
+}
+.weixin a{
+	background-position:-828px -515px;
+}
+.weixin:hover a{
+	background-position:-828px -436px;
+}
