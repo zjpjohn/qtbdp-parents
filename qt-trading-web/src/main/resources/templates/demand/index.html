@@ -31,8 +31,8 @@
             <!--数据类型筛选th:href="@{/demand}+'/'+${val.id}"   th:href="@{/demand}" -->
             <p class="chose_menu floating">
                 <span>服务范围&nbsp;&nbsp;：</span>
-                <a th:class="${currentid} ? null : 'active'" data-id="0"  id="limit" onclick="return getDataByDataType(this);">不限</a>
-                <a th:each="val : ${typeModels}"  th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'" onclick="return getDataByDataType(this);">智能制造</a>
+                <a th:class="${currentid} ? null : 'active'" data-id="0"  id="limit" onclick="getDataByDataType(this);">不限</a>
+                <a th:each="val : ${typeModels}"  th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'" onclick="getDataByDataType(this);">智能制造</a>
             </p>
             <p class="filters">
                 <a data-id="1" class="active" id="buyInfo">数据众包</a>
@@ -64,7 +64,6 @@
     <!--页脚结束-->
     <script th:src="@{/tradecenter/js/query.js}"></script>
     <script th:src="@{/tradecenter/js/paging.js}"></script>
-    <script th:src="@{/tradecenter/js/demand.js}"></script>
     <script th:src="@{/tradecenter/js/pagedata.js}"></script>
     <script th:src="@{/tradecenter/js/timeFormat.js}"></script>
 
@@ -73,7 +72,13 @@
         {{each(i,prod) list}}
         <li>
             <div class="lf">
-                <p class="list_title">${$item._substr(prod.designation,20)}<span>${$item._time(prod.toDate)}</span> </p>
+                <p class="list_title">${$item._substr(prod.designation,20)}
+                 {{if $item._time(prod.toDate)=="已截止"}}
+                 <span class="over">${$item._time(prod.toDate)}</span>
+                {{else}}
+                <span>${$item._time(prod.toDate)}</span>
+                {{/if}}
+                </p>
                 <p class="list_info">${$item._substr(prod.description,60)}</p>
                 <p class="list_bot">
                     <span>数据规模：${prod.dataScale}条</span>
@@ -84,7 +89,11 @@
             <div class="rt list_rt">
                 <h1>￥${prod.expFee}</h1>
                 <p> 0人已经接单</p>
-                <a href="javascript:;"> 立即接单</a>
+                {{if $item._time(prod.toDate)=="已截止"}}
+                 <a class="over">接单结束</a>
+                {{else}}
+                <a href="javascript:;">立即接单</a>
+                {{/if}}
             </div>
          </li>
         {{/each}}
@@ -95,7 +104,13 @@
         {{each(i,prod) list}}
         <li>
             <div class="lf">
-                <p class="list_title">${$item._substr(prod.designation,20)}<span> ${$item._time(prod.toDate)}</span> </p>
+                <p class="list_title">${$item._substr(prod.designation,20)}
+                 {{if $item._time(prod.toDate)=="已截止"}}
+                 <span class="over">${$item._time(prod.toDate)}</span>
+                {{else}}
+                <span>${$item._time(prod.toDate)}</span>
+                {{/if}}
+                </p>
                 <p class="list_info">${$item._substr(prod.description,60)}</p>
 
                 <p class="list_bot">
@@ -107,99 +122,60 @@
             <div class="rt list_rt">
                 <h1>${prod.expFee}</h1>
                 <p> 0人已经接单</p>
-                <a href="javascript:;"> 立即接单</a>
+               {{if $item._time(prod.toDate)=="已截止"}}
+                 <a class="over">接单结束</a>
+                {{else}}
+                <a href="javascript:;">立即接单</a>
+                {{/if}}
             </div>
          </li>
         {{/each}}
     </script>
 
     <script th:inline="javascript">
-
-        // 页面请求参数 数据众包
-        var settings = {
-            url: "/api/demand/buyInfos",            // 请求地址
-            tmpl_id: "#tmpl_demand_buyInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-            target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
-            pager_id: "#pageTool",           // 分页html元素标签
-            params: [{key:"dataType",value:[[${currentid}]] }]
+        function getData(dataType){
+            // 数据众包
+            var settings = {
+                url: "/api/demand/buyInfos",
+                tmpl_id: "#tmpl_demand_buyInfos" ,
+                target: "#data_list" ,
+                pager_id: "#pageTool",
+                params: [{key:"dataType",value:dataType }]
+            }
+            //方案召集
+            var settings_sos = {
+                url: "/api/demand/sosInfos",
+                tmpl_id: "#tmpl_demand_sosInfos" ,
+                target: "#data_list" ,
+                pager_id: "#pageTool",
+                params: [{key:"dataType",value:dataType }]
+            }
+            var flag = $("#buyInfo").is(".active");
+            if(flag){
+                pageData.products(settings);
+            }else{
+                pageData.products(settings_sos) ;
+            }
         }
-        //方案召集
-        var settings_sos = {
-            url: "/api/demand/sosInfos",            // 请求地址
-            tmpl_id: "#tmpl_demand_sosInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-            target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
-            pager_id: "#pageTool",           // 分页html元素标签
-            params: [{key:"dataType",value:[[${currentid}]] }]
-        }
-
-        // 初始化数据
-/*        pageData.products(settings) ;
-
-        pageData.products(settings_sos) ;
-
-        pageData.active(settings) ;*/
-        var flag = $("#buyInfo").is(".active");
-        if(flag){
-            pageData.products(settings);
-        }else{
-            pageData.products(settings_sos) ;
-        }
+        getData(null);
 
     </script>
     <script>
-        function changeDate(){
-            var flag = $("#buyInfo").is(".active");
-            if(flag){
-                pageData.products(settings) ;
-            }else{
-                var dataTypeNew = null;
-                var settings_sos_new = {
-                    url: "/api/demand/sosInfos",            // 请求地址
-                    tmpl_id: "#tmpl_demand_sosInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-                    target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
-                    pager_id: "#pageTool",           // 分页html元素标签
-                    params: [{key:"dataType",value:dataTypeNew }]
-                }
-                pageData.products(settings_sos_new) ;
-                $("#limit").addClass("active");
-            }
-        }
-
+        //数据众包、方案召集切换
+         $(".filters>a").unbind("click").click(function(){
+             $(".chose_menu>a").removeClass("active");
+             $("#limit").addClass("active");
+             $(this).addClass("active").siblings(".active").removeClass("active");
+             getData(null);
+         });
+         //服务范围点击
         function getDataByDataType(data) {
-            //数据众包 路径
-            var flag = $("#buyInfo").is(".active");
-            if(flag){
-                var dataTypeNew2= $(data).attr("data-id");
-                if(dataTypeNew2 == 0){
-                    dataTypeNew2 = null;
-                }
-                var settings = {
-                    url: "/api/demand/buyInfos",            // 请求地址
-                    tmpl_id: "#tmpl_demand_buyInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-                    target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
-                    pager_id: "#pageTool",           // 分页html元素标签
-                    params: [{key:"dataType",value:dataTypeNew2 }]
-                }
-                pageData.products(settings) ;
-                return false;
-
-
-            }else {
-                //方案召集 路径
-                var dataTypeNew = $(data).attr("data-id");
-                if(dataTypeNew == 0){
-                    dataTypeNew = null;
-                }
-                var settings_sos_new = {
-                    url: "/api/demand/sosInfos",            // 请求地址
-                    tmpl_id: "#tmpl_demand_sosInfos" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-                    target: "#data_list" ,       // 替换html元素，如：#div_id 或 .class_name
-                    pager_id: "#pageTool",           // 分页html元素标签
-                    params: [{key:"dataType",value:dataTypeNew }]
-                }
-                pageData.products(settings_sos_new) ;
-                return false;
+            $(this).addClass("active").siblings(".active").removeClass("active");
+            var dataTypeNew= $(data).attr("data-id");
+            if(dataTypeNew == 0){
+                dataTypeNew = null;
             }
+            getData(dataTypeNew);
         }
         nav(3);
     </script>
