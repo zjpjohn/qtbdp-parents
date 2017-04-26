@@ -66,7 +66,11 @@ $(document).ready(function(){
     //如果是支付订单
     if(getQueryString("order")=="4"){
         $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
-        $(".orderpay").addClass("active").siblings(".active").removeClass("active");
+        if($("#orderState")==3){
+            getMyOrder();
+        }else{
+            $(".orderpay").addClass("active").siblings(".active").removeClass("active");
+        }
 
     }else{
         var settings={
@@ -100,26 +104,6 @@ $(document).ready(function(){
 
 
 });
-//获取概览数据封装
-function userGailan(url,id){
-    $.ajax({
-        type:"GET",
-        dataType:"json",
-        url: url ,
-        ansync:true,
-        data:{
-            userId:userId
-        },
-        xhrFields:{
-            withCredentials:true
-        },
-        success:function(data){
-            console.log(data);
-            $(id).html(data);
-        }
-    });
-}
-
 
 /**点击切换右侧页面*/
 
@@ -141,17 +125,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
             break;
         case "myorder":
             //我的订单数据订单
-            $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
-            $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
-            var settings = {
-                url: "/api/trade/orders",
-                tmpl_id: "#tmpl_dataorder" ,
-                target: "#orderList2" ,
-                pager_id: "#orderPage2",
-                params: [{key:"productId",value:userId }],
-                size: 10
-            }
-            pageData.products(settings) ;
+            getMyOrder();
             break;
         case "demandorder":
             //我的订单需求订单
@@ -170,10 +144,10 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
             $(".fabu_filter>a:first-child").addClass("active").siblings().removeClass("active");
             //页面请求参数
             var settings={
-                url: "/api/demand/buyInfos",            // 请求地址
-                tmpl_id: "#tmpl_release" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-                target: "#replace_crow" ,       // 替换html元素，如：#div_id 或 .class_name
-                pager_id: "#crowdPage",           // 分页html元素标签
+                url: "/api/demand/buyInfos",
+                tmpl_id: "#tmpl_release" ,
+                target: "#replace_crow" ,
+                pager_id: "#crowdPage",
                 params: [{key:"userId",value:userId}],
                 size: 10
             }
@@ -187,10 +161,10 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
 
             //页面请求参数
             var settings={
-                url: "/api/demand/sosInfos",            // 请求地址
-                tmpl_id: "#tmpl_scheme" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-                target: "#tmpl_project" ,       // 替换html元素，如：#div_id 或 .class_name
-                pager_id: "#schemePage",           // 分页html元素标签
+                url: "/api/demand/sosInfos",
+                tmpl_id: "#tmpl_scheme" ,
+                target: "#tmpl_project" ,
+                pager_id: "#schemePage",
                 params: [{key:"userId",value:userId}],
                 size: 10
             }
@@ -202,9 +176,9 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
             $(".pereach>li:nth-child(2)").addClass("active").siblings().removeClass("active");
 
             var settings={
-                url: "/api/user",            // 请求地址
-                tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-                target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
+                url: "/api/user",
+                tmpl_id: "#tmpl_personals" ,
+                target: "#personaldata" ,
                 params: [{key:"id",value:userId}],
             }
             pageData.products(settings) ;
@@ -213,6 +187,20 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
     }
 
 });
+//获取我的订单需求订单数据封装
+function getMyOrder(){
+    $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
+    $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
+    var settings = {
+        url: "/api/trade/orders",
+        tmpl_id: "#tmpl_dataorder" ,
+        target: "#orderList2" ,
+        pager_id: "#orderPage2",
+        params: [{key:"productId",value:userId }],
+        size: 10
+    }
+    pageData.products(settings) ;
+}
 
 //点击成为数据服务商 整个li可以跳转
 $(".pereach>li:nth-child(6)").click(function(){

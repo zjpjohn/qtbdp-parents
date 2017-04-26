@@ -374,16 +374,17 @@
                 <div >成为数据服务商</div>
                 <!-- 订单支付开始 -->
                 <div class="orderpay rt_tbs">
+                    <p id="orderState" th:text="${order.orderState}" style="display:none;"></p>
                     <h2>
                         <i></i>
                         订单支付
                     </h2>
                     <div>
-                        <h2>全国各地区调频广播频率表</h2>
-                        <h1 class="color">￥4593.60</h1>
-                        <p>订单编号：67849598623537298672</p>
+                        <h2 th:text="${order.orderSubject}" id="orderTitle"></h2>
+                        <h1 class="color" th:text="'￥'+${order.amount}" id="orderAmount"></h1>
+                        <p th:text="'订单编号：'+${order.orderNo}" id="orderNo"></p>
                         <p>订单类型：订单购买</p>
-                        <p>订单详情：<span class="color">整包</span></p>
+                        <p>订单详情：<span class="color" th:text="${order.productType} == 2? '整包': '条目'"></span></p>
                         <p>购买数量：<span cladd="color">1</span>份</p>
                         <p class="pay_btns">
                             <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
@@ -654,11 +655,11 @@
         usercenter.userSubmit() ;
 
         function pay() {
-            var abc = {"orderNo":"199302151619","amount":"0.01","subject":"测试支付宝付款接口"};
+            var orderData = {"orderNo":$("#orderNo").html(),"amount":$("#orderAmount").html(),"subject":$("#orderTitle").html()};
             $.ajax({
                 url: '/api/trade/alipayapi',
                 type: 'post',
-                data: JSON.stringify(abc),//$.parseJSON( jsonstr );
+                data: JSON.stringify(orderData),//$.parseJSON( jsonstr );
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (data) {

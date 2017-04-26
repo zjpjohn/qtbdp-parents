@@ -83,7 +83,7 @@
             </p>
             <div class="list_mask">
                 <p><i>￥1.00</i>（10积分）</p>
-                <a href="javacript:;" class="list_buy" >购买</a>
+                <a class="list_buy" onclick="buy(${item.id},1);">购买</a>
                 <!--<a href="javacript:;" class="list_see">查看详情</a>-->
             </div>
         </li>
@@ -111,13 +111,11 @@
 
         //点击购买数据包
         $("#buydata").click(function(){
-            location.href="/getOrderInfoAndGoto/"+[[${prod.id}]]+"/2?order=4" ;
+            buy([[${prod.id}]],2);
         });
-
-        //点击购买数据条目
-        $(".list_buy").click(function () {
-
-        });
+        function buy(id,n){
+            location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
+        }
     </script>
 </body>
 </html>
