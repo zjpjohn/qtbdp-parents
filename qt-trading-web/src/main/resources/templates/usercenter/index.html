@@ -30,7 +30,7 @@
                 <p class="pername perphone"><a th:text="${user.phone}"></a></p>
                 <p class="perdata">
                     <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
-                    <a class="preinfo rt" href="javascript:;">完善资料</a>
+                    <a class="preinfo rt" data-class="persinfo"  id="perfectdatum" href="javascript:;">完善资料</a>
                 </p>
 
                 <ul class="pereach lf floating">
@@ -403,10 +403,13 @@
     <!--个人中心-个人信息-->
     <script id="tmpl_personals" type="text/x-jquery-tmpl">
         <form action="" id="perdetail">
-            <input type="hidden" name="id" value="1"/>
+            <input type="hidden" name="id" value="${id}"/>
             <div class="headimgs">
                 <img src="${head}" onerror="this.src='/tradecenter/images/user_img.png'" alt="" class="peronimg"/>
-                <a href="javascript:;" class="inputimg">上传新的头像<input type="file" /></a>
+                <a href="javascript:;" class="inputimg">上传新的头像
+                    <input type="file"  id="upheadimg"/>
+                    <input type="hidden" name="head" id="realHead">
+                </a>
                 <a href="javascript:;" class="savechange rt" id="savealter">保存更改</a>
             </div>
 
@@ -429,8 +432,9 @@
                 </div>-->
 
                 <p class="pers_names">用户类型</p>
-                <input type="text" class="pers_input" value="${userType}" name="userType"/>
-                <br/> <a href="javascript:;">成为数据服务商</a>
+                <p class="pers_input pers_geren">个人</p>
+                <!--<input type="text" class="pers_input" value="${userType}" name="userType"/>-->
+                <a href="javascript:;">成为数据服务商</a>
 
                 <p class="pers_names">密码</p>
                 <input type="password" class="pers_input" value="${pwd}" name="pwd"/>
