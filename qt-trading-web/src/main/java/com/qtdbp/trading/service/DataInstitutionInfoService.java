@@ -48,6 +48,9 @@ public class DataInstitutionInfoService {
         if(infoModel == null) throw new GlobalException("服务商数据为空");
         int id = -1 ;
 
+        DataInstitutionInfoModel exsitModel = infoMapper.findDataInstitutionInfoByUserId(infoModel.getUserId()) ;
+        if(exsitModel != null) throw new GlobalException("此用户已经是服务商，无需升级。");
+
         Integer count = infoMapper.insertInstitution(infoModel) ;
         if(count != null && count > 0) {
             id = infoModel.getId() ; // 返回服务商ID
@@ -63,4 +66,16 @@ public class DataInstitutionInfoService {
         return id ;
     }
 
+    /**
+     * 用户是否服务商
+     * @param userId
+     * @return 服务商信息
+     * @throws GlobalException
+     */
+    public DataInstitutionInfoModel findDataInstitutionByUserId(Integer userId) throws GlobalException {
+
+        if(userId == null) throw new GlobalException("用户ID为空");
+
+        return infoMapper.findDataInstitutionInfoByUserId(userId) ;
+    }
 }

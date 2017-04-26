@@ -92,7 +92,7 @@
             #{dimension}, #{demandType}, #{fromDate},
             #{toDate}, #{expFee}, #{contactsName},
             #{contactsPhone}, #{contactsEmail}, #{userId},
-            now(), 0, #{filepath}, #{dataType},
+            now(), 0, #{filePath}, #{dataType},
             #{dataTypeSub}, #{description})
     </insert>
 

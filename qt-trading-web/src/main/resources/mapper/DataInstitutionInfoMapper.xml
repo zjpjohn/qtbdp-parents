@@ -61,4 +61,17 @@
         </collection>
     </resultMap>
 
+    <!-- 通过用户ID查询服务商 -->
+    <select id="findDataInstitutionInfoByUserId" parameterType="int" resultType="com.qtdbp.trading.model.DataInstitutionInfoModel">
+        SELECT
+            type,
+            designation,
+            service_type AS serviceType,
+            abstracts
+        FROM
+            data_institution_info
+        WHERE
+            user_id = #{userId}
+    </select>
+
 </mapper>
