@@ -79,6 +79,24 @@ $(document).ready(function(){
         pageData.products(settings) ;
 
     }
+    //判断是否成为服务商
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "/api/institution/exist",
+        ansync: true,
+        xhrFields: {
+            widthCredentials: true
+        },
+        data: {
+            userId: userId
+        },
+        success: function (data) {
+            if (data.isExist) {
+                $("#joinservice2").remove();
+            }
+        }
+    });
 
 
 });
@@ -248,17 +266,6 @@ function check2(){
 $("#person_emal").blur(function(){
     check2();
 });
-
-
-/*
-//我的发布 右侧点击数据众包、召集方案 切换
-$(".filter_btn>a").click(function(){
-    $(this).addClass("active").siblings(".active").removeClass("active");
-    var  switcherdata=$(this).attr("data-id");
-    $(switcherdata).addClass("active").siblings(".active").removeClass("active");
-
-});
-*/
 
 
 

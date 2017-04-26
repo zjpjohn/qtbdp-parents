@@ -28,7 +28,6 @@
                 </div>
                 <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
                 <p class="pername perphone"><a th:text="${user.phone}"></a></p>
-                <input type="hidden" id="userId" value="${user.userId}">
                 <p class="perdata">
                     <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
                     <a class="preinfo rt" href="javascript:;">完善资料</a>
@@ -645,12 +644,6 @@
             </td>
         </tr>
     {{/if}}
-    </script>
-
-    <script>
-
-        var userId=$("#userId").val();
-
     </script>
     <script th:src="@{/tradecenter/js/usercenter.js}"></script>
     <script>
