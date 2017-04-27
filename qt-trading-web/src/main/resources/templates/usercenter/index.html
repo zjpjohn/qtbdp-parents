@@ -207,7 +207,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="5">
-                                            <a href="/datamart" class="leavedata">前往数据商城</a>
+                                            <a href="javascript:;" class="leavedata">前往数据商城</a>
                                         </td>
                                     </tr>
 
@@ -378,7 +378,8 @@
                 </div>
                 <!-- 订单支付结束 -->
             </div>
-
+            <!-- 支付回调 -->
+            <div id="aliBack" style="dispay:none;"></div>
         </div>
 
     </div>
@@ -434,18 +435,14 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                {{if order.productType==1}}
-                <td>条目</td>
-                {{else}}
-                <td>整包</td>
-                {{/if}}
-                <td>${$item._substr(order.orderSubject,18)}</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState==1}}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
+                        <a href="javascript:;" class="gopay" onclick="gopay(${order.productId},${order.productType});">去支付</a>
                     </td>
                 {{else order.orderState==2}}
                      <td class="paid">已撤销</td>
@@ -455,7 +452,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="${order.downloadUrl}" class="download">下载</a>
+                        <a href="javascript:;" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -493,19 +490,15 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>${i+1}</td>
-                {{if order.productType==1}}
-                <td>条目</td>
-                {{else}}
-                <td>整包</td>
-                {{/if}}
-                <td>${$item._substr(order.orderSubject,18)}</td>
+                <td>i</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
+                        <a href="javascript:;" class="gopay" onclick="gopay(${order.productId},${order.productType});">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
@@ -515,7 +508,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="${order.downloadUrl}" class="download">下载</a>
+                        <a href="javascript:;" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -526,7 +519,7 @@
                      <div class="nodata">
                         <img src="/tradecenter/images/none.png" alt=""/>
                             <p>暂时数据订单</p>
-                            <a href="/datamart">前往数据商城</a>
+                            <a href="javascript:;">前往数据商城</a>
                     </div>
                 </td>
             </tr>
@@ -537,19 +530,15 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>${i+1}</td>
-                {{if order.productType==1}}
-                <td>条目</td>
-                {{else}}
-                <td>整包</td>
-                {{/if}}
-                <td>${$item._substr(order.orderSubject,18)}</td>
+                <td>i</td>
+                <td>${order.productType}</td>
+                <td>${order.orderSubject}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
+                        <a href="javascript:;" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
@@ -559,7 +548,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="${order.downloadUrl}" class="download">下载</a>
+                        <a href="javascript:;" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -570,7 +559,7 @@
                      <div class="nodata">
                         <img src="/tradecenter/images/none.png" alt=""/>
                             <p>暂时需求订单</p>
-                            <a href="/demand">前往需求大厅</a>
+                            <a href="javascript:;">前往需求大厅</a>
                     </div>
                 </td>
             </tr>
@@ -605,7 +594,7 @@
                  <div class="nodata">
                     <img src="/tradecenter/images/none.png" alt=""/>
                         <p>暂时没有发布数据众包</p>
-                        <a href="/demand/buy/add">前往发布数据众包</a>
+                        <a href="javascript:;">前往发布数据众包</a>
                 </div>
             </td>
         </tr>
@@ -638,7 +627,7 @@
                  <div class="nodata">
                     <img src="/tradecenter/images/none.png" alt=""/>
                         <p>暂时没有发布方案召集</p>
-                        <a href="/demand/sos/add">前往发布方案召集</a>
+                        <a href="javascript:;">前往发布方案召集</a>
                 </div>
             </td>
         </tr>
@@ -646,6 +635,8 @@
     </script>
     <script>
         var userId=$("#userId").val();
+
+
     </script>
 
     <!-- 订单支付 -->
@@ -667,7 +658,7 @@
             <p>购买数量：<span cladd="color">1</span>份</p>
             <p class="pay_btns">
                 <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
-                <a href="javascript:;" class="alibtn" onclick="pay(${orderNo},${amount},${orderSubject});">支付宝付款</a>
+                <a href="javascript:;" class="alibtn" onclick="pay('${orderNo}',${amount},'${orderSubject}');">支付宝付款</a>
             </p>
         </div>
     </script>
