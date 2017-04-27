@@ -21,8 +21,9 @@
     <div class="schall">
         <div class="scalmin">
             <p class="scaltop">
-                <a th:href="@{/demand/sos/add}" class="">方案召集</a>或
                 <a th:href="@{/demand/buy/add}" class="active">数据众包</a>
+                <a th:href="@{/demand/sos/add}" class="">方案召集</a>
+
             </p>
             <form class="scalsection" id="schemeForm">
                 <input type="hidden" th:value="${user.id}" name="userId" id="userId">
