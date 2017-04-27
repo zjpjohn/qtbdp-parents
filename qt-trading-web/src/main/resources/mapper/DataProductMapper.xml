@@ -65,7 +65,8 @@
         p.editor_time,
         p.score,
         p.data_type_props,
-        p.p_score
+        p.p_score,
+        p.file_url
         FROM
         data_product as p
         WHERE
@@ -85,6 +86,7 @@
         <result column="score" property="score" />
         <result column="data_type_props" property="dataTypeProps" />
         <result column="p_score" property="pScore" />
+        <result column="file_url" property="fileUrl"/>
     
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
