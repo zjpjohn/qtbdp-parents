@@ -1,4 +1,36 @@
-$(document).ready(function(){
+//获取我的订单需求订单数据封装
+function getMyOrder(){
+    $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
+    $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
+    var settings = {
+        url: "/api/trade/orders",
+        tmpl_id: "#tmpl_dataorder" ,
+        target: "#orderList2" ,
+        pager_id: "#orderPage2",
+        params: [{key:"productId",value:userId }],
+        size: 10
+    }
+    pageData.products(settings) ;
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        url: "/api/trade/count" ,
+        ansync:true,
+        data:{
+            userId:userId
+        },
+        xhrFields:{
+            withCredentials:true
+        },
+        success:function(data){
+            $(".allorders").html(data.pageInfo.authorizeOrder+data.pageInfo.transactionOrder);
+            $(".dataorders").html(data.pageInfo.authorizeOrder);
+            $(".demandorders").html(data.pageInfo.transactionOrder);
+        }
+    });
+}
+//获取概览最新订单 最新发布 订单数量 发布数量函数封装
+function getGailan(){
     //订单数量
     $.ajax({
         type:"GET",
@@ -38,9 +70,9 @@ $(document).ready(function(){
 
     // 概览 最新订单
     var settings = {
-        url: "/api/trade/neworders",      // 请求地址
-        tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
-        target: "#orderList1" ,       // 替换html元素id
+        url: "/api/trade/neworders",
+        tmpl_id: "#tmpl_neworder" ,
+        target: "#orderList1" ,
         params: [{key:"userId",value:userId }]
     }
     pageData.products(settings) ;
@@ -53,36 +85,27 @@ $(document).ready(function(){
         params: [{key:"userId",value:userId }]
     }
     pageData.products(settings) ;
-
-
-
-
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
-    }
-
+}
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
+$(document).ready(function(){
+    usercenter.userSubmit() ;
     //如果是支付订单
     if(getQueryString("order")=="4"){
         $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
-        if($("#orderState")==3){
+        if(orderState==3){
             getMyOrder();
         }else{
+            $("#tmpl_orderpay").tmpl(order).appendTo("#orderPay");
             $(".orderpay").addClass("active").siblings(".active").removeClass("active");
         }
-
     }else{
-        var settings={
-            url: "/api/user",            // 请求地址
-            tmpl_id: "#tmpl_personals" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-            target: "#personaldata" ,       // 替换html元素，如：#div_id 或 .class_name
-            params: [{key:"id",value:userId}],
-
-        }
-        pageData.products(settings) ;
-
+        getGailan();
     }
+
     //判断是否成为服务商
     $.ajax({
         type: "GET",
@@ -101,8 +124,6 @@ $(document).ready(function(){
             }
         }
     });
-
-
 });
 
 /**点击切换右侧页面*/
@@ -115,10 +136,9 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
         case "overview":
             // 概览 最新订单
             var settings = {
-                url: "/api/trade/neworders",      // 请求地址
-                tmpl_id: "#tmpl_neworder" ,     //  tmpl 模板元素id
-                target: "#orderList1" ,       // 替换html元素id
-                // pager_id: "#pageTool",           // 分页
+                url: "/api/trade/neworders",
+                tmpl_id: "#tmpl_neworder" ,
+                target: "#orderList1" ,
                 params: [{key:"userId",value:userId }]
             }
             pageData.products(settings) ;
@@ -187,27 +207,31 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
     }
 
 });
-//获取我的订单需求订单数据封装
-function getMyOrder(){
-    $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
-    $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
-    var settings = {
-        url: "/api/trade/orders",
-        tmpl_id: "#tmpl_dataorder" ,
-        target: "#orderList2" ,
-        pager_id: "#orderPage2",
-        params: [{key:"productId",value:userId }],
-        size: 10
-    }
-    pageData.products(settings) ;
+
+//订单支付
+function pay(no,amount,subject) {
+    var orderData = {"orderNo":no,"amount":amount,"subject":subject};
+    $.ajax({
+        url: '/api/trade/alipayapi',
+        type: 'post',
+        data: JSON.stringify(orderData),//$.parseJSON( jsonstr );
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data) {
+            if(data != null){
+                /*var content = data.pageInfo;
+                 var htmlData = content.sHtmlText;*/
+                layer.open({
+                    type: 1,
+                    content: data.pageInfo.sHtmlText //这里content是一个普通的String
+                });
+            }
+        },
+        error: function () {
+
+        }
+    });
 }
-
-//点击成为数据服务商 整个li可以跳转
-$(".pereach>li:nth-child(6)").click(function(){
-    location.href="/institution/add";
-
-});
-
 
 //点击我的账户  余额明细、积分明细
 $(".convertye>a").click(function(){

@@ -38,15 +38,13 @@ var pageData = {
             xhrFields:{
                 withCredentials:true
             },
-           /* dataType:"jsonp",
-            jsonpCallback:"callback",*/
             beforeSend: function() {
                 _loadding.show() ;
             },
             success:function(data){
                 //console.log(data);
                 if(data && data.pageInfo) {
-                    console.log(data.pageInfo);
+                    //console.log(data.pageInfo);
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo, {
 
@@ -74,15 +72,6 @@ var pageData = {
                         _repstr :function(str2,i){
                             return pageData._replacestr(str2,i);
                         }
-
-
-
-
-
-
-
-
-
 
                     }).appendTo(_target);
 

@@ -373,24 +373,8 @@
                 <!-- 我的发布结束-->
                 <div >成为数据服务商</div>
                 <!-- 订单支付开始 -->
-                <div class="orderpay rt_tbs">
-                    <p id="orderState" th:text="${order.orderState}" style="display:none;"></p>
-                    <h2>
-                        <i></i>
-                        订单支付
-                    </h2>
-                    <div>
-                        <h2 th:text="${order.orderSubject}" id="orderTitle"></h2>
-                        <h1 class="color" th:text="'￥'+${order.amount}" id="orderAmount"></h1>
-                        <p th:text="'订单编号：'+${order.orderNo}" id="orderNo"></p>
-                        <p>订单类型：订单购买</p>
-                        <p>订单详情：<span class="color" th:text="${order.productType} == 2? '整包': '条目'"></span></p>
-                        <p>购买数量：<span cladd="color">1</span>份</p>
-                        <p class="pay_btns">
-                            <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
-                            <a href="javascript:;" class="alibtn" onclick="pay();">支付宝付款</a>
-                        </p>
-                    </div>
+                <div class="orderpay rt_tbs" id="orderPay">
+
                 </div>
                 <!-- 订单支付结束 -->
             </div>
@@ -445,10 +429,6 @@
 
         </form>
     </script>
-
-
-
-
     <!-- 最新订单tpml模板 -->
     <script id="tmpl_neworder" type="text/x-jquery-tmpl">
         {{if list.length > 0}}
@@ -650,37 +630,43 @@
         </tr>
     {{/if}}
     </script>
+    <!-- 订单支付 -->
+    <script id="tmpl_orderpay" type="text/x-jquery-tmpl">
+        <h2>
+            <i></i>
+            订单支付
+        </h2>
+        <div>
+            <h2 id="orderTitle">${orderSubject}</h2>
+            <h1 class="color" id="orderAmount">￥ ${amount}</h1>
+            <p id="orderNo">订单编号：${orderNo}</p>
+            <p>订单类型：订单购买</p>
+            {{if productType==2}}
+            <p>订单详情：<span class="color">整包</span></p>
+            {{else}}
+            <p>订单详情：<span class="color" >条目</span></p>
+            {{/if}}
+            <p>购买数量：<span cladd="color">1</span>份</p>
+            <p class="pay_btns">
+                <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
+                <a href="javascript:;" class="alibtn" onclick="pay(${orderNo},${amount},${orderSubject});">支付宝付款</a>
+            </p>
+        </div>
+    </script>
+
     <script th:src="@{/tradecenter/js/usercenter.js}"></script>
     <script>
-        usercenter.userSubmit() ;
+        var order = [[${order}]];
+        var user = [[${user}]];
+        var orderState=[[${orderState}]];
 
-        function pay() {
-            var orderData = {"orderNo":$("#orderNo").html(),"amount":$("#orderAmount").html(),"subject":$("#orderTitle").html()};
-            $.ajax({
-                url: '/api/trade/alipayapi',
-                type: 'post',
-                data: JSON.stringify(orderData),//$.parseJSON( jsonstr );
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                success: function (data) {
-                    if(data != null){
-                        var content = data.pageInfo;
-                        var htmlData = content.sHtmlText;
-                        layer.open({
-                            type: 1,
-                            content: content.sHtmlText //这里content是一个普通的String
-                        });
-                    }
-                },
-                error: function () {
 
-                }
-            });
-        }
+
+
     </script>
     <script th:inline="javascript">
-        var pojo = [[${order}]];
-        var user = [[${user}]];
+
+
     </script>
 </body>
 </html>
