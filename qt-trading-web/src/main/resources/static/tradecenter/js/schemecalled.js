@@ -124,7 +124,9 @@ var crowsubmit={
                             function(index){
                                 layer.close(index);
                                 //location.href="/demand";
+
                             });
+                        history.go(-1);
                     },
                     error:function(data){
                         console.log("提交失败");

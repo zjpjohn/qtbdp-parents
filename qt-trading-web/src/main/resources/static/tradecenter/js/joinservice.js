@@ -125,29 +125,57 @@ function checkJoin(){
 var joinsubmit={
     scheme:function(){
         $("#formSubmit").unbind("click").click(function(){
+            var me=this;
             if(!checkJoin()){
                 return false;
-            }
-            var _data = joinsubmit._formatparam($("#joinForm").serializeArray()) ;
-
-            if($(this).attr("class").indexOf("disabled")==-1){
-                var me=this;
+            }else{
                 $.ajax({
-                    dataType: "text",
-                    url: "/api/institution",
-                    type: "post",
-                    contentType:"application/json",
-                    data: _data,
-                    success: function(data){
-                        layer.msg("您已成功提交信息，请耐心等待审核结果",{icon:6});
-
-                      //  location.href="/fedration";
+                    type: "GET",
+                    dataType: "json",
+                    url: "/api/institution/exist",
+                    ansync: true,
+                    xhrFields: {
+                        widthCredentials: true
                     },
-                    error:function(data){
-                        console.log("提交失败");
+                    data: {
+                        userId: userId
+                    },
+                    success: function (data) {
+
+                        if (data.isExist) {
+                            layer.msg("您已经加盟数据服务商了", {icon: 6});
+                            $(me).addClass("disabled");
+
+                        } else {
+                            //location.href = "/institution/add";
+                            var _data = joinsubmit._formatparam($("#joinForm").serializeArray()) ;
+
+                            if(!$(me).hasClass("disabled")){
+
+                                $.ajax({
+                                    dataType: "text",
+                                    url: "/api/institution",
+                                    type: "post",
+                                    contentType:"application/json",
+                                    data: _data,
+                                    success: function(data){
+                                        layer.confirm('您已成功提交加盟信息，请耐心等待审核结果', {
+                                            btn: ['确定'] //按钮
+                                        }, function(){
+                                            history.go(-1);
+                                        });
+                                    },
+                                    error:function(data){
+                                        console.log("提交失败");
+                                    }
+                                });
+                            }
+                        }
                     }
                 });
             }
+
+
 
         });
     },

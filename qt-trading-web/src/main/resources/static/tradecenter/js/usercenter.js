@@ -55,7 +55,6 @@ function getfabuNum(){
         }
     });
 }
-//获取概览
 function getGailan(){
     getorderNum();
     getfabuNum();
@@ -111,7 +110,7 @@ $(document).ready(function(){
         },
         success: function (data) {
             if (data.isExist) {
-                $("#joinservice2").hide();
+                $("#joinservice2").css("display","none");
             }
         }
     });
