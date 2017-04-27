@@ -125,6 +125,7 @@ function checkJoin(){
 var joinsubmit={
     scheme:function(){
         $("#formSubmit").unbind("click").click(function(){
+            var me=this;
             if(!checkJoin()){
                 return false;
             }else{
@@ -140,16 +141,17 @@ var joinsubmit={
                         userId: userId
                     },
                     success: function (data) {
+
                         if (data.isExist) {
                             layer.msg("您已经加盟数据服务商了", {icon: 6});
-
+                            $(me).addClass("disabled");
 
                         } else {
                             //location.href = "/institution/add";
                             var _data = joinsubmit._formatparam($("#joinForm").serializeArray()) ;
 
-                            if($(this).attr("class").indexOf("disabled")==-1){
-                                var me=this;
+                            if(!$(me).hasClass("disabled")){
+
                                 $.ajax({
                                     dataType: "text",
                                     url: "/api/institution",
