@@ -300,18 +300,6 @@ public class DataTradeApi {
     }
 
     /**
-     * 支付回跳
-     * @return
-     * @throws UnsupportedEncodingException
-     */
-    @ApiOperation(value = "支付宝同步回调", notes = "{}")
-    @RequestMapping(value = "/alipay/returnUrl")
-    public String returnUrl(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
-        String reurlid = new String(request.getParameter("extra_common_param").getBytes("ISO-8859-1"),"UTF-8");
-        return reurlid;
-    }
-
-    /**
      * 输出信息到页面
      * @param response
      * @param msg

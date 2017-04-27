@@ -49,11 +49,11 @@
                 <div class="overview2 active">
                     <ul class="view_top floating">
                         <li>
-                            <h1>246</h1>
+                            <h1>-</h1>
                             <p class="color">积分</p>
                         </li>
                         <li>
-                            <h1>35</h1>
+                            <h1>-</h1>
                             <p>余额（元）</p>
                         </li>
                         <li>
@@ -224,7 +224,7 @@
                 <div class="myorder2 rt_tbs">
                     <h2>我的订单：<span class="color allorders"></span></h2>
                     <p>
-                        数据订单：<span class="color dataorders">6</span>
+                        数据订单：<span class="color dataorders"></span>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         需求订单：<span class="color demandorders"></span>
                     </p>
@@ -373,23 +373,8 @@
                 <!-- 我的发布结束-->
                 <div >成为数据服务商</div>
                 <!-- 订单支付开始 -->
-                <div class="orderpay rt_tbs">
-                    <h2>
-                        <i></i>
-                        订单支付
-                    </h2>
-                    <div>
-                        <h2>全国各地区调频广播频率表</h2>
-                        <h1 class="color">￥4593.60</h1>
-                        <p>订单编号：67849598623537298672</p>
-                        <p>订单类型：订单购买</p>
-                        <p>订单详情：<span class="color">整包</span></p>
-                        <p>购买数量：<span cladd="color">1</span>份</p>
-                        <p class="pay_btns">
-                            <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
-                            <a href="javascript:;" class="alibtn" onclick="pay();">支付宝付款</a>
-                        </p>
-                    </div>
+                <div class="orderpay rt_tbs" id="orderPay">
+
                 </div>
                 <!-- 订单支付结束 -->
             </div>
@@ -444,10 +429,6 @@
 
         </form>
     </script>
-
-
-
-
     <!-- 最新订单tpml模板 -->
     <script id="tmpl_neworder" type="text/x-jquery-tmpl">
         {{if list.length > 0}}
@@ -649,37 +630,39 @@
         </tr>
     {{/if}}
     </script>
+    <!-- 订单支付 -->
+    <script id="tmpl_orderpay" type="text/x-jquery-tmpl">
+        <h2>
+            <i></i>
+            订单支付
+        </h2>
+        <div>
+            <h2 id="orderTitle">${orderSubject}</h2>
+            <h1 class="color" id="orderAmount">￥ ${amount}</h1>
+            <p id="orderNo">订单编号：${orderNo}</p>
+            <p>订单类型：订单购买</p>
+            {{if productType==2}}
+            <p>订单详情：<span class="color">整包</span></p>
+            {{else}}
+            <p>订单详情：<span class="color" >条目</span></p>
+            {{/if}}
+            <p>购买数量：<span cladd="color">1</span>份</p>
+            <p class="pay_btns">
+                <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
+                <a href="javascript:;" class="alibtn" onclick="pay(${orderNo},${amount},${orderSubject});">支付宝付款</a>
+            </p>
+        </div>
+    </script>
+
     <script th:src="@{/tradecenter/js/usercenter.js}"></script>
-    <script>
-        usercenter.userSubmit() ;
-
-        function pay() {
-            var abc = {"orderNo":"199302151619","amount":"0.01","subject":"测试支付宝付款接口"};
-            $.ajax({
-                url: '/api/trade/alipayapi',
-                type: 'post',
-                data: JSON.stringify(abc),//$.parseJSON( jsonstr );
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                success: function (data) {
-                    if(data != null){
-                        var content = data.pageInfo;
-                        var htmlData = content.sHtmlText;
-                        layer.open({
-                            type: 1,
-                            content: content.sHtmlText //这里content是一个普通的String
-                        });
-                    }
-                },
-                error: function () {
-
-                }
-            });
-        }
-    </script>
     <script th:inline="javascript">
-        var pojo = [[${order}]];
+        var order = [[${order}]];
         var user = [[${user}]];
+        var orderState=[[${orderState}]];
+        /*console.log(order);
+        console.log(orderState);*/
+
     </script>
+
 </body>
 </html>

@@ -38,15 +38,13 @@ var pageData = {
             xhrFields:{
                 withCredentials:true
             },
-           /* dataType:"jsonp",
-            jsonpCallback:"callback",*/
             beforeSend: function() {
                 _loadding.show() ;
             },
             success:function(data){
                 //console.log(data);
                 if(data && data.pageInfo) {
-                    console.log(data.pageInfo);
+                    //console.log(data.pageInfo);
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo, {
 
@@ -74,15 +72,6 @@ var pageData = {
                         _repstr :function(str2,i){
                             return pageData._replacestr(str2,i);
                         }
-
-
-
-
-
-
-
-
-
 
                     }).appendTo(_target);
 
@@ -120,34 +109,31 @@ var pageData = {
     paging : function (settings) {
 
         var _c = settings.count ;
-        if(_c == 0){
-            return;
-        }else if(!_c){
-            return;
-        }
+
         var _s = settings.size ? settings.size : 12; // 默认每页12条
         var _pager = settings.pager_id ;
 
         $(_pager).empty() ; // 清空原有分页插件
+        if(settings.count>0){
+            $(_pager).Paging({
+                pagesize: _s,
+                count: _c,
+                toolbar:true,
+                callback:function(page,size,count){
 
-        $(_pager).Paging({
-            pagesize: _s,
-            count: _c,
-            toolbar:true,
-            callback:function(page,size,count){
+                    settings.curr_page = page ; // 当前页
 
-                settings.curr_page = page ; // 当前页
+                    // 条件不变，无需重新查询数据
+                    // if(!pageData._change)
+                    pageData.products(settings) ;
 
-                // 条件不变，无需重新查询数据
-                // if(!pageData._change)
-                pageData.products(settings) ;
-
-                pageData._change = false ;
-                // console.log(page);//当前页
-                // console.log(size);//每页条数
-                // console.log(count);//总页数
-            }
-        });
+                    pageData._change = false ;
+                    // console.log(page);//当前页
+                    // console.log(size);//每页条数
+                    // console.log(count);//总页数
+                }
+            });
+        }
     },
 
     /**
@@ -287,15 +273,9 @@ var pageData = {
      * @private
      */
     _formatedate: function (date) {
-
-        var newDate = new Date(date);
-
-
-        newDate = newDate.toLocaleDateString() ;
-        return newDate ;
-        // var formatedate=new Date(date);
-        // formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
-       // return formatedate;
+        var formatedate=new Date(date);
+        formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+       return formatedate;
     },
 
     /**

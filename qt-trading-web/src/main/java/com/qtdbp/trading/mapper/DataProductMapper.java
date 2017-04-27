@@ -37,4 +37,11 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return
      */
     List<DataItemModel> findItemsByProductId(DataItemModel item) ;
+
+    /**
+     * 单表查询数据条目
+     * @param id
+     * @return
+     */
+    DataItemModel findItemById(@Param("id") Integer id) ;
 }

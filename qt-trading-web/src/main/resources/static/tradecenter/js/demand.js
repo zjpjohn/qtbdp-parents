@@ -7,7 +7,7 @@ function getData(dataType){
         target: "#data_list" ,
         pager_id: "#pageTool",
         size:6,
-        params: [{key:"dataType",value:dataType }]
+        params: [{key:"dataType",value:dataType },{key:"isUsed",value:1 }]
     }
     //方案召集
     var settings_sos = {
@@ -16,7 +16,7 @@ function getData(dataType){
         target: "#data_list" ,
         pager_id: "#pageTool",
         size:6,
-        params: [{key:"dataType",value:dataType }]
+        params: [{key:"dataType",value:dataType },{key:"isUsed",value:1 }]
     }
     var flag = $("#buyInfo").is(".active");
     if(flag){
