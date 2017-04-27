@@ -64,33 +64,6 @@
 	function fabuHover(n){
 		$(".fabu_btns>a:nth-child("+n+")").addClass("active");
 	}
-
-	function joinservice() {
-        if (!userId) {
-            location.href = "/login";
-        } else {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "/api/institution/exist",
-                ansync: true,
-                xhrFields: {
-                    widthCredentials: true
-                },
-                data: {
-                    userId: userId
-                },
-                success: function (data) {
-                    if (data.isExist) {
-                        layer.msg("您已经加盟数据服务商了", {icon: 6});
-                    } else {
-                        location.href = "/institution/add";
-                    }
-                }
-            });
-        }
-
-    }
 </script>
 <!--页头结束-->
 	<div class="lqb_slide">
