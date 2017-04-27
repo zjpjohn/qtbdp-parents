@@ -555,7 +555,7 @@
 .time_btn{
     position:relative;
     padding-right:10px;
-    width:245px;
+    width:150px;
     cursor:pointer;
 }
 .time_btn>i{
@@ -563,7 +563,7 @@
     width:0px;
     height:0px;
     border:4px solid transparent;
-    right:110px;
+    right:35px;
 }
 .time_btn>i:first-child{
     top:17px;

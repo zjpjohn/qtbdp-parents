@@ -44,7 +44,7 @@ var pageData = {
             success:function(data){
                 //console.log(data);
                 if(data && data.pageInfo) {
-                    //console.log(data.pageInfo);
+                    console.log(data.pageInfo);
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo, {
 
@@ -80,7 +80,9 @@ var pageData = {
                     settings.count = data.pageInfo.total ;
 
                     // 第一次加载数据，条件变更需要重新加载分页插件
-                    if(pageData._change) pageData.paging(settings) ;
+                    if(settings.count>0) {
+                        if (pageData._change) pageData.paging(settings);
+                    }
                 }
             },
             error:function(data){
@@ -114,26 +116,26 @@ var pageData = {
         var _pager = settings.pager_id ;
 
         $(_pager).empty() ; // 清空原有分页插件
-        if(settings.count>0){
-            $(_pager).Paging({
-                pagesize: _s,
-                count: _c,
-                toolbar:true,
-                callback:function(page,size,count){
 
-                    settings.curr_page = page ; // 当前页
+        $(_pager).Paging({
+            pagesize: _s,
+            count: _c,
+            toolbar:true,
+            callback:function(page,size,count){
 
-                    // 条件不变，无需重新查询数据
-                    // if(!pageData._change)
-                    pageData.products(settings) ;
+                settings.curr_page = page ; // 当前页
 
-                    pageData._change = false ;
-                    // console.log(page);//当前页
-                    // console.log(size);//每页条数
-                    // console.log(count);//总页数
-                }
-            });
-        }
+                // 条件不变，无需重新查询数据
+                // if(!pageData._change)
+                pageData.products(settings) ;
+
+                pageData._change = false ;
+                // console.log(page);//当前页
+                // console.log(size);//每页条数
+                // console.log(count);//总页数
+            }
+        });
+
     },
 
     /**
@@ -274,7 +276,7 @@ var pageData = {
      */
     _formatedate: function (date) {
         var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+        formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
        return formatedate;
     },
 

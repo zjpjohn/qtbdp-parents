@@ -434,14 +434,18 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>${order.productType}</td>
-                <td>${order.orderSubject}</td>
+                {{if order.productType==1}}
+                <td>条目</td>
+                {{else}}
+                <td>整包</td>
+                {{/if}}
+                <td>${$item._substr(order.orderSubject,18)}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState==1}}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="gopay">去支付</a>
+                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState==2}}
                      <td class="paid">已撤销</td>
@@ -451,7 +455,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="download">下载</a>
+                        <a href="${order.downloadUrl}" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -489,15 +493,19 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>i</td>
-                <td>${order.productType}</td>
-                <td>${order.orderSubject}</td>
+                <td>${i}</td>
+                {{if order.productType==1}}
+                <td>条目</td>
+                {{else}}
+                <td>整包</td>
+                {{/if}}
+                <td>${$item._substr(order.orderSubject,18)}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="gopay">去支付</a>
+                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
@@ -507,7 +515,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="download">下载</a>
+                        <a href="${order.downloadUrl}" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -529,15 +537,19 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>i</td>
-                <td>${order.productType}</td>
-                <td>${order.orderSubject}</td>
+                <td>${i}</td>
+                {{if order.productType==1}}
+                <td>条目</td>
+                {{else}}
+                <td>整包</td>
+                {{/if}}
+                <td>${$item._substr(order.orderSubject,18)}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="gopay">去支付</a>
+                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
@@ -547,7 +559,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="download">下载</a>
+                        <a href="${order.downloadUrl}" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>

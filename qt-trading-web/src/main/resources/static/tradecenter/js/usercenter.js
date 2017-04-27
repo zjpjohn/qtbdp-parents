@@ -1,5 +1,6 @@
 //获取我的订单需求订单数据封装
 function getMyOrder(){
+    getorderNum();
     $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
     $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
     $(".myorder2").addClass("active").siblings(".active").removeClass("active");
@@ -12,6 +13,10 @@ function getMyOrder(){
         size: 10
     }
     pageData.products(settings) ;
+}
+//获取概览最新订单 最新发布 订单数量 发布数量函数封装
+//订单数量
+function getorderNum(){
     $.ajax({
         type:"GET",
         dataType:"json",
@@ -30,27 +35,8 @@ function getMyOrder(){
         }
     });
 }
-//获取概览最新订单 最新发布 订单数量 发布数量函数封装
-function getGailan(){
-    //订单数量
-    $.ajax({
-        type:"GET",
-        dataType:"json",
-        url: "/api/trade/count" ,
-        ansync:true,
-        data:{
-            userId:userId
-        },
-        xhrFields:{
-            withCredentials:true
-        },
-        success:function(data){
-            $(".allorders").html(data.pageInfo.authorizeOrder+data.pageInfo.transactionOrder);
-            $(".dataorders").html(data.pageInfo.transactionOrder);
-            $(".demandorders").html(data.pageInfo.authorizeOrder);
-        }
-    });
-    //发布数量
+//发布数量
+function getfabuNum(){
     $.ajax({
         type:"GET",
         dataType:"json",
@@ -68,7 +54,11 @@ function getGailan(){
             $(".schemes").html(data.pageInfo.sosinfo);
         }
     });
-
+}
+//获取概览
+function getGailan(){
+    getorderNum();
+    getfabuNum();
     // 概览 最新订单
     var settings = {
         url: "/api/trade/neworders",
@@ -121,7 +111,7 @@ $(document).ready(function(){
         },
         success: function (data) {
             if (data.isExist) {
-                $("#joinservice2").remove();
+                $("#joinservice2").hide();
             }
         }
     });
@@ -135,14 +125,8 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
     $("."+centerleft+"2").addClass("active").siblings(".active").removeClass("active");
     switch (centerleft) {
         case "overview":
-            // 概览 最新订单
-            var settings = {
-                url: "/api/trade/neworders",
-                tmpl_id: "#tmpl_neworder" ,
-                target: "#orderList1" ,
-                params: [{key:"userId",value:userId }]
-            }
-            pageData.products(settings) ;
+            // 概览
+            getGailan();
             break;
         case "myorder":
             //我的订单数据订单
@@ -160,10 +144,11 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
             }
             pageData.products(settings) ;
             break;
-        case "myrelease": //我的发布 数据众包
+        case "myrelease":
+            //我的发布 数据众包
+            getfabuNum();
             $(".pereach>li:nth-child(5)").addClass("active").siblings().removeClass("active");
             $(".fabu_filter>a:first-child").addClass("active").siblings().removeClass("active");
-            //页面请求参数
             var settings={
                 url: "/api/demand/buyInfos",
                 tmpl_id: "#tmpl_release" ,
@@ -172,15 +157,13 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
                 params: [{key:"userId",value:userId}],
                 size: 10
             }
-            // 初始化数据
             pageData.products(settings) ;
 
             break;
-        case "schemes": //我的发布  方案召集
+        case "schemes":
+            //我的发布  方案召集
             $(".pereach>li:nth-child(5)").addClass("active").siblings().removeClass("active");
             $(".fabu_filter>a:nth-child(2)").addClass("active").siblings().removeClass("active");
-
-            //页面请求参数
             var settings={
                 url: "/api/demand/sosInfos",
                 tmpl_id: "#tmpl_scheme" ,
@@ -189,13 +172,11 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
                 params: [{key:"userId",value:userId}],
                 size: 10
             }
-            // 初始化数据
-
             pageData.products(settings) ;
             break;
-        case "persinfo"://个人信息
+        case "persinfo":
+            //个人信息
             $(".pereach>li:nth-child(2)").addClass("active").siblings().removeClass("active");
-
             var settings={
                 url: "/api/user",
                 tmpl_id: "#tmpl_personals" ,
@@ -204,16 +185,9 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
             }
             pageData.products(settings) ;
             break;
-
     }
 
 });
-//点击成为数据服务商 整个li可以跳转
-$(".pereach>li:nth-child(6)").click(function(){
-    location.href="/institution/add";
-
-});
-
 
 //订单支付
 function pay(no,amount,subject) {
