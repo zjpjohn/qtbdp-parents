@@ -38,12 +38,22 @@ public class AliPayController extends BaseController{
         ModelAndView modelAndView = new ModelAndView(PAGE_USER_CENTER);
 
         SysUser user = getPrincipal() ;
+        if(user == null) {
+            modelAndView.setViewName("login");
+            return modelAndView;
+        }
 
+        String order_no = "";
         //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
         //商户订单号
-        String orderNoArr[] = request.getParameter("out_trade_no").split("：");//支付宝返回的订单编号为：订单编号:17829187298172  (所以需要截取)
-        String order_no = orderNoArr[1];
-     //   String order_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+        String orderNo = request.getParameter("out_trade_no");//支付宝返回的订单编号为：订单编号:17829187298172  (所以需要截取)
+        try{
+            order_no = orderNo.split("：")[1];
+        }catch(Exception e){
+            order_no = orderNo;
+            e.getMessage();
+        }
+        String order_no_1 = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
         System.out.println("order_no="+order_no);
         //支付宝交易号
         String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
@@ -55,6 +65,7 @@ public class AliPayController extends BaseController{
         String total_fee = new String(request.getParameter("total_fee").getBytes("ISO-8859-1"),"UTF-8");
         System.out.println("total_fee="+total_fee);
         modelAndView.addObject("orderState",0);
+        //支付成功后更新订单状态
         if("T".equals(trade_status)){
             try {
                 int i = orderService.updateOrder(order_no,trade_no);
@@ -65,7 +76,6 @@ public class AliPayController extends BaseController{
                 e.getMessage();
             }
         }
-
         return modelAndView;
     }
 }

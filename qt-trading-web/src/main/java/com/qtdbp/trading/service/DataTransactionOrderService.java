@@ -113,6 +113,7 @@ public class DataTransactionOrderService {
 
                 orderModel.setOrderSubject(product.getDesignation());
                 amount = new BigDecimal(product.getpScore()) ;
+                orderModel.setDownloadUrl(product.getFileUrl());
             } else {
 
                 DataItemModel itemModel = productMapper.findItemById(orderModel.getProductId());
@@ -139,7 +140,9 @@ public class DataTransactionOrderService {
         DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
         orderModel.setOrderState((byte)3);//改变支付状态
         orderModel.setTradeNo(tradeNo);//加入交易流水号
-        orderModel.setOrderNo(orderNo);//加入订单号 根据此号来判断更改那条数据
+        orderModel.setOrderNo(orderNo);//加入订单号 根据此号来判断更改哪条数据
+        orderModel.setPayTime(new Date());
+        orderModel.setFinishTime(new Date());
         Integer i = orderMapper.updateOrder(orderModel);
         return i;
     }
@@ -149,7 +152,7 @@ public class DataTransactionOrderService {
      * @return
      */
     public String getOrderNo() {
-        String orderNo = String.valueOf(System.currentTimeMillis())+Math.round(Math.random() * 9000 + 1000);
+        String orderNo = "qt"+String.valueOf(System.currentTimeMillis())+Math.round(Math.random() * 9000 + 1000);
         return  orderNo;
     }
 

@@ -132,8 +132,8 @@
     </select>
 
     <update id="updateOrder" parameterType="com.qtdbp.trading.model.DataTransactionOrderModel">
-           UPDATE data_transaction_order SET order_state = #{orderState} ,pay_time= now() ,
-           finish_time = now(),trade_no=#{tradeNo} WHERE order_no = #{orderNo}
+           UPDATE data_transaction_order SET order_state = #{orderState} ,pay_time= #{payTime} ,
+           finish_time = #{finishTime},trade_no=#{tradeNo} WHERE order_no = #{orderNo}
     </update>
 
 </mapper>

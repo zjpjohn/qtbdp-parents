@@ -23,20 +23,21 @@
 <form class="schall" id="formsubmits">
     <div class="scalmin">
         <p class="scaltop">
-            <a th:href="@{/demand/sos/add}" class="active">方案召集</a>或
             <a th:href="@{/demand/buy/add}" class="">数据众包</a>
+            <a th:href="@{/demand/sos/add}" class="active">方案召集</a>
+
         </p>
         <div class="scalsection">
             <div class="scal_hint"> <span></span>  小贴士 : 被数据困扰 , 淹没在数海中 ? 发布方案召集 , 解决解决方案 ! (<i>*</i>为必填)</div>
             <div class="scal_onself">
                 <p> <i>*</i> 数据名称</p>
-                <input type="text" id="designation" name="designation" value="全国民航机场吞吐量"/>
+                <input type="text" id="designation" name="designation" value=""/>
             </div>
 
 
             <div class="scal_demand">
                 <p> <i>*</i> 产品介绍</p>
-                <textarea cols="30" id="description"  name="description" placeholder="一句话描述您的需求(不少于10字)" rows="10"></textarea>
+                <textarea cols="30" id="description"  name="description" rows="10"></textarea>
                 <b>产品介绍不得少于10个字</b>
             </div>
             <!--上传数据-->

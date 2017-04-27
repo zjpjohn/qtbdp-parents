@@ -180,12 +180,7 @@ function pay(no,amount,subject) {
         dataType: 'json',
         success: function (data) {
             if(data != null){
-                /*var content = data.pageInfo;
-                 var htmlData = content.sHtmlText;*/
-                layer.open({
-                    type: 1,
-                    content: data.pageInfo.sHtmlText //这里content是一个普通的String
-                });
+                $("#aliBack").html(data.pageInfo.sHtmlText);//这里content是一个普通的String
             }
         },
         error: function () {
