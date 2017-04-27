@@ -172,12 +172,12 @@ var consubmit={
                     data: _data,
                     success: function(data){
                         console.log(data);
-                        layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
-                            {title:"",btn:["确定"]},
-                            function(index){
-                                layer.close(index);
-                               // location.href="/demand";
-                            });
+                        layer.confirm('您已成功提交发布信息，请耐心等待审核结果', {
+                            btn: ['确定'] //按钮
+                        }, function(){
+                            history.go(-1);
+                        });
+
                     },
                     error:function(data){
                         console.log("提交失败");
