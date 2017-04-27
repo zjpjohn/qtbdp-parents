@@ -44,7 +44,7 @@ var pageData = {
             success:function(data){
                 //console.log(data);
                 if(data && data.pageInfo) {
-                    console.log(data.pageInfo);
+                    //console.log(data.pageInfo);
                     $(_target).empty() ;
                     $(_tmpl).tmpl(data.pageInfo, {
 
