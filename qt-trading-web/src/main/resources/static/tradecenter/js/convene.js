@@ -151,7 +151,7 @@ $("#filePath").change(function() {
 });
 
 
-
+//点击发布
 
 var consubmit={
     scheme:function(){
@@ -159,7 +159,7 @@ var consubmit={
             if(!checkData()){
                 return false;
             }
-            var _data = consubmit._formatparam($("#formsubmits").serialize()) ;
+            var _data = consubmit._formatparam($("#formsubmits").serializeArray()) ;
             console.log("_data："+_data);
 
             if($(this).attr("class").indexOf("disabled")==-1){
@@ -176,7 +176,7 @@ var consubmit={
                             {title:"",btn:["确定"]},
                             function(index){
                                 layer.close(index);
-                                location.href="/demand";
+                               // location.href="/demand";
                             });
                     },
                     error:function(data){
@@ -190,12 +190,19 @@ var consubmit={
     _formatparam :function (param) {
 
         if(!param) return ;
-        var _data = {} ;
+        /*var _data = {} ;
         var _keys = param.split("&") ;
         _keys.forEach(function(val,index){
             var _attrs = val.split("=") ;
             _data[_attrs[0]] = _attrs[1] ;
         }) ;
+        return JSON.stringify(_data);*/
+
+        var _data = {} ;
+        param.forEach(function(val,index){
+            _data[val.name] = val.value ;
+        }) ;
+
         return JSON.stringify(_data);
     }
 }

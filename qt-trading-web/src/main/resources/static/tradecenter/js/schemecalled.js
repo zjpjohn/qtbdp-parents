@@ -123,7 +123,7 @@ var crowsubmit={
                             {title:"",btn:["确定"]},
                             function(index){
                                 layer.close(index);
-                                location.href="/demand";
+                                //location.href="/demand";
                             });
                     },
                     error:function(data){

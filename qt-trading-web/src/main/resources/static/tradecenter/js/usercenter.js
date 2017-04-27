@@ -208,6 +208,12 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
     }
 
 });
+//点击成为数据服务商 整个li可以跳转
+$(".pereach>li:nth-child(6)").click(function(){
+    location.href="/institution/add";
+
+});
+
 
 //订单支付
 function pay(no,amount,subject) {
@@ -323,7 +329,7 @@ var usercenter = {
 
         $("#personaldata").on("click","#savealter",function(){
 
-            var _data = usercenter._formatparam($("#perdetail").serialize()) ;
+            var _data = usercenter._formatparam($("#perdetail").serializeArray()) ;
             console.log("_data："+_data);
 
             $.ajax({
@@ -351,12 +357,20 @@ var usercenter = {
     _formatparam :function (param) {
 
         if(!param) return ;
-        var _data = {} ;
+
+        /*var _data = {} ;
         var _keys = param.split("&") ;
         _keys.forEach(function(val,index){
             var _attrs = val.split("=") ;
             _data[_attrs[0]] = _attrs[1] ;
         }) ;
+        */
+
+        var _data = {} ;
+        param.forEach(function(val,index){
+            _data[val.name] = val.value ;
+        }) ;
+
         return JSON.stringify(_data);
     }
 }

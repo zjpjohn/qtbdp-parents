@@ -1,6 +1,4 @@
-//导航选中
-nav(4);
-fabuHover(4);
+
 //检验用户是否加盟为数据服务商
 function checkIsAddInstitution(){
     var result = true;
@@ -130,7 +128,7 @@ var joinsubmit={
             if(!checkJoin()){
                 return false;
             }
-            var _data = joinsubmit._formatparam($("#joinForm").serialize()) ;
+            var _data = joinsubmit._formatparam($("#joinForm").serializeArray()) ;
 
             if($(this).attr("class").indexOf("disabled")==-1){
                 var me=this;
@@ -142,7 +140,8 @@ var joinsubmit={
                     data: _data,
                     success: function(data){
                         layer.msg("您已成功提交信息，请耐心等待审核结果",{icon:6});
-                        location.href="/fedration";
+
+                      //  location.href="/fedration";
                     },
                     error:function(data){
                         console.log("提交失败");
@@ -155,12 +154,19 @@ var joinsubmit={
     _formatparam :function (param) {
 
         if(!param) return ;
-        var _data = {} ;
+        /*var _data = {} ;
         var _keys = param.split("&") ;
         _keys.forEach(function(val,index){
             var _attrs = val.split("=") ;
             _data[_attrs[0]] = _attrs[1] ;
         }) ;
+        return JSON.stringify(_data);*/
+
+        var _data = {} ;
+        param.forEach(function(val,index){
+            _data[val.name] = val.value ;
+        }) ;
+
         return JSON.stringify(_data);
     }
 }
@@ -168,6 +174,9 @@ var joinsubmit={
 
 $(function(){
     joinsubmit.scheme();
+    //导航选中
+    nav(4);
+    fabuHover(4);
 });
 
 

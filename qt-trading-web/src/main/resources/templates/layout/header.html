@@ -40,7 +40,7 @@
 					<a th:href="@{/logout}">退出登录</a>
 				</p>
 			</div>
-			<input type="hidden" th:value="${user.id}" id="userId">
+			<input type="hidden" th:value="${user.id}" name="id" id="userId">
 		</div>
 		<!--如果未登录-->
 		<div th:unless="${user}">

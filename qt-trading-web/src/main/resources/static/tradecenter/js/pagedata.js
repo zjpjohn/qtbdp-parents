@@ -274,7 +274,7 @@ var pageData = {
      */
     _formatedate: function (date) {
         var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+        formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
        return formatedate;
     },
 
