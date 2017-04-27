@@ -152,7 +152,7 @@ $(function(){
     crowsubmit.scheme();
     //导航选中
     nav(3);
-    fabuHover(3);
+    fabuHover(2);
 });
 
 
