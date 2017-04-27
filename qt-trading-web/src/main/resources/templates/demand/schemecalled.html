@@ -25,6 +25,7 @@
                 <a th:href="@{/demand/buy/add}" class="active">数据众包</a>
             </p>
             <form class="scalsection" id="schemeForm">
+                <input type="hidden" th:value="${user.id}" name="userId" id="userId">
                 <div class="scal_hint"> <span></span>  小贴士 ： 被数据困扰，淹没在数海中？发布方案召集,解决解决方案！（<i>*</i>为必填）</div>
                 <div class="scal_onself">
                     <p> <i>*</i> 数据名称</p>
