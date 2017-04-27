@@ -2,12 +2,13 @@
 function getMyOrder(){
     $(".pereach>li:nth-child(4)").addClass("active").siblings().removeClass("active");
     $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
+    $(".myorder2").addClass("active").siblings(".active").removeClass("active");
     var settings = {
         url: "/api/trade/orders",
         tmpl_id: "#tmpl_dataorder" ,
         target: "#orderList2" ,
         pager_id: "#orderPage2",
-        params: [{key:"productId",value:userId }],
+        params: [{key:"userId",value:userId }],
         size: 10
     }
     pageData.products(settings) ;
@@ -24,8 +25,8 @@ function getMyOrder(){
         },
         success:function(data){
             $(".allorders").html(data.pageInfo.authorizeOrder+data.pageInfo.transactionOrder);
-            $(".dataorders").html(data.pageInfo.authorizeOrder);
-            $(".demandorders").html(data.pageInfo.transactionOrder);
+            $(".dataorders").html(data.pageInfo.transactionOrder);
+            $(".demandorders").html(data.pageInfo.authorizeOrder);
         }
     });
 }
@@ -45,8 +46,8 @@ function getGailan(){
         },
         success:function(data){
             $(".allorders").html(data.pageInfo.authorizeOrder+data.pageInfo.transactionOrder);
-            $(".dataorders").html(data.pageInfo.authorizeOrder);
-            $(".demandorders").html(data.pageInfo.transactionOrder);
+            $(".dataorders").html(data.pageInfo.transactionOrder);
+            $(".demandorders").html(data.pageInfo.authorizeOrder);
         }
     });
     //发布数量
@@ -154,7 +155,7 @@ $(".pereach>li,.filter_btn>a,#moreOrder,#morefabu,#perfectdatum").unbind().click
                 tmpl_id: "#tmpl_demandorder" ,
                 target: "#orderList3" ,
                 pager_id: "#demandPage",
-                params: [{key:"productId",value:userId }],
+                params: [{key:"userId",value:userId }],
                 size: 10
             }
             pageData.products(settings) ;
