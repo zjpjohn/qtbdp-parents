@@ -619,7 +619,7 @@
     border-bottom:2px solid #0081CB;
 }
 .id_btn{
-    width:60px;
+    width:40px;
     border-bottom:2px solid #0081CB;
 }
 .id_btn>i{
@@ -762,9 +762,16 @@ tbody{
     border: 1px solid #ddd;
     color: #ddd;
 }
+.center_tb tbody tr>td:first-child{
+    text-align:center;
+}
+.overview2 .center_tb tbody tr>td:first-child{
+    text-align:left;
+}
 
-
-
+.myorder2 thead tr>th:nth-child(3){
+    width:300px;
+}
 
 
 

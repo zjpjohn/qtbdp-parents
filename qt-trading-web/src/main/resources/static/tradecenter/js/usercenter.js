@@ -95,25 +95,6 @@ $(document).ready(function(){
     }else{
         getGailan();
     }
-
-    //判断是否成为服务商
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "/api/institution/exist",
-        ansync: true,
-        xhrFields: {
-            widthCredentials: true
-        },
-        data: {
-            userId: userId
-        },
-        success: function (data) {
-            if (data.isExist) {
-                $("#joinservice2").css("display","none");
-            }
-        }
-    });
 });
 
 /**点击切换右侧页面*/
