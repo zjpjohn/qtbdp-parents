@@ -127,4 +127,20 @@
         <result column="editor_time" property="editorTime" />
     </resultMap>
 
+    <select id="findItemById" resultMap="ItemResultMap" >
+        SELECT
+            i.id,
+            i.product_id,
+            i.item_name,
+            i.view_count,
+            i.download_count,
+            i.editor_time
+        FROM
+            data_item AS i
+        WHERE
+            i.is_used = 1
+        AND id = #{id}
+        ORDER BY
+        i.editor_time desc
+    </select>
 </mapper>

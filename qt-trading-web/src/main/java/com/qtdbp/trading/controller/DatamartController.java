@@ -155,6 +155,7 @@ public class DatamartController extends BaseController {
         try {
             DataTransactionOrderModel result = orderService.insertNewOrder(orderModel);
             view.addObject("order", result);
+            view.addObject("orderState", result.getOrderState());
         } catch (GlobalException e) {
             e.printStackTrace();
             // TODO: 2017/4/26 跳转到我的订单页面

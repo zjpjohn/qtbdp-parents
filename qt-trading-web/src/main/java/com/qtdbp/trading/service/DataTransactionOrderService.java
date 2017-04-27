@@ -3,7 +3,9 @@ package com.qtdbp.trading.service;
 import com.github.pagehelper.PageHelper;
 import com.qtdbp.trading.constants.AppConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
+import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataSosInfoModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
@@ -30,6 +32,9 @@ public class DataTransactionOrderService {
 
     @Autowired
     private DataProductService productService ;
+
+    @Autowired
+    private DataProductMapper productMapper;
 
 
     /**
@@ -109,9 +114,12 @@ public class DataTransactionOrderService {
                 orderModel.setOrderSubject(product.getDesignation());
                 amount = new BigDecimal(product.getpScore()) ;
             } else {
+
+                DataItemModel itemModel = productMapper.findItemById(orderModel.getProductId());
+                if(itemModel == null) throw new GlobalException("此产品不存在，请选择其他产品购买") ;
                 //数据条目，默认数据条目1.00
                 amount = new BigDecimal(1) ;
-
+                orderModel.setOrderSubject(itemModel.getItemName());
             }
             orderModel.setOrderState((byte)AppConstants.ORDER_STATE_PAYING);
             orderModel.setOrderNo(getOrderNo());
@@ -130,9 +138,8 @@ public class DataTransactionOrderService {
     public Integer updateOrder(String orderNo, String tradeNo){
         DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
         orderModel.setOrderState((byte)3);//改变支付状态
-        orderModel.setPayTime(new Date());//加入付款时间
-        orderModel.setFinishTime(new Date());//加入订单完成时间
         orderModel.setTradeNo(tradeNo);//加入交易流水号
+        orderModel.setOrderNo(orderNo);//加入订单号 根据此号来判断更改那条数据
         Integer i = orderMapper.updateOrder(orderModel);
         return i;
     }
