@@ -275,8 +275,12 @@
 .com_circle>i.active,.com_circle>i:hover{
     background:#0285CD;
 }
+/******轮播**********/
+.nivoSlider i{
+    position:absolute;
+    cursor:pointer;
+}
 .knowmore{
-    position: absolute;
     width: 165px;
     height: 72px;
     top: 282px;
@@ -286,7 +290,6 @@
     background:url("../images/knowmore2.png") no-repeat 0px 0px;
 }
 .joinus{
-    position: absolute;
     width: 248px;
     height: 106px;
     top: 312px;
