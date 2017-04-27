@@ -121,7 +121,7 @@ $(document).ready(function(){
         },
         success: function (data) {
             if (data.isExist) {
-                $("#joinservice2").remove();
+                $("#joinservice2").css("display","none");
             }
         }
     });
