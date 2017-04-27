@@ -202,7 +202,7 @@ $(function(){
     joinsubmit.scheme();
     //导航选中
     nav(4);
-    fabuHover(4);
+    fabuHover(3);
 });
 
 
