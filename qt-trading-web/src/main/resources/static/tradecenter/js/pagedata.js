@@ -287,9 +287,15 @@ var pageData = {
      * @private
      */
     _formatedate: function (date) {
-        var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
-       return formatedate;
+
+        var newDate = new Date(date);
+
+
+        newDate = newDate.toLocaleDateString() ;
+        return newDate ;
+        // var formatedate=new Date(date);
+        // formatedate=formatedate.getFullYear()+"-"+formatedate.getMonth()+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+       // return formatedate;
     },
 
     /**
