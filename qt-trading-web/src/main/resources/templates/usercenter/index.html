@@ -207,7 +207,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="5">
-                                            <a href="javascript:;" class="leavedata">前往数据商城</a>
+                                            <a href="/datamart" class="leavedata">前往数据商城</a>
                                         </td>
                                     </tr>
 
@@ -435,14 +435,18 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>${order.productType}</td>
-                <td>${order.orderSubject}</td>
+                {{if order.productType==1}}
+                <td>条目</td>
+                {{else}}
+                <td>整包</td>
+                {{/if}}
+                <td>${$item._substr(order.orderSubject,18)}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState==1}}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="gopay" onclick="gopay(${order.productId},${order.productType});">去支付</a>
+                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState==2}}
                      <td class="paid">已撤销</td>
@@ -452,7 +456,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="download">下载</a>
+                        <a href="${order.downloadUrl}" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -490,15 +494,19 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>i</td>
-                <td>${order.productType}</td>
-                <td>${order.orderSubject}</td>
+                <td>${i+1}</td>
+                {{if order.productType==1}}
+                <td>条目</td>
+                {{else}}
+                <td>整包</td>
+                {{/if}}
+                <td>${$item._substr(order.orderSubject,18)}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="gopay" onclick="gopay(${order.productId},${order.productType});">去支付</a>
+                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
@@ -508,7 +516,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="download">下载</a>
+                        <a href="${order.downloadUrl}" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -519,7 +527,7 @@
                      <div class="nodata">
                         <img src="/tradecenter/images/none.png" alt=""/>
                             <p>暂时数据订单</p>
-                            <a href="javascript:;">前往数据商城</a>
+                            <a href="/datamart">前往数据商城</a>
                     </div>
                 </td>
             </tr>
@@ -530,15 +538,19 @@
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>i</td>
-                <td>${order.productType}</td>
-                <td>${order.orderSubject}</td>
+                <td>${i+1}</td>
+                {{if order.productType==1}}
+                <td>条目</td>
+                {{else}}
+                <td>整包</td>
+                {{/if}}
+                <td>${$item._substr(order.orderSubject,18)}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="gopay">去支付</a>
+                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
@@ -548,7 +560,7 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="javascript:;" class="download">下载</a>
+                        <a href="${order.downloadUrl}" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
@@ -559,7 +571,7 @@
                      <div class="nodata">
                         <img src="/tradecenter/images/none.png" alt=""/>
                             <p>暂时需求订单</p>
-                            <a href="javascript:;">前往需求大厅</a>
+                            <a href="/demand">前往需求大厅</a>
                     </div>
                 </td>
             </tr>
@@ -594,7 +606,7 @@
                  <div class="nodata">
                     <img src="/tradecenter/images/none.png" alt=""/>
                         <p>暂时没有发布数据众包</p>
-                        <a href="javascript:;">前往发布数据众包</a>
+                        <a href="/demand/buy/add">前往发布数据众包</a>
                 </div>
             </td>
         </tr>
@@ -627,7 +639,7 @@
                  <div class="nodata">
                     <img src="/tradecenter/images/none.png" alt=""/>
                         <p>暂时没有发布方案召集</p>
-                        <a href="javascript:;">前往发布方案召集</a>
+                        <a href="/demand/sos/add">前往发布方案召集</a>
                 </div>
             </td>
         </tr>
@@ -635,8 +647,6 @@
     </script>
     <script>
         var userId=$("#userId").val();
-
-
     </script>
 
     <!-- 订单支付 -->
