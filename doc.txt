@@ -7,7 +7,7 @@ qtbdp-parents # 父目录
   |-- qt-trading-web # 钱塘交易中心，具体的web应用
 
 # 运行说明
-1. 启动eureka-server的EureKaServerApplication主函数，成功后直接访问地址：http://localhost:8010/
-2. 启动config-server的ConfigServerApplication主函数，成功后直接访问地址：http://localhost:8020/base-service/dev/master(确保能调用到配置信息)
-3. 启动base-service的BaseServiceApplication主函数，成功后直接访问地址：http://localhost:8030/
-4. 启动qt-trading-web的WebApplication主函数，成功后直接访问地址：http://localhost:8040/
+1. 启动eureka-server的EureKaServerApplication主函数，成功后直接访问地址：http://localhost:9010/
+2. 启动config-server的ConfigServerApplication主函数，成功后直接访问地址：http://localhost:9020/base-service/dev/master(确保能调用到配置信息)
+3. 启动base-service的BaseServiceApplication主函数，成功后直接访问地址：http://localhost:9030/
+4. 启动qt-trading-web的WebApplication主函数，成功后直接访问地址：http://localhost:9040/
