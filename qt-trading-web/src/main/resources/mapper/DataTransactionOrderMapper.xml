@@ -136,4 +136,23 @@
            finish_time = #{finishTime},trade_no=#{tradeNo} WHERE order_no = #{orderNo}
     </update>
 
+    <!-- 查询订单信息 -->
+    <select id="findOrderByNo" resultMap="OrderResultMap">
+        SELECT
+            o.product_type,
+            o.product_id,
+            o.user_id,
+            o.order_no,
+            o.amount,
+            o.order_state,
+            o.addtime,
+            o.editor_time,
+            o.order_subject,
+            o.download_code,
+            o.download_url
+        FROM
+            data_transaction_order AS o
+        WHERE
+            order_no = #{orderNo}
+    </select>
 </mapper>

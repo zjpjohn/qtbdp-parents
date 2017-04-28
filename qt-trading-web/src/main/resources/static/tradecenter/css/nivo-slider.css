@@ -23,16 +23,16 @@
 	left: 50%;
 	transform:translate(-50%,-50%);
 }
-.nivoSlider img {
+.nivoSlider a img {
 	position:absolute;
 	top:0px;
 	left:0px;
 	max-width: none;
 }
 .nivo-main-image {
-	display: block !important;
-	position: relative !important; 
-	width: 100% !important;
+	display: block ;
+	position: relative ;
+	width: 100% ;
 }
 .theme-default .nivoSlider a {
 	border:0;
@@ -56,9 +56,11 @@
 	margin:0;
 	z-index:6;
 	display:none;
-	background:white; 
 	filter:alpha(opacity=0); 
 	opacity:0;
+}
+.nivoSlider a.nivo-imageLink.hover{
+	opacity:1;
 }
 .nivo-controlNav a {
 	display:inline-block;

@@ -1,8 +1,11 @@
-# 测试环境配置 #
+# ===================================================================
+# Spring Booot开发环境配置
+# ===================================================================
 
 spring:
   thymeleaf:
-    cache: false  # thymeleaf模板引擎是否开启缓存，开发时关闭
+#    cache: false  # thymeleaf模板引擎是否开启缓存，开发时关闭
+    mode: LEGACYHTML5
   datasource:
     name: dataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -16,17 +19,62 @@ spring:
     test-while-idle: true
     test-on-borrow: false
     test-on-return: false
-    url: jdbc:mysql://192.168.36.39:3306/test?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://192.168.36.38:3306/zj_industry_bigdata?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
-    password: Mysql@3306
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     pool-prepared-statements: true   # 打开PSCache
     max-open-prepared-statements: 20 # 并且指定每个连接上PSCache的大小
     connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     filters: stat,wall,log4j         # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+  jmx: # 必须关闭jms，否则启动报错
+    enabled: false
 
-
+# ===================================================================
+# Eureka注册中心配置
+# ===================================================================
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8010/eureka/
+      defaultZone: http://192.168.36.39:9010/eureka
+
+# ===================================================================
+# Logback开发环境日志输出
+# ===================================================================
+logging:
+  file: /home/web/logs/qt-trading-test.log
+  level:
+    com.qtdbp.trading: TRACE
+
+# ===================================================================
+# sso单点登录配置
+# ===================================================================
+sso:
+  key: eada1cfcc5d247d49d3c3494b7360f24
+  host: http://sso.qtbigdata.com/
+  loginUrl: http://sso.qtbigdata.com/sso/action/goLogin?retUrl=
+  registerUrl: http://sso.qtbigdata.com/sso/action/goRegister?retUrl=
+  callback: http://jytest.qtbigdata.com/callback
+
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  soTimeout: 1501
+  connectTimeout: 601
+  thumbImage:             #缩略图生成参数
+    width: 150
+    height: 150
+  trackerList:            #TrackerList参数,支持多个
+    - 192.168.36.39:22122
+    #- 192.168.36.39:22123
+  pool:
+      #从池中借出的对象的最大数目
+      maxTotal: 153
+      #获取连接时的最大等待毫秒数100
+      maxWaitMillis: 102
+
+# fdfs upload 文件上传配置信息
+fdfs-upload:
+  port: 2300
+  host: 192.168.36.39
