@@ -245,4 +245,11 @@ public class DataProductModel extends BaseModel {
         this.buyCount = buyCount;
     }
 
+    public String getValIds() {
+        return valIds;
+    }
+
+    public void setValIds(String valIds) {
+        this.valIds = valIds;
+    }
 }
