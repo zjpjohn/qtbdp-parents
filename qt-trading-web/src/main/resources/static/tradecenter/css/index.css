@@ -283,18 +283,14 @@
 .knowmore{
     width: 165px;
     height: 72px;
-    top: 282px;
-    left: 671px;
-}
-.knowmore:hover{
+    top: 277px;
+    left: 683px;
     background:url("../images/knowmore2.png") no-repeat 0px 0px;
 }
 .joinus{
     width: 248px;
     height: 106px;
-    top: 312px;
-    left: 828px;
-}
-.joinus:hover{
+    top: 306px;
+    left: 836px;
     background:url("../images/join2.png") no-repeat 0px 0px;
 }
