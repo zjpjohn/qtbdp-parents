@@ -193,7 +193,7 @@ var joinsubmit={
             } else {
                 if (isService) {
                     layer.msg("您已是数据服务商啦！", {icon: 6});
-                    $(this).addClass("disabled");
+                    $(me).addClass("disablmeed");
                     return false;
                 } else {
                     var _data = joinsubmit._formatparam($("#joinForm").serializeArray());
