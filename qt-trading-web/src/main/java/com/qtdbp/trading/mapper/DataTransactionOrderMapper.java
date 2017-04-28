@@ -51,4 +51,11 @@ public interface DataTransactionOrderMapper {
      * @return
      */
     Integer updateOrder(DataTransactionOrderModel order);
+
+    /**
+     * 查询订单信息
+     * @param orderNo
+     * @return
+     */
+    DataTransactionOrderModel findOrderByNo(String orderNo) ;
 }

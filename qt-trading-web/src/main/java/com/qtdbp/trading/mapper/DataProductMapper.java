@@ -44,4 +44,11 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return
      */
     DataItemModel findItemById(@Param("id") Integer id) ;
+
+    /**
+     * 更新产品信息
+     * @param productModel
+     * @return 记录数，成功返回1
+     */
+    Integer updateProduct(DataProductModel productModel) ;
 }
