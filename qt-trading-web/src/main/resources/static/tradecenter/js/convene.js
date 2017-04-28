@@ -175,7 +175,7 @@ var consubmit={
                         layer.confirm('您已成功提交发布信息，请耐心等待审核结果', {
                             btn: ['确定'] //按钮
                         }, function(){
-                            history.go(-1);
+                           history.go(-1);
                         });
 
                     },
