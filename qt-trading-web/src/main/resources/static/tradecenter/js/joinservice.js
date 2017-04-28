@@ -84,7 +84,7 @@ function checkJoin(){
     var type=$('input:radio[name="type"]:checked').val();//身份选择
     var designation = $("#designation").val();//名称
     var serviceType=$('input:radio[name="serviceType"]:checked').val();//服务类型
-    var dataTypes = $('input:checkbox[name="dataTypes"]:checked').val();//擅长领域选择
+    var dataType = $('input:checkbox[name="dataType"]:checked').val();//擅长领域选择
     var abstracts=$("#abstracts").val();//您的介绍
     var picture = $("#picture").val();//图片路径
 
@@ -101,7 +101,7 @@ function checkJoin(){
         $(".err_info").html("*请选择服务类型");
         return false;
     }
-    if(!dataTypes){
+    if(!dataType){
         $(".err_info").html("*请选择您的擅长领域");
         return false;
     }
@@ -151,7 +151,6 @@ var joinsubmit={
                             var _data = joinsubmit._formatparam($("#joinForm").serializeArray()) ;
 
                             if(!$(me).hasClass("disabled")){
-
                                 $.ajax({
                                     dataType: "text",
                                     url: "/api/institution",
