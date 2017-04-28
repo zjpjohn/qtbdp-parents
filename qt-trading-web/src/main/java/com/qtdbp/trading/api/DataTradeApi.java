@@ -19,6 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -152,7 +153,6 @@ public class DataTradeApi {
     @RequestMapping(value = "/alipayapi", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public ModelMap openAlipay(@RequestBody AlipayModel alipayModel) {
 
-
         ModelMap result = new ModelMap() ;
 
         Map<String, Object> map = new HashMap<>();
@@ -161,7 +161,6 @@ public class DataTradeApi {
         if (null == amount || amount.equals(BigDecimal.ZERO)) {
 
         } else {
-
             //	TODO 添加订单
 
             // 商户订单号，商户网站订单系统中唯一订单号，必填
@@ -196,7 +195,8 @@ public class DataTradeApi {
             sParaTemp.put("total_fee", total_fee);
             sParaTemp.put("body", body);
             sParaTemp.put("extra_common_param", alipayModel.getReturnUrl());
-            // 其他业务参数根据在线开发文档，添加参数.文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.O9yorI&treeId=62&articleId=103740&docType=1
+            // 其他业务参数根据在线开发文档，添加参数.
+            // 文档地址:https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.O9yorI&treeId=62&articleId=103740&docType=1
             // 如sParaTemp.put("参数名","参数值");
 
             // 建立请求
@@ -210,11 +210,10 @@ public class DataTradeApi {
         result.put("status", new ResponseEntity(map, HttpStatus.OK).getStatusCode());
 
         return result ;
-
     }
 
     /**
-     * 支付回调
+     * 支付异步回调
      */
     @ApiOperation(value = "支付宝异步回调", notes = "{}")
     @PostMapping(value = "/alipay/toNotifyUrl")
@@ -274,18 +273,18 @@ public class DataTradeApi {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商
                 //
-                //
                 // 户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序 TRADE_SUCCESS
 
                 //修改订单信息
                 try {
-                    orderService.updateOrder(out_trade_no,trade_no);
+                    int i = orderService.updateOrder(out_trade_no,trade_no);
+                    if (i == 0){
+                        throw new GlobalException("修改下载权限失败");
+                    }
                 }catch (Exception e){
                     e.getMessage();
                 }
-
-                //修改余额
 
                 printOutMsg(response, "success");//请不要修改或删除
                 //注意：
@@ -297,6 +296,7 @@ public class DataTradeApi {
         }else{//验证失败
             printOutMsg(response, "fail");
         }
+
     }
 
     /**

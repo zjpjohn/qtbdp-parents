@@ -36,7 +36,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:9010/eureka/
+      defaultZone: http://localhost:8010/eureka/
 
 # ===================================================================
 # Logback开发环境日志输出
