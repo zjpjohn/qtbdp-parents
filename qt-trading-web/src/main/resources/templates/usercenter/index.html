@@ -6,7 +6,6 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
-    <title>个人中心</title>
     <!-- 引入header布局 -->
     <top th:replace="layout/top :: top"></top>
     <!-- 页面自定义css、js  -->
@@ -420,7 +419,7 @@
                 <p class="pers_names">用户类型</p>
                 <p class="pers_input pers_geren">个人</p>
                 <!--<input type="text" class="pers_input" value="${userType}" name="userType"/>-->
-                <a href="javascript:;">成为数据服务商</a>
+                <a href="/institution/add">成为数据服务商</a>
 
                 <p class="pers_names">密码</p>
                 <input type="password" class="pers_input" value="${pwd}" name="pwd"/>

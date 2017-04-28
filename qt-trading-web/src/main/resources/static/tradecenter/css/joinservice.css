@@ -13,6 +13,7 @@
     line-height:40px;
     background:#E0EDF5;
     color:#0081CB;
+    margin-bottom: 10px;
 }
 .tieshi>i{
     display:inline-block;
@@ -149,4 +150,14 @@
 }
 #deleteA{
     display:none;
+}
+.is_service{
+    margin-bottom:10px;
+    overflow:hidden;
+}
+.is_service>i{
+    position: relative;
+    width:160px;
+    left:0;
+    color:#F58181;
 }

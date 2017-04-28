@@ -118,15 +118,11 @@ var crowsubmit={
                     contentType:"application/json",
                     data: _data,
                     success: function(data){
+                        $(me).addClass("disabled");
                         console.log(data);
-                        layer.confirm("您已成功提交发布信息，请耐心等待审核结果",
-                            {title:"",btn:["确定"]},
-                            function(index){
-                                layer.close(index);
-                                //location.href="/demand";
-                                history.go(-1);
-
-                            });
+                        layer.msg('您已成功提交发布信息，请耐心等待审核结果', function(){
+                            history.go(-1);
+                        });
 
                     },
                     error:function(data){

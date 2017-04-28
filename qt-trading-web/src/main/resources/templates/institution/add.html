@@ -6,7 +6,6 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
-    <title>加盟服务商</title>
     <!-- 引入header布局 -->
     <top th:replace="layout/top :: top"></top>
     <!-- 页面自定义css、js  -->
@@ -23,7 +22,10 @@
 
         <p class="tieshi">
             <i></i>
-            小贴士：被数据困扰，淹没在数海中？发布方案召集，寻找解决方案！（<span class="red">*</span>为必填）
+            小贴示：我有数据，我能处理数据，那就申请为数据服务商吧，实现数据变现！（<span class="red">*</span>为必填）
+        </p>
+        <p class="is_service">
+            <i></i>
         </p>
         <form id="joinForm" class="joinform" enctype="multipart/form-data" method="post">
             <input type="hidden" th:value="${user.id}" name="userId" id="userId">
@@ -99,9 +101,9 @@
                         所属区域：
                     </p>
                     <div id="city">
-                            <select name="province" class="prov"  id="provinceId">
+                            <select name="provinceId" class="prov"  id="provinceId">
                             </select>
-                            <select name="city" class="city"  id="cityId">
+                            <select name="cityId" class="city"  id="cityId">
                             </select>
                             <!--<select name="area" class="dist"  id="countyId"></select>-->
                     </div>
@@ -113,59 +115,59 @@
                     </p>
                     <div>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="1"/>
+                            <input type="checkbox" name="dataType"  value="1"/>
                             <span>知识/专利</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="2"/>
+                            <input type="checkbox" name="dataType"  value="2"/>
                             <span>智能制造</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="3"/>
+                            <input type="checkbox" name="dataType"  value="3"/>
                             <span>物联网</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="4"/>
+                            <input type="checkbox" name="dataType"  value="4"/>
                             <span>工业参数</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="5"/>
+                            <input type="checkbox" name="dataType"  value="5"/>
                             <span>仪器、仪表</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="6"/>
+                            <input type="checkbox" name="dataType"  value="6"/>
                             <span>先进制造</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="7"/>
+                            <input type="checkbox" name="dataType"  value="7"/>
                             <span>工业安全</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="8"/>
+                            <input type="checkbox" name="dataType"  value="8"/>
                             <span>政府监管</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="9"/>
+                            <input type="checkbox" name="dataType"  value="9"/>
                             <span>工业运行</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="10"/>
+                            <input type="checkbox" name="dataType"  value="10"/>
                             <span>数据物流</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="11"/>
+                            <input type="checkbox" name="dataType"  value="11"/>
                          <span>工业设计</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="12"/>
+                            <input type="checkbox" name="dataType"  value="12"/>
                             <span>学术/教育</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="13"/>
+                            <input type="checkbox" name="dataType"  value="13"/>
                             <span>行业综合</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="dataTypes"  value="14"/>
+                            <input type="checkbox" name="dataType"  value="14"/>
                             <span>其他</span>
                         </label>
                     </div>
@@ -216,16 +218,6 @@
     <script th:src="@{/tradecenter/js/jquery.form.js}"></script>
     <script th:src="@{/tradecenter/js/jquery.cityselect.js}"></script>
     <script th:src="@{/tradecenter/js/joinservice.js}"></script>
-    <script>
-        $("#city").citySelect({
-            url:"/tradecenter/js/city.min.js",
-            prov:"浙江", //省份
-            city:"杭州", //城市
-           // dist:"萧山区", //区县
-            nodata:"none" //当子集无数据时，隐藏select
-        });
-    </script>
-
 
 </body>
 </html>
