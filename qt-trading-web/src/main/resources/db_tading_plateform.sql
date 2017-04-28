@@ -55,7 +55,7 @@ create table data_product_attr_relation
 /*==============================================================*/
 /* Table: data_product   产品表新增字段data_type_props            */
 /*==============================================================*/
-ALTER TABLE data_product ADD data_type_props VARCHAR(1000) ;
+ALTER TABLE data_product ADD data_type_props VARCHAR(1000),ADD download_count INT,ADD buy_count INT  ;
 
 /*==============================================================*/
 /* Table: data_user_info   用户表新增系统用户ID、昵称              */

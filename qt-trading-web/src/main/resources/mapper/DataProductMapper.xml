@@ -102,8 +102,8 @@
         <trim prefix="set" suffixOverrides=",">
         <if test="editorId != null">editor_id = #{editorId},</if>
         editor_time = now(),
-        <if test="downloadCount != null">download_count = IFNULL(download_count,0)+1,</if>
-        <if test="buyCount != null">buy_count = IFNULL(buy_count,0)+1,</if>
+        <if test="downloadCount != null and downloadCount != 0">download_count = IFNULL(download_count,0)+1,</if>
+        <if test="buyCount != null and buyCount != 0">buy_count = IFNULL(buy_count,0)+1,</if>
         </trim>
         WHERE
         id = #{id}

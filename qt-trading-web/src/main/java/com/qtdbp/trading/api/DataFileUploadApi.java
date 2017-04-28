@@ -3,7 +3,7 @@ package com.qtdbp.trading.api;
 
 import com.qtd.utils.OssUpload;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.service.FdfsUploadService;
+import com.qtdbp.trading.service.FdfsFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class DataFileUploadApi {
 
     @Autowired
-    private FdfsUploadService uploadService ;
+    private FdfsFileService uploadService ;
 
     //===================================================================
     // 图片上传接口-支持阿里云Oss服务

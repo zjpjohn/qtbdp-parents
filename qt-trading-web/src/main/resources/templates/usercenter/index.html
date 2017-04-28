@@ -515,7 +515,8 @@
                      <td class="paid">已支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="${order.downloadUrl}" class="download">下载</a>
+                        <!--<a href="${order.downloadUrl}" class="download">下载</a>-->
+                        <a href="/download/${order.orderNo}" class="download">下载</a>
                     </td>
                 {{/if}}
             </tr>
