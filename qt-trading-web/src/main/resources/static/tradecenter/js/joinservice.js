@@ -185,9 +185,7 @@ var joinsubmit={
                             contentType: "application/json",
                             data: _data,
                             success: function (data) {
-                                layer.confirm('您已成功提交加盟信息，请耐心等待审核结果', {
-                                    btn: ['确定']
-                                }, function () {
+                                layer.msg('您已成功提交发布信息，请耐心等待审核结果', function(){
                                     history.go(-1);
                                 });
                             },
