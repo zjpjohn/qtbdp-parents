@@ -23,7 +23,10 @@
 
         <p class="tieshi">
             <i></i>
-            小贴士：被数据困扰，淹没在数海中？发布方案召集，寻找解决方案！（<span class="red">*</span>为必填）
+            小贴示：我有数据，我能处理数据，那就申请为数据服务商吧，实现数据变现！（<span class="red">*</span>为必填）
+        </p>
+        <p class="is_service">
+            <i></i>
         </p>
         <form id="joinForm" class="joinform" enctype="multipart/form-data" method="post">
             <input type="hidden" th:value="${user.id}" name="userId" id="userId">
@@ -216,16 +219,6 @@
     <script th:src="@{/tradecenter/js/jquery.form.js}"></script>
     <script th:src="@{/tradecenter/js/jquery.cityselect.js}"></script>
     <script th:src="@{/tradecenter/js/joinservice.js}"></script>
-    <script>
-        $("#city").citySelect({
-            url:"/tradecenter/js/city.min.js",
-            prov:"浙江", //省份
-            city:"杭州", //城市
-           // dist:"萧山区", //区县
-            nodata:"none" //当子集无数据时，隐藏select
-        });
-    </script>
-
 
 </body>
 </html>
