@@ -1,20 +1,62 @@
-
+var isService=false;
+$(window).ready(function(){
+    //加载省市下拉菜单
+    $("#city").citySelect({
+        url:"/tradecenter/js/city.min.js",
+        prov:"浙江", //省份
+        city:"杭州", //城市
+        // dist:"萧山区", //区县
+        nodata:"none" //当子集无数据时，隐藏select
+    });
+    checkIsService();
+});
 //检验用户是否加盟为数据服务商
-function checkIsAddInstitution(){
-    var result = true;
+function checkIsService() {
     $.ajax({
-        type:"post",
-        url:"/institution/checkIsAddInstitution",
-        dataType:"json",
-        async:false,
-        data:{},
-        success:function(data){
-            if(data=="1"){
-                result=false;
+        type: "GET",
+        dataType: "json",
+        url: "/api/institution/exist",
+        ansync: true,
+        xhrFields: {
+            widthCredentials: true
+        },
+        data: {
+            userId: userId
+        },
+        success: function (data) {
+
+            if (data.isExist) {
+                isService = true;
+                $(".is_service>i").html("您已是数据服务商啦！");
+                var tipTimer = null;
+                var tipLeft = 0;
+                var isLeft = false;
+
+                function tipMove() {
+                    if (!isLeft) {
+                        tipLeft += 1;
+                        if (tipLeft == 500) {
+                            isLeft = true;
+                        }
+                    } else {
+                        tipLeft -= 1;
+                        if (tipLeft == 0) {
+                            isLeft = false;
+                        }
+                    }
+                    $(".is_service>i").css("left", tipLeft);
+                };
+                tipTimer = setInterval(tipMove, 50);
+                $(".com_slide").mouseenter(function () {
+                    clearInterval(tipTimer);
+                    tipTimer = null;
+                });
+                $(".com_slide").mouseleave(function () {
+                    tipTimer = setInterval(tipMove, 50);
+                });
             }
         }
-    });
-    return result;
+    })
 }
 
 //上传图片
@@ -124,54 +166,37 @@ function checkJoin(){
 
 var joinsubmit={
     scheme:function(){
-        $("#formSubmit").unbind("click").click(function(){
-            var me=this;
-            if(!checkJoin()){
+        $("#formSubmit").unbind("click").click(function() {
+            if (!checkJoin()) {
                 return false;
-            }else{
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "/api/institution/exist",
-                    ansync: true,
-                    xhrFields: {
-                        widthCredentials: true
-                    },
-                    data: {
-                        userId: userId
-                    },
-                    success: function (data) {
+            } else {
+                if (isService) {
+                    layer.msg("您已是数据服务商啦！", {icon: 6});
+                    $(this).addClass("disabled");
+                    return false;
+                } else {
+                    var _data = joinsubmit._formatparam($("#joinForm").serializeArray());
 
-                        if (data.isExist) {
-                            layer.msg("您已经加盟数据服务商了", {icon: 6});
-                            $(me).addClass("disabled");
-
-                        } else {
-                            //location.href = "/institution/add";
-                            var _data = joinsubmit._formatparam($("#joinForm").serializeArray()) ;
-
-                            if(!$(me).hasClass("disabled")){
-                                $.ajax({
-                                    dataType: "text",
-                                    url: "/api/institution",
-                                    type: "post",
-                                    contentType:"application/json",
-                                    data: _data,
-                                    success: function(data){
-                                        layer.confirm('您已成功提交加盟信息，请耐心等待审核结果', {
-                                            btn: ['确定'] //按钮
-                                        }, function(){
-                                            history.go(-1);
-                                        });
-                                    },
-                                    error:function(data){
-                                        console.log("提交失败");
-                                    }
+                    if (!$(this).hasClass("disabled")) {
+                        $.ajax({
+                            dataType: "text",
+                            url: "/api/institution",
+                            type: "post",
+                            contentType: "application/json",
+                            data: _data,
+                            success: function (data) {
+                                layer.confirm('您已成功提交加盟信息，请耐心等待审核结果', {
+                                    btn: ['确定']
+                                }, function () {
+                                    history.go(-1);
                                 });
+                            },
+                            error: function (data) {
+                                console.log("提交失败");
                             }
-                        }
+                        });
                     }
-                });
+                }
             }
 
 
