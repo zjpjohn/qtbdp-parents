@@ -66,7 +66,7 @@ public class AliPayController extends BaseController{
         System.out.println("total_fee="+total_fee);
         modelAndView.addObject("orderState",0);
         //支付成功后更新订单状态
-        if("T".equals(trade_status)){
+/*        if("T".equals(trade_status)){
             try {
                 int i = orderService.updateOrder(order_no,trade_no);
                 if(i > 0){
@@ -75,7 +75,7 @@ public class AliPayController extends BaseController{
             }catch (Exception e){
                 e.getMessage();
             }
-        }
+        }*/
         return modelAndView;
     }
 }

@@ -10,6 +10,10 @@ $(window).ready(function(){
     });
     checkIsService();
 });
+
+
+
+
 //检验用户是否加盟为数据服务商
 function checkIsService() {
     $.ajax({
@@ -47,17 +51,33 @@ function checkIsService() {
                     $(".is_service>i").css("left", tipLeft);
                 };
                 tipTimer = setInterval(tipMove, 50);
-                $(".com_slide").mouseenter(function () {
+                $(".is_service").mouseenter(function () {
                     clearInterval(tipTimer);
                     tipTimer = null;
                 });
-                $(".com_slide").mouseleave(function () {
+                $(".is_service").mouseleave(function () {
                     tipTimer = setInterval(tipMove, 50);
                 });
             }
         }
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //上传图片
 var imgName="",tValue="";
@@ -167,12 +187,13 @@ function checkJoin(){
 var joinsubmit={
     scheme:function(){
         $("#formSubmit").unbind("click").click(function() {
+            var me=$(this)
             if (!checkJoin()) {
                 return false;
             } else {
                 if (isService) {
                     layer.msg("您已是数据服务商啦！", {icon: 6});
-                    $(this).addClass("disabled");
+                    $(me).addClass("disablmeed");
                     return false;
                 } else {
                     var _data = joinsubmit._formatparam($("#joinForm").serializeArray());
@@ -185,6 +206,7 @@ var joinsubmit={
                             contentType: "application/json",
                             data: _data,
                             success: function (data) {
+                                $(me).addClass("disabled");
                                 layer.msg('您已成功提交发布信息，请耐心等待审核结果', function(){
                                     history.go(-1);
                                 });

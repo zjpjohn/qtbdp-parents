@@ -261,6 +261,12 @@
         });
 
         $('#slider').nivoSlider();
+        $("#slider>a>i").mouseenter(function(){
+            $(this).parent().addClass("hover");
+        });
+        $("#slider>a>i").mouseleave(function(){
+            $(this).parent().removeClass("hover");
+        });
 
     </script>
 </body>
