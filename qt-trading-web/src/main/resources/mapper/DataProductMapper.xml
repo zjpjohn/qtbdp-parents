@@ -100,7 +100,7 @@
     <update id="updateProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
         UPDATE data_product
         <trim prefix="set" suffixOverrides=",">
-        <if test="editord != null">editor_id = #{editord},</if>
+        <if test="editorId != null">editor_id = #{editorId},</if>
         editor_time = now(),
         <if test="downloadCount != null">download_count = IFNULL(download_count,0)+1,</if>
         <if test="buyCount != null">buy_count = IFNULL(buy_count,0)+1,</if>
