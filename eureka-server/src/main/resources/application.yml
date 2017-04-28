@@ -2,9 +2,8 @@
 server:
   port: 8010
 
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    serviceUrl:
-      defaultZone: http://localhost:${server.port}/eureka/
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: dev   # 默认激活application-dev.yml配置
