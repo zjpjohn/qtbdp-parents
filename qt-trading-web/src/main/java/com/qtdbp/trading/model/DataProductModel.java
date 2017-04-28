@@ -35,6 +35,7 @@ public class DataProductModel extends BaseModel {
     private int rec ;               // 推荐值
     private int isUsed ;            // 是否可用
     private String typeChain ;      // 类型链
+    private int downloadCount ;     // 下载次数
     private String dataTypeProps ;  // 数据类型属性串pname:vname:pid:vid;pname1:vname1:pid1:vid1
 
     private int attrId ;        // 属性ID
@@ -245,4 +246,19 @@ public class DataProductModel extends BaseModel {
         this.buyCount = buyCount;
     }
 
+    public String getValIds() {
+        return valIds;
+    }
+
+    public void setValIds(String valIds) {
+        this.valIds = valIds;
+    }
+
+    public int getDownloadCount() {
+        return downloadCount;
+    }
+
+    public void setDownloadCount(int downloadCount) {
+        this.downloadCount = downloadCount;
+    }
 }
