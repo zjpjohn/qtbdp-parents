@@ -106,7 +106,7 @@ var crowsubmit={
             if(!checkData()){
                 return false;
             }
-            var _data = crowsubmit._formatparam($("#schemeForm").serialize()) ;
+            var _data = crowsubmit._formatparam($("#schemeForm").serializeArray()) ;
             console.log("_data："+_data);
 
             if($(this).attr("class").indexOf("disabled")==-1){
@@ -140,11 +140,17 @@ var crowsubmit={
 
         if(!param) return ;
         var _data = {} ;
+        param.forEach(function(val,index){
+            _data[val.name] = val.value ;
+        }) ;
+
+
+        /*var _data = {} ;
         var _keys = param.split("&") ;
         _keys.forEach(function(val,index){
             var _attrs = val.split("=") ;
             _data[_attrs[0]] = _attrs[1] ;
-        }) ;
+        }) ;*/
         return JSON.stringify(_data);
     }
 }
