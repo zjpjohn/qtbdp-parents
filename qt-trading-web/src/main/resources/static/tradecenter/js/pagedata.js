@@ -42,7 +42,7 @@ var pageData = {
                 _loadding.show() ;
             },
             success:function(data){
-                //console.log(data);
+                console.log(data);
                 if(data && data.pageInfo) {
                     //console.log(data.pageInfo);
                     $(_target).empty() ;
