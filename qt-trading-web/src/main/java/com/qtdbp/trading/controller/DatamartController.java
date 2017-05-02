@@ -158,12 +158,12 @@ public class DatamartController extends BaseController {
         orderModel.setUserId(user.getId());
         orderModel.setProductId(prodId);
         orderModel.setProductType((byte)type);
-
+        view.setViewName(PAGE_USERCENTER);
         try {
             DataTransactionOrderModel result = orderService.insertNewOrder(orderModel);
             view.addObject("order", result);
             view.addObject("orderState", result.getOrderState());
-            view.setViewName(PAGE_USERCENTER);
+
         } catch (GlobalException e) {
             e.getMessage();
         }
