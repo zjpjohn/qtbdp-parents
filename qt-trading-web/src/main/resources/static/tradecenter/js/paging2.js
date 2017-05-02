@@ -44,7 +44,6 @@
 			this.container = $('<div id="' + this.id + '" class="ui-paging-container"/>');
 			this.target.append(this.container);
 			this.render(this.settings);
-			this.format();
 			this.bindEvent();
 		},
 		render: function(ops) {
@@ -52,7 +51,9 @@
 			this.pagesize = ops.pagesize || this.settings.pagesize;
 			this.current = ops.current || this.settings.current;
 			this.pagecount = Math.ceil(this.count / this.pagesize);
-			this.format();
+			if(this.count>0){
+                this.format();
+			}
 		},
 		bindEvent: function() {
 			var _this = this;
