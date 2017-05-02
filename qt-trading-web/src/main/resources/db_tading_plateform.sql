@@ -60,7 +60,7 @@ ALTER TABLE data_product ADD data_type_props VARCHAR(1000),ADD download_count IN
 /*==============================================================*/
 /* Table: data_user_info   用户表新增系统用户ID、昵称              */
 /*==============================================================*/
-ALTER TABLE data_user_info ADD nick VARCHAR(50), sso_user_id VARCHAR(100) ;
+ALTER TABLE data_user_info ADD nick VARCHAR(50),ADD sso_user_id VARCHAR(100) ;
 
 /*==============================================================*/
 /* Table: data_institution_type_relation  修改字段不为空          */
