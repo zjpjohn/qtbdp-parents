@@ -1,7 +1,9 @@
 package com.qtdbp.trading.service;
 
 import com.github.pagehelper.PageHelper;
+import com.qtdbp.trading.alipay.util.UtilDate;
 import com.qtdbp.trading.constants.AppConstants;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
@@ -123,14 +125,15 @@ public class DataTransactionOrderService {
                 orderModel.setOrderSubject(itemModel.getItemName());
             }
             orderModel.setOrderState((byte)AppConstants.ORDER_STATE_PAYING);
-            orderModel.setOrderNo(getOrderNo());
+            //生成唯一订单号
+            String orderNo = "qt"+UtilDate.getOrderNum();
+            orderModel.setOrderNo(orderNo);
             orderModel.setAmount(amount);
             // 调用订单插入操作
             Integer count = orderMapper.insertOrder(orderModel) ;
-            if(count == null || count < 0) throw new GlobalException("订单创建失败，请重新操作") ;
+            if(count == null || count < 0) throw new GlobalException(ErrorCode.ERROR_ORDER_CREATE_FAIL,"订单创建失败，请重新操作") ;
         } else {
-           // throw new GlobalException("订单已创建，请前往【个人中心】- 【我的订单】中查看") ;
-            orderModel = list.get(0);
+           throw new GlobalException(ErrorCode.ERROR_ORDER_CREATED, "订单已创建，请前往【个人中心】- 【我的订单】中查看") ;
         }
 
         return orderModel ;
@@ -145,15 +148,6 @@ public class DataTransactionOrderService {
         orderModel.setFinishTime(new Date());
         Integer i = orderMapper.updateOrder(orderModel);
         return i;
-    }
-
-    /**
-     * 生成订单号
-     * @return
-     */
-    public String getOrderNo() {
-        String orderNo = "qt"+String.valueOf(System.currentTimeMillis())+Math.round(Math.random() * 9000 + 1000);
-        return  orderNo;
     }
 
 }

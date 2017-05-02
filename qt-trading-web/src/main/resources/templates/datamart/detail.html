@@ -117,7 +117,25 @@
             buy([[${prod.id}]],2);
         });
         function buy(id,n){
-            location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
+            //判断用户是否登录
+            if(!userId){
+                location.href = "/login";
+            }
+            $.ajax({
+                type: 'get',
+                url: '/selectOrder/'+id+'/'+n,
+                success: function (data) {
+                    if(data.errorCode){
+                        //todo 弹出提示框该订单已创建....
+                        layer.alert(data.errorMsg);
+                    }else{
+                        location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
+                    }
+                },
+                error: function () {
+                    layer.alert("查询该用户下是否包含此订单失败");
+                }
+            });
         }
     </script>
 </body>

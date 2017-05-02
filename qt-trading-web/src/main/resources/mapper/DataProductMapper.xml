@@ -11,6 +11,7 @@
               p.designation,
               p.pic,
               p.introduce,
+              p.data_type_props,
               rel.attr_name,
               rel.val_name
             FROM
@@ -31,7 +32,8 @@
                     p.id,
                     p.designation,
                     p.pic,
-                    p.introduce
+                    p.introduce,
+                    p.data_type_props
                 FROM
                     data_product as p
                 WHERE
@@ -50,6 +52,7 @@
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
         <result column="introduce" property="introduce" />
+        <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
     </resultMap>
@@ -87,7 +90,7 @@
         <result column="data_type_props" property="dataTypeProps" />
         <result column="p_score" property="pScore" />
         <result column="file_url" property="fileUrl"/>
-    
+
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
 
