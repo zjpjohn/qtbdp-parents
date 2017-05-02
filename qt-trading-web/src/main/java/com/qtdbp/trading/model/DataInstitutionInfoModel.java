@@ -24,6 +24,10 @@ public class DataInstitutionInfoModel extends BaseModel{
     private Integer provinceId;//省ID
     @ApiModelProperty(value = "市ID")
     private Integer cityId;//市ID
+    @ApiModelProperty(value = "省")
+    private String province;//省
+    @ApiModelProperty(value = "市")
+    private String city;//市
     @ApiModelProperty(hidden=true)
     private String area;//地区
     @ApiModelProperty(hidden=true)
@@ -294,5 +298,21 @@ public class DataInstitutionInfoModel extends BaseModel{
 
     public void setRelationModels(List<DataInstitutionTypeRelationModel> relationModels) {
         this.relationModels = relationModels;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

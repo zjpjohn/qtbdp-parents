@@ -68,6 +68,11 @@ ALTER TABLE data_user_info ADD nick VARCHAR(50), sso_user_id VARCHAR(100) ;
 ALTER TABLE data_institution_type_relation MODIFY institution_id INT NOT NULL, MODIFY data_type INT NOT NULL;
 
 /*==============================================================*/
+/* Table: data_institution_info  新增province、city              */
+/*==============================================================*/
+ALTER TABLE data_institution_info ADD `province` VARCHAR(50) NULL DEFAULT NULL COMMENT '省',ADD `city` VARCHAR(50) NULL DEFAULT NULL COMMENT '市' ;
+
+/*==============================================================*/
 /*                         基础数据                              */
 /*==============================================================*/
 INSERT INTO `data_type_attr` VALUES (1, 0, '计价方式', 0, 0, 0, 1);
