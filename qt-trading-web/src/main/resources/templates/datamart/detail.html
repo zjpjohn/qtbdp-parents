@@ -72,6 +72,7 @@
 
     <!-- 数据包产品tpml模板 -->
     <script id="tmpl_items" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
         {{each(i,item) list}}
         <li>
             <h2>${$item._substr(item.itemName,10)}</h2>
@@ -82,11 +83,14 @@
             </p>
             <div class="list_mask">
                 <p><i>￥1.00</i>（10积分）</p>
-                <a class="list_buy" onclick="buy(${item.id},1);">购买</a>
+                <!--<a class="list_buy" onclick="buy(${item.id},1);">购买</a>-->
                 <!--<a href="javacript:;" class="list_see">查看详情</a>-->
             </div>
         </li>
         {{/each}}
+    {{else}}
+        暂时没有相关信息
+    {{/if}}
     </script>
 
     <script th:inline="javascript">
@@ -113,7 +117,25 @@
             buy([[${prod.id}]],2);
         });
         function buy(id,n){
-            location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
+            //判断用户是否登录
+            if(!userId){
+                location.href = "/login";
+            }
+            $.ajax({
+                type: 'get',
+                url: '/selectOrder/'+id+'/'+n,
+                success: function (data) {
+                    if(data.errorCode){
+                        //todo 弹出提示框该订单已创建....
+                        layer.alert(data.errorMsg);
+                    }else{
+                        location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
+                    }
+                },
+                error: function () {
+                    layer.alert("查询该用户下是否包含此订单失败");
+                }
+            });
         }
     </script>
 </body>

@@ -100,6 +100,7 @@
     <!-- 方案召集模板 -->
     <!--${$item._surplusDays(prod.toDate)}-->
     <script id="tmpl_demand_sosInfos" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
         {{each(i,prod) list}}
         <li>
             <div class="lf">
@@ -129,6 +130,9 @@
             </div>
          </li>
         {{/each}}
+    {{else}}
+        暂时没有相关需求
+    {{/if}}
     </script>
 </body>
 </html>
