@@ -36,11 +36,12 @@ public class FdfsFileService {
      * 下载文件
      * @param orderNo 订单号
      * @param currUserId 当前用户ID
+     * @param check true检查文件,false下载文件
      * @return
      * @throws GlobalException
      */
     @Transactional
-    public ResponseEntity<byte[]> downloadFile(String orderNo, Integer currUserId) throws GlobalException {
+    public ResponseEntity<byte[]> downloadFile(String orderNo, Integer currUserId, boolean check) throws GlobalException {
 
         DataTransactionOrderModel order = orderMapper.findOrderByNo(orderNo) ;
         if(order == null) throw new GlobalException("此订单已不存在") ;
@@ -52,6 +53,7 @@ public class FdfsFileService {
         try {
             // 下载文档
             String filePath = order.getDownloadUrl() ;
+            if(filePath == null) throw new GlobalException("文件不存在") ;
             String fileName = order.getOrderSubject() ;
 
             String substr = filePath.substring(filePath.indexOf("group"));
@@ -61,7 +63,7 @@ public class FdfsFileService {
             fileEntity = FileManager.download(group, remoteFileName,specFileName);
 
             // 更新产品下载次数
-            if(order.getProductId() != null){
+            if(order.getProductId() != null && !check){
                 DataProductModel productModel = new DataProductModel() ;
                 productModel.setEditorId(order.getUserId());
                 productModel.setDownloadCount(1);

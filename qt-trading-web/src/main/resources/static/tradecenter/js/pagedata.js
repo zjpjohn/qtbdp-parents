@@ -80,9 +80,7 @@ var pageData = {
                     settings.count = data.pageInfo.total ;
 
                     // 第一次加载数据，条件变更需要重新加载分页插件
-                    if(settings.count>0) {
-                        if (pageData._change) pageData.paging(settings);
-                    }
+                    if (pageData._change) pageData.paging(settings);
                 }
             },
             error:function(data){

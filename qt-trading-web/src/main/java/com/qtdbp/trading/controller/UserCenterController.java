@@ -57,7 +57,7 @@ public class UserCenterController extends BaseController {
 
         ResponseEntity<byte[]> file ;
         try {
-            file = fileService.downloadFile(orderNo, user.getId()) ;
+            file = fileService.downloadFile(orderNo, user.getId(), false) ;
         } catch (Exception e) {
             throw new GlobalException("下载出错："+e.getMessage()) ;
         }

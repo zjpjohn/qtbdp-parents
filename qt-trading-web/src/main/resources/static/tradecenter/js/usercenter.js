@@ -189,13 +189,21 @@ function pay(no,amount,subject) {
     });
 }
 
-//点击我的账户  余额明细、积分明细
-$(".convertye>a").click(function(){
-    $(this).addClass("active").siblings(".active").removeClass("active");
-    var convertye=$(this).attr("data-index");
-    $("."+convertye+"2").addClass("active").siblings(".active").removeClass("active");
-});
-
+//下载函数封装
+function orderDownload(orderId){
+    $.ajax({
+        url: "/api/upload/file/exist?orderNo="+orderId,
+        type: "get",
+        xhrFields:{withCredentials:true},
+        success: function (data) {
+            if(data.success){
+              window.location.href="/download/"+orderId;
+            }else{
+                layer.msg("当前数据已失效",{icon:5});
+            }
+        }
+    })
+}
 
 //个人信息 前端验证
 function check1(){
@@ -215,7 +223,6 @@ function check1(){
 $("#phoneNUM").blur(function(){
     check1();
 });
-
 function check2(){
     /*<![CDATA[*/
     var emalnum =/[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/;
@@ -236,13 +243,8 @@ function check2(){
 $("#person_emal").blur(function(){
     check2();
 });
-
-
-
-
 //个人信息 头像修改
 var headUrl="";
-
 $(document).on("change","#upheadimg",function() {
     var form = new FormData();
     form.append("img",$("#upheadimg")[0].files[0]);
@@ -264,11 +266,6 @@ $(document).on("change","#upheadimg",function() {
         }
     })
 });
-
-
-
-
-
 
 
 //信息修改 保存

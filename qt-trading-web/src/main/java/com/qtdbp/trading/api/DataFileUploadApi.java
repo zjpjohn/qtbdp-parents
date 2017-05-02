@@ -2,11 +2,14 @@ package com.qtdbp.trading.api;
 
 
 import com.qtd.utils.OssUpload;
+import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.service.FdfsFileService;
+import com.qtdbp.trading.service.security.model.SysUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(description = "文件上传 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/upload")
-public class DataFileUploadApi {
+public class DataFileUploadApi extends BaseController {
 
     @Autowired
     private FdfsFileService uploadService ;
@@ -87,6 +90,25 @@ public class DataFileUploadApi {
 
         map.put("success", isSuccess) ;
         map.put("file", fileUrl) ;
+
+        return map;
+    }
+
+    @ApiOperation(value = "文件是否有效")
+    @RequestMapping(value = "/file/exist", method = RequestMethod.GET)
+    public ModelMap fileExist(String orderNo) throws GlobalException {
+
+        ModelMap map = new ModelMap();
+
+        SysUser user = getPrincipal() ;
+        if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+
+        try {
+            ResponseEntity<byte[]> file = uploadService.downloadFile(orderNo, user.getId(), true) ;
+            if(file != null) map.put("success", true) ;
+        } catch (Exception e) {
+            throw new GlobalException("下载出错："+e.getMessage()) ;
+        }
 
         return map;
     }
