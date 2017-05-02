@@ -72,6 +72,7 @@
 
     <!-- 数据包产品tpml模板 -->
     <script id="tmpl_items" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
         {{each(i,item) list}}
         <li>
             <h2>${$item._substr(item.itemName,10)}</h2>
@@ -87,6 +88,9 @@
             </div>
         </li>
         {{/each}}
+    {{else}}
+        暂时没有相关信息
+    {{/if}}
     </script>
 
     <script th:inline="javascript">

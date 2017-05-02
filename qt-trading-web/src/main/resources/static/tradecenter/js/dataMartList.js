@@ -1,67 +1,64 @@
-﻿var type,priceStyle,dataFormat,dataSource,dataSize,sortStyle;
-//点击左侧数据大分类
-$(".data_sort>li>a").unbind("click").click(function(){
-    $(".data_sort>li>a").removeClass("active");
-    $(this).addClass("active");
-    $(".sub_sort a").removeClass('active');
-    $(".sub_sort .a1").addClass("active");
-    type=$(this).attr("data-id");
-    priceStyle=0;dataFormat=0;dataSource=0;dataSize=0;sortStyle=0;
-});
-//计价方式
-$(".priceStyle>li>a").unbind("click").click(function(){
-    $(".priceStyle>li>a").removeClass("active");
-    $(this).addClass("active");
-    priceStyle=$(this).attr("data-id");
-});
-//数据格式
-$(".dataFormat>li>a").unbind("click").click(function(){
-    $(".dataFormat>li>a").removeClass("active");
-    $(this).addClass("active");
-    dataFormat=$(this).attr("data-id");
-});
-//数据来源
-$(".dataSource>li>a").unbind("click").click(function(){
-    $(".dataSource>li>a").removeClass("active");
-    $(this).addClass("active");
-    dataSource=$(this).attr("data-id");
-});
-//数据大小
-$(".dataSize>li>a").unbind("click").click(function(){
-    $(".dataSize>li>a").removeClass("active");
-    $(this).addClass("active");
-    dataSize=$(this).attr("data-id");
-});
-//排序方式
-$(".sortStyle>li>a").unbind("click").click(function(){
-    $(".sortStyle>li>a").removeClass("active");
-    $(this).addClass("active");
-    sortStyle=$(this).attr("data-id");
-});
-//获取列表数据
-function getData(){
-    $.ajax({
-        type:"GET",
-        dataType:"json",
-        url:"",
-        ansync:true,
-        data:{
-
-        },
-        xhrFields:{
-            withCredentials:true
-        },
-        success:function(data){
-            console.log(data);
-        },
-        error:function(data){
-            console.log(data);
+nav(2);
+//banner动画
+var m=0,n=1,deg1=0;deg2=0,plus=true,arrow=205,arrowLeft=882,plus2=true;
+function intervals(){
+    m++;
+    //中间的箭头收缩
+    if(m%3==0){
+        if(arrow==205){
+            plus2=false;
+        }else if( arrow==175) {
+            plus2=true;
         }
-    });
+        if(plus2){
+            arrow++;
+            arrowLeft-=0.5;
+        }else {
+            arrow--;
+            arrowLeft+=0.5;
+        }
+        $(".arrow").css("width",arrow).css("left",arrowLeft);
+    }
+    //最左边箭头、右边的小方块显示与消失
+    if(m%25==0){
+        n++;
+        if(n>3){
+            n=1;
+        }
+        $(".arrows>i:nth-child("+n+")").addClass("blue").siblings(".blue").removeClass("blue");
+        if($(".square").attr("class").indexOf("disappear")==-1){
+            $(".square").addClass("disappear");
+        }else{
+            $(".square").removeClass("disappear");
+        }
+    }
+    //钟摆与左右摇摆
+    deg1++;
+    if(deg1>360){
+        deg1=0;
+    }
+    if(deg2==45){
+        plus=false;
+    }else if( deg2==-45) {
+        plus=true;
+    }
+    if(plus){
+        deg2++;
+    }else {
+        deg2--;
+    }
+    $(".hex").css("transform","rotate("+deg1+"deg)");
+    $(".clock").css("transform","rotate("+deg2+"deg)");
+    //最右边数据递增
+    if(m%100==0){
+        m=0;
+        if(parseInt($(".exchange").html())<1000000000){
+            $(".exchange").html(parseInt($(".exchange").html())+parseInt(Math.random()*400+100));
+        }
+        if(parseInt($(".capacity").html())<10000){
+            $(".capacity").html(parseInt($(".capacity").html())+parseInt(Math.random()*10+1)+"G");
+        }
+    }
+
 }
-//分页条   数据的总条数：count
-$('#pageTool').Paging({pagesize:12,count:100,toolbar:true,callback:function(page,size,count){
-    //console.log(page);//当前页
-    //console.log(size);//每页条数
-    //console.log(count);//总页数
-}});
+setInterval(intervals,20);
