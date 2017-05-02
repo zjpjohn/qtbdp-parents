@@ -20,9 +20,9 @@ public class DataInstitutionInfoModel extends BaseModel{
     private String designation;//企业名称
     @ApiModelProperty(hidden=true)
     private Integer greaterRegionId;//大区ID
-    @ApiModelProperty(value = "省ID")
+    @ApiModelProperty(value = "省ID",hidden=true)
     private Integer provinceId;//省ID
-    @ApiModelProperty(value = "市ID")
+    @ApiModelProperty(value = "市ID",hidden=true)
     private Integer cityId;//市ID
     @ApiModelProperty(value = "省")
     private String province;//省
