@@ -28,7 +28,7 @@
 	<section class="fredation_main main">
 		<p class="chose_menu floating">
 			<span>服务范围&nbsp;&nbsp;：</span>
-			<a th:class="${currentid} ? null : 'active'" data-id="0" >不限</a>
+			<a th:href="@{/fedration}" th:class="${currentid} ? null : 'active'" data-id="0" >不限</a>
 			<a th:each="val : ${typeModels}"  th:text="${val.name}" th:attr="data-id=${val.id}" th:class="${currentid} == ${val.id} ? 'active'">智能制造</a>
 
 		</p>
