@@ -524,6 +524,7 @@
 }
 .center_tb a{
     display:block;
+    cursor:pointer;
 }
 .center_tb td,.center_tb th{
     height:70px;
@@ -755,6 +756,8 @@ tbody{
 }
 .ui-paging-container li.page_arrow{
     padding:0px 6px;
+    position: absolute;
+    z-index: 9;
 }
 .ui-paging-container li.ui-pager-disabled.page_arrow, .ui-paging-container li.ui-pager-disabled.page_arrow:hover {
     background-color: #fff;
