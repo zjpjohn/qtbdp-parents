@@ -50,6 +50,7 @@
 
 	<!-- 联盟tpml模板 -->
 	<script id="tmpl_institution" type="text/x-jquery-tmpl">
+	 {{if list.length>0}}
         {{each(i,prod) list}}
         <li>
 			<a href="javascript:;" class="prolist_img">
@@ -63,6 +64,9 @@
 			</div>
 		</li>
         {{/each}}
+     {{else}}
+        暂时没有相关服务商
+    {{/if}}
     </script>
 	<script th:inline="javascript">
 		nav(4);
