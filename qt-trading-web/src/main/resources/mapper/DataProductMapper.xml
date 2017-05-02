@@ -12,6 +12,7 @@
               p.pic,
               p.introduce,
               p.data_type_props,
+              p.p_score,
               rel.attr_name,
               rel.val_name
             FROM
@@ -33,6 +34,7 @@
                     p.designation,
                     p.pic,
                     p.introduce,
+                    p.p_score,
                     p.data_type_props
                 FROM
                     data_product as p
@@ -55,6 +57,7 @@
         <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
+        <result column="p_score" property="pScore"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
