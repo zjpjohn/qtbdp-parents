@@ -96,8 +96,8 @@
                 <a href="/datamart/detail/${prod.id}" class="list_title">${$item._substr(prod.designation,14)}</a>
                 <div class="list_con">${$item._repstr(prod.introduce,35)}</div>
                 <p class="list_bot floating">
-                    <span class="lf"> <i></i> 文件，个人，100M以下</span>
-                    <span class="rt free">免费</span>
+                    <span class="lf"> <i></i> ${$item._dataTypeProp(prod.dataTypeProps)}</span>
+                    <span class="rt free">${$item._prices(prod.pScore)}</span>
                 </p>
             </div>
         </li>
