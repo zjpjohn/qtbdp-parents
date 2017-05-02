@@ -95,7 +95,7 @@
 
     <script th:inline="javascript">
         nav(2);
-        if($(".infos").html()>120){
+        if($(".infos").html().length>120){
             $(".infos").html($(".infos").html().substring(0,120)+"...");
         }
 
@@ -127,13 +127,21 @@
                 success: function (data) {
                     if(data.errorCode){
                         //todo 弹出提示框该订单已创建....
-                        layer.alert(data.errorMsg);
+                        layer.confirm(data.errorMsg,
+                            {
+                                btn:["确定"]
+                            },
+                            function(index){
+                                layer.close(index);
+                                location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
+                            }
+                        );
                     }else{
                         location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
                     }
                 },
-                error: function () {
-                    layer.alert("查询该用户下是否包含此订单失败");
+                error: function (data) {
+                    console.log("查询该用户下是否包含此订单失败");
                 }
             });
         }

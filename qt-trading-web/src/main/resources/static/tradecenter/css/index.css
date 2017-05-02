@@ -228,7 +228,7 @@
     height:44px;
     margin-right:45px;
     background-image:url("../images/icon.png" );
-    cursor:default;
+    cursor:pointer;
 }
 .com_list>.a1{
     background-position:-188px -161px;
