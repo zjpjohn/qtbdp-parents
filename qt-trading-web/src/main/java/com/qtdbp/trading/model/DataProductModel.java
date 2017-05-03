@@ -46,6 +46,8 @@ public class DataProductModel extends BaseModel {
 
     private String valIds ;     // 请求参数：属性值ID列表，如：1
 
+    private String valSqls ;    // 动态sql
+
     public String getDesignation() {
         return designation;
     }
@@ -260,5 +262,34 @@ public class DataProductModel extends BaseModel {
 
     public void setDownloadCount(int downloadCount) {
         this.downloadCount = downloadCount;
+    }
+
+    public String getValSqls() {
+
+        String val = null ;
+        if(valIds != null) {
+            String[] valIdArray =  valIds.split(",") ;
+            StringBuilder sqls = new StringBuilder() ;
+
+            boolean first = false;
+            for (String valId : valIdArray) {
+
+                if(sqls.length() > 0) {
+                    first = true ;
+                    sqls.append(" AND product_id IN (") ;
+                }
+                sqls.append("SELECT product_id FROM data_product_attr_relation WHERE val_id = "+valId) ;
+
+                if(first) sqls.append(")") ;
+            }
+
+            val = sqls.toString() ;
+        }
+
+        return val;
+    }
+
+    public void setValSqls(String valSqls) {
+        this.valSqls = valSqls;
     }
 }
