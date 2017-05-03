@@ -42,7 +42,7 @@ eureka:
 # Logback开发环境日志输出
 # ===================================================================
 logging:
-  file: /home/web/logs/qt-trading-test.log
+  file: /home/boot/logs/qt-trading-test.log
   level:
     com.qtdbp.trading: TRACE
 
