@@ -73,6 +73,11 @@ ALTER TABLE data_institution_type_relation MODIFY institution_id INT NOT NULL, M
 ALTER TABLE data_institution_info ADD `province` VARCHAR(50) NULL DEFAULT NULL COMMENT '省',ADD `city` VARCHAR(50) NULL DEFAULT NULL COMMENT '市' ;
 
 /*==============================================================*/
+/*                         建索引                                */
+/*==============================================================*/
+ALTER TABLE `data_product_attr_relation` ADD INDEX idx_val_id_and_product_id ( `val_id`, `product_id` ) ;
+
+/*==============================================================*/
 /*                         基础数据                              */
 /*==============================================================*/
 INSERT INTO `data_type_attr` VALUES (1, 0, '计价方式', 0, 0, 0, 1);
