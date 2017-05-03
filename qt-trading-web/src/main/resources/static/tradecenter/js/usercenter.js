@@ -86,12 +86,12 @@ $(document).ready(function(){
     //如果是支付订单
     if(getQueryString("order")=="4"){
         $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
-        if(orderState==3){
-            getMyOrder();
-        }else{
-            $("#tmpl_orderpay").tmpl(order).appendTo("#orderPay");
-            $(".orderpay").addClass("active").siblings(".active").removeClass("active");
-        }
+        $("#tmpl_orderpay").tmpl(order).appendTo("#orderPay");
+        $(".orderpay").addClass("active").siblings(".active").removeClass("active");
+
+    }else if(getQueryString("order")=="3"){
+        $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
+        getMyOrder();
     }else{
         getGailan();
     }

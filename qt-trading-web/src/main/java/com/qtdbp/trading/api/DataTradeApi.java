@@ -6,7 +6,10 @@ import com.qtdbp.trading.alipay.sign.RSA;
 import com.qtdbp.trading.alipay.util.AlipayNotify;
 import com.qtdbp.trading.alipay.util.AlipaySubmit;
 import com.qtdbp.trading.constants.ApiConstants;
+import com.qtdbp.trading.constants.AppConstants;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
 import com.qtdbp.trading.model.AlipayModel;
 import com.qtdbp.trading.model.DataAuthorizeOrderModel;
 import com.qtdbp.trading.model.DataItemModel;
@@ -14,6 +17,7 @@ import com.qtdbp.trading.model.DataTransactionOrderModel;
 import com.qtdbp.trading.service.DataAuthorizeOrderService;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
+import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.trading.utils.AliPayOrderUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -24,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,6 +63,9 @@ public class DataTradeApi {
 
     @Autowired
     private DataAuthorizeOrderService demandOrderService ;
+
+    @Autowired
+    private DataTransactionOrderMapper orderMapper ;
 
     //===================================================================
     // 订单API接口

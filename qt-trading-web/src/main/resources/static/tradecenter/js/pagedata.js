@@ -71,6 +71,12 @@ var pageData = {
                         },
                         _repstr :function(str2,i){
                             return pageData._replacestr(str2,i);
+                        },
+                        _dataTypeProp :function (props) {
+                            return pageData._dataTypeProps(props);
+                        },
+                        _prices :function (price) {
+                            return pageData._price(price);
                         }
 
                     }).appendTo(_target);
@@ -387,6 +393,37 @@ var pageData = {
         return demandtypes;
     },
 
+    //数据商场 具体详情数据格式解析
+    _dataTypeProps: function (data) {
+        var returnData = [];
+        if(data != null && data != ""){
+            var dataArr = data.split(";");
+            var jsonData = {};
+            for(var i=0;i<dataArr.length;i++){
+                var aa = new Array();
+                aa = dataArr[i].split(":");
+                jsonData[aa[0]] = aa[1];
+            }
+            returnData.push(jsonData.数据格式);
+            returnData.push(jsonData.数据来源);
+            returnData.push(jsonData.数据大小);
+            return returnData.join(",");
+        }else{
+            return "";
+        }
+
+    },
+
+    // 数据商场页面要显示的价格
+    _price: function (price) {
+        var returnData = "";
+        if(price != null && price != ""){
+            returnData = "￥"+price;
+        } else{
+            returnData = "￥"+0;
+        }
+        return returnData;
+    }
 
 };
 

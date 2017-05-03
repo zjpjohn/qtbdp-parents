@@ -60,7 +60,7 @@ ALTER TABLE data_product ADD data_type_props VARCHAR(1000),ADD download_count IN
 /*==============================================================*/
 /* Table: data_user_info   用户表新增系统用户ID、昵称              */
 /*==============================================================*/
-ALTER TABLE data_user_info ADD nick VARCHAR(50), sso_user_id VARCHAR(100) ;
+ALTER TABLE data_user_info ADD nick VARCHAR(50),ADD sso_user_id VARCHAR(100) ;
 
 /*==============================================================*/
 /* Table: data_institution_type_relation  修改字段不为空          */
@@ -71,6 +71,11 @@ ALTER TABLE data_institution_type_relation MODIFY institution_id INT NOT NULL, M
 /* Table: data_institution_info  新增province、city              */
 /*==============================================================*/
 ALTER TABLE data_institution_info ADD `province` VARCHAR(50) NULL DEFAULT NULL COMMENT '省',ADD `city` VARCHAR(50) NULL DEFAULT NULL COMMENT '市' ;
+
+/*==============================================================*/
+/*                         建索引                                */
+/*==============================================================*/
+ALTER TABLE `data_product_attr_relation` ADD INDEX idx_val_id_and_product_id ( `val_id`, `product_id` ) ;
 
 /*==============================================================*/
 /*                         基础数据                              */

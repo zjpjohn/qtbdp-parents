@@ -4,45 +4,25 @@
 
     <!-- 分页查询数据包产品 -->
     <select id="findProductsByCondtion" resultMap="ProductResultMap">
-        <choose>
-            <when test="valIds != null">
-            SELECT
-              p.id,
-              p.designation,
-              p.pic,
-              p.introduce,
-              rel.attr_name,
-              rel.val_name
-            FROM
-                data_product as p,
-                data_product_attr_relation as rel
-            WHERE
-                p.id = rel.product_id
-                AND p.is_used = 1
-                <if test="dataType != null and dataType != 0">
-                    AND p.data_type = ${dataType}
-                </if>
-                AND rel.val_id in (${valIds})
-            ORDER BY
-              p.addtime DESC
-            </when>
-            <otherwise>
-                SELECT
-                    p.id,
-                    p.designation,
-                    p.pic,
-                    p.introduce
-                FROM
-                    data_product as p
-                WHERE
-                  p.is_used = 1
-                  <if test="dataType != null and dataType != 0">
-                      AND p.data_type = ${dataType}
-                  </if>
-                ORDER BY
-                  p.addtime DESC
-            </otherwise>
-        </choose>
+        SELECT
+        p.id,
+        p.designation,
+        p.pic,
+        p.introduce,
+        p.p_score,
+        p.data_type_props
+        FROM
+        data_product as p
+        WHERE
+        p.is_used = 1
+        <if test="dataType != null and dataType != 0">
+            AND p.data_type = ${dataType}
+        </if>
+        <if test="valSqls != null">
+            AND p.id IN (${valSqls})
+        </if>
+        ORDER BY
+        p.addtime DESC
     </select>
 
     <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
@@ -50,8 +30,10 @@
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
         <result column="introduce" property="introduce" />
+        <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
+        <result column="p_score" property="pScore"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -87,7 +69,7 @@
         <result column="data_type_props" property="dataTypeProps" />
         <result column="p_score" property="pScore" />
         <result column="file_url" property="fileUrl"/>
-    
+
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
 

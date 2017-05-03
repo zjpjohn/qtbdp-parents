@@ -52,11 +52,17 @@
 
 .about_chose a:hover{background: #00c3ed;color:#fff;transition-duration: 0.5s}
 .next_line{width: 7px;height: 153px;background: url(../images/arrow-153.png) no-repeat ;margin:92px auto 0 auto;}
-.trading{width: 500px;height: 280px;margin:35px auto 0 auto;position: relative;}
+.trading{
+    height: 280px;
+    margin:35px auto 0 auto;
+    position: relative;
+    padding-bottom:220px;
+    background:url("../images/line_2.png") no-repeat center 65px;
+}
 .trading h2{color:#feffff; font-size: 48px;font-weight:normal;text-align: center;}
-.trading p{color: #ffffff;font-size: 18px;display: block;width: 500px;margin-top:30px;}
+.trading p{color: #ffffff;font-size: 18px;display: block;width: 500px;margin:0px auto;margin-top:30px;}
 
-.start_box{width: 100%;height:55px;margin-top:220px;}
+.start_box{width: 100%;height:55px;}
  
 .start{display: block; color:#00c3ed;border:1px solid #00c3ed;font-size: 22px;width: 200px;margin:0 auto;height: 53px;text-align: center; line-height: 55px;z-index: 999;}
 .start:hover{background: #00c3ed;color:#fff;transition-duration: 0.5s}

@@ -1,6 +1,18 @@
+# ===================================================================
+# Eureka注册中心配置
+# ===================================================================
 eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
     serviceUrl:
       defaultZone: http://192.168.36.39:8010/eureka/
+
+
+# ===================================================================
+# Logback开发环境日志输出
+# ===================================================================
+logging:
+  file: /home/boot/logs/eureka-server-prod.log
+  level:
+    com.qtdbp.trading: TRACE
