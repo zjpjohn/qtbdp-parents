@@ -22,7 +22,7 @@
             AND p.id IN (${valSqls})
         </if>
         ORDER BY
-        p.addtime DESC
+        ${orderBy} DESC
     </select>
 
     <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >

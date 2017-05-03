@@ -172,14 +172,20 @@ var pageData = {
 
                 // 获取已选值
                 var _vids = "";
-                $("ul.sub_sort li a.active").each(function () {
+                var orderBy = "";
+                $(".priceStyle a.active").each(function () {
                     var _vid = $(this).attr("data-id") ;
                     if(_vid) _vids += _vid + "," ;
                 }) ;
+                $(".sortStyle a.active").each(function(){
+                    var order = $(this).attr("data-id") ;
+                    if(order && orderBy != order) orderBy = order;
+                });
                 if(_vids && _vids.endsWith(",")) _vids = _vids.substr(0,_vids.length-1) ;
 
                 // 请求参数要http://localhost:8040/swagger-ui.html接口中的key一致
                 var _hasVids = false ;
+                var flag = false;
                 if(settings.params) {
                     // 存在key=valIds替换原有值，否则push
                     $.each(settings.params, function (index, param) {
@@ -188,12 +194,17 @@ var pageData = {
                             _hasVids = true ;
                             param.value = _vids ;
                         }
+                        //替换原有的orderBy值
+                        if(_key == "orderBy") {
+                            flag = true;
+                            param.value = orderBy;
+                        }
                     }) ;
                 } else {
                     settings.params = [] ;// params不存在新建空json数组
                 }
                 if(!_hasVids) settings.params.push({key:"valIds",value:_vids}) ;
-
+                if(!flag) settings.params.push({key:"orderBy",value:orderBy});
                 // console.log("valIds: "+_vids);//vids
 
                 // 条件变更，数据重新查询

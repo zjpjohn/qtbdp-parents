@@ -43,6 +43,7 @@ public class DataProductModel extends BaseModel {
     private int valId ;         // 属性值Id
     private String valName ;    // 属性值名称
     private int buyCount ;      // 购买次数
+    private String orderBy ;    //排序字段
 
     private String valIds ;     // 请求参数：属性值ID列表，如：1
 
@@ -292,4 +293,14 @@ public class DataProductModel extends BaseModel {
     public void setValSqls(String valSqls) {
         this.valSqls = valSqls;
     }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
 }
+
+

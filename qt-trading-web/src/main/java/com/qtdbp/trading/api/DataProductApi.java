@@ -43,6 +43,7 @@ public class DataProductApi {
             @ApiImplicitParam(name = "name", value = "数据包产品名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "valIds", value = "属性值Id列表vid1,vid2; 如：1,2", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "orderBy", value = "排序字段值; 如：addtime", dataType = "String", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：12）", defaultValue = "12", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
@@ -51,6 +52,9 @@ public class DataProductApi {
     public ModelMap loadDataProducts(DataProductModel productModel) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
+        if(productModel.getOrderBy() == null){
+            productModel.setOrderBy("addtime");
+        }
         // 设置默认每页显示记录数
         try {
             if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
