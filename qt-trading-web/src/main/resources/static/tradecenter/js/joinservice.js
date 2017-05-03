@@ -67,18 +67,6 @@ function checkIsService() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //上传图片
 var imgName="",tValue="";
 $("#uploadImg").change(function(){
@@ -235,8 +223,17 @@ var joinsubmit={
         return JSON.stringify(_data);*/
 
         var _data = {} ;
+        var relationModels=[];
         param.forEach(function(val,index){
-            _data[val.name] = val.value ;
+            if(val.name=="dataType"){
+                var obj={}
+                obj[val.name]= val.value;
+                relationModels.push(obj);
+                _data["relationModels"]=relationModels;
+            }else{
+                _data[val.name] = val.value ;
+            }
+
         }) ;
 
         return JSON.stringify(_data);
