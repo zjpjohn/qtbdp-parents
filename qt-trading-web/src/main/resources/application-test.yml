@@ -78,3 +78,13 @@ fdfs:
 fdfs-upload:
   port: 2300
   host: 192.168.36.39
+
+# ===================================================================
+# 对接支付宝
+# ===================================================================
+
+# 回调地址
+# 1. returnUrl 同步，2. notifyUrl 异步
+alipay:
+  returnUrl: http://jytest.qtbigdata.com/alipay/returnUrl
+  notifyUrl: http://andyhttp.iok.la:23918/api/trade/alipay/toNotifyUrl

@@ -78,3 +78,13 @@ fdfs:
 fdfs-upload:
   port: 2300
   host: 192.168.36.17
+
+# ===================================================================
+# 对接支付宝
+# ===================================================================
+
+# 回调地址
+# 1. returnUrl 同步，2. notifyUrl 异步
+alipay:
+  returnUrl: http://jy.qtbigdata.com/alipay/returnUrl
+  notifyUrl: http://jy.qtbigdata.com/api/trade/alipay/toNotifyUrl
