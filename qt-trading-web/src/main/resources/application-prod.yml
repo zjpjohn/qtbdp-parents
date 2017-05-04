@@ -42,7 +42,7 @@ eureka:
 # Logback开发环境日志输出
 # ===================================================================
 logging:
-  file: /home/boot/logs/qt-trading-prod.log
+  file: /home/logs/qt-trading-prod.log
   level:
     com.qtdbp.trading: ERROR
 
@@ -54,7 +54,7 @@ sso:
   host: http://sso.qtbigdata.com/
   loginUrl: http://sso.qtbigdata.com/sso/action/goLogin?retUrl=
   registerUrl: http://sso.qtbigdata.com/sso/action/goRegister?retUrl=
-  callback: http://jytest.qtbigdata.com/callback
+  callback: http://jy.qtbigdata.com/callback
 
 # ===================================================================
 # 分布式文件系统FDFS配置
