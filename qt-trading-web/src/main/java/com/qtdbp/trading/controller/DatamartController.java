@@ -170,21 +170,22 @@ public class DatamartController extends BaseController {
         return view;
     }
 
-    @ResponseBody
+    /**
+     * 获取订单信息并且跳转到订单付款页面
+     * @param productId
+     * @param productType
+     * @return
+     */
     @RequestMapping(value = "/selectOrder/{productId}/{productType}", method = RequestMethod.GET)
-    public ModelMap selectOrder(@PathVariable("productId") String productId,
+    public ModelAndView selectOrder(@PathVariable("productId") String productId,
                                 @PathVariable("productType") String productType){
 
-        ModelMap map = new ModelMap();
+        ModelAndView view = new ModelAndView();
         // 未登陆请先登录
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        SysUser user = null ;
-        if (principal instanceof SysUser) {
-            user = (SysUser) principal;
-        }
+        SysUser user = getPrincipal() ;
         if(user == null) {
-            map = null;
-            return map;
+            view.setViewName("login");
+            return view;
         }
         DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
         int prodId = Integer.parseInt(productId) ;
@@ -197,14 +198,13 @@ public class DatamartController extends BaseController {
         if(list != null && !list.isEmpty()) {
             for(DataTransactionOrderModel order : list){
                 // 只要有一条订单待支付或已支付，则不能购买
-                if(order.getOrderState().intValue() == AppConstants.ORDER_STATE_PAYING
-                        || order.getOrderState().intValue() == AppConstants.ORDER_STATE_PAYED) {
-                    map.put("errorCode", ErrorCode.ERROR_ORDER_CREATED);
-                    map.put("errorMsg", "订单已创建，请前往【个人中心】- 【我的订单】中查看");
-                    break;
+                if(order.getOrderState().intValue() == AppConstants.ORDER_STATE_PAYING) {
+                    view.addObject("order", order);
+                    view.addObject("orderState", order.getOrderState());
+                    view.setViewName(PAGE_USERCENTER);
                 }
             }
         }
-        return map;
+        return view;
     }
 }
