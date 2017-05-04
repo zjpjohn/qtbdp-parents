@@ -81,6 +81,14 @@ public class DataUserInfoService {
         if(sysUser != null) throw new GlobalException("用户已存在无需添加") ;
 
         // 系统用户在交易平台中没有此用户，则插入新纪录
+        try {
+            // 对请求参数中文信息、地址信息解码
+            userInfoModel.setNick(URLDecoder.decode(userInfoModel.getNick(), "UTF-8"));
+            userInfoModel.setHead(URLDecoder.decode(userInfoModel.getHead(), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         Integer count = userInfoMapper.insertDataUserInfo(userInfoModel);
 
         int id  = -1 ;

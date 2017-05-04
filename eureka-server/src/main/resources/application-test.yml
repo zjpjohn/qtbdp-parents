@@ -14,6 +14,6 @@ eureka:
 # Logback开发环境日志输出
 # ===================================================================
 logging:
-  file: /home/boot/logs/eureka-server-prod.log
+  file: /home/logs/eureka-server-test.log
   level:
     com.qtbdp.eureka: TRACE
