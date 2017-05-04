@@ -63,7 +63,8 @@ function getGailan(){
         url: "/api/trade/neworders",
         tmpl_id: "#tmpl_neworder" ,
         target: "#orderList1" ,
-        params: [{key:"userId",value:userId }]
+        curr_page:3,
+        params: [{key:"userId",value:userId}]
     }
     pageData.products(settings) ;
 
@@ -72,6 +73,7 @@ function getGailan(){
         url: "/api/demand/demandorders",
         tmpl_id: "#tmpl_newfabu" ,
         target: "#newfabuList" ,
+        curr_page:3,
         params: [{key:"userId",value:userId }]
     }
     pageData.products(settings) ;
@@ -84,12 +86,13 @@ function getQueryString(name) {
 $(document).ready(function(){
     usercenter.userSubmit() ;
     //如果是支付订单
-    if(getQueryString("order")=="4"){
+    if(isOrder && isOrder=="4"){
         $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
         $("#tmpl_orderpay").tmpl(order).appendTo("#orderPay");
         $(".orderpay").addClass("active").siblings(".active").removeClass("active");
 
-    }else if(getQueryString("order")=="3"){
+    }
+    if(getQueryString("order")=="3"){
         $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
         getMyOrder();
     }else{
