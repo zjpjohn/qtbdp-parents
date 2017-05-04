@@ -12,7 +12,7 @@ public class AliPayOrderUtil {
      * create the order info. 创建订单信息
      *
      */
-    public static String getOrderInfo2(String subject, String body,String orderNo,String price) {
+    public static String getOrderInfo2(String subject, String body,String orderNo,String price, String notifyUrl, String returnUrl) {
 
         // 签约合作者身份ID
         String orderInfo = "partner=" + "\"" + AlipayConfig.partner + "\"";
@@ -33,7 +33,7 @@ public class AliPayOrderUtil {
         orderInfo += "&total_fee=" + "\"" + price + "\"";
 
         // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + AlipayConfig.notify_url + "\"";
+        orderInfo += "&notify_url=" + "\"" + notifyUrl + "\"";
 
         // 服务接口名称， 固定值
         orderInfo += "&service="+"\""+AlipayConfig.service+"\"";
@@ -55,7 +55,7 @@ public class AliPayOrderUtil {
         // orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
 
         // 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
-        orderInfo += "&return_url="+"\""+AlipayConfig.return_url+"\"";
+        orderInfo += "&return_url="+"\""+returnUrl+"\"";
         orderInfo += "&sign_type="+"\"RSA\"";
 
         return orderInfo;

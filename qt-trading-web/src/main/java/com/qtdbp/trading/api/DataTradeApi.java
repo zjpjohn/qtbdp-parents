@@ -67,6 +67,9 @@ public class DataTradeApi {
     @Autowired
     private DataTransactionOrderMapper orderMapper ;
 
+    @Autowired
+    private AlipayConfig alipayConfig ;
+
     //===================================================================
     // 订单API接口
     //===================================================================
@@ -181,7 +184,7 @@ public class DataTradeApi {
             String body = alipayModel.getBody();
 
             //加签
-            String needsign = AliPayOrderUtil.getOrderInfo2(subject, body, orderNo, total_fee);
+            String needsign = AliPayOrderUtil.getOrderInfo2(subject, body, orderNo, total_fee,alipayConfig.notify_url,alipayConfig.return_url);
             String mysign = RSA.sign(needsign, AlipayConfig.private_key, AlipayConfig.input_charset);
 
             // 防钓鱼时间戳
@@ -194,8 +197,8 @@ public class DataTradeApi {
             sParaTemp.put("seller_id", AlipayConfig.seller_id);
             sParaTemp.put("_input_charset", AlipayConfig.input_charset);
             sParaTemp.put("payment_type", AlipayConfig.payment_type);
-            sParaTemp.put("notify_url", AlipayConfig.notify_url);
-            sParaTemp.put("return_url", AlipayConfig.return_url);
+            sParaTemp.put("notify_url", alipayConfig.notify_url);
+            sParaTemp.put("return_url", alipayConfig.return_url);
             sParaTemp.put("anti_phishing_key", AlipayConfig.anti_phishing_key);
             sParaTemp.put("exter_invoke_ip", AlipayConfig.exter_invoke_ip);
             sParaTemp.put("out_trade_no", orderNo);

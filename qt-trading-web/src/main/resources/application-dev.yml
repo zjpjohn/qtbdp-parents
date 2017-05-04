@@ -78,3 +78,22 @@ fdfs:
 fdfs-upload:
   port: 2300
   host: 192.168.36.39
+
+# ===================================================================
+# 对接支付宝
+# ===================================================================
+
+# 回调地址
+# 1. returnUrl 同步，2. notifyUrl 异步, 3. alipayPublicKey 支付宝的公钥 , 4. privateKey 商户的私钥 , 5. sellerId 收款支付宝账号, 6. partner 合作身份者ID，签约账号
+# 7. signType 签名方式, 8. logPath 创建TXT日志文件夹路径, 9. inputCharset 字符编码格式, 10. paymentType 支付类型, 11. service 调用的接口名
+alipay:
+  returnUrl: http://jytest.qtbigdata.com/alipay/returnUrl
+  notifyUrl: http://andyhttp.iok.la:23918/api/trade/alipay/toNotifyUrl
+#  alipayPublicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB
+#  privateKey: MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAOwA7AqP0Z+pXhd0eohPuY+xFQgm0Bf23GLx5X1ARdrrXaUzcoAozIexy05ZaBr+YH4fffMKvZf2fzpRDbiFvV+Be+vgMxN9hczgTOJ1wiAI2BDwULP9YxKLORdgNiPprfDeQPXN83NCWRvWt+cCp9ldp94bodqYFy3QWzS5vgUrAgMBAAECgYAr0kwB9gx9cgx3nHg4IV2aUc5O8i4HlR38/V+YbzvJV5TO3QuwwmKf+6J9jNpo0L0IDj7rxx3HPs0G/g/nKGYuH2u/xtU9a1hHDA5fMeyLPK6Klic2loPNMJomW1KJaz2OYiOSkClstTRf2AibiwtG0RmdRFByCXWmm9xTmI9DkQJBAPYwm9zOWDcGqG2Xj6gAxQX2jvEd+QoOhy8Xg1oonnmOzKSWRoEJnpvgmvEdqqaHD1bfA5Eg+aNLaTVyB1U+OEkCQQD1aGcUI32E8OcODuTbmmmbMaHf226SFrkAdy3LbL2MasGxryE+JUi9lrYyOyLZaFbR00Jhp8+aR7IlFWidQpnTAkBiFvwC/jQnuH9jKwAR8DyQI6zQZSDU4PT7zmKHiaeax0rCSR3OTAbmFJeneiqEL0vtUO4a5QiSB3nj0Ysaa7ABAkEAimzsj+CBAcb9HeHq17Be12qEm4fj88WbbxbKnw9kT9s8DKTzhGF1iXOErArNWoLPTiXzMLB+mtDMPLy5uNMDfwJBAPMtAe8tLJrAKkFEfOy0P+bwdri5ThVG9JYsogyczubgtgbYleMHjXnrb0S50FMuUklxIGh+CHbat0UaWcPDkls=
+#  sellerId: 2088221727788503
+#  partner: 2088221727788503
+#  signType: RSA
+#  logPath: C:\
+#  paymentType: 1
+#  service: create_direct_pay_by_user
