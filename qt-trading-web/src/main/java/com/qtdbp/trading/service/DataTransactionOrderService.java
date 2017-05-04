@@ -126,7 +126,7 @@ public class DataTransactionOrderService {
             }
             orderModel.setOrderState((byte)AppConstants.ORDER_STATE_PAYING);
             //生成唯一订单号
-            String orderNo = "qt"+UtilDate.getOrderNum();
+            String orderNo = "QT"+UtilDate.getOrderNum();
             orderModel.setOrderNo(orderNo);
             orderModel.setAmount(amount);
             // 调用订单插入操作

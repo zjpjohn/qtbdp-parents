@@ -11,6 +11,10 @@ package com.qtdbp.trading.alipay.config;
  *该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
  */
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class AlipayConfig {
 	
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -23,15 +27,17 @@ public class AlipayConfig {
 
 	//商户的私钥,需要PKCS8格式，RSA公私钥生成：https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.nBDxfy&treeId=58&articleId=103242&docType=1
 	public static String private_key = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAOwA7AqP0Z+pXhd0eohPuY+xFQgm0Bf23GLx5X1ARdrrXaUzcoAozIexy05ZaBr+YH4fffMKvZf2fzpRDbiFvV+Be+vgMxN9hczgTOJ1wiAI2BDwULP9YxKLORdgNiPprfDeQPXN83NCWRvWt+cCp9ldp94bodqYFy3QWzS5vgUrAgMBAAECgYAr0kwB9gx9cgx3nHg4IV2aUc5O8i4HlR38/V+YbzvJV5TO3QuwwmKf+6J9jNpo0L0IDj7rxx3HPs0G/g/nKGYuH2u/xtU9a1hHDA5fMeyLPK6Klic2loPNMJomW1KJaz2OYiOSkClstTRf2AibiwtG0RmdRFByCXWmm9xTmI9DkQJBAPYwm9zOWDcGqG2Xj6gAxQX2jvEd+QoOhy8Xg1oonnmOzKSWRoEJnpvgmvEdqqaHD1bfA5Eg+aNLaTVyB1U+OEkCQQD1aGcUI32E8OcODuTbmmmbMaHf226SFrkAdy3LbL2MasGxryE+JUi9lrYyOyLZaFbR00Jhp8+aR7IlFWidQpnTAkBiFvwC/jQnuH9jKwAR8DyQI6zQZSDU4PT7zmKHiaeax0rCSR3OTAbmFJeneiqEL0vtUO4a5QiSB3nj0Ysaa7ABAkEAimzsj+CBAcb9HeHq17Be12qEm4fj88WbbxbKnw9kT9s8DKTzhGF1iXOErArNWoLPTiXzMLB+mtDMPLy5uNMDfwJBAPMtAe8tLJrAKkFEfOy0P+bwdri5ThVG9JYsogyczubgtgbYleMHjXnrb0S50FMuUklxIGh+CHbat0UaWcPDkls=";
-	
+
 	// 支付宝的公钥,查看地址：https://b.alipay.com/order/pidAndKey.htm
 	public static String alipay_public_key  = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://andyhttp.iok.la:23918/api/trade/alipay/toNotifyUrl";
+	@Value("${alipay.notifyUrl}")
+	public String notify_url ;
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://jytest.qtbigdata.com/alipay/returnUrl";
+	@Value("${alipay.returnUrl}")
+	public String return_url ;
 
 	// 签名方式
 	public static String sign_type = "RSA";

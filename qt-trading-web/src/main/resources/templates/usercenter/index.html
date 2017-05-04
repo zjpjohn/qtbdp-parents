@@ -445,7 +445,7 @@
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
+                        <a href="/selectOrderAndPay/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState==2}}
                      <td class="paid">已撤销</td>
@@ -505,7 +505,7 @@
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
+                        <a href="/selectOrderAndPay/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>
@@ -549,7 +549,7 @@
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
                     <td>
-                        <a href="/getOrderInfoAndGoto/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
+                        <a href="/selectOrderAndPay/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
                     </td>
                 {{else order.orderState == 2 }}
                      <td class="paid">已撤销</td>

@@ -207,4 +207,42 @@ public class DatamartController extends BaseController {
         }
         return map;
     }
+
+    /**
+     * 获取订单信息并且跳转到订单付款页面
+     * @param productId
+     * @param productType
+     * @return
+     */
+    @RequestMapping(value = "/selectOrderAndPay/{productId}/{productType}", method = RequestMethod.GET)
+    public ModelAndView selectOrderAndPay(@PathVariable("productId") String productId,
+                                    @PathVariable("productType") String productType){
+
+        ModelAndView view = new ModelAndView();
+        // 未登陆请先登录
+        SysUser user = getPrincipal() ;
+        if(user == null) {
+            view.setViewName("login");
+            return view;
+        }
+        DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
+        int prodId = Integer.parseInt(productId) ;
+        orderModel.setProductId(prodId);
+        int type = productType != null ? Integer.parseInt(productType) : AppConstants.PRODUCT_TYPE_PACKAGE ;
+        orderModel.setProductType((byte)type);
+        orderModel.setUserId(user.getId());
+        List<DataTransactionOrderModel> list = orderMapper.findOrderByUserIdAndProductIdAndType(orderModel);
+        // 如果当前用户已经购买了此数据包产品，则无需购买
+        if(list != null && !list.isEmpty()) {
+            for(DataTransactionOrderModel order : list){
+                // 只要有一条订单待支付或已支付，则不能购买
+                if(order.getOrderState().intValue() == AppConstants.ORDER_STATE_PAYING) {
+                    view.addObject("order", order);
+                    view.addObject("orderState", order.getOrderState());
+                    view.setViewName(PAGE_USERCENTER);
+                }
+            }
+        }
+        return view;
+    }
 }
