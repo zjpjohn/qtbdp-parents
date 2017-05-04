@@ -1,12 +1,12 @@
 @charset "utf-8";
-.about_bg1{width: 100%;height:468px;background: url(../images/bg3.png) no-repeat center center; }
+.about_bg1{width: 100%;height:530px;background: url(../images/bg3.png) no-repeat center center; }
 .bg1_con_box{width: 1200px;margin:0 auto;}
 .bg1_con{width: 850px;height: 200px;margin:0 auto;}
 .bg1_con h2{font-size: 50px;color:#00ffff;font-weight: 100;padding-top:84px;}
 .bg1_con span{display: block;color:#00ffff;font-size: 14px;margin-top:20px;}
 .bg1_con p{color: #a5b5c4;font-size: 14px}
 .bg1_con a{display: block;width: 30px;height: 1px;background: #00ffff;margin-top: 30px}
-.nextbg{width:2px;height: 150px;background: url(../images/arrow-153.png) no-repeat center center;margin:0 auto;margin-top:155px;}
+.nextbg{width:2px;height: 150px;background: url(../images/arrow-153.png) no-repeat center center;margin:0 auto;margin-top:187px;}
 
 
 
