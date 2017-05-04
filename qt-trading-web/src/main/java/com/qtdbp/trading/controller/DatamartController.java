@@ -44,8 +44,6 @@ public class DatamartController extends BaseController {
 
     private static final String PAGE_DATAMART_DETAIL = "datamart/detail" ;
 
-    private static final String PAGE_USERCENTER = "usercenter/index";
-
     @Autowired
     private DataTypeMapper dataTypeMapper ;
     @Autowired
@@ -131,45 +129,6 @@ public class DatamartController extends BaseController {
         result.addObject("attrModels", attrModels) ;
     }
 
-    /**
-     * 创建订单并且跳转到个人中心
-     * @param productId
-     * @param productType
-     * @return
-     */
-    @RequestMapping(value = "/getOrderInfoAndGoto/{productId}/{productType}", method = RequestMethod.GET)
-    public ModelAndView getOrderInfoAndGoto(@PathVariable("productId") String productId,
-                                            @PathVariable("productType") String productType) throws GlobalException {
-
-        ModelAndView view = new ModelAndView();
-
-        // 未登陆请先登录
-        SysUser user = getPrincipal() ;
-        if(user == null) {
-            view.setViewName("login");
-            return view;
-        }
-
-        if(productId == null || "0".equals(productId)) throw new GlobalException("此产品不存在，请选择其他产品购买") ;
-        int type = productType != null ? Integer.parseInt(productType) : AppConstants.PRODUCT_TYPE_PACKAGE ;
-        int prodId = Integer.parseInt(productId) ;
-
-        DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
-        orderModel.setUserId(user.getId());
-        orderModel.setProductId(prodId);
-        orderModel.setProductType((byte)type);
-        view.setViewName(PAGE_USERCENTER);
-        try {
-            DataTransactionOrderModel result = orderService.insertNewOrder(orderModel);
-            view.addObject("order", result);
-            view.addObject("orderState", result.getOrderState());
-
-        } catch (GlobalException e) {
-            e.getMessage();
-        }
-        return view;
-    }
-
     @ResponseBody
     @RequestMapping(value = "/selectOrder/{productId}/{productType}", method = RequestMethod.GET)
     public ModelMap selectOrder(@PathVariable("productId") String productId,
@@ -208,41 +167,4 @@ public class DatamartController extends BaseController {
         return map;
     }
 
-    /**
-     * 获取订单信息并且跳转到订单付款页面
-     * @param productId
-     * @param productType
-     * @return
-     */
-    @RequestMapping(value = "/selectOrderAndPay/{productId}/{productType}", method = RequestMethod.GET)
-    public ModelAndView selectOrderAndPay(@PathVariable("productId") String productId,
-                                    @PathVariable("productType") String productType){
-
-        ModelAndView view = new ModelAndView();
-        // 未登陆请先登录
-        SysUser user = getPrincipal() ;
-        if(user == null) {
-            view.setViewName("login");
-            return view;
-        }
-        DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
-        int prodId = Integer.parseInt(productId) ;
-        orderModel.setProductId(prodId);
-        int type = productType != null ? Integer.parseInt(productType) : AppConstants.PRODUCT_TYPE_PACKAGE ;
-        orderModel.setProductType((byte)type);
-        orderModel.setUserId(user.getId());
-        List<DataTransactionOrderModel> list = orderMapper.findOrderByUserIdAndProductIdAndType(orderModel);
-        // 如果当前用户已经购买了此数据包产品，则无需购买
-        if(list != null && !list.isEmpty()) {
-            for(DataTransactionOrderModel order : list){
-                // 只要有一条订单待支付或已支付，则不能购买
-                if(order.getOrderState().intValue() == AppConstants.ORDER_STATE_PAYING) {
-                    view.addObject("order", order);
-                    view.addObject("orderState", order.getOrderState());
-                    view.setViewName(PAGE_USERCENTER);
-                }
-            }
-        }
-        return view;
-    }
 }
