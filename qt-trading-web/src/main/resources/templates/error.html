@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head lang="en">
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
-        <title>错误页面</title>
-    </head>
-    <body>
-        <div style="text-align:center;">
-            <img style="width: 100%;" th:src="@{/tradecenter/images/500.jpg}" alt="" />
-        </div>
-    </body>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <title>错误页面</title>
+    <style type="text/css">
+        .d1{
+            position:relative;
+            text-align:center;
+        }
+        img{
+            width:100%;
+        }
+        .back{
+            position:absolute;
+            left:46%;
+            bottom:20%;
+            color:#666;
+            text-decoration:none;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="d1">
+    <img th:src="@{/tradecenter/images/500.jpg}" alt="" />
+    <a onclick="javascript:history.back(-1);" class="back">返回上一页</a>
+</div>
+
+<!--<p>url: ${path}</p>
+<p>异常信息: ${statuscode} ${status}</p>
+<hr />
+<div th:text="${url}"></div>
+<div th:text="${exception.message}"></div>-->
+
+</body>
 </html>
