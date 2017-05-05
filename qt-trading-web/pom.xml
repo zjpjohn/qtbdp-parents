@@ -11,7 +11,7 @@
 
     <artifactId>qt-trading-web</artifactId>
     <version>1.0.0</version>
-    <!--<packaging>war</packaging>-->
+    <packaging>war</packaging>
 
     <dependencyManagement>
         <dependencies>
@@ -46,19 +46,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <!-- 部署线上不采用spring-boot自带的tomcat进行启动 -->
-            <!--<exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
         </dependency>
         <!-- 本地启动需要-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -232,11 +232,17 @@
 
     <distributionManagement>
         <repository>
+            <id>QTD</id>
+            <name>Internal QTD</name>
+            <url>http://192.168.36.37:8688/nexus/content/repositories/QTD
+            </url>
+        </repository>
+        <!--<repository>
             <id>releases</id>
             <name>Internal Releases</name>
             <url>http://192.168.36.37:8688/nexus/content/repositories/releases
             </url>
-        </repository>
+        </repository>-->
         <snapshotRepository>
             <id>snapshots</id>
             <name>Internal snapshots</name>
