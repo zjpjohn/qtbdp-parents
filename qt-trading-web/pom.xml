@@ -238,6 +238,16 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
     <distributionManagement>
@@ -247,12 +257,12 @@
             <url>http://192.168.36.37:8688/nexus/content/repositories/QTD
             </url>
         </repository>
-        <!--<repository>
+        <repository>
             <id>releases</id>
             <name>Internal Releases</name>
             <url>http://192.168.36.37:8688/nexus/content/repositories/releases
             </url>
-        </repository>-->
+        </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>Internal snapshots</name>

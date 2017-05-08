@@ -5,7 +5,7 @@ spring:
   application:
     name: qt-trading-web
   profiles:
-    active: dev   # 默认激活application-dev.yml配置
+    active: ${application.profiles}   # 默认激活application-dev.yml配置
 
 # ===================================================================
 # mybatis配置，包括分页插件配置如下

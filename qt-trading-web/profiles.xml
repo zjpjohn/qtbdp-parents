@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profilesXml xmlns="http://maven.apache.org/PROFILES/1.0.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.org/xsd/profiles-1.0.0.xsd">
+
+    <profiles>
+        <!-- maven编译打包指定开发环境 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 指定应用环境 -->
+                <application.profiles>dev</application.profiles>
+                <!-- fastdfs tracker地址 -->
+                <tracker_server>192.168.36.39:22122</tracker_server>
+            </properties>
+        </profile>
+
+        <!-- maven编译打包指定测试环境 -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <!-- 指定应用环境 -->
+                <application.profiles>test</application.profiles>
+                <!-- fastdfs tracker地址 -->
+                <tracker_server>192.168.36.39:22122</tracker_server>
+            </properties>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <!-- maven编译打包指定生产环境 -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!-- 指定应用环境 -->
+                <application.profiles>prod</application.profiles>
+                <!-- fastdfs tracker地址 -->
+                <tracker_server>192.168.36.17:22122</tracker_server>
+            </properties>
+        </profile>
+    </profiles>
+
+</profilesXml>
