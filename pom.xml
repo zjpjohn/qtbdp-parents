@@ -13,6 +13,7 @@
         <module>base-service</module>
         <module>qt-trading-web</module>
         <module>config-server</module>
+        <module>qt-trading-admin</module>
     </modules>
 
     <properties>
