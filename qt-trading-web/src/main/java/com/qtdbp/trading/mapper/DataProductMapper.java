@@ -51,4 +51,11 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return 记录数，成功返回1
      */
     Integer updateProduct(DataProductModel productModel) ;
+
+    /**
+     * 新增数据包产品
+     * @param productModel
+     * @return  成功返回新增数据的ID
+     */
+    Integer insertProduct(DataProductModel productModel);
 }

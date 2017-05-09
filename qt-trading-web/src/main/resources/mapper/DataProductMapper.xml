@@ -91,6 +91,61 @@
         id = #{id}
     </update>
 
+    <insert id="insertProduct" parameterType="com.qtdbp.trading.model.DataProductModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into data_product (
+            designation,
+            introduce,
+            pic,
+            data_scale,
+            data_type,
+            data_type_sub,
+            score,
+            p_score,
+            file_url,
+            province_id,
+            is_huadong,
+            user_id,
+            addtime,
+            editor_id,
+            editor_time,
+            sort,
+            rec,
+            is_used,
+            type_chain,
+            data_type_props,
+            download_count,
+            buy_count
+        ) VALUES (
+            #{designation},
+            #{introduce},
+            #{pic},
+            #{dataScale},
+            #{dataType},
+            0,
+            #{score},
+            #{pScore},
+            #{fileUrl},
+            #{provinceId},
+            1,
+            #{userId},
+            now(),
+            0,
+            null,
+            #{sort},
+            #{rec},
+            #{isUsed},
+            NULL ,
+            #{dataTypeProps},
+            0,
+            0
+        )
+
+    </insert>
+
     <!-- #################################################################### -->
     <!-- #############################数据条目处理############################# -->
     <!-- #################################################################### -->

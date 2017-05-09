@@ -1,6 +1,7 @@
 package com.qtdbp.trading.service;
 
 import com.github.pagehelper.PageHelper;
+import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
@@ -57,6 +58,21 @@ public class DataProductService {
         }
 
         return productMapper.findItemsByProductId(item);
+    }
+
+    /**
+     * 新增数据包产品
+     * @param productModel
+     * @return
+     * @throws GlobalException
+     */
+    public Integer insertProduct(DataProductModel productModel) throws GlobalException {
+
+        if (productModel == null) throw  new GlobalException("数据包产品为空") ;
+
+        Integer count = productMapper.insertProduct(productModel) ;
+        if (count != null && count >0) return productModel.getId();
+        return -1;
     }
 
 }

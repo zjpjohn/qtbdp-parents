@@ -6,16 +6,15 @@ import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.service.DataProductService;
+import com.qtdbp.trading.service.FdfsFileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -33,6 +32,9 @@ public class DataProductApi {
 
     @Autowired
     private DataProductService productService ;
+
+    @Autowired
+    private FdfsFileService uploadService ;
 
     //===================================================================
     // 数据包产品API接口
@@ -69,6 +71,23 @@ public class DataProductApi {
         return map ;
     }
 
+    @ApiOperation(value="添加数据包产品数据接口")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
+        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+        ModelMap map = new ModelMap() ;
+        try {
+            Integer id = productService.insertProduct(productModel);
+            map.put("success", id>0?true:false);
+            map.put("id", id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map;
+    }
+
     //===================================================================
     // 数据条目API接口
     //===================================================================
@@ -96,4 +115,5 @@ public class DataProductApi {
         }
         return map ;
     }
+
 }
