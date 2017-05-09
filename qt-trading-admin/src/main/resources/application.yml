@@ -1,0 +1,39 @@
+server:
+  port: 8050
+
+spring:
+  application:
+    name: qt-trading-admin
+  profiles:
+    active: dev   # 默认激活application-dev.yml配置
+
+# ===================================================================
+# mybatis配置，包括分页插件配置如下
+# ===================================================================
+mybatis:
+    type-aliases-package: com.qtdbp.trading.model
+    mapper-locations: classpath:mapper/*.xml
+
+mapper:
+    mappers:
+      - com.qtdbp.tradingadmin.utils.BaseMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+---
+# Thymeleaf的默认参数配置
+#    check-template-location: true # Check that the templates location exists.
+#    content-type: text/html       # Content-Type value.
+#    enabled: true                 # Enable MVC Thymeleaf view resolution.
+#    encoding: UTF-8               # Template encoding.
+#    prefix: classpath:/templates/ # Prefix that gets prepended to view names when building a URL.
+#    suffix: .html                 # Suffix that gets appended to view names when building a URL.
+#    #template-resolver-order:     # Order of the template resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.
+#    #excluded-view-names:         # Comma-separated list of view names that should be excluded from resolution.
+#    mode: HTML5                   # Template mode to be applied to templates. See also StandardTemplateModeHandlers.

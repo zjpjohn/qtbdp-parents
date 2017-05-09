@@ -1,0 +1,63 @@
+@charset "UTF-8";
+.red_star{
+    color:#f00;
+    position: relative;
+    top:2px;
+    left:2px;
+}
+.role_div>div{
+    padding-top:8px;
+}
+.qt_logo{
+    height: 40px;
+    margin-top: 18px;
+}
+
+@media (max-width: 480px){
+    .page-header .page-header-top .top-menu {
+        display: inline-block;
+        clear: none;
+        margin: 13px 0 0;
+    }
+}
+.error{
+    color:#f00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

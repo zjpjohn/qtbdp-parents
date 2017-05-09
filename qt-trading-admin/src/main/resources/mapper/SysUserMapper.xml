@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.SysUserMapper">
+
+    <!-- 查询用户基本信息 -->
+    <select id="findUserBySsoId" resultMap="UserInfoResultMap">
+        SELECT
+            u.id,
+            u.nick,
+            u.head,
+            u.real_name,
+            u.phone
+        FROM
+            data_user_info AS u
+        WHERE
+            u.sso_user_id = #{ssoId}
+    </select>
+
+    <resultMap id="UserInfoResultMap" type="com.qtdbp.tradingadmin.service.security.model.SysUser" >
+        <id column="id" property="id" />
+        <result column="nick" property="userName" />
+        <result column="pwd" property="password" />
+        <result column="head" property="head" />
+        <result column="real_name" property="realName" />
+        <result column="phone" property="phone" />
+    </resultMap>
+</mapper>

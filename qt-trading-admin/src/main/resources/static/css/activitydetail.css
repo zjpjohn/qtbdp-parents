@@ -1,0 +1,59 @@
+@charset "UTF-8";
+.qt_logo{
+    height: 40px;
+}
+.main_lf{
+    background:#fff;
+    padding:0px 40px;
+    padding-bottom:40px;
+}
+.main_rt{
+    width:330px;
+    background:#fff;
+    padding:20px;
+}
+.detail_tips>i{
+    display:inline-block;
+    vertical-align:middle;
+    width:24px;
+    height:24px;
+    border:1px solid #3699DC;
+    margin-right:14px;
+    border-bottom:none;
+}
+.detail_tips{
+    border-bottom:1px solid #3699DC;
+    margin-bottom:40px;
+    margin-top:40px;
+    position:relative;
+}
+.detail_tips>span{
+    position:absolute;
+    color:#999;
+    right:0px;
+    top:30px;
+    font-weight:normal;
+    font-size:14px;
+}
+.main_lf p{
+    clear:both;
+    line-height:25px;
+    margin-bottom:10px;
+}
+.main_rt>h3>i{
+    display:inline-block;
+    vertical-align:middle;
+    width:20px;
+    height:20px;
+    background:#3699DC;
+    margin-right:10px;
+}
+
+.banner_pic{
+    width:100%;
+}
+@media (max-width: 480px){
+    .page-header.navbar .top-menu {
+        clear: none;
+    }
+}

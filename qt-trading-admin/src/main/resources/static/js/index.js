@@ -1,0 +1,41 @@
+/**
+ * Created by zd on 2017/5/5.
+ */
+$(function(){
+    //页面刚加载
+    //导航条样式
+    $("#panel-item").addClass("start");
+    $(".nav-item").each(function(){
+        if($(this).children(".sub-menu").children("li").length==0){
+            $(this).children("a.nav-link").removeClass("nav-toggle").children(".arrow").remove();
+        }
+    });
+    $(".page-content-wrapper").load("/ctactivity/activityList",{
+
+    });
+    //活动列表
+    $("#goActivityList").click(function(){
+        $(".page-content-wrapper").load("/ctactivity/activityList",{
+        });
+    });
+    //活动添加
+    $("#AddActivity").click(function(){
+        $(".page-content-wrapper").load("/ctactivity/goAddActivity",{});
+    });
+    //用户管理
+    $("#jigou-item>a").click(function(){
+        $(".page-content-wrapper").load("/user/userList",{});
+    })
+    //菜单管理
+    $("#sysSetting-item").click(function(){
+        $(".page-content-wrapper").load("/sys/menu",{});
+    });
+    //个人信息
+    $("#personInfo").click(function(){
+        $(".page-content-wrapper").load("/user/getInfo",{});
+    });
+    //修改密码
+    $("#modifyPwd").click(function(){
+        $(".page-content-wrapper").load("/user/modifyPwd",{});
+    });
+})
