@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    public static final String DEFAULT_ERROR_VIEW = "error";
+    public static final String DEFAULT_ERROR_VIEW = "404";
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
