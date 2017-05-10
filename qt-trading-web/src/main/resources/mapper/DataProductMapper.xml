@@ -53,7 +53,7 @@
         data_product as p
         WHERE
         p.is_used = 1
-        AND p.id = ${id}
+        AND p.id = #{id}
         ORDER BY
         p.addtime DESC
     </select>
