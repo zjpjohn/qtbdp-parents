@@ -218,16 +218,6 @@
                         <version>1.2.5.RELEASE</version>
                     </dependency>
                 </dependencies>
-                <!--<configuration>
-                    <mainClass>com.qtdbp.trading.WebApplication</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -256,12 +246,6 @@
             <url>http://192.168.36.37:8688/nexus/content/repositories/QTD
             </url>
         </repository>
-        <!--<repository>
-            <id>releases</id>
-            <name>Internal Releases</name>
-            <url>http://192.168.36.37:8688/nexus/content/repositories/releases
-            </url>
-        </repository>-->
         <snapshotRepository>
             <id>snapshots</id>
             <name>Internal snapshots</name>
