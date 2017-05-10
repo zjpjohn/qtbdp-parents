@@ -126,9 +126,9 @@
         o.order_subject,
         o.download_code,
         o.download_url from data_transaction_order as o
-        where o.user_id=${userId}
-        and o.product_id=${productId}
-        and o.product_type=${productType}
+        where o.user_id=#{userId}
+        and o.product_id=#{productId}
+        and o.product_type=#{productType}
     </select>
 
     <update id="updateOrder" parameterType="com.qtdbp.trading.model.DataTransactionOrderModel">

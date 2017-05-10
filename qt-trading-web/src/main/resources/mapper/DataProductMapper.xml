@@ -16,13 +16,13 @@
         WHERE
         p.is_used = 1
         <if test="dataType != null and dataType != 0">
-            AND p.data_type = ${dataType}
+            AND p.data_type = #{dataType}
         </if>
         <if test="valSqls != null">
             AND p.id IN (${valSqls})
         </if>
         ORDER BY
-        ${orderBy} DESC
+        #{orderBy} DESC
     </select>
 
     <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
