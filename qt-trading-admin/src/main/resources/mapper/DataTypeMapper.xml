@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.DataTypeMapper">
+
+    <!-- 查询所有数据类型 -->
+    <select id="findAll" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeModel">
+        select t.id,t.name from data_type as t where is_used = 1 order by sort asc
+    </select>
+
+    <!--查询数据类型顶层(一级)分类-->
+    <select id="findRootNode" resultMap="dataTypeModel">
+        select d.* from data_type d where d.pid not in (select id from data_type)
+        <if test="isUsed != null">
+            and d.is_used = #{isUsed}
+        </if>
+        order by sort asc
+    </select>
+
+    <!--查询数据类型二级分类-->
+    <select id="findSecondNode" resultMap="dataTypeModel">
+        select d.* from data_type d where d.pid = #{id}
+        <if test="isUsed != null">
+            and d.is_used = #{isUsed}
+        </if>
+        order by sort asc
+    </select>
+
+    <resultMap id="dataTypeModel" type="com.qtdbp.tradingadmin.model.DataTypeModel">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="name" property="name" />
+        <result column="is_used" property="isUsed" />
+        <result column="sort" property="sort" />
+        <result column="remark" property="remark" />
+        <result column="is_parent" property="isParent" />
+    </resultMap>
+    <!-- 查询所有属性数据 -->
+    <select id="findAttrAll" resultMap="DataTypeAttrsMap">
+        select id,attr_name from data_type_attr WHERE data_type_id = 0 AND is_used = 1 ORDER BY sort_order asc
+    </select>
+
+    <!-- 根据类目ID查询所有属性信息（注意：目前属性信息通用） -->
+    <select id="findAttrAllByTypeId" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeAttrModel">
+        select id,attr_name as name from data_type_attr WHERE data_type_id = 0 AND is_used = 1 ORDER BY sort_order asc
+    </select>
+
+    <resultMap type="com.qtdbp.trading.model.DataTypeAttrModel" id="DataTypeAttrsMap">
+        <id column="id" property="id"/>
+        <result column="attr_name" property="name"/>
+
+        <collection property="attrVals" ofType="com.qtdbp.trading.model.DataTypeAttrValModel" column="id" select="findAttrValByAttrId"></collection>
+    </resultMap>
+
+    <!-- 根据属性ID查询所有属性值 -->
+    <select id="findAttrValByAttrId" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeAttrValModel">
+      select v.id,v.attr_id as attrId,v.name from data_type_attr_val as v where attr_id = #{id} AND is_used = 1 ORDER BY sort_order asc
+    </select>
+
+    <!--增加新的数据类型-->
+    <insert id="insertType" parameterType="com.qtdbp.tradingadmin.model.DataTypeModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into data_type (
+            pid,
+            name,
+            is_used,
+            sort,
+            remark,
+            is_parent
+        ) VALUES (
+            #{pid},
+            #{name},
+            #{isUsed},
+            #{sort},
+            #{remark},
+            #{isParent}
+        )
+
+    </insert>
+
+    <!--修改数据类型的名字、是否可用-->
+    <update id="updateType" parameterType="com.qtdbp.tradingadmin.model.DataTypeModel">
+        update data_type
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null ">
+                name = #{name} ,
+            </if>
+            <if test="isUsed != null ">
+                is_used = #{isUsed} ,
+            </if>
+        </trim>
+        where id = #{id}
+
+    </update>
+</mapper>

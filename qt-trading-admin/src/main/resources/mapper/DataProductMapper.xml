@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.DataProductMapper">
+
+    <!-- 分页查询数据包产品 -->
+    <select id="findProductsByCondtion" resultMap="ProductResultMap">
+        SELECT
+        p.id,
+        p.designation,
+        p.pic,
+        p.introduce,
+        p.p_score,
+        p.data_type_props
+        FROM
+        data_product as p
+        <where>
+            <if test="dataType != null and dataType != 0">
+                p.data_type = #{dataType}
+            </if>
+            <if test="valSqls != null">
+                AND p.id IN (${valSqls})
+            </if>
+        </where>
+        ORDER BY
+        #{orderBy} DESC
+    </select>
+
+    <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
+        <id column="Id" property="id" />
+        <result column="designation" property="designation" />
+        <result column="pic" property="pic" />
+        <result column="introduce" property="introduce" />
+        <result column="data_type_props" property="dataTypeProps"/>
+        <result column="attr_name" property="attrName" />
+        <result column="val_name" property="valName" />
+        <result column="p_score" property="pScore"/>
+    </resultMap>
+
+    <!-- 单表查询产品 -->
+    <select id="findProductsById" resultMap="ProductDetailResultMap">
+        SELECT
+        p.id,
+        p.designation,
+        p.pic,
+        p.introduce,
+        p.addtime,
+        p.editor_time,
+        p.score,
+        p.data_type_props,
+        p.p_score,
+        p.file_url
+        FROM
+        data_product as p
+        WHERE
+        p.is_used = 1
+        AND p.id = #{id}
+        ORDER BY
+        p.addtime DESC
+    </select>
+
+    <resultMap id="ProductDetailResultMap" type="com.qtdbp.trading.model.DataProductModel" >
+        <id column="Id" property="id" />
+        <result column="designation" property="designation" />
+        <result column="pic" property="pic" />
+        <result column="introduce" property="introduce" />
+        <result column="addtime" property="addTime" />
+        <result column="editor_time" property="editorTime" />
+        <result column="score" property="score" />
+        <result column="data_type_props" property="dataTypeProps" />
+        <result column="p_score" property="pScore" />
+        <result column="file_url" property="fileUrl"/>
+        <result column="is_used" property="isUsed"/>
+
+        <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
+    </resultMap>
+
+    <!-- 通过产品ID计算订单购买数，其中product_type=1表示数据包产品,order_state = 3表示已完成交易 -->
+    <select id="findOrdersCountByProductId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      SELECT COUNT(*) FROM data_transaction_order  WHERE product_id = #{id} AND product_type = 1 AND order_state = 3
+    </select>
+
+    <!-- 更新产品信息 -->
+    <update id="updateProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
+        UPDATE data_product
+        <trim prefix="set" suffixOverrides=",">
+        <if test="editorId != null">editor_id = #{editorId},</if>
+        editor_time = now(),
+        <if test="downloadCount != null and downloadCount != 0">download_count = IFNULL(download_count,0)+1,</if>
+        <if test="buyCount != null and buyCount != 0">buy_count = IFNULL(buy_count,0)+1,</if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <insert id="insertProduct" parameterType="com.qtdbp.trading.model.DataProductModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into data_product (
+            designation,
+            introduce,
+            pic,
+            data_scale,
+            data_type,
+            data_type_sub,
+            score,
+            p_score,
+            file_url,
+            province_id,
+            is_huadong,
+            user_id,
+            addtime,
+            editor_id,
+            editor_time,
+            sort,
+            rec,
+            is_used,
+            type_chain,
+            data_type_props,
+            download_count,
+            buy_count
+        ) VALUES (
+            #{designation},
+            #{introduce},
+            #{pic},
+            #{dataScale},
+            #{dataType},
+            0,
+            #{score},
+            #{pScore},
+            #{fileUrl},
+            #{provinceId},
+            1,
+            #{userId},
+            now(),
+            0,
+            null,
+            #{sort},
+            #{rec},
+            #{isUsed},
+            NULL ,
+            #{dataTypeProps},
+            0,
+            0
+        )
+
+    </insert>
+
+    <!-- 根据ID查询单条数据包产品 -->
+    <select id="findProductByIdIgnoreIsUsed" resultMap="ProductDetailResultMap">
+        SELECT
+        p.id,
+        p.designation,
+        p.pic,
+        p.introduce,
+        p.addtime,
+        p.editor_time,
+        p.score,
+        p.data_type_props,
+        p.p_score,
+        p.file_url,
+        p.is_used
+        FROM
+        data_product as p
+        WHERE
+        p.id = #{id}
+    </select>
+
+    <!--下架数据包产品-->
+    <update id="updateSoldOut" parameterType="java.lang.Integer">
+        UPDATE data_product SET is_used = 0 where id = #{id}
+    </update>
+
+    <!--上架数据包产品-->
+    <update id="updatePutaway" parameterType="java.lang.Integer">
+        UPDATE data_product SET is_used = 1 where id = #{id}
+    </update>
+
+    <!-- #################################################################### -->
+    <!-- #############################数据条目处理############################# -->
+    <!-- #################################################################### -->
+
+    <select id="findItemsByProductId" resultMap="ItemResultMap">
+        SELECT
+            i.id,
+            i.product_id,
+            i.item_name,
+            i.view_count,
+            i.download_count,
+            i.editor_time
+        FROM
+            data_item AS i
+        WHERE
+            i.is_used = 1
+        AND product_id = #{productId}
+        ORDER BY
+        i.editor_time desc
+    </select>
+
+    <resultMap id="ItemResultMap" type="com.qtdbp.trading.model.DataItemModel" >
+        <id column="Id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="item_name" property="itemName" />
+        <result column="view_count" property="viewCount" />
+        <result column="view_count" property="viewCount" />
+        <result column="download_count" property="downloadCount" />
+        <result column="editor_time" property="editorTime" />
+    </resultMap>
+
+    <select id="findItemById" resultMap="ItemResultMap" >
+        SELECT
+            i.id,
+            i.product_id,
+            i.item_name,
+            i.view_count,
+            i.download_count,
+            i.editor_time
+        FROM
+            data_item AS i
+        WHERE
+            i.is_used = 1
+        AND id = #{id}
+        ORDER BY
+        i.editor_time desc
+    </select>
+</mapper>
