@@ -1,4 +1,32 @@
 nav(2);
+$(".data_sort>li>a").mouseenter(function(){
+    var me=this;
+    if($(this).attr("data-id")!=0){
+        if($(this).next().html()==""){
+            $.ajax({
+                type:"GET",
+                dataType:"json",
+                url:"/api/type/secondDataType",
+                data:$(this).attr("data-id"),
+                ansync:true,
+                xhrFields:{
+                    withCredentials:true
+                },
+                success:function(obj){
+                    var data=obj.pageInfo.list;
+                    var str="";
+                    for(var i=0;i<data.length;i++){
+                        str+='<a href="/datamart/'+data[i].id+'">'+data[i].name+'</a>'
+                    }
+                    $(me).next().html(str);
+                },
+                error:function(){
+                    layer.msg("获取二级列表失败",{icon:5});
+                }
+            });
+        }
+    }
+});
 //banner动画
 var m=0,n=1,deg1=0;deg2=0,plus=true,arrow=205,arrowLeft=882,plus2=true;
 function intervals(){
