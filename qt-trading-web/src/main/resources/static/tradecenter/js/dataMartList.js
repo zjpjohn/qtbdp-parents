@@ -7,7 +7,9 @@ $(".data_sort>li>a").mouseenter(function(){
                 type:"GET",
                 dataType:"json",
                 url:"/api/type/secondDataType",
-                data:$(this).attr("data-id"),
+                data:{
+                    id:$(this).attr("data-id")
+                },
                 ansync:true,
                 xhrFields:{
                     withCredentials:true
@@ -16,7 +18,7 @@ $(".data_sort>li>a").mouseenter(function(){
                     var data=obj.pageInfo.list;
                     var str="";
                     for(var i=0;i<data.length;i++){
-                        str+='<a href="/datamart/'+data[i].id+'">'+data[i].name+'</a>'
+                        str+='<a href="/datamart/'+$(me).attr("data-id")+'/'+data[i].id+'">'+data[i].name+'</a>'
                     }
                     $(me).next().html(str);
                 },
