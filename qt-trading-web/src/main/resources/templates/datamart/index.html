@@ -47,7 +47,8 @@
             <ul class="data_sort">
                 <li><a th:href="@{/datamart}" th:class="${currentid} ? null : 'active'" data-id="0">全部分类 </a></li>
                 <li th:each="list : ${typeModels}">
-                    <a th:href="@{/datamart}+'/'+${list.id}" th:text="${list.name}" th:attr="data-id=${list.id}" th:class="${currentid} == ${list.id} ? 'active'"><i></i> </a>
+                    <i></i>
+                    <a th:href="@{/datamart}+'/'+${list.id}" th:text="${list.name}" th:attr="data-id=${list.id}" th:class="${currentid} == ${list.id} ? 'active'"></a>
                     <p>
                         <a href="javascript:;">知识产权</a>
                         <a href="javascript:;">研发专利</a>
@@ -55,9 +56,9 @@
                         <a href="javascript:;">其他</a>
                     </p>
                 </li>
-                <li>
-                    <a th:href="@{/datamart}/10" data-id="" >其他 </a>
-                </li>
+               <!-- <li>
+                    <a href="javascript:;" data-id="" >其他 </a>
+                </li>-->
             </ul>
         </div>
         <!--右侧-->
