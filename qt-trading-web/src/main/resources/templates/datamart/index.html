@@ -47,8 +47,18 @@
             <ul class="data_sort">
                 <li><a th:href="@{/datamart}" th:class="${currentid} ? null : 'active'" data-id="0">全部分类 </a></li>
                 <li th:each="list : ${typeModels}">
-                    <a th:href="@{/datamart}+'/'+${list.id}" th:text="${list.name}" th:attr="data-id=${list.id}" th:class="${currentid} == ${list.id} ? 'active'">智能制造 </a>
+                    <i></i>
+                    <a th:href="@{/datamart}+'/'+${list.id}" th:text="${list.name}" th:attr="data-id=${list.id}" th:class="${currentid} == ${list.id} ? 'active'"></a>
+                    <p>
+                        <a href="javascript:;">知识产权</a>
+                        <a href="javascript:;">研发专利</a>
+                        <a href="javascript:;">科研数据</a>
+                        <a href="javascript:;">其他</a>
+                    </p>
                 </li>
+               <!-- <li>
+                    <a href="javascript:;" data-id="" >其他 </a>
+                </li>-->
             </ul>
         </div>
         <!--右侧-->
@@ -56,9 +66,9 @@
             <!--右侧分类-->
             <ul class="sub_sort">
                 <li class="priceStyle" th:each="attr : ${attrModels}">
-                    <span th:text="${attr.name}+' ：'" th:object="${attr.attrVals}">计价方式 ：</span>
+                    <span th:text="${attr.name}+' ：'" th:object="${attr.attrVals}"></span>
                     <a href="javascript:;" class="a1 active" >不限</a>
-                    <a th:each="val : ${attr.attrVals}" href="javascript:;" th:text="${val.name}" th:attr="data-id=${val.id}">免费</a>
+                    <a th:each="val : ${attr.attrVals}" href="javascript:;" th:text="${val.name}" th:attr="data-id=${val.id}"></a>
                 </li>
                 <li class="sortStyle">
                     <span>排序方式 ：</span>
