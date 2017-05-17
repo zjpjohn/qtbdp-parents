@@ -15,8 +15,8 @@
         data_product as p
         WHERE
         p.is_used = 1
-        <if test="dataType != null and dataType != 0">
-            AND p.data_type = #{dataType}
+        <if test="dataTypes != null ">
+            AND p.data_type in (${dataTypes})
         </if>
         <if test="valSqls != null">
             AND p.id IN (${valSqls})

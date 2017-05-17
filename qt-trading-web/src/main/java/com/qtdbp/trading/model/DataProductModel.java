@@ -1,8 +1,12 @@
 package com.qtdbp.trading.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Lists;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +52,8 @@ public class DataProductModel extends BaseModel {
     private String valIds ;     // 请求参数：属性值ID列表，如：1
 
     private String valSqls ;    // 动态sql
+
+    private String dataTypes ;  // 数据类型ID集合
 
     public String getDesignation() {
         return designation;
@@ -300,6 +306,14 @@ public class DataProductModel extends BaseModel {
 
     public void setOrderBy(String orderBy) {
         this.orderBy = orderBy;
+    }
+
+    public String getDataTypes() {
+        return dataTypes;
+    }
+
+    public void setDataTypes(String dataTypes) {
+        this.dataTypes = dataTypes;
     }
 }
 

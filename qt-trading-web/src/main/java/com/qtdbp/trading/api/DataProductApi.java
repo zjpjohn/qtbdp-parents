@@ -3,8 +3,10 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
+import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.FdfsFileService;
 import io.swagger.annotations.Api;
@@ -16,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +38,9 @@ public class DataProductApi {
 
     @Autowired
     private FdfsFileService uploadService ;
+
+    @Autowired
+    private DataTypeMapper dataTypeMapper;
 
     //===================================================================
     // 数据包产品API接口
@@ -57,6 +63,22 @@ public class DataProductApi {
         if(productModel.getOrderBy() == null){
             productModel.setOrderBy("addtime");
         }
+
+        List<Integer> list = getAllDataTypeIds(productModel.getDataType());
+        if (list != null && list.size() != 0){
+            String dataTypes = "";
+            for (int i = 0; i<list.size(); i++){
+                if (i == (list.size()-1)){
+                    dataTypes = dataTypes + list.get(i) ;
+                }else {
+                    dataTypes = dataTypes + list.get(i) + ",";
+                }
+            }
+            productModel.setDataTypes(dataTypes);
+        }else {
+            productModel.setDataTypes(productModel.getDataType()+"");
+        }
+
         // 设置默认每页显示记录数
         try {
             if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
@@ -116,4 +138,24 @@ public class DataProductApi {
         return map ;
     }
 
+
+
+    /**
+     * 递归查询数据类型某一节点下所有的叶子节点
+     * @param dataType
+     * @return
+     */
+    private List getAllDataTypeIds(Integer dataType) {
+
+        List<Integer> dataTypeIdsList = new ArrayList<>();
+
+        List<DataTypeModel> list = dataTypeMapper.findSecondNode(dataType);
+        if (list == null || list.size() == 0) return dataTypeIdsList;
+        for(DataTypeModel model : list){
+            dataTypeIdsList.add(model.getId());
+            List<Integer> idsList = getAllDataTypeIds(model.getId());
+            if(idsList != null && idsList.size() != 0) dataTypeIdsList.addAll(idsList);
+        }
+        return dataTypeIdsList;
+    }
 }

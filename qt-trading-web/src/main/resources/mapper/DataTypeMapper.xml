@@ -28,4 +28,16 @@
     <select id="findAttrValByAttrId" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeAttrValModel">
       select v.id,v.attr_id as attrId,v.name from data_type_attr_val as v where attr_id = #{id} AND is_used = 1 ORDER BY sort_order asc
     </select>
+
+    <!--查询数据类型顶层(一级)分类-->
+    <select id="findRootNode" resultType="com.qtdbp.trading.model.DataTypeModel">
+        select d.* from data_type d where d.pid not in (select id from data_type) and d.is_used = 1
+        order by sort asc
+    </select>
+
+    <!--查询数据类型二级分类-->
+    <select id="findSecondNode" parameterType="java.lang.Integer" resultType="com.qtdbp.trading.model.DataTypeModel">
+        select d.* from data_type d where d.pid = #{id} and d.is_used = 1
+        order by sort asc
+    </select>
 </mapper>
