@@ -3,7 +3,7 @@
 <mapper namespace="com.qtdbp.trading.mapper.DataTypeMapper">
 
     <!-- 查询所有数据类型 -->
-    <select id="findAll" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeModel">
+    <select id="oldFindAll" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeModel">
         select t.id,t.name from data_type as t where is_used = 1 order by sort asc
     </select>
 
@@ -30,7 +30,7 @@
     </select>
 
     <!--查询数据类型顶层(一级)分类-->
-    <select id="findRootNode" resultType="com.qtdbp.trading.model.DataTypeModel">
+    <select id="findAll" resultType="com.qtdbp.trading.model.DataTypeModel">
         select d.* from data_type d where d.pid not in (select id from data_type) and d.is_used = 1
         order by sort asc
     </select>

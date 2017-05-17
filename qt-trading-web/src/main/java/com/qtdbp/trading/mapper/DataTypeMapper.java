@@ -16,7 +16,7 @@ import java.util.List;
 public interface DataTypeMapper {
 
     /**
-     * 查询所有可用的数据类型
+     * 查询所有可用的数据类型 查询一级节点
      * 根据排序正序排列
      * @return 返回数据类型
      */
