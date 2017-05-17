@@ -2,6 +2,7 @@ package com.qtdbp.tradingadmin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by dell on 2017/5/17.
@@ -15,7 +16,7 @@ public class DataTypeController {
      * 跳转到类目管理页面
      * @return
      */
-    @RequestMapping(value = "/gotoItemPage")
+    @RequestMapping(value = "/gotoItemPage", method = RequestMethod.GET)
     public String gotoItemPage() {
 
         return PAGE_ITEM;
