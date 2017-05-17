@@ -1,0 +1,16 @@
+.page-search {
+    padding: 20px 0 20px 20px;
+}
+
+.page-search #add_btn {
+    margin-bottom: 20px;
+}
+
+.page-search #search_btn {
+    cursor: pointer;
+}
+
+select {
+    outline:none;
+    border: 0;
+}
