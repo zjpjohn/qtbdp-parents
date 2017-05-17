@@ -68,6 +68,7 @@
                     <div class="portlet-body">
                         <form action="#" id="form_sample" novalidate="novalidate">
                             <div class="form-body">
+                                <!--产品名称-->
                                 <div class="form-group form-md-line-input">
                                     <input type="text" class="form-control" name="name" id="waresName" placeholder="请输入产品名称">
                                     <label for="waresName">产品名称
@@ -75,12 +76,18 @@
                                     </label>
                                     <span class="help-block">输入产品名称...</span>
                                 </div>
+                                <!--产品名称结束-->
+
+                                <!--产品描述-->
                                 <div class="form-group form-md-line-input">
                                     <label for="describe" id="describeL">产品描述
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div id="describe"  name="describe"></div>
                                 </div>
+                                <!--产品描述结束-->
+
+                                <!--产品类型-->
                                 <div class="form-group form-md-radios">
                                     <label for="TypeCheck1">产品类型</label>
                                     <div class="md-radio-inline" id="waresType">
@@ -126,26 +133,30 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--产品类型结束-->
+
+                                <!--一级分类-->
                                 <div class="form-group form-md-line-input">
                                     <select class="form-control" id="classA" name="type1">
                                         <option value="">一级分类</option>
-                                        <option value="1">选项1</option>
-                                        <option value="2">选项2</option>
-                                        <option value="3">选项3</option>
+                                        
                                     </select>
                                     <label for="classA">所属类别</label>
                                     <span class="help-block">有些帮助在这里...</span>
                                 </div>
+                                <!--一级分类结束-->
+                                <!--二级分类-->
                                 <div class="form-group form-md-line-input">
                                     <select class="form-control" id="classB" name="type2">
                                         <option value="">二级分类</option>
-                                        <option value="1">选项1</option>
-                                        <option value="2">选项2</option>
-                                        <option value="3">选项3</option>
+                                        
                                     </select>
                                     <label for="classB">所属二级类别</label>
                                     <span class="help-block">有些帮助在这里...</span>
                                 </div>
+                                <!--二级分类结束-->
+
+                                <!--数据来源-->
                                 <div class="form-group form-md-radios">
                                     <label for="source1">数据来源</label>
                                     <div class="md-radio-inline" id="source">
@@ -186,6 +197,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--数据来源结束-->
+
+                                <!--收费方式-->
                                 <div class="form-group form-md-radios" id="charge">
                                     <label for="mode1">收费方式</label>
                                     <div class="md-radio-list">
@@ -205,6 +219,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!--收费价格-->
                                 <div id="Price">
                                     <div class="input-group input-medium margin-top-10 ">
                                                         <span class="input-group-addon">
@@ -220,6 +236,10 @@
                                     </div>
                                     <div id="warning" class="alert alert-warning" style="margin-top: 20px">请输入整包和子文件的价格。</div>
                                 </div>
+                                <!--收费价格结束-->
+                                <!--收费方式结束-->
+
+                                <!--上传数据-->
                                 <div class="form-group form-md-radios">
                                     <label for="fileName">上传数据</label>
                                     <div class="md-radio-inline">
@@ -230,11 +250,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--上传数据结束-->
+
+                                <!--上传图片-->
                                 <div class="form-group">
                                     <label for="input-file-now">上传图片</label>
                                     <input type="file" name="uploadImg" id="input-file-now" class="dropify fileImg" />
                                 </div>
+                                <!--上传图片结束-->
                             </div>
+                            <!--提交按钮-->
                             <div class="form-actions">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -242,6 +267,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--提交按钮结束-->
                         </form>
                     </div>
                 </div>
@@ -276,5 +302,11 @@
 <script src="/js/plugins/upload/trumbowyg.upload.js"></script>
 <script src="/js/plugins/base64/trumbowyg.base64.js"></script>
 <script src="/js/shopManage/setUp.js"></script>
+<script id="opt_tmpl" type="text/x-jquery-tmpl">
+    <option value="">请选择分类</option>
+    {{each list}}
+            <option value="${id}">${name}</option>
+     {{/each}}
+</script>
 </body>
 </html>

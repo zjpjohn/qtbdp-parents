@@ -1,11 +1,13 @@
 $(document).ready(function(){
-    //表单信息
-    var $form = $('#form_content'),//form表单
+    //表单元素
+    var $form = $('#form_sample'),//form表单
         $waresN = $('#waresName'),//产品名称
         $describe = $('#describe'),//产品描述
         $classA = $('#classA'),//一级分类
         $classB = $('#classB'),//二级分类
+        $optTmpl = $('#opt_tmpl'),//分类模板
         $charge = $('#charge'),//收费方式
+        $price = $('#Price'),//价格
         $whole = $('#whole'),//整包价格
         $child = $('#child'),//子文件价格
         $file = $('#fileName');//上传文件
@@ -26,21 +28,21 @@ $(document).ready(function(){
     });
 
     //收费价格显示与否
-    $("#charge").on('click','input',function () {
+    $charge.on('click','input',function () {
         if(this.type != 'radio'){
             return;
         }else if($(this).is(':checked') === true){
             if($(this).attr("id") === 'mode1'){
-                $('#Price').css('display','block');
+                $price.css('display','block');
             }else {
-                $('#Price').css('display','none');
+                $price.css('display','none');
             }
         }
     });
 
     //收费价格校验
-    $('#Price').on('blur','input',function () {
-        if($('#Price').css('display') != 'none'){
+    $price.on('blur','input',function () {
+        if($price.css('display') != 'none'){
             if($whole.val() == '' || $child.val() == ''){
                 $('#warning').css('display','block');
                 return;
@@ -48,23 +50,58 @@ $(document).ready(function(){
                 $('#warning').css('display','none');
             }
         }
-    })
+    });
 
-    
-    
-    function upload(ele) {
-        ele.on('change',function () {
-            $.ajax({
 
-            })
-        })
-    }
+    var typeList = function (ele,id) {
+        ele.empty();
+        var url;
+        if(ele.is('#classA') == true){
+            url = "/api/dataType/findRootNode";
+        }else if(ele.is('#classB') == true){
+            url = "/api/dataType/findSecondNode";
+        }
+        $.ajax({
+            url: url,
+            dataType: "json",
+            type:"get",
+            data:{
+                id:id
+            },
+            error:function () {
+                alert("加载错误")
+            },
+            success: function (ret) {
+                var data = ret.pageInfo;
+                $optTmpl.tmpl(data).appendTo(ele);
+            }
+        });
+    };
     
+
+    typeList($classA);
+
+    $classA.on('change',function () {
+        var id = $(this).val();
+       if(id == ""){
+           return;
+       }else {
+           typeList($classB,id);
+       }
+    });
+
+
+
+
+
+
+
+
 
 
 
     $form.on('submit',function (e) {
-        e.preventDefault(); //组织默认提交表单
+        //e.preventDefault(); //组织默认提交表单
        //获取表单信息
         var whole = 0,
             child = 0,
@@ -73,33 +110,32 @@ $(document).ready(function(){
             type = $('#waresType input:radio:checked ').val(),
             classA = $classA.val(),
             classB = $classB.val(),
-            source = $('#source input:radio:checked ').val(),
-            file = $file.val(),
-            fileImg = $('.dropify-render>img').attr("src");
+            source = $('#source input:radio:checked ').val();
 
 
-        console.log(wares);
-        console.log(describe);
-        console.log(type);
-        console.log(classA);
-        console.log(classB);
-        console.log(source);
-        console.log(file);
-        console.log(fileImg);
+        var fd = new FormData();
+        fd.append("shopName", wares);
+        fd.append("shopContact", describe);
+        fd.append("shopMobile", type);
+        fd.append("merchantBaseId", classA);
+        fd.append("commission", classB);
+        fd.append("shopIntro", source);
+
+        // fd.forEach(function(i, j) {
+        //     console.log(i, j);
+        // });
 
 
         // $.ajax({
-        //     url: '',
+        //     url: '/api/product/add',
         //     type: "post",
         //     dataType:'json',
-        //     data: {
-        //
-        //     },
+        //     data: fd,
         //     error: function () {
-        //
+        //         alert("错误")
         //     },
         //     success: function() {
-        //
+        //         alert("成功")
         //     }
         // });
     })
