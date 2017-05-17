@@ -152,18 +152,14 @@
 .data_sort li p>a:hover{
      color:#0276C6;
  }
-.data_sort li.active{
-    border-right:1px solid #ddd;
-}
-.data_sort li.active>a{
-    color:#0276C6;
-    background-color:#FAFAFA;
-}
-.data_sort li.active i{
+.data_sort li.active>a,.data_sort li.active i{
     border-left-color:#0276C6;
 }
 .data_sort li.active p{
-    display:none;
+     display:none;
+ }
+.data_sort li.active:hover p{
+    display:block;
 }
 
 

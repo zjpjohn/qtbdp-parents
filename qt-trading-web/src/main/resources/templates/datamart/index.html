@@ -46,7 +46,7 @@
             <!--<p>全部分类</p>-->
             <ul class="data_sort">
                 <li><a th:href="@{/datamart}" th:class="${currentid} ? null : 'active'" data-id="0">全部分类 </a></li>
-                <li th:each="list : ${typeModels}">
+                <li th:each="list : ${typeModels}" th:class="${currentid} == ${list.id} ? 'active'">
                     <i></i>
                     <a th:href="@{/datamart}+'/'+${list.id}" th:text="${list.name}" th:attr="data-id=${list.id}" th:class="${currentid} == ${list.id} ? 'active'"></a>
                     <p>
