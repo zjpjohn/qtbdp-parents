@@ -60,6 +60,23 @@ public class DatamartController extends BaseController {
 
         ModelAndView result = new ModelAndView(PAGE_DATAMART);
         result.addObject("currentid", typeId) ;
+        result.addObject("activeId", typeId) ;
+        this.initData(result) ;
+
+        return result ;
+    }
+
+    /**
+     * 二级目录请求方法
+     * @param typeId
+     * @return
+     */
+    @RequestMapping(value = "/datamart/{pid}/{id}", method = RequestMethod.GET)
+    public ModelAndView indexSecond(@PathVariable("pid") int pid, @PathVariable("id") int typeId) {
+
+        ModelAndView result = new ModelAndView(PAGE_DATAMART);
+        result.addObject("currentid", typeId) ;
+        result.addObject("activeId", pid) ;
 
         this.initData(result) ;
 
