@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -67,8 +68,8 @@ public class DataProductApi {
     }
 
     @ApiOperation(value="添加数据包产品数据接口")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ModelMap addProduct(@RequestBody DataProductModel productModel, @RequestParam MultipartFile file) throws GlobalException {
         if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
         ModelMap map = new ModelMap() ;
         try {

@@ -105,4 +105,22 @@ public class DataTypeApi {
 
         return map;
     }
+
+    @ApiOperation(value = "根据二级节点查询对应的类型属性接口")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "id", value = "节点id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @ResponseBody
+    @RequestMapping(value = "findTypeAttr", method = RequestMethod.GET)
+    public ModelMap findTypeAttr (DataTypeModel dataType) throws GlobalException {
+        if (dataType == null) throw new GlobalException("数据类型为空，请重新操作");
+        ModelMap map = new ModelMap();
+        try {
+            List<DataTypeAttrModel> list = dataTypeMapper.findTypeAttr(dataType.getId());
+            map.put("pageInfo", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
 }
