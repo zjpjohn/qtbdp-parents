@@ -58,7 +58,6 @@ public class DataProductApi {
             if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
             List<DataProductModel> productList = productService.findProductsForPage(productModel);
             map.put("pageInfo", new PageInfo<>(productList));
-            map.put("queryParam", productModel);
             map.put("page", productModel.getPage());
             map.put("rows", productModel.getRows());
         } catch (Exception e) {
