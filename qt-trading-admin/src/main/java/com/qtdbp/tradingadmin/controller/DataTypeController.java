@@ -16,7 +16,7 @@ public class DataTypeController {
      * 跳转到类目管理页面
      * @return
      */
-    @RequestMapping(value = "/gotoItemPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/items", method = RequestMethod.GET)
     public String gotoItemPage() {
 
         return PAGE_ITEM;
