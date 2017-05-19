@@ -42,4 +42,11 @@ public interface DataTypeMapper {
      * @return
      */
     Integer updateType(DataTypeModel dataType);
+
+    /**
+     * 根据二级节点查询对应的类型属性
+     * @param id
+     * @return
+     */
+    List<DataTypeAttrModel> findTypeAttr(Integer id);
 }
