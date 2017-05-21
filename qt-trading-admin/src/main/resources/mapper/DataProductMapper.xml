@@ -91,10 +91,18 @@
     <update id="updateProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
         UPDATE data_product
         <trim prefix="set" suffixOverrides=",">
-        <if test="editorId != null">editor_id = #{editorId},</if>
-        editor_time = now(),
-        <if test="downloadCount != null and downloadCount != 0">download_count = IFNULL(download_count,0)+1,</if>
-        <if test="buyCount != null and buyCount != 0">buy_count = IFNULL(buy_count,0)+1,</if>
+            <if test="editorId != null">editor_id = #{editorId},</if>
+            editor_time = now(),
+            <if test="downloadCount != null and downloadCount != 0">download_count = IFNULL(download_count,0)+1,</if>
+            <if test="buyCount != null and buyCount != 0">buy_count = IFNULL(buy_count,0)+1,</if>
+            <if test="designation != null"> designation = #{designation} </if>
+            <if test="introduce != null">introduce = #{introduce} </if>
+            <if test="pic != null">pic = #{pic} </if>
+            <if test="dataType != null and dataType != 0">data_type = #{dataType} </if>
+            <if test="score != null and score != 0">score = #{score} </if>
+            <if test="pScore != null and pScore != 0">p_score = #{pScore} </if>
+            <if test="fileUrl != null">file_url = #{fileUrl} </if>
+            <if test="dataTypeProps != null">data_type_props = #{dataTypeProps} </if>
         </trim>
         WHERE
         id = #{id}

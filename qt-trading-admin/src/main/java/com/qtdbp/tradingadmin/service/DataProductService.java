@@ -82,4 +82,19 @@ public class DataProductService {
         return count;
     }
 
+    /**
+     * 更新数据包产品信息
+     * @param productModel
+     * @return
+     * @throws GlobalException
+     */
+    public Integer updateProduct(DataProductModel productModel) throws GlobalException {
+        Integer count = 0;
+        if (productModel.getId() != null && productModel.getId() != 0) {
+            count = productMapper.updateProduct(productModel);
+        } else {
+            throw new GlobalException("产品ID为空，请重新操作");
+        }
+        return count;
+    }
 }

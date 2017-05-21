@@ -107,10 +107,8 @@ public class DataProductApi {
         if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
         ModelMap map = new ModelMap() ;
         try {
-            Integer id = productService.insertProduct(productModel);
-            map.put("success", id>0?true:false);
-            map.put("id", id);
-
+            Integer count = productService.updateProduct(productModel);
+            map.put("success", count>0?true:false);
         } catch (Exception e) {
             e.printStackTrace();
             throw new GlobalException(e.getMessage()) ;
