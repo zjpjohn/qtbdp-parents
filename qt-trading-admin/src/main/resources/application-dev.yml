@@ -6,6 +6,12 @@ spring:
   thymeleaf:
     cache: false  # thymeleaf模板引擎是否开启缓存，开发时关闭
     mode: LEGACYHTML5
+  jpa:
+    database: mysql
+    show-sql: true  #显示执行sql
+    hibernate:
+      ddl-auto: update  # 数据库的表和列会自动创建
+
   datasource:
     name: dataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -42,19 +48,9 @@ eureka:
 # Logback开发环境日志输出
 # ===================================================================
 logging:
-  file: out/my-dev.log
+  file: out/admin-dev.log
   level:
     com.qtdbp.trading: TRACE
-
-# ===================================================================
-# sso单点登录配置
-# ===================================================================
-sso:
-  key: eada1cfcc5d247d49d3c3494b7360f24
-  host: http://sso.qtbigdata.com/
-  loginUrl: http://sso.qtbigdata.com/sso/action/goLogin?retUrl=
-  registerUrl: http://sso.qtbigdata.com/sso/action/goRegister?retUrl=
-  callback: http://jyadmintest.qtbigdata.com/callback
 
 # ===================================================================
 # 分布式文件系统FDFS配置

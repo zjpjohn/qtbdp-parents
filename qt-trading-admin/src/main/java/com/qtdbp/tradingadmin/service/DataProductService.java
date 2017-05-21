@@ -2,10 +2,8 @@ package com.qtdbp.tradingadmin.service;
 
 import com.github.pagehelper.PageHelper;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.tradingadmin.mapper.DataProductMapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

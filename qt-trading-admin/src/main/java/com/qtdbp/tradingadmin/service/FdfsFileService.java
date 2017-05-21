@@ -1,18 +1,10 @@
 package com.qtdbp.tradingadmin.service;
 
-import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.mapper.DataProductMapper;
-import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
-import com.qtdbp.trading.model.DataProductModel;
-import com.qtdbp.trading.model.DataTransactionOrderModel;
 import com.qtdbp.trading.utils.fdfs.FastDFSFile;
 import com.qtdbp.trading.utils.fdfs.FileManager;
 import com.qtdbp.trading.utils.fdfs.FileManagerConfig;
 import org.csource.common.NameValuePair;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

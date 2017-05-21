@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by dell on 2017/5/18.
  */
 @Controller
-public class DatamartController {
+public class DatamartController extends BaseController {
 
     public static final String PAGE_PRODUCTS = "shopManage/waresNew";
 

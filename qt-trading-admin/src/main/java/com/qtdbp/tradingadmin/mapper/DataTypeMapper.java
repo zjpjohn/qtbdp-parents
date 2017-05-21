@@ -1,7 +1,6 @@
 package com.qtdbp.tradingadmin.mapper;
 
 import com.qtdbp.trading.model.DataTypeAttrModel;
-import com.qtdbp.trading.utils.BaseMapper;
 import com.qtdbp.tradingadmin.model.DataTypeModel;
 
 import java.util.List;

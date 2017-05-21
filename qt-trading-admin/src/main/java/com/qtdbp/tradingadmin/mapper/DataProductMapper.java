@@ -1,6 +1,5 @@
 package com.qtdbp.tradingadmin.mapper;
 
-import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.utils.BaseMapper;
 import org.apache.ibatis.annotations.Param;
