@@ -114,5 +114,22 @@ public class DataProductApi {
         return map;
     }
 
+    @ApiOperation(value = "根据ID查询单条数据包产品接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "数据包产品Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "findProductById", method = RequestMethod.GET)
+    public ModelMap findProductById(DataProductModel productModel) throws GlobalException {
+        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+        ModelMap map = new ModelMap() ;
+        try {
+            productModel = productService.findProductById(productModel.getId());
+            map.put("pageInfo", productModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
 
 }
