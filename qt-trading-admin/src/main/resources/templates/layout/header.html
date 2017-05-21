@@ -1,4 +1,4 @@
-<div class="page-header navbar navbar-fixed-top">
+<div class="page-header navbar navbar-fixed-top" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="page-header-inner " >
         <div class="page-logo">
             <a href="/ctactivity">
@@ -8,10 +8,10 @@
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
-                <li class="dropdown dropdown-user">
+                <li class="dropdown dropdown-user" th:if="${user}">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" src="/img/qt_logo.jpg"/>
-                        <span class="username username-hide-on-mobile"> admin </span>
+                        <img alt="" class="img-circle" th:src="@{${user.VQzjgmc} ? ${user.VQzjgmc} : '/img/qt_logo.jpg'} "/>
+                        <span class="username username-hide-on-mobile" th:text="${user.name}"> admin </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
@@ -24,7 +24,7 @@
                                 <i class="icon-lock"></i> 修改密码 </a>
                         </li>
                         <li>
-                            <a href="javascript:;" class="logout">
+                            <a class="logout" th:href="@{/logout}">
                                 <i class="icon-key"></i> 退出登录 </a>
                         </li>
                     </ul>

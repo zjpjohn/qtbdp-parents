@@ -14,14 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class IndexController {
+public class IndexController extends BaseController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index() {
+    @RequestMapping(value = "/dashboard",method = RequestMethod.GET)
+    public String hello() {
+        return "index";
+    }
 
-        return "index" ;
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String root() {
+        return "index";
     }
 
 }

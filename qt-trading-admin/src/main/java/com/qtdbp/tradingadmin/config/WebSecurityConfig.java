@@ -1,8 +1,9 @@
 package com.qtdbp.tradingadmin.config;
 
-import com.qtdbp.tradingadmin.constants.SysRoleConstants;
-import com.qtdbp.tradingadmin.service.security.support.CustomUserDetailsService;
-import com.qtdbp.tradingadmin.service.security.support.LoginSuccessHandler;
+import com.qtdbp.tradingadmin.base.security.support.CustomFilterSecurityInterceptor;
+import com.qtdbp.tradingadmin.base.security.support.CustomLoginSuccessHandler;
+import com.qtdbp.tradingadmin.base.security.support.CustomUserDetailsService;
+import com.qtdbp.tradingadmin.base.security.support.SimpleRememberMeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
  * 钱塘交易中心应用权限框架配置
@@ -25,7 +27,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService ;
+    private CustomUserDetailsService defaultUserDetailsService ;
+
+    @Autowired
+    private CustomFilterSecurityInterceptor customFilterSecurityInterceptor;
+
+    private static final String KEY = "admin_key" ;
 
     /**
      * http://localhost:8080/login 输入正确的用户名密码 并且选中remember-me 则登陆成功，转到 index页面
@@ -37,37 +44,49 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority(SysRoleConstants.ROLE_ADMIN) //登陆后之后拥有“ADMIN”权限才可以访问/hello方法，否则系统会出现“403”权限不足的提示
-//                .anyRequest().authenticated() // 其他所有资源都需要认证，登陆后访问
-                .and()
-                .formLogin()
-                    .loginPage("/login") //指定登录页是”/login”
-                    .failureUrl("/token")
+
+        http.csrf().disable(); // 关闭crsf() 防止post请求405
+
+        http.authorizeRequests()
+                .antMatchers("/login/**","/captcha/**").anonymous()
+                .anyRequest().authenticated();
+
+        http.formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .permitAll()
-                .successHandler(loginSuccessHandler()) //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
-                .and()
-                .logout().logoutSuccessUrl("/").permitAll() //退出登录后的默认网址是”/home”
-                .invalidateHttpSession(true)
-                .and()
-                .csrf().disable() // 关闭crsf() 防止post请求405
-                .rememberMe()//登录后记住用户，下次自动登录,数据库中必须存在名为persistent_logins的表
+                .successHandler(loginSuccessHandler()) ;
+
+        // 配置登出
+        http.logout()
+                .logoutSuccessUrl("/login")
+                .permitAll();
+
+        // 登录后记住用户，下次自动登录,数据库中必须存在名为persistent_logins的表
+        http.rememberMe()
+                .rememberMeServices(new SimpleRememberMeServices(KEY, defaultUserDetailsService))
                 .tokenValiditySeconds(1209600) ;
+
+        // 检测失效的sessionId,超时时定位到另外一个URL
+        http.sessionManagement().invalidSessionUrl("/timeout") ;
+
+        // 数据库管理资源，权限校验
+        http.addFilterBefore(customFilterSecurityInterceptor, FilterSecurityInterceptor.class);
     }
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //指定密码加密所使用的加密器为passwordEncoder()
         //需要将密码加密后写入数据库
-        auth.userDetailsService(customUserDetailsService) ;//.passwordEncoder(passwordEncoder());
+        auth.userDetailsService(defaultUserDetailsService).passwordEncoder(passwordEncoder());
         auth.eraseCredentials(false);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         //设置不拦截规则
-        web.ignoring().antMatchers("classpath:resources/static/**");
+        web.ignoring().antMatchers("/css/**","/fonts/**","/images/**","/img/**","/js/**","/lang/**","/plugins/**"); //.anyRequest() ;
     }
 
     /**
@@ -84,8 +103,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * @return
      */
     @Bean
-    public LoginSuccessHandler loginSuccessHandler(){
-        return new LoginSuccessHandler();
+    public CustomLoginSuccessHandler loginSuccessHandler(){
+        return new CustomLoginSuccessHandler();
     }
 
 }

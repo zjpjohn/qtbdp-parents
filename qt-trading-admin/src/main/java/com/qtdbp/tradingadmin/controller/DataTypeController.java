@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by dell on 2017/5/17.
  */
 @Controller
-public class DataTypeController {
+public class DataTypeController extends BaseController {
 
     public static final String PAGE_ITEM = "dataclassify";
 

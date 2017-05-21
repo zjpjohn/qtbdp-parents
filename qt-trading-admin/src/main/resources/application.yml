@@ -26,6 +26,25 @@ pagehelper:
     supportMethodsArguments: true
     params: count=countSql
 
+
+# ===================================================================
+# kaptcha配置，验证码
+# ===================================================================
+kaptcha:
+  border:
+    color: 105,179,90
+  textproducer:
+    font:
+      color: blue
+      names: 宋体,楷体,微软雅黑
+    char:
+      length: 6
+  image:
+    width: 125
+    height: 45
+  session:
+    key: code
+
 ---
 # Thymeleaf的默认参数配置
 #    check-template-location: true # Check that the templates location exists.
