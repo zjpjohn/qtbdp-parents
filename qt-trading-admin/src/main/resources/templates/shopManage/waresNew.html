@@ -102,6 +102,20 @@
 <script src="/js/admin/common.js"></script>
 
 <script th:inline="javascript">
+    var dataTypeJson = {};
+    $.ajax({
+        url: "/api/dataType/findAll",
+        type: "get",
+        success: function (result){
+            if (result != null){
+                dataTypeJson = result.pageInfo;
+            }
+        },
+        error: function (result) {
+
+        }
+
+    });
 
     var settings = {
         container:"#datatable_ajax",
@@ -113,7 +127,7 @@
             { "data": "designation" },
             { "data": "userId" },
             { "data": "addTime" },
-            { "data": "addTime" }
+            { "data": "isUsed" }
         ]
     }
 

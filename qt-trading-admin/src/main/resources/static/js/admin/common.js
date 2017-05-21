@@ -66,7 +66,19 @@ var Common = {
                     data: param,  //传入组装的参数
                     dataType: "json",
                     success: function (result) {
-                        //console.log(result);
+
+                        var dataChage = result.pageInfo.list;
+                        if(dataChage.length > 0){
+                            for ( var i = 0; i<dataChage.length; i++){
+                                var time = dataChage[i].addTime;
+                                dataChage[i].addTime = Common._formatedate(time);
+                                var props = dataChage[i].dataTypeProps;
+                                dataChage[i].dataTypeProps = Common._dataTypeProps(props);
+                                var typeId = dataChage[i].dataType;
+                                dataChage[i].dataType = dataTypeJson[typeId]?dataTypeJson[typeId]:0;
+                            }
+                        }
+
                         //封装返回数据
                         var returnData = {};
                         returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
@@ -84,7 +96,40 @@ var Common = {
             columns: _cols
         }).api();
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
-    }
+    },
+
+    /**
+     * 时间格式转换
+     * @param date
+     * @private
+     */
+    _formatedate: function (date) {
+        var formatedate=new Date(date);
+        formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+        return formatedate;
+    },
+
+    //数据商场 具体详情数据格式解析
+    _dataTypeProps: function (data) {
+        var returnData = [];
+        if(data != null && data != ""){
+            var dataArr = data.split(";");
+            var jsonData = {};
+            for(var i=0;i<dataArr.length;i++){
+                var aa = new Array();
+                aa = dataArr[i].split(":");
+                jsonData[aa[0]] = aa[1];
+            }
+            returnData.push(jsonData.计价方式);
+            returnData.push(jsonData.数据格式);
+            returnData.push(jsonData.数据来源);
+            returnData.push(jsonData.数据大小);
+            return returnData.join(",");
+        }else{
+            return "";
+        }
+
+    },
 
 
 }

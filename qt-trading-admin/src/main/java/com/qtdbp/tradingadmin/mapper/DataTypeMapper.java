@@ -28,7 +28,7 @@ public interface DataTypeMapper {
      * 查询所有属性
      * @return 属性以及所有属性值
      */
-    List<DataTypeAttrModel> findAttrAll() ;
+    List<DataTypeAttrModel> findAttrAll(Integer dataTypeId) ;
 
     /**
      * 新增数据类型
@@ -48,4 +48,11 @@ public interface DataTypeMapper {
      * @return
      */
     List<DataTypeAttrModel> findTypeAttr(Integer id);
+
+    /**
+     * 查询所有的数据类型
+     * @param isUsed
+     * @return
+     */
+    List<DataTypeModel> findAll(Integer isUsed);
 }

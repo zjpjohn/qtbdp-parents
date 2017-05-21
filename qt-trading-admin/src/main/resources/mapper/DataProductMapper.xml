@@ -13,7 +13,8 @@
         p.data_type_props,
         p.addtime,
         p.data_type,
-        p.user_id
+        p.user_id,
+        p.is_used
         FROM
         data_product as p
         <where>
@@ -40,6 +41,7 @@
         <result column="addtime" property="addTime" />
         <result column="data_type" property="dataType" />
         <result column="user_id" property="userId" />
+        <result column="is_used" property="isUsed" />
     </resultMap>
 
     <!-- 单表查询产品 -->

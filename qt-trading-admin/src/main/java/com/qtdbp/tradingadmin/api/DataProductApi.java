@@ -67,7 +67,7 @@ public class DataProductApi {
 
     @ApiOperation(value="添加数据包产品数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ModelMap addProduct(@RequestBody DataProductModel productModel, @RequestParam MultipartFile file) throws GlobalException {
+    public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
         if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
         ModelMap map = new ModelMap() ;
         try {
@@ -99,6 +99,22 @@ public class DataProductApi {
         return  map;
     }
 
+    @ApiOperation(value="修改数据包产品数据接口")
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public ModelMap updateProduct(@RequestBody DataProductModel productModel) throws GlobalException {
+        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+        ModelMap map = new ModelMap() ;
+        try {
+            Integer id = productService.insertProduct(productModel);
+            map.put("success", id>0?true:false);
+            map.put("id", id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map;
+    }
 
 
 }
