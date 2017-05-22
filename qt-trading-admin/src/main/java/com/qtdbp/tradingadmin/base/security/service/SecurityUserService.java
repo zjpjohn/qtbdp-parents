@@ -5,8 +5,13 @@ package com.qtdbp.tradingadmin.base.security.service;
 
 import com.qtdbp.tradingadmin.base.security.entity.SysAuthorities;
 import com.qtdbp.tradingadmin.base.security.entity.SysUsers;
+import com.qtdbp.tradingadmin.base.security.repository.SysUsersRepository;
+import com.qtdbp.tradingadmin.base.security.utils.PageUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -32,6 +37,9 @@ public class SecurityUserService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@Autowired
+	private SysUsersRepository usersRepository ;
 
 	/**
 	 * 加载用户权限
@@ -88,5 +96,20 @@ public class SecurityUserService {
 		query.setParameter(3, users.getUserId());
 
 		return query.executeUpdate() ;
+	}
+
+	/**
+	 * 分页查询用户
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public Page<SysUsers> findUsersForPage(int pageNumber, int pageSize){
+
+		PageRequest request = PageUtils.buildPageRequest(pageNumber,pageSize,null);
+
+		Page<SysUsers> sourceCodes= this.usersRepository.findAll(request);
+
+		return sourceCodes ;
 	}
 }
