@@ -1,5 +1,6 @@
 package com.qtdbp.tradingadmin.mapper;
 
+import com.qtdbp.trading.model.DataProductAttrRelationModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.utils.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -63,4 +64,11 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return
      */
     DataProductModel findProductByIdIgnoreIsUsed(@Param("id") Integer id) ;
+
+    /**
+     * 新增数据包产品关联表数据
+     * @param dataProductAttrRelationModel
+     * @return
+     */
+    Integer insertProductAttrRelation(DataProductAttrRelationModel dataProductAttrRelationModel);
 }

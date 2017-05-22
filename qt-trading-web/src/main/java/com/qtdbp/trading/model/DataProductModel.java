@@ -55,6 +55,9 @@ public class DataProductModel extends BaseModel {
 
     private String dataTypes ;  // 数据类型ID集合
 
+    @Transient
+    private List<DataProductAttrRelationModel> attrRelationModels = Lists.newArrayList();
+
     public String getDesignation() {
         return designation;
     }
@@ -314,6 +317,14 @@ public class DataProductModel extends BaseModel {
 
     public void setDataTypes(String dataTypes) {
         this.dataTypes = dataTypes;
+    }
+
+    public List<DataProductAttrRelationModel> getAttrRelationModels() {
+        return attrRelationModels;
+    }
+
+    public void setAttrRelationModels(List<DataProductAttrRelationModel> attrRelationModels) {
+        this.attrRelationModels = attrRelationModels;
     }
 }
 
