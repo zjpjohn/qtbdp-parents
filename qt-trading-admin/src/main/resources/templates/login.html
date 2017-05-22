@@ -40,7 +40,7 @@
                     <button class="close" data-close="alert"></button>
                     <span> 请输入账号密码. </span>
                 </div>
-                <span style="color:red;" th:if="${param.error}">
+                <span style="color:red;" th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
                         用户名或密码错误
                 </span>
                 <span style="color:red;" th:if="${param.logout}">

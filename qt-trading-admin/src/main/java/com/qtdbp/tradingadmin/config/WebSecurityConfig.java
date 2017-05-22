@@ -1,13 +1,11 @@
 package com.qtdbp.tradingadmin.config;
 
-import com.qtdbp.tradingadmin.base.security.support.CustomFilterSecurityInterceptor;
-import com.qtdbp.tradingadmin.base.security.support.CustomLoginSuccessHandler;
-import com.qtdbp.tradingadmin.base.security.support.CustomUserDetailsService;
-import com.qtdbp.tradingadmin.base.security.support.SimpleRememberMeServices;
+import com.qtdbp.tradingadmin.base.security.support.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +22,7 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)//允许进入页面方法前检验
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomFilterSecurityInterceptor customFilterSecurityInterceptor;
+
+    @Autowired
+    private CustomAuthenticationProvider provider;//自定义验证
 
     private static final String KEY = "admin_key" ;
 
@@ -53,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/login")
+                .failureUrl("/login?error=true")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .successHandler(loginSuccessHandler()) ;
@@ -77,25 +80,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        //指定密码加密所使用的加密器为passwordEncoder()
         //需要将密码加密后写入数据库
-        auth.userDetailsService(defaultUserDetailsService).passwordEncoder(passwordEncoder());
         auth.eraseCredentials(false);
+        //将验证过程交给自定义验证工具
+        auth.authenticationProvider(provider) ;
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         //设置不拦截规则
         web.ignoring().antMatchers("/css/**","/fonts/**","/images/**","/img/**","/js/**","/lang/**","/plugins/**"); //.anyRequest() ;
-    }
-
-    /**
-     * 对于密码做加密处理
-     * @return
-     */
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(4);
     }
 
     /**
