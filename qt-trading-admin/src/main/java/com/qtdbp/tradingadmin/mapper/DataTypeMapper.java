@@ -55,4 +55,11 @@ public interface DataTypeMapper {
      * @return
      */
     List<DataTypeModel> findAll(Integer isUsed);
+
+    /**
+     *根据id查询单条数据
+     * @param id
+     * @return
+     */
+    DataTypeModel findDataTypeById(Integer id);
 }
