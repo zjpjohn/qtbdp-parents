@@ -277,19 +277,22 @@ $(document).ready(function(){
             valName:sourceCName
         }));
 
-
         data.attrRelationModels = attrRelationModels;
-        JSON.stringify(data);
 
         $.ajax({
             url: '/api/product',
             type: "post",
-            data:data,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             error: function () {
                 alert("错误")
             },
-            success: function() {
-                alert("成功");
+            success: function(result) {
+                if (result ) {
+                    alert("成功");
+                }
+
                 // window.location.href = './wares.html';
             }
         });
