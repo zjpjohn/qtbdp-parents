@@ -60,6 +60,9 @@ public class DataProductModel extends BaseModel {
     @Transient
     private List<DataProductAttrRelationModel> attrRelationModels = Lists.newArrayList();
 
+    @Transient
+    private DataTypeModel dataTypeModel;
+
     public String getDesignation() {
         return designation;
     }
@@ -343,6 +346,14 @@ public class DataProductModel extends BaseModel {
 
     public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public DataTypeModel getDataTypeModel() {
+        return dataTypeModel;
+    }
+
+    public void setDataTypeModel(DataTypeModel dataTypeModel) {
+        this.dataTypeModel = dataTypeModel;
     }
 }
 
