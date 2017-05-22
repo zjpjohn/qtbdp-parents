@@ -81,6 +81,8 @@
         <result column="user_id" property="userId" />
         <result column="price" property="price" />
         <result column="item_price" property="itemPrice" />
+        
+        <association property="dataTypeModel" column="data_type" select="findDataTypeById"></association>
 
         <association property="attrRelationModels" column="id" select="findProductAttrRelation"></association>
 
@@ -91,6 +93,24 @@
     <select id="findOrdersCountByProductId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
       SELECT COUNT(*) FROM data_transaction_order  WHERE product_id = #{id} AND product_type = 1 AND order_state = 3
     </select>
+
+    <!--根据id查询单条数据类型-->
+    <select id="findDataTypeById" parameterType="java.lang.Integer" resultMap="dataTypeModel">
+        select * from data_type where id = #{id}
+    </select>
+
+    <!--数据类型表实体类映射-->
+    <resultMap id="dataTypeModel" type="com.qtdbp.trading.model.DataTypeModel">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+
+
+        <result column="name" property="name" />
+        <result column="is_used" property="isUsed" />
+        <result column="sort" property="sort" />
+        <result column="remark" property="remark" />
+        <result column="is_parent" property="isParent" />
+    </resultMap>
 
     <!-- 更新产品信息 -->
     <update id="updateProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
