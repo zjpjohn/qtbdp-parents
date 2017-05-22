@@ -2,12 +2,12 @@ package com.qtdbp.tradingadmin.service;
 
 import com.github.pagehelper.PageHelper;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.model.DataItemModel;
+import com.qtdbp.trading.model.DataProductAttrRelationModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.tradingadmin.mapper.DataProductMapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -49,17 +49,29 @@ public class DataProductService {
     }
 
     /**
-     * 新增数据包产品
+     * 新增数据包产品以及关联数据表数据
      * @param productModel
      * @return
      * @throws GlobalException
      */
+    @Transactional
     public Integer insertProduct(DataProductModel productModel) throws GlobalException {
 
         if (productModel == null) throw  new GlobalException("数据包产品为空") ;
 
         Integer count = productMapper.insertProduct(productModel) ;
-        if (count != null && count >0) return productModel.getId();
+        if (count != null && count > 0) {
+            List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
+            for (DataProductAttrRelationModel model : list) {
+                model.setProductId(productModel.getId());
+                model.setTypeId(productModel.getDataType());
+                Integer id = productMapper.insertProductAttrRelation(model);
+                if (!(id > 0)) {
+                    throw new GlobalException("插入关联表数据失败");
+                }
+            }
+            return productModel.getId();
+        }
         return -1;
     }
 
@@ -82,4 +94,19 @@ public class DataProductService {
         return count;
     }
 
+    /**
+     * 更新数据包产品信息
+     * @param productModel
+     * @return
+     * @throws GlobalException
+     */
+    public Integer updateProduct(DataProductModel productModel) throws GlobalException {
+        Integer count = 0;
+        if (productModel.getId() != null && productModel.getId() != 0) {
+            count = productMapper.updateProduct(productModel);
+        } else {
+            throw new GlobalException("产品ID为空，请重新操作");
+        }
+        return count;
+    }
 }

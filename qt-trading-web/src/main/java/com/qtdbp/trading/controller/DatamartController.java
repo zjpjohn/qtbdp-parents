@@ -72,7 +72,7 @@ public class DatamartController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/datamart/{pid}/{id}", method = RequestMethod.GET)
-    public ModelAndView indexSecond(@PathVariable("pid") int pid, @PathVariable("id") int typeId) {
+    public ModelAndView index(@PathVariable("pid") int pid, @PathVariable("id") int typeId) {
 
         ModelAndView result = new ModelAndView(PAGE_DATAMART);
         result.addObject("currentid", typeId) ;
@@ -88,7 +88,7 @@ public class DatamartController extends BaseController {
 
         ModelAndView result = new ModelAndView(PAGE_DATAMART);
         result.addObject("currentid", 0) ;
-
+        result.addObject("activeId", 0) ;
         this.initData(result) ;
 
         return result ;

@@ -9,8 +9,12 @@
         p.designation,
         p.pic,
         p.introduce,
-        p.p_score,
-        p.data_type_props
+        p.price,
+        p.data_type_props,
+        p.addtime,
+        p.data_type,
+        p.user_id,
+        p.is_used
         FROM
         data_product as p
         <where>
@@ -33,7 +37,11 @@
         <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
-        <result column="p_score" property="pScore"/>
+        <result column="price" property="price"/>
+        <result column="addtime" property="addTime" />
+        <result column="data_type" property="dataType" />
+        <result column="user_id" property="userId" />
+        <result column="is_used" property="isUsed" />
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -42,18 +50,19 @@
         p.id,
         p.designation,
         p.pic,
+        p.data_type,
         p.introduce,
         p.addtime,
         p.editor_time,
-        p.score,
+        p.price,
         p.data_type_props,
-        p.p_score,
-        p.file_url
+        p.item_price,
+        p.file_url,
+        user_id
         FROM
         data_product as p
         WHERE
-        p.is_used = 1
-        AND p.id = #{id}
+          p.id = #{id}
         ORDER BY
         p.addtime DESC
     </select>
@@ -65,11 +74,15 @@
         <result column="introduce" property="introduce" />
         <result column="addtime" property="addTime" />
         <result column="editor_time" property="editorTime" />
-        <result column="score" property="score" />
         <result column="data_type_props" property="dataTypeProps" />
-        <result column="p_score" property="pScore" />
         <result column="file_url" property="fileUrl"/>
         <result column="is_used" property="isUsed"/>
+        <result column="data_type" property="dataType"  />
+        <result column="user_id" property="userId" />
+        <result column="price" property="price" />
+        <result column="item_price" property="itemPrice" />
+
+        <association property="attrRelationModels" column="id" select="findProductAttrRelation"></association>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
@@ -83,10 +96,18 @@
     <update id="updateProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
         UPDATE data_product
         <trim prefix="set" suffixOverrides=",">
-        <if test="editorId != null">editor_id = #{editorId},</if>
-        editor_time = now(),
-        <if test="downloadCount != null and downloadCount != 0">download_count = IFNULL(download_count,0)+1,</if>
-        <if test="buyCount != null and buyCount != 0">buy_count = IFNULL(buy_count,0)+1,</if>
+            <if test="editorId != null">editor_id = #{editorId},</if>
+            editor_time = now(),
+            <if test="downloadCount != null and downloadCount != 0">download_count = IFNULL(download_count,0)+1,</if>
+            <if test="buyCount != null and buyCount != 0">buy_count = IFNULL(buy_count,0)+1,</if>
+            <if test="designation != null"> designation = #{designation} </if>
+            <if test="introduce != null">introduce = #{introduce} </if>
+            <if test="pic != null">pic = #{pic} </if>
+            <if test="dataType != null and dataType != 0">data_type = #{dataType} </if>
+            <if test="price != null and price != 0">price = #{price} </if>
+            <if test="itemPrice != null and itemPrice != 0">item_price = #{itemPrice} </if>
+            <if test="fileUrl != null">file_url = #{fileUrl} </if>
+            <if test="dataTypeProps != null">data_type_props = #{dataTypeProps} </if>
         </trim>
         WHERE
         id = #{id}
@@ -104,8 +125,8 @@
             data_scale,
             data_type,
             data_type_sub,
-            score,
-            p_score,
+            price,
+            item_price,
             file_url,
             province_id,
             is_huadong,
@@ -127,8 +148,8 @@
             #{dataScale},
             #{dataType},
             0,
-            #{score},
-            #{pScore},
+            #{price},
+            #{itemPrice},
             #{fileUrl},
             #{provinceId},
             1,
@@ -156,9 +177,9 @@
         p.introduce,
         p.addtime,
         p.editor_time,
-        p.score,
+        p.price,
         p.data_type_props,
-        p.p_score,
+        p.item_price,
         p.file_url,
         p.is_used
         FROM
@@ -224,4 +245,47 @@
         ORDER BY
         i.editor_time desc
     </select>
+
+    <!-- #################################################################### -->
+    <!-- #######################数据包产品与属性关联表######################### -->
+    <!-- #################################################################### -->
+    <insert id="insertProductAttrRelation" parameterType="com.qtdbp.trading.model.DataProductAttrRelationModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into data_product_attr_relation (
+            product_id,
+            type_id,
+            attr_id,
+            val_id,
+            attr_name,
+            val_name
+        ) values (
+            #{productId},
+            #{typeId},
+            #{attrId},
+            #{valId},
+            #{attrName},
+            #{valName}
+        )
+
+    </insert>
+
+    <select id="findProductAttrRelation" parameterType="java.lang.Integer" resultMap="productAttrRelationMap">
+        select r.id, r.product_id, r.type_id, r.attr_id, r.val_id, r.attr_name, r.val_name from data_product_attr_relation r
+        where r.product_id = #{id}
+    </select>
+
+    <resultMap id="productAttrRelationMap" type="com.qtdbp.trading.model.DataProductAttrRelationModel">
+        <id column="id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="type_id" property="typeId" />
+        <result column="attr_id" property="attrId" />
+        <result column="attr_name" property="attrName" />
+        <result column="val_id" property="valId" />
+        <result column="val_name" property="valName" />
+    </resultMap>
+
+
 </mapper>

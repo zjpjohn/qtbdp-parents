@@ -3,9 +3,7 @@ package com.qtdbp.tradingadmin.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
-import com.qtdbp.trading.service.FdfsFileService;
 import com.qtdbp.tradingadmin.service.DataProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -58,7 +57,6 @@ public class DataProductApi {
             if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
             List<DataProductModel> productList = productService.findProductsForPage(productModel);
             map.put("pageInfo", new PageInfo<>(productList));
-            map.put("queryParam", productModel);
             map.put("page", productModel.getPage());
             map.put("rows", productModel.getRows());
         } catch (Exception e) {
@@ -68,7 +66,7 @@ public class DataProductApi {
     }
 
     @ApiOperation(value="添加数据包产品数据接口")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
         if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
         ModelMap map = new ModelMap() ;
@@ -101,6 +99,37 @@ public class DataProductApi {
         return  map;
     }
 
+    @ApiOperation(value="修改数据包产品数据接口")
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public ModelMap updateProduct(@RequestBody DataProductModel productModel) throws GlobalException {
+        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+        ModelMap map = new ModelMap() ;
+        try {
+            Integer count = productService.updateProduct(productModel);
+            map.put("success", count>0?true:false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GlobalException(e.getMessage()) ;
+        }
+        return map;
+    }
 
+    @ApiOperation(value = "根据ID查询单条数据包产品接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "数据包产品Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "findProductById", method = RequestMethod.GET)
+    public ModelMap findProductById(DataProductModel productModel) throws GlobalException {
+        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+        ModelMap map = new ModelMap() ;
+        try {
+            productModel = productService.findProductById(productModel.getId());
+            map.put("pageInfo", productModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
 
 }

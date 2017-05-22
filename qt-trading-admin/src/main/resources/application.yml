@@ -5,7 +5,11 @@ spring:
   application:
     name: qt-trading-admin
   profiles:
-    active: dev   # 默认激活application-dev.yml配置
+    active: dev # 默认激活application-dev.yml配置
+  http:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 
 # ===================================================================
 # mybatis配置，包括分页插件配置如下
@@ -26,14 +30,28 @@ pagehelper:
     supportMethodsArguments: true
     params: count=countSql
 
----
-# Thymeleaf的默认参数配置
-#    check-template-location: true # Check that the templates location exists.
-#    content-type: text/html       # Content-Type value.
-#    enabled: true                 # Enable MVC Thymeleaf view resolution.
-#    encoding: UTF-8               # Template encoding.
-#    prefix: classpath:/templates/ # Prefix that gets prepended to view names when building a URL.
-#    suffix: .html                 # Suffix that gets appended to view names when building a URL.
-#    #template-resolver-order:     # Order of the template resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.
-#    #excluded-view-names:         # Comma-separated list of view names that should be excluded from resolution.
-#    mode: HTML5                   # Template mode to be applied to templates. See also StandardTemplateModeHandlers.
+
+# ===================================================================
+# kaptcha配置，验证码
+# ===================================================================
+kaptcha:
+  border:
+    color: 105,179,90
+  textproducer:
+    font:
+      color: blue
+      names: 宋体,楷体,微软雅黑
+    char:
+      length: 6
+  image:
+    width: 125
+    height: 45
+  session:
+    key: code
+
+# ===================================================================
+# 文件大小配置，最大文件50M, 最大请求50M
+# ===================================================================
+#multipart:
+#  maxFileSize: 50Mb
+#  maxRequestSize: 50Mb

@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dell on 2017/5/15.
@@ -71,7 +73,7 @@ public class DataTypeApi {
     @RequestMapping(value = "/findAttrAll", method = RequestMethod.GET)
     public List findAttrAll (){
         // 属性、属性值列表
-        List<DataTypeAttrModel> attrModels = dataTypeMapper.findAttrAll() ;
+        List<DataTypeAttrModel> attrModels = dataTypeMapper.findAttrAll(null) ;
         return attrModels;
     }
 
@@ -105,4 +107,61 @@ public class DataTypeApi {
 
         return map;
     }
+
+    @ApiOperation(value = "根据二级节点查询对应的类型属性接口")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "id", value = "节点id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @ResponseBody
+    @RequestMapping(value = "findTypeAttr", method = RequestMethod.GET)
+    public ModelMap findTypeAttr (DataTypeModel dataType) throws GlobalException {
+        if (dataType == null) throw new GlobalException("数据类型为空，请重新操作");
+        ModelMap map = new ModelMap();
+        try {
+            List<DataTypeAttrModel> list = dataTypeMapper.findAttrAll(dataType.getId());
+            map.put("pageInfo", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    @ApiOperation(value = "获取所有数据类型接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 2.否)", required = false, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @ResponseBody
+    @RequestMapping(value = "findAll", method = RequestMethod.GET)
+    public ModelMap findAll(DataTypeModel dataTypeModel){
+
+        ModelMap map = new ModelMap();
+        List<DataTypeModel> list = dataTypeMapper.findAll(dataTypeModel.getIsUsed());
+        Map<Integer, String> data = new HashMap<>();
+        if (list.size() > 0) {
+            for (DataTypeModel model : list) {
+                data.put(model.getId(),model.getName());
+            }
+        }
+        map.put("pageInfo", data);
+        return map;
+    }
+
+    @ApiOperation(value = "根据ID查询单条数据类型接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @ResponseBody
+    @RequestMapping(value = "findDataTypById", method = RequestMethod.GET)
+    public ModelMap findDataTypeById(DataTypeModel typeModel) throws GlobalException {
+        ModelMap map = new ModelMap();
+        if (typeModel == null) throw new GlobalException("数据为空，请重新操作");
+        try {
+            typeModel = dataTypeMapper.findDataTypeById(typeModel.getId());
+            map.put("pageInfo", typeModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
 }

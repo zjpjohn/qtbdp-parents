@@ -99,3 +99,19 @@ INSERT INTO `data_type_attr_val` VALUES (11, 4, '数据大小', '100M-500M', 1, 
 INSERT INTO `data_type_attr_val` VALUES (12, 4, '数据大小', '100M-500M', 2, 1);
 INSERT INTO `data_type_attr_val` VALUES (13, 4, '数据大小', '500M-1G', 3, 1);
 INSERT INTO `data_type_attr_val` VALUES (14, 4, '数据大小', '1G以上', 4, 1);
+
+
+/* 新增字段 2017-5-12 */
+
+/*==============================================================*/
+/* Table: data_type  新增is_parent                               */
+/*==============================================================*/
+ALTER TABLE data_type ADD is_parent TINYINT NOT NULL DEFAULT 0 COMMENT '是否父节点, 0是，1否';
+
+/* 新增字段 2017-5-22 */
+
+/*==============================================================*/
+/* Table: data_product  新增price,item_price                    */
+/*==============================================================*/
+ALTER TABLE data_product ADD price DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '数据包价格', ADD item_price DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '数据包单个条目价格';
+

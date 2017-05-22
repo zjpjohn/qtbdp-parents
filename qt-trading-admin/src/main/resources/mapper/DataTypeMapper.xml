@@ -3,8 +3,12 @@
 <mapper namespace="com.qtdbp.tradingadmin.mapper.DataTypeMapper">
 
     <!-- 查询所有数据类型 -->
-    <select id="findAll" parameterType="int" resultType="com.qtdbp.trading.model.DataTypeModel">
-        select t.id,t.name from data_type as t where is_used = 1 order by sort asc
+    <select id="findAll" parameterType="java.lang.Integer" resultType="com.qtdbp.tradingadmin.model.DataTypeModel">
+        select t.id,t.name from data_type as t
+        <if test="isUsed != null">
+            where is_used = #{isUsed}
+        </if>
+        order by sort asc
     </select>
 
     <!--查询数据类型顶层(一级)分类-->
@@ -35,8 +39,9 @@
         <result column="is_parent" property="isParent" />
     </resultMap>
     <!-- 查询所有属性数据 -->
-    <select id="findAttrAll" resultMap="DataTypeAttrsMap">
-        select id,attr_name from data_type_attr WHERE data_type_id = 0 AND is_used = 1 ORDER BY sort_order asc
+    <select id="findAttrAll" parameterType="java.lang.Integer" resultMap="DataTypeAttrsMap">
+        select id,attr_name from data_type_attr WHERE is_used = 1
+        AND data_type_id in (0, #{dataTypeId}) ORDER BY sort_order asc
     </select>
 
     <!-- 根据类目ID查询所有属性信息（注意：目前属性信息通用） -->
@@ -94,4 +99,24 @@
         where id = #{id}
 
     </update>
+
+    <select id="findDataTypeById" parameterType="java.lang.Integer" resultMap="dataTypeModel">
+        select * from data_type where id = #{id}
+    </select>
+    <!--#########################################################-->
+    <!--################  数据类型属性   #########################-->
+    <!--#########################################################-->
+
+    <select id="findTypeAttr" parameterType="java.lang.Integer" resultMap="dataTypeAttr">
+      select a.id, a.data_type_id, a.attr_name, v.id val_id, v.name from data_type_attr a LEFT JOIN data_type_attr_val v on v.attr_id=a.id
+      where a.data_type_id in (0, #{id});
+    </select>
+
+    <resultMap id="dataTypeAttr" type="com.qtdbp.trading.model.DataTypeAttrModel">
+        <id column="id" property="id" />
+        <result column="data_type_id" property="tid" />
+        <result column="attr_name" property="name" />
+        <result column="val_id" property="valId" />
+        <result column="name" property="valName" />
+    </resultMap>
 </mapper>

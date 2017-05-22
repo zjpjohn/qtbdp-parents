@@ -9,7 +9,7 @@
         p.designation,
         p.pic,
         p.introduce,
-        p.p_score,
+        p.item_price,
         p.data_type_props
         FROM
         data_product as p
@@ -33,7 +33,7 @@
         <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
-        <result column="p_score" property="pScore"/>
+        <result column="item_price" property="itemPrice"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -45,9 +45,9 @@
         p.introduce,
         p.addtime,
         p.editor_time,
-        p.score,
+        p.price,
         p.data_type_props,
-        p.p_score,
+        p.item_price,
         p.file_url
         FROM
         data_product as p
@@ -65,9 +65,9 @@
         <result column="introduce" property="introduce" />
         <result column="addtime" property="addTime" />
         <result column="editor_time" property="editorTime" />
-        <result column="score" property="score" />
+        <result column="price" property="price" />
         <result column="data_type_props" property="dataTypeProps" />
-        <result column="p_score" property="pScore" />
+        <result column="item_price" property="itemPrice" />
         <result column="file_url" property="fileUrl"/>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
@@ -103,8 +103,8 @@
             data_scale,
             data_type,
             data_type_sub,
-            score,
-            p_score,
+            price,
+            item_price,
             file_url,
             province_id,
             is_huadong,
@@ -126,8 +126,8 @@
             #{dataScale},
             #{dataType},
             0,
-            #{score},
-            #{pScore},
+            #{price},
+            #{itemPrice},
             #{fileUrl},
             #{provinceId},
             1,

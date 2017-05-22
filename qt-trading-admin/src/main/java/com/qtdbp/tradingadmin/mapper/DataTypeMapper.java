@@ -1,7 +1,6 @@
 package com.qtdbp.tradingadmin.mapper;
 
 import com.qtdbp.trading.model.DataTypeAttrModel;
-import com.qtdbp.trading.utils.BaseMapper;
 import com.qtdbp.tradingadmin.model.DataTypeModel;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public interface DataTypeMapper {
      * 查询所有属性
      * @return 属性以及所有属性值
      */
-    List<DataTypeAttrModel> findAttrAll() ;
+    List<DataTypeAttrModel> findAttrAll(Integer dataTypeId) ;
 
     /**
      * 新增数据类型
@@ -42,4 +41,25 @@ public interface DataTypeMapper {
      * @return
      */
     Integer updateType(DataTypeModel dataType);
+
+    /**
+     * 根据二级节点查询对应的类型属性
+     * @param id
+     * @return
+     */
+    List<DataTypeAttrModel> findTypeAttr(Integer id);
+
+    /**
+     * 查询所有的数据类型
+     * @param isUsed
+     * @return
+     */
+    List<DataTypeModel> findAll(Integer isUsed);
+
+    /**
+     *根据id查询单条数据
+     * @param id
+     * @return
+     */
+    DataTypeModel findDataTypeById(Integer id);
 }
