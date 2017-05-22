@@ -41,6 +41,8 @@ public class DataProductModel extends BaseModel {
     private String typeChain ;      // 类型链
     private int downloadCount ;     // 下载次数
     private String dataTypeProps ;  // 数据类型属性串pname:vname:pid:vid;pname1:vname1:pid1:vid1
+    private double price;
+    private double itemPrice;
 
     private int attrId ;        // 属性ID
     private String attrName ;   // 属性名称
@@ -325,6 +327,22 @@ public class DataProductModel extends BaseModel {
 
     public void setAttrRelationModels(List<DataProductAttrRelationModel> attrRelationModels) {
         this.attrRelationModels = attrRelationModels;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
     }
 }
 
