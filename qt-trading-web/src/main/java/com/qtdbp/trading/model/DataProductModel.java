@@ -63,6 +63,9 @@ public class DataProductModel extends BaseModel {
     @Transient
     private DataTypeModel dataTypeModel;
 
+    @Transient
+    private String username;    //登录用户的名称
+
     public String getDesignation() {
         return designation;
     }
@@ -354,6 +357,14 @@ public class DataProductModel extends BaseModel {
 
     public void setDataTypeModel(DataTypeModel dataTypeModel) {
         this.dataTypeModel = dataTypeModel;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
 
