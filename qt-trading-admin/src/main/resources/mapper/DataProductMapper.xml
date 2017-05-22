@@ -149,7 +149,7 @@
             #{dataType},
             0,
             #{price},
-            #{item_price},
+            #{itemPrice},
             #{fileUrl},
             #{provinceId},
             1,
@@ -286,5 +286,6 @@
         <result column="val_id" property="valId" />
         <result column="val_name" property="valName" />
     </resultMap>
+
 
 </mapper>
