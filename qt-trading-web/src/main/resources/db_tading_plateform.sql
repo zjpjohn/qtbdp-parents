@@ -118,3 +118,8 @@ ALTER TABLE data_product ADD price DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '数
 ALTER TABLE data_product MODIFY user_id VARCHAR(100) ;
 
 ALTER TABLE data_product ADD data_size INT COMMENT '数据文件大小' ;
+
+/*==============================================================*/
+/* Table: data_product  新增price,item_price                    */
+/*==============================================================*/
+ALTER TABLE data_item ADD price DECIMAL(10,2) COMMENT '价格',ADD file_url VARCHAR(1000) COMMENT '数据包路径' ;
