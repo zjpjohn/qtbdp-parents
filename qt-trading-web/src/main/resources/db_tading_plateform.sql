@@ -115,3 +115,4 @@ ALTER TABLE data_type ADD is_parent TINYINT NOT NULL DEFAULT 0 COMMENT '是否�
 /*==============================================================*/
 ALTER TABLE data_product ADD price DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '数据包价格', ADD item_price DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '数据包单个条目价格';
 
+ALTER TABLE data_product MODIFY user_id VARCHAR(100) ;
