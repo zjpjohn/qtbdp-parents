@@ -1,7 +1,6 @@
 package com.qtdbp.tradingadmin.api;
 
 import com.qtdbp.trading.constants.ApiConstants;
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.tradingadmin.base.security.entity.SysUsers;
 import com.qtdbp.tradingadmin.base.security.service.SecurityUserService;
 import com.qtdbp.tradingadmin.base.security.utils.PageUtils;

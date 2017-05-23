@@ -182,6 +182,19 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- POI解析文件 -->
+        <dependency>
+            <groupId>com.qtdbp.utils</groupId>
+            <artifactId>file-parser</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <build>
