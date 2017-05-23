@@ -17,6 +17,7 @@ public class DataTypeModel {
     private int isUsed ;   // 是否可用 0 不可用，1可用
     private int sort ;      // 排序
     private String remark;  // 备注
+    private Integer isParent;
 
     public int getId() {
         return id;
@@ -64,5 +65,13 @@ public class DataTypeModel {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(Integer isParent) {
+        this.isParent = isParent;
     }
 }

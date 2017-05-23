@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DatamartController extends BaseController {
 
-    public static final String PAGE_PRODUCTS = "shopManage/waresNew";
+    public static final String PAGE_PRODUCTS = "shopManage/wares";
 
     public static final String PAGE_ADD_PRODUCT = "shopManage/setUp";
 

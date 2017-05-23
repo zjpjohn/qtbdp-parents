@@ -1,5 +1,4 @@
 var Common = {
-
     /**
      * 自定义表格
      * @param settings
@@ -47,16 +46,33 @@ var Common = {
             orderMulti: false,  //启用多列排序
             order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
             renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
-            pagingType: "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
-            columnDefs: [{
-                "targets": 'nosort',  //列的样式名
-                "orderable": false    //包含上样式名‘nosort’的禁止排序
-            }],
+            pagingType: "full_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
+            columnDefs:[{
+                targets: 6,
+                render: function (data, type, row, meta) {
+                    var isUsed,
+                        color;
+                    if(row.isUsed == 1){
+                        isUsed = "下架";
+                        color = "red";
+                    }else {
+                        isUsed = "上架";
+                        color = "blue";
+                    }
+                    return '<a href="javascript:void(0)" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">修改</a>' +
+                        '<button class="btn btn-sm '+ color + ' btn-outline filter-cancel isUsed" value=" '+ row.id +' ">'+ isUsed + '</button>';
+                }
+            },
+                { "orderable": false, "targets": 4 }
+            ],
             ajax: function (data, callback, settings) {
+
+                console.log(data);
                 //封装请求参数
                 var param = {};
                 param.rows = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
                 param.page = (data.start / data.length)+1;//当前页码
+                param.name = data.search;
                 //console.log(param);
                 //ajax请求数据
                 $.ajax({
@@ -75,7 +91,7 @@ var Common = {
                                 var props = dataChage[i].dataTypeProps;
                                 dataChage[i].dataTypeProps = Common._dataTypeProps(props);
                                 var typeId = dataChage[i].dataType;
-                                dataChage[i].dataType = dataTypeJson[typeId]?dataTypeJson[typeId]:0;
+                                dataChage[i].dataType = dataTypeJson[typeId];
                             }
                         }
 
@@ -85,7 +101,6 @@ var Common = {
                         returnData.recordsTotal = result.pageInfo.total;//返回数据全部记录
                         returnData.recordsFiltered = result.pageInfo.total;//后台不实现过滤功能，每次查询均视作全部结果
                         returnData.data = result.pageInfo.list;//返回的数据列表
-                        //console.log(returnData);
                         //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                         //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                         callback(returnData);
@@ -96,6 +111,14 @@ var Common = {
             columns: _cols
         }).api();
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
+    },
+    createAttr:function (opt) {
+        var obj = {};
+        obj.attrId = opt.attrId;
+        obj.attrName = opt.attrName;
+        obj.valId = opt.valId;
+        obj.valName = opt.valName;
+        return obj;
     },
 
     /**
@@ -129,7 +152,6 @@ var Common = {
             return "";
         }
 
-    },
+    }
 
-
-}
+};

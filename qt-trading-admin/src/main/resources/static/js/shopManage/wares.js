@@ -1,25 +1,29 @@
 $(function () {
     var $tbody = $('tbody'),
-        $trTmpl = $('#tr_tmpl');
+        $searchBtn = $('#searchBtn'),
+        searchInp = $('#searchInp');
 
-    var productList = function () {
-        $.ajax({
-            url: "/api/product",
-            dataType: "json",
-            type:"get",
-            error:function () {
-                alert("加载错误")
-            },
-            success: function (ret) {
-                var data = ret.pageInfo;
-                $trTmpl.tmpl(data).appendTo($tbody);
-            }
-        });
+
+    var settings = {
+        container:"#datatable_ajax",
+        url: "/api/product",
+        columns: [
+            { "data": "id" },
+            { "data": "dataTypeProps" },
+            { "data": "dataType" },
+            { "data": "designation" },
+            { "data": "username" },
+            { "data": "addTime" },
+            { "data": null }
+        ]
     };
 
+    Common.ajaxTable(settings);
+
+
+    //上下架操作
     $tbody.on('click','.isUsed',function () {
-        var tr = $(this).parent().parent(),
-            id = tr.children('.id').text();
+        var id = $(this).val();
             $.ajax({
                 url: "/api/product/changeState",
                 dataType: "json",
@@ -32,14 +36,13 @@ $(function () {
                 },
                 success: function () {
                     alert("成功");
-                    productList();
                 }
             })
-    });
+    })
 
+    //修改操作
     $tbody.on('click','.revise',function () {
-        var tr = $(this).parent().parent(),
-            id = tr.children('.id').text();
+        var id = $(this).data("value");
         $.ajax({
             url: "/api/product/changeState",
             dataType: "json",
@@ -57,8 +60,10 @@ $(function () {
         })
     });
 
-    productList();
+    // 搜索
+    $searchBtn.on('click',function () {
+        var val = searchInp.val();
 
-
+    })
 
 });

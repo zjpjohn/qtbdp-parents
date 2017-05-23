@@ -32,9 +32,9 @@
                     <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')"></span>
                 </p>
                 <p class="p2">
-                    <i th:text="'￥'+${#numbers.formatDecimal(prod.pScore, 0, 2)}+' / 整包'">￥200.00 / 整包</i>
+                    <i th:text="'￥'+${#numbers.formatDecimal(prod.price, 0, 2)}+' / 整包'">￥200.00 / 整包</i>
                     <span>（-）积分</span>
-                    <i th:text="'￥'+${#numbers.formatDecimal(prod.score , 0, 2)}+' / 条'">￥1.00 / 条</i>
+                    <i th:text="'￥'+${#numbers.formatDecimal(prod.itemPrice , 0, 2)}+' / 条'">￥1.00 / 条</i>
                     <span>（-）积分</span>
                 </p>
                 <p class="p3">

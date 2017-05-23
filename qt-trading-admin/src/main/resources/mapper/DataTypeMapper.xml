@@ -100,6 +100,9 @@
 
     </update>
 
+    <select id="findDataTypeById" parameterType="java.lang.Integer" resultMap="dataTypeModel">
+        select * from data_type where id = #{id}
+    </select>
     <!--#########################################################-->
     <!--################  数据类型属性   #########################-->
     <!--#########################################################-->

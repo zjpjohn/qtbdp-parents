@@ -34,248 +34,152 @@
 <div class="page-container">
     <!--侧边栏-->
     <div th:replace="layout/sidebar" /></div>
-    <!--侧边栏结束-->
+<!--侧边栏结束-->
 
-    <!--主体内容-->
-    <div class="page-content-wrapper">
-        <div class="page-content" style="min-height: 1095px;">
-            <!--面包屑-->
-            <div class="page-bar">
-                <ul class="page-breadcrumb">
-                    <li>
-                        <span>数据商城管理</span>
-                        <i class="fa fa-circle"></i>
-                    </li>
-                    <li>
-                        <a href="wares.html" class="active">数据商品管理</a>
-                        <i class="fa fa-circle"></i>
-                    </li>
-                    <li>
-                        <a href="#" class="active">添加数据商品</a>
-                    </li>
-                </ul>
-            </div>
-            <!--面包屑结束-->
-            <!--表单-->
-            <div class="container" id="form_content">
-                <div class="portlet light portlet-fit portlet-form bordered">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class=" icon-layers font-red"></i>
-                            <span class="caption-subject font-red sbold uppercase">数据产品信息</span>
-                        </div>
+<!--主体内容-->
+<div class="page-content-wrapper">
+    <div class="page-content" style="min-height: 1095px;">
+        <!--面包屑-->
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <span>数据商城管理</span>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="wares.html" class="active">数据商品管理</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="#" class="active">添加数据商品</a>
+                </li>
+            </ul>
+        </div>
+        <!--面包屑结束-->
+        <!--表单-->
+        <div class="container" id="form_content">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-red"></i>
+                        <span class="caption-subject font-red sbold uppercase">数据产品信息</span>
                     </div>
-                    <div class="portlet-body">
-                        <form action="#" id="form_sample" novalidate="novalidate">
-                            <div class="form-body">
-                                <!--产品名称-->
-                                <div class="form-group form-md-line-input">
-                                    <input type="text" class="form-control" name="name" id="waresName" placeholder="请输入产品名称">
-                                    <label for="waresName">产品名称
-                                    <span class="required" aria-required="true">*</span>
-                                    </label>
-                                    <span class="help-block">输入产品名称...</span>
-                                </div>
-                                <!--产品名称结束-->
+                </div>
+                <div class="portlet-body">
+                    <form id="form_sample">
+                        <div class="form-body">
+                            <!--一级分类-->
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" id="classA" name="type1">
+                                    <option value="">一级分类</option>
 
-                                <!--产品描述-->
-                                <div class="form-group form-md-line-input">
-                                    <label for="describe" id="describeL">产品描述
-                                        <span class="required" aria-required="true">*</span>
-                                    </label>
-                                    <div id="describe"  name="describe"></div>
-                                </div>
-                                <!--产品描述结束-->
+                                </select>
+                                <label for="classA">所属类别</label>
+                                <span class="help-block">有些帮助在这里...</span>
+                            </div>
+                            <!--一级分类结束-->
+                            <!--二级分类-->
+                            <div class="form-group form-md-line-input">
+                                <select class="form-control" id="classB" name="type2">
+                                    <option value="">二级分类</option>
 
+                                </select>
+                                <label for="classB">所属二级类别</label>
+                                <span class="help-block">有些帮助在这里...</span>
+                            </div>
+                            <!--二级分类结束-->
+
+                            <div id="attr">
                                 <!--产品类型-->
-                                <div class="form-group form-md-radios">
-                                    <label for="TypeCheck1">产品类型</label>
-                                    <div class="md-radio-inline" id="waresType">
-                                        <div class="md-radio">
-                                            <input type="radio" id="TypeCheck1" name="type" value="121" class="md-radiobtn" checked>
-                                            <label for="TypeCheck1">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 数据包
-                                            </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="TypeCheck2" name="type" value="112" class="md-radiobtn">
-                                            <label for="TypeCheck2">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> API接口
-                                            </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="TypeCheck3" name="type" value="112" class="md-radiobtn">
-                                            <label for="TypeCheck3">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 可视化
-                                            </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="TypeCheck4" name="type" value="112" class="md-radiobtn">
-                                            <label for="TypeCheck4">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 研究报告
-                                            </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="TypeCheck5" name="type" value="112" class="md-radiobtn">
-                                            <label for="TypeCheck5">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 预测分析
-                                            </label>
-                                        </div>
-                                    </div>
+                                <div class="form-group form-md-radios" id="waresType">
                                 </div>
                                 <!--产品类型结束-->
 
-                                <!--一级分类-->
-                                <div class="form-group form-md-line-input">
-                                    <select class="form-control" id="classA" name="type1">
-                                        <option value="">一级分类</option>
-                                        
-                                    </select>
-                                    <label for="classA">所属类别</label>
-                                    <span class="help-block">有些帮助在这里...</span>
-                                </div>
-                                <!--一级分类结束-->
-                                <!--二级分类-->
-                                <div class="form-group form-md-line-input">
-                                    <select class="form-control" id="classB" name="type2">
-                                        <option value="">二级分类</option>
-                                        
-                                    </select>
-                                    <label for="classB">所属二级类别</label>
-                                    <span class="help-block">有些帮助在这里...</span>
-                                </div>
-                                <!--二级分类结束-->
-
                                 <!--数据来源-->
-                                <div class="form-group form-md-radios">
-                                    <label for="source1">数据来源</label>
-                                    <div class="md-radio-inline" id="source">
-                                        <div class="md-radio">
-                                            <input type="radio" id="source4" name="source" value="112" class="md-radiobtn" checked>
-                                            <label for="source4">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 网络 </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="source1" name="source" value="121" class="md-radiobtn">
-                                            <label for="source1">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 政府 </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="source2" name="source" value="112" class="md-radiobtn">
-                                            <label for="source2">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 企业 </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="source3" name="source" value="112" class="md-radiobtn">
-                                            <label for="source3">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 机构 </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="source5" name="source" value="112" class="md-radiobtn">
-                                            <label for="source5">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 其他 </label>
-                                        </div>
-                                    </div>
+                                <div class="form-group form-md-radios" id="source">
                                 </div>
                                 <!--数据来源结束-->
 
                                 <!--收费方式-->
                                 <div class="form-group form-md-radios" id="charge">
-                                    <label for="mode1">收费方式</label>
-                                    <div class="md-radio-list">
-                                        <div class="md-radio">
-                                            <input type="radio" id="mode2" name="chargeRadio" value="2" class="md-radiobtn" checked>
-                                            <label for="mode2">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 免费 </label>
-                                        </div>
-                                        <div class="md-radio">
-                                            <input type="radio" id="mode1" name="chargeRadio" value="1" class="md-radiobtn">
-                                            <label for="mode1">
-                                                <span></span>
-                                                <span class="check"></span>
-                                                <span class="box"></span> 收费 </label>
-                                        </div>
-                                    </div>
                                 </div>
+                                <!--收费方式结束-->
+                            </div>
 
-                                <!--收费价格-->
-                                <div id="Price">
-                                    <div class="input-group input-medium margin-top-10 ">
+                            <!--收费价格-->
+                            <div id="Price">
+                                <div class="input-group input-medium margin-top-10 ">
                                                         <span class="input-group-addon">
                                                             <span>￥</span>
                                                         </span>
-                                        <input type="number" id="whole" name="whole" class="form-control" placeholder="整包价格">
-                                    </div>
-                                    <div class="input-group input-medium margin-top-10">
+                                    <input type="number" id="whole" name="whole" class="form-control" placeholder="整包价格">
+                                </div>
+                                <div class="input-group input-medium margin-top-10">
                                                         <span class="input-group-addon">
                                                            <span>￥</span>
                                                         </span>
-                                        <input type="number" id="child" name="child"  class="form-control" placeholder="子文件价格">
-                                    </div>
-                                    <div id="warning" class="alert alert-warning" style="margin-top: 20px">请输入整包和子文件的价格。</div>
+                                    <input type="number" id="child" name="child"  class="form-control" placeholder="子文件价格">
                                 </div>
-                                <!--收费价格结束-->
-                                <!--收费方式结束-->
-
-                                <!--上传数据-->
-                                <div class="form-group form-md-radios">
-                                    <label for="fileName">上传数据</label>
-                                    <div class="md-radio-inline">
-                                        <div class="uploader black">
-                                            <input type="text" class="filename" readonly/>
-                                            <input type="button" name="file" class="button" value="上传文件"/>
-                                            <input type="file" id="fileName" name="fileName"  size="30"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--上传数据结束-->
-
-                                <!--上传图片-->
-                                <div class="form-group">
-                                    <label for="input-file-now">上传图片</label>
-                                    <input type="file" name="uploadImg" id="input-file-now" class="dropify fileImg" />
-                                </div>
-                                <!--上传图片结束-->
+                                <div id="warning" class="alert alert-warning" style="margin-top: 20px">请输入整包和子文件的价格。</div>
                             </div>
-                            <!--提交按钮-->
-                            <div class="form-actions">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn green" id="subBtn">发布上架</button>
+                            <!--收费价格结束-->
+
+                            <!--产品名称-->
+                            <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                <input type="text" class="form-control" name="name" id="waresName" placeholder="请输入产品名称">
+                                <label for="waresName">产品名称
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <span class="help-block">输入产品名称...</span>
+                            </div>
+                            <!--产品名称结束-->
+
+                            <!--产品描述-->
+                            <div class="form-group form-md-line-input">
+                                <label for="describe" id="describeL">产品描述
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <div id="describe"  name="describe"></div>
+                            </div>
+                            <!--产品描述结束-->
+
+                            <!--上传数据-->
+                            <div class="form-group form-md-radios">
+                                <label for="fileName">上传数据</label>
+                                <div class="md-radio-inline">
+                                    <div class="uploader black">
+                                        <input type="text" class="filename" readonly/>
+                                        <input type="button" name="file" class="button" value="上传文件"/>
+                                        <input type="file" id="fileName" name="fileName"  size="30"/>
                                     </div>
                                 </div>
                             </div>
-                            <!--提交按钮结束-->
-                        </form>
-                    </div>
+                            <!--上传数据结束-->
+
+                            <!--上传图片-->
+                            <div class="form-group">
+                                <label for="input-file-now">上传图片</label>
+                                <input type="file" name="uploadImg" id="input-file-now" class="dropify fileImg" />
+                            </div>
+                            <!--上传图片结束-->
+                        </div>
+                        <!--提交按钮-->
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn green" id="subBtn">发布上架</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--提交按钮结束-->
+                    </form>
                 </div>
             </div>
-            <!--表单结束-->
         </div>
+        <!--表单结束-->
     </div>
-    <!--主体内容结束-->
+</div>
+<!--主体内容结束-->
 </div>
 
 
@@ -301,12 +205,64 @@
 <script src="/js/dropify.min.js"></script>
 <script src="/js/plugins/upload/trumbowyg.upload.js"></script>
 <script src="/js/plugins/base64/trumbowyg.base64.js"></script>
+<script src="/js/admin/common.js"></script>
 <script src="/js/shopManage/setUp.js"></script>
-<script id="opt_tmpl" type="text/x-jquery-tmpl">
+<script id="type_tmpl" type="text/x-jquery-tmpl">
     <option value="">请选择分类</option>
     {{each list}}
             <option value="${id}">${name}</option>
      {{/each}}
+</script>
+
+<script id="source_tmpl" type="text/x-jquery-tmpl">
+
+        <label for="source1" id="sourceName">${name}</label>
+         <div class="md-radio-inline">
+         {{each attrVals}}
+              <div class="md-radio">
+                  <input type="radio" id="${$item.setId(id)}" data-name="${name}" data-attrId="${attrId}" name="source" value="${id}" class="md-radiobtn">
+                   <label for="${$item.setId(id)}">
+                       <span></span>
+                       <span class="check"></span>
+                       <span class="box"></span> ${name}
+                   </label>
+               </div>
+          {{/each}}
+         </div>
+
+</script>
+
+<script id="charge_tmpl" type="text/x-jquery-tmpl">
+
+    <label for="mode1" id="chargeName">${name}</label>
+      <div class="md-radio-list">
+       {{each attrVals}}
+           <div class="md-radio">
+                <input type="radio" id="${$item.setId(id)}" data-name="${name}" data-attrId="${attrId}" name="chargeRadio" value="${id}" class="md-radiobtn">
+                <label for="${$item.setId(id)}">
+                   <span></span>
+                   <span class="check"></span>
+                   <span class="box"></span> ${name}
+                </label>
+           </div>
+       {{/each}}
+       </div>
+</script>
+
+<script id="waresType_tmpl" type="text/x-jquery-tmpl">
+        <label for="TypeCheck1" id="waresTypeName">${name}</label>
+        <div class="md-radio-inline">
+        {{each attrVals}}
+            <div class="md-radio">
+                <input type="radio" id="${$item.setId(id)}" data-name="${name}" data-attrId="${attrId}" name="type" value="${id}" class="md-radiobtn">
+                 <label for="${$item.setId(id)}">
+                    <span></span>
+                    <span class="check"></span>
+                    <span class="box"></span> ${name}
+                </label>
+            </div>
+        {{/each}}
+        </div>
 </script>
 </body>
 </html>

@@ -146,4 +146,22 @@ public class DataTypeApi {
         return map;
     }
 
+    @ApiOperation(value = "根据ID查询单条数据类型接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @ResponseBody
+    @RequestMapping(value = "findDataTypById", method = RequestMethod.GET)
+    public ModelMap findDataTypeById(DataTypeModel typeModel) throws GlobalException {
+        ModelMap map = new ModelMap();
+        if (typeModel == null) throw new GlobalException("数据为空，请重新操作");
+        try {
+            typeModel = dataTypeMapper.findDataTypeById(typeModel.getId());
+            map.put("pageInfo", typeModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
 }

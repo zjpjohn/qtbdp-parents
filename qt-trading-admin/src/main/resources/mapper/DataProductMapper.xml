@@ -9,20 +9,18 @@
         p.designation,
         p.pic,
         p.introduce,
-        p.p_score,
+        p.price,
         p.data_type_props,
         p.addtime,
         p.data_type,
         p.user_id,
-        p.is_used
+        p.is_used,
+        s.name
         FROM
-        data_product as p
+        data_product as p left join sys_users s on p.user_id = s.user_id
         <where>
             <if test="dataType != null and dataType != 0">
                 p.data_type = #{dataType}
-            </if>
-            <if test="valSqls != null">
-                AND p.id IN (${valSqls})
             </if>
         </where>
         ORDER BY
@@ -37,11 +35,12 @@
         <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
-        <result column="p_score" property="pScore"/>
+        <result column="price" property="price"/>
         <result column="addtime" property="addTime" />
         <result column="data_type" property="dataType" />
         <result column="user_id" property="userId" />
         <result column="is_used" property="isUsed" />
+        <result column="name" property="username" />
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -50,13 +49,15 @@
         p.id,
         p.designation,
         p.pic,
+        p.data_type,
         p.introduce,
         p.addtime,
         p.editor_time,
-        p.score,
+        p.price,
         p.data_type_props,
-        p.p_score,
-        p.file_url
+        p.item_price,
+        p.file_url,
+        user_id
         FROM
         data_product as p
         WHERE
@@ -72,11 +73,17 @@
         <result column="introduce" property="introduce" />
         <result column="addtime" property="addTime" />
         <result column="editor_time" property="editorTime" />
-        <result column="score" property="score" />
         <result column="data_type_props" property="dataTypeProps" />
-        <result column="p_score" property="pScore" />
         <result column="file_url" property="fileUrl"/>
         <result column="is_used" property="isUsed"/>
+        <result column="data_type" property="dataType"  />
+        <result column="user_id" property="userId" />
+        <result column="price" property="price" />
+        <result column="item_price" property="itemPrice" />
+        
+        <association property="dataTypeModel" column="data_type" select="findDataTypeById"></association>
+
+        <association property="attrRelationModels" column="id" select="findProductAttrRelation"></association>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
@@ -85,6 +92,24 @@
     <select id="findOrdersCountByProductId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
       SELECT COUNT(*) FROM data_transaction_order  WHERE product_id = #{id} AND product_type = 1 AND order_state = 3
     </select>
+
+    <!--根据id查询单条数据类型-->
+    <select id="findDataTypeById" parameterType="java.lang.Integer" resultMap="dataTypeModel">
+        select * from data_type where id = #{id}
+    </select>
+
+    <!--数据类型表实体类映射-->
+    <resultMap id="dataTypeModel" type="com.qtdbp.trading.model.DataTypeModel">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+
+
+        <result column="name" property="name" />
+        <result column="is_used" property="isUsed" />
+        <result column="sort" property="sort" />
+        <result column="remark" property="remark" />
+        <result column="is_parent" property="isParent" />
+    </resultMap>
 
     <!-- 更新产品信息 -->
     <update id="updateProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
@@ -98,8 +123,8 @@
             <if test="introduce != null">introduce = #{introduce} </if>
             <if test="pic != null">pic = #{pic} </if>
             <if test="dataType != null and dataType != 0">data_type = #{dataType} </if>
-            <if test="score != null and score != 0">score = #{score} </if>
-            <if test="pScore != null and pScore != 0">p_score = #{pScore} </if>
+            <if test="price != null and price != 0">price = #{price} </if>
+            <if test="itemPrice != null and itemPrice != 0">item_price = #{itemPrice} </if>
             <if test="fileUrl != null">file_url = #{fileUrl} </if>
             <if test="dataTypeProps != null">data_type_props = #{dataTypeProps} </if>
         </trim>
@@ -119,8 +144,8 @@
             data_scale,
             data_type,
             data_type_sub,
-            score,
-            p_score,
+            price,
+            item_price,
             file_url,
             province_id,
             is_huadong,
@@ -142,8 +167,8 @@
             #{dataScale},
             #{dataType},
             0,
-            #{score},
-            #{pScore},
+            #{price},
+            #{itemPrice},
             #{fileUrl},
             #{provinceId},
             1,
@@ -171,9 +196,9 @@
         p.introduce,
         p.addtime,
         p.editor_time,
-        p.score,
+        p.price,
         p.data_type_props,
-        p.p_score,
+        p.item_price,
         p.file_url,
         p.is_used
         FROM
@@ -265,5 +290,21 @@
         )
 
     </insert>
+
+    <select id="findProductAttrRelation" parameterType="java.lang.Integer" resultMap="productAttrRelationMap">
+        select r.id, r.product_id, r.type_id, r.attr_id, r.val_id, r.attr_name, r.val_name from data_product_attr_relation r
+        where r.product_id = #{id}
+    </select>
+
+    <resultMap id="productAttrRelationMap" type="com.qtdbp.trading.model.DataProductAttrRelationModel">
+        <id column="id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="type_id" property="typeId" />
+        <result column="attr_id" property="attrId" />
+        <result column="attr_name" property="attrName" />
+        <result column="val_id" property="valId" />
+        <result column="val_name" property="valName" />
+    </resultMap>
+
 
 </mapper>

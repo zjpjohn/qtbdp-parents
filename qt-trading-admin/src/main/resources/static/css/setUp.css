@@ -10,6 +10,10 @@
 .form-group {
     margin-top: 50px;
 }
+
+#attr>div,#Price,#warning {
+    display: none;
+}
 /*全局结束*/
 
 
@@ -130,10 +134,3 @@ input[type=text]::-webkit-focus-inner{padding:0; border:0 none; -webkit-box-sizi
 }
 /*图片上传样式结束*/
 
-
-/*收费*/
-#Price,#warning {
-    display: none;
-}
-
-/*收费结束*/
