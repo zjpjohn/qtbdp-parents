@@ -20,12 +20,8 @@ $(document).ready(function(){
         $file = $('#fileName'),//上传文件
         $fileImg = $('.fileImg');//上传图片
 
-
-
     $('#describe').trumbowyg();//文本编辑器实例化
     $('.dropify').dropify();//图片上传实例化
-
-
 
     //上传文件
     $file.change(function(){
@@ -41,11 +37,12 @@ $(document).ready(function(){
             processData: false,
             data:formData,
             error:function () {
-                alert("加载错误")
+                layer.msg("文件上传失败",{icon:5});
             },
             success: function (ret) {
-               alert("成功");
-               $file.attr("data-src",ret.file)
+               if (ret.success == true){
+                   $file.attr("data-src", ret.file);
+               }
             }
         });
     });
@@ -55,7 +52,6 @@ $(document).ready(function(){
             $(this).parents(".uploader").find(".filename").val("未选中文件...");
         }
     });
-
 
 
     //图片上传
@@ -71,7 +67,7 @@ $(document).ready(function(){
             processData: false,
             data:formData,
             error:function () {
-                alert("加载错误")
+                layer.msg("图片上传失败",{icon:5});
             },
             success: function (ret) {
                 var img = $('.dropify-render>img');
@@ -94,7 +90,6 @@ $(document).ready(function(){
         }
     });
 
-
     //收费价格校验
     $price.on('blur','input',function () {
         if($price.css('display') != 'none'){
@@ -107,14 +102,12 @@ $(document).ready(function(){
         }
     });
 
-
     //展示一级
     Common.typeList({
         ele:$classA,
         url:"/api/dataType/findRootNode",
         tmpl:$typeTmpl
     });
-
 
     //通过一级展示二级
     $classA.on('change',function () {
@@ -130,8 +123,6 @@ $(document).ready(function(){
             });
         }
     });
-
-
 
     //展示数据来源，收费方式，数据类型
     $classB.on('change',function () {
@@ -151,9 +142,6 @@ $(document).ready(function(){
             });
         }
     });
-
-
-
 
     //修改时获取元素
     var reviseWares = function () {
@@ -180,7 +168,6 @@ $(document).ready(function(){
                             optionB = $classB.children(),
                             imgHtml = "<img src='"+ data.pic + "'>";
 
-
                         Common.optionSelect({
                             ele:$classA,
                             option:optionA,
@@ -201,13 +188,11 @@ $(document).ready(function(){
                             ]
                         });
 
-
                         $waresN.val(data.designation);
                         $describe.html(data.introduce);
                         $(".filename").val(data.fileUrl);
                         $file.attr("data-src",data.fileUrl);
                         $('.dropify-render').append(imgHtml);
-
 
                     }
                 }
@@ -216,12 +201,7 @@ $(document).ready(function(){
 
     };
 
-
     reviseWares();
-
-
-
-
 
     //表单提交
     $form.on('submit',function (e) {
@@ -259,7 +239,6 @@ $(document).ready(function(){
             data.item_price = $child.val();
         }
 
-
         attrRelationModels.push(Common.createAttr({
             attrId:typeAttrId,
             attrName:typeName,
@@ -283,13 +262,11 @@ $(document).ready(function(){
 
         data.attrRelationModels = attrRelationModels;
 
-
         if(id == undefined || id == null || id == ""){
             ajaxType = "post";
         }else {
             ajaxType = "put";
         }
-
 
         $.ajax({
             url:"/api/product",
@@ -298,16 +275,20 @@ $(document).ready(function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             error: function () {
-                alert("错误")
+                layer.msg("添加数据包产品失败",{icon:5});
             },
             success: function(result) {
-                if (result ) {
-                    alert("成功");
+                if (result.success == true ) {
+                    layer.msg('添加数据产品成功', {
+                        icon: 1,
+                        time: 3000 //3秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        //do something
+                        window.location.href = '/wares';
+                    });
                 }
-                window.location.href = './wares.html';
             }
         });
     })
-
 
 });

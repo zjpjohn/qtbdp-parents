@@ -33,11 +33,10 @@ $(function () {
                     id:id
                 },
                 error:function () {
-                    alert("错误")
+                    layer.msg("修改产品上下架状态失败",{icon: 5});
                 },
                 success: function (ret) {
                     if(ret.success === true){
-                        alert(that.text() + "成功");
                         if(that.text() == "上架"){
                             that.removeClass('blue').addClass('red');
                             that.text("下架");
