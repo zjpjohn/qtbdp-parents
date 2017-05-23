@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataProductModel;
+import com.qtdbp.tradingadmin.base.security.SecurityUser;
+import com.qtdbp.tradingadmin.controller.BaseController;
 import com.qtdbp.tradingadmin.service.DataProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,7 +14,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ import java.util.List;
 @Api(description = "数据包产品 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/product")
-public class DataProductApi {
+public class DataProductApi extends BaseController {
 
     @Autowired
     private DataProductService productService ;
@@ -37,10 +38,9 @@ public class DataProductApi {
 
     @ApiOperation(value="数据包产品数据接口，分页获取")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "数据包产品名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "designation", value = "数据包产品名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "valIds", value = "属性值Id列表vid1,vid2; 如：1,2", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "orderBy", value = "排序字段值; 如：addtime", dataType = "String", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：12）", defaultValue = "12", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
@@ -49,9 +49,6 @@ public class DataProductApi {
     public ModelMap loadDataProducts(DataProductModel productModel) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
-        if(productModel.getOrderBy() == null){
-            productModel.setOrderBy("addtime");
-        }
         // 设置默认每页显示记录数
         try {
             if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
@@ -69,7 +66,11 @@ public class DataProductApi {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
         if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+        SecurityUser user = getPrincipal() ;
+        if (user == null) throw new GlobalException("授权过期，请重新登陆") ;
+        productModel.setUserId(user.getUserId());
         ModelMap map = new ModelMap() ;
+
         try {
             Integer id = productService.insertProduct(productModel);
             map.put("success", id>0?true:false);

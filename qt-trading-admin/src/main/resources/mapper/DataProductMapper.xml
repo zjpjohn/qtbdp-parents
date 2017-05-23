@@ -22,9 +22,15 @@
             <if test="dataType != null and dataType != 0">
                 p.data_type = #{dataType}
             </if>
+            <if test="dataType != null and designation != null">
+                and
+            </if>
+            <if test="designation != null">
+                p.designation like '%${designation}%'
+            </if>
         </where>
         ORDER BY
-        #{orderBy} DESC
+        addtime desc
     </select>
 
     <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
