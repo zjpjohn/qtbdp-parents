@@ -140,7 +140,7 @@
 
 
 <script>
-
+//页面加载获取的数据
     $(function(){
         $.ajax({
             url: "/api/dataType/findRootNode",
@@ -159,7 +159,7 @@
             }
         })
     });
-
+//点击一级分类展现二级分类
     $("#tableClassify").unbind("click").on("click",".dataname",function(){
         //$("p").slideToggle();
         var dataid=$(this).attr("data-id");
