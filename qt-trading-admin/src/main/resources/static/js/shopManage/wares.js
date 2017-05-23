@@ -12,7 +12,7 @@ $(function () {
             { "data": "dataTypeProps" },
             { "data": "dataType" },
             { "data": "designation" },
-            { "data": "userId" },
+            { "data": "username" },
             { "data": "addTime" },
             { "data": null }
         ]

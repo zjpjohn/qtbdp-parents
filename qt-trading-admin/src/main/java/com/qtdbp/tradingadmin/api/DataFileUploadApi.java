@@ -2,7 +2,6 @@ package com.qtdbp.tradingadmin.api;
 
 
 import com.qtd.utils.OssUpload;
-import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.tradingadmin.service.FdfsFileService;
 import io.swagger.annotations.Api;
@@ -25,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(description = "文件上传 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/upload")
-public class DataFileUploadApi extends BaseController {
+public class DataFileUploadApi {
 
     @Autowired
     private FdfsFileService uploadService ;

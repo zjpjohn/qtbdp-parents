@@ -14,19 +14,23 @@
         p.addtime,
         p.data_type,
         p.user_id,
-        p.is_used
+        p.is_used,
+        s.name
         FROM
-        data_product as p
+        data_product as p left join sys_users s on p.user_id = s.user_id
         <where>
             <if test="dataType != null and dataType != 0">
                 p.data_type = #{dataType}
             </if>
-            <if test="valSqls != null">
-                AND p.id IN (${valSqls})
+            <if test="dataType != null and designation != null">
+                and
+            </if>
+            <if test="designation != null">
+                p.designation like '%${designation}%'
             </if>
         </where>
         ORDER BY
-        #{orderBy} DESC
+        addtime desc
     </select>
 
     <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
@@ -42,6 +46,7 @@
         <result column="data_type" property="dataType" />
         <result column="user_id" property="userId" />
         <result column="is_used" property="isUsed" />
+        <result column="name" property="username" />
     </resultMap>
 
     <!-- 单表查询产品 -->
