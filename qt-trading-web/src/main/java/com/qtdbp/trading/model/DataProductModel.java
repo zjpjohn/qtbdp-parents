@@ -31,7 +31,7 @@ public class DataProductModel extends BaseModel {
     private String fileUrl ;        // 数据包路径
     private int provinceId ;        // 省份id
     private int isHuadong ;         // 是否华东
-    private int userId ;            // 添加人
+    private String userId ;            // 添加人
     private Date addTime ;          // 添加时间
     private int editorId ;          // 编辑人id
     private Date editorTime ;       // 编辑时间
@@ -154,11 +154,11 @@ public class DataProductModel extends BaseModel {
         this.isHuadong = isHuadong;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

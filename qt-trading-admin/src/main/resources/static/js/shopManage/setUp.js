@@ -38,11 +38,12 @@ $(document).ready(function(){
             processData: false,
             data:formData,
             error:function () {
-                alert("加载错误")
+                layer.msg("文件上传失败",{icon:5});
             },
             success: function (ret) {
-               alert("成功");
-               $file.attr("data-src",ret.file)
+               if (ret.success == true){
+                   $file.attr("data-src", ret.file);
+               }
             }
         });
     });
@@ -67,7 +68,7 @@ $(document).ready(function(){
             processData: false,
             data:formData,
             error:function () {
-                alert("加载错误")
+                layer.msg("图片上传失败",{icon:5});
             },
             success: function (ret) {
                 var img = $('.dropify-render>img');
@@ -103,7 +104,6 @@ $(document).ready(function(){
     });
 
 
-
     //展示选择栏数据列表
     var typeList = function (opt) {
         var ele = opt.ele,
@@ -118,7 +118,7 @@ $(document).ready(function(){
                 id:id
             },
             error:function () {
-                alert("加载错误")
+                layer.msg("获取列表数据失败",{icon:5});
             },
             success: function (ret) {
                 var data = ret.pageInfo;
@@ -182,11 +182,6 @@ $(document).ready(function(){
             })
         }
     });
-
-
-
-
-
 
     var attrList = function (opt) {
         var ele = opt.ele,
@@ -286,17 +281,22 @@ $(document).ready(function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             error: function () {
-                alert("错误")
+                layer.msg("添加数据包产品失败",{icon:5});
             },
             success: function(result) {
-                if (result ) {
-                    alert("成功");
+                if (result.success == true ) {
+                    layer.msg('添加数据产品成功', {
+                        icon: 1,
+                        time: 3000 //3秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        //do something
+                        window.location.href = '/wares';
+                    });
+
                 }
 
-                // window.location.href = './wares.html';
             }
         });
     })
-
 
 });
