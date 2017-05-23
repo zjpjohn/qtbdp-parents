@@ -1,7 +1,7 @@
 $(document).ready(function(){
     //表单元素
-    var $form = $('#form_sample'),//form表单
-        $subBtn = $('#subBtn'),//提交按钮
+    var id = Common.QueryString().id,//修改时ID
+        $form = $('#form_sample'),//form表单
         $attr = $('#attr>div'),//二级菜单下的属性
         $waresN = $('#waresName'),//产品名称
         $describe = $('#describe'),//产品描述
@@ -18,10 +18,13 @@ $(document).ready(function(){
         $whole = $('#whole'),//整包价格
         $child = $('#child'),//子文件价格
         $file = $('#fileName'),//上传文件
-        $fileImg = $('.fileImg');
+        $fileImg = $('.fileImg');//上传图片
+
+
 
     $('#describe').trumbowyg();//文本编辑器实例化
     $('.dropify').dropify();//图片上传实例化
+
 
 
     //上传文件
@@ -52,6 +55,7 @@ $(document).ready(function(){
             $(this).parents(".uploader").find(".filename").val("未选中文件...");
         }
     });
+
 
 
     //图片上传
@@ -90,6 +94,7 @@ $(document).ready(function(){
         }
     });
 
+
     //收费价格校验
     $price.on('blur','input',function () {
         if($price.css('display') != 'none'){
@@ -103,34 +108,13 @@ $(document).ready(function(){
     });
 
 
-
-    //展示选择栏数据列表
-    var typeList = function (opt) {
-        var ele = opt.ele,
-            id = opt.id,
-            url = opt.url;
-        ele.empty();
-        $.ajax({
-            url: url,
-            dataType: "json",
-            type:"get",
-            data:{
-                id:id
-            },
-            error:function () {
-                alert("加载错误")
-            },
-            success: function (ret) {
-                var data = ret.pageInfo;
-                $typeTmpl.tmpl(data).appendTo(ele);
-            }
-        });
-    };
     //展示一级
-    typeList({
+    Common.typeList({
         ele:$classA,
-        url:"/api/dataType/findRootNode"
+        url:"/api/dataType/findRootNode",
+        tmpl:$typeTmpl
     });
+
 
     //通过一级展示二级
     $classA.on('change',function () {
@@ -138,84 +122,103 @@ $(document).ready(function(){
         if(id == ""){
             return;
         }else {
-            typeList({
+            Common.typeList({
                 ele:$classB,
                 id:id,
-                url:"/api/dataType/findSecondNode"
+                url:"/api/dataType/findSecondNode",
+                tmpl:$typeTmpl
             });
         }
     });
+
+
 
     //展示数据来源，收费方式，数据类型
     $classB.on('change',function () {
         var id = $(this).val();
-
-
         if(id == ""){
             $attr.css("display","none");
             return;
         }else {
-            $attr.css("display","block");
-            attrList({
-                ele:$source,
+            Common.attrList({
                 id:id,
-                url:"/api/dataType/findTypeAttr",
-                idName:"source",
-                tmpl:$sourceTmpl,
-                index:2
+                attrId:$attr,
+                attrContent:[
+                    {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
+                    {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
+                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                ]
             });
-            attrList({
-                ele:$wares,
-                id:id,
-                url:"/api/dataType/findTypeAttr",
-                idName:"TypeCheck",
-                tmpl:$waresTmpl,
-                index:1
-            });
-            attrList({
-                ele:$charge,
-                id:id,
-                index:0,
-                url:"/api/dataType/findTypeAttr",
-                idName:"mode",
-                tmpl:$chargeTmpl
-            })
         }
     });
 
 
 
 
+    //修改时获取元素
+    var reviseWares = function () {
+        if(id == undefined || id == null || id == ""){
+            return
+        }else {
+            $.ajax({
+                url: "/api/product/findProductById",
+                dataType: "json",
+                type:"get",
+                data:{
+                    id:id
+                },
+                error:function () {
+                    alert("错误")
+                },
+                success: function (ret) {
+                    data = ret.pageInfo;
+
+                    if(ret.pageInfo){
+                        var data = ret.pageInfo,
+                            type = data.dataTypeModel,
+                            optionA = $classA.children(),
+                            optionB = $classB.children(),
+                            imgHtml = "<img src='"+ data.pic + "'>";
 
 
-    var attrList = function (opt) {
-        var ele = opt.ele,
-            id = opt.id,
-            url = opt.url,
-            tmpl = opt.tmpl,
-            index = opt.index,
-            idName = opt.idName;
-        ele.empty();
-        $.ajax({
-            url: url,
-            dataType: "json",
-            type:"get",
-            data:{
-                id:id
-            },
-            error:function () {
-                alert("加载错误")
-            },
-            success: function (ret) {
-                var data = ret.pageInfo;
-                tmpl.tmpl(data[index],{
-                    setId:function (i) {
-                        return idName + i;
+                        Common.optionSelect({
+                            ele:$classA,
+                            option:optionA,
+                            id:type.pid
+                        });
+                        Common.typeList({
+                            ele:$classB,
+                            id:type.pid,
+                            url:"/api/dataType/findSecondNode",
+                            tmpl:$typeTmpl,
+                            CId:type.id,
+                            selected:data.attrRelationModels,
+                            attrId:$attr,
+                            attrContent:[
+                                {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
+                                {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
+                                {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                            ]
+                        });
+
+
+                        $waresN.val(data.designation);
+                        $describe.html(data.introduce);
+                        $(".filename").val(data.fileUrl);
+                        $file.attr("data-src",data.fileUrl);
+                        $('.dropify-render').append(imgHtml);
+
+
                     }
-                }).appendTo(ele);
-            }
-        });
+                }
+            });
+        }
+
     };
+
+
+    reviseWares();
+
 
 
 
@@ -224,7 +227,8 @@ $(document).ready(function(){
     $form.on('submit',function (e) {
         e.preventDefault(); //组织默认提交表单
        //获取表单信息
-        var attrRelationModels = [],
+        var ajaxType,
+            attrRelationModels = [],
             wares = $waresN.val(),
             describe = $describe.html(),
             classB = $classB.val(),
@@ -279,9 +283,17 @@ $(document).ready(function(){
 
         data.attrRelationModels = attrRelationModels;
 
+
+        if(id == undefined || id == null || id == ""){
+            ajaxType = "post";
+        }else {
+            ajaxType = "put";
+        }
+
+
         $.ajax({
-            url: '/api/product',
-            type: "post",
+            url:"/api/product",
+            type: ajaxType,
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -292,8 +304,7 @@ $(document).ready(function(){
                 if (result ) {
                     alert("成功");
                 }
-
-                // window.location.href = './wares.html';
+                window.location.href = './wares.html';
             }
         });
     })
