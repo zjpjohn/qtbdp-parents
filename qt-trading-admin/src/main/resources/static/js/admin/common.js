@@ -59,7 +59,7 @@ var Common = {
                         isUsed = "上架";
                         color = "blue";
                     }
-                    return '<a href="./setUp.html?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">修改</a>' +
+                    return '<a href="/setUp?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">修改</a>' +
                         '<button class="btn btn-sm '+ color + ' btn-outline filter-cancel isUsed" value=" '+ row.id +' ">'+ isUsed + '</button>';
                 }
             },
