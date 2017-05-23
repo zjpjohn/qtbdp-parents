@@ -285,7 +285,14 @@ $(document).ready(function(){
             },
             success: function(result) {
                 if (result.success == true ) {
-                    window.location.href = '/wares';
+                    layer.msg('添加数据产品成功', {
+                        icon: 1,
+                        time: 3000 //3秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        //do something
+                        window.location.href = '/wares';
+                    });
+
                 }
 
             }
