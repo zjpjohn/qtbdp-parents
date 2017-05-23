@@ -11,9 +11,11 @@ $(document).ready(function(){
         $sourceTmpl = $('#source_tmpl'),//数据来源模板
         $chargeTmpl = $('#charge_tmpl'),//收费模板
         $waresTmpl = $('#waresType_tmpl'),//文件类型模板
+        $fileSizeTmpl = $('#fileSize_tmpl'),//文件大小模板
         $source = $('#source'),//数据来源属性
         $charge = $('#charge'),//收费方式
         $wares = $('#waresType'),//文件类型
+        $fileSize = $('#fileSize'),//文件大小
         $price = $('#Price'),//价格
         $whole = $('#whole'),//整包价格
         $child = $('#child'),//子文件价格
@@ -146,7 +148,8 @@ $(document).ready(function(){
                 attrContent:[
                     {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
                     {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl},
+                    {attrN:$fileSize,index:3,idName:"fileSize",tmpl:$fileSizeTmpl}
                 ]
             });
         }
@@ -197,7 +200,8 @@ $(document).ready(function(){
                             attrContent:[
                                 {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
                                 {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                                {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                                {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl},
+                                {attrN:$fileSize,index:3,idName:"fileSize",tmpl:$fileSizeTmpl}
                             ]
                         });
 

@@ -161,7 +161,7 @@ var Common = {
                 id:id
             },
             error:function () {
-                alert("加载错误")
+                layer.msg("获取列表数据失败",{icon:5});
             },
             success: function (ret) {
                 var data = ret.pageInfo;
