@@ -6,9 +6,7 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 数据包产品Model
@@ -65,6 +63,11 @@ public class DataProductModel extends BaseModel {
 
     @Transient
     private String username;    //登录用户的名称
+
+    @Transient
+    private Map<String, String> itemMap = new HashMap<>();  //拆分后的数据条目
+
+    private Integer dataSize;   //文件大小
 
     public String getDesignation() {
         return designation;
@@ -365,6 +368,22 @@ public class DataProductModel extends BaseModel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Map<String, String> getItemMap() {
+        return itemMap;
+    }
+
+    public void setItemMap(Map<String, String> itemMap) {
+        this.itemMap = itemMap;
+    }
+
+    public Integer getDataSize() {
+        return dataSize;
+    }
+
+    public void setDataSize(Integer dataSize) {
+        this.dataSize = dataSize;
     }
 }
 
