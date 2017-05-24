@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 文件上传API接口
  *
@@ -75,11 +78,11 @@ public class DataFileUploadApi {
 
         ModelMap map = new ModelMap();
         boolean isSuccess = false ;
-        String fileUrl ;
-
+        String fileUrl = null;
+        int fileSize = 0;
         try {
             if(file == null) throw new GlobalException("文件不存在，请先上传文件") ;
-
+            fileSize = (int)file.getSize()/1024;
             fileUrl = client.uploadFile(file) ;
             if(fileUrl != null) {
                 isSuccess = true ;
@@ -93,9 +96,14 @@ public class DataFileUploadApi {
             throw new GlobalException(e.getMessage()) ;
         }
 
+
         map.put("success", isSuccess) ;
         map.put("file", fileUrl) ;
-        map.put("subFiles", poiParserService.getFiles()) ;
+
+        Map<String, String> subFiles = poiParserService.getFiles() ;
+        map.put("subFiles", subFiles) ;
+        map.put("fileSize", fileSize);
+        poiParserService.setFiles(null); ;
 
         return map;
     }
