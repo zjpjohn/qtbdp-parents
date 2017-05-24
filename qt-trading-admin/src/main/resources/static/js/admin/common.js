@@ -114,10 +114,10 @@ var Common = {
     //创建属性对象数据
     createAttr:function (opt) {
         var obj = {};
-        obj.attrId = opt.attrId;
         obj.attrName = opt.attrName;
-        obj.valId = opt.valId;
         obj.valName = opt.valName;
+        obj.attrId = opt.attrId;
+        obj.valId = opt.valId;
         return obj;
     },
     //获取修改时页面id值
@@ -150,6 +150,11 @@ var Common = {
             CId = opt.CId,
             selected = opt.selected,
             attrID = opt.attrId,
+            price = opt.price,
+            PWhole = opt.PWhole,
+            PChild = opt.PChild,
+            itemPrice = opt.itemPrice,
+            priceName = opt.priceName,
             attrContent = opt.attrContent;
 
         ele.empty();
@@ -177,7 +182,12 @@ var Common = {
                     Common.attrList({
                         attrContent:attrContent,
                         id:CId,
-                        selected:selected
+                        selected:selected,
+                        priceName:priceName,
+                        price:price,
+                        itemPrice:itemPrice,
+                        PWhole:PWhole,
+                        PChild:PChild
                     });
                 }
             }
@@ -203,6 +213,11 @@ var Common = {
         var attrContent = opt.attrContent,
             attrId = opt.attrId,
             id = opt.id,
+            price = opt.price,
+            itemPrice = opt.itemPrice,
+            PWhole = opt.PWhole,
+            PChild = opt.PChild,
+            priceName = opt.priceName,
             selected = opt.selected;
 
         $.ajax({
@@ -234,19 +249,23 @@ var Common = {
 
 
                     if(selected){
-                        $.each(selected,function (s,val) {
-                            if(ele.find("input").data("attrid") == val.attrId){
+                        $.each(selected,function (s,v) {
+                            if(ele.find("input").data("attrid") == v.attrId){
                                 for(var j = 0;j < ele.find("input").length;j++){
-                                    if($(ele.find("input")[j]).val() == val.valId){
+                                    if($(ele.find("input")[j]).val() == v.valId){
                                         $(ele.find("input")[j]).attr("checked",'checked');
+                                        if(v.attrId == 1 && v.valId == 2){
+                                            priceName.css("display","block");
+                                            PWhole.val(price);
+                                            PChild.val(itemPrice);
+                                        }
                                     }
                                 }
                             }
                         });
                     }
-
-
                 });
+
             }
         });
     },
