@@ -1,5 +1,6 @@
 package com.qtdbp.tradingadmin.mapper;
 
+import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductAttrRelationModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.utils.BaseMapper;
@@ -71,4 +72,11 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return
      */
     Integer insertProductAttrRelation(DataProductAttrRelationModel dataProductAttrRelationModel);
+
+    /**
+     * 插入数据条目
+     * @param itemModel
+     * @return
+     */
+    Integer insertItem(DataItemModel itemModel);
 }

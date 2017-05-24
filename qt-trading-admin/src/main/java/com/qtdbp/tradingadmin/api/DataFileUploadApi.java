@@ -4,7 +4,7 @@ package com.qtdbp.tradingadmin.api;
 import com.qtd.utils.OssUpload;
 import com.qtdbp.poi.excel.ExcelReaderUtil;
 import com.qtdbp.trading.exception.GlobalException;
-import com.qtdbp.tradingadmin.service.FdfsFileService;
+import com.qtdbp.tradingadmin.service.FastDFSClient;
 import com.qtdbp.tradingadmin.service.PoiParserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,12 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/api/upload")
 public class DataFileUploadApi {
 
-    @Autowired
-    private FdfsFileService uploadService ;
 
     @Autowired
     private PoiParserService poiParserService ;
 
+    @Autowired
+    private FastDFSClient client ;
     //===================================================================
     // 图片上传接口-支持阿里云Oss服务
     //===================================================================
@@ -75,18 +75,19 @@ public class DataFileUploadApi {
 
         ModelMap map = new ModelMap();
         boolean isSuccess = false ;
-        String fileUrl = null;
+        String fileUrl ;
 
         try {
             if(file == null) throw new GlobalException("文件不存在，请先上传文件") ;
 
-            fileUrl = uploadService.uploadFile(file) ;
+            fileUrl = client.uploadFile(file) ;
             if(fileUrl != null) {
                 isSuccess = true ;
 
                 // 解析Excel文件，按照sheet多个拆分子文件，并上传文件系统
                 ExcelReaderUtil.readExcel(poiParserService, file.getOriginalFilename(), file.getInputStream());
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new GlobalException(e.getMessage()) ;

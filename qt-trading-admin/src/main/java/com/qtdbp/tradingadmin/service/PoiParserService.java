@@ -1,11 +1,15 @@
 package com.qtdbp.tradingadmin.service;
 
+import com.github.tobato.fastdfs.domain.StorePath;
+import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.qtdbp.poi.excel.AbstractExcel2007Writer;
 import com.qtdbp.poi.excel.Excel2007Writer;
 import com.qtdbp.poi.excel.model.ExcelSheetModel;
 import com.qtdbp.poi.excel.service.IExcelReader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,15 +25,10 @@ import java.util.List;
 @Service
 public class PoiParserService implements IExcelReader {
 
-    private static class Holder {
-        private static FdfsFileService singleton = new FdfsFileService();
-    }
-
-    public static FdfsFileService getInstantiate(){
-        return Holder.singleton;
-    }
-
     private List<String> files ;
+
+    @Autowired
+    private FastFileStorageClient storageClient;
 
     @Override
     public void getSheet(ExcelSheetModel excelSheetModel) {
@@ -43,11 +42,8 @@ public class PoiParserService implements IExcelReader {
             AbstractExcel2007Writer excel07Writer = new Excel2007Writer();
             excel07Writer.process(outStream, excelSheetModel);
 
-            // 上传文件至文件系统
-            String filePath = getInstantiate().uploadFile(outStream.toByteArray(), excelSheetModel.getName(), outStream.toByteArray().length, "xlsx") ;
-
-            files.add(filePath);
-
+            StorePath storePath = storageClient.uploadFile(new ByteArrayInputStream(outStream.toByteArray()) , outStream.toByteArray().length, "xlsx", null) ;
+            files.add(storePath.getFullPath());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
