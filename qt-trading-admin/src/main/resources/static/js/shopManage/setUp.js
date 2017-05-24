@@ -259,46 +259,56 @@ $(document).ready(function(){
     //
     //     if(charge != 1){
     //         data.price = $whole.val();
-    //         data.item_price = $child.val();
+    //         data.itemPrice = $child.val();
     //     }
     //
     //
     //
     //
     //     attrRelationModels.push(Common.createAttr({
-    //         attrId:typeAttrId,
     //         attrName:typeName,
-    //         valId:type,
-    //         valName:typeCName
+    //         valName:typeCName,
+    //         attrId:typeAttrId,
+    //         valId:type
     //     }));
     //
     //     attrRelationModels.push(Common.createAttr({
-    //         attrId:chargeAttrId,
     //         attrName:chargeName,
-    //         valId:charge,
-    //         valName:chargeCName
+    //         valName:chargeCName,
+    //         attrId:chargeAttrId,
+    //         valId:charge
     //     }));
     //
     //     attrRelationModels.push(Common.createAttr({
-    //         attrId:sourceAttrId,
     //         attrName:sourceName,
-    //         valId:source,
-    //         valName:sourceCName
+    //         valName:sourceCName,
+    //         attrId:sourceAttrId,
+    //         valId:source
+    //
     //     }));
     //
     //     attrRelationModels.push(Common.createAttr({
-    //         attrId:sizeAttrId,
     //         attrName:sizeName,
-    //         valId:size,
-    //         valName:sizeCName
+    //         valName:sizeCName,
+    //         attrId:sizeAttrId,
+    //         valId:size
     //     }));
+    //
+    //
+    //     $.each(attrRelationModels,function (i,v) {
+    //         for(var k in v){
+    //             dataTypeProps += v[k] + ":";
+    //         }
+    //         dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
+    //         dataTypeProps += ";";
+    //     });
+    //
     //
     //     data.attrRelationModels = attrRelationModels;
+    //     data.dataTypeProps = dataTypeProps;
     //
     //
-    //     for(var i = 0;i < attrRelationModels.length;i++){
-    //         // console.log(attrRelationModels[i])
-    //     }
+    //
     //
     //
     //     if(id == undefined || id == null || id == ""){
@@ -385,6 +395,13 @@ $(document).ready(function(){
                 fileUrl:file,
                 dataType:classB
             };
+        if(id == undefined || id == null || id == ""){
+            ajaxType = "post";
+        }else {
+            ajaxType = "put";
+            data.id = id;
+        }
+
 
         if(charge != 1){
             data.price = $whole.val();
@@ -436,15 +453,6 @@ $(document).ready(function(){
         data.attrRelationModels = attrRelationModels;
         data.dataTypeProps = dataTypeProps;
 
-
-
-
-
-        if(id == undefined || id == null || id == ""){
-            ajaxType = "post";
-        }else {
-            ajaxType = "put";
-        }
 
 
 
