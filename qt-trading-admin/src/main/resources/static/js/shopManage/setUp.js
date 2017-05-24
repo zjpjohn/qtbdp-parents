@@ -25,6 +25,8 @@ $(document).ready(function(){
     $('#describe').trumbowyg();//文本编辑器实例化
     $('.dropify').dropify();//图片上传实例化
 
+
+
     //上传文件
     $file.change(function(){
         $(this).parents(".uploader").find(".filename").val($(this).val());
@@ -183,7 +185,12 @@ $(document).ready(function(){
                             tmpl:$typeTmpl,
                             CId:type.id,
                             selected:data.attrRelationModels,
+                            price:data.price,
+                            itemPrice:data.itemPrice,
+                            PWhole:$whole,
+                            PChild:$child,
                             attrId:$attr,
+                            priceName:$price,
                             attrContent:[
                                 {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
                                 {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
@@ -207,27 +214,168 @@ $(document).ready(function(){
 
     reviseWares();
 
+
+
+
+
+    // $form.submit(function() {
+    //     //获取表单信息
+    //     var ajaxType,
+    //         attrRelationModels = [],
+    //         dataTypeProps = "",
+    //         wares = $waresN.val(),
+    //         describe = $describe.html(),
+    //         classB = $classB.val(),
+    //         //文件类型信息
+    //         type = $('#waresType input:radio:checked ').val(),
+    //         typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
+    //         typeName = $('#waresTypeName').text(),
+    //         typeCName = $('#waresType input:radio:checked ').data("name"),
+    //         //文件大小信息
+    //         size = $('#fileSize input:radio:checked').val(),
+    //         sizeAttrId = $('#fileSize input:radio:checked').data("attrid"),
+    //         sizeName = $('#fileSizeName').text(),
+    //         sizeCName = $('#fileSize input:radio:checked').data("name"),
+    //         // 收费方式信息
+    //         charge = $('#charge input:radio:checked ').val(),
+    //         chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
+    //         chargeName = $('#chargeName').text(),
+    //         chargeCName = $('#charge input:radio:checked ').data("name"),
+    //         //数据来源信息
+    //         source = $('#source input:radio:checked ').val(),
+    //         sourceAttrId = $('#source input:radio:checked ').data("attrid"),
+    //         sourceName = $('#sourceName').text(),
+    //         sourceCName = $('#source input:radio:checked ').data("name"),
+    //
+    //         file = $file.data("src"),
+    //         img = $('.dropify-render>img').attr("src"),
+    //         data = {
+    //             designation:wares,
+    //             introduce:describe,
+    //             pic:img,
+    //             fileUrl:file,
+    //             dataType:classB
+    //         };
+    //
+    //     if(charge != 1){
+    //         data.price = $whole.val();
+    //         data.item_price = $child.val();
+    //     }
+    //
+    //
+    //
+    //
+    //     attrRelationModels.push(Common.createAttr({
+    //         attrId:typeAttrId,
+    //         attrName:typeName,
+    //         valId:type,
+    //         valName:typeCName
+    //     }));
+    //
+    //     attrRelationModels.push(Common.createAttr({
+    //         attrId:chargeAttrId,
+    //         attrName:chargeName,
+    //         valId:charge,
+    //         valName:chargeCName
+    //     }));
+    //
+    //     attrRelationModels.push(Common.createAttr({
+    //         attrId:sourceAttrId,
+    //         attrName:sourceName,
+    //         valId:source,
+    //         valName:sourceCName
+    //     }));
+    //
+    //     attrRelationModels.push(Common.createAttr({
+    //         attrId:sizeAttrId,
+    //         attrName:sizeName,
+    //         valId:size,
+    //         valName:sizeCName
+    //     }));
+    //
+    //     data.attrRelationModels = attrRelationModels;
+    //
+    //
+    //     for(var i = 0;i < attrRelationModels.length;i++){
+    //         // console.log(attrRelationModels[i])
+    //     }
+    //
+    //
+    //     if(id == undefined || id == null || id == ""){
+    //         ajaxType = "post";
+    //     }else {
+    //         ajaxType = "put";
+    //     }
+    //
+    //
+    //     var options = {
+    //         error:function () {
+    //             layer.msg("添加数据包产品失败",{icon:5});
+    //         },
+    //         success: function(result) {
+    //             if (result.success == true ) {
+    //                 layer.msg('添加数据产品成功', {
+    //                     icon: 1,
+    //                     time: 3000 //3秒关闭（如果不配置，默认是3秒）
+    //                 }, function(){
+    //                     //do something
+    //                     window.location.href = '/wares';
+    //                 });
+    //             }
+    //         },
+    //         url:"/api/product",
+    //         type:ajaxType,
+    //         dataType: "json",
+    //         data: JSON.stringify(data)
+    //     };
+    //
+    //     FormValidationMd.init(options);
+    //     return false;
+    // });
+
+
+
+
+
+
+
+
+
+
+
     //表单提交
     $form.on('submit',function (e) {
         e.preventDefault(); //组织默认提交表单
+
+
        //获取表单信息
         var ajaxType,
             attrRelationModels = [],
+            dataTypeProps = "",
             wares = $waresN.val(),
             describe = $describe.html(),
             classB = $classB.val(),
+            //文件类型信息
             type = $('#waresType input:radio:checked ').val(),
             typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
             typeName = $('#waresTypeName').text(),
             typeCName = $('#waresType input:radio:checked ').data("name"),
+            //文件大小信息
+            size = $('#fileSize input:radio:checked').val(),
+            sizeAttrId = $('#fileSize input:radio:checked').data("attrid"),
+            sizeName = $('#fileSizeName').text(),
+            sizeCName = $('#fileSize input:radio:checked').data("name"),
+            // 收费方式信息
             charge = $('#charge input:radio:checked ').val(),
             chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
             chargeName = $('#chargeName').text(),
             chargeCName = $('#charge input:radio:checked ').data("name"),
+            //数据来源信息
             source = $('#source input:radio:checked ').val(),
             sourceAttrId = $('#source input:radio:checked ').data("attrid"),
             sourceName = $('#sourceName').text(),
             sourceCName = $('#source input:radio:checked ').data("name"),
+
             file = $file.data("src"),
             img = $('.dropify-render>img').attr("src"),
             data = {
@@ -240,37 +388,66 @@ $(document).ready(function(){
 
         if(charge != 1){
             data.price = $whole.val();
-            data.item_price = $child.val();
+            data.itemPrice = $child.val();
         }
 
+
+
+
         attrRelationModels.push(Common.createAttr({
-            attrId:typeAttrId,
             attrName:typeName,
-            valId:type,
-            valName:typeCName
+            valName:typeCName,
+            attrId:typeAttrId,
+            valId:type
         }));
 
         attrRelationModels.push(Common.createAttr({
-            attrId:chargeAttrId,
             attrName:chargeName,
-            valId:charge,
-            valName:chargeCName
+            valName:chargeCName,
+            attrId:chargeAttrId,
+            valId:charge
         }));
 
         attrRelationModels.push(Common.createAttr({
-            attrId:sourceAttrId,
             attrName:sourceName,
-            valId:source,
-            valName:sourceCName
+            valName:sourceCName,
+            attrId:sourceAttrId,
+            valId:source
+
         }));
+
+        attrRelationModels.push(Common.createAttr({
+            attrName:sizeName,
+            valName:sizeCName,
+            attrId:sizeAttrId,
+            valId:size
+        }));
+
+
+        $.each(attrRelationModels,function (i,v) {
+            for(var k in v){
+                dataTypeProps += v[k] + ":";
+            }
+            dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
+            dataTypeProps += ";";
+        });
+
 
         data.attrRelationModels = attrRelationModels;
+        data.dataTypeProps = dataTypeProps;
+
+
+
+
 
         if(id == undefined || id == null || id == ""){
             ajaxType = "post";
         }else {
             ajaxType = "put";
         }
+
+
+
 
         $.ajax({
             url:"/api/product",
