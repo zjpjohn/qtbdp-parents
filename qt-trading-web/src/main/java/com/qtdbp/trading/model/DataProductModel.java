@@ -65,7 +65,7 @@ public class DataProductModel extends BaseModel {
     private String username;    //登录用户的名称
 
     @Transient
-    private Map<String, String> itemMap = new HashMap<>();  //拆分后的数据条目
+    private Map<String, String> subFiles = new HashMap<>();  //拆分后的数据条目
 
     private Integer dataSize;   //文件大小
 
@@ -370,12 +370,12 @@ public class DataProductModel extends BaseModel {
         this.username = username;
     }
 
-    public Map<String, String> getItemMap() {
-        return itemMap;
+    public Map<String, String> getSubFiles() {
+        return subFiles;
     }
 
-    public void setItemMap(Map<String, String> itemMap) {
-        this.itemMap = itemMap;
+    public void setSubFiles(Map<String, String> subFiles) {
+        this.subFiles = subFiles;
     }
 
     public Integer getDataSize() {
