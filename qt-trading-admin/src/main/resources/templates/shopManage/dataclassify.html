@@ -80,7 +80,7 @@
 
                         </tr>
                     </thead>
-                    <tbody id="tableClassify" class="twoClassify">
+                    <tbody id="tableClassify" class="twoClassify addtr">
                         <!--<tr>
                             <td>Tiger</td>
                             <td>Nixon</td>
@@ -150,9 +150,9 @@
                 console.log(data);
                 for(var i=0;i<data.pageInfo.list.length;i++){
                     html+='<tr data-id="'+data.pageInfo.list[i].id+'" data-isUsed="'+data.pageInfo.list[i].isUsed+'"   >\
-                        <td data-id="'+data.pageInfo.list[i].id+'" class="dataname">'+data.pageInfo.list[i].name+'</td>\
+                        <td  class="dataname">'+data.pageInfo.list[i].name+'</td>\
                         <td>可见</td>\
-                        <td> <a href="javadcript:;" class="editor" data-id="'+data.pageInfo.list[i].id+'" data-isUsed="'+data.pageInfo.list[i].isUsed+'"   >修改</a>  <a href="javascript:;">隐藏</a> <a href="javascript:;">添加下级菜单</a></td>\
+                        <td> <a href="javadcript:;" class="editor">修改</a>  <a href="javascript:;" class="addmenu">添加下级菜单</a></td>\
                     </tr>'
                 }
                 $("#tableClassify").html(html);
@@ -162,8 +162,8 @@
 //点击一级分类展现二级分类
     $("#tableClassify").unbind("click").on("click",".dataname",function(){
         //$("p").slideToggle();
-        var dataid=$(this).attr("data-id");
-        var isUsed=$(this).attr("data-isUsed");
+        var dataid=$(this).parent().attr("data-id");
+        var isUsed=$(this).parent().attr("data-isUsed");
 
         var me=this;
         if(!$(me).hasClass("disabled")){
@@ -178,12 +178,13 @@
                     var html2="";
                     console.log(data);
                     console.log(isUsed);
+                    console.log(dataid);
 
                     for(var i=0;i<data.pageInfo.list.length;i++){
-                        html2+='<tr class="disableds" data-pid="'+data.pageInfo.list[i].pid+'" >\
-                        <td data-isUsed="'+data.pageInfo.list[i].isUsed+'" class="dataname" style="padding-left: 50px;">'+data.pageInfo.list[i].name+'</td>\
+                        html2+='<tr class="disableds"  data-id="'+data.pageInfo.list[i].id+'" data-isUsed="'+data.pageInfo.list[i].isUsed+'"  data-pid="'+data.pageInfo.list[i].pid+'" >\
+                        <td class="dataname" style="padding-left: 50px;">'+data.pageInfo.list[i].name+'</td>\
                         <td >可见</td>\
-                        <td> <a href="javadcript:;"  data-id="'+data.pageInfo.list[i].id+'" data-isUsed="'+data.pageInfo.list[i].isUsed+'"    class="editor">修改</a>  <a href="javascript:;">隐藏</a> </td>\
+                        <td> <a href="javadcript:;"  class="editor">修改</a>  </td>\
                         </tr>'
                     }
                     $(me).parent().after(html2);
@@ -197,8 +198,8 @@
     });
 //点击一级类目编辑
     $("#tableMenu").unbind("click").on("click",".editor",function(){
-        var dataid=$(this).attr("data-id");
-        var isUsed=$(this).attr("data-isUsed");
+        var dataid=$(this).parent().parent().attr("data-id");
+        var isUsed=$(this).parent().parent().attr("data-isUsed");
         var html3=""
         $.ajax({
             url: "/api/dataType/findDataTypById",
@@ -210,7 +211,9 @@
             success: function (data) {
                 console.log(data);
                 console.log(dataid);
-                 html3=' <div class="row">\
+                console.log(isUsed);
+
+                html3=' <div class="row">\
                     <h4>修改菜单</h4>\
                     </div>\
                     <form class="form-horizontal">\
@@ -237,12 +240,95 @@
 
                 layer.open({
                     title:false,
+                    type: 0,
+                    //skin: 'layui-layer-rim', //加上边框
                     area: ['400px', '300px'], //宽高
-                    content: html3
+                    content: html3,
+                    yes: function(){
+
+                        $.ajax({
+                            url: "/api/dataType/insertDataType",
+                            type: "put",
+                            success: function (data) {
+                                window.location.reload();//刷新
+
+                            },
+                            error:function(){
+                                layer.msg(data.msg?data.msg:'操作失败!', {icon: 5});
+
+                            }
+                        })
+                    }
                 });
 
             }
         })
+    });
+
+ //点击下级菜单
+    $(".addtr").unbind("click").on("click",".addmenu",function(){
+        var dataid=$(this).parent().parent().attr("data-id");
+        var isUsed=$(this).parent().parent().attr("data-isUsed");
+        var html4=""
+        $.ajax({
+            url: "/api/dataType/findDataTypById",
+            type: "get",
+            data:{
+                id:dataid,
+                isUsed:isUsed,
+            },
+            success: function (data) {
+                console.log(data);
+                console.log(dataid);
+                console.log(isUsed);
+
+                html4=' <div class="row">\
+                    <h4>修改菜单</h4>\
+                    </div>\
+                    <form class="form-horizontal">\
+                        <div class="form-group">\
+                            <label class="col-md-3 control-label">名称 </label>\
+                            <div class="col-md-9">\
+                            <input name="name" value="" class=" form-control input-small "  type="text" />\
+                            </div>\
+                        </div>\
+                        <div class="form-group">\
+                            <label class="col-md-3 control-label">可见 </label>\
+                            <div class="col-md-9" style="padding-top:8px;">\
+                            <label><input name="yes" type="radio"  />是</label>\
+                            <label><input name="yes" type="radio" />否</label>\
+                        </div>\
+                        </div>\
+                        <form >';
+
+                layer.open({
+                    title:false,
+                    type: 0,
+                    //skin: 'layui-layer-rim', //加上边框
+                    area: ['400px', '300px'], //宽高
+                    content: html4,
+                    yes: function(){
+
+                        $.ajax({
+                            url: "/api/dataType/insertDataType",
+                            type: "post",
+                            success: function (data) {
+                                window.location.reload();//刷新
+
+                            },
+                            error:function(){
+                                layer.msg(data.msg?data.msg:'操作失败!', {icon: 5});
+
+                            }
+                        })
+                    }
+                });
+
+            }
+        })
+
+
+
     });
 
 

@@ -5,7 +5,7 @@ spring:
   application:
     name: qt-trading-admin
   profiles:
-    active: dev # 默认激活application-dev.yml配置
+    active: test # 默认激活application-dev.yml配置
   http:
     multipart:
       max-file-size: 50MB
@@ -48,10 +48,3 @@ kaptcha:
     height: 45
   session:
     key: code
-
-# ===================================================================
-# 文件大小配置，最大文件50M, 最大请求50M
-# ===================================================================
-#multipart:
-#  maxFileSize: 50Mb
-#  maxRequestSize: 50Mb
