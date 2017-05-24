@@ -112,7 +112,7 @@
 <script th:inline="javascript">
     var dataTypeJson = {};
     $.ajax({
-        url: "/api/dataType/findAll",
+        url: "/api/dataType",
         type: "get",
         success: function (result){
             if (result != null){
