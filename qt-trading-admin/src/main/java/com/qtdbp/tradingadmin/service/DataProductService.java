@@ -2,6 +2,7 @@ package com.qtdbp.tradingadmin.service;
 
 import com.github.pagehelper.PageHelper;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductAttrRelationModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.tradingadmin.mapper.DataProductMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 数据包产品业务服务
@@ -49,7 +51,7 @@ public class DataProductService {
     }
 
     /**
-     * 新增数据包产品以及关联数据表数据
+     * 新增数据包产品、数据条目产品以及关联数据表数据
      * @param productModel
      * @return
      * @throws GlobalException
@@ -66,13 +68,25 @@ public class DataProductService {
                 model.setProductId(productModel.getId());
                 model.setTypeId(productModel.getDataType());
                 Integer id = productMapper.insertProductAttrRelation(model);
-                if (!(id > 0)) {
-                    throw new GlobalException("插入关联表数据失败");
+                if (!(id > 0)) throw new GlobalException("插入关联表数据失败");
+            }
+            Map<String, String> itemMap = productModel.getSubFiles();
+            if (itemMap != null && itemMap.size() > 0) {
+                for (String key : itemMap.keySet()) {
+                    DataItemModel itemModel = new DataItemModel();
+                    itemModel.setProductId(productModel.getId());
+                    itemModel.setIsUsed(1);
+                    itemModel.setPrice(productModel.getItemPrice());
+                    itemModel.setItemName(key);
+                    itemModel.setFileUrl(itemMap.get(key));
+                    int id = productMapper.insertItem(itemModel);
+                    if (!(id > 0)) throw new GlobalException("插入数据条目失败");
                 }
             }
             return productModel.getId();
+        }else {
+            throw new GlobalException("新增数据包产品失败");
         }
-        return -1;
     }
 
     /**
