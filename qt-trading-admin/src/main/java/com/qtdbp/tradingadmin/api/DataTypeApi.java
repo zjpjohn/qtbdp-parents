@@ -31,7 +31,7 @@ public class DataTypeApi {
 
     @ApiOperation(value="获取数据类型一级类目接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 2.否)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 0.否)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
     @RequestMapping(value = "/findRootNode", method = RequestMethod.GET)
@@ -51,7 +51,7 @@ public class DataTypeApi {
     @ApiOperation(value="获取数据类型二级类目接口")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "节点id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 2.否)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 0.否)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
     @RequestMapping(value = "/findSecondNode", method = RequestMethod.GET)
@@ -128,7 +128,7 @@ public class DataTypeApi {
 
     @ApiOperation(value = "获取所有数据类型接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 2.否)", required = false, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 0.否)", required = false, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
     @RequestMapping(value = "findAll", method = RequestMethod.GET)
