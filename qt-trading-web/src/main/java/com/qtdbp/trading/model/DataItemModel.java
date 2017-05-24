@@ -22,6 +22,8 @@ public class DataItemModel extends BaseModel {
     private int sort ;              // 排序值
     private int rec ;               // 推荐值
     private int isUsed ;            // 是否可用
+    private Double price ;          // 价格
+    private String fileUrl;         // 地址
 
     public int getProductId() {
         return productId;
@@ -110,4 +112,21 @@ public class DataItemModel extends BaseModel {
     public void setIsUsed(int isUsed) {
         this.isUsed = isUsed;
     }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
 }

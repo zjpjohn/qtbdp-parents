@@ -32,18 +32,22 @@ public class FdfsFileService {
             // 获取文件后缀名
             String ext = attach.getOriginalFilename().substring(attach.getOriginalFilename().lastIndexOf(".")+1);
 
-            FastDFSFile file = new FastDFSFile(attach.getBytes(),ext);
-            NameValuePair[] meta_list = new NameValuePair[4];
-            meta_list[0] = new NameValuePair("fileName", attach.getOriginalFilename());
-            meta_list[1] = new NameValuePair("fileLength", String.valueOf(attach.getSize()));
-            meta_list[2] = new NameValuePair("fileExt", ext);
-            meta_list[3] = new NameValuePair("fileAuthor", FileManagerConfig.FILE_DEFAULT_AUTHOR);
-            filePath = FileManager.upload(file, meta_list);
+            filePath = uploadFile(attach.getBytes(), attach.getOriginalFilename(), attach.getSize(), ext) ;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return filePath ;
+    }
+
+    public String uploadFile(byte[] content, String fileName, long fileLength, String ext) {
+        FastDFSFile file = new FastDFSFile(content,ext);
+        NameValuePair[] meta_list = new NameValuePair[4];
+        meta_list[0] = new NameValuePair("fileName", fileName);
+        meta_list[1] = new NameValuePair("fileLength", String.valueOf(fileLength));
+        meta_list[2] = new NameValuePair("fileExt", ext);
+        meta_list[3] = new NameValuePair("fileAuthor", FileManagerConfig.FILE_DEFAULT_AUTHOR);
+        return FileManager.upload(file, meta_list);
     }
 
 }

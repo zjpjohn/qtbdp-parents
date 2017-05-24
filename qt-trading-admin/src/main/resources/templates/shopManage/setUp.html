@@ -100,6 +100,11 @@
                                 </div>
                                 <!--数据来源结束-->
 
+                                <!--文件大小-->
+                                <div class="form-group form-md-radios" id="fileSize">
+                                </div>
+                                <!--文件大小结束-->
+
                                 <!--收费方式-->
                                 <div class="form-group form-md-radios" id="charge">
                                 </div>
@@ -167,7 +172,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn green" id="subBtn">发布上架</button>
+                                    <button type="submit" class="btn green" id="subBtn">提交</button>
                                 </div>
                             </div>
                         </div>
@@ -255,6 +260,22 @@
         {{each attrVals}}
             <div class="md-radio">
                 <input type="radio" id="${$item.setId(id)}" data-name="${name}" data-attrId="${attrId}" name="type" value="${id}" class="md-radiobtn">
+                 <label for="${$item.setId(id)}">
+                    <span></span>
+                    <span class="check"></span>
+                    <span class="box"></span> ${name}
+                </label>
+            </div>
+        {{/each}}
+        </div>
+</script>
+
+<script id="fileSize_tmpl" type="text/x-jquery-tmpl">
+        <label for="fileSize" id="fileSizeName">${name}</label>
+        <div class="md-radio-inline">
+        {{each attrVals}}
+            <div class="md-radio">
+                <input type="radio" id="${$item.setId(id)}" data-name="${name}" data-attrId="${attrId}" name="size" value="${id}" class="md-radiobtn">
                  <label for="${$item.setId(id)}">
                     <span></span>
                     <span class="check"></span>

@@ -46,7 +46,7 @@ var Common = {
             orderMulti: false,  //启用多列排序
             order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
             renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
-            pagingType: "full_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
+            pagingType: "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
             columnDefs:[{
                 targets: 6,
                 render: function (data, type, row, meta) {
@@ -59,7 +59,7 @@ var Common = {
                         isUsed = "上架";
                         color = "blue";
                     }
-                    return '<a href="javascript:void(0)" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">修改</a>' +
+                    return '<a href="/setUp?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">修改</a>' +
                         '<button class="btn btn-sm '+ color + ' btn-outline filter-cancel isUsed" value=" '+ row.id +' ">'+ isUsed + '</button>';
                 }
             },
@@ -67,7 +67,6 @@ var Common = {
             ],
             ajax: function (data, callback, settings) {
 
-                console.log(data);
                 //封装请求参数
                 var param = {};
                 param.rows = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
@@ -112,6 +111,7 @@ var Common = {
         }).api();
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
     },
+    //创建属性对象数据
     createAttr:function (opt) {
         var obj = {};
         obj.attrId = opt.attrId;
@@ -120,7 +120,136 @@ var Common = {
         obj.valName = opt.valName;
         return obj;
     },
+    //获取修改时页面id值
+    QueryString:function () {
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+                query_string[pair[0]] = pair[1];
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+                var arr = [query_string[pair[0]], pair[1]];
+                query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+                query_string[pair[0]].push(pair[1]);
+            }
+        }
+        return query_string;
+    },
+    //渲染Select
+    typeList:function (opt) {
+        var ele = opt.ele,
+            id = opt.id,
+            tmpl = opt.tmpl,
+            url = opt.url,
+            CId = opt.CId,
+            selected = opt.selected,
+            attrID = opt.attrId,
+            attrContent = opt.attrContent;
 
+        ele.empty();
+        $.ajax({
+            url: url,
+            dataType: "json",
+            type:"get",
+            data:{
+                id:id
+            },
+            error:function () {
+                layer.msg("获取列表数据失败",{icon:5});
+            },
+            success: function (ret) {
+                var data = ret.pageInfo;
+                tmpl.tmpl(data).appendTo(ele);
+                if(CId){
+                    Common.optionSelect({
+                        ele:ele,
+                        option:ele.children(),
+                        id:CId
+                    });
+
+                    attrID.css("display","block");
+                    Common.attrList({
+                        attrContent:attrContent,
+                        id:CId,
+                        selected:selected
+                    });
+                }
+            }
+        });
+    },
+    //渲染已选择的option
+    optionSelect:function (obj) {
+        var ele = obj.ele,
+            opt = obj.option,
+            id = obj.id;
+
+        for(var i = 0;i < opt.length;i++){
+            if($(opt[i]).val() == id){
+                ele.val($(opt[i]).val());
+                break;
+            }else {
+                continue;
+            }
+        }
+    },
+    //渲染单选框
+    attrList:function (opt) {
+        var attrContent = opt.attrContent,
+            attrId = opt.attrId,
+            id = opt.id,
+            selected = opt.selected;
+
+        $.ajax({
+            url: "/api/dataType/findTypeAttr",
+            dataType: "json",
+            type:"get",
+            data:{
+                id:id
+            },
+            error:function () {
+                alert("加载错误")
+            },
+            success: function (ret) {
+                var data = ret.pageInfo;
+                if(attrId){
+                    attrId.css("display","block");
+                }
+                $.each(attrContent,function (i,val) {
+                    var tmpl = val.tmpl,
+                        index = val.index,
+                        idName = val.idName,
+                        ele = val.attrN;
+                    ele.empty();
+                    tmpl.tmpl(data[index],{
+                        setId:function (i) {
+                            return idName + i;
+                        }
+                    }).appendTo(ele);
+
+
+                    if(selected){
+                        $.each(selected,function (s,val) {
+                            if(ele.find("input").data("attrid") == val.attrId){
+                                for(var j = 0;j < ele.find("input").length;j++){
+                                    if($(ele.find("input")[j]).val() == val.valId){
+                                        $(ele.find("input")[j]).attr("checked",'checked');
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+
+                });
+            }
+        });
+    },
     /**
      * 时间格式转换
      * @param date

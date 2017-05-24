@@ -22,9 +22,15 @@
             <if test="dataType != null and dataType != 0">
                 p.data_type = #{dataType}
             </if>
+            <if test="dataType != null and designation != null">
+                and
+            </if>
+            <if test="designation != null">
+                p.designation like '%${designation}%'
+            </if>
         </where>
         ORDER BY
-        #{orderBy} DESC
+        addtime desc
     </select>
 
     <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
@@ -264,6 +270,33 @@
         ORDER BY
         i.editor_time desc
     </select>
+
+    <!-- 插入数据条目 -->
+    <insert id="insertItem" parameterType="com.qtdbp.trading.model.DataItemModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into data_item (
+            product_id,
+            item_name,
+            item_content,
+            view_count,
+            download_count,
+            is_used,
+            price,
+            file_url
+        ) VALUES (
+            #{productId},
+            #{itemName},
+            #{itemContent},
+            #{viewCount},
+            #{downloadCount},
+            1,
+            #{price},
+            #{fileUrl}
+        )
+    </insert>
 
     <!-- #################################################################### -->
     <!-- #######################数据包产品与属性关联表######################### -->

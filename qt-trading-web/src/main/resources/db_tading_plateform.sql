@@ -116,3 +116,10 @@ ALTER TABLE data_type ADD is_parent TINYINT NOT NULL DEFAULT 0 COMMENT '是否�
 ALTER TABLE data_product ADD price DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '数据包价格', ADD item_price DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '数据包单个条目价格';
 
 ALTER TABLE data_product MODIFY user_id VARCHAR(100) ;
+
+ALTER TABLE data_product ADD data_size INT COMMENT '数据文件大小' ;
+
+/*==============================================================*/
+/* Table: data_product  新增price,item_price                    */
+/*==============================================================*/
+ALTER TABLE data_item ADD price DECIMAL(10,2) COMMENT '价格',ADD file_url VARCHAR(1000) COMMENT '数据包路径' ;

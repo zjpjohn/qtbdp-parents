@@ -23,6 +23,7 @@ $(function () {
 
     //上下架操作
     $tbody.on('click','.isUsed',function () {
+        var that = $(this);
         var id = $(this).val();
             $.ajax({
                 url: "/api/product/changeState",
@@ -32,38 +33,23 @@ $(function () {
                     id:id
                 },
                 error:function () {
-                    alert("错误")
+                    layer.msg("修改产品上下架状态失败",{icon: 5});
                 },
-                success: function () {
-                    alert("成功");
+                success: function (ret) {
+                    if(ret.success === true){
+                        if(that.text() == "上架"){
+                            that.removeClass('blue').addClass('red');
+                            that.text("下架");
+                        }else {
+                            that.removeClass('red').addClass('blue');
+                            that.text("上架");
+                        }
+                    }
                 }
             })
-    })
-
-    //修改操作
-    $tbody.on('click','.revise',function () {
-        var id = $(this).data("value");
-        $.ajax({
-            url: "/api/product/changeState",
-            dataType: "json",
-            type:"get",
-            data:{
-                id:id
-            },
-            error:function () {
-                alert("错误")
-            },
-            success: function () {
-                alert("成功");
-                window.location.href = './setUp.html';
-            }
-        })
     });
 
-    // 搜索
-    $searchBtn.on('click',function () {
-        var val = searchInp.val();
 
-    })
+
 
 });

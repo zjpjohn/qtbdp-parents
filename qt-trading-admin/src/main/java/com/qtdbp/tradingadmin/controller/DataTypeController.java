@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DataTypeController extends BaseController {
 
-    public static final String PAGE_ITEM = "dataclassify";
+    public static final String PAGE_ITEM = "shopManage/dataclassify";
 
     /**
      * 跳转到类目管理页面
