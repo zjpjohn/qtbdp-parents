@@ -83,8 +83,8 @@
 }
 .pro_list>li>i{
     display:block;
-    width:51px;
-    height:51px;
+    width:60px;
+    height:55px;
     margin:0px auto;
     background-image:url("../images/icon.png" );
 }
@@ -92,25 +92,25 @@
     background-position:-37px -157px;
 }
 .pro_i2{
-    background-position:-37px -261px;
-}
-.pro_i3{
-    background-position:-40px -366px;
-}
-.pro_i4   {
     background-position:-37px -471px;
 }
+.pro_i3{
+    background-position:-37px -576px;
+}
+.pro_i4   {
+    background-position:-419px -677px;
+}
 .pro_i5{
-     background-position:-37px -576px;
+    background-position:-40px -366px;
  }
 .pro_i6{
-    background-position:-41px -679px;
+    background-position:-35px -260px;
 }
 .pro_i7{
-    background-position:-41px -785px;
+    background-position:-422px -777px;
 }
 .pro_i8{
-    background-position:-40px -891px;
+    background-position:-420px -886px;
 }
 .pro_list>li>h3{
     color:#2A97E7;

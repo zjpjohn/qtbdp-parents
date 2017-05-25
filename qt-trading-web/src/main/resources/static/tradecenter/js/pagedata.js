@@ -275,7 +275,8 @@ var pageData = {
     },
     //数据内 p 标签截取
     _replacestr: function (str2,i) {
-        str2=str2.replace("<p>","").replace("</p>","");
+        var reg=/<[^>]*>/g;
+        str2=str2.replace(reg,"");
         if(str2.length>i){
             str2=str2.substring(0,i)+"...";
         }
