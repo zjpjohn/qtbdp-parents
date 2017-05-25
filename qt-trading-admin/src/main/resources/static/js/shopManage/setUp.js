@@ -24,8 +24,7 @@ $(document).ready(function(){
         $fileImg = $('.fileImg');//上传图片
 
     $('#describe').trumbowyg();//文本编辑器实例化
-    $('.dropify').dropify();//图片上传实例化
-
+    $('.dropify').dropify();//图片预览
 
 
     //上传文件
@@ -93,7 +92,7 @@ $(document).ready(function(){
         if(this.type != 'radio'){
             return;
         }else if($(this).is(':checked') === true){
-            if($(this).val() === "2"){
+            if($(this).val() === "101"){
                 $price.css('display','block');
             }else {
                 $price.css('display','none');
@@ -148,8 +147,7 @@ $(document).ready(function(){
                 attrContent:[
                     {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
                     {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl},
-                    {attrN:$fileSize,index:3,idName:"fileSize",tmpl:$fileSizeTmpl}
+                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
                 ]
             });
         }
@@ -172,7 +170,6 @@ $(document).ready(function(){
                 },
                 success: function (ret) {
                     data = ret.pageInfo;
-
                     if(ret.pageInfo){
                         var data = ret.pageInfo,
                             type = data.dataTypeModel,
@@ -200,8 +197,7 @@ $(document).ready(function(){
                             attrContent:[
                                 {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
                                 {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                                {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl},
-                                {attrN:$fileSize,index:3,idName:"fileSize",tmpl:$fileSizeTmpl}
+                                {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
                             ]
                         });
 
@@ -210,7 +206,10 @@ $(document).ready(function(){
                         $(".filename").val(data.fileUrl);
                         $file.attr("data-src",data.fileUrl);
                         $file.attr("data-size", data.dataSize);
-                        // Dropify.setPreview(true,data.fileUrl);
+                        var img = document.createElement('img');
+                        img.setAttribute("src",data.pic);
+                        $('.dropify-render').append(img);
+                        $('.dropify-preview').css("display","block");
                     }
                 }
             });
@@ -218,8 +217,8 @@ $(document).ready(function(){
 
     };
 
-    reviseWares();
 
+    reviseWares();
 
 
 
@@ -388,11 +387,6 @@ $(document).ready(function(){
             typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
             typeName = $('#waresTypeName').text(),
             typeCName = $('#waresType input:radio:checked ').data("name"),
-            //文件大小信息
-            size = $('#fileSize input:radio:checked').val(),
-            sizeAttrId = $('#fileSize input:radio:checked').data("attrid"),
-            sizeName = $('#fileSizeName').text(),
-            sizeCName = $('#fileSize input:radio:checked').data("name"),
             // 收费方式信息
             charge = $('#charge input:radio:checked ').val(),
             chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
@@ -458,12 +452,6 @@ $(document).ready(function(){
 
         }));
 
-        attrRelationModels.push(Common.createAttr({
-            attrName:sizeName,
-            valName:sizeCName,
-            attrId:sizeAttrId,
-            valId:size
-        }));
 
 
         $.each(attrRelationModels,function (i,v) {
