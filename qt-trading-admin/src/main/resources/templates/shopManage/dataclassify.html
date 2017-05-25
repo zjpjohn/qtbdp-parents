@@ -49,10 +49,10 @@
 <!--侧边栏结束-->
 
 <!--主体内容-->
-<div class="page-content-wrapper">
+<div class="page-content-wrapper addtr">
     <div class="page-content" style="min-height: 1095px;">
         <!--面包屑-->
-        <div class="page-bar">
+        <div class="page-bar" >
             <ul class="page-breadcrumb">
                 <li>
                     <span>数据商城管理</span>
@@ -65,10 +65,10 @@
         </div>
         <!--面包屑结束-->
         <div class="portlet light portlet-fit portlet-datatable">
-            <p><a href="javascript:;" class="carteadd"> 添加一级目录 </a></p>
+            <p id="adddataid"><a href="javascript:;" class="carteadd" data-id="'+data.pageInfo.list[i].id+'"> 添加一级目录 </a> </p>
             <div class="portlet-body">
                 <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="tableMenu">
-                    <thead class="addtr">
+                    <thead >
                         <tr>
                             <th class="all">分类名称</th>
 
@@ -149,18 +149,23 @@
                 console.log(data);
                 for(var i=0;i<data.pageInfo.list.length;i++){
                     html+='<tr data-id="'+data.pageInfo.list[i].id+'" data-isUsed="'+data.pageInfo.list[i].isUsed+'" >\
-                        <td  class="dataname">'+data.pageInfo.list[i].name+'</td>\
-                        <td>可见</td>\
-                        <td> <a href="javadcript:;" class="editor" data-isParent="'+data.pageInfo.isParent+'" data-name="'+data.pageInfo.name+'" data-pid="'+data.pageInfo.pid+'">修改</a>\
+                        <td  class="dataname">'+data.pageInfo.list[i].name+'</td>'
+                        if(data.pageInfo.list[i].isUsed==1){
+                            html+='<td>可见</td>'
+                        }else{
+                            html+='<td>隐藏</td>'
+                        }
+                    html+='<td> <a href="javadcript:;" class="editor" data-isParent="'+data.pageInfo.list[i].isParent+'" data-name="'+data.pageInfo.list[i].name+'" data-pid="'+data.pageInfo.list[i].pid+'">修改</a>\
                              <a href="javascript:;" class="addmenu">添加下级菜单</a></td>\
                     </tr>'
                 }
                 $("#tableClassify").html(html);
+
             }
         })
     });
 //点击一级分类展现二级分类
-    $("#tableClassify").unbind("click").on("click",".dataname",function(){
+    $("#tableClassify").unbind("click").on("click",".dataname,.carteadd",function(){
         //$("p").slideToggle();
         console.log(666);
         var dataid=$(this).parent().attr("data-id");
@@ -174,7 +179,7 @@
                 type: "get",
                 data:{
                     id:dataid,
-                    isUsed:isUsed,
+            //        isUsed:isUsed,
                 },
                 success: function (data) {
                     var html2="";
@@ -186,9 +191,13 @@
 
                     for(var i=0;i<data.pageInfo.list.length;i++){
                         html2+='<tr class="disableds"  data-id="'+data.pageInfo.list[i].id+'" data-isUsed="'+data.pageInfo.list[i].isUsed+'"  data-pid="'+data.pageInfo.list[i].pid+'" >\
-                        <td class="dataname" style="padding-left: 50px;">'+data.pageInfo.list[i].name+'</td>\
-                        <td >可见</td>\
-                        <td> <a href="javadcript:;"  class="editor"  data-isParent="'+data.pageInfo.isParent+'" data-name="'+data.pageInfo.name+'" data-pid="'+data.pageInfo.pid+'">修改</a>  </td>\
+                        <td class="dataname" style="padding-left: 50px;">'+data.pageInfo.list[i].name+'</td>'
+                        if(data.pageInfo.list[i].isUsed==1){
+                            html2+='<td>可见</td>'
+                        }else{
+                            html2+='<td>隐藏</td>'
+                        }
+                    html2+='<td> <a href="javadcript:;"  class="editor"  data-isParent="'+data.pageInfo.list[i].isParent+'" data-name="'+data.pageInfo.list[i].name+'" data-pid="'+data.pageInfo.list[i].pid+'">修改</a>  </td>\
                         </tr>'
                     }
                     $(me).parent().after(html2);
@@ -206,9 +215,8 @@
         var isUsed=$(this).parent().parent().attr("data-isUsed");
 
         var isParent=$(this).attr("data-isParent");
-        var name=$(this).attr("data-name");
         var pid=$(this).attr("data-pid");
-        var html3=""
+        var html3="";
         $.ajax({
             url: "/api/dataType/findDataTypById",
             type: "get",
@@ -217,12 +225,6 @@
                 isUsed:isUsed,
             },
             success: function (data) {
-                console.log(data);
-                console.log(dataid);
-                console.log(isUsed);
-                console.log(name);
-                console.log(pid);
-
                 html3=' <div class="row">\
                     <h4>修改菜单</h4>\
                     </div>\
@@ -230,23 +232,25 @@
                         <div class="form-group">\
                             <label class="col-md-3 control-label">名称 </label>\
                             <div class="col-md-9">\
-                            <input name="name" value="'+data.pageInfo.name+'" class=" form-control input-small "  type="text" />\
+                            <input name="name" class="nameslice" value="'+data.pageInfo.name+'" class=" form-control input-small "  type="text" />\
                             </div>\
                         </div>\
                         <div class="form-group">\
                             <label class="col-md-3 control-label">可见 </label>\
                             <div class="col-md-9" style="padding-top:8px;">'
                             if(isUsed==1){
-                                html3+= '<label><input name="yes" type="radio" checked="checked" />是</label>\
-                                <label><input name="yes" type="radio" />否</label>'
+                                html3+= '<label><input name="yes" class="yeschecked" type="radio" checked="checked" value="1"/>是</label>\
+                                        <label><input name="yes" class="yeschecked"  type="radio" value="0"/>否</label>'
                             }else{
-                                html3+= '<label><input name="1" type="radio" />是</label>\
-                                         <label><input name="1" type="radio" checked="checked" />否</label>'
+                                html3+= '<label><input name="yes" class="yeschecked"  type="radio" value="1"/>是</label>\
+                                         <label><input name="yes" class="yeschecked"  type="radio" value="0"checked="checked" />否</label>'
                             }
 
                         html3+='</div>\
                         </div>\
-                        <form >';
+                    <form >';
+
+
 
                 layer.open({
                     title:false,
@@ -256,9 +260,12 @@
                     content: html3,
 
                     yes: function(){
+                        var name=$(".nameslice").val();
+                        var isUsed2=$(".yeschecked:checked").val();
+
                         var data = {
                             id:dataid,
-                            isUsed:isUsed,
+                            isUsed:isUsed2,
                             name:name
                         };
 
@@ -269,8 +276,8 @@
                             contentType: "application/json",
                             dataType: "json",
                             success: function (data) {
-                                alert("修改成功");
-                               // window.location.reload();//刷新
+                               // alert("修改成功");
+                                window.location.reload();//刷新
                             },
                             error:function(){
                                 layer.msg(data.msg?data.msg:'操作失败!', {icon: 5});
@@ -283,137 +290,83 @@
         })
     });
 
- //点击添加二级菜单
-    $(".addtr").unbind("click").on("click",".addmenu",function(){
-        var dataid=$(this).parent().parent().attr("data-id");
-        var isUsed=$(this).parent().parent().attr("data-isUsed");
-        var html4=""
-        $.ajax({
-            url: "/api/dataType/findDataTypById",
-            type: "get",
-            data:{
-                id:dataid,
-                isUsed:isUsed,
-            },
-            success: function (data) {
-                console.log(data);
-                console.log(dataid);
-                console.log(isUsed);
-
-                html4='<div class="row">\
+ //点击添加菜单函数封装
+function addcd(dataid){
+    var html4="";
+    html4='<div class="row">\
                     <h4>添加二级菜单</h4>\
                     </div>\
                     <form class="form-horizontal">\
                         <div class="form-group">\
                             <label class="col-md-3 control-label">名称 </label>\
                             <div class="col-md-9">\
-                            <input name="name" value="" class=" form-control input-small "  type="text" />\
+                            <input name="name" value="" class=" form-control input-small nameslice"  type="text" />\
                             </div>\
                         </div>\
                         <div class="form-group">\
                             <label class="col-md-3 control-label">可见 </label>\
                             <div class="col-md-9" style="padding-top:8px;">\
-                            <label><input name="yes" type="radio"  />是</label>\
-                            <label><input name="yes" type="radio" />否</label>\
+                            <label><input name="yes" type="radio" value="1" class="yeschecked"/>是</label>\
+                            <label><input name="yes" type="radio" value="0" class="yeschecked" />否</label>\
                         </div>\
                         </div>\
                         <form >';
 
-                layer.open({
-                    title:false,
-                    type: 0,
-                    //skin: 'layui-layer-rim', //加上边框
-                    area: ['400px', '300px'], //宽高
-                    content: html4,
-                    yes: function(){
+    layer.open({
+        title:false,
+        type: 0,
+        //skin: 'layui-layer-rim', //加上边框
+        area: ['400px', '300px'], //宽高
+        content: html4,
+        yes: function(){
+            var name=$(".nameslice").val();
+            var isUsed2=$(".yeschecked:checked").val();
+            var data = {
+                pid:dataid,
+                isUsed:isUsed2,
+                isParent: 0,
+                name:name
+            };
 
-                        $.ajax({
-                            url: "/api/dataType/insertDataType",
-                            type: "post",
-                            data:{
+            $.ajax({
+                url: "/api/dataType",
+                type: "post",
+                data:JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    window.location.reload();//刷新
+                    //alert("添加成功");
+                },
+                error:function(){
+                    layer.msg(data.msg?data.msg:'操作失败!', {icon: 5});
+                }
+            })
+        }
+    });
+}
 
 
-                            },
-                            success: function (data) {
-                               // window.location.reload();//刷新
-                                alert("添加成功");
+//点击添加二级菜单
+    $(".addtr").unbind("click").on("click",".addmenu",function(){
+        console.log(9999999999999);
+        var dataid=$(this).parent().parent().attr("data-id");
+       // var isUsed=$(this).parent().parent().attr("data-isUsed");
+        console.log(dataid);
+        addcd(dataid);
 
-                            },
-                            error:function(){
-                                layer.msg(data.msg?data.msg:'操作失败!', {icon: 5});
 
-                            }
-                        })
-                    }
-                });
 
-            }
-        })
+    });
+//点击添加一级菜单
+    $(".carteadd").click(function(){
+        console.log(9999999999999);
+        var dataid=0;
+        addcd(dataid);
     });
 
 
 
-/*
-//点击左上角 添加一级菜单
-$(".carteadd").click(function(){
-    var dataid=$(this).parent().parent().attr("data-id");
-    var isUsed=$(this).parent().parent().attr("data-isUsed");
-    var html4=""
-    $.ajax({
-        url: "/api/dataType/findDataTypById",
-        type: "get",
-        data:{
-            id:dataid,
-            isUsed:isUsed,
-        },
-        success: function (data) {
-            console.log(data);
-            console.log(dataid);
-            console.log(isUsed);
-
-            html4='<div class="row">\
-                    <h4>添加二级菜单</h4>\
-                    </div>\
-                    <form class="form-horizontal">\
-                        <div class="form-group">\
-                            <label class="col-md-3 control-label">名称 </label>\
-                            <div class="col-md-9">\
-                            <input name="name" value="" class=" form-control input-small "  type="text" />\
-                            </div>\
-                        </div>\
-                        <div class="form-group">\
-                            <label class="col-md-3 control-label">可见 </label>\
-                            <div class="col-md-9" style="padding-top:8px;">\
-                                <label><input name="yes" type="radio"  />是</label>\
-                                <label><input name="yes" type="radio" />否</label>\
-                            </div>\
-                        </div>\
-                    <form >';
-
-            layer.open({
-                title:false,
-                type: 0,
-                //skin: 'layui-layer-rim', //加上边框
-                area: ['400px', '300px'], //宽高
-                content: html4,
-                yes: function(){
-
-                    $.ajax({
-                        url: "/api/dataType/insertDataType",
-                        type: "post",
-                        success: function (data) {
-                            window.location.reload();//刷新
-                        },
-                        error:function(){
-                            layer.msg(data.msg?data.msg:'操作失败!', {icon: 5});
-                        }
-                    })
-                }
-            });
-        }
-    })
-});
-*/
 
 
 
