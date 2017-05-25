@@ -210,7 +210,7 @@ $(document).ready(function(){
                         $(".filename").val(data.fileUrl);
                         $file.attr("data-src",data.fileUrl);
                         $file.attr("data-size", data.dataSize);
-                        // Dropify.setPreview(true,data.fileUrl);
+                        Dropify.setPreview(true,data.fileUrl);
                     }
                 }
             });
