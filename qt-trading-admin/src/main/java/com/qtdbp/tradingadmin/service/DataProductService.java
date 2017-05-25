@@ -70,7 +70,7 @@ public class DataProductService {
                 Integer id = productMapper.insertProductAttrRelation(model);
                 if (!(id > 0)) throw new GlobalException("插入关联表数据失败");
             }
-            Map<String, String> itemMap = productModel.getItemMap();
+            Map<String, String> itemMap = productModel.getSubFiles();
             if (itemMap != null && itemMap.size() > 0) {
                 for (String key : itemMap.keySet()) {
                     DataItemModel itemModel = new DataItemModel();

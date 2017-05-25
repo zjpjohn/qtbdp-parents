@@ -102,7 +102,7 @@ public class DataFileUploadApi {
 
         Map<String, String> subFiles = poiParserService.getFiles() ;
         map.put("subFiles", subFiles) ;
-        map.put("fileSize", fileSize);
+        map.put("dataSize", fileSize);
         poiParserService.setFiles(null); ;
 
         return map;

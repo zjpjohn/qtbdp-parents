@@ -1,6 +1,7 @@
 $(document).ready(function(){
     //表单元素
-    var id = Common.QueryString().id,//修改时ID
+    var subFlie,
+        id = Common.QueryString().id,//修改时ID
         $form = $('#form_sample'),//form表单
         $attr = $('#attr>div'),//二级菜单下的属性
         $waresN = $('#waresName'),//产品名称
@@ -44,9 +45,15 @@ $(document).ready(function(){
                 layer.msg("文件上传失败",{icon:5});
             },
             success: function (ret) {
-               if (ret.success == true){
-                   $file.attr("data-src", ret.file);
-               }
+                if (ret.success == true){
+                    $file.attr("data-src", ret.file);
+                    $file.attr("data-size", ret.dataSize);
+                    if(ret.subFiles){
+                        subFlie = ret.subFiles
+                    }
+                }else {
+                    subFlie = {}
+                }
             }
         });
     });
@@ -170,8 +177,7 @@ $(document).ready(function(){
                         var data = ret.pageInfo,
                             type = data.dataTypeModel,
                             optionA = $classA.children(),
-                            optionB = $classB.children(),
-                            imgHtml = "<img src='"+ data.pic + "'>";
+                            optionB = $classB.children();
 
                         Common.optionSelect({
                             ele:$classA,
@@ -203,8 +209,8 @@ $(document).ready(function(){
                         $describe.html(data.introduce);
                         $(".filename").val(data.fileUrl);
                         $file.attr("data-src",data.fileUrl);
-                        $('.dropify-render').append(imgHtml);
-
+                        $file.attr("data-size", data.dataSize);
+                        Dropify.setPreview(true,data.fileUrl);
                     }
                 }
             });
@@ -217,10 +223,13 @@ $(document).ready(function(){
 
 
 
-
+    //
     // $form.submit(function() {
+    //
     //     //获取表单信息
     //     var ajaxType,
+    //         mes = '',
+    //         errorMes = '',
     //         attrRelationModels = [],
     //         dataTypeProps = "",
     //         wares = $waresN.val(),
@@ -248,20 +257,34 @@ $(document).ready(function(){
     //         sourceCName = $('#source input:radio:checked ').data("name"),
     //
     //         file = $file.data("src"),
+    //         fileSize = $file.data("size"),
     //         img = $('.dropify-render>img').attr("src"),
     //         data = {
     //             designation:wares,
     //             introduce:describe,
     //             pic:img,
     //             fileUrl:file,
+    //             fileSize:fileSize,
+    //             subFiles:subFlie,
     //             dataType:classB
     //         };
+    //     if(id == undefined || id == null || id == ""){
+    //         ajaxType = "post";
+    //         mes = '添加数据产品成功';
+    //         errorMes = "添加数据包产品失败";
+    //
+    //     }else {
+    //         ajaxType = "put";
+    //         data.id = id;
+    //         mes = '修改数据包产品成功';
+    //         errorMes = "修改数据包产品失败";
+    //     }
+    //
     //
     //     if(charge != 1){
     //         data.price = $whole.val();
     //         data.itemPrice = $child.val();
     //     }
-    //
     //
     //
     //
@@ -311,20 +334,13 @@ $(document).ready(function(){
     //
     //
     //
-    //     if(id == undefined || id == null || id == ""){
-    //         ajaxType = "post";
-    //     }else {
-    //         ajaxType = "put";
-    //     }
-    //
-    //
     //     var options = {
     //         error:function () {
-    //             layer.msg("添加数据包产品失败",{icon:5});
+    //             layer.msg(errorMes,{icon:5});
     //         },
     //         success: function(result) {
     //             if (result.success == true ) {
-    //                 layer.msg('添加数据产品成功', {
+    //                 layer.msg(mes, {
     //                     icon: 1,
     //                     time: 3000 //3秒关闭（如果不配置，默认是3秒）
     //                 }, function(){
@@ -353,13 +369,15 @@ $(document).ready(function(){
 
 
 
-    //表单提交
+    // 表单提交
     $form.on('submit',function (e) {
         e.preventDefault(); //组织默认提交表单
 
 
        //获取表单信息
         var ajaxType,
+            mes = '',
+            errorMes = '',
             attrRelationModels = [],
             dataTypeProps = "",
             wares = $waresN.val(),
@@ -387,19 +405,27 @@ $(document).ready(function(){
             sourceCName = $('#source input:radio:checked ').data("name"),
 
             file = $file.data("src"),
+            fileSize = $file.data("size"),
             img = $('.dropify-render>img').attr("src"),
             data = {
                 designation:wares,
                 introduce:describe,
                 pic:img,
                 fileUrl:file,
+                dataSize:fileSize,
+                subFiles:subFlie,
                 dataType:classB
             };
         if(id == undefined || id == null || id == ""){
             ajaxType = "post";
+            mes = '添加数据产品成功';
+            errorMes = "添加数据包产品失败";
+
         }else {
             ajaxType = "put";
             data.id = id;
+            mes = '修改数据包产品成功';
+            errorMes = "修改数据包产品失败";
         }
 
 
@@ -407,7 +433,6 @@ $(document).ready(function(){
             data.price = $whole.val();
             data.itemPrice = $child.val();
         }
-
 
 
 
@@ -464,11 +489,11 @@ $(document).ready(function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             error: function () {
-                layer.msg("添加数据包产品失败",{icon:5});
+                layer.msg(errorMes,{icon:5});
             },
             success: function(result) {
                 if (result.success == true ) {
-                    layer.msg('添加数据产品成功', {
+                    layer.msg(mes, {
                         icon: 1,
                         time: 3000 //3秒关闭（如果不配置，默认是3秒）
                     }, function(){
