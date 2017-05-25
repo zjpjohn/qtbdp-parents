@@ -254,7 +254,7 @@ var Common = {
                                 for(var j = 0;j < ele.find("input").length;j++){
                                     if($(ele.find("input")[j]).val() == v.valId){
                                         $(ele.find("input")[j]).attr("checked",'checked');
-                                        if(v.attrId == 1 && v.valId == 2){
+                                        if(v.attrId == 4 && v.valId == 101){
                                             priceName.css("display","block");
                                             PWhole.val(price);
                                             PChild.val(itemPrice);
