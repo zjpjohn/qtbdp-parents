@@ -75,8 +75,6 @@ public class DataProductApi {
                 }
             }
             productModel.setDataTypes(dataTypes);
-        }else {
-            productModel.setDataTypes(productModel.getDataType()+"");
         }
 
         // 设置默认每页显示记录数
@@ -146,6 +144,8 @@ public class DataProductApi {
      * @return
      */
     private List getAllDataTypeIds(Integer dataType) {
+
+        if (dataType == 0 || dataType == null) return null;
 
         List<Integer> dataTypeIdsList = new ArrayList<>();
 

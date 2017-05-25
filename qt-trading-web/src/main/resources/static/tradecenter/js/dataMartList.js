@@ -16,11 +16,18 @@ $(".data_sort>li>a").mouseenter(function(){
                 },
                 success:function(obj){
                     var data=obj.pageInfo.list;
-                    var str="";
-                    for(var i=0;i<data.length;i++){
-                        str+='<a href="/datamart/'+$(me).attr("data-id")+'/'+data[i].id+'">'+data[i].name+'</a>'
+                    console.log(data);
+                    console.log(data=="");
+                    if(data==""){
+                        $(me).next().hide();
+                    }else{
+                        var str="";
+                        for(var i=0;i<data.length;i++){
+                            str+='<a href="/datamart/'+$(me).attr("data-id")+'/'+data[i].id+'">'+data[i].name+'</a>'
+                        }
+                        $(me).next().html(str);
                     }
-                    $(me).next().html(str);
+
                 },
                 error:function(){
                     layer.msg("获取二级列表失败",{icon:5});

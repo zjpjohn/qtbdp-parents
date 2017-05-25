@@ -5,6 +5,7 @@ import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductAttrRelationModel;
 import com.qtdbp.trading.model.DataProductModel;
+import com.qtdbp.tradingadmin.mapper.DataItemMapper;
 import com.qtdbp.tradingadmin.mapper.DataProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class DataProductService {
 
     @Autowired
     private DataProductMapper productMapper ;
+
+    @Autowired
+    private DataItemMapper itemMapper;
 
     /**
      * 分页获取数据包产品
@@ -64,11 +68,13 @@ public class DataProductService {
         Integer count = productMapper.insertProduct(productModel) ;
         if (count != null && count > 0) {
             List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
-            for (DataProductAttrRelationModel model : list) {
-                model.setProductId(productModel.getId());
-                model.setTypeId(productModel.getDataType());
-                Integer id = productMapper.insertProductAttrRelation(model);
-                if (!(id > 0)) throw new GlobalException("插入关联表数据失败");
+            if (list != null && list.size() > 0) {
+                for (DataProductAttrRelationModel model : list) {
+                    model.setProductId(productModel.getId());
+                    model.setTypeId(productModel.getDataType());
+                    Integer id = productMapper.insertProductAttrRelation(model);
+                    if (!(id > 0)) throw new GlobalException("插入关联表数据失败");
+                }
             }
             Map<String, String> itemMap = productModel.getSubFiles();
             if (itemMap != null && itemMap.size() > 0) {
@@ -79,7 +85,7 @@ public class DataProductService {
                     itemModel.setPrice(productModel.getItemPrice());
                     itemModel.setItemName(key);
                     itemModel.setFileUrl(itemMap.get(key));
-                    int id = productMapper.insertItem(itemModel);
+                    int id = itemMapper.insertItem(itemModel);
                     if (!(id > 0)) throw new GlobalException("插入数据条目失败");
                 }
             }
@@ -109,7 +115,7 @@ public class DataProductService {
     }
 
     /**
-     * 更新数据包产品信息
+     * 更新数据包产品信息、数据条目信息、数据属性信息
      * @param productModel
      * @return
      * @throws GlobalException
@@ -118,6 +124,45 @@ public class DataProductService {
         Integer count = 0;
         if (productModel.getId() != null && productModel.getId() != 0) {
             count = productMapper.updateProduct(productModel);
+            if (count > 0) {
+                List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
+                if (list != null && list.size() > 0) {
+                    //删除数据包属性关联表数据
+                    Integer delCount = productMapper.deleteAttrByProductId(productModel.getId());
+                    if (delCount > 0) {
+                        //重新插入数据
+                        for (DataProductAttrRelationModel model : list) {
+                            model.setProductId(productModel.getId());
+                            model.setTypeId(productModel.getDataType());
+                            Integer id = productMapper.insertProductAttrRelation(model);
+                            if (!(id > 0)) throw new GlobalException("插入关联表数据失败");
+                        }
+                    } else {
+                        throw new GlobalException("删除数据包属性关联表数据失败");
+                    }
+                }
+                Map<String, String> itemMap = productModel.getSubFiles();
+                //当数据包产品修改时，数据条目文件也要进行修改
+                if (itemMap != null && itemMap.size() > 0) {
+                    //删除数据条目文件
+                    Integer delCount = itemMapper.deleteByProductId(productModel.getId());
+                    //重新插入修改后的数据文件
+                    if (delCount > 0) {
+                        for (String key : itemMap.keySet()) {
+                            DataItemModel itemModel = new DataItemModel();
+                            itemModel.setProductId(productModel.getId());
+                            itemModel.setIsUsed(1);
+                            itemModel.setPrice(productModel.getItemPrice());
+                            itemModel.setItemName(key);
+                            itemModel.setFileUrl(itemMap.get(key));
+                            int id = itemMapper.insertItem(itemModel);
+                            if (!(id > 0)) throw new GlobalException("插入数据条目失败");
+                        }
+                    }else {
+                        throw new GlobalException("删除数据条目失败");
+                    }
+                }
+            }
         } else {
             throw new GlobalException("产品ID为空，请重新操作");
         }

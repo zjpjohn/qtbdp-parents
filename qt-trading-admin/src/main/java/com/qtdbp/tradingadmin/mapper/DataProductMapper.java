@@ -74,9 +74,9 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
     Integer insertProductAttrRelation(DataProductAttrRelationModel dataProductAttrRelationModel);
 
     /**
-     * 插入数据条目
-     * @param itemModel
+     * 根据productId删除数据包属性关联表数据
+     * @param productId
      * @return
      */
-    Integer insertItem(DataItemModel itemModel);
+    Integer deleteAttrByProductId(Integer productId);
 }
