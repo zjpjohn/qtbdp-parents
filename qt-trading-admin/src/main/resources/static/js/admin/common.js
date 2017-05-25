@@ -290,7 +290,7 @@ var Common = {
                 aa = dataArr[i].split(":");
                 jsonData[aa[0]] = aa[1];
             }
-            return jsonData.产品类型;
+            return jsonData.产品类型?jsonData.产品类型:"该类型已不存在";
         }else{
             return "该类型已不存在";
         }
