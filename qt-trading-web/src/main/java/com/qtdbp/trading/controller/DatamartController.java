@@ -110,6 +110,10 @@ public class DatamartController extends BaseController {
         List<DataTypeAttrModel> attrModels = dataTypeMapper.findAttrAllByTypeId(resultProduct.getDataType()) ;
 
         ModelAndView result = new ModelAndView(PAGE_DATAMART_DETAIL);
+
+        // 假的购买数和下载数
+        resultProduct.setBuyCount(resultProduct.getBuyCount()+CommonUtil.randomNum(productId));
+        resultProduct.setDownloadCount(resultProduct.getDownloadCount()+CommonUtil.randomNum(productId));
         result.addObject("prod", resultProduct) ;
 
         /*
