@@ -32,4 +32,18 @@ public class CommonUtil {
         }
         return ip;
     }
+
+    /**
+     * 生成10~100之间的随机数
+     * @return
+     */
+    public static int randomNum(long seed) {
+
+        int max=100;
+        int min=10;
+        java.util.Random r=new java.util.Random(seed);
+
+        return r.nextInt(max)%(max-min+1) + min ;
+    }
+
 }

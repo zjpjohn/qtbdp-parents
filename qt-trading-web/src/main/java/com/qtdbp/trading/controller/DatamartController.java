@@ -12,6 +12,7 @@ import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
 import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.trading.utils.CommonUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * 数据交易平台-数据商城
@@ -103,6 +105,8 @@ public class DatamartController extends BaseController {
         List<DataTypeAttrModel> attrModels = dataTypeMapper.findAttrAllByTypeId(resultProduct.getDataType()) ;
 
         ModelAndView result = new ModelAndView(PAGE_DATAMART_DETAIL);
+        // 假的下载量，暂时
+        resultProduct.setBuyCount(CommonUtil.randomNum(productId)+resultProduct.getBuyCount());
         result.addObject("prod", resultProduct) ;
 
         /*
