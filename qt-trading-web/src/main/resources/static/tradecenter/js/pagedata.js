@@ -275,7 +275,8 @@ var pageData = {
     },
     //数据内 p 标签截取
     _replacestr: function (str2,i) {
-        str2=str2.replace("<p>","").replace("</p>","");
+        var reg=/<[^>]*>/g;
+        str2=str2.replace(reg,"");
         if(str2.length>i){
             str2=str2.substring(0,i)+"...";
         }
@@ -413,11 +414,8 @@ var pageData = {
             for(var i=0;i<dataArr.length;i++){
                 var aa = new Array();
                 aa = dataArr[i].split(":");
-                jsonData[aa[0]] = aa[1];
+                returnData.push(aa[1]);
             }
-            returnData.push(jsonData.数据格式);
-            returnData.push(jsonData.数据来源);
-            returnData.push(jsonData.数据大小);
             return returnData.join(",");
         }else{
             return "";

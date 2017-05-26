@@ -159,7 +159,8 @@
             i.item_name,
             i.view_count,
             i.download_count,
-            i.editor_time
+            i.editor_time,
+            i.price
         FROM
             data_item AS i
         WHERE
@@ -177,6 +178,7 @@
         <result column="view_count" property="viewCount" />
         <result column="download_count" property="downloadCount" />
         <result column="editor_time" property="editorTime" />
+        <result column="price" property="price" />
     </resultMap>
 
     <select id="findItemById" resultMap="ItemResultMap" >
@@ -186,7 +188,8 @@
             i.item_name,
             i.view_count,
             i.download_count,
-            i.editor_time
+            i.editor_time,
+            i.price
         FROM
             data_item AS i
         WHERE
