@@ -88,7 +88,7 @@ public class FdfsFileService {
         try {
             fileEntity = downloadFilePublic(filePath, fileName);
             //更新产品下载次数
-            productModel = null;
+            productModel = new DataProductModel();
             productModel.setId(productId);
             productModel.setDownloadCount(1);
             int i = productMapper.updateProduct(productModel);
