@@ -3,6 +3,7 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
@@ -37,7 +38,7 @@ public class DataProductApi {
     private DataProductService productService ;
 
     @Autowired
-    private FdfsFileService uploadService ;
+    private DataProductMapper productMapper;
 
     @Autowired
     private DataTypeMapper dataTypeMapper;
@@ -157,5 +158,25 @@ public class DataProductApi {
             if(idsList != null && idsList.size() != 0) dataTypeIdsList.addAll(idsList);
         }
         return dataTypeIdsList;
+    }
+
+    @ApiOperation("更新数据包产品下载次数接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "产品ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "/updateDownloadCount", method = RequestMethod.GET)
+    public ModelMap updateProduct(DataProductModel productModel) throws GlobalException {
+        if (productModel.getId() == null || productModel.getId() == 0) throw new GlobalException("产品ID为空");
+        ModelMap map = new ModelMap();
+
+        productModel.setDownloadCount(1);
+
+        try {
+            int i = productMapper.updateProduct(productModel);
+            map.put("success",i>0?true:false );
+        } catch (Exception e) {
+            throw new GlobalException("更新数据包下载次数失败");
+        }
+        return map;
     }
 }
