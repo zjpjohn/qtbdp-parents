@@ -160,23 +160,5 @@ public class DataProductApi {
         return dataTypeIdsList;
     }
 
-    @ApiOperation("更新数据包产品下载次数接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "产品ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @RequestMapping(value = "/updateDownloadCount", method = RequestMethod.GET)
-    public ModelMap updateProduct(DataProductModel productModel) throws GlobalException {
-        if (productModel.getId() == null || productModel.getId() == 0) throw new GlobalException("产品ID为空");
-        ModelMap map = new ModelMap();
 
-        productModel.setDownloadCount(1);
-
-        try {
-            int i = productMapper.updateProduct(productModel);
-            map.put("success",i>0?true:false );
-        } catch (Exception e) {
-            throw new GlobalException("更新数据包下载次数失败");
-        }
-        return map;
-    }
 }

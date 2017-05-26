@@ -53,15 +53,8 @@ public class FdfsFileService {
         try {
             // 下载文档
             String filePath = order.getDownloadUrl() ;
-            if(filePath == null) throw new GlobalException("文件不存在") ;
             String fileName = order.getOrderSubject() ;
-
-            String substr = filePath.substring(filePath.indexOf("group"));
-            String group = substr.split("/")[0];
-            String remoteFileName = substr.substring(substr.indexOf("/")+1);
-            String specFileName = fileName + substr.substring(substr.indexOf("."));
-            fileEntity = FileManager.download(group, remoteFileName,specFileName);
-
+            fileEntity = downloadFilePublic(filePath,fileName);
             // 更新产品下载次数
             if(order.getProductId() != null && !check){
                 DataProductModel productModel = new DataProductModel() ;
@@ -76,6 +69,38 @@ public class FdfsFileService {
         }
         return fileEntity ;
     }
+
+    /**
+     * 下载免费数据包文件
+     * @param productId
+     * @return
+     * @throws GlobalException
+     */
+    public ResponseEntity<byte[]> downloadFreeFile(Integer productId) throws GlobalException {
+
+        if (productId == null) throw new GlobalException("获取订单的ID为空");
+        DataProductModel productModel = productMapper.findProductsById(productId);
+        if (productModel == null) throw new GlobalException("该数据包已不存在");
+        String filePath = productModel.getFileUrl();
+        String fileName = productModel.getDesignation();
+        ResponseEntity<byte[]> fileEntity = null ;
+
+        try {
+            fileEntity = downloadFilePublic(filePath, fileName);
+            //更新产品下载次数
+            productModel = null;
+            productModel.setId(productId);
+            productModel.setDownloadCount(1);
+            int i = productMapper.updateProduct(productModel);
+            if (!(i > 0)) throw new GlobalException("更新下载次数失败");
+        } catch (GlobalException e) {
+            e.printStackTrace();
+            throw new GlobalException(e.getMessage());
+        }
+
+        return fileEntity;
+    }
+
 
     /**
      * 文件上传
@@ -102,6 +127,34 @@ public class FdfsFileService {
         }
 
         return filePath ;
+    }
+
+    /**
+     * 文件下载公共方法
+     * @param filePath
+     * @param fileName
+     * @return
+     * @throws GlobalException
+     */
+    public ResponseEntity<byte[]> downloadFilePublic(String filePath, String fileName) throws GlobalException {
+
+        ResponseEntity<byte[]> fileEntity = null ;
+            // 下载文档
+        if(filePath == null) throw new GlobalException("文件不存在") ;
+
+        try {
+            String substr = filePath.substring(filePath.indexOf("group"));
+            String group = substr.split("/")[0];
+            String remoteFileName = substr.substring(substr.indexOf("/")+1);
+            String specFileName = fileName + substr.substring(substr.indexOf("."));
+            fileEntity = FileManager.download(group, remoteFileName,specFileName);
+
+        } catch (GlobalException e) {
+            e.printStackTrace();
+            throw new GlobalException(e.getMessage()) ;
+        }
+
+        return fileEntity;
     }
 
 }
