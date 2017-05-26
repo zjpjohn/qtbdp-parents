@@ -41,16 +41,18 @@
     <!-- 单表查询产品 -->
     <select id="findProductsById" resultMap="ProductDetailResultMap">
         SELECT
-        p.id,
-        p.designation,
-        p.pic,
-        p.introduce,
-        p.addtime,
-        p.editor_time,
-        p.price,
-        p.data_type_props,
-        p.item_price,
-        p.file_url
+            p.id,
+            p.designation,
+            p.pic,
+            p.introduce,
+            p.addtime,
+            p.editor_time,
+            p.price,
+            p.data_type_props,
+            p.item_price,
+            p.file_url,
+            p.buy_count,
+            p.download_count
         FROM
         data_product as p
         WHERE
@@ -71,6 +73,9 @@
         <result column="data_type_props" property="dataTypeProps" />
         <result column="item_price" property="itemPrice" />
         <result column="file_url" property="fileUrl"/>
+        <result column="buy_count" property="buyCount"/>
+        <result column="download_count" property="downloadCount"/>
+
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
