@@ -40,11 +40,15 @@ $(document).ready(function(){
             contentType: false,
             processData: false,
             data:formData,
+            beforeSend: function(){
+                layer.msg("文件正在上传",{icon:5});
+            },
             error:function () {
                 layer.msg("文件上传失败",{icon:5});
             },
             success: function (ret) {
                 if (ret.success == true){
+                    layer.msg("文件上传成功",{icon:1});
                     $file.attr("data-src", ret.file);
                     $file.attr("data-size", ret.dataSize);
                     if(ret.subFiles){
@@ -112,6 +116,12 @@ $(document).ready(function(){
         }
     });
 
+
+
+
+
+
+
     //展示一级
     Common.typeList({
         ele:$classA,
@@ -119,25 +129,44 @@ $(document).ready(function(){
         tmpl:$typeTmpl
     });
 
+
     //通过一级展示二级
     $classA.on('change',function () {
-        var id = $(this).val();
-        if(id == ""){
+        var id = $(this).val(),
+            isParent = $(this).find("option:selected").attr("data-isParent");
+        $attr.css("display","none");
+        if(id == "" || id == undefined || id == null){
+            $classB.empty();
             return;
         }else {
-            Common.typeList({
-                ele:$classB,
-                id:id,
-                url:"/api/dataType/findSecondNode",
-                tmpl:$typeTmpl
-            });
+            if(isParent == 0){
+                $attr.css("display","block");
+                $attr.children().css("display","block");
+                Common.attrList({
+                    id:id,
+                    attrId:$attr,
+                    attrContent:[
+                        {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
+                        {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
+                        {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                    ]
+                });
+            }else {
+                Common.typeList({
+                    ele:$classB,
+                    id:id,
+                    url:"/api/dataType/findSecondNode",
+                    tmpl:$typeTmpl
+                });
+            }
         }
     });
+
 
     //展示数据来源，收费方式，数据类型
     $classB.on('change',function () {
         var id = $(this).val();
-        if(id == ""){
+        if(id == ""|| id == undefined || id == null){
             $attr.css("display","none");
             return;
         }else {
@@ -152,6 +181,9 @@ $(document).ready(function(){
             });
         }
     });
+
+
+
 
     //修改时获取元素
     var reviseWares = function () {
@@ -214,155 +246,10 @@ $(document).ready(function(){
                 }
             });
         }
-
     };
 
 
     reviseWares();
-
-
-
-    //
-    // $form.submit(function() {
-    //
-    //     //获取表单信息
-    //     var ajaxType,
-    //         mes = '',
-    //         errorMes = '',
-    //         attrRelationModels = [],
-    //         dataTypeProps = "",
-    //         wares = $waresN.val(),
-    //         describe = $describe.html(),
-    //         classB = $classB.val(),
-    //         //文件类型信息
-    //         type = $('#waresType input:radio:checked ').val(),
-    //         typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
-    //         typeName = $('#waresTypeName').text(),
-    //         typeCName = $('#waresType input:radio:checked ').data("name"),
-    //         //文件大小信息
-    //         size = $('#fileSize input:radio:checked').val(),
-    //         sizeAttrId = $('#fileSize input:radio:checked').data("attrid"),
-    //         sizeName = $('#fileSizeName').text(),
-    //         sizeCName = $('#fileSize input:radio:checked').data("name"),
-    //         // 收费方式信息
-    //         charge = $('#charge input:radio:checked ').val(),
-    //         chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
-    //         chargeName = $('#chargeName').text(),
-    //         chargeCName = $('#charge input:radio:checked ').data("name"),
-    //         //数据来源信息
-    //         source = $('#source input:radio:checked ').val(),
-    //         sourceAttrId = $('#source input:radio:checked ').data("attrid"),
-    //         sourceName = $('#sourceName').text(),
-    //         sourceCName = $('#source input:radio:checked ').data("name"),
-    //
-    //         file = $file.data("src"),
-    //         fileSize = $file.data("size"),
-    //         img = $('.dropify-render>img').attr("src"),
-    //         data = {
-    //             designation:wares,
-    //             introduce:describe,
-    //             pic:img,
-    //             fileUrl:file,
-    //             fileSize:fileSize,
-    //             subFiles:subFlie,
-    //             dataType:classB
-    //         };
-    //     if(id == undefined || id == null || id == ""){
-    //         ajaxType = "post";
-    //         mes = '添加数据产品成功';
-    //         errorMes = "添加数据包产品失败";
-    //
-    //     }else {
-    //         ajaxType = "put";
-    //         data.id = id;
-    //         mes = '修改数据包产品成功';
-    //         errorMes = "修改数据包产品失败";
-    //     }
-    //
-    //
-    //     if(charge != 1){
-    //         data.price = $whole.val();
-    //         data.itemPrice = $child.val();
-    //     }
-    //
-    //
-    //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:typeName,
-    //         valName:typeCName,
-    //         attrId:typeAttrId,
-    //         valId:type
-    //     }));
-    //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:chargeName,
-    //         valName:chargeCName,
-    //         attrId:chargeAttrId,
-    //         valId:charge
-    //     }));
-    //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:sourceName,
-    //         valName:sourceCName,
-    //         attrId:sourceAttrId,
-    //         valId:source
-    //
-    //     }));
-    //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:sizeName,
-    //         valName:sizeCName,
-    //         attrId:sizeAttrId,
-    //         valId:size
-    //     }));
-    //
-    //
-    //     $.each(attrRelationModels,function (i,v) {
-    //         for(var k in v){
-    //             dataTypeProps += v[k] + ":";
-    //         }
-    //         dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
-    //         dataTypeProps += ";";
-    //     });
-    //
-    //
-    //     data.attrRelationModels = attrRelationModels;
-    //     data.dataTypeProps = dataTypeProps;
-    //
-    //
-    //
-    //
-    //
-    //     var options = {
-    //         error:function () {
-    //             layer.msg(errorMes,{icon:5});
-    //         },
-    //         success: function(result) {
-    //             if (result.success == true ) {
-    //                 layer.msg(mes, {
-    //                     icon: 1,
-    //                     time: 3000 //3秒关闭（如果不配置，默认是3秒）
-    //                 }, function(){
-    //                     //do something
-    //                     window.location.href = '/wares';
-    //                 });
-    //             }
-    //         },
-    //         url:"/api/product",
-    //         type:ajaxType,
-    //         dataType: "json",
-    //         data: JSON.stringify(data)
-    //     };
-    //
-    //     FormValidationMd.init(options);
-    //     return false;
-    // });
-
-
-
-
-
-
 
 
 
@@ -372,6 +259,10 @@ $(document).ready(function(){
     $form.on('submit',function (e) {
         e.preventDefault(); //组织默认提交表单
 
+        FormValidationMd.init({
+            isParent:$classA.find("option:selected").attr("data-isParent"),
+            v:$classB.val()
+        });
 
        //获取表单信息
         var ajaxType,
@@ -426,6 +317,9 @@ $(document).ready(function(){
         if(charge != 1){
             data.price = $whole.val();
             data.itemPrice = $child.val();
+        }else {
+            data.price = "0";
+            data.itemPrice = "0";
         }
 
 
