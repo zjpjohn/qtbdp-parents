@@ -114,7 +114,7 @@ public class DataFileUploadApi extends BaseController {
     }
 
     @ApiOperation(value = "免费数据包文件是否有效")
-    @RequestMapping(value = "/file/exist", method = RequestMethod.GET)
+    @RequestMapping(value = "/file/exist/free", method = RequestMethod.GET)
     public ModelMap fileExistFree(Integer productId) throws GlobalException {
 
         ModelMap map = new ModelMap();
