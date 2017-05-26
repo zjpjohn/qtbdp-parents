@@ -114,14 +114,14 @@ public class DataTransactionOrderService {
                 if(product == null) throw new GlobalException("此产品不存在，请选择其他产品购买") ;
 
                 orderModel.setOrderSubject(product.getDesignation());
-                amount = new BigDecimal(product.getpScore()) ;
+                amount = new BigDecimal(product.getPrice()) ;
                 orderModel.setDownloadUrl(product.getFileUrl());
             } else {
 
                 DataItemModel itemModel = productMapper.findItemById(orderModel.getProductId());
                 if(itemModel == null) throw new GlobalException("此产品不存在，请选择其他产品购买") ;
-                //数据条目，默认数据条目1.00
-                amount = new BigDecimal(1) ;
+                //数据条目
+                amount = new BigDecimal(product.getItemPrice()) ;
                 orderModel.setOrderSubject(itemModel.getItemName());
             }
             orderModel.setOrderState((byte)AppConstants.ORDER_STATE_PAYING);
@@ -139,7 +139,13 @@ public class DataTransactionOrderService {
         return orderModel ;
     }
 
-    public Integer updateOrder(String orderNo, String tradeNo){
+    /**
+     * 修改订单的支付状态
+     * @param orderNo
+     * @param tradeNo
+     * @return
+     */
+    public Integer updateOrder(String orderNo, String tradeNo) throws GlobalException {
         DataTransactionOrderModel orderModel = new DataTransactionOrderModel();
         orderModel.setOrderState((byte)3);//改变支付状态
         orderModel.setTradeNo(tradeNo);//加入交易流水号
@@ -147,6 +153,7 @@ public class DataTransactionOrderService {
         orderModel.setPayTime(new Date());
         orderModel.setFinishTime(new Date());
         Integer i = orderMapper.updateOrder(orderModel);
+        if (!(i > 0)) throw new GlobalException("修改订单状态失败");
         return i;
     }
 
