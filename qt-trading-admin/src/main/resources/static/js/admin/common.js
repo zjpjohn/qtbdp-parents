@@ -163,6 +163,7 @@ var Common = {
             dataType: "json",
             type:"get",
             data:{
+                isUsed:1,
                 id:id
             },
             error:function () {

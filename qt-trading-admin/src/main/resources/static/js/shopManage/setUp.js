@@ -40,11 +40,15 @@ $(document).ready(function(){
             contentType: false,
             processData: false,
             data:formData,
+            beforeSend: function(){
+                layer.msg("文件正在上传",{icon:5});
+            },
             error:function () {
                 layer.msg("文件上传失败",{icon:5});
             },
             success: function (ret) {
                 if (ret.success == true){
+                    layer.msg("文件上传成功",{icon:1});
                     $file.attr("data-src", ret.file);
                     $file.attr("data-size", ret.dataSize);
                     if(ret.subFiles){
@@ -95,7 +99,9 @@ $(document).ready(function(){
             if($(this).val() === "101"){
                 $price.css('display','block');
             }else {
+                $price.find("input").val("0");
                 $price.css('display','none');
+                console.log($price.find("input").val())
             }
         }
     });
@@ -112,6 +118,12 @@ $(document).ready(function(){
         }
     });
 
+
+
+
+
+
+
     //展示一级
     Common.typeList({
         ele:$classA,
@@ -119,25 +131,44 @@ $(document).ready(function(){
         tmpl:$typeTmpl
     });
 
+
     //通过一级展示二级
     $classA.on('change',function () {
-        var id = $(this).val();
-        if(id == ""){
+        var id = $(this).val(),
+            isParent = $(this).find("option:selected").attr("data-isParent");
+        $attr.css("display","none");
+        if(id == "" || id == undefined || id == null){
+            $classB.empty();
             return;
         }else {
-            Common.typeList({
-                ele:$classB,
-                id:id,
-                url:"/api/dataType/findSecondNode",
-                tmpl:$typeTmpl
-            });
+            if(isParent == 0){
+                $attr.css("display","block");
+                $attr.children().css("display","block");
+                Common.attrList({
+                    id:id,
+                    attrId:$attr,
+                    attrContent:[
+                        {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
+                        {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
+                        {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                    ]
+                });
+            }else {
+                Common.typeList({
+                    ele:$classB,
+                    id:id,
+                    url:"/api/dataType/findSecondNode",
+                    tmpl:$typeTmpl
+                });
+            }
         }
     });
+
 
     //展示数据来源，收费方式，数据类型
     $classB.on('change',function () {
         var id = $(this).val();
-        if(id == ""){
+        if(id == ""|| id == undefined || id == null){
             $attr.css("display","none");
             return;
         }else {
@@ -152,6 +183,9 @@ $(document).ready(function(){
             });
         }
     });
+
+
+
 
     //修改时获取元素
     var reviseWares = function () {
@@ -214,7 +248,6 @@ $(document).ready(function(){
                 }
             });
         }
-
     };
 
 
@@ -222,10 +255,18 @@ $(document).ready(function(){
 
 
 
+
+
+    // // 表单提交
+    // $form.on('submit',function (e) {
+    //     e.preventDefault(); //组织默认提交表单
     //
-    // $form.submit(function() {
+    //     FormValidationMd.init({
+    //         isParent:$classA.find("option:selected").attr("data-isParent"),
+    //         v:$classB.val()
+    //     });
     //
-    //     //获取表单信息
+    //    //获取表单信息
     //     var ajaxType,
     //         mes = '',
     //         errorMes = '',
@@ -239,11 +280,6 @@ $(document).ready(function(){
     //         typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
     //         typeName = $('#waresTypeName').text(),
     //         typeCName = $('#waresType input:radio:checked ').data("name"),
-    //         //文件大小信息
-    //         size = $('#fileSize input:radio:checked').val(),
-    //         sizeAttrId = $('#fileSize input:radio:checked').data("attrid"),
-    //         sizeName = $('#fileSizeName').text(),
-    //         sizeCName = $('#fileSize input:radio:checked').data("name"),
     //         // 收费方式信息
     //         charge = $('#charge input:radio:checked ').val(),
     //         chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
@@ -263,7 +299,7 @@ $(document).ready(function(){
     //             introduce:describe,
     //             pic:img,
     //             fileUrl:file,
-    //             fileSize:fileSize,
+    //             dataSize:fileSize,
     //             subFiles:subFlie,
     //             dataType:classB
     //         };
@@ -283,6 +319,9 @@ $(document).ready(function(){
     //     if(charge != 1){
     //         data.price = $whole.val();
     //         data.itemPrice = $child.val();
+    //     }else {
+    //         data.price = "0";
+    //         data.itemPrice = "0";
     //     }
     //
     //
@@ -309,12 +348,6 @@ $(document).ready(function(){
     //
     //     }));
     //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:sizeName,
-    //         valName:sizeCName,
-    //         attrId:sizeAttrId,
-    //         valId:size
-    //     }));
     //
     //
     //     $.each(attrRelationModels,function (i,v) {
@@ -333,29 +366,27 @@ $(document).ready(function(){
     //
     //
     //
-    //     var options = {
-    //         error:function () {
-    //             layer.msg(errorMes,{icon:5});
-    //         },
-    //         success: function(result) {
-    //             if (result.success == true ) {
-    //                 layer.msg(mes, {
-    //                     icon: 1,
-    //                     time: 3000 //3秒关闭（如果不配置，默认是3秒）
-    //                 }, function(){
-    //                     //do something
-    //                     window.location.href = '/wares';
-    //                 });
-    //             }
-    //         },
-    //         url:"/api/product",
-    //         type:ajaxType,
-    //         dataType: "json",
-    //         data: JSON.stringify(data)
-    //     };
-    //
-    //     FormValidationMd.init(options);
-    //     return false;
+    //     // $.ajax({
+    //     //     url:"/api/product",
+    //     //     type: ajaxType,
+    //     //     data: JSON.stringify(data),
+    //     //     contentType: "application/json; charset=utf-8",
+    //     //     dataType: "json",
+    //     //     error: function () {
+    //     //         layer.msg(errorMes,{icon:5});
+    //     //     },
+    //     //     success: function(result) {
+    //     //         if (result.success == true ) {
+    //     //             layer.msg(mes, {
+    //     //                 icon: 1,
+    //     //                 time: 3000 //3秒关闭（如果不配置，默认是3秒）
+    //     //             }, function(){
+    //     //                 //do something
+    //     //                 window.location.href = '/wares';
+    //     //             });
+    //     //         }
+    //     //     }
+    //     // });
     // });
 
 
@@ -367,130 +398,234 @@ $(document).ready(function(){
 
 
 
-
-    // 表单提交
-    $form.on('submit',function (e) {
-        e.preventDefault(); //组织默认提交表单
+    var FormValidationMd = function () {
 
 
-       //获取表单信息
-        var ajaxType,
-            mes = '',
-            errorMes = '',
-            attrRelationModels = [],
-            dataTypeProps = "",
-            wares = $waresN.val(),
-            describe = $describe.html(),
-            classB = $classB.val(),
-            //文件类型信息
-            type = $('#waresType input:radio:checked ').val(),
-            typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
-            typeName = $('#waresTypeName').text(),
-            typeCName = $('#waresType input:radio:checked ').data("name"),
-            // 收费方式信息
-            charge = $('#charge input:radio:checked ').val(),
-            chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
-            chargeName = $('#chargeName').text(),
-            chargeCName = $('#charge input:radio:checked ').data("name"),
-            //数据来源信息
-            source = $('#source input:radio:checked ').val(),
-            sourceAttrId = $('#source input:radio:checked ').data("attrid"),
-            sourceName = $('#sourceName').text(),
-            sourceCName = $('#source input:radio:checked ').data("name"),
+        var r = function (options) {
+            var _options  = options;
 
-            file = $file.data("src"),
-            fileSize = $file.data("size"),
-            img = $('.dropify-render>img').attr("src"),
-            data = {
-                designation:wares,
-                introduce:describe,
-                pic:img,
-                fileUrl:file,
-                dataSize:fileSize,
-                subFiles:subFlie,
-                dataType:classB
-            };
-        if(id == undefined || id == null || id == ""){
-            ajaxType = "post";
-            mes = '添加数据产品成功';
-            errorMes = "添加数据包产品失败";
+            // jQuery.validator.addMethod("isClassB", function(opt) {
+            //     if(opt.isParent == 0){
+            //         return true
+            //     }else if(opt.isParent == 1 && opt.v != "" && opt.v != undefined && opt.v != null){
+            //         return true
+            //     }else {
+            //         return false;
+            //     }
+            // }, "请选择二级分类");
 
-        }else {
-            ajaxType = "put";
-            data.id = id;
-            mes = '修改数据包产品成功';
-            errorMes = "修改数据包产品失败";
-        }
-
-
-        if(charge != 1){
-            data.price = $whole.val();
-            data.itemPrice = $child.val();
-        }
-
-
-
-        attrRelationModels.push(Common.createAttr({
-            attrName:typeName,
-            valName:typeCName,
-            attrId:typeAttrId,
-            valId:type
-        }));
-
-        attrRelationModels.push(Common.createAttr({
-            attrName:chargeName,
-            valName:chargeCName,
-            attrId:chargeAttrId,
-            valId:charge
-        }));
-
-        attrRelationModels.push(Common.createAttr({
-            attrName:sourceName,
-            valName:sourceCName,
-            attrId:sourceAttrId,
-            valId:source
-
-        }));
+            var e = $("#form_sample"), r = $(".alert-danger", e), i = $(".alert-success", e);
+            e.validate({
+                errorElement: "span",
+                errorClass: "help-block help-block-error",
+                focusInvalid: !1,
+                ignore: "",
+                messages: {
+                    name: {required: "名称不能为空",minlength:"名称太短"},
+                    type1: {required: "请选择一级分类"},
+                    type2: {required: "请选择二级分类"},
+                    type:{required: "请选择产品类型"},
+                    describe:{required: "请填写产品描述"},
+                    source: {required: "请选择数据来源"},
+                    // fileName: {required: "请上传数据文件"},
+                    // uploadImg: {required: "请上传图片!"},
+                    chargeRadio: {required: "请选择收费方式"},
+                    size:{required: "请选择文件大小"}
+                },
+                rules: {
+                    name: {minlength: 2, required: !0},
+                    type1: {required: !0},
+                    // type2: {isClassB: _options},
+                    type2: {required: !0},
+                    chargeRadio: {required: !0},
+                    type:{required: !0},
+                    source: {required: !0},
+                    // describe:{required: !0},
+                    // fileName: {required: !0},
+                    // uploadImg: {required: !0},
+                    size:{required: !0}
+                },
+                invalidHandler: function (e, t) {
+                    i.hide(), r.show(), App.scrollTo(r, -200)
+                },
+                errorPlacement: function (e, r) {
+                    r.is(":checkbox") ? e.insertAfter(r.closest(".md-checkbox-list, .md-checkbox-inline, .checkbox-list, .checkbox-inline")) : r.is(":radio") ? e.insertAfter(r.closest(".md-radio-list, .md-radio-inline, .radio-list,.radio-inline")) : e.insertAfter(r)
+                },
+                highlight: function (e) {
+                    $(e).closest(".form-group").addClass("has-error")
+                },
+                unhighlight: function (e) {
+                    $(e).closest(".form-group").removeClass("has-error")
+                },
+                success: function (e) {
+                    e.closest(".form-group").removeClass("has-error")
+                },
+                submitHandler: function (e) {
+                    i.show(), r.hide();
 
 
-
-        $.each(attrRelationModels,function (i,v) {
-            for(var k in v){
-                dataTypeProps += v[k] + ":";
-            }
-            dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
-            dataTypeProps += ";";
-        });
-
-
-        data.attrRelationModels = attrRelationModels;
-        data.dataTypeProps = dataTypeProps;
-
-
-
-
-
-        $.ajax({
-            url:"/api/product",
-            type: ajaxType,
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            error: function () {
-                layer.msg(errorMes,{icon:5});
-            },
-            success: function(result) {
-                if (result.success == true ) {
-                    layer.msg(mes, {
-                        icon: 1,
-                        time: 3000 //3秒关闭（如果不配置，默认是3秒）
-                    }, function(){
-                        //do something
-                        window.location.href = '/wares';
+                    FormValidationMd.init({
+                        isParent:$classA.find("option:selected").attr("data-isParent"),
+                        v:$classB.val()
                     });
+
+                    // /获取表单信息
+                    var ajaxType,
+                        mes = '',
+                        errorMes = '',
+                        attrRelationModels = [],
+                        dataTypeProps = "",
+                        wares = $waresN.val(),
+                        describe = $describe.html(),
+                        classB = $classB.val(),
+                        //文件类型信息
+                        type = $('#waresType input:radio:checked ').val(),
+                        typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
+                        typeName = $('#waresTypeName').text(),
+                        typeCName = $('#waresType input:radio:checked ').data("name"),
+                        // 收费方式信息
+                        charge = $('#charge input:radio:checked ').val(),
+                        chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
+                        chargeName = $('#chargeName').text(),
+                        chargeCName = $('#charge input:radio:checked ').data("name"),
+                        //数据来源信息
+                        source = $('#source input:radio:checked ').val(),
+                        sourceAttrId = $('#source input:radio:checked ').data("attrid"),
+                        sourceName = $('#sourceName').text(),
+                        sourceCName = $('#source input:radio:checked ').data("name"),
+
+                        file = $file.data("src"),
+                        fileSize = $file.data("size"),
+                        img = $('.dropify-render>img').attr("src"),
+                        data = {
+                            designation:wares,
+                            introduce:describe,
+                            pic:img,
+                            fileUrl:file,
+                            dataSize:fileSize,
+                            subFiles:subFlie,
+                            dataType:classB
+                        };
+                    if(id == undefined || id == null || id == ""){
+                        ajaxType = "post";
+                        mes = '添加数据产品成功';
+                        errorMes = "添加数据包产品失败";
+
+                    }else {
+                        ajaxType = "put";
+                        data.id = id;
+                        mes = '修改数据包产品成功';
+                        errorMes = "修改数据包产品失败";
+                    }
+
+
+                    if(charge != 1){
+                        data.price = $whole.val();
+                        data.itemPrice = $child.val();
+                    }else {
+                        data.price = "0";
+                        data.itemPrice = "0";
+                    }
+
+
+
+                    attrRelationModels.push(Common.createAttr({
+                        attrName:typeName,
+                        valName:typeCName,
+                        attrId:typeAttrId,
+                        valId:type
+                    }));
+
+                    attrRelationModels.push(Common.createAttr({
+                        attrName:chargeName,
+                        valName:chargeCName,
+                        attrId:chargeAttrId,
+                        valId:charge
+                    }));
+
+                    attrRelationModels.push(Common.createAttr({
+                        attrName:sourceName,
+                        valName:sourceCName,
+                        attrId:sourceAttrId,
+                        valId:source
+
+                    }));
+
+
+
+                    $.each(attrRelationModels,function (i,v) {
+                        for(var k in v){
+                            dataTypeProps += v[k] + ":";
+                        }
+                        dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
+                        dataTypeProps += ";";
+                    });
+
+
+                    data.attrRelationModels = attrRelationModels;
+                    data.dataTypeProps = dataTypeProps;
+
+
+
+
+
+                    $.ajax({
+                        url:"/api/product",
+                        type: ajaxType,
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        error: function () {
+                            layer.msg(errorMes,{icon:5});
+                        },
+                        success: function(result) {
+                            if (result.success == true ) {
+                                layer.msg(mes, {
+                                    icon: 1,
+                                    time: 3000 //3秒关闭（如果不配置，默认是3秒）
+                                }, function(){
+                                    //do something
+                                    window.location.href = '/wares';
+                                    // alert("111");
+                                });
+                            }
+                        }
+                    });
+
+
+
+
                 }
+            })
+        };
+        return {
+            init: function (options) {
+                r(options)
             }
-        });
-    })
+        }
+    }();
+
+    FormValidationMd.init()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });

@@ -3,6 +3,7 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
@@ -37,7 +38,7 @@ public class DataProductApi {
     private DataProductService productService ;
 
     @Autowired
-    private FdfsFileService uploadService ;
+    private DataProductMapper productMapper;
 
     @Autowired
     private DataTypeMapper dataTypeMapper;
@@ -158,4 +159,6 @@ public class DataProductApi {
         }
         return dataTypeIdsList;
     }
+
+
 }
