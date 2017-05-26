@@ -290,14 +290,12 @@ public class DataTradeApi {
                 //修改订单信息
                 try {
                     int i = orderService.updateOrder(out_trade_no,trade_no);
-                    if (i == 0){
-                        throw new GlobalException("修改下载权限失败");
+                    if (i > 0) {
+                        printOutMsg(response, "success");//请不要修改或删除
                     }
                 }catch (Exception e){
                     e.getMessage();
                 }
-
-                printOutMsg(response, "success");//请不要修改或删除
                 //注意：
                 //付款完成后，支付宝系统发送该交易状态通知
             } else {

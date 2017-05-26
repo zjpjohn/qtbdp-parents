@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -53,9 +54,15 @@ public class UserCenterController extends BaseController {
 
         ModelAndView result = new ModelAndView(PAGE_USER_CENTER);
         if(orderModel != null){
-            result.addObject("isOrder", 4);
-            result.addObject("order", orderModel);
-            result.addObject("orderState", orderModel.getOrderState());
+            //当订单为已支付时
+            if (orderModel.getOrderState() == AppConstants.ORDER_STATE_PAYED) {
+
+            } else {
+                result.addObject("isOrder", 4);
+                result.addObject("order", orderModel);
+                result.addObject("orderState", orderModel.getOrderState());
+            }
+
             orderModel = null;
         }
 
@@ -115,7 +122,12 @@ public class UserCenterController extends BaseController {
         view.setViewName("redirect:/usercenter");
         try {
             DataTransactionOrderModel result = orderService.insertNewOrder(dataTransactionOrderModel);
-            orderModel = result;
+            if (result.getAmount().compareTo(new BigDecimal(0)) == 0 ) {
+                //当付款金额为0时，直接改变订单状态，支付宝交易流水号为"xxxxxxxxxxxxx"
+                orderService.updateOrder(result.getOrderNo(),"xxxxxxxxxxxxx");
+            }
+            //重新获取订单信息
+            orderModel = orderMapper.findOrderByNo(result.getOrderNo());
         } catch (GlobalException e) {
             e.getMessage();
         }
