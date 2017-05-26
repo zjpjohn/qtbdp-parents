@@ -127,8 +127,8 @@
             <if test="introduce != null">introduce = #{introduce} ,</if>
             <if test="pic != null">pic = #{pic} ,</if>
             <if test="dataType != null and dataType != 0">data_type = #{dataType} ,</if>
-            <if test="price != null and price != 0">price = #{price} ,</if>
-            <if test="itemPrice != null and itemPrice != 0">item_price = #{itemPrice} ,</if>
+            <if test="price != null">price = #{price} ,</if>
+            <if test="itemPrice != null ">item_price = #{itemPrice} ,</if>
             <if test="fileUrl != null">file_url = #{fileUrl} ,</if>
             <if test="dataTypeProps != null">data_type_props = #{dataTypeProps} ,</if>
             <if test="dataSize != null">data_size = #{dataSize},</if>
