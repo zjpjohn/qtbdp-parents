@@ -12,11 +12,11 @@ $(document).ready(function(){
         $sourceTmpl = $('#source_tmpl'),//数据来源模板
         $chargeTmpl = $('#charge_tmpl'),//收费模板
         $waresTmpl = $('#waresType_tmpl'),//文件类型模板
-        $fileSizeTmpl = $('#fileSize_tmpl'),//文件大小模板
+        // $fileSizeTmpl = $('#fileSize_tmpl'),//文件大小模板
         $source = $('#source'),//数据来源属性
         $charge = $('#charge'),//收费方式
         $wares = $('#waresType'),//文件类型
-        $fileSize = $('#fileSize'),//文件大小
+        // $fileSize = $('#fileSize'),//文件大小
         $price = $('#Price'),//价格
         $whole = $('#whole'),//整包价格
         $child = $('#child'),//子文件价格
@@ -92,16 +92,15 @@ $(document).ready(function(){
 
 
     //收费价格显示与否
-    $charge.on('click','input',function () {
+    $charge.on('change','input',function () {
         if(this.type != 'radio'){
             return;
         }else if($(this).is(':checked') === true){
+            $price.find("input").val("");
             if($(this).val() === "101"){
                 $price.css('display','block');
             }else {
-                $price.find("input").val("0");
                 $price.css('display','none');
-                console.log($price.find("input").val())
             }
         }
     });
@@ -137,11 +136,13 @@ $(document).ready(function(){
         var id = $(this).val(),
             isParent = $(this).find("option:selected").attr("data-isParent");
         $attr.css("display","none");
+        $price.css("display","none");
         if(id == "" || id == undefined || id == null){
             $classB.empty();
             return;
         }else {
             if(isParent == 0){
+                $classB.empty();
                 $attr.css("display","block");
                 $attr.children().css("display","block");
                 Common.attrList({
@@ -167,6 +168,7 @@ $(document).ready(function(){
 
     //展示数据来源，收费方式，数据类型
     $classB.on('change',function () {
+        $price.css("display","none");
         var id = $(this).val();
         if(id == ""|| id == undefined || id == null){
             $attr.css("display","none");
@@ -254,164 +256,14 @@ $(document).ready(function(){
     reviseWares();
 
 
-
-
-
-    // // 表单提交
-    // $form.on('submit',function (e) {
-    //     e.preventDefault(); //组织默认提交表单
-    //
-    //     FormValidationMd.init({
-    //         isParent:$classA.find("option:selected").attr("data-isParent"),
-    //         v:$classB.val()
-    //     });
-    //
-    //    //获取表单信息
-    //     var ajaxType,
-    //         mes = '',
-    //         errorMes = '',
-    //         attrRelationModels = [],
-    //         dataTypeProps = "",
-    //         wares = $waresN.val(),
-    //         describe = $describe.html(),
-    //         classB = $classB.val(),
-    //         //文件类型信息
-    //         type = $('#waresType input:radio:checked ').val(),
-    //         typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
-    //         typeName = $('#waresTypeName').text(),
-    //         typeCName = $('#waresType input:radio:checked ').data("name"),
-    //         // 收费方式信息
-    //         charge = $('#charge input:radio:checked ').val(),
-    //         chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
-    //         chargeName = $('#chargeName').text(),
-    //         chargeCName = $('#charge input:radio:checked ').data("name"),
-    //         //数据来源信息
-    //         source = $('#source input:radio:checked ').val(),
-    //         sourceAttrId = $('#source input:radio:checked ').data("attrid"),
-    //         sourceName = $('#sourceName').text(),
-    //         sourceCName = $('#source input:radio:checked ').data("name"),
-    //
-    //         file = $file.data("src"),
-    //         fileSize = $file.data("size"),
-    //         img = $('.dropify-render>img').attr("src"),
-    //         data = {
-    //             designation:wares,
-    //             introduce:describe,
-    //             pic:img,
-    //             fileUrl:file,
-    //             dataSize:fileSize,
-    //             subFiles:subFlie,
-    //             dataType:classB
-    //         };
-    //     if(id == undefined || id == null || id == ""){
-    //         ajaxType = "post";
-    //         mes = '添加数据产品成功';
-    //         errorMes = "添加数据包产品失败";
-    //
-    //     }else {
-    //         ajaxType = "put";
-    //         data.id = id;
-    //         mes = '修改数据包产品成功';
-    //         errorMes = "修改数据包产品失败";
-    //     }
-    //
-    //
-    //     if(charge != 1){
-    //         data.price = $whole.val();
-    //         data.itemPrice = $child.val();
-    //     }else {
-    //         data.price = "0";
-    //         data.itemPrice = "0";
-    //     }
-    //
-    //
-    //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:typeName,
-    //         valName:typeCName,
-    //         attrId:typeAttrId,
-    //         valId:type
-    //     }));
-    //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:chargeName,
-    //         valName:chargeCName,
-    //         attrId:chargeAttrId,
-    //         valId:charge
-    //     }));
-    //
-    //     attrRelationModels.push(Common.createAttr({
-    //         attrName:sourceName,
-    //         valName:sourceCName,
-    //         attrId:sourceAttrId,
-    //         valId:source
-    //
-    //     }));
-    //
-    //
-    //
-    //     $.each(attrRelationModels,function (i,v) {
-    //         for(var k in v){
-    //             dataTypeProps += v[k] + ":";
-    //         }
-    //         dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
-    //         dataTypeProps += ";";
-    //     });
-    //
-    //
-    //     data.attrRelationModels = attrRelationModels;
-    //     data.dataTypeProps = dataTypeProps;
-    //
-    //
-    //
-    //
-    //
-    //     // $.ajax({
-    //     //     url:"/api/product",
-    //     //     type: ajaxType,
-    //     //     data: JSON.stringify(data),
-    //     //     contentType: "application/json; charset=utf-8",
-    //     //     dataType: "json",
-    //     //     error: function () {
-    //     //         layer.msg(errorMes,{icon:5});
-    //     //     },
-    //     //     success: function(result) {
-    //     //         if (result.success == true ) {
-    //     //             layer.msg(mes, {
-    //     //                 icon: 1,
-    //     //                 time: 3000 //3秒关闭（如果不配置，默认是3秒）
-    //     //             }, function(){
-    //     //                 //do something
-    //     //                 window.location.href = '/wares';
-    //     //             });
-    //     //         }
-    //     //     }
-    //     // });
-    // });
-
-
-
-
-
-
-
-
-
-
     var FormValidationMd = function () {
 
 
         var r = function (options) {
             var _options  = options;
 
-            // jQuery.validator.addMethod("isClassB", function(opt) {
-            //     if(opt.isParent == 0){
-            //         return true
-            //     }else if(opt.isParent == 1 && opt.v != "" && opt.v != undefined && opt.v != null){
-            //         return true
-            //     }else {
-            //         return false;
-            //     }
+            // jQuery.validator.addMethod("isClassB", function() {
+            //     return _options.isParent == 0
             // }, "请选择二级分类");
 
             var e = $("#form_sample"), r = $(".alert-danger", e), i = $(".alert-success", e);
@@ -435,8 +287,10 @@ $(document).ready(function(){
                 rules: {
                     name: {minlength: 2, required: !0},
                     type1: {required: !0},
-                    // type2: {isClassB: _options},
-                    type2: {required: !0},
+                    type2: {
+                        // isClassB: true,
+                        // required: !0
+                    },
                     chargeRadio: {required: !0},
                     type:{required: !0},
                     source: {required: !0},
@@ -464,134 +318,133 @@ $(document).ready(function(){
                     i.show(), r.hide();
 
 
-                    FormValidationMd.init({
-                        isParent:$classA.find("option:selected").attr("data-isParent"),
-                        v:$classB.val()
-                    });
+                       FormValidationMd.init({
+                           isParent:$classA.find("option:selected").attr("data-isParent"),
+                           v:$classB.val()
+                       });
 
-                    // /获取表单信息
-                    var ajaxType,
-                        mes = '',
-                        errorMes = '',
-                        attrRelationModels = [],
-                        dataTypeProps = "",
-                        wares = $waresN.val(),
-                        describe = $describe.html(),
-                        classB = $classB.val(),
-                        //文件类型信息
-                        type = $('#waresType input:radio:checked ').val(),
-                        typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
-                        typeName = $('#waresTypeName').text(),
-                        typeCName = $('#waresType input:radio:checked ').data("name"),
-                        // 收费方式信息
-                        charge = $('#charge input:radio:checked ').val(),
-                        chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
-                        chargeName = $('#chargeName').text(),
-                        chargeCName = $('#charge input:radio:checked ').data("name"),
-                        //数据来源信息
-                        source = $('#source input:radio:checked ').val(),
-                        sourceAttrId = $('#source input:radio:checked ').data("attrid"),
-                        sourceName = $('#sourceName').text(),
-                        sourceCName = $('#source input:radio:checked ').data("name"),
+                       // /获取表单信息
+                       var ajaxType,
+                           mes = '',
+                           errorMes = '',
+                           attrRelationModels = [],
+                           dataTypeProps = "",
+                           wares = $waresN.val(),
+                           describe = $describe.html(),
+                           classB = $classB.val(),
+                           //文件类型信息
+                           type = $('#waresType input:radio:checked ').val(),
+                           typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
+                           typeName = $('#waresTypeName').text(),
+                           typeCName = $('#waresType input:radio:checked ').data("name"),
+                           // 收费方式信息
+                           charge = $('#charge input:radio:checked ').val(),
+                           chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
+                           chargeName = $('#chargeName').text(),
+                           chargeCName = $('#charge input:radio:checked ').data("name"),
+                           //数据来源信息
+                           source = $('#source input:radio:checked ').val(),
+                           sourceAttrId = $('#source input:radio:checked ').data("attrid"),
+                           sourceName = $('#sourceName').text(),
+                           sourceCName = $('#source input:radio:checked ').data("name"),
 
-                        file = $file.data("src"),
-                        fileSize = $file.data("size"),
-                        img = $('.dropify-render>img').attr("src"),
-                        data = {
-                            designation:wares,
-                            introduce:describe,
-                            pic:img,
-                            fileUrl:file,
-                            dataSize:fileSize,
-                            subFiles:subFlie,
-                            dataType:classB
-                        };
-                    if(id == undefined || id == null || id == ""){
-                        ajaxType = "post";
-                        mes = '添加数据产品成功';
-                        errorMes = "添加数据包产品失败";
+                           file = $file.data("src"),
+                           fileSize = $file.data("size"),
+                           img = $('.dropify-render>img').attr("src"),
+                           data = {
+                               designation:wares,
+                               introduce:describe,
+                               pic:img,
+                               fileUrl:file,
+                               dataSize:fileSize,
+                               subFiles:subFlie,
+                               dataType:classB
+                           };
+                       if(id == undefined || id == null || id == ""){
+                           ajaxType = "post";
+                           mes = '添加数据产品成功';
+                           errorMes = "添加数据包产品失败";
 
-                    }else {
-                        ajaxType = "put";
-                        data.id = id;
-                        mes = '修改数据包产品成功';
-                        errorMes = "修改数据包产品失败";
-                    }
-
-
-                    if(charge != 1){
-                        data.price = $whole.val();
-                        data.itemPrice = $child.val();
-                    }else {
-                        data.price = "0";
-                        data.itemPrice = "0";
-                    }
+                       }else {
+                           ajaxType = "put";
+                           data.id = id;
+                           mes = '修改数据包产品成功';
+                           errorMes = "修改数据包产品失败";
+                       }
 
 
-
-                    attrRelationModels.push(Common.createAttr({
-                        attrName:typeName,
-                        valName:typeCName,
-                        attrId:typeAttrId,
-                        valId:type
-                    }));
-
-                    attrRelationModels.push(Common.createAttr({
-                        attrName:chargeName,
-                        valName:chargeCName,
-                        attrId:chargeAttrId,
-                        valId:charge
-                    }));
-
-                    attrRelationModels.push(Common.createAttr({
-                        attrName:sourceName,
-                        valName:sourceCName,
-                        attrId:sourceAttrId,
-                        valId:source
-
-                    }));
+                       if(charge != 1){
+                           data.price = $whole.val();
+                           data.itemPrice = $child.val();
+                       }else {
+                           data.price = "0";
+                           data.itemPrice = "0";
+                       }
 
 
 
-                    $.each(attrRelationModels,function (i,v) {
-                        for(var k in v){
-                            dataTypeProps += v[k] + ":";
-                        }
-                        dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
-                        dataTypeProps += ";";
-                    });
+                       attrRelationModels.push(Common.createAttr({
+                           attrName:typeName,
+                           valName:typeCName,
+                           attrId:typeAttrId,
+                           valId:type
+                       }));
+
+                       attrRelationModels.push(Common.createAttr({
+                           attrName:chargeName,
+                           valName:chargeCName,
+                           attrId:chargeAttrId,
+                           valId:charge
+                       }));
+
+                       attrRelationModels.push(Common.createAttr({
+                           attrName:sourceName,
+                           valName:sourceCName,
+                           attrId:sourceAttrId,
+                           valId:source
+
+                       }));
 
 
-                    data.attrRelationModels = attrRelationModels;
-                    data.dataTypeProps = dataTypeProps;
+
+                       $.each(attrRelationModels,function (i,v) {
+                           for(var k in v){
+                               dataTypeProps += v[k] + ":";
+                           }
+                           dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
+                           dataTypeProps += ";";
+                       });
+
+
+                       data.attrRelationModels = attrRelationModels;
+                       data.dataTypeProps = dataTypeProps;
 
 
 
 
 
-                    $.ajax({
-                        url:"/api/product",
-                        type: ajaxType,
-                        data: JSON.stringify(data),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        error: function () {
-                            layer.msg(errorMes,{icon:5});
-                        },
-                        success: function(result) {
-                            if (result.success == true ) {
-                                layer.msg(mes, {
-                                    icon: 1,
-                                    time: 3000 //3秒关闭（如果不配置，默认是3秒）
-                                }, function(){
-                                    //do something
-                                    window.location.href = '/wares';
-                                    // alert("111");
-                                });
-                            }
-                        }
-                    });
-
+                       $.ajax({
+                           url:"/api/product",
+                           type: ajaxType,
+                           data: JSON.stringify(data),
+                           contentType: "application/json; charset=utf-8",
+                           dataType: "json",
+                           error: function () {
+                               layer.msg(errorMes,{icon:5});
+                           },
+                           success: function(result) {
+                               if (result.success == true ) {
+                                   layer.msg(mes, {
+                                       icon: 1,
+                                       time: 3000 //3秒关闭（如果不配置，默认是3秒）
+                                   }, function(){
+                                       //do something
+                                       window.location.href = '/wares';
+                                       // alert("111");
+                                   });
+                               }
+                           }
+                       });
 
 
 
