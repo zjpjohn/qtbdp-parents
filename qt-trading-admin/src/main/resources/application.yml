@@ -5,7 +5,7 @@ spring:
   application:
     name: qt-trading-admin
   profiles:
-    active: test # 默认激活application-dev.yml配置
+    active: ${package.active} # 默认激活application-dev.yml配置
   http:
     multipart:
       max-file-size: 50MB

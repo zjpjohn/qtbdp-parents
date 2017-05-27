@@ -176,6 +176,18 @@
     </dependencies>
 
     <build>
+
+        <!-- 指定要过滤的文件 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -217,5 +229,33 @@
             </url>
         </snapshotRepository>
     </distributionManagement>
+
+    <!-- 配置打包环境 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <package.active>dev</package.active>
+            </properties>
+            <!-- 默认打包环境 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <package.active>test</package.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <package.active>prod</package.active>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
