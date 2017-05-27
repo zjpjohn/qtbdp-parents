@@ -44,7 +44,7 @@ kaptcha:
     char:
       length: 6
   image:
-    width: 125
-    height: 45
+    width: 240
+    height: 50
   session:
     key: code
