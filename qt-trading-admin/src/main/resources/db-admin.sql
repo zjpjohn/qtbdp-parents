@@ -237,3 +237,58 @@ create table persistent_logins  (
    last_used            timestamp,
    constraint PK_PERSISTENT_LOGINS primary key (series)
 ) ENGINE=INNODB AUTO_INCREMENT=1 default charset=utf8 ;
+
+
+/* 初始化数据 */
+INSERT INTO `sys_users` (`user_id`, `v_qzjgid`, `v_qzjgmc`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `deadline`, `dep_id`, `dep_name`, `dt_create`, `enabled`, `last_login`, `login_ip`, `name`, `password`, `username`) VALUES ('40289fa55c152593015c15259e0e0000', NULL, NULL, 1, 1, 1, '2017-5-18', NULL, NULL, '2017-5-17 14:43:26', 1, '2017-5-31 08:55:46', '0:0:0:0:0:0:0:1', '系统管理员', '$2a$04$dYqUiNaZDypNFtGZroWMCOMsHQrzNNYpP.q3uegoB3VJajfSeuJ3K', 'admin');
+INSERT INTO `sys_users` (`user_id`, `v_qzjgid`, `v_qzjgmc`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `deadline`, `dep_id`, `dep_name`, `dt_create`, `enabled`, `last_login`, `login_ip`, `name`, `password`, `username`) VALUES ('40289fa55c197723015c19772f0b0000', NULL, NULL, 1, 1, 1, '2017-5-18', NULL, NULL, '2017-5-18 10:51:00', 1, NULL, NULL, '系统普通用户', '$2a$04$z79WM9zByXY1k0ZMo.7Xk.ffwVu0qPLQAIc4/9N8GniE7wpf9Lm2a', 'user');
+
+INSERT INTO `sys_roles` (`role_id`, `enable`, `issys`, `module_id`, `role_desc`, `role_name`, `user_id`) VALUES ('40289fa55c15371d015c153728570000', 1, 1, NULL, '系统管理员, 不允许删除', 'ROLE_ADMIN', NULL);
+INSERT INTO `sys_roles` (`role_id`, `enable`, `issys`, `module_id`, `role_desc`, `role_name`, `user_id`) VALUES ('40289fa55c197347015c197352a70000', 1, 1, NULL, '系统普通用户, 不允许删除', 'ROLE_USER', NULL);
+
+INSERT INTO `sys_authorities` (`authority_id`, `authority_desc`, `authority_mark`, `authority_name`, `enable`, `issys`, `message`, `module_id`, `remark`) VALUES ('40289fa55c1a0322015c1a032df70000', '登录后首页', 'AUTH_DASHBOARD', '登录后首页', 1, 1, '登录后首页', NULL, NULL);
+INSERT INTO `sys_authorities` (`authority_id`, `authority_desc`, `authority_mark`, `authority_name`, `enable`, `issys`, `message`, `module_id`, `remark`) VALUES ('40289fa55c1a0322015c1a032e070001', '产品列表页', 'AUTH_PRODUCT_LIST', '产品列表页', 1, 1, '产品列表页', NULL, NULL);
+INSERT INTO `sys_authorities` (`authority_id`, `authority_desc`, `authority_mark`, `authority_name`, `enable`, `issys`, `message`, `module_id`, `remark`) VALUES ('40289fa55c1a0322015c1a032e070002', '产品列表页 - 添加', 'AUTH_PRODUCT_ADD', '产品列表页 - 添加', 1, 1, '产品列表页 - 添加', NULL, NULL);
+INSERT INTO `sys_authorities` (`authority_id`, `authority_desc`, `authority_mark`, `authority_name`, `enable`, `issys`, `message`, `module_id`, `remark`) VALUES ('40289fa55c1a0322015c1a032e070003', '产品列表页 - 删除', 'AUTH_PRODUCT_DELETE', '产品列表页 - 删除', 1, 1, '产品列表页 - 删除', NULL, NULL);
+INSERT INTO `sys_authorities` (`authority_id`, `authority_desc`, `authority_mark`, `authority_name`, `enable`, `issys`, `message`, `module_id`, `remark`) VALUES ('40289fa55c1a0322015c1a032e070004', '产品列表页 - 编辑', 'AUTH_PRODUCT_UPDATE', '产品列表页 - 编辑', 1, 1, '产品列表页 - 编辑', NULL, NULL);
+INSERT INTO `sys_authorities` (`authority_id`, `authority_desc`, `authority_mark`, `authority_name`, `enable`, `issys`, `message`, `module_id`, `remark`) VALUES ('40289fa55c1a0322015c1a032e070005', '产品列表页 - 上架', 'AUTH_PRODUCT_UP', '产品列表页 - 上架', 1, 1, '产品列表页 - 上架', NULL, NULL);
+INSERT INTO `sys_authorities` (`authority_id`, `authority_desc`, `authority_mark`, `authority_name`, `enable`, `issys`, `message`, `module_id`, `remark`) VALUES ('40289fa55c1a0322015c1a032e080006', '产品列表页 - 下架', 'AUTH_PRODUCT_DOWN', '产品列表页 - 下架', 1, 1, '产品列表页 - 下架', NULL, NULL);
+
+INSERT INTO `sys_modules` (`module_id`, `i_level`, `application`, `controller`, `enable`, `issys`, `leaf`, `module_desc`, `module_name`, `module_type`, `module_url`, `parent`, `priority`) VALUES ('40289fa55c158562015c15856d4c0000', 1, 'APP_TRADING_ADMIN', NULL, 1, 1, '\0', '数据商城', '数据商城', 'normal', NULL, NULL, 10);
+INSERT INTO `sys_modules` (`module_id`, `i_level`, `application`, `controller`, `enable`, `issys`, `leaf`, `module_desc`, `module_name`, `module_type`, `module_url`, `parent`, `priority`) VALUES ('40289fa55c158562015c15856d7c0001', 2, 'APP_TRADING_ADMIN', NULL, 1, 1, 1, '数据商城 - 产品管理', '产品管理', 'normal', '/products', '40289fa55c158562015c15856d4c0000', 100);
+INSERT INTO `sys_modules` (`module_id`, `i_level`, `application`, `controller`, `enable`, `issys`, `leaf`, `module_desc`, `module_name`, `module_type`, `module_url`, `parent`, `priority`) VALUES ('40289fa55c158562015c15856d7d0002', 2, 'APP_TRADING_ADMIN', NULL, 1, 1, 1, '数据商城 - 类目管理', '类目管理', 'normal', '/types', '40289fa55c158562015c15856d4c0000', 110);
+
+INSERT INTO `sys_resources` (`resource_id`, `enable`, `http_method`, `issys`, `module_id`, `priority`, `resource_desc`, `resource_name`, `resource_path`, `resource_type`) VALUES ('40289fa55c15a4c7015c15a4d2750000', 1, NULL, 1, NULL, 1, '添加产品', '添加产品', '/products/add', 'METHOD');
+INSERT INTO `sys_resources` (`resource_id`, `enable`, `http_method`, `issys`, `module_id`, `priority`, `resource_desc`, `resource_name`, `resource_path`, `resource_type`) VALUES ('40289fa55c15a4c7015c15a4d2840001', 1, NULL, 1, NULL, 2, '修改产品', '修改产品', '/products/update', 'METHOD');
+INSERT INTO `sys_resources` (`resource_id`, `enable`, `http_method`, `issys`, `module_id`, `priority`, `resource_desc`, `resource_name`, `resource_path`, `resource_type`) VALUES ('40289fa55c15a4c7015c15a4d2840002', 1, NULL, 1, NULL, 3, '产品下架', '下架', '/products/down', 'METHOD');
+INSERT INTO `sys_resources` (`resource_id`, `enable`, `http_method`, `issys`, `module_id`, `priority`, `resource_desc`, `resource_name`, `resource_path`, `resource_type`) VALUES ('40289fa55c15a4c7015c15a4d2840003', 1, NULL, 1, NULL, 4, '产品上架', '上架', '/products/up', 'METHOD');
+INSERT INTO `sys_resources` (`resource_id`, `enable`, `http_method`, `issys`, `module_id`, `priority`, `resource_desc`, `resource_name`, `resource_path`, `resource_type`) VALUES ('40289fa55c1a0dcc015c1a0ddd570000', 1, NULL, 1, NULL, 5, '产品列表', '产品列表', '/products', 'URL');
+INSERT INTO `sys_resources` (`resource_id`, `enable`, `http_method`, `issys`, `module_id`, `priority`, `resource_desc`, `resource_name`, `resource_path`, `resource_type`) VALUES ('40289fa55c1a0dcc015c1a0ddd720001', 1, NULL, 1, NULL, 6, '登录后首页', '登录后首页', '/dashboard', 'URL');
+INSERT INTO `sys_resources` (`resource_id`, `enable`, `http_method`, `issys`, `module_id`, `priority`, `resource_desc`, `resource_name`, `resource_path`, `resource_type`) VALUES ('40289fa55c1a220e015c1a221f300000', 1, NULL, 1, NULL, 7, '产品删除', '删除', '/products/delete', 'METHOD');
+
+
+INSERT INTO `sys_users_roles` (`id`, `czybh`, `role_id`, `user_id`) VALUES ('40289fa55c154d70015c154d7afc0000', NULL, '40289fa55c15371d015c153728570000', '40289fa55c152593015c15259e0e0000');
+INSERT INTO `sys_users_roles` (`id`, `czybh`, `role_id`, `user_id`) VALUES ('40289fa55c1a1441015c1a1451e70000', NULL, '40289fa55c197347015c197352a70000', '40289fa55c197723015c19772f0b0000');
+
+INSERT INTO `sys_roles_modules` (`id`, `module_id`, `role_id`) VALUES ('40289fa55c1591f8015c1592038b0000', '40289fa55c158562015c15856d4c0000', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_modules` (`id`, `module_id`, `role_id`) VALUES ('40289fa55c1591f8015c159203950001', '40289fa55c158562015c15856d7c0001', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_modules` (`id`, `module_id`, `role_id`) VALUES ('40289fa55c1591f8015c159203950002', '40289fa55c158562015c15856d7d0002', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_modules` (`id`, `module_id`, `role_id`) VALUES ('40289fa55c1a17f0015c1a18023f0000', '40289fa55c158562015c15856d4c0000', '40289fa55c197347015c197352a70000');
+
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7260000', '40289fa55c1a0322015c1a032df70000', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7310001', '40289fa55c1a0322015c1a032e070001', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7310002', '40289fa55c1a0322015c1a032e070002', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7310003', '40289fa55c1a0322015c1a032e070003', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7310004', '40289fa55c1a0322015c1a032e070004', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7310005', '40289fa55c1a0322015c1a032e070005', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7310006', '40289fa55c1a0322015c1a032e080006', '40289fa55c15371d015c153728570000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7310007', '40289fa55c1a0322015c1a032df70000', '40289fa55c197347015c197352a70000');
+INSERT INTO `sys_roles_authorities` (`id`, `authority_id`, `role_id`) VALUES ('40289fa55c1a26dc015c1a26e7320008', '40289fa55c1a0322015c1a032e070001', '40289fa55c197347015c197352a70000');
+
+INSERT INTO `sys_authorities_resources` (`id`, `authority_id`, `resource_id`) VALUES ('40289fa55c1a2296015c1a22a8320000', '40289fa55c1a0322015c1a032e070001', '40289fa55c1a0dcc015c1a0ddd570000');
+INSERT INTO `sys_authorities_resources` (`id`, `authority_id`, `resource_id`) VALUES ('40289fa55c1a2296015c1a22a8420001', '40289fa55c1a0322015c1a032e070002', '40289fa55c15a4c7015c15a4d2750000');
+INSERT INTO `sys_authorities_resources` (`id`, `authority_id`, `resource_id`) VALUES ('40289fa55c1a2296015c1a22a8420002', '40289fa55c1a0322015c1a032e070003', '40289fa55c1a220e015c1a221f300000');
+INSERT INTO `sys_authorities_resources` (`id`, `authority_id`, `resource_id`) VALUES ('40289fa55c1a2296015c1a22a8420003', '40289fa55c1a0322015c1a032e070004', '40289fa55c15a4c7015c15a4d2840001');
+INSERT INTO `sys_authorities_resources` (`id`, `authority_id`, `resource_id`) VALUES ('40289fa55c1a2296015c1a22a8420004', '40289fa55c1a0322015c1a032e070005', '40289fa55c15a4c7015c15a4d2840003');
+INSERT INTO `sys_authorities_resources` (`id`, `authority_id`, `resource_id`) VALUES ('40289fa55c1a2296015c1a22a8420005', '40289fa55c1a0322015c1a032e080006', '40289fa55c15a4c7015c15a4d2840002');
+INSERT INTO `sys_authorities_resources` (`id`, `authority_id`, `resource_id`) VALUES ('40289fa55c1a2296015c1a22a8420006', '40289fa55c1a0322015c1a032df70000', '40289fa55c1a0dcc015c1a0ddd720001');
