@@ -277,8 +277,8 @@ var Common = {
      */
     _formatedate: function (date) {
         var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
-        return formatedate;
+      //  formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+        return formatedate.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
     },
 
     //数据商场 具体详情数据格式解析
