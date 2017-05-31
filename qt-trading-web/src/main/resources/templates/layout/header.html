@@ -45,9 +45,9 @@
 		<!--如果未登录-->
 		<div th:unless="${user}">
 			<p class="rt nav_list nav_rt">
-				<a th:href="@{/login}">登录</a>
+				<a href="javascripy:;"  onclick="loginShow(this)">登录</a>
 				<i>/</i>
-				<a th:href="@{/register}">注册</a>
+				<a href="javascripy:;"  onclick="registerShow(this)">注册</a>
 			</p>
 		</div>
 	</div>
@@ -85,3 +85,109 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- 登录弹框  -->
+<div class="model" id="loginModel">
+	<div class="model_content">
+		<i class="model_delete" onclick="modelClose(this)">X</i>
+		<h2 class="model_title">请先登录</h2>
+		<form action="" id="loginForm" class="model_form">
+			<p class="error_tip">请输入您的账号</p>
+			<input type="text" placeholder="账号" name="userAccount" class="user_account">
+			<input type="password" placeholder="密码" name="userPwd" class="user_pwd">
+			<a href="javascript:;" id="loginSubmit" class="form_submit">登录</a>
+		</form>
+		<div class="model_bottom floating">
+			<!--<a href="javascript:;" class="lf" onclick="findPwdShow()">忘记密码？</a>-->
+			<p class="rt">没有注册？<a href="javascript:;" onclick="registerShow()">注册</a></p>
+		</div>
+	</div>
+</div>
+<!-- 登录弹框结束  -->
+<!-- 注册弹框  -->
+<div class="model" id="registerModel">
+	<div class="model_content">
+		<i class="model_delete" onclick="modelClose(this)">X</i>
+		<h2 class="model_title">注册</h2>
+		<form action="" id="registerForm" class="model_form">
+			<p class="error_tip">请输入您的手机号</p>
+			<input type="text" placeholder="请输入您的手机号" name="userPhone" class="user_phone">
+			<label class="code_lab">
+				<input type="text" placeholder="请输入验证码" maxlength="4" name="verifyCode" class="phone_code">
+				<a href="javascript:;" class="getCode" onclick="getPhoneCode('#registerModel ')">获取验证码</a>
+			</label>
+			<input type="password" placeholder="请输入新密码" name="userPwd" class="user_pwd">
+			<input type="password" placeholder="请再次输入新密码" name="userPwd2" class="user_pwd user_pwd2">
+			<label>
+				<input type="checkbox" name="agreement" class="agreement">
+				我已阅读并同意
+				<a href="javascript:;" class="protocol">《钱塘用户注册协议》</a>
+			</label>
+			<a href="javascript:;" id="registerSubmit" class="form_submit">注册</a>
+		</form>
+		<div class="model_bottom">
+			已经注册？<a href="javascript:;" onclick="loginShow()">登录</a>
+		</div>
+	</div>
+</div>
+<!-- 注册弹框结束  -->
+<!-- 找回密码弹框  -->
+<div class="model" id="findPwdModel">
+	<div class="model_content">
+		<i class="model_delete" onclick="modelClose(this)">X</i>
+		<h2 class="model_title">找回密码</h2>
+		<form action="" id="findPwdForm" class="model_form">
+			<p class="error_tip">请输入您的手机号</p>
+			<input type="text" placeholder="请输入您的手机号" name="userPhone" class="user_phone">
+			<label class="code_lab">
+				<input type="text" placeholder="请输入验证码" maxlength="4" name="verifyCode" class="phone_code">
+				<a href="javascript:;" class="getCode" onclick="getPhoneCode('#findPwdModel ')">获取验证码</a>
+			</label>
+			<input type="password" placeholder="请输入新密码" name="userPwd" class="user_pwd">
+			<input type="password" placeholder="请再次输入新密码" name="userPwd2" class="user_pwd user_pwd2">
+			<a href="javascript:;" id="findPwdSubmit" class="form_submit">确定</a>
+		</form>
+		<div class="model_bottom">
+			<a href="javascript:;" onclick="loginShow()">返回登录</a>
+		</div>
+	</div>
+</div>
+<!-- 找回密码弹框结束  -->
+<script th:src="@{/tradecenter/js/login.js}"></script>
+<!--<script th:src="@{/tradecenter/js/modelcheck.js}"></script>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
