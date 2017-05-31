@@ -3,12 +3,14 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.FdfsFileService;
+import com.qtdbp.trading.utils.CommonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -37,7 +39,7 @@ public class DataProductApi {
     private DataProductService productService ;
 
     @Autowired
-    private FdfsFileService uploadService ;
+    private DataProductMapper productMapper;
 
     @Autowired
     private DataTypeMapper dataTypeMapper;
@@ -126,6 +128,12 @@ public class DataProductApi {
         try {
             if(item.getRows() == null || item.getRows() == 0) item.setRows(20);
             List<DataItemModel> itemList = productService.findItemsByProductIdForPage(item);
+            if (itemList != null && itemList.size() > 0) {
+                for (DataItemModel itemModel : itemList) {
+                    itemModel.setDownloadCount(itemModel.getDownloadCount() + CommonUtil.randomNum(itemModel.getId()));
+                    itemModel.setViewCount(itemModel.getViewCount() + CommonUtil.randomNum(itemModel.getId()));
+                }
+            }
             map.put("pageInfo", new PageInfo<>(itemList));
             map.put("queryParam", item);
             map.put("page", item.getPage());
@@ -158,4 +166,6 @@ public class DataProductApi {
         }
         return dataTypeIdsList;
     }
+
+
 }

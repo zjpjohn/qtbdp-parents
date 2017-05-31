@@ -90,7 +90,7 @@ var Common = {
                                 var props = dataChage[i].dataTypeProps;
                                 dataChage[i].dataTypeProps = Common._dataTypeProps(props);
                                 var typeId = dataChage[i].dataType;
-                                dataChage[i].dataType = dataTypeJson[typeId];
+                                dataChage[i].dataType = dataTypeJson[typeId]?dataTypeJson[typeId]:typeId;
                             }
                         }
 
@@ -163,6 +163,7 @@ var Common = {
             dataType: "json",
             type:"get",
             data:{
+                isUsed:1,
                 id:id
             },
             error:function () {
@@ -276,13 +277,12 @@ var Common = {
      */
     _formatedate: function (date) {
         var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
-        return formatedate;
+      //  formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
+        return formatedate.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
     },
 
     //数据商场 具体详情数据格式解析
     _dataTypeProps: function (data) {
-        var returnData = [];
         if(data != null && data != ""){
             var dataArr = data.split(";");
             var jsonData = {};
@@ -291,15 +291,10 @@ var Common = {
                 aa = dataArr[i].split(":");
                 jsonData[aa[0]] = aa[1];
             }
-            returnData.push(jsonData.计价方式);
-            returnData.push(jsonData.数据格式);
-            returnData.push(jsonData.数据来源);
-            returnData.push(jsonData.数据大小);
-            return returnData.join(",");
+            return jsonData.产品类型?jsonData.产品类型:"该类型已不存在";
         }else{
-            return "";
+            return "该类型已不存在";
         }
-
     }
 
 };

@@ -36,22 +36,22 @@
     font-weight:normal;
     margin-bottom:15px;
 }
-.detail_info>p{
+.detail_info p{
     margin-bottom:17px;
 }
-.detail_info>p>span{
+.detail_info p>span{
     margin-right:50px;
 }
-.detail_info>.p3{
+.detail_info .p3{
     margin-bottom:0px;
 }
-.detail_info>.p1{
+.detail_info .p1{
     color:#333;
 }
-.infos,.detail_info>.p2{
+.infos,.detail_info .p2{
     color:#808080;
 }
-.detail_info>.p2>i{
+.detail_info .p2>i{
     font-size:18px;
     color:#FF4E00;
 }
@@ -63,6 +63,10 @@
     font-size:18px;
     border-radius:4px;
     cursor: pointer;
+}
+.free .buy1{
+    color:#fff;
+    background-color:#3A9BFC;
 }
 .filter{
     margin-top:40px;
@@ -158,4 +162,14 @@
 }
 .liulan{
     margin-right:20px;
+}
+/*********是否免费*********/
+.isfree{
+     display:none;
+ }
+.isfree.show{
+    display:block;
+}
+.free{
+    margin-top:60px;
 }

@@ -99,7 +99,13 @@
                 <div class="list_con">${$item._repstr(prod.introduce,35)}</div>
                 <p class="list_bot floating">
                     <span class="lf"> <i></i> ${$item._dataTypeProp(prod.dataTypeProps)}</span>
-                    <span class="rt free">${$item._prices(prod.price)}</span>
+                    <span class="rt free">
+                        {{if $item._prices(prod.price)=='￥0'}}
+                            免费
+                        {{else}}
+                            ${$item._prices(prod.price)}
+                        {{/if}}
+                    </span>
                 </p>
             </div>
         </li>

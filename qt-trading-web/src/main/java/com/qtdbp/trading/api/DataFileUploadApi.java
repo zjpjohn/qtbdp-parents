@@ -112,4 +112,25 @@ public class DataFileUploadApi extends BaseController {
 
         return map;
     }
+
+    @ApiOperation(value = "免费数据包文件是否有效")
+    @RequestMapping(value = "/file/exist/free", method = RequestMethod.GET)
+    public ModelMap fileExistFree(Integer productId) throws GlobalException {
+
+        ModelMap map = new ModelMap();
+
+        SysUser user = getPrincipal() ;
+        if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+
+        try {
+            ResponseEntity<byte[]> file = uploadService.downloadFreeFile(productId);
+            if(file != null) map.put("success", true) ;
+        } catch (Exception e) {
+            throw new GlobalException("下载出错："+e.getMessage()) ;
+        }
+
+        return map;
+    }
+
+
 }

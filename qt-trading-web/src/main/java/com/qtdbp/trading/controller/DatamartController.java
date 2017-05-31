@@ -1,5 +1,6 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.constants.AppConstants;
 import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
@@ -11,9 +12,15 @@ import com.qtdbp.trading.model.DataTypeAttrModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
+import com.qtdbp.trading.service.FdfsFileService;
 import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.trading.utils.CommonUtil;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,7 +57,7 @@ public class DatamartController extends BaseController {
     private DataProductService productService ;
 
     @Autowired
-    private DataTransactionOrderService orderService ;
+    private FdfsFileService fileService;
 
     @Autowired
     private DataTransactionOrderMapper orderMapper ;
@@ -103,6 +110,10 @@ public class DatamartController extends BaseController {
         List<DataTypeAttrModel> attrModels = dataTypeMapper.findAttrAllByTypeId(resultProduct.getDataType()) ;
 
         ModelAndView result = new ModelAndView(PAGE_DATAMART_DETAIL);
+
+        // 假的购买数和下载数
+        resultProduct.setBuyCount(resultProduct.getBuyCount()+CommonUtil.randomNum(productId));
+        resultProduct.setDownloadCount(resultProduct.getDownloadCount()+CommonUtil.randomNum(productId));
         result.addObject("prod", resultProduct) ;
 
         /*
@@ -182,6 +193,29 @@ public class DatamartController extends BaseController {
             }
         }
         return map;
+    }
+
+    /**
+     * 下载免费数据包文件
+     * @param productId
+     * @return
+     * @throws GlobalException
+     */
+    @RequestMapping(value = "/downloadFreeProduct/{productId}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> updateFreeProduct(@PathVariable Integer productId) throws GlobalException {
+
+        SysUser user = getPrincipal() ;
+
+        if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+
+        ResponseEntity<byte[]> file ;
+        try {
+            file = fileService.downloadFreeFile(productId);
+        } catch (Exception e) {
+            throw new GlobalException("下载出错："+e.getMessage()) ;
+        }
+
+        return file;
     }
 
 }

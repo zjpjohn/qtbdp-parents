@@ -62,9 +62,11 @@
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">验证码</label>
                     <div class="input-icon">
-                        <i class="fa fa-lock"></i>
-                        <input class="form-control placeholder-no-fix" type="text" name="vrifyCode"/> </label>
-                        <img alt="验证码" onclick = "this.src='captcha?d='+new Date()*1" src="/captcha" />
+                        <i class="fa fa-shield"></i>
+                        <input class="form-control placeholder-no-fix" type="text" name="vrifyCode" placeholder="验证码"/> </label>
+                        <span class="input-group-addon">
+                            <img alt="验证码" onclick = "this.src='captcha?d='+new Date()*1" src="/captcha" />
+                        </span>
                     </div>
                 </div>
                 <div class="form-actions">

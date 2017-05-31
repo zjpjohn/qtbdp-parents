@@ -5,12 +5,11 @@
     <parent>
         <artifactId>qtbdp-parents</artifactId>
         <groupId>com.qtbdp.parents</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>qt-trading-admin</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -101,10 +100,10 @@
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-log4j12</artifactId>
                 </exclusion>
-                <exclusion>
+                <!--<exclusion>
                     <groupId>bcloud</groupId>
                     <artifactId>bcloud</artifactId>
-                </exclusion>
+                </exclusion>-->
                 <exclusion>
                     <groupId>org.docx4j</groupId>
                     <artifactId>docx4j</artifactId>
@@ -176,6 +175,27 @@
     </dependencies>
 
     <build>
+        <resources>
+            <!-- 指定不过滤的文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                    <include>*.*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+
+            <!-- 指定要过滤的文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -217,5 +237,33 @@
             </url>
         </snapshotRepository>
     </distributionManagement>
+
+    <!-- 配置打包环境 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <package.active>dev</package.active>
+            </properties>
+            <!-- 默认打包环境 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <package.active>test</package.active>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <package.active>prod</package.active>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

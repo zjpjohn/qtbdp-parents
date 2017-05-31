@@ -31,16 +31,25 @@
                 <p class="p1">
                     <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')"></span>
                 </p>
-                <p class="p2">
-                    <i th:text="'￥'+${#numbers.formatDecimal(prod.price, 0, 2)}+' / 整包'">￥200.00 / 整包</i>
-                    <span>（-）积分</span>
-                    <i th:text="'￥'+${#numbers.formatDecimal(prod.itemPrice , 0, 2)}+' / 条'">￥1.00 / 条</i>
-                    <span>（-）积分</span>
-                </p>
-                <p class="p3">
-                    <a class="buy1" id="buydata">购买数据包</a>
-                    <span th:text="'已有'+${prod.buyCount}+'人购买'">已有34人购买</span>
-                </p>
+                <div th:class="${prod.price}==0?'show isfree free':'isfree'">
+                    <p class="p3">
+                        <a class="buy1" id="freeDownload">免费下载 <i style="display:none;" th:text=" ${prod.id}"></i></a>
+                        <span>已有 <i th:text="${prod.downloadCount}"></i> 人下载</span>
+                    </p>
+                </div>
+                <div th:class="${prod.price}==0?'isfree':'show isfree'">
+                    <p class="p2">
+                        <i th:text="'￥'+${#numbers.formatDecimal(prod.price, 0, 2)}+' / 整包'"></i>
+                        <span>（-）积分</span>
+                        <i th:text="'￥'+${#numbers.formatDecimal(prod.itemPrice , 0, 2)}+' / 条'"></i>
+                        <span>（-）积分</span>
+                    </p>
+                    <p class="p3">
+                        <a class="buy1" id="buydata">购买数据包</a>
+                        <span>已有   <i th:text="${prod.buyCount}"></i> 人购买</span>
+                    </p>
+                </div>
+
             </div>
         </div>
 
@@ -82,7 +91,7 @@
                 <span>销售量：${item.downloadCount}</span>
             </p>
             <div class="list_mask">
-                <p><i>￥1.00</i>（10积分）</p>
+                <p><i>￥${item.price}</i>（-）积分</p>
                 <!--<a class="list_buy" onclick="buy(${item.id},1);">购买</a>-->
                 <!--<a href="javacript:;" class="list_see">查看详情</a>-->
             </div>
@@ -98,6 +107,7 @@
         if($(".infos").html().length>120){
             $(".infos").html($(".infos").html().substring(0,120)+"...");
         }
+        //$(".numbers").html(parseInt(Math.random()*150)+50);
 
         // 页面请求参数
         var settings = {
@@ -145,6 +155,28 @@
                 }
             });
         }
+        $("#freeDownload").unbind().click(function(){
+         //判断用户是否登录
+             if(!userId){
+                location.href = "/login";
+             }
+            var id=$(this).children("i").html();
+            $.ajax({
+                url: "/api/upload/file/exist/free?productId="+id,
+                type: "get",
+                xhrFields:{withCredentials:true},
+                success: function (data) {
+                    if(data.success){
+                        window.location.href="/downloadFreeProduct/"+id;
+                    }else{
+                        layer.msg("下载数据失败",{icon:5});
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        });
     </script>
 </body>
 </html>

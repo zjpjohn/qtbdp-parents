@@ -414,11 +414,8 @@ var pageData = {
             for(var i=0;i<dataArr.length;i++){
                 var aa = new Array();
                 aa = dataArr[i].split(":");
-                jsonData[aa[0]] = aa[1];
+                returnData.push(aa[1]);
             }
-            returnData.push(jsonData.数据格式);
-            returnData.push(jsonData.数据来源);
-            returnData.push(jsonData.数据大小);
             return returnData.join(",");
         }else{
             return "";

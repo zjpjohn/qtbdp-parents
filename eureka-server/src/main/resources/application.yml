@@ -6,4 +6,4 @@ spring:
   application:
     name: eureka-server
   profiles:
-    active: dev   # 默认激活application-dev.yml配置
+    active: ${package.active}   # 默认激活application-dev.yml配置
