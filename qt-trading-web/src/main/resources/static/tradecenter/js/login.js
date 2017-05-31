@@ -56,8 +56,7 @@ function checkPwd(type){
     elm.parent().children(".error_tip").html("");
     return true;
 }
-//验证各系统的地址
-var sysid="msvtPqZBiqX5qeOaXUEFL5AilgBSA2KTFu0WN74T4MIHjWUMxYbTvQ%3D%3D";
+
 //登录表单提交
 $("#loginSubmit").unbind("click").click(function(sysid){
     console.log(sysid);
@@ -82,10 +81,16 @@ $("#loginSubmit").unbind("click").click(function(sysid){
             },
             success:function(data){
                 //如果登录成功
-                $("#loginModel").hide();
-                //location.reload();
 
-                //location.href="/callback";
+                //location.reload();
+                if(data.status==200){
+                    $("#loginModel").hide();
+                    location.href="/callback";
+                }else{
+
+
+                    $(".error_tip").html("请输入正确的账号及密码");
+                }
 
             },
             error:function(data){
