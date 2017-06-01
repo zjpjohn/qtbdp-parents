@@ -13,3 +13,12 @@ qtbdp-parents # 父目录
 3. 启动base-service的BaseServiceApplication主函数，成功后直接访问地址：http://localhost:8030/
 4. 启动qt-trading-web的WebApplication主函数，成功后直接访问地址：http://localhost:8040/
 5. 启动qt-trading-admin的AdminApplication主函数，成功后直接访问地址：http://localhost:8050/
+
+# 2017-05-01
+交易平台V1.0.0正式发布上线
+前台支持数据商城、服务商等功能
+后台支持数据产品发布、类目管理等功能
+
+# 2017-06-01
+交易平台V1.1.0正式发布上线
+支持登录注册弹框，不跳转页面

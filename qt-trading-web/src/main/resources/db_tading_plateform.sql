@@ -101,14 +101,14 @@ INSERT INTO `data_type_attr_val` VALUES (13, 4, '数据大小', '500M-1G', 3, 1)
 INSERT INTO `data_type_attr_val` VALUES (14, 4, '数据大小', '1G以上', 4, 1);
 
 
-/* 新增字段 2017-5-12 v1.1 */
+/* 新增字段 2017-5-12 v1.1.0 */
 
 /*==============================================================*/
 /* Table: data_type  新增is_parent                               */
 /*==============================================================*/
 ALTER TABLE data_type ADD is_parent TINYINT NOT NULL DEFAULT 0 COMMENT '是否父节点, 0是，1否';
 
-/* 新增字段 2017-5-22 v1.1 */
+/* 新增字段 2017-5-22 v1.1.0 */
 
 /*==============================================================*/
 /* Table: data_product  新增price,item_price                    */
@@ -124,7 +124,7 @@ ALTER TABLE data_product ADD data_size INT COMMENT '数据文件大小' ;
 /*==============================================================*/
 ALTER TABLE data_item ADD price DECIMAL(10,2) COMMENT '价格',ADD file_url VARCHAR(1000) COMMENT '数据包路径' ;
 
-/* 调整类目基础数据 2017-5-25 v1.1 */
+/* 调整类目基础数据 2017-5-25 v1.1.0 */
 INSERT INTO `data_type` (`id`, `pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (28, 0, '产权专利', 1, 0, null, 1);
 INSERT INTO `data_type` (`id`, `pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (29, 0, '行业综合', 1, 1, null, 1);
 INSERT INTO `data_type` (`id`, `pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (30, 0, '工业生产', 1, 2, null, 1);
@@ -205,3 +205,7 @@ INSERT INTO `data_type_attr_val` VALUES (301, 6, '数据来源', '企业', 1, 1)
 INSERT INTO `data_type_attr_val` VALUES (302, 6, '数据来源', '组织机构', 2, 1);
 INSERT INTO `data_type_attr_val` VALUES (303, 6, '数据来源', '互联网', 3, 1);
 INSERT INTO `data_type_attr_val` VALUES (304, 6, '数据来源', '个人', 4, 1);
+
+
+/* 2017-06-01 v1.2.0 */
+ALTER TABLE data_product ADD data_profile VARCHAR(1000) COMMENT '产品简介', ADD market_price DECIMAL(10,2) COMMENT '市场价' ;
