@@ -251,7 +251,6 @@ $("#registerSubmit").unbind("click").click(function(){
         return false;
     }else{
         //上传表单
-        console.log(0);
         $.ajax({
             url:"http://sso.qtbigdata.com/ssoUser/register?ajax=true&sysid=zypXpOz8bjEudhPF8bNf3YrGaoHTgKgGId6pkYs8lSHmZMdRyMWaPg==",
             type:"POST",
@@ -275,7 +274,9 @@ $("#registerSubmit").unbind("click").click(function(){
                         icon: 1,
                         time: 3000 //3秒关闭（如果不配置，默认是3秒）
                     }, function(){
+                        $("#registerModel").hide();
                         loginShow();
+
 
                     });
 
