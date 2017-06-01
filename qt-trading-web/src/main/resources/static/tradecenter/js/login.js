@@ -9,6 +9,7 @@ function modelClose(me){
 //弹框之间切换时
 function modelSwitch(){
     $(".model").hide();
+    $(".error_tip").html("");
     $(".model_content").css("left",window.innerWidth/2-250);
     $(".model_content").css("top",window.innerHeight/2-230);
     clearInterval(newtimer);
