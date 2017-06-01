@@ -279,9 +279,6 @@ $("#registerSubmit").unbind("click").click(function(){
 
                     });
 
-
-
-
                 }else if(data.status==400){
                     $(".error_tip").html(data.msg);
 
