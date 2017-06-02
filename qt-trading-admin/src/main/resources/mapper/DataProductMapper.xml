@@ -42,15 +42,19 @@
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
         <result column="price" property="price"/>
+        <result column="item_price" property="itemPrice" />
         <result column="addtime" property="addTime" />
+        <result column="editor_time" property="editorTime" />
         <result column="data_type" property="dataType" />
         <result column="user_id" property="userId" />
         <result column="is_used" property="isUsed" />
         <result column="name" property="username" />
+        <result column="file_url" property="fileUrl"/>
+        <result column="data_type_path" property="dataTypePath" />
     </resultMap>
 
     <!-- 单表查询产品 -->
-    <select id="findProductsById" resultMap="ProductDetailResultMap">
+    <select id="findProductsById" resultMap="ProductResultMap">
         SELECT
         p.id,
         p.designation,
@@ -63,47 +67,14 @@
         p.data_type_props,
         p.item_price,
         p.file_url,
-        user_id
+        p.user_id,
+        p.is_used,
+        p.data_type_path
         FROM
         data_product as p
         WHERE
-          p.id = #{id}
-        ORDER BY
-        p.addtime DESC
+        p.id = #{id}
     </select>
-
-    <resultMap id="ProductDetailResultMap" type="com.qtdbp.trading.model.DataProductModel" >
-        <id column="Id" property="id" />
-        <result column="designation" property="designation" />
-        <result column="pic" property="pic" />
-        <result column="introduce" property="introduce" />
-        <result column="addtime" property="addTime" />
-        <result column="editor_time" property="editorTime" />
-        <result column="data_type_props" property="dataTypeProps" />
-        <result column="file_url" property="fileUrl"/>
-        <result column="is_used" property="isUsed"/>
-        <result column="data_type" property="dataType"  />
-        <result column="user_id" property="userId" />
-        <result column="price" property="price" />
-        <result column="item_price" property="itemPrice" />
-        
-    </resultMap>
-
-    <!--根据id查询单条数据类型-->
-    <select id="findDataTypeById" parameterType="java.lang.Integer" resultMap="dataTypeModel">
-        select * from data_type where id = #{id}
-    </select>
-
-    <!--数据类型表实体类映射-->
-    <resultMap id="dataTypeModel" type="com.qtdbp.trading.model.DataTypeModel">
-        <id column="id" property="id" />
-        <result column="pid" property="pid" />
-        <result column="name" property="name" />
-        <result column="is_used" property="isUsed" />
-        <result column="sort" property="sort" />
-        <result column="remark" property="remark" />
-        <result column="is_parent" property="isParent" />
-    </resultMap>
 
     <!-- 更新产品信息 -->
     <update id="updateProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
@@ -122,6 +93,7 @@
             <if test="fileUrl != null">file_url = #{fileUrl} ,</if>
             <if test="dataTypeProps != null">data_type_props = #{dataTypeProps} ,</if>
             <if test="dataSize != null">data_size = #{dataSize},</if>
+            <if test="dataTypePath != null">data_type_path = #{dataTypePath}, </if>
         </trim>
         WHERE
         id = #{id}
@@ -155,7 +127,8 @@
             data_type_props,
             download_count,
             buy_count,
-            data_size
+            data_size,
+            data_type_path
         ) VALUES (
             #{designation},
             #{introduce},
@@ -179,30 +152,11 @@
             #{dataTypeProps},
             0,
             0,
-            #{dataSize}
+            #{dataSize},
+            #{dataTypePath}
         )
 
     </insert>
-
-    <!-- 根据ID查询单条数据包产品 -->
-    <select id="findProductByIdIgnoreIsUsed" resultMap="ProductDetailResultMap">
-        SELECT
-        p.id,
-        p.designation,
-        p.pic,
-        p.introduce,
-        p.addtime,
-        p.editor_time,
-        p.price,
-        p.data_type_props,
-        p.item_price,
-        p.file_url,
-        p.is_used
-        FROM
-        data_product as p
-        WHERE
-        p.id = #{id}
-    </select>
 
     <!--下架数据包产品-->
     <update id="updateSoldOut" parameterType="java.lang.Integer">
@@ -239,21 +193,6 @@
         )
 
     </insert>
-
-    <select id="findProductAttrRelation" parameterType="java.lang.Integer" resultMap="productAttrRelationMap">
-        select r.id, r.product_id, r.type_id, r.attr_id, r.val_id, r.attr_name, r.val_name from data_product_attr_relation r
-        where r.product_id = #{id}
-    </select>
-
-    <resultMap id="productAttrRelationMap" type="com.qtdbp.trading.model.DataProductAttrRelationModel">
-        <id column="id" property="id" />
-        <result column="product_id" property="productId" />
-        <result column="type_id" property="typeId" />
-        <result column="attr_id" property="attrId" />
-        <result column="attr_name" property="attrName" />
-        <result column="val_id" property="valId" />
-        <result column="val_name" property="valName" />
-    </resultMap>
 
     <delete id="deleteAttrByProductId" parameterType="java.lang.Integer">
         delete from data_product_attr_relation where product_id = #{productId}

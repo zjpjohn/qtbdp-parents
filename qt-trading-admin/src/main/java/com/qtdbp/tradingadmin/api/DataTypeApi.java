@@ -53,26 +53,6 @@ public class DataTypeApi {
         return map;
     }
 
-/*    @ApiOperation(value="获取数据类型二级类目接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "节点id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 0.否)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @ResponseBody
-    @RequestMapping(value = "/findSecondNode", method = RequestMethod.GET)
-    public ModelMap findSecondNode (DataTypeModel dataTypeModel) {
-
-        ModelMap map = new ModelMap() ;
-        try {
-            List<DataTypeModel> list = dataTypeMapper.findSecondNode(dataTypeModel);
-            map.put("pageInfo", new PageInfo<>(list));
-            map.put("queryParam", dataTypeModel);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return map;
-    }*/
-
     @ApiOperation(value = "获取所有属性、属性值列表")
     @ResponseBody
     @RequestMapping(value = "/findAttrAll", method = RequestMethod.GET)

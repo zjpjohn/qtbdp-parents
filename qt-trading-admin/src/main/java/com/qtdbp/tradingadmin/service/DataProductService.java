@@ -102,7 +102,7 @@ public class DataProductService {
      * @throws GlobalException
      */
     public Integer updateState(Integer productId) throws GlobalException {
-        DataProductModel productModel = productMapper.findProductByIdIgnoreIsUsed(productId);
+        DataProductModel productModel = productMapper.findProductsById(productId);
         if (productModel == null) throw new GlobalException("该数据包已不存在") ;
         Integer count = 0;
         if (productModel.getIsUsed() == 1){ // 上架时改为下架
