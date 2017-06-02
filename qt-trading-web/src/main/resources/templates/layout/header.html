@@ -8,12 +8,27 @@
 	</div>
 	<div class="head_fabu  floating">
 		<i class="lf icon"></i>
-		<div class="lf fabu_btns">
-			<p>发布</p>
-			<a th:href="@{/demand/buy/add}">需求发布</a>
-			<a th:href="@{/institution/add}">加盟服务</a>
-			<!--<a>数据发布</a>-->
+
+		<!--如果已登录-->
+		<div  th:if="${user}">
+			<div class="lf fabu_btns">
+				<p>发布</p>
+				<a th:href="@{/demand/buy/add}">需求发布</a>
+				<a th:href="@{/institution/add}" >加盟服务</a>
+				<!--<a>数据发布</a>-->
+			</div>
 		</div>
+
+		<!--如果未登录-->
+		<div  th:unless="${user}">
+			<div class="lf fabu_btns">
+				<p>发布</p>
+				<a href="javascript:;"  onclick="loginShow(this)">需求发布</a>
+				<a href="javascript:;"  onclick="loginShow(this)">加盟服务</a>
+				<!--<a>数据发布</a>-->
+			</div>
+		</div>
+
 
 	</div>
 </header>
@@ -93,7 +108,7 @@
 		<i class="model_delete" onclick="modelClose(this)">X</i>
 		<h2 class="model_title">请先登录</h2>
 		<form action="" id="loginForm" class="model_form">
-			<p class="error_tip">请输入您的账号</p>
+			<p class="error_tip"><!--请输入您的账号--></p>
 			<input type="text" placeholder="账号" name="userAccount" class="user_account">
 			<input type="password" placeholder="密码" name="userPwd" class="user_pwd">
 			<a href="javascript:;" id="loginSubmit" class="form_submit">登录</a>
@@ -111,7 +126,7 @@
 		<i class="model_delete" onclick="modelClose(this)">X</i>
 		<h2 class="model_title">注册</h2>
 		<form action="" id="registerForm" class="model_form">
-			<p class="error_tip">请输入您的手机号</p>
+			<p class="error_tip"><!--请输入您的手机号--></p>
 			<input type="text" placeholder="请输入您的手机号" name="userPhone" class="user_phone">
 			<label class="code_lab">
 				<input type="text" placeholder="请输入验证码" maxlength="4" name="verifyCode" class="phone_code">
