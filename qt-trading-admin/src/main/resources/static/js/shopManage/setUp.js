@@ -26,46 +26,72 @@ $(document).ready(function(){
     $('#describe').trumbowyg();//文本编辑器实例化
     $('.dropify').dropify();//图片预览
 
-
-    //上传文件
-    $file.change(function(){
-        $(this).parents(".uploader").find(".filename").val($(this).val());
-        var val = this.files[0];
-        var formData = new FormData();
-        formData.append("file", val);
-
-        $.ajax({
-            url: "/api/upload/file",
-            type:"post",
-            contentType: false,
-            processData: false,
-            data:formData,
-            beforeSend: function(){
-                layer.msg("文件正在上传",{icon:5});
-            },
-            error:function () {
-                layer.msg("文件上传失败",{icon:5});
-            },
-            success: function (ret) {
-                if (ret.success == true){
-                    layer.msg("文件上传成功",{icon:1});
-                    $file.attr("data-src", ret.file);
-                    $file.attr("data-size", ret.dataSize);
-                    if(ret.subFiles){
-                        subFlie = ret.subFiles
-                    }
-                }else {
-                    subFlie = {}
-                }
+    $file.fileinput({
+        language: 'zh',
+        layoutTemplates:{
+            actionDelete:'',
+            actionUpload:''
+        },
+        uploadUrl: '/api/upload/file'
+    }).on("filebatchselected", function(event, files) {
+        $('.file-caption').html("");
+        $(this).fileinput("upload");
+    }).on('fileerror', function(event, data, msg) {
+        layer.msg("文件上传失败",{icon:5});
+    }).on("fileuploaded", function(event, data, previewId, index) {
+        layer.msg("文件上传成功",{icon:1});
+        var ret = data.response;
+        if (ret.success == true){
+            layer.msg("文件上传成功",{icon:1});
+            $file.attr("data-src", ret.file);
+            $file.attr("data-size", ret.dataSize);
+            if(ret.subFiles){
+                subFlie = ret.subFiles
             }
-        });
-    });
-    //未选择文件时显示
-    $file.each(function(){
-        if($(this).val()==""){
-            $(this).parents(".uploader").find(".filename").val("未选中文件...");
+        }else {
+            subFlie = {}
         }
     });
+
+    //上传文件
+    // $file.change(function(){
+    //     $(this).parents(".uploader").find(".filename").val($(this).val());
+    //     var val = this.files[0];
+    //     var formData = new FormData();
+    //     formData.append("file", val);
+    //
+    //     $.ajax({
+    //         url: "/api/upload/file",
+    //         type:"post",
+    //         contentType: false,
+    //         processData: false,
+    //         data:formData,
+    //         beforeSend: function(){
+    //             layer.msg("文件正在上传",{icon:5});
+    //         },
+    //         error:function () {
+    //             layer.msg("文件上传失败",{icon:5});
+    //         },
+    //         success: function (ret) {
+    //             if (ret.success == true){
+    //                 layer.msg("文件上传成功",{icon:1});
+    //                 $file.attr("data-src", ret.file);
+    //                 $file.attr("data-size", ret.dataSize);
+    //                 if(ret.subFiles){
+    //                     subFlie = ret.subFiles
+    //                 }
+    //             }else {
+    //                 subFlie = {}
+    //             }
+    //         }
+    //     });
+    // });
+    // //未选择文件时显示
+    // $file.each(function(){
+    //     if($(this).val()==""){
+    //         $(this).parents(".uploader").find(".filename").val("未选中文件...");
+    //     }
+    // });
 
 
     //图片上传
@@ -212,36 +238,62 @@ $(document).ready(function(){
                             optionA = $classA.children(),
                             optionB = $classB.children();
 
-                        Common.optionSelect({
-                            ele:$classA,
-                            option:optionA,
-                            id:type.pid
-                        });
-                        Common.typeList({
-                            ele:$classB,
-                            id:type.pid,
-                            url:"/api/dataType/findSecondNode",
-                            tmpl:$typeTmpl,
-                            CId:type.id,
-                            selected:data.attrRelationModels,
-                            price:data.price,
-                            itemPrice:data.itemPrice,
-                            PWhole:$whole,
-                            PChild:$child,
-                            attrId:$attr,
-                            priceName:$price,
-                            attrContent:[
-                                {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
-                                {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                                {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
-                            ]
-                        });
+                        if(type){
+                            Common.optionSelect({
+                                ele:$classA,
+                                option:optionA,
+                                id:type.pid
+                            });
+                            Common.typeList({
+                                ele:$classB,
+                                id:type.pid,
+                                url:"/api/dataType/findSecondNode",
+                                tmpl:$typeTmpl,
+                                CId:type.id,
+                                selected:data.attrRelationModels,
+                                price:data.price,
+                                itemPrice:data.itemPrice,
+                                PWhole:$whole,
+                                PChild:$child,
+                                attrId:$attr,
+                                priceName:$price,
+                                attrContent:[
+                                    {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
+                                    {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
+                                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                                ]
+                            });
+                        }else {
+
+                            Common.optionSelect({
+                                ele:$classA,
+                                option:optionA
+                            });
+                            Common.typeList({
+                                ele:$classB,
+                                url:"/api/dataType/findSecondNode",
+                                tmpl:$typeTmpl,
+                                selected:data.attrRelationModels,
+                                price:data.price,
+                                itemPrice:data.itemPrice,
+                                PWhole:$whole,
+                                PChild:$child,
+                                attrId:$attr,
+                                priceName:$price,
+                                attrContent:[
+                                    {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
+                                    {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
+                                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
+                                ]
+                            });
+                        }
+
 
                         $waresN.val(data.designation);
                         $describe.html(data.introduce);
-                        $(".filename").val(data.fileUrl);
                         $file.attr("data-src",data.fileUrl);
                         $file.attr("data-size", data.dataSize);
+                        $('.file-caption').html(data.fileUrl);
                         var img = document.createElement('img');
                         img.setAttribute("src",data.pic);
                         $('.dropify-render').append(img);
@@ -262,9 +314,10 @@ $(document).ready(function(){
         var r = function (options) {
             var _options  = options;
 
-            // jQuery.validator.addMethod("isClassB", function() {
-            //     return _options.isParent == 0
-            // }, "请选择二级分类");
+            jQuery.validator.addMethod("isClassB", function() {
+                debugger;
+                return _options.isParent == 0 || _options.isParent == 1;
+            }, "请选择二级分类");
 
             var e = $("#form_sample"), r = $(".alert-danger", e), i = $(".alert-success", e);
             e.validate({
@@ -289,7 +342,7 @@ $(document).ready(function(){
                     type1: {required: !0},
                     type2: {
                         // isClassB: true,
-                        // required: !0
+                        // required: true
                     },
                     chargeRadio: {required: !0},
                     type:{required: !0},
@@ -317,11 +370,12 @@ $(document).ready(function(){
                 submitHandler: function (e) {
                     i.show(), r.hide();
 
-
-                       FormValidationMd.init({
-                           isParent:$classA.find("option:selected").attr("data-isParent"),
-                           v:$classB.val()
-                       });
+                      //
+                      // $("#subBtn").on("click",function () {
+                      //     FormValidationMd.init({
+                      //         isParent:$classA.find("option:selected").attr("data-isParent")
+                      //     });
+                      // });
 
                        // /获取表单信息
                        var ajaxType,
@@ -420,7 +474,7 @@ $(document).ready(function(){
                        data.dataTypeProps = dataTypeProps;
 
 
-
+                    // alert("111");
 
 
                        $.ajax({
@@ -440,7 +494,7 @@ $(document).ready(function(){
                                    }, function(){
                                        //do something
                                        window.location.href = '/wares';
-                                       // alert("111");
+
                                    });
                                }
                            }
