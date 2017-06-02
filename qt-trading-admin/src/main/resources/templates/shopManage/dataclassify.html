@@ -11,7 +11,6 @@
     <meta content="" name="author" />
     <meta http-equiv="cache-control" content="no-cache" />
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
-    <link href="/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
     <link href="/css/layout.css" rel="stylesheet" type="text/css" />
@@ -141,7 +140,7 @@
 //页面加载获取的数据
     $(function(){
         $.ajax({
-            url: "/api/dataType/findRootNode",
+            url: "/api/dataType/findNode",
             type: "get",
             success: function (data) {
                 var html="";
@@ -171,7 +170,7 @@
 
         if(!$(me).hasClass("disabled")){
             $.ajax({
-                url: "/api/dataType/findSecondNode",
+                url: "/api/dataType/findNode",
                 type: "get",
                 data:{
                     id:dataid,
