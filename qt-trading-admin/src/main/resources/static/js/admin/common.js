@@ -141,6 +141,26 @@ var Common = {
         }
         return query_string;
     },
+    attrSelect:function (str,symbols) {
+        if(typeof str != 'string' || str == ""){
+            console.log("参数错误")
+        }else {
+            var newStr = str.split(symbols[0]),
+                arr = [];
+            newStr.pop();
+
+            for(var i = 0;i < newStr.length;i++){
+                var newArr = newStr[i].split(symbols[1]),
+                    obj = {};
+                obj.attrName = newArr[0];
+                obj.valName = newArr[1];
+                obj.attrId = newArr[2];
+                obj.valId = newArr[3];
+                arr.push(obj);
+            }
+            return arr;
+        }
+    },
     //渲染Select
     typeList:function (opt) {
         var ele = opt.ele,

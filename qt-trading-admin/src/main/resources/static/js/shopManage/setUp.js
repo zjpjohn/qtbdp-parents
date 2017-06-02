@@ -29,7 +29,6 @@ $(document).ready(function(){
     $file.fileinput({
         language: 'zh',
         layoutTemplates:{
-            actionDelete:'',
             actionUpload:''
         },
         uploadUrl: '/api/upload/file'
@@ -152,7 +151,7 @@ $(document).ready(function(){
     //展示一级
     Common.typeList({
         ele:$classA,
-        url:"/api/dataType/findRootNode",
+        url:"/api/dataType/findNode",
         tmpl:$typeTmpl
     });
 
@@ -184,7 +183,7 @@ $(document).ready(function(){
                 Common.typeList({
                     ele:$classB,
                     id:id,
-                    url:"/api/dataType/findSecondNode",
+                    url:"/api/dataType/findNode",
                     tmpl:$typeTmpl
                 });
             }
@@ -234,7 +233,8 @@ $(document).ready(function(){
                     data = ret.pageInfo;
                     if(ret.pageInfo){
                         var data = ret.pageInfo,
-                            type = data.dataTypeModel,
+                            typePath = data.dataTypePath,
+                            type = data.dataType,
                             optionA = $classA.children(),
                             optionB = $classB.children();
 
@@ -242,15 +242,15 @@ $(document).ready(function(){
                             Common.optionSelect({
                                 ele:$classA,
                                 option:optionA,
-                                id:type.pid
+                                id:typePath
                             });
                             Common.typeList({
                                 ele:$classB,
-                                id:type.pid,
-                                url:"/api/dataType/findSecondNode",
+                                id:typePath,
+                                url:"/api/dataType/findNode",
                                 tmpl:$typeTmpl,
-                                CId:type.id,
-                                selected:data.attrRelationModels,
+                                CId:type,
+                                selected:Common.attrSelect(data.dataTypeProps,[';',':']),
                                 price:data.price,
                                 itemPrice:data.itemPrice,
                                 PWhole:$whole,
@@ -271,9 +271,9 @@ $(document).ready(function(){
                             });
                             Common.typeList({
                                 ele:$classB,
-                                url:"/api/dataType/findSecondNode",
+                                url:"/api/dataType/findNode",
                                 tmpl:$typeTmpl,
-                                selected:data.attrRelationModels,
+                                selected:Common.attrSelect(data.dataTypeProps,[';',':']),
                                 price:data.price,
                                 itemPrice:data.itemPrice,
                                 PWhole:$whole,
@@ -385,6 +385,7 @@ $(document).ready(function(){
                            dataTypeProps = "",
                            wares = $waresN.val(),
                            describe = $describe.html(),
+                           classA = $classA.val(),
                            classB = $classB.val(),
                            //文件类型信息
                            type = $('#waresType input:radio:checked ').val(),
@@ -412,6 +413,7 @@ $(document).ready(function(){
                                fileUrl:file,
                                dataSize:fileSize,
                                subFiles:subFlie,
+                               dataTypePath:classA,
                                dataType:classB
                            };
                        if(id == undefined || id == null || id == ""){
