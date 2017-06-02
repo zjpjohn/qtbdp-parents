@@ -140,7 +140,7 @@
 //页面加载获取的数据
     $(function(){
         $.ajax({
-            url: "/api/dataType/findRootNode",
+            url: "/api/dataType/findNode",
             type: "get",
             success: function (data) {
                 var html="";
@@ -170,7 +170,7 @@
 
         if(!$(me).hasClass("disabled")){
             $.ajax({
-                url: "/api/dataType/findSecondNode",
+                url: "/api/dataType/findNode",
                 type: "get",
                 data:{
                     id:dataid,
