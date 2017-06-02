@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>qt-trading-web</artifactId>
-    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -24,19 +23,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!-- 部署线上不采用spring-boot自带的tomcat进行启动 -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 本地启动需要-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -117,14 +103,6 @@
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.csource</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
         <!--  支付  -->
         <dependency>
             <groupId>net.sinofool</groupId>
@@ -177,22 +155,26 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>application.yml</include>
-                    <include>fdfs_client.properties</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
         </resources>
 
         <plugins>
-            <!-- 支持maven打包自定义名字 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--<version>1.5.2.RELEASE</version>-->
                 <configuration>
-                    <warName>qt-trading-web</warName>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <mainClass>com.qtdbp.trading.WebApplication</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
