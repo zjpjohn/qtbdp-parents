@@ -33,7 +33,6 @@ function findPwdShow(){
     modelSwitch();
     $("#findPwdModel").show();
 }
-
 /*******************登录***************/
 //验证登录账号
 function checkAccount(type){
@@ -57,7 +56,6 @@ function checkPwd(type){
     elm.parent().children(".error_tip").html("");
     return true;
 }
-
 //登录表单提交
 $("#loginSubmit").unbind("click").click(function(){
     var type="#loginModel ";
@@ -90,20 +88,15 @@ $("#loginSubmit").unbind("click").click(function(){
                 }else{
                     $(".error_tip").html("请输入正确的账号及密码");
                 }
-
             },
             error:function(data){
                 console.log(data);
             }
         });
-
     }
 });
 
 /************注册*****************/
-
-
-
     //验证手机号
     function checkPhone(type){
         console.log(type);
@@ -146,7 +139,6 @@ $("#loginSubmit").unbind("click").click(function(){
                         clearInterval(newtimer);
                         newtimer = null;
                     }
-
                 },
                 error:function(data){
                     console.log(data);
@@ -160,7 +152,6 @@ $("#loginSubmit").unbind("click").click(function(){
             timercount--;
             $(".getCode").html(timercount+"秒后重新获取");
             $(".getCode").addClass("huoqu_success");
-
             if(timercount<=0){
                 clearInterval(newtimer);
                 newtimer = null;
@@ -169,7 +160,6 @@ $("#loginSubmit").unbind("click").click(function(){
             }
         },1000);
     }
-
 //验证注册手机验证码不为空
     function checkPhoneCode(type){
         var elm=$(type+".phone_code");
@@ -181,8 +171,6 @@ $("#loginSubmit").unbind("click").click(function(){
         elm.parent().parent().children(".error_tip").html("");
         return true;
     }
-
-
 //验证注册密码
     function checkPwd(type){
         var elm=$(type+".user_pwd3");
@@ -196,7 +184,6 @@ $("#loginSubmit").unbind("click").click(function(){
     }
 //注册验证第二次新密码
     function checkPwd2(type){
-
         var elm=$(type+".user_pwd3").val();
         var elm2=$(type+".user_pwd2").val();
         if( elm2==""){
@@ -221,7 +208,6 @@ $("#loginSubmit").unbind("click").click(function(){
             return true;
         }
     }
-
 function checkall(type){
     if(!checkPhone(type)){
         return false;
@@ -237,7 +223,6 @@ function checkall(type){
     }if(!checkAgreement(type)){
         return false;
     }
-
     return true;
 }
 
@@ -245,8 +230,6 @@ function checkall(type){
 //提交注册表单
 $("#registerSubmit").unbind("click").click(function(){
     var type="#registerModel ";
-
-
     if( !checkall(type) ){
         console.log("aa");
         return false;
@@ -277,13 +260,10 @@ $("#registerSubmit").unbind("click").click(function(){
                     }, function(){
                         $("#registerModel").hide();
                         loginShow();
-
-
                     });
 
                 }else if(data.status==400){
                     $(".error_tip").html(data.msg);
-
                 }
 
             },
