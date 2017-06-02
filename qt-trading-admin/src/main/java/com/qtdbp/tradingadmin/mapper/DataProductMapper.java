@@ -60,13 +60,6 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
     Integer updatePutaway(@Param("id") Integer id) ;
 
     /**
-     * 查询单条数据包产品(忽视是否可用)
-     * @param id
-     * @return
-     */
-    DataProductModel findProductByIdIgnoreIsUsed(@Param("id") Integer id) ;
-
-    /**
      * 新增数据包产品关联表数据
      * @param dataProductAttrRelationModel
      * @return

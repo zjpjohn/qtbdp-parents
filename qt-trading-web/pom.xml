@@ -5,13 +5,11 @@
     <parent>
         <artifactId>qtbdp-parents</artifactId>
         <groupId>com.qtbdp.parents</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>qt-trading-web</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <!--<packaging>war</packaging>-->
 
     <dependencies>
         <dependency>
@@ -25,20 +23,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!-- 部署线上不采用spring-boot自带的tomcat进行启动 -->
-            <!--<exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>-->
         </dependency>
-        <!-- 本地启动需要-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,14 +103,6 @@
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.csource</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
         <!--  支付  -->
         <dependency>
             <groupId>net.sinofool</groupId>
@@ -159,29 +136,45 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>com.caucho</groupId>
-            <artifactId>hessian</artifactId>
-            <version>4.0.7</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.32</version>
-        </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <!-- 指定不过滤的文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                    <include>*.*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+
+            <!-- 指定要过滤的文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
-            <!-- 支持maven打包自定义名字 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--<version>1.5.2.RELEASE</version>-->
                 <configuration>
-                    <warName>qt-trading-web</warName>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <mainClass>com.qtdbp.trading.WebApplication</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -208,4 +201,35 @@
             </url>
         </snapshotRepository>
     </distributionManagement>
+
+    <!-- 配置打包环境 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <package.active>dev</package.active>
+                <tracker.addr>192.168.36.39:22122</tracker.addr>
+            </properties>
+            <!-- 默认打包环境 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <package.active>test</package.active>
+                <tracker.addr>192.168.36.39:22122</tracker.addr>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <package.active>prod</package.active>
+                <tracker.addr>192.168.36.17:22122</tracker.addr>
+            </properties>
+        </profile>
+    </profiles>
 </project>

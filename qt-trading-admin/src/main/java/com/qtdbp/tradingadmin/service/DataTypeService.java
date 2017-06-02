@@ -1,7 +1,7 @@
 package com.qtdbp.tradingadmin.service;
 
-import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.tradingadmin.mapper.DataTypeMapper;
+import com.qtdbp.tradingadmin.model.DataTypeModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,23 @@ public class DataTypeService {
     @Autowired
     public DataTypeMapper dataTypeMapper;
 
-    public List findRootNode (DataTypeModel dataType) {
+    /**
+     * 查询数据类型类目接口
+     * @param dataType
+     * @return
+     */
+    public List findNode (DataTypeModel dataType) {
 
-        return null;
+        List<DataTypeModel> list = null;
+
+        if (dataType.getId() != 0) {
+            //查询子节点类目
+            list = dataTypeMapper.findSecondNode(dataType);
+        } else {
+            //查询顶级节点类目
+            list = dataTypeMapper.findRootNode(dataType);
+        }
+        return list;
     }
 
 }

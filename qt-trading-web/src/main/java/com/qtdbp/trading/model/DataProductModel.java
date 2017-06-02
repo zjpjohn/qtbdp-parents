@@ -41,6 +41,7 @@ public class DataProductModel extends BaseModel {
     private String dataTypeProps ;  // 数据类型属性串pname:vname:pid:vid;pname1:vname1:pid1:vid1
     private double price;
     private double itemPrice;
+    private String dataTypePath;    //数据类目路径
 
     private int attrId ;        // 属性ID
     private String attrName ;   // 属性名称
@@ -384,6 +385,14 @@ public class DataProductModel extends BaseModel {
 
     public void setDataSize(Integer dataSize) {
         this.dataSize = dataSize;
+    }
+
+    public String getDataTypePath() {
+        return dataTypePath;
+    }
+
+    public void setDataTypePath(String dataTypePath) {
+        this.dataTypePath = dataTypePath;
     }
 }
 
