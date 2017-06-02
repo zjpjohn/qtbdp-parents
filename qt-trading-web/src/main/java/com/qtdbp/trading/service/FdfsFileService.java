@@ -1,15 +1,18 @@
 package com.qtdbp.trading.service;
 
+import com.github.tobato.fastdfs.domain.StorePath;
+import com.github.tobato.fastdfs.proto.storage.DownloadByteArray;
+import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTransactionOrderModel;
-import com.qtdbp.trading.utils.fdfs.FastDFSFile;
-import com.qtdbp.trading.utils.fdfs.FileManager;
-import com.qtdbp.trading.utils.fdfs.FileManagerConfig;
-import org.csource.common.NameValuePair;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +34,8 @@ public class FdfsFileService {
     private DataTransactionOrderMapper orderMapper ;
     @Autowired
     private DataProductMapper productMapper ;
+    @Autowired
+    private FastFileStorageClient storageClient;
 
     /**
      * 下载文件
@@ -107,54 +112,41 @@ public class FdfsFileService {
      * @param attach
      * @return
      */
-    public String uploadFile(MultipartFile attach) {
+    public String uploadFile(MultipartFile attach) throws GlobalException {
 
-        String filePath = null ;
-
+        StorePath storePath ;
         try {
-            // 获取文件后缀名
-            String ext = attach.getOriginalFilename().substring(attach.getOriginalFilename().lastIndexOf(".")+1);
-
-            FastDFSFile file = new FastDFSFile(attach.getBytes(),ext);
-            NameValuePair[] meta_list = new NameValuePair[4];
-            meta_list[0] = new NameValuePair("fileName", attach.getOriginalFilename());
-            meta_list[1] = new NameValuePair("fileLength", String.valueOf(attach.getSize()));
-            meta_list[2] = new NameValuePair("fileExt", ext);
-            meta_list[3] = new NameValuePair("fileAuthor", FileManagerConfig.FILE_DEFAULT_AUTHOR);
-            filePath = FileManager.upload(file, meta_list);
+            storePath = storageClient.uploadFile(attach.getInputStream(),attach.getSize(), FilenameUtils.getExtension(attach.getOriginalFilename()),null);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new GlobalException("文件："+attach.getName()+"上传失败，错误信息："+e.getMessage()) ;
         }
-
-        return filePath ;
+        return storePath.getFullPath() ;
     }
 
     /**
-     * 文件下载公共方法
-     * @param filePath
+     * 文件下载
+     * @param fileUrl
      * @param fileName
      * @return
-     * @throws GlobalException
      */
-    public ResponseEntity<byte[]> downloadFilePublic(String filePath, String fileName) throws GlobalException {
-
-        ResponseEntity<byte[]> fileEntity = null ;
-            // 下载文档
-        if(filePath == null) throw new GlobalException("文件不存在") ;
-
+    public ResponseEntity<byte[]> downloadFilePublic(String fileUrl, String fileName) throws GlobalException {
+        byte[] content = null;
+        HttpHeaders headers = null ;
         try {
-            String substr = filePath.substring(filePath.indexOf("group"));
-            String group = substr.split("/")[0];
-            String remoteFileName = substr.substring(substr.indexOf("/")+1);
-            String specFileName = fileName + substr.substring(substr.indexOf("."));
-            fileEntity = FileManager.download(group, remoteFileName,specFileName);
+            StorePath storePath = StorePath.praseFromUrl(fileUrl);
+            content = storageClient.downloadFile(storePath.getGroup(), storePath.getPath(), new DownloadByteArray()) ;
 
-        } catch (GlobalException e) {
+            String realName = fileName +"."+ FilenameUtils.getExtension(fileUrl) ;
+
+            headers = new HttpHeaders();
+            headers.setContentDispositionFormData("attachment",  new String(realName.getBytes("UTF-8"),"iso-8859-1"));
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-            throw new GlobalException(e.getMessage()) ;
+            throw new GlobalException("文件："+fileName+"下载失败，错误信息："+e.getMessage()) ;
         }
-
-        return fileEntity;
+        return new ResponseEntity<byte[]>(content, headers, HttpStatus.CREATED);
     }
-
 }
