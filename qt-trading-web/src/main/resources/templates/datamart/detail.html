@@ -14,7 +14,11 @@
 </head>
 <body >
     <!-- 页头-->
-    <div th:include="layout/header::#head" ></div>
+    <!--<div th:include="layout/header::#head" ></div>-->
+    <!--页头结束-->
+
+    <!-- 页头-->
+    <div th:replace="layout/header" /></div>
     <!--页头结束-->
 
     <!--主体-->
@@ -79,6 +83,7 @@
     <script th:src="@{/tradecenter/js/paging.js}"></script>
     <script th:src="@{/tradecenter/js/pagedata.js}"></script>
 
+
     <!-- 数据包产品tpml模板 -->
     <script id="tmpl_items" type="text/x-jquery-tmpl">
     {{if list.length>0}}
@@ -123,13 +128,15 @@
         pageData.products(settings) ;
 
         //点击购买数据包
-        $("#buydata").click(function(){
+        $("#buydata").unbind().click(function(){
             buy([[${prod.id}]],2);
         });
         function buy(id,n){
             //判断用户是否登录
             if(!userId){
-                location.href = "/login";
+                  loginShow();
+                  return false;
+                //location.href = "/login";
             }
             $.ajax({
                 type: 'get',
@@ -157,9 +164,11 @@
         }
         $("#freeDownload").unbind().click(function(){
          //判断用户是否登录
-             if(!userId){
-                location.href = "/login";
-             }
+            if(!userId){
+                loginShow();
+                return false;
+                 //location.href = "/login";
+            }
             var id=$(this).children("i").html();
             $.ajax({
                 url: "/api/upload/file/exist/free?productId="+id,
