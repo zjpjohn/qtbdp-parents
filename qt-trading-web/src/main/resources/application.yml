@@ -5,11 +5,7 @@ spring:
   application:
     name: qt-trading-web
   profiles:
-    active: ${package.active}   # 默认激活application-dev.yml配置
-  http:
-    multipart:
-      max-file-size: 50MB
-      max-request-size: 50MB
+    active: dev   # 默认激活application-dev.yml配置
 
 # ===================================================================
 # mybatis配置，包括分页插件配置如下

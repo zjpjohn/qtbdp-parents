@@ -5,12 +5,13 @@
     <parent>
         <artifactId>qtbdp-parents</artifactId>
         <groupId>com.qtbdp.parents</groupId>
-        <version>1.1.0</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>qt-trading-web</artifactId>
-    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <!--<packaging>war</packaging>-->
 
     <dependencies>
         <dependency>
@@ -25,19 +26,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <!-- 部署线上不采用spring-boot自带的tomcat进行启动 -->
-            <exclusions>
+            <!--<exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
         <!-- 本地启动需要-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -158,31 +159,19 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.32</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <resources>
-            <!-- 指定不过滤的文件 -->
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.*</include>
-                    <include>*.*</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-
-            <!-- 指定要过滤的文件 -->
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>application.yml</include>
-                    <include>fdfs_client.properties</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
         <plugins>
             <!-- 支持maven打包自定义名字 -->
             <plugin>
@@ -219,35 +208,4 @@
             </url>
         </snapshotRepository>
     </distributionManagement>
-
-    <!-- 配置打包环境 -->
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <package.active>dev</package.active>
-                <tracker.addr>192.168.36.39:22122</tracker.addr>
-            </properties>
-            <!-- 默认打包环境 -->
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>test</id>
-            <properties>
-                <package.active>test</package.active>
-                <tracker.addr>192.168.36.39:22122</tracker.addr>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>prod</id>
-            <properties>
-                <package.active>prod</package.active>
-                <tracker.addr>192.168.36.17:22122</tracker.addr>
-            </properties>
-        </profile>
-    </profiles>
 </project>
