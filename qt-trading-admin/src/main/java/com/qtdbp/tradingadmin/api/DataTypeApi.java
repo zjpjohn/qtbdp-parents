@@ -6,6 +6,7 @@ import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataTypeAttrModel;
 import com.qtdbp.tradingadmin.mapper.DataTypeMapper;
 import com.qtdbp.tradingadmin.model.DataTypeModel;
+import com.qtdbp.tradingadmin.service.DataTypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -27,19 +28,23 @@ import java.util.Map;
 public class DataTypeApi {
 
     @Autowired
-    public DataTypeMapper dataTypeMapper;
+    private DataTypeMapper dataTypeMapper;
 
-    @ApiOperation(value="获取数据类型一级类目接口")
+    @Autowired
+    private DataTypeService dataTypeService;
+
+    @ApiOperation(value="查询数据类型类目接口")
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "节点id", required = false, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 0.否)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
-    @RequestMapping(value = "/findRootNode", method = RequestMethod.GET)
+    @RequestMapping(value = "/findNode", method = RequestMethod.GET)
     public ModelMap findRootNode (DataTypeModel dataTypeModel) {
 
         ModelMap map = new ModelMap() ;
         try {
-            List<DataTypeModel> list = dataTypeMapper.findRootNode(dataTypeModel);
+            List<DataTypeModel> list = dataTypeService.findNode(dataTypeModel);
             map.put("pageInfo", new PageInfo<>(list));
             map.put("queryParam", dataTypeModel);
         } catch (Exception e) {
@@ -48,7 +53,7 @@ public class DataTypeApi {
         return map;
     }
 
-    @ApiOperation(value="获取数据类型二级类目接口")
+/*    @ApiOperation(value="获取数据类型二级类目接口")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "节点id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "isUsed", value = "是否可用(1.是 0.否)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
@@ -66,7 +71,7 @@ public class DataTypeApi {
             e.printStackTrace();
         }
         return map;
-    }
+    }*/
 
     @ApiOperation(value = "获取所有属性、属性值列表")
     @ResponseBody
@@ -108,7 +113,7 @@ public class DataTypeApi {
         return map;
     }
 
-    @ApiOperation(value = "根据二级节点查询对应的类型属性接口")
+    @ApiOperation(value = "根据子节点查询对应的类型属性接口")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "id", value = "节点id", required = true, dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })

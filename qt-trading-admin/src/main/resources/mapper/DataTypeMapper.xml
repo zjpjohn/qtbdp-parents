@@ -11,7 +11,7 @@
         order by sort asc
     </select>
 
-    <!--查询数据类型顶层(一级)分类-->
+    <!--查询数据类型顶层(一级)类目-->
     <select id="findRootNode" resultMap="dataTypeModel">
         select d.* from data_type d where d.pid not in (select id from data_type)
         <if test="isUsed != null">
@@ -20,7 +20,7 @@
         order by sort asc
     </select>
 
-    <!--查询数据类型二级分类-->
+    <!--根据父节点id查询子节点类目-->
     <select id="findSecondNode" resultMap="dataTypeModel">
         select d.* from data_type d where d.pid = #{id}
         <if test="isUsed != null">
