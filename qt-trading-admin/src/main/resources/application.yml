@@ -42,9 +42,9 @@ kaptcha:
       color: blue
       names: 宋体,楷体,微软雅黑
     char:
-      length: 6
+      length: 4
   image:
-    width: 240
+    width: 150
     height: 50
   session:
     key: code
