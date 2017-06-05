@@ -206,6 +206,10 @@ INSERT INTO `data_type_attr_val` VALUES (302, 6, '数据来源', '组织机构',
 INSERT INTO `data_type_attr_val` VALUES (303, 6, '数据来源', '互联网', 3, 1);
 INSERT INTO `data_type_attr_val` VALUES (304, 6, '数据来源', '个人', 4, 1);
 
+/* 2017-06-01 v1.1.0 */
+ALTER TABLE data_product ADD COLUMN data_type_path  VARCHAR(200) COMMENT '数据类目路径';
+ALTER TABLE data_user_info MODIFY COLUMN sso_user_id  VARCHAR(100) COMMENT '系统用户ID';
+
 
 /* 2017-06-01 v1.2.0 */
 ALTER TABLE data_product ADD data_profile VARCHAR(1000) COMMENT '产品简介', ADD market_price DECIMAL(10,2) COMMENT '市场价' ;
