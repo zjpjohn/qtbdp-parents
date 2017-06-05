@@ -8,7 +8,6 @@
         p.id,
         p.designation,
         p.pic,
-        p.introduce,
         p.price,
         p.data_type_props,
         p.addtime,
@@ -51,6 +50,8 @@
         <result column="name" property="username" />
         <result column="file_url" property="fileUrl"/>
         <result column="data_type_path" property="dataTypePath" />
+        <result column="data_profile" property="dataProfile"/>
+        <result column="market_price" property="marketPrice"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -69,7 +70,9 @@
         p.file_url,
         p.user_id,
         p.is_used,
-        p.data_type_path
+        p.data_type_path,
+        p.data_profile,
+        p.market_price
         FROM
         data_product as p
         WHERE
@@ -94,6 +97,8 @@
             <if test="dataTypeProps != null">data_type_props = #{dataTypeProps} ,</if>
             <if test="dataSize != null">data_size = #{dataSize},</if>
             <if test="dataTypePath != null">data_type_path = #{dataTypePath}, </if>
+            <if test="dataProfile != null ">data_profile = #{dataProfile}, </if>
+            <if test="marketPrice != null ">market_price = #{marketPrice}, </if>
         </trim>
         WHERE
         id = #{id}
@@ -128,7 +133,9 @@
             download_count,
             buy_count,
             data_size,
-            data_type_path
+            data_type_path,
+            data_profile,
+            market_price
         ) VALUES (
             #{designation},
             #{introduce},
@@ -153,7 +160,9 @@
             0,
             0,
             #{dataSize},
-            #{dataTypePath}
+            #{dataTypePath},
+            #{dataProfile},
+            #{marketPrice}
         )
 
     </insert>

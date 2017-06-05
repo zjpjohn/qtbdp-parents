@@ -42,6 +42,8 @@ public class DataProductModel extends BaseModel {
     private double price;
     private double itemPrice;
     private String dataTypePath;    //数据类目路径
+    private String dataProfile;     //产品简介
+    private Double marketPrice;     //市场价
 
     private int attrId ;        // 属性ID
     private String attrName ;   // 属性名称
@@ -393,6 +395,22 @@ public class DataProductModel extends BaseModel {
 
     public void setDataTypePath(String dataTypePath) {
         this.dataTypePath = dataTypePath;
+    }
+
+    public String getDataProfile() {
+        return dataProfile;
+    }
+
+    public void setDataProfile(String dataProfile) {
+        this.dataProfile = dataProfile;
+    }
+
+    public Double getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(Double marketPrice) {
+        this.marketPrice = marketPrice;
     }
 }
 
