@@ -8,10 +8,10 @@
         p.id,
         p.designation,
         p.pic,
-        p.introduce,
         p.item_price,
         p.data_type_props,
-        p.price
+        p.price,
+        p.data_profile
         FROM
         data_product as p
         WHERE
@@ -36,6 +36,7 @@
         <result column="val_name" property="valName" />
         <result column="item_price" property="itemPrice"/>
         <result column="price" property="price" />
+        <result column="data_profile" property="dataProfile"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -51,6 +52,7 @@
             p.data_type_props,
             p.item_price,
             p.file_url,
+            p.data_profile,
             p.buy_count,
             p.download_count
         FROM
@@ -75,7 +77,7 @@
         <result column="file_url" property="fileUrl"/>
         <result column="buy_count" property="buyCount"/>
         <result column="download_count" property="downloadCount"/>
-
+        <result column="data_profile" property="dataProfile"/>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
