@@ -128,26 +128,3 @@
 </script>
 </body>
 </html>
-
-<!--表格模板-->
-<script id="tr_tmpl" type="text/x-jquery-tmpl">
-    {{each list}}
-            <tr>
-                <td class="id">${id}</td>
-                <td>${dataTypeProps}</td>
-                <td>${dataType}</td>
-                <td>${designation}</td>
-                <td>${userId}</td>
-                <td>${addTime}</td>
-                <td rowspan="1" colspan="1">
-                    <a href="javascript:void(0)" class="btn btn-sm green btn-outline filter-submit revise">修改</a>
-                    {{if isUsed == 1}}
-                    <button class="btn btn-sm red btn-outline filter-cancel isUsed" value="${isUsed}">下架</button>
-                    {{else}}
-                     <button class="btn btn-sm blue btn-outline filter-cancel isUsed" value="${isUsed}">上架</button>
-                    {{/if}}
-                </td>
-            </tr>
-     {{/each}}
-</script>
-<!--表格模板结束-->

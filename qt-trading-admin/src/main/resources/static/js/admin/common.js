@@ -90,6 +90,9 @@ var Common = {
                                 var props = dataChage[i].dataTypeProps;
                                 dataChage[i].dataTypeProps = Common._dataTypeProps(props);
                                 var typeId = dataChage[i].dataType;
+                                if(typeId == 0){
+                                    typeId = "其他";
+                                }
                                 dataChage[i].dataType = dataTypeJson[typeId]?dataTypeJson[typeId]:typeId;
                             }
                         }
@@ -170,18 +173,22 @@ var Common = {
             CId = opt.CId,
             selected = opt.selected,
             attrID = opt.attrId,
+            marketPrice = opt.marketPrice,
             price = opt.price,
+            PMarket = opt.PMarket,
             PWhole = opt.PWhole,
             PChild = opt.PChild,
             itemPrice = opt.itemPrice,
             priceName = opt.priceName,
             attrContent = opt.attrContent;
 
+
         ele.empty();
         $.ajax({
             url: url,
             dataType: "json",
             type:"get",
+            async:false,
             data:{
                 isUsed:1,
                 id:id
@@ -192,10 +199,11 @@ var Common = {
             success: function (ret) {
                 var data = ret.pageInfo;
                 tmpl.tmpl(data).appendTo(ele);
+
+
                 if(CId){
                     Common.optionSelect({
                         ele:ele,
-                        option:ele.children(),
                         id:CId
                     });
 
@@ -205,8 +213,10 @@ var Common = {
                         id:CId,
                         selected:selected,
                         priceName:priceName,
+                        marketPrice:marketPrice,
                         price:price,
                         itemPrice:itemPrice,
+                        PMarket:PMarket,
                         PWhole:PWhole,
                         PChild:PChild
                     });
@@ -217,11 +227,13 @@ var Common = {
     //渲染已选择的option
     optionSelect:function (obj) {
         var ele = obj.ele,
-            opt = obj.option,
+            opt = ele.children(),
             id = obj.id;
 
         for(var i = 0;i < opt.length;i++){
+
             if($(opt[i]).val() == id){
+
                 ele.val($(opt[i]).val());
                 break;
             }else {
@@ -234,8 +246,10 @@ var Common = {
         var attrContent = opt.attrContent,
             attrId = opt.attrId,
             id = opt.id,
+            marketPrice = opt.marketPrice,
             price = opt.price,
             itemPrice = opt.itemPrice,
+            PMarket = opt.PMarket,
             PWhole = opt.PWhole,
             PChild = opt.PChild,
             priceName = opt.priceName,
@@ -256,6 +270,7 @@ var Common = {
                 if(attrId){
                     attrId.css("display","block");
                 }
+
                 $.each(attrContent,function (i,val) {
                     var tmpl = val.tmpl,
                         index = val.index,
@@ -279,6 +294,7 @@ var Common = {
                                             priceName.css("display","block");
                                             PWhole.val(price);
                                             PChild.val(itemPrice);
+                                            PMarket.val(marketPrice);
                                         }
                                     }
                                 }

@@ -18,6 +18,8 @@ $(document).ready(function(){
         $wares = $('#waresType'),//文件类型
         // $fileSize = $('#fileSize'),//文件大小
         $price = $('#Price'),//价格
+        $marketPrice = $("#marketPrice"),//市场价
+        $synopsis =$('#synopsis'),//产品简介
         $whole = $('#whole'),//整包价格
         $child = $('#child'),//子文件价格
         $file = $('#fileName'),//上传文件
@@ -26,8 +28,10 @@ $(document).ready(function(){
     $('#describe').trumbowyg();//文本编辑器实例化
     $('.dropify').dropify();//图片预览
 
+
     $file.fileinput({
         language: 'zh',
+        showUpload:false,
         layoutTemplates:{
             actionUpload:''
         },
@@ -145,17 +149,12 @@ $(document).ready(function(){
 
 
 
-
-
-
     //展示一级
     Common.typeList({
         ele:$classA,
         url:"/api/dataType/findNode",
         tmpl:$typeTmpl
     });
-
-
     //通过一级展示二级
     $classA.on('change',function () {
         var id = $(this).val(),
@@ -191,7 +190,7 @@ $(document).ready(function(){
     });
 
 
-    //展示数据来源，收费方式，数据类型
+    //展示类目属性
     $classB.on('change',function () {
         $price.css("display","none");
         var id = $(this).val();
@@ -234,25 +233,20 @@ $(document).ready(function(){
                     if(ret.pageInfo){
                         var data = ret.pageInfo,
                             typePath = data.dataTypePath,
-                            type = data.dataType,
-                            optionA = $classA.children(),
-                            optionB = $classB.children();
+                            type = data.dataType;
 
-                        if(type){
-                            Common.optionSelect({
-                                ele:$classA,
-                                option:optionA,
-                                id:typePath
-                            });
-                            Common.typeList({
-                                ele:$classB,
-                                id:typePath,
-                                url:"/api/dataType/findNode",
-                                tmpl:$typeTmpl,
-                                CId:type,
+                        Common.optionSelect({
+                            ele:$classA,
+                            id:typePath
+                        });
+
+                        if(type == 0){
+                            Common.attrList({
                                 selected:Common.attrSelect(data.dataTypeProps,[';',':']),
+                                marketPrice:data.marketPrice,
                                 price:data.price,
                                 itemPrice:data.itemPrice,
+                                PMarket:$marketPrice,
                                 PWhole:$whole,
                                 PChild:$child,
                                 attrId:$attr,
@@ -264,18 +258,17 @@ $(document).ready(function(){
                                 ]
                             });
                         }else {
-
-                            Common.optionSelect({
-                                ele:$classA,
-                                option:optionA
-                            });
                             Common.typeList({
+                                id:typePath,
                                 ele:$classB,
+                                CId:type,
                                 url:"/api/dataType/findNode",
                                 tmpl:$typeTmpl,
                                 selected:Common.attrSelect(data.dataTypeProps,[';',':']),
+                                marketPrice:data.marketPrice,
                                 price:data.price,
                                 itemPrice:data.itemPrice,
+                                PMarket:$marketPrice,
                                 PWhole:$whole,
                                 PChild:$child,
                                 attrId:$attr,
@@ -288,7 +281,7 @@ $(document).ready(function(){
                             });
                         }
 
-
+                        $synopsis.val(data.dataProfile);
                         $waresN.val(data.designation);
                         $describe.html(data.introduce);
                         $file.attr("data-src",data.fileUrl);
@@ -335,6 +328,7 @@ $(document).ready(function(){
                     // fileName: {required: "请上传数据文件"},
                     // uploadImg: {required: "请上传图片!"},
                     chargeRadio: {required: "请选择收费方式"},
+                    synopsis: {required: "请输入产品简介"},
                     size:{required: "请选择文件大小"}
                 },
                 rules: {
@@ -344,6 +338,7 @@ $(document).ready(function(){
                         // isClassB: true,
                         // required: true
                     },
+                    synopsis: {required: !0},
                     chargeRadio: {required: !0},
                     type:{required: !0},
                     source: {required: !0},
@@ -387,6 +382,7 @@ $(document).ready(function(){
                            describe = $describe.html(),
                            classA = $classA.val(),
                            classB = $classB.val(),
+                           synopsis = $synopsis.val(),
                            //文件类型信息
                            type = $('#waresType input:radio:checked ').val(),
                            typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
@@ -409,6 +405,7 @@ $(document).ready(function(){
                            data = {
                                designation:wares,
                                introduce:describe,
+                               dataProfile:synopsis,
                                pic:img,
                                fileUrl:file,
                                dataSize:fileSize,
@@ -432,9 +429,11 @@ $(document).ready(function(){
                        if(charge != 1){
                            data.price = $whole.val();
                            data.itemPrice = $child.val();
+                           data.marketPrice = $marketPrice.val();
                        }else {
                            data.price = "0";
                            data.itemPrice = "0";
+                           data.marketPrice = "0";
                        }
 
 
