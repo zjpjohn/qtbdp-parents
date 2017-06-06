@@ -36,6 +36,7 @@
         <id column="Id" property="id" />
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
+        <result column="data_scale" property="dataScale"/>
         <result column="introduce" property="introduce" />
         <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
@@ -60,6 +61,7 @@
         p.id,
         p.designation,
         p.pic,
+        p.data_scale,
         p.data_type,
         p.introduce,
         p.addtime,
@@ -90,6 +92,7 @@
             <if test="designation != null"> designation = #{designation} ,</if>
             <if test="introduce != null">introduce = #{introduce} ,</if>
             <if test="pic != null">pic = #{pic} ,</if>
+            <if test="dataScale != null">data_scale = #{dataScale}, </if>
             <if test="dataType != null and dataType != 0">data_type = #{dataType} ,</if>
             <if test="price != null">price = #{price} ,</if>
             <if test="itemPrice != null ">item_price = #{itemPrice} ,</if>
