@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //设置不拦截规则
-        web.ignoring().antMatchers("/css/**","/fonts/**","/images/**","/img/**","/js/**","/lang/**","/plugins/**"); //.anyRequest() ;
+        web.ignoring().antMatchers("/css/**","/fonts/**","/images/**","/img/**","/js/**","/lang/**","/plugins/**","/pages/**","/assets/**"); //.anyRequest() ;
     }
 
     /**
