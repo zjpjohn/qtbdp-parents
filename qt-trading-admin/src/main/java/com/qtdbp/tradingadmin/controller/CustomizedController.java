@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CustomizedController extends BaseController {
 
-    public static final String PAGE_CUSTOMIZED = "customized/index";
+    public static final String PAGE_CUSTOMIZED_ROLE = "customized/index";
+    public static final String PAGE_CUSTOMIZED_DATA = "customized/data";
 
     /**
      * 定制数据列表
@@ -23,7 +24,7 @@ public class CustomizedController extends BaseController {
     @RequestMapping(value = "/customized/data", method = RequestMethod.GET)
     public String customizedData() {
 
-        return PAGE_CUSTOMIZED;
+        return PAGE_CUSTOMIZED_DATA;
     }
 
     /**
@@ -33,6 +34,6 @@ public class CustomizedController extends BaseController {
     @RequestMapping(value = "/customized/role", method = RequestMethod.GET)
     public String customizedRole() {
 
-        return PAGE_CUSTOMIZED;
+        return PAGE_CUSTOMIZED_ROLE;
     }
 }
