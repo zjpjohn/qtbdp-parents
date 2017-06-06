@@ -500,8 +500,7 @@ $(document).ready(function(){
                                        time: 3000 //3秒关闭（如果不配置，默认是3秒）
                                    }, function(){
                                        //do something
-                                       // window.location.href = '/products';
-
+                                       window.location.href = '/products';
                                    });
                                }
                            }
