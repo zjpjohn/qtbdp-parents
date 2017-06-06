@@ -212,4 +212,179 @@ ALTER TABLE data_user_info MODIFY COLUMN sso_user_id  VARCHAR(100) COMMENT '系�
 
 
 /* 2017-06-01 v1.2.0 */
-ALTER TABLE data_product ADD data_profile VARCHAR(1000) COMMENT '产品简介', ADD market_price DECIMAL(10,2) COMMENT '市场价' ;
+ALTER TABLE data_product ADD data_profile VARCHAR(1000) COMMENT '产品简介',
+ ADD market_price DECIMAL(10,2) COMMENT '市场价',
+ ADD data_format VARCHAR (10) COMMENT '数据格式',
+ ADD data_status TINYINT COMMENT '数据类型',
+ ADD data_src TINYINT COMMENT '数据来源',
+ ADD auditor VARCHAR (100) COMMENT '审核人',
+ ADD audit_time datetime COMMENT '审核时间',
+ ADD audit_status TINYINT COMMENT '审核状态';
+
+/*==============================================================*/
+/* Table: crawlers_role   爬虫规则                               */
+/*==============================================================*/
+drop table if exists crawlers_role;
+
+create table crawlers_role
+(
+   id                   int                            not null AUTO_INCREMENT,
+   type_id              int                            not null,
+   role_type            varchar(50)                    not null default 'SMT',
+   name                 varchar(100)                   not null,
+   introduction         varchar(500)                   not null,
+   logo                 varchar(500)                   null,
+   market_price         decimal(10,2)                  not null,
+   price                decimal(10,2)                  not null,
+   `desc`               text                           not null,
+   user_rating          tinyint                        null,
+   buy_count            int                            null,
+   view_count           int                            null,
+   file_path            varchar(500)                   null,
+   web_type             tinyint                        not null default 0,
+   web_site             varchar(500)                   null,
+   collection_field     varchar(100)                   null,
+   is_self_support      tinyint                        not null default 0,
+   is_institution       tinyint                        not null default 0,
+   is_guarantee         tinyint                        not null default 0,
+   is_full_refund       tinyint                        not null default 0,
+   is_service_supervision tinyint                      not null default 0,
+   is_great_institution tinyint                        not null default 0,
+   create_id            int                            not null,
+   create_time          datetime                       not null,
+   edit_id              int                            null,
+   edit_time            datetime                       null,
+   auditor              varchar(100)                   null,
+   audit_time           datetime                       null,
+   audit_status         tinyint                        null default 0,
+   audit_fail_reason    varchar(100)                   null,
+   is_used              tinyint                        not null default 0,
+   constraint PK_CRAWLERS_ROLE primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: data_institution_info_new   新服务商                   */
+/*==============================================================*/
+drop table if exists data_institution_info_new;
+
+create table data_institution_info_new
+(
+   id                   int                            not null AUTO_INCREMENT,
+   type                 tinyint                        null,
+   name                 varchar(100)                   not null,
+   designation          varchar(200)                   null,
+   logo                 varchar(1000)                  null,
+   info_id              int                            not null,
+   is_sys               tinyint                        null default 0,
+   is_great             tinyint                        null default 0,
+   create_id            int                            null,
+   addtime              timestamp                      null,
+   editor_id            int                            null,
+   editor_time          datetime                       null,
+   sort                 tinyint                        null,
+   auditor              varchar(100)                   null,
+   audit_time           datetime                       null,
+   audit_status         tinyint                        null default 0,
+   is_used              tinyint                        null default 1,
+   constraint PK_DATA_INSTITUTION_INFO_NEW primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: company_info          企业资料                         */
+/*==============================================================*/
+drop table if exists company_info;
+
+create table company_info
+(
+   id                   int                            not null AUTO_INCREMENT,
+   institution_id       int                            not null,
+   company_name         varchar(100)                   not null,
+   company_logo         varchar(500)                   not null,
+   company_abstracts    varchar(500)                   null,
+   industry_id          int                            null,
+   license              varchar(500)                   null,
+   license_number       varchar(20)                    null,
+   province_id          int                            null,
+   city_id              int                            null,
+   address              varchar(200)                   null,
+   phone                int                            null,
+   corporator           varchar(50)                    null,
+   create_id            int                            not null,
+   create_time          datetime                       not null,
+   edit_id              int                            null,
+   edit_time            datetime                       null,
+   auditor              varchar(100)                   null,
+   audit_time           datetime                       null,
+   audit_status         tinyint                        null default 0,
+   is_used              tinyint                        not null default 0,
+   constraint PK_COMPANY_INFO primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: personal_info      个人资料                            */
+/*==============================================================*/
+drop table if exists personal_info;
+
+create table personal_info
+(
+   id                   int                            not null AUTO_INCREMENT,
+   institution_id       int                            not null,
+   real_name            varchar(50)                    not null,
+   id_number            varchar(50)                    not null,
+   gender               varchar(10)                    not null,
+   full_face_photo      varchar(500)                   not null,
+   negative_side_photo  varchar(500)                   not null,
+   exp_time             date                           not null,
+   type_id              int                            null,
+   province_id          int                            null,
+   city_id              int                            null,
+   district_id          int                            null,
+   address              varchar(200)                   null,
+   phone                int                            null,
+   create_id            int                            not null,
+   create_time          datetime                       not null,
+   edit_id              int                            null,
+   edit_time            datetime                       null,
+   auditor              varchar(100)                   null,
+   audit_time           datetime                       null,
+   audit_status         tinyint                        null default 0,
+   is_used              tinyint                        not null default 0,
+   constraint PK_PERSONAL_INFO primary key clustered (id)
+);
+
+
+/*==============================================================*/
+/* Table: custom_service      定制服务                           */
+/*==============================================================*/
+drop table if exists custom_service;
+
+create table custom_service
+(
+   id                   int                            not null AUTO_INCREMENT,
+   type_id              int                            not null,
+   name                 varchar(100)                   not null,
+   introduction         varchar(500)                   null,
+   logo                 varchar(500)                   null,
+   price                decimal(10,2)                  not null,
+   bargaining           tinyint                        not null default 0,
+   service_type         tinyint                        not null,
+   `desc`               text                           null,
+   status               tinyint                        not null default 0,
+   begin_time           datetime                       null,
+   end_time             datetime                       null,
+   dimension            varchar(100)                   null,
+   scale                INT                            null,
+   website              varchar(500)                   null,
+   phone                varchar(50)                    null,
+   qq                   varchar(50)                    null,
+   create_id            int                            not null,
+   create_time          datetime                       not null,
+   edit_id              int                            null,
+   edit_time            datetime                       null,
+   auditor              varchar(100)                   null,
+   audit_time           datetime                       null,
+   audit_status         tinyint                        null default 0,
+   audit_fail_reason    varchar(100)                   null,
+   is_used              tinyint                        not null default 0,
+   constraint PK_CUSTOM_SERVICE primary key clustered (id)
+);

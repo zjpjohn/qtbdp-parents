@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.CustomizedMapper">
+
+    <!-- 分页查询定制服务service_type=1定制规则，service_type=2定制数据 -->
+    <select id="findCustomizedDataByCondtion" resultMap="CustomServiceResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.NAME,
+        c.introduction,
+        c.logo,
+        c.price,
+        c.bargaining,
+        c.service_type,
+        c.STATUS,
+        c.end_time,
+        c.dimension,
+        c.scale,
+        c.website,
+        c.phone,
+        c.qq,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason
+        FROM
+        custom_service AS c
+        WHERE
+        c.is_used = 1
+        <if test="serviceType != null and serviceType != 0">
+            AND c.service_type = #{serviceType}
+        </if>
+        <if test="name != null">
+            AND c.name like '%${name}%'
+        </if>
+        ORDER BY create_time desc
+    </select>
+
+    <!-- 查询定制服务数据明细 -->
+    <select id="findCustomizedDataById" resultMap="CustomServiceResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.NAME,
+        c.introduction,
+        c.logo,
+        c.price,
+        c.bargaining,
+        c.service_type,
+        c.STATUS,
+        c.end_time,
+        c.dimension,
+        c.scale,
+        c.website,
+        c.phone,
+        c.qq,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason,
+        c.desc
+        FROM
+        custom_service AS c
+        WHERE
+        c.is_used = 1 AND c.id = #{id}
+    </select>
+
+    <!-- 定制服务结果集 -->
+    <resultMap id="CustomServiceResult" type="com.qtdbp.trading.model.CustomServiceModel">
+        <id column="id" property="id" />
+        <result column="type_id" property="typeId" />
+        <result column="NAME" property="name" />
+        <result column="introduction" property="introduction" />
+        <result column="logo" property="logo" />
+        <result column="price" property="price" />
+        <result column="bargaining" property="bargaining" />
+        <result column="service_type" property="serviceType" />
+        <result column="STATUS" property="status" />
+        <result column="end_time" property="endTime" />
+        <result column="dimension" property="dimension" />
+        <result column="scale" property="scale" />
+        <result column="website" property="website" />
+        <result column="phone" property="phone" />
+        <result column="qq" property="qq" />
+        <result column="create_id" property="createId" />
+        <result column="create_time" property="createTime" />
+        <result column="auditor" property="auditor" />
+        <result column="audit_time" property="auditTime" />
+        <result column="audit_status" property="auditStatus" />
+        <result column="audit_fail_reason" property="auditFailReason" />
+        <result column="desc" property="desc" />
+    </resultMap>
+
+    <!-- 更新定制服务数据 -->
+    <update id="updateCustomizedData" parameterType="com.qtdbp.trading.model.CustomServiceModel">
+        UPDATE custom_service
+        <trim prefix="set" suffixOverrides=",">
+            <if test="editId != null">edit_id = #{editId},</if>
+            edit_time = now(),
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="introduction != null"> introduction = #{introduction} ,</if>
+            <if test="logo != null">logo = #{logo} ,</if>
+            <if test="price != null">price = #{price} ,</if>
+            <if test="bargaining != null">bargaining = #{bargaining} ,</if>
+            <if test="desc != null">desc = #{desc} ,</if>
+            <if test="status != null ">status = #{status} ,</if>
+            <if test="beginTime != null">begin_time = #{beginTime} ,</if>
+            <if test="endTime != null">end_time = #{endTime} ,</if>
+            <if test="dimension != null">dimension = #{dimension},</if>
+            <if test="scale != null">scale = #{scale}, </if>
+            <if test="website != null ">website = #{website}, </if>
+            <if test="phone != null ">phone = #{phone}, </if>
+            <if test="qq != null ">qq = #{qq}, </if>
+            <if test="auditor != null ">auditor = #{auditor}, </if>
+            <if test="auditTime != null ">audit_time = #{auditTime}, </if>
+            <if test="auditStatus != null ">audit_status = #{auditStatus}, </if>
+            <if test="auditFailReason != null ">audit_fail_reason = #{auditFailReason}, </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!-- 添加定制服务数据 -->
+    <insert id="insertCustomizedData" parameterType="com.qtdbp.trading.model.CustomServiceModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO custom_service (
+        type_id,
+        `name`,
+        introduction,
+        logo,
+        price,
+        bargaining,
+        service_type,
+        status,
+        end_time,
+        dimension,
+        `scale`,
+        website,
+        phone,
+        qq,
+        create_id,
+        create_time,
+        `desc`,
+        is_used
+        ) VALUES (
+        #{typeId},
+        #{name},
+        #{introduction},
+        #{logo},
+        #{price},
+        #{bargaining},
+        #{serviceType},
+        0,
+        #{endTime},
+        #{dimension},
+        #{scale},
+        #{website},
+        #{phone},
+        #{qq},
+        #{createId},
+        now(),
+        #{desc},
+        1 )
+    </insert>
+</mapper>
