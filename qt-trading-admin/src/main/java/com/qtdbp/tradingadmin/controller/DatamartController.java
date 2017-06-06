@@ -15,9 +15,6 @@ public class DatamartController extends BaseController {
     public static final String PAGE_PRODUCTS = "datamart/index";
     public static final String PAGE_SAVE_PRODUCT = "datamart/save";
     public static final String PAGE_CATEGORY = "datamart/category";
-//    public static final String PAGE_PRODUCTS = "shopManage/wares";
-
-//    public static final String PAGE_ADD_PRODUCT = "shopManage/setUp";
 
     /**
      * 跳转到数据产品管理页面

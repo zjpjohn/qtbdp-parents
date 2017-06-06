@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class ErrorController {
+public class ErrorController extends BaseController {
 
     private static final String PAGE_FORBIDDEN = "403" ;
     private static final String PAGE_NOT_FOUND = "404" ;
