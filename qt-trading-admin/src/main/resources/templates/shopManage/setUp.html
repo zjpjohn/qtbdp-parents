@@ -83,7 +83,7 @@
                             <!--二级分类-->
                             <div class="form-group form-md-line-input">
                                 <select class="form-control" id="classB" name="type2">
-                                    <option value="">二级分类</option>
+                                    <option value="">无</option>
 
                                 </select>
                                 <label for="classB">所属二级类别</label>
@@ -111,18 +111,24 @@
                             <!--收费价格-->
                             <div id="Price">
                                 <div class="input-group input-medium margin-top-10 ">
-                                                        <span class="input-group-addon">
-                                                            <span>￥</span>
-                                                        </span>
-                                    <input type="number" id="whole" name="whole" class="form-control" placeholder="整包价格">
+                                    <span class="input-group-addon">
+                                        <span>￥</span>
+                                    </span>
+                                    <input type="number" id="marketPrice" name="marketPrice" class="form-control" placeholder="市场价">
+                                </div>
+                                <div class="input-group input-medium margin-top-10 ">
+                                    <span class="input-group-addon">
+                                        <span>￥</span>
+                                    </span>
+                                    <input type="number" id="whole" name="whole" class="form-control" placeholder="折扣价">
                                 </div>
                                 <div class="input-group input-medium margin-top-10">
-                                                        <span class="input-group-addon">
-                                                           <span>￥</span>
-                                                        </span>
+                                    <span class="input-group-addon">
+                                        <span>￥</span>
+                                    </span>
                                     <input type="number" id="child" name="child"  class="form-control" placeholder="子文件价格">
                                 </div>
-                                <div id="warning" class="alert alert-warning" style="margin-top: 20px">请输入整包和子文件的价格。</div>
+                                <div id="warning" class="alert alert-warning" style="margin-top: 20px">请输入价格。</div>
                             </div>
                             <!--收费价格结束-->
 
@@ -135,6 +141,17 @@
                                 <span class="help-block">输入产品名称...</span>
                             </div>
                             <!--产品名称结束-->
+
+
+                            <!--简介-->
+                            <div class="form-group">
+                                <label for="synopsis">产品简介
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <textarea class="form-control" name="synopsis" id="synopsis" cols="30" rows="10"></textarea>
+                                <span class="help-block">输入产品简介...</span>
+                            </div>
+                            <!--简介结束-->
 
                             <!--产品描述-->
                             <div class="form-group form-md-line-input">
