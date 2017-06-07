@@ -29,7 +29,7 @@ public class DataProductModel extends BaseModel {
     private String fileUrl ;        // 数据包路径
     private int provinceId ;        // 省份id
     private int isHuadong ;         // 是否华东
-    private String userId ;            // 添加人
+    private Integer userId ;            // 添加人
     private Date addTime ;          // 添加时间
     private int editorId ;          // 编辑人id
     private Date editorTime ;       // 编辑时间
@@ -79,6 +79,8 @@ public class DataProductModel extends BaseModel {
     private Map<String, String> subFiles = new HashMap<>();  //拆分后的数据条目
 
     private Integer dataSize;   //文件大小
+
+    private Integer isFree;     //是否免费
 
     public String getDesignation() {
         return designation;
@@ -168,11 +170,11 @@ public class DataProductModel extends BaseModel {
         this.isHuadong = isHuadong;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -475,6 +477,14 @@ public class DataProductModel extends BaseModel {
 
     public void setAuditFailReason(String auditFailReason) {
         this.auditFailReason = auditFailReason;
+    }
+
+    public Integer getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(Integer isFree) {
+        this.isFree = isFree;
     }
 }
 
