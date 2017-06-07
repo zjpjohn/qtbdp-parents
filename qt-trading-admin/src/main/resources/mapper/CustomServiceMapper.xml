@@ -100,8 +100,7 @@
     <update id="updateCustomizedData" parameterType="com.qtdbp.trading.model.CustomServiceModel">
         UPDATE custom_service
         <trim prefix="set" suffixOverrides=",">
-            <if test="editId != null">edit_id = #{editId},</if>
-            edit_time = now(),
+            <if test="editId != null">edit_id = #{editId}, edit_time = now(),</if>
             <if test="typeId != null">type_id = #{typeId},</if>
             <if test="name != null">name = #{name},</if>
             <if test="introduction != null"> introduction = #{introduction} ,</if>
@@ -117,8 +116,7 @@
             <if test="website != null ">website = #{website}, </if>
             <if test="phone != null ">phone = #{phone}, </if>
             <if test="qq != null ">qq = #{qq}, </if>
-            <if test="auditor != null ">auditor = #{auditor}, </if>
-            <if test="auditTime != null ">audit_time = #{auditTime}, </if>
+            <if test="auditor != null ">auditor = #{auditor}, audit_time = now(), </if>
             <if test="auditStatus != null ">audit_status = #{auditStatus}, </if>
             <if test="auditFailReason != null ">audit_fail_reason = #{auditFailReason}, </if>
         </trim>

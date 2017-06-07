@@ -7,17 +7,13 @@ import com.qtdbp.tradingadmin.base.security.SecurityUser;
 import com.qtdbp.tradingadmin.controller.BaseController;
 import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.service.CustomizedService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,23 +64,20 @@ public class CustomizedApi extends BaseController {
     }
 
     @ApiOperation(value = "根据ID查询单条定制服务数据接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "定制服务Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @RequestMapping(value = "id", method = RequestMethod.GET)
-    public ModelMap findCustomizedData(Integer id) throws GlobalAdminException {
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public ModelMap findCustomizedDataById(@ApiParam(name = "id", value = "定制服务Id", required = true) @PathVariable Integer id) throws GlobalAdminException {
 
-        if(id == null) throw new GlobalAdminException("数据不存在，请重新填入") ;
-
-        ModelMap map = new ModelMap() ;
-        try {
-            CustomServiceModel custom = customizedService.findCustomizedDataById(id);
-            if(custom == null) custom = new CustomServiceModel() ;
-            map.put("pageInfo", custom);
-        } catch (Exception e) {
-            logger.error("findCustomizedData has error ,message:"+e.getMessage());
-            throw new GlobalAdminException(e.getMessage()) ;
+        ModelMap map = new ModelMap();
+        CustomServiceModel custom = null ;
+        if(id != null) {
+            try {
+                custom = customizedService.findCustomizedDataById(id);
+            } catch (Exception e) {
+                logger.error("findCustomizedDataById has error ,message:" + e.getMessage());
+                throw new GlobalAdminException(e.getMessage());
+            }
         }
+        map.put("pageInfo", custom);
 
         return map;
     }
@@ -108,11 +101,9 @@ public class CustomizedApi extends BaseController {
                 CustomServiceModel custom = new CustomServiceModel();
                 custom.setId(id);
                 custom.setAuditor(user.getUserId()); // 系统用户ID
-                custom.setAuditTime(new Date());
                 custom.setAuditStatus(status);
                 custom.setAuditFailReason(reason);
                 success = customizedService.auditCustomizedData(custom);
-                map.put("success", success);
             } catch (Exception e) {
                 logger.error("auditCustomizedData has error ,message:" + e.getMessage());
                 throw new GlobalAdminException(e.getMessage());
