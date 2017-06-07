@@ -83,8 +83,10 @@ public class CrawlersRoleApi extends BaseController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else {
+            map.put("success", false);
         }
-        map.put("success", false);
+
         return map;
     }
 
