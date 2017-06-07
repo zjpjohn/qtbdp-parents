@@ -71,4 +71,11 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return
      */
     Integer deleteAttrByProductId(Integer productId);
+
+    /**
+     * 审核数据包产品
+     * @param productModel
+     * @return
+     */
+    Integer auditProduct(DataProductModel productModel);
 }

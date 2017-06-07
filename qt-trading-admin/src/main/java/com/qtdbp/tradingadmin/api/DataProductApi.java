@@ -133,4 +133,22 @@ public class DataProductApi extends BaseController {
         return map;
     }
 
+    @ApiOperation(value="数据包产品审核接口")
+    @RequestMapping(value = "/auditProduct", method = RequestMethod.PUT)
+    public ModelMap auditProduct(@RequestBody DataProductModel productModel) throws GlobalException {
+        if (productModel == null) throw new GlobalException("数据不存在，请重新输入");
+
+        ModelMap map = new ModelMap();
+
+        try {
+            Integer count = productService.auditProduct(productModel);
+            map.put("success", count > 0 ? true : false);
+            map.put("id", productModel.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
 }
