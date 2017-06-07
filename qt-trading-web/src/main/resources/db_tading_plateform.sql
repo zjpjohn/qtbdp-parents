@@ -219,7 +219,8 @@ ALTER TABLE data_product ADD data_profile VARCHAR(1000) COMMENT '产品简介',
  ADD data_src TINYINT COMMENT '数据来源',
  ADD auditor VARCHAR (100) COMMENT '审核人',
  ADD audit_time datetime COMMENT '审核时间',
- ADD audit_status TINYINT COMMENT '审核状态';
+ ADD audit_status TINYINT COMMENT '审核状态',
+ ADD audit_fail_reason VARCHAR (100) COMMENT '审核不通过原因';
 
 /*==============================================================*/
 /* Table: crawlers_role   爬虫规则                               */
@@ -270,7 +271,8 @@ drop table if exists data_institution_info_new;
 create table data_institution_info_new
 (
    id                   int                            not null AUTO_INCREMENT,
-   type                 tinyint                        null,
+   type_id              int                            not null,
+   institution_type     tinyint                        null,
    name                 varchar(100)                   not null,
    designation          varchar(200)                   null,
    logo                 varchar(500)                  null,
@@ -285,6 +287,7 @@ create table data_institution_info_new
    auditor              varchar(100)                   null,
    audit_time           datetime                       null,
    audit_status         tinyint                        null default 0,
+   audit_fail_reason    varchar(100)                   null,
    is_used              tinyint                        null default 1,
    constraint PK_DATA_INSTITUTION_INFO_NEW primary key clustered (id)
 );
@@ -297,7 +300,6 @@ drop table if exists company_info;
 create table company_info
 (
    id                   int                            not null AUTO_INCREMENT,
-   institution_id       int                            not null,
    company_name         varchar(100)                   not null,
    company_logo         varchar(500)                   not null,
    company_intro        varchar(500)                   null,
@@ -329,7 +331,6 @@ drop table if exists personal_info;
 create table personal_info
 (
    id                   int                            not null AUTO_INCREMENT,
-   institution_id       int                            not null,
    real_name            varchar(50)                    not null,
    id_number            varchar(50)                    not null,
    gender               varchar(10)                    not null,

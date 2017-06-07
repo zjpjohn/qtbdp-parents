@@ -1,5 +1,7 @@
 package com.qtdbp.trading.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 /**
@@ -11,7 +13,6 @@ import java.util.Date;
  */
 public class PersonalInfoModel extends BaseModel {
 
-    private Integer institutionId ;         // 服务商ID
     private String realName ;               // 真实姓名
     private String idNumber ;               // 身份证号码
     private String gender ;                 // 性别 男male，女female
@@ -25,22 +26,22 @@ public class PersonalInfoModel extends BaseModel {
     private String address ;                // 详细地址
     private String phone ;                  // 手机号
     private Integer createId ;              // 添加人
+    @ApiModelProperty(hidden=true)
     private Date createTime ;               // 添加时间
+    @ApiModelProperty(hidden=true)
     private Integer editId ;                // 编辑人
+    @ApiModelProperty(hidden=true)
     private Date editTime ;                 // 编辑时间
+    @ApiModelProperty(hidden=true)
     private String auditor ;                // 审核人
+    @ApiModelProperty(hidden=true)
     private Date auditTime;                 // 审核时间
+    @ApiModelProperty(hidden=true)
     private Integer auditStatus ;           // 审核状态 0未审核 1审核通过 2审核不通过
+    @ApiModelProperty(hidden=true)
     private String auditFailReason ;        // 审核不通过原因
+    @ApiModelProperty(hidden=true)
     private Integer isUsed ;                // 是否可用 0否 1是
-
-    public Integer getInstitutionId() {
-        return institutionId;
-    }
-
-    public void setInstitutionId(Integer institutionId) {
-        this.institutionId = institutionId;
-    }
 
     public String getRealName() {
         return realName;

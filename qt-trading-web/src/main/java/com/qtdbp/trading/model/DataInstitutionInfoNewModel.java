@@ -1,5 +1,8 @@
 package com.qtdbp.trading.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -11,7 +14,8 @@ import java.util.Date;
  */
 public class DataInstitutionInfoNewModel extends BaseModel {
 
-    private Integer type ;          // 服务商类型，1企业 2个人
+    private Integer typeId;         // 所属类目ID
+    private Integer institutionType ;// 服务商类型，1企业 2个人
     private String name;            // 服务商名称
     private String designation;     // 服务领域
     private String logo;            // 服务商logo
@@ -19,21 +23,44 @@ public class DataInstitutionInfoNewModel extends BaseModel {
     private Integer isSys ;         // 是否自营 0否 1是
     private Integer isGreat ;       // 是否优质服务商 0否 1是
     private Integer createId;       // 添加人ID
+    @ApiModelProperty(hidden=true)
     private Date createTime ;       // 添加时间
+    @ApiModelProperty(hidden=true)
     private Integer editId ;        // 编辑人
+    @ApiModelProperty(hidden=true)
     private Date editTime ;         // 编辑时间
+    @ApiModelProperty(hidden=true)
     private Integer sort ;          // 排序值
+    @ApiModelProperty(hidden=true)
     private String auditor ;        // 审核人
+    @ApiModelProperty(hidden=true)
     private Date auditTime ;        // 审核时间
+    @ApiModelProperty(hidden=true)
     private Integer auditStatus;    // 审核状态 0未审核 1审核通过 2审核不通过
+    @ApiModelProperty(hidden=true)
     private Integer isUsed;         // 是否可用 0否 1是
+    @ApiModelProperty(hidden=true)
+    private String auditFailReason ;// 审核不通过原因
 
-    public Integer getType() {
-        return type;
+    @Transient
+    private PersonalInfoModel personalInfoModel ;   // 个人资料
+    @Transient
+    private CompanyInfoModel companyInfoModel ;     // 企业资料
+
+    public Integer getTypeId() {
+        return typeId;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    public Integer getInstitutionType() {
+        return institutionType;
+    }
+
+    public void setInstitutionType(Integer institutionType) {
+        this.institutionType = institutionType;
     }
 
     public String getName() {
@@ -154,5 +181,29 @@ public class DataInstitutionInfoNewModel extends BaseModel {
 
     public void setIsUsed(Integer isUsed) {
         this.isUsed = isUsed;
+    }
+
+    public String getAuditFailReason() {
+        return auditFailReason;
+    }
+
+    public void setAuditFailReason(String auditFailReason) {
+        this.auditFailReason = auditFailReason;
+    }
+
+    public PersonalInfoModel getPersonalInfoModel() {
+        return personalInfoModel;
+    }
+
+    public void setPersonalInfoModel(PersonalInfoModel personalInfoModel) {
+        this.personalInfoModel = personalInfoModel;
+    }
+
+    public CompanyInfoModel getCompanyInfoModel() {
+        return companyInfoModel;
+    }
+
+    public void setCompanyInfoModel(CompanyInfoModel companyInfoModel) {
+        this.companyInfoModel = companyInfoModel;
     }
 }

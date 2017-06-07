@@ -1,5 +1,7 @@
 package com.qtdbp.trading.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 /**
@@ -11,7 +13,6 @@ import java.util.Date;
  */
 public class CompanyInfoModel extends BaseModel {
 
-    private Integer institutionId ;             // 服务商ID
     private String companyName;                 // 公司名称
     private String companyLogo;                 // 公司logo
     private String companyIntro;                // 公司介绍
@@ -25,21 +26,20 @@ public class CompanyInfoModel extends BaseModel {
     private String phone ;                  // 手机号
     private String corporator;              // 企业法人
     private Integer createId;               // 添加人
+    @ApiModelProperty(hidden=true)
     private Date createTime ;               // 添加时间
+    @ApiModelProperty(hidden=true)
     private Integer editId ;                // 编辑人
+    @ApiModelProperty(hidden=true)
     private Date editTime ;                 // 编辑时间
+    @ApiModelProperty(hidden=true)
     private String auditor ;                // 审核人
+    @ApiModelProperty(hidden=true)
     private Date auditTime;                 // 审核时间
+    @ApiModelProperty(hidden=true)
     private Integer auditStatus ;           // 审核状态 0未审核 1审核通过 2审核不通过
+    @ApiModelProperty(hidden=true)
     private Integer isUsed ;                // 是否可用 0否 1是
-
-    public Integer getInstitutionId() {
-        return institutionId;
-    }
-
-    public void setInstitutionId(Integer institutionId) {
-        this.institutionId = institutionId;
-    }
 
     public String getCompanyName() {
         return companyName;
