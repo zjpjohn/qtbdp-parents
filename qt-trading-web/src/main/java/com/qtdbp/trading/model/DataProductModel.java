@@ -80,6 +80,8 @@ public class DataProductModel extends BaseModel {
 
     private Integer dataSize;   //文件大小
 
+    private Integer isFree;     //是否免费
+
     public String getDesignation() {
         return designation;
     }
@@ -475,6 +477,14 @@ public class DataProductModel extends BaseModel {
 
     public void setAuditFailReason(String auditFailReason) {
         this.auditFailReason = auditFailReason;
+    }
+
+    public Integer getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(Integer isFree) {
+        this.isFree = isFree;
     }
 }
 
