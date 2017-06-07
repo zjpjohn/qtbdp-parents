@@ -44,6 +44,14 @@ public class DataProductModel extends BaseModel {
     private String dataTypePath;    //数据类目路径
     private String dataProfile;     //产品简介
     private Double marketPrice;     //市场价
+    private String dataFormat;      //数据格式
+    private Integer dataStatus;     //数据类型
+    private Integer dataSrc;        //数据来源
+    private String auditor;         //审核人
+    private Date auditTime;         //审核时间
+    private Integer auditStatus;    //审核状态
+    private String auditFailReason; //审核失败原因
+
 
     private int attrId ;        // 属性ID
     private String attrName ;   // 属性名称
@@ -411,6 +419,62 @@ public class DataProductModel extends BaseModel {
 
     public void setMarketPrice(Double marketPrice) {
         this.marketPrice = marketPrice;
+    }
+
+    public String getDataFormat() {
+        return dataFormat;
+    }
+
+    public void setDataFormat(String dataFormat) {
+        this.dataFormat = dataFormat;
+    }
+
+    public Integer getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(Integer dataStatus) {
+        this.dataStatus = dataStatus;
+    }
+
+    public Integer getDataSrc() {
+        return dataSrc;
+    }
+
+    public void setDataSrc(Integer dataSrc) {
+        this.dataSrc = dataSrc;
+    }
+
+    public String getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(String auditor) {
+        this.auditor = auditor;
+    }
+
+    public Date getAuditTime() {
+        return auditTime;
+    }
+
+    public void setAuditTime(Date auditTime) {
+        this.auditTime = auditTime;
+    }
+
+    public Integer getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(Integer auditStatus) {
+        this.auditStatus = auditStatus;
+    }
+
+    public String getAuditFailReason() {
+        return auditFailReason;
+    }
+
+    public void setAuditFailReason(String auditFailReason) {
+        this.auditFailReason = auditFailReason;
     }
 }
 

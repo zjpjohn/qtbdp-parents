@@ -33,12 +33,7 @@
               is_great_institution,
               create_id,
               create_time,
-              edit_id,
-              edit_time,
-              auditor,
-              audit_time,
               audit_status,
-              audit_fail_reason,
               is_used
         ) values (
             #{typeId},
@@ -64,12 +59,7 @@
             #{isGreatInstitution},
             #{createId},
             now(),
-            #{editId},
-            #{editTime},
-            #{auditor},
-            #{auditTime},
-            #{auditStatus},
-            #{auditFailReason},
+            0,
             0
         )
     </insert>

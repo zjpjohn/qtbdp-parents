@@ -52,7 +52,7 @@ public class CrawlersRoleApi {
     }
 
     @ApiOperation(value="爬虫规则审核数据接口")
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @RequestMapping(value = "/auditCrawlersRole", method = RequestMethod.PUT)
     public ModelMap update(@RequestBody CrawlersRoleModel crawlersRoleModel) throws GlobalException {
         if (crawlersRoleModel == null) throw new GlobalException("数据不存在，请重新输入");
 
