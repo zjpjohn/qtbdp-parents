@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="qt-trading-web:war">
-    <output-path>$PROJECT_DIR$/qt-trading-web/target</output-path>
-    <root id="archive" name="qt-trading-web.war">
-      <element id="artifact" artifact-name="qt-trading-web:war exploded" />
-    </root>
-  </artifact>
-</component>

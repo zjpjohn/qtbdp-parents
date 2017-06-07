@@ -53,7 +53,10 @@ public class DataProductApi {
             @ApiImplicitParam(name = "name", value = "数据包产品名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "valIds", value = "属性值Id列表vid1,vid2; 如：1,2", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "orderBy", value = "排序字段值; 如：addtime", dataType = "String", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "dataStatus", value = "数据类型（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "dataSrc", value = "数据来源（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "isFree", value = "是否免费 0：否，1是", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "orderBy", value = "排序字段值; 如：addtime", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：12）", defaultValue = "12", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })

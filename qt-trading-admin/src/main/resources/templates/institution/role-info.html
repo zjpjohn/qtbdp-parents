@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
+Version: 1.0.0
+Author: caidchen
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <title>钱塘号后台管理系统 | 服务商列表</title>
+    <div th:replace="layout/header"></div>
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <!-- END PAGE LEVEL PLUGINS -->
+    <style>
+        .form-body {
+            width: 65%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<!-- END HEAD -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+<div class="page-wrapper">
+    <!-- BEGIN HEADER -->
+    <div th:replace="layout/page-header"></div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div th:replace="layout/page-sidebar"></div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE BAR -->
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="index.html">首页</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span>服务商</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END PAGE BAR -->
+
+                <!-- BEGIN PAGE TITLE-->
+
+                <!-- END PAGE TITLE-->
+
+
+                <!-- 服务商列表内容 -->
+                <div>
+                    <div class="portlet light portlet-fit portlet-datatable bordered" style="margin-top: 20px;">
+                        <!-- BEGIN PAGE TITLE-->
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject font-dark sbold uppercase">服务商数据详情</span>
+                            </div>
+                        </div>
+                        <!-- END PAGE TITLE-->
+
+
+                        <!-- 规则详情内容 -->
+                        <div class="portlet-body">
+                            <form id="form_sample">
+                                <div class="form-body">
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="dataName" placeholder="无" readonly="readonly">
+                                        <label for="dataName">数据名称
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group form-md-line-input">
+                                        <label for="synopsis">数据简介
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <textarea class="form-control" id="synopsis" cols="20" rows="5" readonly="readonly" style="resize:none" ></textarea>
+                                    </div>
+
+
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="scale" placeholder="无" readonly="readonly">
+                                        <label for="scale">数据规模
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="price" placeholder="无" readonly="readonly">
+                                        <label for="price">价格
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="dataType" placeholder="无" readonly="readonly">
+                                        <label for="dataType">数据类型
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="category" placeholder="无" readonly="readonly">
+                                        <label for="category">数据类别
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                    </div>
+
+
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="source" placeholder="无" readonly="readonly">
+                                        <label for="source">数据来源
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group form-md-radios">
+                                        <label for="fileName">数据源文件</label>
+                                        <div class="md-radio-inline" style="width: 50%">
+                                            <div class="uploader black">
+                                                <input type="text" class="filename" readonly/>
+                                                <input type="button" name="file" class="button" value="上传文件"/>
+                                                <input type="button" id="fileName" name="fileName"  size="30"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group form-md-line-input">
+                                        <label for="cover">数据封面
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <img src="" alt="数据封面" id="cover">
+                                    </div>
+
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="merchant" placeholder="无" readonly="readonly">
+                                        <label for="merchant">服务商家
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group form-md-line-input">
+                                        <label for="details">数据描述
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <textarea class="form-control" id="details" cols="20" rows="5" readonly="readonly" style="resize:none" ></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+            </div>
+        </div>
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div th:replace="layout/page-footer" />
+    <!-- END FOOTER -->
+</div>
+
+<!-- BEGIN SCRIPT -->
+<div th:replace="layout/footer"></div>
+
+<script src="/pages/js/layer.js" type="text/javascript"></script>
+<script src="/pages/js/admin/common.js"></script>
+<script src="/pages/js/institution/roleInfo.js"></script>
+
+<!-- END SCRIPT -->
+</body>
+
+</html>

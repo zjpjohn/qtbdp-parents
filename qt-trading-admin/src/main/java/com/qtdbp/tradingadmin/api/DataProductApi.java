@@ -41,6 +41,7 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "designation", value = "数据包产品名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "valIds", value = "属性值Id列表vid1,vid2; 如：1,2", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "userId", value = "用户id（0：后台系统用户）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：12）", defaultValue = "12", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
@@ -66,9 +67,7 @@ public class DataProductApi extends BaseController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
         if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
-        SecurityUser user = getPrincipal() ;
-        if (user == null) throw new GlobalException("授权过期，请重新登陆") ;
-        productModel.setUserId(user.getUserId());
+        productModel.setUserId(0);
         ModelMap map = new ModelMap() ;
 
         try {
@@ -126,6 +125,24 @@ public class DataProductApi extends BaseController {
         try {
             productModel = productService.findProductById(productModel.getId());
             map.put("pageInfo", productModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    @ApiOperation(value="数据包产品审核接口")
+    @RequestMapping(value = "/auditProduct", method = RequestMethod.PUT)
+    public ModelMap auditProduct(@RequestBody DataProductModel productModel) throws GlobalException {
+        if (productModel == null) throw new GlobalException("数据不存在，请重新输入");
+
+        ModelMap map = new ModelMap();
+
+        try {
+            Integer count = productService.auditProduct(productModel);
+            map.put("success", count > 0 ? true : false);
+            map.put("id", productModel.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -37,7 +37,7 @@ public class CaptchaConfig {
     public DefaultKaptcha getKaptchaBean(){
         DefaultKaptcha defaultKaptcha=new DefaultKaptcha();
         Properties properties=new Properties();
-        properties.setProperty("kaptcha.border", "yes");
+        properties.setProperty("kaptcha.border", "no");
         properties.setProperty("kaptcha.border.color", borderColor);
         properties.setProperty("kaptcha.textproducer.font.color", fontColor);
         properties.setProperty("kaptcha.image.width", imageWidth);

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.DataInstitutionInfoNewMapper">
+
+    <!-- 分页查询服务商type=1企业，type=2个人 -->
+    <select id="findDataInstitutionInfoNewByCondtion" resultMap="DataInstitutionInfoNewResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.institution_type,
+        c.name,
+        c.designation,
+        c.logo,
+        c.info_id,
+        c.is_sys,
+        c.is_great,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason
+        FROM
+        data_institution_info_new AS c
+        WHERE
+        c.is_used = 1
+        <if test="institutionType != null and institutionType != 0">
+            AND c.institution_type = #{institutionType}
+        </if>
+        <if test="name != null">
+            AND c.name like '%${name}%'
+        </if>
+        ORDER BY create_time desc
+    </select>
+
+    <!-- 查询服务商明细, 并关联获取个人资料信息或者企业资料信息 -->
+    <select id="findDataInstitutionInfoNewById" resultMap="DataInstitutionInfoNewWithInfoResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.institution_type,
+        c.name,
+        c.designation,
+        c.logo,
+        c.info_id,
+        c.is_sys,
+        c.is_great,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason
+        FROM
+        data_institution_info_new AS c
+        WHERE
+        c.is_used = 1 AND c.id = #{id}
+    </select>
+
+    <!-- 服务商结果集 -->
+    <resultMap id="DataInstitutionInfoNewResult" type="com.qtdbp.trading.model.DataInstitutionInfoNewModel">
+        <id column="id" property="id" />
+        <result column="type_id" property="typeId" />
+        <result column="institution_type" property="institutionType" />
+        <result column="name" property="name" />
+        <result column="designation" property="designation" />
+        <result column="logo" property="logo" />
+        <result column="info_id" property="infoId" />
+        <result column="is_sys" property="isSys" />
+        <result column="is_great" property="isGreat" />
+        <result column="create_id" property="createId" />
+        <result column="create_time" property="createTime" />
+        <result column="auditor" property="auditor" />
+        <result column="audit_time" property="auditTime" />
+        <result column="audit_status" property="auditStatus" />
+        <result column="audit_fail_reason" property="auditFailReason" />
+    </resultMap>
+
+    <!-- 服务商结果集，关联获取资料 -->
+    <resultMap id="DataInstitutionInfoNewWithInfoResult" type="com.qtdbp.trading.model.DataInstitutionInfoNewModel">
+        <id column="id" property="id" />
+        <result column="type_id" property="typeId" />
+        <result column="institution_type" property="institutionType" />
+        <result column="name" property="name" />
+        <result column="designation" property="designation" />
+        <result column="logo" property="logo" />
+        <result column="info_id" property="infoId" />
+        <result column="is_sys" property="isSys" />
+        <result column="is_great" property="isGreat" />
+        <result column="create_id" property="createId" />
+        <result column="create_time" property="createTime" />
+        <result column="auditor" property="auditor" />
+        <result column="audit_time" property="auditTime" />
+        <result column="audit_status" property="auditStatus" />
+        <result column="audit_fail_reason" property="auditFailReason" />
+
+        <!-- 鉴别器，根据服务商类型(institution_type)自动匹配是CompanyInfoModel或者是PersonalInfoModel -->
+        <discriminator javaType="int" column="institution_type">
+            <!-- 关联企业资料 -->
+            <case value="1" resultMap="institution2CompanyMap" />
+            <!-- 关联个人资料 -->
+            <case value="2" resultMap="institution2PersonalMap" />
+        </discriminator>
+    </resultMap>
+
+    <resultMap id="institution2CompanyMap" type="com.qtdbp.trading.model.DataInstitutionInfoNewModel" extends="DataInstitutionInfoNewWithInfoResult">
+        <association property="companyInfoModel" column="info_id" select="findCompanyInfoById" />
+    </resultMap>
+
+    <resultMap id="institution2PersonalMap" type="com.qtdbp.trading.model.DataInstitutionInfoNewModel" extends="DataInstitutionInfoNewWithInfoResult">
+        <association property="personalInfoModel" column="info_id" select="findPersonalInfoById" />
+    </resultMap>
+
+    <!-- 更新服务商 -->
+    <update id="updateDataInstitutionInfoNew" parameterType="com.qtdbp.trading.model.DataInstitutionInfoNewModel">
+        UPDATE data_institution_info_new
+        <trim prefix="set" suffixOverrides=",">
+            <if test="institutionType != null">institution_type = #{institutionType},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="designation != null"> designation = #{designation} ,</if>
+            <if test="logo != null">logo = #{logo} ,</if>
+            <if test="infoId != null">info_id = #{infoId} ,</if>
+            <if test="isSys != null">is_sys = #{isSys} ,</if>
+            <if test="isGreat != null">is_great = #{isGreat} ,</if>
+            <if test="editId != null ">edit_id = #{editId},  edit_time = now(),</if>
+            <if test="auditor != null ">auditor = #{auditor}, audit_time = now(),</if>
+            <if test="auditStatus != null ">audit_status = #{auditStatus}, </if>
+            <if test="auditFailReason != null ">audit_fail_reason = #{auditFailReason}, </if>
+            <if test="isUsed != null ">is_used = #{isUsed}, </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!-- 添加定制服务数据 -->
+    <insert id="insertDataInstitutionInfoNew" parameterType="com.qtdbp.trading.model.DataInstitutionInfoNewModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO data_institution_info_new (
+        type_id,
+        institution_type,
+        name,
+        designation,
+        logo,
+        info_id,
+        is_sys,
+        is_great,
+        create_id,
+        create_time,
+        is_used
+        ) VALUES (
+        #{typeId},
+        #{institutionType},
+        #{name},
+        #{designation},
+        #{logo},
+        #{infoId},
+        #{isSys},
+        #{isGreat},
+        #{createId},
+        now(),
+        1 )
+    </insert>
+
+    <!-- #################################################################### -->
+    <!-- ##################################个人资料########################### -->
+    <!-- #################################################################### -->
+
+    <select id="findPersonalInfoById" resultMap="PersonalInfoResult">
+        SELECT p.real_name,p.id_number, p.gender, p.full_face_photo, p.negative_side_photo, p.exp_time, p.province_id, p.city_id, p.district_id, p.address, p.phone,p.create_id,p.create_time FROM personal_info AS p WHERE p.is_used = 1 AND p.id = #{id}
+    </select>
+
+    <!-- 添加个人资料insertPersonalInfo -->
+    <insert id="insertPersonalInfo" parameterType="com.qtdbp.trading.model.PersonalInfoModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO personal_info (
+        real_name,
+        id_number,
+        gender,
+        full_face_photo,
+        negative_side_photo,
+        exp_time,
+        type_id,
+        province_id,
+        city_id,
+        district_id,
+        address,
+        phone,
+        create_id,
+        create_time,
+        is_used
+        ) VALUES (
+        #{realName},
+        #{idNumber},
+        #{gender},
+        #{fullFacePhoto},
+        #{negativeSidePhoto},
+        #{expTime},
+        #{typeId},
+        #{provinceId},
+        #{cityId},
+        #{districtId},
+        #{address},
+        #{phone},
+        #{createId},
+        now(),
+        1 )
+    </insert>
+
+    <!-- 个人资料结果集 -->
+    <resultMap id="PersonalInfoResult" type="com.qtdbp.trading.model.PersonalInfoModel">
+        <id column="id" property="id" />
+        <result column="real_name" property="realName" />
+        <result column="id_number" property="idNumber" />
+        <result column="gender" property="gender" />
+        <result column="full_face_photo" property="fullFacePhoto" />
+        <result column="negative_side_photo" property="negativeSidePhoto" />
+        <result column="exp_time" property="expTime" />
+        <result column="province_id" property="provinceId" />
+        <result column="city_id" property="cityId" />
+        <result column="district_id" property="districtId" />
+        <result column="address" property="address" />
+        <result column="phone" property="phone" />
+        <result column="create_id" property="createId" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- #################################################################### -->
+    <!-- ##################################企业资料########################### -->
+    <!-- #################################################################### -->
+
+    <select id="findCompanyInfoById" resultMap="CompanyInfoResult">
+        select company_name,company_logo,company_intro,license,license_number,province_id,city_id,district_id,address,phone,corporator,create_id,create_time from company_info where is_used = 1 and id = #{id}
+    </select>
+
+    <!-- 添加企业资料insertCompanyInfo -->
+    <insert id="insertCompanyInfo" parameterType="com.qtdbp.trading.model.CompanyInfoModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO company_info (
+        company_name,
+        company_logo,
+        company_intro,
+        industry_id,
+        license,
+        license_number,
+        province_id,
+        city_id,
+        district_id,
+        address,
+        phone,
+        corporator,
+        create_id,
+        create_time,
+        is_used
+        ) VALUES (
+        #{companyName},
+        #{companyLogo},
+        #{companyIntro},
+        #{industryId},
+        #{license},
+        #{licenseNumber},
+        #{provinceId},
+        #{cityId},
+        #{districtId},
+        #{address},
+        #{phone},
+        #{corporator},
+        #{createId},
+        now(),
+        1 )
+    </insert>
+
+    <!-- 企业资料结果集 -->
+    <resultMap id="CompanyInfoResult" type="com.qtdbp.trading.model.CompanyInfoModel">
+        <id column="id" property="id" />
+        <result column="company_name" property="companyName" />
+        <result column="company_logo" property="companyLogo" />
+        <result column="company_intro" property="companyIntro" />
+        <result column="license" property="license" />
+        <result column="license_number" property="licenseNumber" />
+        <result column="province_id" property="provinceId" />
+        <result column="city_id" property="cityId" />
+        <result column="district_id" property="districtId" />
+        <result column="address" property="address" />
+        <result column="phone" property="phone" />
+        <result column="corporator" property="corporator" />
+        <result column="create_id" property="createId" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+</mapper>

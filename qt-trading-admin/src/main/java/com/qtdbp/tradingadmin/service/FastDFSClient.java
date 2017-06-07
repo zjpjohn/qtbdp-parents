@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 
 /**
@@ -37,7 +38,19 @@ public class FastDFSClient {
      * @throws IOException
      */
     public String uploadFile(MultipartFile file) throws IOException {
-        StorePath storePath = storageClient.uploadFile(file.getInputStream(),file.getSize(), FilenameUtils.getExtension(file.getOriginalFilename()),null);
+        return uploadFile(file.getInputStream(), file.getSize(), FilenameUtils.getExtension(file.getOriginalFilename())) ;
+    }
+
+    /**
+     * 上传文件
+     * @param inputStream 文件流
+     * @param size  大小
+     * @param ext   文件类型
+     * @return
+     * @throws IOException
+     */
+    public String uploadFile(InputStream inputStream, long size, String ext) throws IOException {
+        StorePath storePath = storageClient.uploadFile(inputStream, size, ext,null);
         return getResAccessUrl(storePath);
     }
 

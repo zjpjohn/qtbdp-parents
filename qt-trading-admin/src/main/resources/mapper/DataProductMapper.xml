@@ -8,14 +8,14 @@
         p.id,
         p.designation,
         p.pic,
-        p.introduce,
         p.price,
         p.data_type_props,
         p.addtime,
         p.data_type,
         p.user_id,
         p.is_used,
-        s.name
+        s.name,
+        p.data_status
         FROM
         data_product as p left join sys_users s on p.user_id = s.user_id
         <where>
@@ -28,6 +28,14 @@
             <if test="designation != null">
                 p.designation like '%${designation}%'
             </if>
+            <choose>
+                <when test="userId != null and userId == 0">
+                    p.user_id = 0
+                </when>
+                <otherwise>
+                    p.user_id != 0
+                </otherwise>
+            </choose>
         </where>
         ORDER BY
         addtime desc
@@ -37,6 +45,7 @@
         <id column="Id" property="id" />
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
+        <result column="data_scale" property="dataScale"/>
         <result column="introduce" property="introduce" />
         <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
@@ -51,6 +60,15 @@
         <result column="name" property="username" />
         <result column="file_url" property="fileUrl"/>
         <result column="data_type_path" property="dataTypePath" />
+        <result column="data_profile" property="dataProfile"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="data_format" property="dataFormat"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="data_src" property="dataSrc"/>
+        <result column="auditor" property="auditor"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="audit_fail_reason" property="auditFailReason"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -59,6 +77,7 @@
         p.id,
         p.designation,
         p.pic,
+        p.data_scale,
         p.data_type,
         p.introduce,
         p.addtime,
@@ -69,7 +88,16 @@
         p.file_url,
         p.user_id,
         p.is_used,
-        p.data_type_path
+        p.data_type_path,
+        p.data_profile,
+        p.market_price,
+        p.data_format,
+        p.data_status,
+        p.data_src,
+        p.auditor,
+        p.audit_time,
+        p.audit_status,
+        p.audit_fail_reason
         FROM
         data_product as p
         WHERE
@@ -87,6 +115,7 @@
             <if test="designation != null"> designation = #{designation} ,</if>
             <if test="introduce != null">introduce = #{introduce} ,</if>
             <if test="pic != null">pic = #{pic} ,</if>
+            <if test="dataScale != null">data_scale = #{dataScale}, </if>
             <if test="dataType != null and dataType != 0">data_type = #{dataType} ,</if>
             <if test="price != null">price = #{price} ,</if>
             <if test="itemPrice != null ">item_price = #{itemPrice} ,</if>
@@ -94,9 +123,26 @@
             <if test="dataTypeProps != null">data_type_props = #{dataTypeProps} ,</if>
             <if test="dataSize != null">data_size = #{dataSize},</if>
             <if test="dataTypePath != null">data_type_path = #{dataTypePath}, </if>
+            <if test="dataProfile != null ">data_profile = #{dataProfile}, </if>
+            <if test="marketPrice != null ">market_price = #{marketPrice}, </if>
+            <if test="dataFormat != null">data_format = #{dataFormat}, </if>
+            <if test="dataStatus != null">data_status = #{dataStatus}, </if>
+            <if test="dataSrc != null">data_src = #{dataSrc}, </if>
         </trim>
         WHERE
         id = #{id}
+    </update>
+
+    <!--审核数据包产品-->
+    <update id="auditProduct" parameterType="com.qtdbp.trading.model.DataProductModel">
+        update data_product
+        <trim prefix="set" suffixOverrides=",">
+            audit_time = now(),
+            <if test="auditStatus != null">audit_status = #{auditStatus},</if>
+            <if test="auditFailReason != null"> audit_fail_reason= #{auditFailReason}, </if>
+            <if test="auditor != null"> auditor = #{auditor}, </if>
+        </trim>
+        where id = #{id}
     </update>
 
     <insert id="insertProduct" parameterType="com.qtdbp.trading.model.DataProductModel" useGeneratedKeys="true" keyProperty="id">
@@ -128,7 +174,13 @@
             download_count,
             buy_count,
             data_size,
-            data_type_path
+            data_type_path,
+            data_profile,
+            market_price,
+            data_format,
+            data_status,
+            data_src,
+            audit_status
         ) VALUES (
             #{designation},
             #{introduce},
@@ -153,7 +205,13 @@
             0,
             0,
             #{dataSize},
-            #{dataTypePath}
+            #{dataTypePath},
+            #{dataProfile},
+            #{marketPrice},
+            #{dataFormat},
+            #{dataStatus},
+            #{dataSrc},
+            0
         )
 
     </insert>

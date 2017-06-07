@@ -1,6 +1,7 @@
 package com.qtdbp.tradingadmin.service;
 
 import com.github.pagehelper.PageHelper;
+import com.qtdbp.trading.constants.AuditStatusConstants;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductAttrRelationModel;
@@ -169,4 +170,23 @@ public class DataProductService {
         return count;
     }
 
+    /**
+     * 审核爬虫规则
+     * @param productModel
+     * @return
+     * @throws GlobalException
+     */
+    public Integer auditProduct(DataProductModel productModel) throws GlobalException {
+        if (productModel.getId() == null || productModel.getId() == 0) throw new GlobalException("id为空，请重新操作");
+        Integer count = 0;
+        //审核通过的时候
+        if (productModel.getAuditStatus() == AuditStatusConstants.AUDIT_STATUS_PASS) {
+            count = productMapper.auditProduct(productModel);
+            //审核不通过的时候
+        } else if (productModel.getAuditStatus() == AuditStatusConstants.AUDIT_STATUS_NO_PASS) {
+            if (productModel.getAuditFailReason() == null) throw new GlobalException("未填写不通过原因，请重新审核");
+            count = productMapper.auditProduct(productModel);
+        }
+        return count > 0 ? count : -1;
+    }
 }

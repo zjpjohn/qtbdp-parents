@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.CrawlersRoleMapper">
+    
+    <select id="findRulesByCondition" resultMap="CrawlersRoleMap">
+        select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price, c.buy_count, c.web_type,
+         c.web_site,  c.collection_field, is_self_support  from crawlers_role as c where c.is_used = 1
+         <if test="typeId != null ">
+             and type_id = #{typeId}
+         </if>
+          <if test="webType != null ">
+              and web_type = #{webType}
+          </if>
+          order by ${orderBy} desc
+    </select>
+
+    <resultMap id="CrawlersRoleMap" type="com.qtdbp.trading.model.CrawlersRoleModel">
+        <id property="id" column="id"/>
+        <result column="type_id" property="typeId"/>
+        <result column="role_type" property="roleType"/>
+        <result column="name" property="name"/>
+        <result column="introduction" property="introduction"/>
+        <result column="logo" property="logo"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="price" property="price"/>
+        <result column="desc" property="desc"/>
+        <result column="user_rating" property="userRating"/>
+        <result column="buy_count" property="buyCount"/>
+        <result column="view_count" property="viewCount"/>
+        <result column="file_path" property="filePath"/>
+        <result column="web_type" property="webType"/>
+        <result column="web_site" property="webSite"/>
+        <result column="collection_field" property="collectionField"/>
+        <result column="is_self_support" property="isSelfSupport"/>
+        <result column="is_institution" property="isInstitution"/>
+        <result column="is_guarantee" property="isGuarantee"/>
+        <result column="is_full_refund" property="isFullRefund"/>
+        <result column="is_service_supervision" property="isServiceSupervision"/>
+        <result column="is_great_institution" property="isGreatInstitution"/>
+        <result column="create_id" property="createId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="edit_id" property="editId"/>
+        <result column="edit_time" property="editTime"/>
+        <result column="auditor" property="auditor"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="audit_fail_reason" property="auditFailReason"/>
+        <result column="is_used" property="isUsed"/>
+    </resultMap>
+
+    <!--审核爬虫规则-->
+    <update id="updateRule" parameterType="com.qtdbp.trading.model.CrawlersRoleModel">
+        update crawlers_role
+        <trim prefix="set" suffixOverrides=",">
+            audit_time = now(),
+            <if test="auditStatus != null">audit_status = #{auditStatus},</if>
+            <if test="auditFailReason != null"> audit_fail_reason= #{auditFailReason}, </if>
+            <if test="auditor != null"> auditor = #{auditor}, </if>
+        </trim>
+        where id = #{id}
+    </update>
+</mapper>

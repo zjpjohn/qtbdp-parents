@@ -9,6 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 public class CommonUtil {
 
     /**
+     * excel2003扩展名
+     */
+    public static final String EXCEL03_EXTENSION = "xls";
+
+    /**
+     * excel2007扩展名
+     */
+    public static final String EXCEL07_EXTENSION = "xlsx";
+
+    /**
+     * zip扩展名
+     */
+    public static final String ZIP_EXTENSION = "zip";
+
+    /**
      * 获取当前登录IP
      * @param request
      * @return

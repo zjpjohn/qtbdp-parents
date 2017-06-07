@@ -29,7 +29,7 @@ public class DataProductModel extends BaseModel {
     private String fileUrl ;        // 数据包路径
     private int provinceId ;        // 省份id
     private int isHuadong ;         // 是否华东
-    private String userId ;            // 添加人
+    private Integer userId ;            // 添加人
     private Date addTime ;          // 添加时间
     private int editorId ;          // 编辑人id
     private Date editorTime ;       // 编辑时间
@@ -42,6 +42,16 @@ public class DataProductModel extends BaseModel {
     private double price;
     private double itemPrice;
     private String dataTypePath;    //数据类目路径
+    private String dataProfile;     //产品简介
+    private Double marketPrice;     //市场价
+    private String dataFormat;      //数据格式
+    private Integer dataStatus;     //数据类型
+    private Integer dataSrc;        //数据来源
+    private String auditor;         //审核人
+    private Date auditTime;         //审核时间
+    private Integer auditStatus;    //审核状态
+    private String auditFailReason; //审核失败原因
+
 
     private int attrId ;        // 属性ID
     private String attrName ;   // 属性名称
@@ -69,6 +79,8 @@ public class DataProductModel extends BaseModel {
     private Map<String, String> subFiles = new HashMap<>();  //拆分后的数据条目
 
     private Integer dataSize;   //文件大小
+
+    private Integer isFree;     //是否免费
 
     public String getDesignation() {
         return designation;
@@ -158,11 +170,11 @@ public class DataProductModel extends BaseModel {
         this.isHuadong = isHuadong;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -393,6 +405,86 @@ public class DataProductModel extends BaseModel {
 
     public void setDataTypePath(String dataTypePath) {
         this.dataTypePath = dataTypePath;
+    }
+
+    public String getDataProfile() {
+        return dataProfile;
+    }
+
+    public void setDataProfile(String dataProfile) {
+        this.dataProfile = dataProfile;
+    }
+
+    public Double getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(Double marketPrice) {
+        this.marketPrice = marketPrice;
+    }
+
+    public String getDataFormat() {
+        return dataFormat;
+    }
+
+    public void setDataFormat(String dataFormat) {
+        this.dataFormat = dataFormat;
+    }
+
+    public Integer getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(Integer dataStatus) {
+        this.dataStatus = dataStatus;
+    }
+
+    public Integer getDataSrc() {
+        return dataSrc;
+    }
+
+    public void setDataSrc(Integer dataSrc) {
+        this.dataSrc = dataSrc;
+    }
+
+    public String getAuditor() {
+        return auditor;
+    }
+
+    public void setAuditor(String auditor) {
+        this.auditor = auditor;
+    }
+
+    public Date getAuditTime() {
+        return auditTime;
+    }
+
+    public void setAuditTime(Date auditTime) {
+        this.auditTime = auditTime;
+    }
+
+    public Integer getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(Integer auditStatus) {
+        this.auditStatus = auditStatus;
+    }
+
+    public String getAuditFailReason() {
+        return auditFailReason;
+    }
+
+    public void setAuditFailReason(String auditFailReason) {
+        this.auditFailReason = auditFailReason;
+    }
+
+    public Integer getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(Integer isFree) {
+        this.isFree = isFree;
     }
 }
 

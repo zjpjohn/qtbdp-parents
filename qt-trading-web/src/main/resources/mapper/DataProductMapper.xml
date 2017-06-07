@@ -8,10 +8,11 @@
         p.id,
         p.designation,
         p.pic,
-        p.introduce,
         p.item_price,
-        p.data_type_props,
-        p.price
+        p.data_type,
+        p.price,
+        p.data_profile,
+        p.data_scale
         FROM
         data_product as p
         WHERE
@@ -19,8 +20,24 @@
         <if test="dataTypes != null ">
             AND p.data_type in (${dataTypes})
         </if>
-        <if test="valSqls != null">
+<!--        <if test="valSqls != null">
             AND p.id IN (${valSqls})
+        </if>-->
+        <if test="dataStatus != null">
+            AND p.data_status = #{dataStatus}
+        </if>
+        <if test="dataSrc != null">
+            AND p.data_src = #{dataSrc}
+        </if>
+        <if test="isFree != null">
+            <choose>
+                <when test="isFree == 1">
+                  AND p.price = 0
+                </when>
+                <otherwise>
+                  AND p.price != 0
+                </otherwise>
+            </choose>
         </if>
         ORDER BY
         ${orderBy} DESC
@@ -31,11 +48,18 @@
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
         <result column="introduce" property="introduce" />
+        <result column="data_scale" property="dataScale"/>
+        <result column="data_type" property="dataType"/>
         <result column="data_type_props" property="dataTypeProps"/>
         <result column="attr_name" property="attrName" />
         <result column="val_name" property="valName" />
         <result column="item_price" property="itemPrice"/>
         <result column="price" property="price" />
+        <result column="data_profile" property="dataProfile"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="data_format" property="dataFormat"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="data_src" property="dataSrc"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -48,11 +72,16 @@
             p.addtime,
             p.editor_time,
             p.price,
-            p.data_type_props,
+            p.data_scale,
             p.item_price,
             p.file_url,
+            p.data_profile,
             p.buy_count,
-            p.download_count
+            p.download_count,
+            p.market_price,
+            p.data_format,
+            p.data_status,
+            p.data_src
         FROM
         data_product as p
         WHERE
@@ -67,6 +96,8 @@
         <result column="designation" property="designation" />
         <result column="pic" property="pic" />
         <result column="introduce" property="introduce" />
+        <result column="data_scale" property="dataScale"/>
+        <result column="data_type" property="dataType"/>
         <result column="addtime" property="addTime" />
         <result column="editor_time" property="editorTime" />
         <result column="price" property="price" />
@@ -75,7 +106,11 @@
         <result column="file_url" property="fileUrl"/>
         <result column="buy_count" property="buyCount"/>
         <result column="download_count" property="downloadCount"/>
-
+        <result column="data_profile" property="dataProfile"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="data_format" property="dataFormat"/>
+        <result column="data_status" property="dataStatus"/>
+        <result column="data_src" property="dataSrc"/>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>

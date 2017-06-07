@@ -31,7 +31,7 @@
             <div class="lf detail_info">
                 <p class="rt" th:text="'更新时间：'+${#dates.format(prod.editorTime,'yyyy/MM/dd HH:mm')}"></p>
                 <h2 th:text="${prod.designation}"></h2>
-                <div class="infos" th:utext="${prod.introduce}"></div>
+                <div class="infos" th:utext="${prod.dataProfile}"></div>
                 <p class="p1">
                     <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')"></span>
                 </p>
