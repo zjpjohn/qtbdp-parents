@@ -34,6 +34,7 @@ var Common = {
         var _grid = settings.container ;
         var _url = settings.url ;
         var _cols = settings.columns ;
+        var _columnDefs = settings.columnDefs;
 
         //初始化表格
         $(_grid).dataTable({
@@ -47,31 +48,14 @@ var Common = {
             order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
             renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
             pagingType: "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
-            columnDefs:[{
-                targets: 6,
-                render: function (data, type, row, meta) {
-                    var isUsed,
-                        color;
-                    if(row.isUsed == 1){
-                        isUsed = "下架";
-                        color = "red";
-                    }else {
-                        isUsed = "上架";
-                        color = "blue";
-                    }
-                    return '<a href="/save?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">修改</a>' +
-                        '<button class="btn btn-sm '+ color + ' btn-outline filter-cancel isUsed" value=" '+ row.id +' ">'+ isUsed + '</button>';
-                }
-            },
-                { "orderable": false, "targets": 4 }
-            ],
+            columnDefs:_columnDefs,
             ajax: function (data, callback, settings) {
 
                 //封装请求参数
                 var param = {};
                 param.rows = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
                 param.page = (data.start / data.length)+1;//当前页码
-                param.name = data.search;
+                // param.name = data.search;
                 //console.log(param);
                 //ajax请求数据
                 $.ajax({
@@ -114,6 +98,8 @@ var Common = {
         }).api();
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
     },
+
+
     //创建属性对象数据
     createAttr:function (opt) {
         var obj = {};
@@ -331,6 +317,134 @@ var Common = {
         }else{
             return "该类型已不存在";
         }
-    }
+    },
 
+    //确认与否弹框
+    Modal : function(title, id,url) {
+        var smodal =
+            '<div class="modal fade confirm-modal-sm" id="myConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+            '    <div class="modal-dialog">' +
+            '        <div class="modal-content">' +
+            '            <div class="modal-header">' +
+            '                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>' +
+            '                <h4 class="modal-title" id="myModalLabel">' + title + '</h4>' +
+            '            </div>' +
+            '            <div class="modal-body">' +
+                '              <div class="form-group form-md-radios" id="Auditing">'+
+                '               <div class="md-radio-inline">'+
+                '                   <div class="md-radio">'+
+                    '                   <input type="radio" id="pass"   name="isUsed" value="1" class="md-radiobtn" checked="checked">'+
+                    '                   <label for="pass">'+
+                    '                       <span></span>'+
+                    '                       <span class="check"></span>'+
+                    '                       <span class="box"></span> 通过'+
+                    '                   </label>'+
+                '                   </div>'+
+                    '               <div class="md-radio">'+
+                    '                   <input type="radio" id="NoPass" name="isUsed" value="2" class="md-radiobtn">'+
+                    '                   <label for="NoPass">'+
+                    '                      <span></span>'+
+                    '                      <span class="check"></span>'+
+                    '                      <span class="box"></span> 不通过'+
+                    '                   </label>'+
+                    '               </div>'+
+                '                </div>'+
+                '               </div>'+
+                '               <div class="form-group" id="reason" style="display: none"> '+
+            '                        <label class="control-label">不通过原因：</label>'+
+            '                        <div class=""> '+
+            '                            <input  type="text"  class="form-control borderRadiusIE8" placeholder="请输入原因" id="reasonContent" >'+
+            '                        </div> '+
+            '                   </div>  '+
+            '            </div>' +
+            '            <div class="modal-footer">' +
+            '                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>' +
+            '                <button type="button" class="btn btn-primary" id="j_confirm_btn">确认</button>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+
+        var bconfirm = false;
+
+        $('body').append($(smodal));
+
+        $('#myConfirmModal').modal('show');
+
+        $('#myConfirmModal').on('hidden.bs.modal', function(e) {
+            $('#myConfirmModal').remove();
+        });
+
+        var AuditStatus = $('#Auditing input:radio[name="isUsed"]:checked').val(),
+            radio = $('#Auditing input');
+
+
+        radio.on('change', function () {
+            if($(this).is(':checked') === true){
+                AuditStatus = $(this).val();
+                if(AuditStatus == 2){
+                    $("#reason").css('display','block');
+                }else {
+                    $("#reason").css('display','none');
+                }
+            }
+        });
+
+
+        $('#j_confirm_btn').on('click', function () {
+            if(AuditStatus == 2){
+                var reason = $('#reasonContent').val();
+            }else {
+                reason = "";
+            }
+
+            $.ajax({
+                url: url,
+                dataType: "json",
+                type:"post",
+                data:{
+                    id:id,
+                    status:AuditStatus,
+                    reason:reason
+                },
+                error:function () {
+                    layer.msg("审核失败",{icon: 5});
+                },
+                success: function (ret) {
+                    if(ret.success === true){
+                        $('#myConfirmModal').modal('hide');
+                        layer.msg("审核成功",{icon: 1},function(){
+                            window.location.reload();
+                        });
+                    }
+                }
+            })
+        });
+
+    },
+    info : function (obj,fn) {
+        var url = obj.url;
+
+        $.ajax({
+            type:'get',
+            data:{
+                id:id
+            },
+            dataType: "json",
+            url:url,
+            async:true,
+            error:function () {
+                layer.msg("获取详情失败",{icon: 5});
+            },
+            success: function (ret) {
+                var data = ret.pageInfo;
+                if(data){
+                   fn(data);
+                }else {
+                    layer.msg("展示遇到错误",{icon: 5});
+                }
+            }
+        });
+    }
 };
+
