@@ -16,7 +16,10 @@ public class InstitutionController extends BaseController {
 
     public static final String PAGE_INSTITUTION = "institution/index";
     public static final String PAGE_INSTITUTION_ROLE = "institution/role";
+    public static final String PAGE_INSTITUTION_ROLE_INFO = "institution/role-info";
     public static final String PAGE_INSTITUTION_DATA = "institution/data";
+    public static final String PAGE_INSTITUTION_DATA_INFO = "institution/data-info";
+    public static final String PAGE_INSTITUTION_INFO = "institution/info";
 
     /**
      * 服务商列表
@@ -39,6 +42,16 @@ public class InstitutionController extends BaseController {
     }
 
     /**
+     * 服务商发布的产品详情
+     * @return
+     */
+    @RequestMapping(value = "/institution/dataInfo", method = RequestMethod.GET)
+    public String institutionDataInfo() {
+
+        return PAGE_INSTITUTION_DATA_INFO;
+    }
+
+    /**
      * 服务商规则审核
      * @return
      */
@@ -46,6 +59,26 @@ public class InstitutionController extends BaseController {
     public String institutionRole() {
 
         return PAGE_INSTITUTION_ROLE;
+    }
+
+    /**
+     * 服务商发布的爬虫规则详情
+     * @return
+     */
+    @RequestMapping(value = "/institution/roleInfo", method = RequestMethod.GET)
+    public String institutionRoleInfo() {
+
+        return PAGE_INSTITUTION_ROLE_INFO;
+    }
+
+    /**
+     * 服务商详情
+     * @return
+     */
+    @RequestMapping(value = "/institution/info", method = RequestMethod.GET)
+    public String institutionInfo() {
+
+        return PAGE_INSTITUTION_INFO;
     }
 
 }
