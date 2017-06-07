@@ -31,12 +31,13 @@ public class CrawlersRoleApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "typeId", value = "类目类型id（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "webType", value = "网站类型id（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "orderBy", value = "排序字段", required = true, dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
+            @ApiImplicitParam(name = "orderBy", value = "排序字段", required = false, dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelMap findByCondition(CrawlersRoleModel crawlersRoleModel) {
         if(crawlersRoleModel.getRows() == null || crawlersRoleModel.getRows() == 0) crawlersRoleModel.setRows(12);
+        if (crawlersRoleModel.getOrderBy() == null) crawlersRoleModel.setOrderBy("create_time");
         ModelMap map = new ModelMap();
 
         try {
