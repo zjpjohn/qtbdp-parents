@@ -17,6 +17,9 @@ public class CustomizedController extends BaseController {
     public static final String PAGE_CUSTOMIZED_ROLE = "customized/index";
     public static final String PAGE_CUSTOMIZED_DATA = "customized/data";
 
+    public static final String PAGE_CUSTOMIZED_DATA_DETAIL = "customized/data-info";
+    public static final String PAGE_CUSTOMIZED_ROLE_DETAIL = "customized/role-info";
+
     /**
      * 定制数据列表
      * @return
@@ -28,6 +31,16 @@ public class CustomizedController extends BaseController {
     }
 
     /**
+     * 定制数据详情
+     * @return
+     */
+    @RequestMapping(value = "/customized/dataInfo", method = RequestMethod.GET)
+    public String customizedDataInfo() {
+
+        return PAGE_CUSTOMIZED_DATA_DETAIL;
+    }
+
+    /**
      * 定制规则列表
      * @return
      */
@@ -35,5 +48,15 @@ public class CustomizedController extends BaseController {
     public String customizedRole() {
 
         return PAGE_CUSTOMIZED_ROLE;
+    }
+
+    /**
+     * 定制规则详情
+     * @return
+     */
+    @RequestMapping(value = "/customized/roleInfo", method = RequestMethod.GET)
+    public String customizedRoleInfo() {
+
+        return PAGE_CUSTOMIZED_ROLE_DETAIL;
     }
 }
