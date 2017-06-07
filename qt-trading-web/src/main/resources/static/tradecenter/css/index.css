@@ -1,209 +1,293 @@
 @charset "utf-8";
-/***************工业数据产品*********/
-.index_titles{
-    position:relative;
-    width:260px;
-    color: #2A97E7;
-    margin:0px auto;
-    margin-bottom:80px;
-    text-align:center;
+
+.industrial_data{
+    box-sizing: border-box;
+    width:100%;
+    height:530px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    background-color:#F9F9F9;
 }
-.index_titles>i{
-   position:absolute;
-    border-bottom:1px solid #2A97E7;
-    border-right:1px solid #2A97E7;
-    background:#2A97E7;
-}
-.index_titles>.i1{
-    width:70px;
-    left:0px;
-    top:10px;
-}
-.index_titles>.i2{
-    width:70px;
-    right:0px;
-    top:10px;
-}
-.index_titles>.i3{
-    width:0px;
-    height:49px;
-    left:0px;
-    top:10px;
-}
-.index_titles>.i4{
-    width:0px;
-    height:49px;
-    right:0px;
-    top:10px;
-}
-.index_titles>.i5{
-    width:20px;
-    left:0px;
-    bottom:6px;
-}
-.index_titles>.i6{
-     width:20px;
-     right:0px;
-     bottom:6px;
- }
-.index_titles>.i7{
-    width:6px;
-    height:7px;
-    left:0px;
-    bottom:6px;
-}
-.index_titles>p{
-    left: 62px;
-}
-.index_titles>h1{
-    margin-top:10px;
-}
-.production{
+/********标题公用样式*********/
+.intitle{
     width:1200px;
-    margin:80px auto;
-    margin-bottom:64px;
+    margin: 0px auto;
 }
-.pro_list1{
-    border-bottom:1px solid #ddd;
+.intitle>span{
+    font-size: 10px;
+    color:#ccc;
+    padding-left: 10px;
 }
-.pro_list>li{
+.intitle>i{
+    display:inline-block;
+    width:6px;
+    height:25px;
+    background-image: linear-gradient(to bottom,#00C9AD 0%,#00B2DC 100%);
+    position:relative;
+    top:2px;
+    margin-right: 20px;
+}
+/*****公用表格样式*******/
+.databox,.datamart{
+    box-sizing: border-box;
+    width:1200px;
+    height:400px;
+    margin:0px auto;
+    margin-top: 20px;
+    border-top:1px solid #E9E9E9;
+}
+.databox>li,.datamart>li{
+    box-sizing: border-box;
     float:left;
-    border-right:1px solid #ddd;
-    width:179px;
-    height:190px;
-    padding:50px 60px;
-    padding-bottom:30px;
-    text-align:center;
-    line-height:20px;
-    color:#999;
+    width:300px;
+    height:200px;
+    background: #fff;
+    border-right:1px solid #E9E9E9;
+    border-bottom:1px solid #E9E9E9;
     position:relative;
 }
-.pro_list>li:last-child{
-    border-right:none;
+.databox>li:first-child,.datamart>li:first-child{
+    box-sizing: border-box;
+    /*border-left:1px solid #E9E9E9;*/
+    width:300px;
+    height:400px;
 }
-.pro_list>li>i{
-    display:block;
-    width:60px;
-    height:55px;
-    margin:0px auto;
-    background-image:url("../images/icon.png" );
+.databox>li>.boximg,.datamart>li>.boximg{
+    width:300px;
+    height:400px;
 }
-.pro_i1{
-    background-position:-37px -157px;
+.databox>li>p:first-child,.datamart>li>p:first-child,.relevancebox>li>p:first-child{
+    width:70px;
+    height:70px;
+    margin: 0px auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    background:url(../images/icon_index.png);
 }
-.pro_i2{
-    background-position:-37px -471px;
+.datamart>li>p:first-child{
+    width:100px;
 }
-.pro_i3{
-    background-position:-37px -576px;
+.relevancebox>li>p:first-child{
+    width:70px;
+    margin-top: 35px;
 }
-.pro_i4   {
-    background-position:-419px -677px;
+.databox>li>p:nth-child(2),.datamart>li>p:nth-child(2),.relevancebox>li>p:nth-child(2){
+    text-align: center;
 }
-.pro_i5{
-    background-position:-40px -366px;
- }
-.pro_i6{
-    background-position:-35px -260px;
+
+/*******工业数据开始*********/
+.databox>li:nth-child(2)>p:first-child{
+    background-position:6px 10px;
 }
-.pro_i7{
-    background-position:-422px -777px;
+.databox>li:nth-child(3)>p:first-child{
+    background-position:-100px 10px;
 }
-.pro_i8{
-    background-position:-420px -886px;
+.databox>li:nth-child(4)>p:first-child{
+    background-position:-206px 10px;
 }
-.pro_list>li>h3{
-    color:#2A97E7;
-    margin:20px auto;
+.databox>li:nth-child(5)>p:first-child{
+    background-position:-326px 10px;
 }
-.pro_list>li>a:hover{
+.databox>li:nth-child(6)>p:first-child{
+    background-position:-442px 10px;
+}
+.databox>li:nth-child(7)>p:first-child{
+    background-position:-584px 10px;
+}
+.box_bot{
     display:inline-block;
+    width:50px;
+    height:50px;
+    background:url(../images/icon_index.png)-506px -281px;
+    position:relative;
+    top:-160px;
+    left:-2px;
+    z-index: 2;
 }
-.more_pro{
-    display:block;
-    width:124px;
-    text-align:center;
-    height:45px;
-    line-height:45px;
-    border:1px solid #2A97E7;
-    color:#2A97E7;
-    border-radius:4px;
-    margin:0px auto;
-    margin-top:50px;
-    font-size:16px;
-}
-.pro_mask{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    line-height:270px;
-    background:rgba(256,256,256,0.8);
-    cursor:pointer;
+.box_shade{
+    width:300px;
+    height:200px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    background-color: rgba(0,160,233,0.1);
     display:none;
 }
-.pro_mask>i{
-   display:inline-block;
-    width:41px;
-    height:41px;
-    margin:0px auto;
-    background:url("../images/icon.png" ) no-repeat -188px -60px;
-}
-.pro_list>li:hover .pro_mask{
+
+.databox>li:hover>.box_shade,.databox>li>.box_shade.active{
+    cursor: pointer;
     display:block;
+
 }
-/***********平台优势****************/
-.advanige{
-    background:url("../images/index_bg1.jpg")no-repeat center center;
-   padding:50px 0px;
+
+
+/**********关联数据开始*************/
+.relevance_data{
+    background-color:#EEEEEE;
+    width:100%;
+    height:625px;
+    box-sizing: border-box;
+    padding-top: 28px;
+    padding-bottom: 40px;
 }
-.advanige .index_titles{
-    color:#fff;
-    margin-bottom:60px;
-    width:200px;
+.relevance_data .intitle>i{
+    background-image: linear-gradient(to bottom,#FDA081 0%,#FF5C56 100%);
 }
-.advanige .index_titles>i{
-    position:absolute;
-    border-bottom:1px solid #fff;
-    border-right:1px solid #fff;
-    background:#fff;
-}
-.advanige .index_titles>.i1,.advanige .index_titles>.i2{
-    width:50px;
-}
-.advanige .index_titles>h1{
-    color:#fff;
-}
-.adv_list{
+.relevancebox{
     width:1200px;
+    height:510px;
     margin:0px auto;
+    margin-top: 20px;
+    border-top:1px solid #E9E9E9;
+    box-sizing: border-box;
 }
-.adv_list>li{
+.relevancebox>li{
+    box-sizing: border-box;
     float:left;
-    width:274px;
-    height:255px;
-    padding:45px 53px;
-    background:#fff;
-    margin-right:30px;
-    margin-bottom:30px;
+    width:225px;
+    height:170px;
+    background: #fff;
+    border-right:1px solid #E9E9E9;
+    border-bottom:1px solid #E9E9E9;
+    position:relative
 }
-.adv_list>li:nth-child(3n){
-    margin-right:0px;
+.relevancebox>li:first-child{
+    box-sizing: border-box;
+    width:300px;
+    height:510px;
 }
-.adv_list p{
-    margin-top:32px;
-    margin-bottom:40px;
+.relevancebox>li:nth-child(2)>p:first-child{
+    background-position:10px -90px;
 }
-.adv_list b{
-    font-size:24px;
-    color:#38AFE5;
+.relevancebox>li:nth-child(3)>p:first-child{
+    background-position:-96px -90px;
 }
-.adv_list ol>li{
-    line-height:30px;
+.relevancebox>li:nth-child(4)>p:first-child{
+    background-position:-208px -90px;
 }
+.relevancebox>li:nth-child(5)>p:first-child{
+    background-position:-324px -90px;
+}
+.relevancebox>li:nth-child(6)>p:first-child{
+    background-position:-448px -80px;
+}
+.relevancebox>li:nth-child(7)>p:first-child{
+    background-position:-581px -85px;
+}
+.relevancebox>li:nth-child(8)>p:first-child{
+    background-position:-725px -80px;
+}
+.relevancebox>li:nth-child(9)>p:first-child{
+    background-position:-96px -178px;
+}
+.relevancebox>li:nth-child(10)>p:first-child{
+    background-position:-200px -170px;
+}
+.relevancebox>li:nth-child(11)>p:first-child{
+    background-position:-324px -166px;
+}
+.relevancebox>li:nth-child(12)>p:first-child{
+    background-position:-448px -80px;
+}
+.relevancebox>li:nth-child(13)>p:first-child{
+    background-position:-444px -170px;
+}
+.new_box{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    background:url(../images/icon_index.png)-607px -280px;
+    position:relative;
+    top:-144px;
+    left:0px;
+    z-index:2;
+}
+.new_shade{
+    width:225px;
+    height:170px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    background-color: rgba(255,105,95,0.1);
+    display:none;
+}
+
+.relevancebox>li:hover>.new_shade,.relevancebox>li>.new_shade.active{
+    cursor: pointer;
+    display:block;
+
+}
+
+
+
+/**************爬虫市场开始***********/
+.reptile_data{
+    background-color:#F9F9F9;
+    width:100%;
+    height:844px;
+    box-sizing: border-box;
+    padding-top: 28px;
+    padding-bottom: 48px;
+}
+.reptile_data .intitle>i{
+    background-image: linear-gradient(to bottom,#8FD06D 0%,#00C28B 100%);
+}
+
+.datamart>li:nth-child(2)>p:first-child{
+    background-position:-568px -167px;
+}
+.datamart>li:nth-child(3)>p:first-child{
+    background-position:-694px -167px;
+}
+.datamart>li:nth-child(4)>p:first-child{
+    background-position:16px -277px;
+}
+.datamart>li:nth-child(5)>p:first-child{
+    background-position:-102px -278px;
+}
+.datamart>li:nth-child(6)>p:first-child{
+    background-position:-234px -270px;
+}
+.datamart>li:nth-child(7)>p:first-child{
+    background-position:-368px -266px;
+}
+.social_shade{
+    width:300px;
+    height:200px;
+    position: absolute;
+    top:0px;
+    left:0px;
+    background-color: rgba(50,177,108,0.1);
+    display:none;
+}
+
+.datamart>li:hover>.social_shade,.datamart>li>.social_shade.active{
+    cursor: pointer;
+    display:block;
+
+}
+
+/**************爬虫市场结束***********/
+
+/*****数据服务商开始*******/
+.reptile_data .intitle>i.servicem{
+    background-image: linear-gradient(to bottom,#7EE7FD 0%,#00C28B 100%);
+    margin-top: 50px;
+}
+.servicebox{
+    width:1200px;
+    height:200px;
+    margin:0px auto;
+    margin-top:20px;
+    border:1px solid #ddd;
+    background-color:#fff;
+    box-sizing: border-box;
+}
+/*****数据服务商结束******/
+
+
 /***********合作关系****************/
-.companion{
+/*.companion{
     width:1200px;
     margin:80px auto;
 }
@@ -212,10 +296,12 @@
 }
 .companion .index_titles>.i1,.companion .index_titles>.i2{
     width:40px;
-}
+}*/
 .com_slide{
-    width:1200px;
+    width:1080px;
+    margin:0px auto;
     overflow:hidden;
+    margin-top:78px;
 }
 .com_list{
     width:1863px;
