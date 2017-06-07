@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.DataUserFeedbackMapper">
+
+    <select id="findFeedbackByCondition" resultMap="DataUserFeedbackMap">
+        select f.id,
+          f.feedback_type,
+          f.email,
+          f.phone,
+          f.content,
+          f.addtime,
+          f.ip,
+          f.mark
+         from data_user_feedback f order by addtime desc
+    </select>
+
+    <resultMap id="DataUserFeedbackMap" type="com.qtdbp.trading.model.DataUserFeedbackModel">
+        <id column="id" property="id"/>
+        <result column="feedback_type" property="feedbackType"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="content" property="content"/>
+        <result column="addtime" property="addtime"/>
+        <result column="ip" property="ip"/>
+        <result column="mark" property="mark"/>
+    </resultMap>
+
+    <update id="updateFeedback" parameterType="com.qtdbp.trading.model.DataUserFeedbackModel">
+        update data_user_feedback
+        <trim prefix="set" suffixOverrides=",">
+            <if test="feedbackType != null">feedback_type = #{feedbackType},</if>
+            <if test="email != null"> email= #{email}, </if>
+            <if test="phone != null"> phone = #{phone}, </if>
+            <if test="content != null"> content = #{content}, </if>
+            <if test="mark != null"> mark = #{mark}, </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+</mapper>
