@@ -16,6 +16,7 @@ ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd {
 h1,h2,h3,h4,h5,h6{
 	color:#333;
 }
+
 img{
 	vertical-align:middle;
 }
@@ -137,7 +138,7 @@ input:-ms-input-placeholder {
 	background-color:#0076C8;
 }
 nav{
-	background:#1A2730;
+	background:#0076C8;
 	height:70px;
 }
 .nav_con{
@@ -145,18 +146,22 @@ nav{
 	margin:0px auto;
 }
 .nav_list>a,.nav_rt>a{
-	margin-right:40px;
+	/*margin-right:40px;*/
 	color:#fff;
 	font-size:18px;
-	padding:23px 0px;
+	padding:23px 29px;
 	line-height:70px;
 }
 .nav_rt>a{
 	margin-right:5px;
 	padding-left:5px;
 }
+.nav_list{
+	font-size: 0px;
+}
 .nav_list>a:hover,.nav_list>a.active{
-	color:#00BAFF;
+	color:#0076C8;
+	background:#fff;
 }
 .nav_haslogin{
 	margin-top:20px;
