@@ -28,6 +28,14 @@
             <if test="designation != null">
                 p.designation like '%${designation}%'
             </if>
+            <choose>
+                <when test="userId != null and userId == 0">
+                    p.user_id = 0
+                </when>
+                <otherwise>
+                    p.user_id != 0
+                </otherwise>
+            </choose>
         </where>
         ORDER BY
         addtime desc
