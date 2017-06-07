@@ -4,11 +4,16 @@ import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.CrawlersRoleModel;
+import com.qtdbp.tradingadmin.base.security.SecurityUser;
+import com.qtdbp.tradingadmin.controller.BaseController;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.service.CrawlersRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +27,9 @@ import java.util.List;
 @Api(description = "爬虫市场 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/crawlers/role")
-public class CrawlersRoleApi {
+public class CrawlersRoleApi extends BaseController {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
     @Autowired
     private CrawlersRoleService crawlersRoleService;
@@ -53,20 +60,31 @@ public class CrawlersRoleApi {
     }
 
     @ApiOperation(value="爬虫规则审核数据接口")
-    @RequestMapping(value = "/auditCrawlersRole", method = RequestMethod.PUT)
-    public ModelMap update(@RequestBody CrawlersRoleModel crawlersRoleModel) throws GlobalException {
-        if (crawlersRoleModel == null) throw new GlobalException("数据不存在，请重新输入");
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "定制服务Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "status", value = "审核状态，1审核成功 2审核失败", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "reason", value = "审核失败原因", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "/auditCrawlersRole", method = RequestMethod.POST)
+    public ModelMap update(Integer id,Integer status,String reason) throws GlobalException {
 
         ModelMap map = new ModelMap();
-
-        try {
-            Integer count = crawlersRoleService.auditRole(crawlersRoleModel);
-            map.put("success", count > 0 ? true : false);
-            map.put("id", crawlersRoleModel.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (id != null){
+            try {
+                SecurityUser user = getPrincipal();
+                if (user == null) throw new GlobalAdminException("授权过期，请重新登陆");
+                CrawlersRoleModel crawlersRoleModel = new CrawlersRoleModel();
+                crawlersRoleModel.setId(id);
+                crawlersRoleModel.setAuditor(user.getUserId()); // 系统用户ID
+                crawlersRoleModel.setAuditStatus(status);
+                crawlersRoleModel.setAuditFailReason(reason);
+                Integer count = crawlersRoleService.auditRole(crawlersRoleModel);
+                map.put("success", count > 0 ? true : false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
+        map.put("success", false);
         return map;
     }
 

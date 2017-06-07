@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qtdbp.trading.mapper.DataUserFeedbackMapper">
 
-    <insert id="insertFeedback" parameterType="com.qtdbp.trading.model.DataUserFeedback" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertFeedback" parameterType="com.qtdbp.trading.model.DataUserFeedbackModel" useGeneratedKeys="true" keyProperty="id">
         <!-- mysql插入数据后，获取id -->
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
