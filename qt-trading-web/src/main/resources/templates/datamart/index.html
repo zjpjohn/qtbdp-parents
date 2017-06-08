@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>钱塘大数据交易中心 | 数据市场</title>
+    <title>数据商城</title>
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/datastoreindex.css"/>
@@ -81,7 +81,7 @@
 
     <!--销量-->
     <p class="sales">
-        <a href="javascript:;">销量 <em></em><i></i> </a>
+        <a href="javascript:;">销量2 <em></em><i></i> </a>
         <span></span>
         <a href="javascript:;" class="active">最新 <em></em><i></i> </a>
         <span></span>
@@ -131,6 +131,7 @@
 </div>
 
 <script>
+    nav(2);
     //数据分类
     $(".repclissify>a").click(function(){
         var shawbox=$(this).attr("data-attr");
@@ -147,5 +148,8 @@
 <!-- 页脚 -->
 <footer th:replace="layout/footer" />
 <!-- 页脚结束 -->
+
+
+
 </body>
 </html>

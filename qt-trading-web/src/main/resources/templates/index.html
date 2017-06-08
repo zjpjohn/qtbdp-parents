@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>钱塘大数据交易中心 | 首页</title>
+        <title>钱塘大数据交易中心</title>
         <div th:replace="layout/top" /></div>
 
         <link rel="stylesheet" href="/pages/common/css/index.css" />
@@ -33,39 +33,50 @@
     <div class="industrial_data">
         <h2 class="intitle"><i></i>  工业数据 <span >Industry Data</span>  </h2>
         <ul class="databox">
-            <li><img th:src="@{/tradecenter/images/index_03.png}" class="boximg" alt=""/></li>
+            <li class="databox_not"><img th:src="@{/tradecenter/images/index_03.png}" class="boximg" alt=""/></li>
 
             <li>
-                <P></P>
-                <P>研发设计</P>
-                <span class="box_bot"></span>
-                <p class="box_shade active"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>研发设计</P>
+                    <span class="box_bot"></span>
+                    <p class="box_shade active"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>物流运输</P>
-                <p class="box_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>物流运输</P>
+                    <p class="box_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>生产制造</P>
-                <p class="box_shade"></p>
-
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>生产制造</P>
+                    <p class="box_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>物联网</P>
-                <p class="box_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>物联网</P>
+                    <p class="box_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>工业产品</P>
-                <p class="box_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>工业产品</P>
+                    <p class="box_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>行业综合</P>
-                <p class="box_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>行业综合</P>
+                    <p class="box_shade"></p>
+                </a>
             </li>
 
         </ul>
@@ -77,67 +88,91 @@
     <div class="relevance_data">
         <h2 class="intitle"><i></i>  关联数据 <span >Associated Data</span>  </h2>
         <ul class="relevancebox">
-            <li><img th:src="@{/tradecenter/images/index_06.png}"  class="boximg" alt=""/></li>
+            <li class="databox_not"><img th:src="@{/tradecenter/images/index_06.png}"  class="boximg" alt=""/></li>
             <li>
-                <P></P>
-                <P>社交网络</P>
-                <span class="new_box"></span>
-                <p class="new_shade active"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>社交网络</P>
+                    <span class="new_box"></span>
+                    <p class="new_shade active"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>金融财经</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>金融财经</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>电子商务</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>电子商务</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>产业数据</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>产业数据</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>交通出行</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>交通出行</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>健康医疗</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>健康医疗</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>科研分析</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>科研分析</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>生活服务</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>生活服务</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>企业征信</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>企业征信</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>社会服务</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>社会服务</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>新闻咨询</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>新闻咨询</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
             <li>
-                <P></P>
-                <P>教育科研</P>
-                <p class="new_shade"></p>
+                <a th:href="@{/datamart}">
+                    <P></P>
+                    <P>教育科研</P>
+                    <p class="new_shade"></p>
+                </a>
             </li>
         </ul>
     </div>
@@ -148,36 +183,55 @@
     <div class="reptile_data">
         <h2 class="intitle"><i></i>  爬虫市场 <span >Crawler Market</span>  </h2>
         <ul class="datamart">
-            <li><img th:src="@{/tradecenter/images/index_08.png}"  class="boximg" alt=""/></li>
+            <li class="databox_not"><img th:src="@{/tradecenter/images/index_08.png}"  class="boximg" alt=""/></li>
             <li>
-                <P></P>
-                <P>社交网站</P>
-                <p class="social_shade active"></p>
+                <a th:href="@{/crawlers}">
+                    <P></P>
+                    <P>社交网站</P>
+                    <p class="social_shade active"></p>
+                </a>
+
             </li>
             <li>
-                <P></P>
-                <P>金融网站</P>
-                <p class="social_shade"></p>
+                <a th:href="@{/crawlers}">
+                    <P></P>
+                    <P>金融网站</P>
+                    <p class="social_shade"></p>
+                </a>
+
             </li>
             <li>
-                <P></P>
-                <P>行业网站</P>
-                <p class="social_shade"></p>
+                <a th:href="@{/crawlers}">
+                    <P></P>
+                    <P>行业网站</P>
+                    <p class="social_shade"></p>
+                </a>
+
+
             </li>
             <li>
-                <P></P>
-                <P>电商网站</P>
-                <p class="social_shade"></p>
+                <a th:href="@{/crawlers}">
+                    <P></P>
+                    <P>电商网站</P>
+                    <p class="social_shade"></p>
+                </a>
+
             </li>
             <li>
-                <P></P>
-                <P>生活网站</P>
-                <p class="social_shade"></p>
+                <a th:href="@{/crawlers}">
+                    <P></P>
+                    <P>生活网站</P>
+                    <p class="social_shade"></p>
+                </a>
+
             </li>
             <li>
-                <P></P>
-                <P>新闻网站</P>
-                <p class="social_shade"></p>
+                <a th:href="@{/crawlers}">
+                    <P></P>
+                    <P>新闻网站</P>
+                    <p class="social_shade"></p>
+                </a>
+
             </li>
         </ul>
         <!--数据服务商开始-->
@@ -239,6 +293,10 @@
         $("#slider>a>i").mouseleave(function(){
             $(this).parent().removeClass("hover");
         });
+
+
+
+
 
     </script>
 </body>

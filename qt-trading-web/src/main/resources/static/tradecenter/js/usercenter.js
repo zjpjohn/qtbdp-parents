@@ -5,10 +5,10 @@ function getMyOrder(){
     $(".order_filter>a:first-child").addClass("active").siblings().removeClass("active");
     $(".myorder2").addClass("active").siblings(".active").removeClass("active");
     var settings = {
-        url: "/api/trade/orders",
-        tmpl_id: "#tmpl_dataorder" ,
-        target: "#orderList2" ,
-        pager_id: "#orderPage2",
+        url: "/api/trade/orders",//请求的url 路径
+        tmpl_id: "#tmpl_dataorder" ,//tpml模板
+        target: "#orderList2" ,//页面被替换id
+        pager_id: "#orderPage2",//分页id
         params: [{key:"userId",value:userId }],
         size: 10
     }
