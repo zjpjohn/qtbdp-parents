@@ -43,6 +43,9 @@ public class CrawlersRoleModel extends BaseModel{
     @Transient
     private String orderBy;            //排序字段
 
+    @Transient
+    private String username;               //创建规则的用户名
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -289,5 +292,13 @@ public class CrawlersRoleModel extends BaseModel{
 
     public void setOrderBy(String orderBy) {
         this.orderBy = orderBy;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

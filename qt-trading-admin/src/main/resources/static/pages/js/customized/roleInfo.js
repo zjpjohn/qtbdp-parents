@@ -5,6 +5,10 @@ $(function () {
     Common.info({
         url:"/api/customized/"+id
     },function (data) {
+        if(data.createId == 0){
+            data.createId = "系统管理员";
+        }
+
         $('#name').val(data.name);//名称
         $('#synopsis').val(data.desc);//描述
         $('#range').val(data.dimension);//采集维度

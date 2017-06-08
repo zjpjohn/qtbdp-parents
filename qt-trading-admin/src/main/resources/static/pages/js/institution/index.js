@@ -22,7 +22,7 @@ $(function () {
             render: function (data, type, row, meta) {
                 var isUsed,
                     color;
-                if(row.auditStatus == 1){
+                if(row.auditStatus == "审核已通过"){
                     isUsed = "审核已通过";
                     color = "red";
                 }else {
@@ -45,7 +45,7 @@ $(function () {
         var id = $(this).val(),
             status = $(this).data("status");
 
-        if(status == 1){
+        if(status == "审核已通过"){
             return;
         }else {
             Common.Modal("服务商身份审核",id,"/api/institutionV2/audit","post");
