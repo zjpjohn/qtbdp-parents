@@ -80,7 +80,7 @@ input:-ms-input-placeholder {
     padding: 35px 0px;
 }
 .icon{
-    background-image:url("../images/icon_index.png");
+    background-image:url("../images/icon.png");
 }
 .qt_logo{
     width:344px;
@@ -264,7 +264,7 @@ nav{
     width:24px;
     height:24px;
     margin-right:10px;
-    background-image:url("../images/icon_index.png" );
+    background-image:url("../images/icon.png" );
 }
 .footer_main .contactus i{
     background-position:-349px -70px;
@@ -320,7 +320,7 @@ nav{
     width: 52px;
     height: 52px;
     margin-bottom: 5px;
-    background-image:url("../images/icon_index.png");
+    background-image:url("../images/icon.png");
 }
 .lqb_slide .phone .box {
     background: url("../images/phone_bg.png") left top no-repeat;
