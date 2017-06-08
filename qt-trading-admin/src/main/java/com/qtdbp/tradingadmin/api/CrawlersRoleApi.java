@@ -30,8 +30,6 @@ import java.util.List;
 @RequestMapping(value = "/api/crawlers/role")
 public class CrawlersRoleApi extends BaseController {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
-
     @Autowired
     private CrawlersRoleService crawlersRoleService;
 
@@ -42,7 +40,10 @@ public class CrawlersRoleApi extends BaseController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "typeId", value = "类目类型id（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "webType", value = "网站类型id（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "orderBy", value = "排序字段", required = false, dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
+            @ApiImplicitParam(name = "isUsed", value = "是否启用（0：否，1：是）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "orderBy", value = "排序字段", required = false, dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：12）", defaultValue = "12", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
