@@ -61,7 +61,7 @@ public class CrawlersRoleApi extends BaseController {
 
     @ApiOperation(value="爬虫规则审核数据接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "定制服务Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "id", value = "爬虫规则id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "status", value = "审核状态，1审核成功 2审核失败", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "reason", value = "审核失败原因", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
