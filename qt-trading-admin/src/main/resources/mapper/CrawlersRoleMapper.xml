@@ -59,4 +59,9 @@
         </trim>
         where id = #{id}
     </update>
+
+    <!--根据ID查询单条爬虫规则数据-->
+    <select id="findRoleById" parameterType="java.lang.Integer" resultMap="CrawlersRoleMap">
+        select * from crawlers_role where id = #{id}
+    </select>
 </mapper>

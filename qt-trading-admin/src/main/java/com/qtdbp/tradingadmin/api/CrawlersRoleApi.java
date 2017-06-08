@@ -3,6 +3,7 @@ package com.qtdbp.tradingadmin.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.tradingadmin.mapper.CrawlersRoleMapper;
 import com.qtdbp.trading.model.CrawlersRoleModel;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
 import com.qtdbp.tradingadmin.controller.BaseController;
@@ -34,6 +35,9 @@ public class CrawlersRoleApi extends BaseController {
     @Autowired
     private CrawlersRoleService crawlersRoleService;
 
+    @Autowired
+    private CrawlersRoleMapper roleMapper;
+
     @ApiOperation(value = "爬虫市场数据接口，分页获取")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "typeId", value = "类目类型id（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
@@ -61,7 +65,7 @@ public class CrawlersRoleApi extends BaseController {
 
     @ApiOperation(value="爬虫规则审核数据接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "定制服务Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "id", value = "爬虫规则id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "status", value = "审核状态，1审核成功 2审核失败", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "reason", value = "审核失败原因", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
@@ -87,6 +91,25 @@ public class CrawlersRoleApi extends BaseController {
             map.put("success", false);
         }
 
+        return map;
+    }
+
+    @ApiOperation(value="根据id查询单条爬虫规则数据接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "爬虫规则id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "/findCrawlersRoleById", method = RequestMethod.GET)
+    public ModelMap findById(Integer id) {
+
+        ModelMap map = new ModelMap();
+        if (id != null) {
+            try {
+                CrawlersRoleModel roleModel = roleMapper.findRoleById(id);
+                map.put("pageInfo", roleModel);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return map;
     }
 

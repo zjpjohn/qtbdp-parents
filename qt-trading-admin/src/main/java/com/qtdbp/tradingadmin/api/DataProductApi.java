@@ -6,6 +6,7 @@ import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
 import com.qtdbp.tradingadmin.controller.BaseController;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.service.DataProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -133,18 +134,33 @@ public class DataProductApi extends BaseController {
     }
 
     @ApiOperation(value="数据包产品审核接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "数据包产品id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "status", value = "审核状态，1审核成功 2审核失败", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "reason", value = "审核失败原因", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
     @RequestMapping(value = "/auditProduct", method = RequestMethod.PUT)
-    public ModelMap auditProduct(@RequestBody DataProductModel productModel) throws GlobalException {
-        if (productModel == null) throw new GlobalException("数据不存在，请重新输入");
+    public ModelMap auditProduct(Integer id,Integer status,String reason ) throws GlobalException {
 
         ModelMap map = new ModelMap();
 
-        try {
-            Integer count = productService.auditProduct(productModel);
-            map.put("success", count > 0 ? true : false);
-            map.put("id", productModel.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (id != null) {
+            try {
+                SecurityUser user = getPrincipal();
+                if (user == null) throw new GlobalAdminException("授权过期，请重新登陆");
+                DataProductModel productModel = new DataProductModel();
+                productModel.setId(id);
+                productModel.setAuditor(user.getUserId()); // 系统用户ID
+                productModel.setAuditStatus(status);
+                productModel.setAuditFailReason(reason);
+                Integer count = productService.auditProduct(productModel);
+                map.put("success", count > 0 ? true : false);
+                map.put("id", productModel.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            map.put("success", false);
         }
 
         return map;
