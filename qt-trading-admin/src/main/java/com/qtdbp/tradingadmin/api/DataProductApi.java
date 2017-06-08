@@ -3,6 +3,7 @@ package com.qtdbp.tradingadmin.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.tradingadmin.mapper.DataProductMapper;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
@@ -174,11 +175,13 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "id", value = "数据包产品id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public ModelMap deleteProduct(Integer id) {
+    public ModelMap deleteProduct(Integer id) throws GlobalException {
 
         ModelMap map = new ModelMap();
 
         if (id != null) {
+            SecurityUser user = getPrincipal() ;
+            if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
             Integer count = productMapper.deleteProduct(id);
             map.put("success", count > 0 ? true : false);
         } else {

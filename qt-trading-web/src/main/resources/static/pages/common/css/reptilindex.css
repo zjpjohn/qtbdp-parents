@@ -165,7 +165,11 @@
 .repmain>a>img{
     margin-right: 20px;
 }
-
+.repmain>img{
+    width:156px;
+    height:120px;
+    margin-right: 20px;
+}
 .main_title{
     font-size: 18px;
     color:#333;

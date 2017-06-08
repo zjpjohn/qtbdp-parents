@@ -1,0 +1,172 @@
+@charset "UTF-8";
+.body{
+    background:#FAFAFA;
+}
+
+
+
+.sales{
+    box-sizing: border-box;
+    width:1200px;
+    height:40px;
+    border:1px solid #ddd;
+    background-color: #fff;
+    margin:30px auto;
+
+}
+.sales>a{
+    padding:0px 20px;
+    color:#999;
+    line-height:40px;
+    font-size: 16px;
+}
+em{
+    display:inline-block;
+    width:16px;
+    height:16px;
+    background:url(../images/icon_index2.png);
+}
+.sales>a>em{
+    background-position: -208px -112px;
+    position:relative;
+    top:5px;
+    margin-left:6px;
+}
+.sales>a:hover,.sales>a.active{
+    color:#05A9FE;
+}
+.sales>a:hover>em,.sales>a.active>em{
+    background-position: -260px -112px;
+}
+.sales>span{
+    display:inline-block;
+    width:1px;
+    height:22px;
+    border-left: 1px solid #ddd;
+    position:relative;
+    top:4px;
+}
+/****内容*******/
+
+*{
+    box-sizing: border-box;
+}
+.message_list{
+    width:1200px;
+    margin: 30px auto;
+
+}
+.list_details{
+    width:590px;
+    height:160px;
+    background: #fff;
+    padding:20px 0 20px 20px;
+    box-shadow:0 3px 3px #d5d5d5;
+    margin-bottom: 17px;
+}
+.list_details>a{
+    display: block;
+}
+.message_list>div:nth-child(2n+1){
+    margin-right: 20px;
+}
+
+div.list_right{
+    width: 430px;
+}
+.list_details div:last-child p:first-child{
+    font-size: 18px;
+    color:#333;
+}
+.list_details div:last-child p:nth-child(2){
+    font-size: 14px;
+    color:#555;
+    line-height:30px;
+
+}
+em{
+    display:inline-block;
+    width:16px;
+    height:16px;
+    background:url(../images/icon_index2.png);
+}
+.main_domain>em{
+
+}
+
+
+.list_right>p>em{
+    display: inline-block;
+    width: 18px;
+    height:18px;
+    margin-right: 10px;
+    background-position:-190px -33px;
+    position:relative;
+    top:2px;
+}
+.list_details div:last-child p:nth-child(3){
+    width: 300px;
+    color: #999;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow:hidden ;
+}
+.rjzy_btn{
+    display: block;
+    width:85px;
+    height:30px;
+    line-height:30px;
+    text-align: center;
+    background: #0076c8;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 20px;
+    cursor:pointer;
+}
+.list_details>a>img{
+    width:120px;
+    height:120px;
+    margin-right: 20px;
+}
+.mainbottom{
+    width:52px;
+    height:52px;
+    background-position:0px -30px;
+    margin:30px 400px 50px 400px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

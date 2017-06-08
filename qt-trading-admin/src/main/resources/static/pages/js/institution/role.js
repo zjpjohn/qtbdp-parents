@@ -12,7 +12,7 @@ $(function () {
             { "data": "name" },
             { "data": "roleType" },
             { "data": "createTime" },
-            {"data":"isUsed"},
+            {"data":"auditStatus"},
             { "data": null }
         ],
         columnDefs:[{
@@ -27,7 +27,7 @@ $(function () {
                     isUsed = "审核";
                     color = "blue";
                 }
-                return '<a href="/roleInfo?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">查看</a>' +
+                return '<a href="/institution/roleInfo?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">查看</a>' +
                     '<button class="btn btn-sm '+ color + ' btn-outline filter-cancel isUsed"  data-target="#completeModal"  data-status="'+ row.auditStatus + '" value="'+ row.id +'">'+ isUsed + '</button>';
             }
         },
@@ -45,7 +45,7 @@ $(function () {
         if(status == 1){
             return;
         }else {
-            Common.Modal("服务商规则审核",id,"/api/crawlers/role/auditCrawlersRole");
+            Common.Modal("服务商规则审核",id,"/api/crawlers/role/auditCrawlersRole","post");
         }
     });
 

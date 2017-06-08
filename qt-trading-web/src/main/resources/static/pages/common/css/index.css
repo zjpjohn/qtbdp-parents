@@ -59,7 +59,7 @@ body{
     width:300px;
     height:400px;
 }
-.databox>li>p:first-child,.datamart>li>p:first-child,.relevancebox>li>p:first-child{
+.databox>li>a>p:first-child,.datamart>li>a>p:first-child,.relevancebox>li>a>p:first-child{
     width:70px;
     height:70px;
     margin: 0px auto;
@@ -67,34 +67,36 @@ body{
     margin-bottom: 20px;
     background:url(../images/icon_index1.png);
 }
-.datamart>li>p:first-child{
+.datamart>li>a>p:first-child{
     width:100px;
 }
-.relevancebox>li>p:first-child{
+.relevancebox>li>a>p:first-child{
     width:70px;
     margin-top: 35px;
 }
-.databox>li>p:nth-child(2),.datamart>li>p:nth-child(2),.relevancebox>li>p:nth-child(2){
+.databox>li>a>p:nth-child(2),.datamart>li>a>p:nth-child(2),.relevancebox>li>a>p:nth-child(2){
     text-align: center;
 }
 
 /*******工业数据开始*********/
-.databox>li:nth-child(2)>p:first-child{
-    background-position:6px 10px;
+.databox>li:nth-child(2)>a>p:first-child{
+    background-position:0px 0px;
+    position:relative;
+    left:2px;
 }
-.databox>li:nth-child(3)>p:first-child{
-    background-position:-100px 10px;
+.databox>li:nth-child(3)>a>p:first-child{
+    background-position:-100px 0px;
 }
-.databox>li:nth-child(4)>p:first-child{
+.databox>li:nth-child(4)>a>p:first-child{
     background-position:-206px 10px;
 }
-.databox>li:nth-child(5)>p:first-child{
+.databox>li:nth-child(5)>a>p:first-child{
     background-position:-326px 10px;
 }
-.databox>li:nth-child(6)>p:first-child{
+.databox>li:nth-child(6)>a>p:first-child{
     background-position:-442px 10px;
 }
-.databox>li:nth-child(7)>p:first-child{
+.databox>li:nth-child(7)>a>p:first-child{
     background-position:-584px 10px;
 }
 .box_bot{
@@ -284,6 +286,51 @@ body{
     margin-top:20px;
     border:1px solid #ddd;
 }
+.com_slide{
+    padding-top: 80px;
+    overflow: hidden;
+}
+.com_list{
+    width:1863px;
+    position:relative;
+    left:0px;
+}
+.com_list>a{
+    float:left;
+    width:162px;
+    height:44px;
+    margin-right:45px;
+    background-image:url("../images/icon_index1.png" );
+    cursor:pointer;
+}
+.com_list>.a1{
+    background-position:0px -374px;
+}
+.com_list>.a2{
+    background-position:-212px -373px;
+}
+.com_list>.a3{
+    background-position:-404px -373px;
+}
+.com_list>.a4{
+    background-position:-594px -374px;
+}
+.com_list>.a5{
+    background-position:0px -465px;
+}
+.com_list>.a6{
+    background-position:-188px -465px;
+}
+.com_list>.a7{
+    background-position:-398px -464px;
+}
+.com_list>.a8{
+    background-position:-591px -462px;
+}
+.com_list>.a9{
+    background-position:0px -532px;
+}
+
 /*****数据服务商结束******/
 
 
