@@ -1,6 +1,7 @@
 package com.qtdbp.trading.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CrawlersController {
 
     public static final String PAGE_CRAWLERS = "crawlers/index";
+    public static final String PAGE_CRAWLERS_DETAIL = "crawlers/detail";
 
     /**
      * 爬虫规则列表
@@ -24,6 +26,16 @@ public class CrawlersController {
     public String crawlers() {
 
         return PAGE_CRAWLERS;
+    }
+
+    /**
+     * 爬虫规则详情
+     * @return
+     */
+    @RequestMapping(value = "/crawlers/detail/{id}", method = RequestMethod.GET)
+    public String crawlersDetail(@PathVariable Integer id) {
+
+        return PAGE_CRAWLERS_DETAIL;
     }
 
 }
