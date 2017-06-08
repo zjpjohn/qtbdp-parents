@@ -2,6 +2,7 @@ package com.qtdbp.trading.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
+import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
@@ -10,6 +11,7 @@ import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.FdfsFileService;
+import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.trading.utils.CommonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -33,7 +35,7 @@ import java.util.List;
 @Api(description = "数据包产品 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/product")
-public class DataProductApi {
+public class DataProductApi extends BaseController{
 
     @Autowired
     private DataProductService productService ;
@@ -118,13 +120,19 @@ public class DataProductApi {
             @ApiImplicitParam(name = "id", value = "数据包产品id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public ModelMap deleteProduct(Integer id) {
+    public ModelMap deleteProduct(Integer id) throws GlobalException {
 
         ModelMap map = new ModelMap();
 
         if (id != null) {
-            Integer count = productMapper.deleteProduct(id);
-            map.put("success", count > 0 ? true : false);
+            try {
+                SysUser user = getPrincipal() ;
+                if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+                Integer count = productMapper.deleteProduct(id);
+                map.put("success", count > 0 ? true : false);
+            } catch (Exception e) {
+                e.getMessage();
+            }
         } else {
             map.put("success", false);
         }

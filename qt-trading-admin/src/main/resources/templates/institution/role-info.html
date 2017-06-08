@@ -14,11 +14,23 @@ Author: caidchen
     <title>钱塘号后台管理系统 | 服务商列表</title>
     <div th:replace="layout/header"></div>
     <!-- BEGIN PAGE LEVEL PLUGINS -->
+
+    <link rel="stylesheet" href="/pages/css/institution/input.css">
     <!-- END PAGE LEVEL PLUGINS -->
     <style>
         .form-body {
             width: 65%;
             margin: 0 auto;
+        }
+        .imgDiv {
+            width: 100%;
+            height: 300px;
+        }
+        .img{
+            width:auto;
+            height:auto;
+            max-width:100%;
+            max-height:100%;
         }
     </style>
 </head>
@@ -66,7 +78,7 @@ Author: caidchen
                         <!-- BEGIN PAGE TITLE-->
                         <div class="portlet-title">
                             <div class="caption">
-                                <span class="caption-subject font-dark sbold uppercase">服务商数据详情</span>
+                                <span class="caption-subject font-dark sbold uppercase">服务商规则详情</span>
                             </div>
                         </div>
                         <!-- END PAGE TITLE-->
@@ -77,23 +89,23 @@ Author: caidchen
                             <form id="form_sample">
                                 <div class="form-body">
                                     <div class="form-group form-md-line-input" style="margin-top: 50px">
-                                        <input type="text" class="form-control" id="dataName" placeholder="无" readonly="readonly">
-                                        <label for="dataName">数据名称
+                                        <input type="text" class="form-control" id="ruleName" placeholder="无" readonly="readonly">
+                                        <label for="ruleName">规则名称
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                     </div>
 
-                                    <div class="form-group form-md-line-input">
-                                        <label for="synopsis">数据简介
+                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
+                                        <input type="text" class="form-control" id="net" placeholder="无" readonly="readonly">
+                                        <label for="net">采集网站
                                             <span class="required" aria-required="true">*</span>
                                         </label>
-                                        <textarea class="form-control" id="synopsis" cols="20" rows="5" readonly="readonly" style="resize:none" ></textarea>
                                     </div>
 
 
                                     <div class="form-group form-md-line-input" style="margin-top: 50px">
                                         <input type="text" class="form-control" id="scale" placeholder="无" readonly="readonly">
-                                        <label for="scale">数据规模
+                                        <label for="scale">采集规模
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                     </div>
@@ -106,8 +118,8 @@ Author: caidchen
                                     </div>
 
                                     <div class="form-group form-md-line-input" style="margin-top: 50px">
-                                        <input type="text" class="form-control" id="dataType" placeholder="无" readonly="readonly">
-                                        <label for="dataType">数据类型
+                                        <input type="text" class="form-control" id="netType" placeholder="无" readonly="readonly">
+                                        <label for="netType">网站类型
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                     </div>
@@ -121,8 +133,8 @@ Author: caidchen
 
 
                                     <div class="form-group form-md-line-input" style="margin-top: 50px">
-                                        <input type="text" class="form-control" id="source" placeholder="无" readonly="readonly">
-                                        <label for="source">数据来源
+                                        <input type="text" class="form-control" id="field" placeholder="无" readonly="readonly">
+                                        <label for="field">采集字段
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                     </div>
@@ -132,17 +144,18 @@ Author: caidchen
                                         <div class="md-radio-inline" style="width: 50%">
                                             <div class="uploader black">
                                                 <input type="text" class="filename" readonly/>
-                                                <input type="button" name="file" class="button" value="上传文件"/>
-                                                <input type="button" id="fileName" name="fileName"  size="30"/>
+                                                <input type="button" name="file" class="button" id="fileName" value="下载文件"/>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group form-md-line-input">
-                                        <label for="cover">数据封面
+                                        <label for="cover">封面图片
                                             <span class="required" aria-required="true">*</span>
                                         </label>
-                                        <img src="" alt="数据封面" id="cover">
+                                        <div class="imgDiv">
+                                            <img class="img" src="" alt="数据封面" id="cover">
+                                        </div>
                                     </div>
 
                                     <div class="form-group form-md-line-input" style="margin-top: 50px">
@@ -153,7 +166,7 @@ Author: caidchen
                                     </div>
 
                                     <div class="form-group form-md-line-input">
-                                        <label for="details">数据描述
+                                        <label for="details">规则详情
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                         <textarea class="form-control" id="details" cols="20" rows="5" readonly="readonly" style="resize:none" ></textarea>

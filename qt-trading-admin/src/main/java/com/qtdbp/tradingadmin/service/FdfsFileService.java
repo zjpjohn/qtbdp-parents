@@ -58,12 +58,6 @@ public class FdfsFileService {
 
         try {
             fileEntity = client.downloadFilePublic(filePath, fileName);
-/*            //更新产品下载次数
-            productModel = new DataProductModel();
-            productModel.setId(productId);
-            productModel.setDownloadCount(1);
-            int i = productMapper.updateProduct(productModel);
-            if (!(i > 0)) throw new GlobalException("更新下载次数失败");*/
         } catch (GlobalException e) {
             e.printStackTrace();
             throw new GlobalException(e.getMessage());

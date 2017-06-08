@@ -4,9 +4,10 @@ package com.qtdbp.tradingadmin.api;
 import com.qtd.utils.OssUpload;
 import com.qtdbp.poi.excel.ExcelReaderUtil;
 import com.qtdbp.poi.zip.ZipUtil;
-import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.tradingadmin.base.security.SecurityUser;
+import com.qtdbp.tradingadmin.controller.BaseController;
 import com.qtdbp.tradingadmin.service.FastDFSClient;
 import com.qtdbp.tradingadmin.service.FdfsFileService;
 import com.qtdbp.tradingadmin.service.PoiParserService;
@@ -39,7 +40,7 @@ import java.util.Map;
 @Api(description = "文件上传 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/upload")
-public class DataFileUploadApi extends BaseController{
+public class DataFileUploadApi extends BaseController {
 
 
     @Autowired
@@ -178,7 +179,7 @@ public class DataFileUploadApi extends BaseController{
 
         ModelMap map = new ModelMap();
 
-        SysUser user = getPrincipal() ;
+        SecurityUser user = getPrincipal() ;
         if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
 
         try {
@@ -197,7 +198,7 @@ public class DataFileUploadApi extends BaseController{
 
         ModelMap map = new ModelMap();
 
-        SysUser user = getPrincipal() ;
+        SecurityUser user = getPrincipal() ;
         if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
 
         try {
