@@ -2,6 +2,7 @@ package com.qtdbp.tradingadmin.mapper;
 
 import com.qtdbp.trading.model.CrawlersRoleModel;
 import com.qtdbp.trading.utils.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,5 +24,12 @@ public interface CrawlersRoleMapper extends BaseMapper<CrawlersRoleModel> {
      * @return
      */
     Integer updateRule(CrawlersRoleModel crawlersRoleModel);
+
+    /**
+     * 根据ID查询单条爬虫规则数据
+     * @param id
+     * @return
+     */
+    CrawlersRoleModel findRoleById(@Param("id") Integer id);
 
 }
