@@ -74,12 +74,20 @@ var Common = {
                                 var props = dataChage[i].dataTypeProps;
                                 dataChage[i].dataTypeProps = Common._dataTypeProps(props);
                                 var typeId = dataChage[i].dataType;
+
+                                if(dataChage[i].institutionType == 1){
+                                    dataChage[i].institutionType = "服务商"
+                                }else {
+                                    dataChage[i].institutionType = "个人"
+                                }
+
                                 if(typeId == 0){
                                     typeId = "其他";
                                 }
                                 dataChage[i].dataType = dataTypeJson[typeId]?dataTypeJson[typeId]:typeId;
                             }
                         }
+
 
                         //封装返回数据
                         var returnData = {};
@@ -320,7 +328,7 @@ var Common = {
     },
 
     //确认与否弹框
-    Modal : function(title, id,url) {
+    Modal : function(title, id,url,type) {
         var smodal =
             '<div class="modal fade confirm-modal-sm" id="myConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
             '    <div class="modal-dialog">' +
@@ -401,7 +409,7 @@ var Common = {
             $.ajax({
                 url: url,
                 dataType: "json",
-                type:"post",
+                type:type,
                 data:{
                     id:id,
                     status:AuditStatus,
@@ -441,10 +449,29 @@ var Common = {
                 if(data){
                    fn(data);
                 }else {
-                    layer.msg("展示遇到错误",{icon: 5});
+                    layer.msg("页面没有数据",{icon: 5});
                 }
             }
         });
+    },
+    downloadFile:function (url,data,downloadUrl) {
+        $.ajax({
+            type:'get',
+            data: data,
+            dataType: "json",
+            url:url,
+            async:true,
+            error:function () {
+                layer.msg("下载失败",{icon: 5});
+            },
+            success: function (ret) {
+                if(ret.success == true){
+                    layer.msg("准备开始下载",{icon: 1},function () {
+                        window.location.href = downloadUrl
+                    });
+                }
+            }
+        })
     }
 };
 

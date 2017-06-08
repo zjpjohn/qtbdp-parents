@@ -12,7 +12,7 @@ $(function () {
             { "data": "name" },
             { "data": "introduction" },
             { "data": "price" },
-            { "data": "auditFailReason" },
+            { "data": "createId" },
             { "data": "createTime" },
             {"data":"auditStatus"},
             { "data": null }
@@ -48,7 +48,7 @@ $(function () {
         if(status == 1){
             return;
         }else {
-            Common.Modal("爬虫规则定制审核",id,"/api/customized/audit");
+            Common.Modal("爬虫规则定制审核",id,"/api/customized/audit","post");
         }
     });
 

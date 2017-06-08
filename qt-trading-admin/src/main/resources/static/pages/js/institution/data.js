@@ -12,7 +12,7 @@ $(function () {
             { "data": "dataTypeProps" },
             { "data": "designation" },
             { "data": "dataType" },
-            { "data": "createTime" },
+            { "data": "addTime" },
             {"data":"auditStatus"},
             { "data": null }
         ],
@@ -28,7 +28,7 @@ $(function () {
                     isUsed = "审核";
                     color = "blue";
                 }
-                return '<a href="/dataInfo?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">查看</a>' +
+                return '<a href="/institution/dataInfo?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">查看</a>' +
                     '<button class="btn btn-sm '+ color + ' btn-outline filter-cancel isUsed"  data-target="#completeModal"  data-status="'+ row.auditStatus + '" value="'+ row.id +'">'+ isUsed + '</button>';
             }
         },
@@ -47,7 +47,7 @@ $(function () {
         if(status == 1){
             return;
         }else {
-            Common.Modal("服务商数据审核",id,"/api/institutionV2/audit");
+            Common.Modal("服务商数据审核",id,"/api/product/auditProduct","put");
         }
     });
 
