@@ -23,60 +23,37 @@
         <div class="repclissify">
             <span class="datarep">数据分类 : </span>
             <a href="javascript:;" class="active" data-attr="sjall">全部</a>
-            <a href="javascript:;" class="sjgy" data-attr="gysj">工业数据</a>
-            <a href="javascript:;" data-attr="glsj">关联数据</a>
+            <!-- 一级类目 -->
         </div>
         <div class="repdataall" >
             <a class="sjall"></a>
-            <p class="gysj">
-                <a href="javascript:;">研发设计</a>
-                <a href="javascript:;">生产制造</a>
-                <a href="javascript:;">物联网</a>
-                <a href="javascript:;">工业产品</a>
-                <a href="javascript:;">物流运输</a>
-                <a href="javascript:;">行业综合</a>
-            </p>
-            <p class="glsj">
-                <a href="javascript:;">社交网络</a>
-                <a href="javascript:;">金融财经</a>
-                <a href="javascript:;">电子商务</a>
-                <a href="javascript:;">交通出行</a>
-                <a href="javascript:;">健康医疗</a>
-                <a href="javascript:;">科研分析</a>
-                <a href="javascript:;">生活服务</a>
-                <a href="javascript:;">产业数据</a>
-                <a href="javascript:;">社会服务</a>
-                <a href="javascript:;">教育科研</a>
-                <a href="javascript:;">企业征信</a>
-                <a href="javascript:;">新闻资讯</a>
-            </p>
-
+            <!-- 二级类目 -->
+            <p class="gysj"></p>
         </div>
     </div>
     <!--收费方式-->
     <p class="tollway">
-
-            <span class="store_price">
-                <i class="datarep">收费方式 : </i>
-                <a href="javascript:;" class="active">不限</a>
-                <a href="javascript:;">收费</a>
-                <a href="javascript:;">免费</a>
-            </span>
         <span class="store_price">
-                <i class="datarep">产品类型 : </i>
-                <a href="javascript:;" class="active">数据包</a>
-                <a href="javascript:;">API接口</a>
-                <a href="javascript:;">数据报告</a>
-            </span>
+            <i class="datarep">收费方式 : </i>
+            <a href="javascript:;" class="active">不限</a>
+            <a href="javascript:;">收费</a>
+            <a href="javascript:;">免费</a>
+        </span>
         <span class="store_price">
-                <i class="datarep">数据来源 : </i>
-                <a href="javascript:;" class="active">不限</a>
-                <a href="javascript:;">政府</a>
-                <a href="javascript:;">企业</a>
-                <a href="javascript:;">组织机构</a>
-                <a href="javascript:;">互联网</a>
-                <a href="javascript:;">个人</a>
-            </span>
+            <i class="datarep">产品类型 : </i>
+            <a href="javascript:;" class="active">数据包</a>
+            <a href="javascript:;">API接口</a>
+            <a href="javascript:;">数据报告</a>
+        </span>
+        <span class="store_price">
+            <i class="datarep">数据来源 : </i>
+            <a href="javascript:;" class="active">不限</a>
+            <a href="javascript:;">政府</a>
+            <a href="javascript:;">企业</a>
+            <a href="javascript:;">组织机构</a>
+            <a href="javascript:;">互联网</a>
+            <a href="javascript:;">个人</a>
+        </span>
     </p>
 
     <!--销量-->
@@ -130,17 +107,45 @@
     <em class="mainbottom"></em>
 </div>
 
+<!-- 一级类目数据模板 -->
+<script id="tmpl_types" type="text/x-jquery-tmpl">
+    {{if pageInfo.length>0}}
+        {{each(i,prod) pageInfo}}
+            <a href="javascript:;" class="sjgy" data-attr="gysj" data-id="${prod.id}">${prod.name}</a>
+        {{/each}}
+    {{/if}}
+</script>
+<!-- 二级类目数据模板 -->
+<script id="tmpl_subTypes" type="text/x-jquery-tmpl">
+    {{if pageInfo.length>0}}
+        {{each(i,prod) pageInfo}}
+            <a href="javascript:;" data-id="${prod.id}">${prod.name}</a>
+        {{/each}}
+    {{/if}}
+</script>
+
 <script>
-    //数据分类
-    $(".repclissify>a").click(function(){
-        var shawbox=$(this).attr("data-attr");
-        $(this).addClass("active").siblings(".active").removeClass("active");
-        $("."+shawbox).show().siblings().hide();
-    });
-    //销量网站类型
-    $(".sales>a,.webtype>a").click(function(){
-        $(this).addClass("active").siblings(".active").removeClass("active");
-    });
+    LoadingData.request({url: "/api/type/0"}, function(data){
+        // 装载一级类目数据
+        $("#tmpl_types").tmpl(data).appendTo(".repclissify");
+
+        // 清空所有二级类目数据
+        $(".repclissify").html() ;
+
+        // 一级类目绑定click事件
+        $(".repclissify > a").click(function () {
+
+            $(".repclissify > a").removeClass("active") ;
+            $(this).addClass("active") ;
+
+            var _id = $(this).attr("data-id") ;
+            LoadingData.request({url: "/api/type/"+_id}, function(data){
+
+                $(".gysj").show().html("") ;
+                $("#tmpl_subTypes").tmpl(data).appendTo(".gysj");
+            }) ;
+        })
+    }) ;
 </script>
 <!-- 内容结束 -->
 
