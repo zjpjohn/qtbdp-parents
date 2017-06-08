@@ -2,12 +2,18 @@ package com.qtdbp.tradingadmin.service;
 
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.exception.FdfsUnsupportStorePathException;
+import com.github.tobato.fastdfs.proto.storage.DownloadByteArray;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import com.qtdbp.trading.exception.GlobalException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -88,5 +94,31 @@ public class FastDFSClient {
         } catch (FdfsUnsupportStorePathException e) {
             logger.warn(e.getMessage());
         }
+    }
+
+    /**
+     * 文件下载
+     * @param fileUrl
+     * @param fileName
+     * @return
+     */
+    public ResponseEntity<byte[]> downloadFilePublic(String fileUrl, String fileName) throws GlobalException {
+        byte[] content = null;
+        HttpHeaders headers = null ;
+        try {
+            StorePath storePath = StorePath.praseFromUrl(fileUrl);
+            content = storageClient.downloadFile(storePath.getGroup(), storePath.getPath(), new DownloadByteArray()) ;
+
+            String realName = fileName +"."+ FilenameUtils.getExtension(fileUrl) ;
+
+            headers = new HttpHeaders();
+            headers.setContentDispositionFormData("attachment",  new String(realName.getBytes("UTF-8"),"iso-8859-1"));
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new GlobalException("文件："+fileName+"下载失败，错误信息："+e.getMessage()) ;
+        }
+        return new ResponseEntity<byte[]>(content, headers, HttpStatus.CREATED);
     }
 }

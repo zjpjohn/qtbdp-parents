@@ -18,36 +18,28 @@ import java.util.List;
 @Controller
 public class DataInstitutionController extends BaseController {
 
-    private static final String PAGE_DATAMART_FEDRATION = "institution/fredation";
+    public static final String PAGE_INSTITUTION = "institution/index";
+    public static final String PAGE_INSTITUTION_DETAIL = "institution/detail";
+    private static final String PAGE_INSTITUTION_ADD = "institution/add";
 
     /**
-     * 升级为服务商
+     * 服务商列表
+     * @return
      */
-    private static final String PAGE_DATAMART_FEDRATION_ADD = "institution/add";
+    @RequestMapping(value = "/institution", method = RequestMethod.GET)
+    public String institution() {
 
-    @Autowired
-    private DataTypeMapper dataTypeMapper ;
-
-    /**
-     * 跳转到数据合作页面
-     */
-    @RequestMapping(value = "/fedration", method = RequestMethod.GET)
-    public ModelAndView toFedration(){
-        ModelAndView mv = new ModelAndView(PAGE_DATAMART_FEDRATION);
-        mv.addObject("currentid", 0) ;
-        this.initData(mv) ;
-        return mv;
+        return PAGE_INSTITUTION;
     }
 
     /**
-     * 跳转到数据合作页面
+     * 服务商详情
+     * @return
      */
-    @RequestMapping(value = "/fedration/{dataType}", method = RequestMethod.GET)
-    public ModelAndView toFedrationByDataType(@PathVariable Integer dataType){
-        ModelAndView mv = new ModelAndView(PAGE_DATAMART_FEDRATION);
-        mv.addObject("currentid", dataType) ;
-        this.initData(mv) ;
-        return mv;
+    @RequestMapping(value = "/institution/detail/{id}", method = RequestMethod.GET)
+    public String institutionDetail(@PathVariable Integer id) {
+
+        return PAGE_INSTITUTION_DETAIL;
     }
 
     /**
@@ -55,23 +47,8 @@ public class DataInstitutionController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/institution/add",method = RequestMethod.GET)
-    public ModelAndView add() {
-        ModelAndView mv = new ModelAndView(PAGE_DATAMART_FEDRATION_ADD);
+    public String add() {
 
-        return mv ;
-    }
-
-    /**
-     * 初始化加载数据
-     * @param result
-     */
-    private void initData(ModelAndView result) {
-
-        if(result == null) return;
-
-        // 类型列表
-        List<DataTypeModel> typeModels = dataTypeMapper.findAll() ;
-
-        result.addObject("typeModels", typeModels);
+        return PAGE_INSTITUTION_ADD ;
     }
 }
