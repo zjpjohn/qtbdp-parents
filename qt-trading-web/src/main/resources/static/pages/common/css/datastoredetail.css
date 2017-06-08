@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.body{
+    background:#FAFAFA;
+}
+
+.top_detail{
+    width:1200px;
+    margin:0px auto;
+    box-sizing: border-box;
+    padding:34px 40px;
+    background-color: #fff;
+}
+
+
