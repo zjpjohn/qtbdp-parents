@@ -30,10 +30,10 @@
             </if>
             <choose>
                 <when test="userId != null and userId == 0">
-                    p.user_id = 0
+                    and p.user_id = 0
                 </when>
                 <otherwise>
-                    p.user_id != 0
+                    and p.user_id != 0
                 </otherwise>
             </choose>
         </where>

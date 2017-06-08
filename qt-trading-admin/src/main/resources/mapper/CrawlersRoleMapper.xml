@@ -4,14 +4,19 @@
     
     <select id="findRulesByCondition" resultMap="CrawlersRoleMap">
         select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price, c.buy_count, c.web_type,
-         c.web_site,  c.collection_field, is_self_support  from crawlers_role as c where c.is_used = 1
-         <if test="typeId != null ">
-             and type_id = #{typeId}
-         </if>
-          <if test="webType != null ">
-              and web_type = #{webType}
-          </if>
-          order by ${orderBy} desc
+         c.web_site,  c.collection_field, is_self_support  from crawlers_role as c
+        <where>
+            <if test="isUsed != null">
+                c.is_used = #{isUsed}
+            </if>
+            <if test="typeId != null ">
+                and c.type_id = #{typeId}
+            </if>
+            <if test="webType != null ">
+                and c.web_type = #{webType}
+            </if>
+        </where>
+        order by ${orderBy} desc
     </select>
 
     <resultMap id="CrawlersRoleMap" type="com.qtdbp.trading.model.CrawlersRoleModel">
