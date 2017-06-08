@@ -226,6 +226,11 @@
         UPDATE data_product SET is_used = 1 where id = #{id}
     </update>
 
+    <!--删除单条数据包-->
+    <delete id="deleteProduct" parameterType="java.lang.Integer">
+        delete from data_product where id = #{id}
+    </delete>
+
     <!-- #################################################################### -->
     <!-- #######################数据包产品与属性关联表######################### -->
     <!-- #################################################################### -->
