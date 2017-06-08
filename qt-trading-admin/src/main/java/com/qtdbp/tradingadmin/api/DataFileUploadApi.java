@@ -173,7 +173,7 @@ public class DataFileUploadApi extends BaseController{
     }
 
     @ApiOperation(value = "数据包文件验证和下载")
-    @RequestMapping(value = "/file/exist/free", method = RequestMethod.GET)
+    @RequestMapping(value = "/productFile/exist", method = RequestMethod.GET)
     public ModelMap fileExistFree(Integer productId) throws GlobalException {
 
         ModelMap map = new ModelMap();
@@ -192,7 +192,7 @@ public class DataFileUploadApi extends BaseController{
     }
 
     @ApiOperation(value = "爬虫规则文件验证和下载")
-    @RequestMapping(value = "/Rolefile/exist/free", method = RequestMethod.GET)
+    @RequestMapping(value = "/roleFile/exist", method = RequestMethod.GET)
     public ModelMap RoleFileExistFree(Integer roleId) throws GlobalException {
 
         ModelMap map = new ModelMap();
