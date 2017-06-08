@@ -44,11 +44,7 @@ import java.util.Map;
 @Controller
 public class DatamartController extends BaseController {
 
-    /**
-     * 数据商城首页
-     */
     private static final String PAGE_DATAMART = "datamart/index" ;
-
     private static final String PAGE_DATAMART_DETAIL = "datamart/detail" ;
 
     @Autowired
@@ -62,43 +58,10 @@ public class DatamartController extends BaseController {
     @Autowired
     private DataTransactionOrderMapper orderMapper ;
 
-    @RequestMapping(value = "/datamart/{id}", method = RequestMethod.GET)
-    public ModelAndView index(@PathVariable("id") int typeId) {
-
-        ModelAndView result = new ModelAndView(PAGE_DATAMART);
-        result.addObject("currentid", typeId) ;
-        result.addObject("activeId", typeId) ;
-        this.initData(result) ;
-
-        return result ;
-    }
-
-    /**
-     * 二级目录请求方法
-     * @param typeId
-     * @return
-     */
-    @RequestMapping(value = "/datamart/{pid}/{id}", method = RequestMethod.GET)
-    public ModelAndView index(@PathVariable("pid") int pid, @PathVariable("id") int typeId) {
-
-        ModelAndView result = new ModelAndView(PAGE_DATAMART);
-        result.addObject("currentid", typeId) ;
-        result.addObject("activeId", pid) ;
-
-        this.initData(result) ;
-
-        return result ;
-    }
-
     @RequestMapping(value = "/datamart", method = RequestMethod.GET)
-    public ModelAndView index() {
+    public String index() {
 
-        ModelAndView result = new ModelAndView(PAGE_DATAMART);
-        result.addObject("currentid", 0) ;
-        result.addObject("activeId", 0) ;
-        this.initData(result) ;
-
-        return result ;
+        return PAGE_DATAMART ;
     }
 
     @RequestMapping(value = "/datamart/detail/{id}", method = RequestMethod.GET)
@@ -136,25 +99,6 @@ public class DatamartController extends BaseController {
         result.addObject("attrModels", attrModels);
 
         return result ;
-    }
-
-
-    /**
-     * 初始化加载数据
-     * @param result
-     */
-    private void initData(ModelAndView result) {
-
-        if(result == null) return;
-
-        // 类型列表
-        List<DataTypeModel> typeModels = dataTypeMapper.findAll() ;
-
-        // 属性、属性值列表
-        List<DataTypeAttrModel> attrModels = dataTypeMapper.findAttrAll() ;
-
-        result.addObject("typeModels", typeModels);
-        result.addObject("attrModels", attrModels) ;
     }
 
     @ResponseBody

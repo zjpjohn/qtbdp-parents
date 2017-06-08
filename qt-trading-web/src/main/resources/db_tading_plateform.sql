@@ -398,7 +398,7 @@ drop table if exists data_user_feedback;
 
 create table data_user_feedback
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    feedback_type        tinyint                        null default 1,
    email                varchar(50)                    null,
    phone                varchar(50)                    null,
