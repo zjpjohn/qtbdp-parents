@@ -390,3 +390,24 @@ create table custom_service
    is_used              tinyint                        not null default 0,
    constraint PK_CUSTOM_SERVICE primary key clustered (id)
 );
+
+/*==============================================================*/
+/* Table: data_user_feedback   用户反馈                          */
+/*==============================================================*/
+drop table if exists data_user_feedback;
+
+create table data_user_feedback
+(
+   id                   int                            not null,
+   feedback_type        tinyint                        null default 1,
+   email                varchar(50)                    null,
+   phone                varchar(50)                    null,
+   content              varchar(200)                   null,
+   addtime              datetime                       null,
+   ip                   varchar(50)                    null,
+   mark                 tinyint                        null default 0,
+   constraint PK_DATA_USER_FEEDBACK primary key clustered (id)
+);
+
+-- 修改用户Id未int类型
+ALTER TABLE data_product MODIFY user_id int ;

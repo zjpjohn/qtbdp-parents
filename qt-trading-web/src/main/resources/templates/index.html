@@ -1,29 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>钱塘大数据交易中心</title>
-    <meta name="keywords" content="钱塘大数据交易中心" />
-    <meta name="description" content="钱塘大数据交易中心" />
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
-    <link rel="stylesheet" th:href="@{/tradecenter/css/common.css}" />
-    <link rel="stylesheet" th:href="@{/tradecenter/css/nivo-slider.css}" />
-    <link rel="stylesheet" th:href="@{/tradecenter/css/index.css}" />
-
-    <script th:src="@{/tradecenter/js/jquery-1.8.3.min.js}"></script>
-</head>
-
-
+    <head>
+        <title>钱塘大数据交易中心 | 首页</title>
+        <div th:replace="layout/top" /></div>
+    </head>
 <body >
     <!--  页头 -->
     <div th:replace="layout/header" /></div>
     <!-- 页头结束 -->
 
     <!-- banner图开始-->
-    <div id="wrapper">
+    <!--<div id="wrapper">
         <div class="slider-wrapper theme-default">
             <div id="slider" class="nivoSlider">
                 <a>
@@ -36,8 +24,9 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>-->
     <!--banner结束-->
+
     <!--工业数据开始-->
     <div class="industrial_data">
         <h2 class="intitle"><i></i>  工业数据 <span >Industry Data</span>  </h2>
@@ -214,14 +203,11 @@
     <!--爬虫市场结束-->
 
 
-
-
     <!-- 页脚 -->
     <footer th:replace="layout/footer"></footer>
     <!-- 页脚结束 -->
 
-
-    <script th:src="@{/tradecenter/js/jquery.nivo.slider.pack.js}"></script>
+    <script src="/assets/global/plugins/jquery.nivo.slider.pack.js"></script>
     <script>
         nav(1);
         //合作关系往左移

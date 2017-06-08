@@ -1,0 +1,164 @@
+@charset "UTF-8";
+.reptile_all{
+    width:1200px;
+    margin:0px auto;
+    margin-top:30px;
+}
+.reptile_left{
+    width:850px;
+    border:1px solid #E9E9E9;
+    padding:30px 15px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.reptile_right{
+    width:320px;
+}
+/***右侧***/
+.reptile_right {
+    width: 320px;
+
+}
+.right_img {
+    width:320px;
+    height:254px;
+    margin-bottom: 20px;
+}
+.right_img2{
+    width:320px;
+    height:165px;
+    margin-bottom: 20px;
+}
+.bazaar_top{
+    width:1200px;
+    margin:0px auto;
+    margin-top:28px;
+    margin-bottom: 20px;
+}
+.bazaar_top>span{
+    color:#0076c8;
+}
+.leimg{
+    width:210px;
+    height:162px;
+    border:1px solid #E2D9DA;
+    margin-right: 30px;
+}
+.letitle{
+    font-weight:bold;
+    font-size: 20px;
+    color:#333;
+    margin-bottom: 14px;
+}
+.leprice{
+    width:550px;
+    color:#f14771;
+    font-size: 20px;
+    padding-bottom:18px;
+    border-bottom: 1px solid #E1E1E1;
+    margin-bottom: 18px;
+}
+.lenum{
+    font-size: 12px;
+    color:#999;
+    margin-bottom: 10px;
+}
+.lenum>span{
+    margin-right: 16px;
+}
+.lenum>span>i{
+    color:#0076c8;
+    padding:0px 2px;
+}
+.employ>a{
+    display:inline-block;
+    width:140px;
+    height:34px;
+    line-height: 34px;
+    margin-right:20px;
+    text-align: center;
+}
+
+.lebuy{
+    color:#fff;
+    background-color:#FF8A00 ;
+}
+.lecurse{
+    background-color:#fff ;
+    color:#0076c8;
+    border:1px solid #0076c8;
+}
+.leintroduce{
+    width:128px;
+    height:39px;
+    line-height: 39px;
+    text-align: center;
+    color:#0076c8;
+    border:1px solid #ddd;
+    border-bottom: none;
+    margin-top:50px;
+    font-size: 16px;
+    position:relative;
+    z-index: 2;
+    top:1px;
+    left:0px;
+    background-color: #fff;
+}
+.lebottoms{
+    width:780px;
+    padding:20px 17px;
+    box-sizing: border-box;
+    border-top:1px solid #ddd;
+}
+.lebottoms>li{
+    box-sizing:border-box;
+    padding:20px 8px;
+    border-bottom:1px solid #ddd;
+
+}
+.lebottoms>li:after{
+    display: block;
+    content:"";
+    clear:both;
+}
+.lebottoms>li:last-child{
+    border-bottom:none;
+    margin-bottom: 100px;
+}
+.lebottoms>li>span{
+    float:left;
+    font-size: 16px;
+    color:#0076c8;
+    font-weight: bolder;
+    line-height:40px;
+}
+
+.lebottoms>li>p{
+    float:right;
+    color:#666;
+    font-size: 14px;
+    width:600px;
+    padding-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

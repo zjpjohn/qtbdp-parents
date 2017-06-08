@@ -1,0 +1,269 @@
+@charset "UTF-8";
+.allindex{
+    background: #FAFAFA;
+}
+.reptile_all{
+    width:1200px;
+    margin:0px auto;
+    margin-top:30px;
+}
+.reptile_left{
+    width:850px;
+}
+.reptile_right{
+    width:320px;
+
+}
+.right_img{
+    width:320px;
+    height:254px;
+    margin-bottom: 20px;
+}
+.right_img2{
+    width:320px;
+    height:165px;
+    margin-bottom: 20px;
+}
+
+.dataclassify{
+    box-sizing: border-box;
+    padding:0px  20px;
+    border:1px solid #ddd;
+    width:850px;
+    background-color: #fff;
+}
+.repclissify{
+    padding:10px 0px;
+}
+.repclissify a{
+    color:#999;
+    display:inline-block;
+    padding:4px 10px;
+    font-size: 14px;
+    margin-right:2px;
+
+}
+.repclissify a:hover,.repclissify a.active{
+    color:#fff;
+    display:inline-block;
+    padding:4px 10px;
+    background-color: #05A9FE;
+}
+
+.datarep{
+    color:#333;
+    margin-right: 20px;
+}
+.repdataall>p{
+    border-top: 1px solid #eee;
+    padding-top:10px;
+}
+.repdataall>p>a{
+    color:#999;
+    display:inline-block;
+    padding:4px 10px;
+
+}
+.repdataall>p>a:hover,.repdataall>p>a.active{
+    background-color: #05A9FE;
+    color:#fff;
+}
+.repdataall{
+    position:relative;
+}
+.repdataall>p{
+    border-top: 1px solid #eee;
+    padding:10px;
+}
+.repdataall>p>a{
+    color:#999;
+    display:inline-block;
+    padding:4px 10px;
+
+}
+.repdataall>p>a:hover,.repdataall>p>a.active{
+    background-color: #05A9FE;
+    color:#fff;
+}
+
+.gysj,.glsj{
+    width:814px;
+    display:none;
+}
+
+
+
+.webtype,.sales{
+    box-sizing: border-box;
+    width:850px;
+    height:40px;
+    border:1px solid #ddd;
+    margin-top: 10px;
+    padding:6px 20px;
+    background-color: #fff;
+}
+.webtype>a{
+    color:#999;
+    display:inline-block;
+    padding:4px 10px;
+}
+.webtype>a:hover,.webtype>a.active{
+    background-color: #05A9FE;
+    color:#fff;
+}
+.sales{
+    padding:0px;
+    margin-bottom:26px;
+}
+.sales>a{
+    display: inline-block;
+    padding:0px 20px;
+    color:#999;
+    line-height:40px;
+    font-size: 16px;
+}
+.sales>a>em{
+    background-position: -208px -112px;
+    position:relative;
+    top:5px;
+    margin-left:6px;
+}
+.sales>a:hover,.sales>a.active{
+    color:#05A9FE;
+}
+.sales>a:hover>em,.sales>a.active>em{
+    background-position: -260px -112px;
+}
+
+
+
+.sales>span{
+    display:inline-block;
+    width:1px;
+    height:22px;
+    border-left: 1px solid #ddd;
+    position:relative;
+    top:4px;
+}
+
+
+
+
+/****被筛选框*******/
+.repmain{
+     width:850px;
+     height:168px;
+     box-sizing: border-box;
+     border:1px solid #ddd;
+     padding:20px;
+     margin-bottom: 20px;
+     background-color: #fff;
+ }
+.repmain:hover,.repmain.active{
+    box-shadow:0px 0px 5px #ddd ;
+}
+.repmain>a>img{
+    margin-right: 20px;
+}
+
+.main_title{
+    font-size: 18px;
+    color:#333;
+    margin-bottom: 20px;
+    width:400px;
+    height:24px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.main_text{
+    color:#666;
+    font-size: 14px;
+    margin-bottom: 40px;
+    width:360px;
+    height:20px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.main_min{
+    color:#999;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.main_domain:first-child{
+    margin-right: 40px;
+}
+em{
+    display:inline-block;
+    width:16px;
+    height:16px;
+    background:url(../images/icon_index2.png);
+}
+.main_domain>em{
+    background-position:-96px -34px;
+    margin-right: 6px;
+    position:relative;
+    top:2px;
+}
+.reptexts{
+    width:420px;
+    border-right:2px solid #ECECEC;
+}
+
+.priceright{
+    width:210px;
+    text-align: center;
+}
+.repprice{
+    font-size: 28px;
+    color:#e60012;
+}
+
+.reppeople{
+    font-size: 12px;
+    color:#999;
+}
+
+.repnow{
+    cursor:pointer;
+    width:114px;
+    height:34px;
+    line-height:34px;
+    margin:0 auto;
+    margin-top:20px;
+    color:#fff;
+    background:#FF8A00;
+    border-radius: 4px;
+}
+
+.mainbottom{
+    width:52px;
+    height:52px;
+    background-position:0px -30px;
+    margin:30px 400px 50px 400px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>钱塘大数据交易中心</title>
+    <meta name="keywords" content="钱塘大数据交易中心" />
+    <meta name="description" content="钱塘大数据交易中心" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <link rel="stylesheet" th:href="@{/tradecenter/css/common.css}" />
+    <link rel="stylesheet" th:href="@{/tradecenter/css/nivo-slider.css}" />
+    <link rel="stylesheet" th:href="@{/tradecenter/css/index.css}" />
+
+    <script th:src="@{/tradecenter/js/jquery-1.8.3.min.js}"></script>
+</head>
+
+
+<body >
+    <!--  页头 -->
+    <div th:replace="layout/header" /></div>
+    <!-- 页头结束 -->
+
+    <!-- banner图开始-->
+    <div id="wrapper">
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                <a>
+                    <img th:src="@{/tradecenter/images/banner1.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
+                    <i class="knowmore" onclick="location.href='/datamart';"></i>
+                </a>
+                <a>
+                    <img th:src="@{/tradecenter/images/banner2.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
+                    <i class="joinus" onclick="location.href='/institution/add';"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--banner结束-->
+    <!--工业数据产品开始-->
+    <div class="production">
+        <div class="index_titles">
+            <p>PRODUCTION</p>
+            <h1>工业数据产品</h1>
+            <i class="i1"></i>
+            <i class="i2"></i>
+            <i class="i3"></i>
+            <i class="i4"></i>
+            <i class="i5"></i>
+            <i class="i6"></i>
+            <i class="i7"></i>
+        </div>
+        <ul class="pro_list pro_list1 floating">
+            <li>
+                <i class="pro_i1"></i>
+                <h3>产权专利</h3>
+                <p>整合工业行业的知识产权数据资源，集成专利基础库，标准专利信息库，案例信息库等</p>
+                <a th:href="@{/datamart}+'/28'" class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <i class="pro_i2"></i>
+                <h3>行业综合</h3>
+                <p>整合工业运行、生产、交易、管理等多维数据</p>
+                <a th:href="@{/datamart}+'/29'"  class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <i class="pro_i3"></i>
+                <h3>工业生产</h3>
+                <p>收集工业行业对生产、交易、管理、经济、社会等运行时的影响和分析数据</p>
+                <a  th:href="@{/datamart}+'/30'" class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <i class="pro_i4"></i>
+                <h3>工业产品</h3>
+                <p>在工业产品设计方面、专利、创意、规范等数据</p>
+                <a  th:href="@{/datamart}+'/31'" class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+        </ul>
+        <ul class="pro_list floating">
+            <li>
+                <i class="pro_i5"></i>
+                <h3>智能制造</h3>
+                <p>集工业机器人、智能终端、生产线等各种智能制造设备的数据</p>
+                <a th:href="@{/datamart}+'/32'" class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <i class="pro_i6"></i>
+                <h3>物联网</h3>
+                <p>收集工业RFID、工业传感器、工业自动控制系统等数据</p>
+                <a th:href="@{/datamart}+'/33'" class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <i class="pro_i7"></i>
+                <h3>交通物流</h3>
+                <p>汇集全国各地的物流信息、物流公司、物流资源等服务数据</p>
+                <a  th:href="@{/datamart}+'/34'"class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+            <li>
+                <i class="pro_i8"></i>
+                <h3>科技金融</h3>
+                <p>汇集一系列高新技术产业下的金融工具、制度、政策与服务等系统性、创新性数据</p>
+                <a th:href="@{/datamart}+'/35'" class="pro_mask">
+                    <i></i>
+                </a>
+            </li>
+        </ul>
+        <a th:href="@{/datamart}" class="more_pro">更多产品</a>
+    </div>
+    <!--工业数据产品结束-->
+    <!--平台优势-->
+    <div class="advanige">
+        <div class="index_titles">
+            <p>ADVANIGE</p>
+            <h1>平台优势</h1>
+            <i class="i1"></i>
+            <i class="i2"></i>
+            <i class="i3"></i>
+            <i class="i4"></i>
+            <i class="i5"></i>
+            <i class="i6"></i>
+            <i class="i7"></i>
+        </div>
+        <ul class="adv_list floating">
+            <li>
+                <h1>海量高质量数据</h1>
+                <p><b>10000+</b> 工业链数据</p>
+                <ol>
+                    <li>* 权威数据来源</li>
+                    <li>* 工业行业全覆盖</li>
+                    <li>* 挖掘大量结构化数据</li>
+                    <li>* 行业专家全方位指导</li>
+                </ol>
+            </li>
+            <li>
+                <h1>多种数据格式</h1>
+                <p>你想要的，<b>这里都有</b></p>
+                <ol>
+                    <li>* API</li>
+                    <li>* Excel</li>
+                    <li>* 可视化</li>
+                    <li>* 文件</li>
+                </ol>
+            </li>
+            <li>
+                <h1>支持个性化定制</h1>
+                <p><b>找不到</b>想要的数据？我来自定义！</p>
+                <ol>
+                    <li>* 自定义需求发布</li>
+                    <li>* 数据众包</li>
+                    <li>* 方案召集</li>
+                    <li>* 按需接单</li>
+                </ol>
+            </li>
+            <li>
+                <h1>实力品牌入驻</h1>
+                <p>想要<b>大牌</b>品质？没有大牌怎么行？</p>
+                <ol>
+                    <li>* 北京中润普达集团</li>
+                    <li>* 华东江苏大数据交易中心</li>
+                    <li>* 武汉东湖大数据交易中心</li>
+                </ol>
+            </li>
+            <li>
+                <h1>多元的合作方式</h1>
+                <p>单一方式><b>不满足</b>？解锁更多方式！</p>
+                <ol>
+                    <li>* 数据共享</li>
+                    <li>* 多重渠道整合</li>
+                    <li>* 数据运营</li>
+                    <li>* 数据变现</li>
+                </ol>
+            </li>
+            <li>
+                <h1>一站式数据托管</h1>
+                <p>交给我们，您<b>放心</b></p>
+                <ol>
+                    <li>* 安全管理</li>
+                    <li>* 数据预处理</li>
+                    <li>* 数据分析</li>
+                    <li>* 客户挖掘</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <!--平台优势结束-->
+    <!--合作伙伴-->
+    <div class="companion">
+        <div class="index_titles">
+            <p>COMPANION</p>
+            <h1>合作伙伴</h1>
+            <i class="i1"></i>
+            <i class="i2"></i>
+            <i class="i3"></i>
+            <i class="i4"></i>
+            <i class="i5"></i>
+            <i class="i6"></i>
+            <i class="i7"></i>
+        </div>
+        <div class="com_slide">
+            <p class="com_list floating">
+                <a href="javascript:;" class="a1"></a>
+                <a href="javascript:;" class="a2"></a>
+                <a href="javascript:;" class="a3"></a>
+                <a href="javascript:;" class="a4"></a>
+                <a href="javascript:;" class="a5"></a>
+                <a href="javascript:;" class="a6"></a>
+                <a href="javascript:;" class="a7"></a>
+                <a href="javascript:;" class="a8"></a>
+                <a href="javascript:;" class="a9"></a>
+            </p>
+        </div>
+    </div>
+    <!--合作伙伴结束-->
+
+    <!-- 页脚 -->
+    <footer th:replace="layout/footer"></footer>
+    <!-- 页脚结束 -->
+
+
+    <script th:src="@{/tradecenter/js/jquery.nivo.slider.pack.js}"></script>
+    <script>
+        nav(1);
+        //合作关系往左移
+        var cooperationTimer=null;
+        var cooperationLeft=0;
+        function cooperationMove(){
+            cooperationLeft-=1;
+            if(cooperationLeft==-207){
+                cooperationLeft=0;
+                $(".com_list").append($(".com_list>a:first-child"));
+            }
+            $(".com_list").css("left",cooperationLeft);
+        };
+        cooperationTimer=setInterval(cooperationMove,50);
+        $(".com_slide").mouseenter(function(){
+            clearInterval(cooperationTimer);
+            cooperationTimer=null;
+        });
+        $(".com_slide").mouseleave(function(){
+            cooperationTimer=setInterval(cooperationMove,50);
+        });
+
+        $('#slider').nivoSlider();
+        $("#slider>a>i").mouseenter(function(){
+            $(this).parent().addClass("hover");
+        });
+        $("#slider>a>i").mouseleave(function(){
+            $(this).parent().removeClass("hover");
+        });
+
+    </script>
+</body>
+</html>
