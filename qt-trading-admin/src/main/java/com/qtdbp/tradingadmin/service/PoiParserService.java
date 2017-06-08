@@ -65,14 +65,4 @@ public class PoiParserService implements IExcelReader, Cloneable {
         this.files = files;
     }
 
-    @Override
-    public Object clone() {
-        PoiParserService stu = null;
-        try{
-            stu = (PoiParserService)super.clone();   //浅复制
-        }catch(CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return stu;
-    }
 }
