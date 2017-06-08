@@ -113,6 +113,25 @@ public class DataProductApi {
         return map;
     }
 
+    @ApiOperation(value = "删除单条数据包产品接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "数据包产品id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    public ModelMap deleteProduct(Integer id) {
+
+        ModelMap map = new ModelMap();
+
+        if (id != null) {
+            Integer count = productMapper.deleteProduct(id);
+            map.put("success", count > 0 ? true : false);
+        } else {
+            map.put("success", false);
+        }
+
+        return map;
+    }
+
     //===================================================================
     // 数据条目API接口
     //===================================================================

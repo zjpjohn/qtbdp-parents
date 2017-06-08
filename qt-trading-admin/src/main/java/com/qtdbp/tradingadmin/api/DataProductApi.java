@@ -3,6 +3,7 @@ package com.qtdbp.tradingadmin.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.tradingadmin.mapper.DataProductMapper;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
 import com.qtdbp.tradingadmin.controller.BaseController;
@@ -32,6 +33,9 @@ public class DataProductApi extends BaseController {
 
     @Autowired
     private DataProductService productService ;
+
+    @Autowired
+    private DataProductMapper productMapper;
 
     //===================================================================
     // 数据包产品API接口
@@ -158,6 +162,25 @@ public class DataProductApi extends BaseController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            map.put("success", false);
+        }
+
+        return map;
+    }
+
+    @ApiOperation(value = "删除单条数据包产品接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "数据包产品id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    public ModelMap deleteProduct(Integer id) {
+
+        ModelMap map = new ModelMap();
+
+        if (id != null) {
+            Integer count = productMapper.deleteProduct(id);
+            map.put("success", count > 0 ? true : false);
         } else {
             map.put("success", false);
         }
