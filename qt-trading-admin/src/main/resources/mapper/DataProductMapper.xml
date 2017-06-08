@@ -15,7 +15,8 @@
         p.user_id,
         p.is_used,
         s.name,
-        p.data_status
+        p.data_status,
+        p.audit_status
         FROM
         data_product as p left join sys_users s on p.user_id = s.user_id
         <where>
