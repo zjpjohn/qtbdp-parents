@@ -80,12 +80,12 @@ input:-ms-input-placeholder {
     padding: 35px 0px;
 }
 .icon{
-    background-image:url("../images/icon.png");
+    background-image:url("../images/icon_index2.png");
 }
 .qt_logo{
     width:344px;
     height:40px;
-    background-position: -579px -60px;
+    background-position: -74px -210px;
 }
 .head_fabu{
     width:252px;
@@ -94,7 +94,9 @@ input:-ms-input-placeholder {
 .head_fabu>i{
     width:44px;
     height:44px;
-    background-position: -36px -58px;
+    border:1px solid #CDCDCD;
+    border-radius:50%;
+    background-position: -8px -216px;
     margin-right:10px;
 }
 .fabu_btns>p{
@@ -264,19 +266,19 @@ nav{
     width:24px;
     height:24px;
     margin-right:10px;
-    background-image:url("../images/icon.png" );
+    background-image:url("../images/icon_index2.png" );
 }
 .footer_main .contactus i{
-    background-position:-349px -70px;
+    background-position:-445px -212px;
 }
 .footer_main .platform i{
-    background-position:-408px -70px;
+    background-position:-500px -212px;
 }
 .footer_main .cooperation i{
-    background-position:-467px -70px;
+    background-position:-555px -212px;
 }
 .footer_main .focusus i{
-    background-position:-290px -70px;
+    background-position:-603px -212px;
 }
 .platform p>a:first-child,.cooperation p>a:first-child{
     margin-right:50px;
