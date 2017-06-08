@@ -67,13 +67,29 @@ var Common = {
                     success: function (result) {
 
                         var dataChage = result.pageInfo.list;
+
                         if(dataChage.length > 0){
                             for ( var i = 0; i<dataChage.length; i++){
-                                var time = dataChage[i].addTime;
+                                var time = dataChage[i].addTime,
+                                    createTime = dataChage[i].createTime;
                                 dataChage[i].addTime = Common._formatedate(time);
                                 var props = dataChage[i].dataTypeProps;
                                 dataChage[i].dataTypeProps = Common._dataTypeProps(props);
                                 var typeId = dataChage[i].dataType;
+
+                                dataChage[i].createTime = Common._formatedate(createTime);
+
+                                if(dataChage[i].auditStatus == 1){
+                                    dataChage[i].auditStatus = "审核已通过"
+                                }else if(dataChage[i].auditStatus == 0){
+                                    dataChage[i].auditStatus = "未审核"
+                                }else {
+                                    dataChage[i].auditStatus = "审核未通过"
+                                }
+
+                                if(dataChage[i].createId == 0){
+                                    dataChage[i].createId = "系统管理员"
+                                }
 
                                 if(dataChage[i].institutionType == 1){
                                     dataChage[i].institutionType = "服务商"
@@ -462,13 +478,15 @@ var Common = {
             url:url,
             async:true,
             error:function () {
-                layer.msg("下载失败",{icon: 5});
+                layer.msg("下载出现错误",{icon: 5});
             },
             success: function (ret) {
                 if(ret.success == true){
                     layer.msg("准备开始下载",{icon: 1},function () {
                         window.location.href = downloadUrl
                     });
+                }else {
+                    layer.msg("下载文件失败",{icon: 1});
                 }
             }
         })

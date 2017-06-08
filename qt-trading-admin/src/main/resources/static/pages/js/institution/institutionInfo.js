@@ -41,7 +41,7 @@ $(function () {
             $IDLabel.html("营业执照号");
             $IDImgLabel.html("营业执照");
 
-            institutionType = "服务商";
+            institutionType = "企业";
 
             if(!data.companyInfoModel){
                 layer.msg("没有相关服务商企业信息",{icon: 5});
