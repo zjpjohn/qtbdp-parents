@@ -80,10 +80,12 @@ body{
 
 /*******工业数据开始*********/
 .databox>li:nth-child(2)>p:first-child{
-    background-position:6px 10px;
+    background-position:0px 0px;
+    position:relative;
+    left:2px;
 }
 .databox>li:nth-child(3)>p:first-child{
-    background-position:-100px 10px;
+    background-position:-100px 0px;
 }
 .databox>li:nth-child(4)>p:first-child{
     background-position:-206px 10px;
@@ -199,7 +201,7 @@ body{
     display:inline-block;
     width:50px;
     height:50px;
-    background:url(images/icon_index.png)-607px -280px;
+    background:url(../images/icon_index1.png)-607px -280px;
     position:relative;
     top:-144px;
     left:0px;

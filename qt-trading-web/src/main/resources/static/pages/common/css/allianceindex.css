@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.body{
+    background:#FAFAFA;
+}
+
+
+
+.sales{
+    box-sizing: border-box;
+    width:1200px;
+    height:40px;
+    border:1px solid #ddd;
+    background-color: #fff;
+    margin:30px auto;
+
+}
+.sales>a{
+    padding:0px 20px;
+    color:#999;
+    line-height:40px;
+    font-size: 16px;
+}
+em{
+    display:inline-block;
+    width:16px;
+    height:16px;
+    background:url(../images/icon_index2.png);
+}
+.sales>a>em{
+    background-position: -208px -112px;
+    position:relative;
+    top:5px;
+    margin-left:6px;
+}
+.sales>a:hover,.sales>a.active{
+    color:#05A9FE;
+}
+.sales>a:hover>em,.sales>a.active>em{
+    background-position: -260px -112px;
+}
+.sales>span{
+    display:inline-block;
+    width:1px;
+    height:22px;
+    border-left: 1px solid #ddd;
+    position:relative;
+    top:4px;
+}
+
+

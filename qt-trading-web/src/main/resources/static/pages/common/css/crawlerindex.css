@@ -205,15 +205,12 @@ em{
 }
 .main_min>span.main_timeend>a{
     color:#05A9FE;
-
 }
 .main_timeend>em{
     background-position: -146px -34px;
     position:relative;
     top:2px;
 }
-
-
 .priceright{
     width:220px;
     text-align: center;
@@ -225,12 +222,10 @@ em{
     margin-top:12px;
     margin-bottom: 8px;
 }
-
 .reppeople{
     font-size: 12px;
     color:#999;
 }
-
 .repnow{
     cursor:pointer;
     width:114px;
