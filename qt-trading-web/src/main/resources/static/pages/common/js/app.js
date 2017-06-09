@@ -8,8 +8,14 @@ var App = function () {
         _url:"/api/product",
         _container: "#data-container",// 数据容器
         _tmpl: "#tmpl_products", // 内容模板
-        _rows: 12 , // 默认每页显示12条
-        _pager: "#pageTool" // 分页插件ID
+        _pager: "#pageTool", // 分页插件ID
+        _rows:12    // 默认每页条数
+    }
+
+    // 请求数据
+    var params = {
+        page:1,    // 默认当前页
+        rows:12    // 默认每页条数
     }
 
     /**
@@ -53,7 +59,7 @@ var App = function () {
                             initType(pid, sub_container) ;
                     }
                     // 加载产品数据
-                    initProducts(pid) ;
+                    initProducts({dataType:pid}) ;
                 })
             } else {
                 $(container).html("").hide() ;
@@ -68,13 +74,21 @@ var App = function () {
      * @param _rows 每页记录数
      * @param tid   类目ID
      */
-    var initProducts = function (_tid,_page,_rows) {
+    var initProducts = function (_params) {
 
-        if(!_tid) _tid = 0 ;
-        if(!_page) _page = 1 ;
-        if(!_rows) _rows = options._rows ;
+        // json对象合并
+        $.extend(params, _params) ;
 
-        LoadingData.request({url: options._url, data:{page:_page,rows:_rows,dataType:_tid}}, function(data){
+        LoadingData.request({url: options._url, data: params}, function(data){
+
+            if(data.code === 100) {
+                LoadingData.toastr({
+                    _type: 'error',
+                    _title: '请求数据错误，地址：'+data.url,
+                    _msg: data.message
+                }) ;
+                return ;
+            }
 
             // 清空容器
             $(options._container).html("") ;
@@ -89,7 +103,11 @@ var App = function () {
                 toolbar:true,
                 callback:function(page,size,count){
 
-                    initProducts(_tid, page, size) ;
+                    // 请求参数赋值
+                    params.page = page;
+                    params.rows = size;
+
+                    initProducts(params) ;
 
                     // console.log(page);//当前页
                     // console.log(size);//每页条数
@@ -100,10 +118,63 @@ var App = function () {
         });
     }
 
+    /**
+     * 过滤条件
+     * 注意：页面中_filterId必须和model对象中属性名一致
+     */
+    var initFilter = function () {
+
+        var container = "#filter-container" ; // 过滤容器
+
+        $(container+" > span").each(function () {
+
+            var _filterId = this.id ;
+
+            // 绑定click事件
+            $("#"+_filterId+" > a").click(function () {
+                $("#"+_filterId+" > a").removeClass("active") ;
+                $(this).addClass("active") ;
+
+                // 封装过滤条件
+                var _params = {} ;
+                var _id = $(this).attr("data-id") ;
+
+                if(_id == -1)
+                    params[_filterId] = undefined ; // 删除不限条件的查询
+                else
+                    _params[_filterId] = _id ;
+
+                // 传入过滤字段
+                initProducts(_params) ;
+            }) ;
+        })
+
+    }
+
+    /**
+     * 排序
+     * 注意：页面中data-by必须和数据库对应表的字段名一致
+     */
+    var initOrderByCond = function () {
+
+        var container = "#order-container" ; // 排序容器
+
+        // 绑定click事件
+        $(container+" > a").click(function () {
+            $(container+" > a").removeClass("active") ;
+            $(this).addClass("active") ;
+
+            // 传入排序字段
+            initProducts({ orderBy : $(this).attr("data-by") }) ;
+        }) ;
+    }
+
     return {
         // 处理数据商城页面数据加载
         initDatamart: function () {
             initType();
+            initOrderByCond() ;
+            initFilter() ;
             initProducts() ;
         }
     };

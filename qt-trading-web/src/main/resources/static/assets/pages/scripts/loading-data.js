@@ -29,7 +29,7 @@ var LoadingData = {
             type: _type,
             dataType:"json",
             data: _data,
-            async:false,
+            async:true,
             beforeSend:function () {
                 $_loadding.show() ;
             },
@@ -39,6 +39,8 @@ var LoadingData = {
 
                 // 调用回调函数
                 if($.isFunction(callback)) callback(data) ;
+
+                $_loadding.hide() ;
             },
             error: function () {
                 LoadingData.toastr({
@@ -46,8 +48,7 @@ var LoadingData = {
                     _title: '请求数据',
                     _msg: '网络超时，请重试或者联系管理员'
                 }) ;
-            },
-            complete : function () {
+
                 $_loadding.hide() ;
             }
         });
