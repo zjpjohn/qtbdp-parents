@@ -36,10 +36,10 @@ public interface DataTypeMapper {
     List<DataTypeAttrModel> findAttrAllByTypeId(int typeId) ;
 
     /**
-     * 查询该节点下的所有子节点
-     * @param id
+     * 父类目ID查询所有类目
+     * @param pid
      * @return
      */
-    List<DataTypeModel> findSecondNode(Integer id);
+    List<DataTypeModel> findDataTypeByParentId(Integer pid);
 
 }

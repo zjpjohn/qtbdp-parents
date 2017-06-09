@@ -57,6 +57,10 @@ $(function () {
         }
 
 
+        if(person == 0){
+            person = "系统管理员";
+        }
+
         $('#identity').val(institutionType);//身份
         $('#institutionName').val(data.name);//服务商名称
         $('#domain').val(data.designation);//服务领域

@@ -35,9 +35,9 @@
         order by sort asc
     </select>
 
-    <!--查询数据类型二级分类-->
-    <select id="findSecondNode" parameterType="java.lang.Integer" resultType="com.qtdbp.trading.model.DataTypeModel">
-        select d.* from data_type d where d.pid = #{id} and d.is_used = 1
+    <!--根据父类目ID查询子类目数据-->
+    <select id="findDataTypeByParentId" parameterType="java.lang.Integer" resultType="com.qtdbp.trading.model.DataTypeModel">
+        select d.* from data_type d where d.pid = #{pid} and d.is_used = 1
         order by sort asc
     </select>
 </mapper>

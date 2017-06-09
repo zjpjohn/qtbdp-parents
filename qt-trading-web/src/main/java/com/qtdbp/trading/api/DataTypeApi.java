@@ -5,16 +5,10 @@ import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.DataTypeModel;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,22 +23,20 @@ public class DataTypeApi {
     @Autowired
     private DataTypeMapper dataTypeMapper;
 
-    @ApiOperation(value="数据类型数据接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "数据类型的一级目录id", dataType = "Integer",required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
+    @ApiOperation(value="根据父类目Id查询所有子类目数据接口")
     @ResponseBody
-    @RequestMapping(value = "/secondDataType", method = RequestMethod.GET)
-    public ModelMap findSecondDataType(DataTypeModel dataTypeModel) throws GlobalException {
+    @RequestMapping(value = "{pid}", method = RequestMethod.GET)
+    public ModelMap findSecondDataType(@ApiParam(name = "pid", value = "父类目id", required = true) @PathVariable Integer pid) throws GlobalException {
+
         ModelMap map = new ModelMap();
-        if (dataTypeModel == null) throw new GlobalException("数据类型为空");
-        List<DataTypeModel> list = dataTypeMapper.findSecondNode(dataTypeModel.getId());
+        if (pid == null) throw new GlobalException("数据类型为空");
+        List<DataTypeModel> list = dataTypeMapper.findDataTypeByParentId(pid);
         try {
-            map.put("pageInfo", new PageInfo<>(list));
-            map.put("queryParam", dataTypeModel);
+            map.put("pageInfo", list);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return map;
     }
 }

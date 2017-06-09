@@ -187,7 +187,7 @@ public class DataProductApi extends BaseController{
 
         List<Integer> dataTypeIdsList = new ArrayList<>();
 
-        List<DataTypeModel> list = dataTypeMapper.findSecondNode(dataType);
+        List<DataTypeModel> list = dataTypeMapper.findDataTypeByParentId(dataType);
         if (list == null || list.size() == 0) return dataTypeIdsList;
         for(DataTypeModel model : list){
             dataTypeIdsList.add(model.getId());
