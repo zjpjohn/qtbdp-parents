@@ -35,7 +35,7 @@ var LoadingData = {
             },
             success:function (data) {
 
-                console.log(data);
+                // console.log(data);
 
                 // 调用回调函数
                 if($.isFunction(callback)) callback(data) ;
