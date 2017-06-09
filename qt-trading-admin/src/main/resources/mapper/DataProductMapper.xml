@@ -18,7 +18,7 @@
         p.data_status,
         p.audit_status
         FROM
-        data_product as p left join sys_users s on p.user_id = s.user_id
+        data_product as p left join data_institution_info_new s on p.user_id = s.id
         <where>
             <if test="dataType != null and dataType != 0">
                 p.data_type = #{dataType}
@@ -73,8 +73,8 @@
     </resultMap>
 
     <!-- 单表查询产品 -->
-    <select id="findProductsById" resultMap="ProductResultMap">
-        SELECT
+    <select id="findProductsById" parameterType="java.lang.Integer" resultMap="ProductResultMap">
+        select
         p.id,
         p.designation,
         p.pic,
@@ -98,11 +98,11 @@
         p.auditor,
         p.audit_time,
         p.audit_status,
-        p.audit_fail_reason
-        FROM
-        data_product as p
-        WHERE
-        p.id = #{id}
+        p.audit_fail_reason,
+        s.name
+        from data_product as p
+        left join data_institution_info_new s on p.user_id = s.id
+        where p.id = #{id}
     </select>
 
     <!-- 更新产品信息 -->

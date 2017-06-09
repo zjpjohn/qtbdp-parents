@@ -9,12 +9,11 @@ $(function () {
     },function (data) {
         $('#ruleName').val(data.name);//名称
         $('#net').val(data.webSite);//采集网站
-/*
-        $('#scale').val(data.buyCount);//规模
-*/
         $('#price').val(data.price);//价格
-        $('#netType').val(data.webType);//网站类型
-        $('#category').val(data.typeId);//数据类别
+        var webType = WEB_TYPE[data.webType] ? WEB_TYPE[data.webType] : data.webType;
+        $('#netType').val(webType);//网站类型
+        var typeName = dataTypeJson[data.typeId] ? dataTypeJson[data.typeId] : data.typeId;
+        $('#category').val(typeName);//数据类别
         $('#field').val(data.collectionField);//采集字段
         $('.filename').val(data.filePath);//文件路径
         $('#cover').attr("src",data.logo);//数据封面
