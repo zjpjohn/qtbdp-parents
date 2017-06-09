@@ -244,6 +244,7 @@ create table crawlers_role
    file_path            varchar(500)                   null,
    web_type             tinyint                        not null default 0,
    web_site             varchar(500)                   null,
+   data_scale           int                            null,
    collection_field     varchar(100)                   null,
    is_self_support      tinyint                        not null default 0,
    is_institution       tinyint                        not null default 0,

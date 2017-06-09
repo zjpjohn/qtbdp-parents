@@ -79,6 +79,36 @@ var LoadingData = {
         };
 
         toastr[options._type](options._msg, options._title)
+    },
+
+    /**
+     * 拼接url请求参数
+     * @param settings
+     * @returns {*}
+     */
+    join : function (settings) {
+
+        if(!settings) return ; // 参数为空
+
+        var result = settings.url +"?page="+settings.curr_page+"&rows="+settings.size ;
+
+        if(settings.params && settings.params.length > 0) {
+            var _params_str = "" ;
+            settings.params.forEach(function(param,index,array){
+
+                var _key = param.key ;
+                var _val = param.value ;
+
+                if(_val) _params_str += "&"+_key+"="+_val ;
+
+                // if(index+1 != array.length) _params_str += "&" ;
+
+            }) ;
+
+            result += _params_str ;
+        }
+
+        return  result ;
     }
 
 }

@@ -6,6 +6,8 @@
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/datastoreindex.css"/>
+    <!-- 页面数据加载 -->
+    <script src="/pages/common/js/app.js" type="text/javascript"></script>
 </head>
 <body class="allindex">
 <!--  页头 -->
@@ -22,13 +24,13 @@
     <div class="dataclassify">
         <div class="repclissify">
             <span class="datarep">数据分类 : </span>
-            <a href="javascript:;" class="active" data-attr="sjall">全部</a>
             <!-- 一级类目 -->
+            <span id="type-container" data-tmpl="#tmpl_types" data-subtype="#subtype-container"></span>
         </div>
         <div class="repdataall" >
             <a class="sjall"></a>
             <!-- 二级类目 -->
-            <p class="gysj"></p>
+            <p class="gysj" id="subtype-container" data-tmpl="#tmpl_subTypes"></p>
         </div>
     </div>
     <!--收费方式-->
@@ -66,52 +68,20 @@
         <span></span>
         <a href="javascript:;">最热 <em></em><i></i> </a>
     </p>
-    <div class="store_main floating">
-        <div class="store_one">
-            <img src="/pages/common/images/index_06.png" alt=""/>
-            <h2>滑动图解 | 过年率成时尚还是搭街坊哈萨克的合法客户端江苏的积分</h2>
-            <p class="sto_main">滑动图解 | 过年率成时尚还是搭街坊图解 | 过年率成时尚还是搭街坊哈图解 | 过年率成时尚还是搭街坊哈哈萨克的合法客户端江苏的积分</p>
-            <p class="store_small"><span class="lf jtcx">交通出行 | <i>78条</i> </span>  <span class="rt mf">免费</span></p>
-        </div>
-        <div class="store_one">
-            <img src="/pages/common/images/index_06.png" alt=""/>
-            <h2>滑动图解 | 过年率成时尚还是搭街坊哈萨克的合法客户端江苏的积分</h2>
-            <p class="sto_main">滑动图解 | 过年率成时尚还是搭街坊图解 | 过年率成时尚还是搭街坊哈图解 | 过年率成时尚还是搭街坊哈哈萨克的合法客户端江苏的积分</p>
-            <p class="store_small"><span class="lf jtcx">交通出行 | <i>78条</i> </span>  <span class="rt mf">免费</span></p>
-        </div>
-        <div class="store_one">
-            <img src="/pages/common/images/index_06.png" alt=""/>
-            <h2>滑动图解 | 过年率成时尚还是搭街坊哈萨克的合法客户端江苏的积分</h2>
-            <p class="sto_main">滑动图解 | 过年率成时尚还是搭街坊图解 | 过年率成时尚还是搭街坊哈图解 | 过年率成时尚还是搭街坊哈哈萨克的合法客户端江苏的积分</p>
-            <p class="store_small"><span class="lf jtcx">交通出行 | <i>78条</i> </span>  <span class="rt mf">免费</span></p>
-        </div>
-        <div class="store_one">
-            <img src="/pages/common/images/index_06.png" alt=""/>
-            <h2>滑动图解 | 过年率成时尚还是搭街坊哈萨克的合法客户端江苏的积分</h2>
-            <p class="sto_main">滑动图解 | 过年率成时尚还是搭街坊图解 | 过年率成时尚还是搭街坊哈图解 | 过年率成时尚还是搭街坊哈哈萨克的合法客户端江苏的积分</p>
-            <p class="store_small"><span class="lf jtcx">交通出行 | <i>78条</i> </span>  <span class="rt mf">免费</span></p>
-        </div>
-        <div class="store_one">
-            <img src="/pages/common/images/index_06.png" alt=""/>
-            <h2>滑动图解 | 过年率成时尚还是搭街坊哈萨克的合法客户端江苏的积分</h2>
-            <p class="sto_main">滑动图解 | 过年率成时尚还是搭街坊图解 | 过年率成时尚还是搭街坊哈图解 | 过年率成时尚还是搭街坊哈哈萨克的合法客户端江苏的积分</p>
-            <p class="store_small"><span class="lf jtcx">交通出行 | <i>78条</i> </span>  <span class="rt mf">免费</span></p>
-        </div>
-        <div class="store_one">
-            <img src="/pages/common/images/index_06.png" alt=""/>
-            <h2>滑动图解 | 过年率成时尚还是搭街坊哈萨克的合法客户端江苏的积分</h2>
-            <p class="sto_main">滑动图解 | 过年率成时尚还是搭街坊图解 | 过年率成时尚还是搭街坊哈图解 | 过年率成时尚还是搭街坊哈哈萨克的合法客户端江苏的积分</p>
-            <p class="store_small"><span class="lf jtcx">交通出行 | <i>78条</i> </span>  <span class="rt mf">免费</span></p>
-        </div>
-    </div>
+    <!-- 产品内容 -->
+    <div class="store_main floating" id="data-container"></div>
+    <!-- 分页开始 -->
+    <div id="pageTool"></div>
+    <!-- 分页结束 -->
     <em class="mainbottom"></em>
 </div>
 
 <!-- 一级类目数据模板 -->
 <script id="tmpl_types" type="text/x-jquery-tmpl">
     {{if pageInfo.length>0}}
+        <a href="javascript:;" class="active" data-id="0">全部</a>
         {{each(i,prod) pageInfo}}
-            <a href="javascript:;" class="sjgy" data-attr="gysj" data-id="${prod.id}">${prod.name}</a>
+            <a href="javascript:;" data-id="${prod.id}">${prod.name}</a>
         {{/each}}
     {{/if}}
 </script>
@@ -123,30 +93,35 @@
         {{/each}}
     {{/if}}
 </script>
-
-<script>
-    LoadingData.request({url: "/api/type/0"}, function(data){
-        // 装载一级类目数据
-        $("#tmpl_types").tmpl(data).appendTo(".repclissify");
-
-        // 清空所有二级类目数据
-        $(".repclissify").html() ;
-
-        // 一级类目绑定click事件
-        $(".repclissify > a").click(function () {
-
-            $(".repclissify > a").removeClass("active") ;
-            $(this).addClass("active") ;
-
-            var _id = $(this).attr("data-id") ;
-            LoadingData.request({url: "/api/type/"+_id}, function(data){
-
-                $(".gysj").show().html("") ;
-                $("#tmpl_subTypes").tmpl(data).appendTo(".gysj");
-            }) ;
-        })
-    }) ;
+<!-- 产品数据模板 -->
+<script id="tmpl_products" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+    {{each(i,prod) list}}
+        <div class="store_one">
+            <!--<a href="/datamart/detail/${prod.id}" class="list_img" target="_blank" style="background:url(${prod.pic}) no-repeat center center;background-size:cover;"> </a>-->
+            <img src="${prod.pic}" alt=""/>
+            <h2>${prod.designation}</h2>
+            <p class="sto_main">${prod.dataProfile}</p>
+            <p class="store_small">
+                <span class="lf jtcx">交通出行 | <i>78条</i> </span>
+                {{if prod.price === 0}}
+                    <span class="rt mf" style="color: #26C281;">免费</span>
+                {{else}}
+                    <span class="rt mf" style="color: #e7505a;">￥${prod.price}</span>
+                {{/if}}
+            </p>
+        </div>
+    {{/each}}
+    {{else}}
+    暂无数据
+    {{/if}}
 </script>
+<script>
+    jQuery(document).ready(function() {
+        App.initDatamart();
+    });
+</script>
+
 <!-- 内容结束 -->
 
 <!-- 页脚 -->
