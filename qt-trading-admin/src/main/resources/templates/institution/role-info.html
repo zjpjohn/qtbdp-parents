@@ -192,8 +192,25 @@ Author: caidchen
 <script src="/pages/js/layer.js" type="text/javascript"></script>
 <script src="/pages/js/admin/common.js"></script>
 <script src="/pages/js/institution/roleInfo.js"></script>
-
+<script src="/pages/js/constant.js" type="text/javascript"></script>
 <!-- END SCRIPT -->
+
+<script th:inline="javascript">
+    var dataTypeJson = {};
+    $.ajax({
+        url: "/api/dataType",
+        type: "get",
+        success: function (result){
+            if (result != null){
+                dataTypeJson = result.pageInfo;
+            }
+        },
+        error: function (result) {
+
+        }
+
+    });
+</script>
 </body>
 
 </html>
