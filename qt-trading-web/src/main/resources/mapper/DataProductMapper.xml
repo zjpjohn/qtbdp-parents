@@ -87,8 +87,6 @@
         WHERE
         p.is_used = 1
         AND p.id = #{id}
-        ORDER BY
-        p.addtime DESC
     </select>
 
     <resultMap id="ProductDetailResultMap" type="com.qtdbp.trading.model.DataProductModel" >

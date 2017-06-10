@@ -3,6 +3,7 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.controller.BaseController;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
@@ -10,17 +11,13 @@ import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
-import com.qtdbp.trading.service.FdfsFileService;
 import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.trading.utils.CommonUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import com.qtdbp.trading.utils.Message;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +42,8 @@ public class DataProductApi extends BaseController{
 
     @Autowired
     private DataTypeMapper dataTypeMapper;
+
+
 
     //===================================================================
     // 数据包产品API接口
@@ -140,6 +139,44 @@ public class DataProductApi extends BaseController{
         } else {
             map.put("success", false);
         }
+
+        return map;
+    }
+
+    @ApiOperation(value = "根据ID查询单条数据包产品接口")
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public ModelMap findProductById(
+            @ApiParam(name = "id", value = "数据包产品Id", required = true) @PathVariable Integer id) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            DataProductModel productModel = productService.findProductById(id);
+            map.put("pageInfo", productModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    @ApiOperation(value = "检查是否可以购买数据包产品")
+    @RequestMapping(value = "/check/{id}/{type}", method = RequestMethod.GET)
+    public ModelMap buyData(
+            @ApiParam(name = "id", value = "数据包产品Id", required = true) @PathVariable("id") Integer productId,
+            @ApiParam(name = "type", value = "产品类型，1数据条目 2数据包", required = true) @PathVariable("type") Integer productType){
+
+        ModelMap map = new ModelMap();
+        Message message = new Message() ;
+        // 未登陆请先登录
+        SysUser user = getPrincipal() ;
+        if(user == null) {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("用户请先登录");
+        } else {
+            message = productService.checkBuyData(productId, productType, user.getId());
+        }
+        map.put("result", message) ;
 
         return map;
     }

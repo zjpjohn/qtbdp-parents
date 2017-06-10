@@ -39,8 +39,8 @@ public class CommonUtil {
      */
     public static int randomNum(long seed) {
 
-        int max=100;
-        int min=10;
+        int max=10;
+        int min=0;
         java.util.Random r=new java.util.Random(seed);
 
         return r.nextInt(max)%(max-min+1) + min ;
