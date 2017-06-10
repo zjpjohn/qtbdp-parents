@@ -19,7 +19,7 @@
     <img src="/pages/common/images/reptile_02.png" alt=""/>
 </div>
 
-<div class="data_store">
+<div class="data_store" style="min-height: 500px">
     <!--数据分类-->
     <div class="dataclassify">
         <div class="repclissify">
@@ -34,41 +34,43 @@
         </div>
     </div>
     <!--收费方式-->
-    <p class="tollway">
-        <span class="store_price">
+    <p class="tollway" id="filter-container">
+        <span class="store_price" id="isFree">
             <i class="datarep">收费方式 : </i>
-            <a href="javascript:;" class="active">不限</a>
-            <a href="javascript:;">收费</a>
-            <a href="javascript:;">免费</a>
+            <a href="javascript:;" class="active" data-id="-1">不限</a>
+            <a href="javascript:;" data-id="1">免费</a>
+            <a href="javascript:;" data-id="2">收费</a>
         </span>
-        <span class="store_price">
+        <span class="store_price" id="dataStatus">
             <i class="datarep">产品类型 : </i>
-            <a href="javascript:;" class="active">数据包</a>
-            <a href="javascript:;">API接口</a>
-            <a href="javascript:;">数据报告</a>
+            <a href="javascript:;" class="active" data-id="-1">不限</a>
+            <a href="javascript:;" data-id="0">数据包</a>
+            <a href="javascript:;" data-id="1">API</a>
+            <a href="javascript:;" data-id="2">数据报告</a>
         </span>
-        <span class="store_price">
+        <span class="store_price" id="dataSrc">
             <i class="datarep">数据来源 : </i>
-            <a href="javascript:;" class="active">不限</a>
-            <a href="javascript:;">政府</a>
-            <a href="javascript:;">企业</a>
-            <a href="javascript:;">组织机构</a>
-            <a href="javascript:;">互联网</a>
-            <a href="javascript:;">个人</a>
+            <a href="javascript:;" class="active" data-id="-1">不限</a>
+            <a href="javascript:;" data-id="0">个人</a>
+            <a href="javascript:;" data-id="1">企业</a>
+            <a href="javascript:;" data-id="2">政府</a>
+            <a href="javascript:;" data-id="3">机构</a>
+            <a href="javascript:;" data-id="4">互联网</a>
         </span>
     </p>
 
     <!--销量-->
-    <p class="sales">
-        <a href="javascript:;">销量 <em></em><i></i> </a>
+    <p class="sales" id="order-container">
+        <a href="javascript:;" data-by="buy_count" data-desc="0">销量 <em></em><i></i> </a>
         <span></span>
-        <a href="javascript:;" class="active">最新 <em></em><i></i> </a>
+        <a href="javascript:;" data-by="addtime" data-desc="0">最新 <em></em><i></i> </a>
         <span></span>
-        <a href="javascript:;">价格 <em></em><i></i> </a>
+        <a href="javascript:;" data-by="price" data-desc="0">价格 <em></em><i></i> </a>
         <span></span>
-        <a href="javascript:;">最热 <em></em><i></i> </a>
+        <a href="javascript:;" data-by="download_count" data-desc="0">最热 <em></em><i></i> </a>
     </p>
     <!-- 产品内容 -->
+    <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
     <div class="store_main floating" id="data-container"></div>
     <!-- 分页开始 -->
     <div id="pageTool"></div>

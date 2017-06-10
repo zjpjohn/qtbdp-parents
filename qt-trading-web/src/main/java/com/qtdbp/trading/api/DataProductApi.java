@@ -82,6 +82,10 @@ public class DataProductApi extends BaseController{
                 }
             }
             productModel.setDataTypes(dataTypes);
+        }else {
+            if (productModel.getDataType() != 0) {
+                productModel.setDataTypes(productModel.getDataType()+"");
+            }
         }
 
         // 设置默认每页显示记录数
