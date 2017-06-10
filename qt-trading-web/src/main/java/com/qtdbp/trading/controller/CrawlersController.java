@@ -1,9 +1,14 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.model.CrawlersRoleModel;
+import com.qtdbp.trading.service.CrawlersRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 爬虫市场
@@ -17,6 +22,9 @@ public class CrawlersController {
 
     public static final String PAGE_CRAWLERS = "crawlers/index";
     public static final String PAGE_CRAWLERS_DETAIL = "crawlers/detail";
+
+    @Autowired
+    private CrawlersRoleService roleService;
 
     /**
      * 爬虫规则列表
@@ -33,9 +41,14 @@ public class CrawlersController {
      * @return
      */
     @RequestMapping(value = "/crawlers/detail/{id}", method = RequestMethod.GET)
-    public String crawlersDetail(@PathVariable Integer id) {
+    public ModelAndView crawlersDetail(@PathVariable Integer id) throws GlobalException {
 
-        return PAGE_CRAWLERS_DETAIL;
+        CrawlersRoleModel roleModel = roleService.findRuleById(id);
+        if (roleModel == null) throw new GlobalException("404 爬虫规则为空");
+
+        ModelAndView result = new ModelAndView(PAGE_CRAWLERS_DETAIL);
+        result.addObject("prod", roleModel);
+        return result;
     }
 
 }

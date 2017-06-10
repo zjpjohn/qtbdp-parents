@@ -66,10 +66,12 @@
     
     <select id="findRulesByCondition" resultMap="CrawlersRoleMap">
         select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price, c.buy_count, c.web_type,
-         c.web_site,  c.collection_field  from crawlers_role as c where c.is_used = 1
-         <if test="typeId != null ">
-             and type_id = #{typeId}
-         </if>
+         c.web_site,  c.collection_field, c.create_time, s.name username  from crawlers_role as c
+        left join data_institution_info_new s on c.create_id = s.id
+        where c.is_used = 1 and c.audit_status = 1
+        <if test="dataTypes != null ">
+            AND c.type_id in (${dataTypes})
+        </if>
           <if test="webType != null ">
               and web_type = #{webType}
           </if>
@@ -108,6 +110,7 @@
         <result column="audit_status" property="auditStatus"/>
         <result column="audit_fail_reason" property="auditFailReason"/>
         <result column="is_used" property="isUsed"/>
+        <result column="username" property="username"/>
     </resultMap>
 
     <!--更新爬虫规则-->
@@ -143,6 +146,6 @@
 
     <select id="findRuleById" parameterType="java.lang.Integer" resultMap="CrawlersRoleMap">
         select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price,  c.`desc`, c.buy_count, c.view_count, c.web_type,
-         c.web_site,  c.collection_field  from crawlers_role as c where id = #{id}
+         c.web_site,  c.collection_field, c.create_time  from crawlers_role as c where id = #{id}
     </select>
 </mapper>
