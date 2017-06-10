@@ -21,6 +21,7 @@ public class DataInstitutionController extends BaseController {
     public static final String PAGE_INSTITUTION = "institution/index";
     public static final String PAGE_INSTITUTION_DETAIL = "institution/detail";
     private static final String PAGE_INSTITUTION_ADD = "institution/add";
+    private static final String PAGE_INSTITUTION_HOME = "institution/home";
 
     /**
      * 服务商列表
@@ -50,5 +51,15 @@ public class DataInstitutionController extends BaseController {
     public String add() {
 
         return PAGE_INSTITUTION_ADD ;
+    }
+
+    /**
+     * 服务商主页
+     * @return
+     */
+    @RequestMapping(value = "/institution/home",method = RequestMethod.GET)
+    public String home() {
+
+        return PAGE_INSTITUTION_HOME ;
     }
 }
