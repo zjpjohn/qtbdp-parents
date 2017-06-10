@@ -5,22 +5,21 @@
     <title>服务商主页2</title>
     <div th:replace="layout/top"/>
     <link rel="stylesheet" href="/pages/common/css/homepage2.css" />
-
 </head>
 <body>
+    <!-- 页头-->
+    <div th:replace="layout/header" /></div>
+    <!--页头结束-->
 <div class="serhead floating">
-    <img src="../images/index_03.png" alt="" class="lf"/>
+    <img src="/pages/common/images/index_03.png" alt="" class="lf"/>
     <div class="lf sertitle">
         <p>钱塘大数据 <a class="serzy">自营</a> </p>
         <p class="serletter">
             <em></em>服务领域数据采集、数据预处理、数据挖掘、数据交易等技术服务
         </p>
     </div>
-
-
 </div>
 <div class="service_top">
-
     <div class="service_main floating">
         <ul class="sernum rt floating">
             <li>
@@ -53,10 +52,7 @@
             </li>
         </ul>
     </div>
-
-
 </div>
-
 <div class="service_listall">
     <div class="service_list">
         <p class="serlist_title">
@@ -68,12 +64,11 @@
             <a href="javascript:;" class="active">数据商品</a>
             <a href="javascript:;">爬虫规则</a>
         </p>
-
         <!--被筛选框-->
         <div class="home_sx floating">
             <div class="repmain active floating lf">
                 <a href="javascript:;" class="floating">
-                    <img src="../images/reptile_10.png" alt="" class="lf"/>
+                    <img src="/pages/common/images/reptile_10.png" alt="" class="lf"/>
                     <div class="lf reptexts">
                         <p class="main_title">淘宝-商品销量信息采集-多彩价格版</p>
                         <p class="main_text">采集字集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集段采集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集字段采集字采集字段采集</p>
@@ -91,7 +86,7 @@
             </div>
             <div class="repmain  floating lf">
                 <a href="javascript:;" class="floating">
-                    <img src="../images/reptile_10.png" alt="" class="lf"/>
+                    <img src="/pages/common/images/reptile_10.png" alt="" class="lf"/>
                     <div class="lf reptexts">
                         <p class="main_title">淘宝-商品销量信息采集-多彩价格版</p>
                         <p class="main_text">采集字集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集段采集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集字段采集字采集字段采集</p>
@@ -109,7 +104,7 @@
             </div>
             <div class="repmain  floating lf">
                 <a href="javascript:;" class="floating">
-                    <img src="../images/reptile_10.png" alt="" class="lf"/>
+                    <img src="/pages/common/images/reptile_10.png" alt="" class="lf"/>
                     <div class="lf reptexts">
                         <p class="main_title">淘宝-商品销量信息采集-多彩价格版</p>
                         <p class="main_text">采集字集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集段采集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集字段采集字采集字段采集</p>
@@ -127,13 +122,12 @@
             </div>
             <div class="repmain  floating lf">
                 <a href="javascript:;" class="floating">
-                    <img src="../images/reptile_10.png" alt="" class="lf"/>
+                    <img src="/pages/common/images/reptile_10.png" alt="" class="lf"/>
                     <div class="lf reptexts">
                         <p class="main_title">淘宝-商品销量信息采集-多彩价格版</p>
                         <p class="main_text">采集字集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集段采集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集字段采集字采集字段采集</p>
                         <p class="main_min">
                             <span class="main_domain"><em></em>采集网站: www.hhhh.com</span>
-
                         </p>
                     </div>
                     <div class="rt priceright">
@@ -143,18 +137,15 @@
                     </div>
                 </a>
             </div>
-
-
         </div>
-
-
-
-
     </div>
 </div>
-
-
-
+    <!--页脚-->
+    <footer th:replace="layout/footer"></footer>
+    <!--页脚结束-->
+    <script>
+        nav(6);
+    </script>
 
 </body>
 </html>

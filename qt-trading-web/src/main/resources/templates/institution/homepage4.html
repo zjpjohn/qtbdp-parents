@@ -7,11 +7,11 @@
     <title>服务商主页3</title>
 </head>
 <body>
-
-
-
+    <!-- 页头-->
+    <div th:replace="layout/header" /></div>
+    <!--页头结束-->
 <div class="serhead floating">
-    <img src="../images/index_03.png" alt="" class="lf"/>
+    <img src="/pages/common/images/index_03.png" alt="" class="lf"/>
     <div class="lf sertitle">
         <p>钱塘大数据 <a class="serzy">自营</a> </p>
         <p class="serletter">
@@ -52,10 +52,7 @@
             </li>
         </ul>
     </div>
-
-
 </div>
-
 <div class="service_listall">
     <div class="service_list">
         <p class="serlist_title">
@@ -154,37 +151,14 @@
                     </div>
                 </a>
             </div>
-
-
-
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 </div>
-
-
-
-
+    <!--页脚-->
+    <footer th:replace="layout/footer"></footer>
+    <!--页脚结束-->
+    <script>
+        nav(6);
+    </script>
 </body>
 </html>
