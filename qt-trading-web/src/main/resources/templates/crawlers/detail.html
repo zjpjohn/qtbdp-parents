@@ -20,13 +20,13 @@
     <div class="reptile_all floating">
         <div class="reptile_left lf">
             <div class="floating">
-                <img src="/pages/common/images/reptile_03.png" alt="" class="lf leimg"/>
+                <img th:src="@{${prod.logo}}" alt="" class="lf leimg"/>
                 <div class="lf">
-                    <p class="letitle">食品药品监督局-北京-医疗机构之极品种信息</p>
-                    <p class="leprice">￥38.00</p>
+                    <p class="letitle"  th:text="${prod.introduction}">食品药品监督局-北京-医疗机构之极品种信息</p>
+                    <p class="leprice" th:text="'￥'+${#numbers.formatDecimal(prod.price , 0, 2)}">￥38.00</p>
                     <p class="lenum">
-                        <span>近30天 <i>5</i>次下载 </span>
-                        <span> <i>shdfisdjh</i>于2017-05-31发布  </span>
+                        <span>近30天 <i th:text="${prod.buyCount}">5</i>次下载 </span>
+                        <span th:text="'于'+${#dates.format(prod.createTime,'yyyy/MM/dd HH:mm')}+'发布'"> <i>shdfisdjh</i>于2017-05-31发布  </span>
                     </p>
                     <p class="employ">
                         <a href="javascript:;" class="lebuy">购买规则</a>
@@ -40,21 +40,22 @@
             <ul class="lebottoms">
                 <li>
                     <span>采集网站</span>
-                    <p>www.aaaaa.cn</p>
+                    <p th:text="${prod.webSite}">www.aaaaa.cn</p>
                 </li>
                 <li>
                     <span>网站类型</span>
-                    <p>其它网站</p>
+                    <p th:text="${prod.webType}">其它网站</p>
 
                 </li>
                 <li>
                     <span>采集字段</span>
-                    <p>其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多价格版</p>
+                    <p th:text="${prod.collectionField}">其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多价格版</p>
                 </li>
                 <li>
                     <span>规则详情</span>
-                    <p>
-                        其它网站其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多</p>
+                    <p th:text="${prod.desc}">
+                        其它网站其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多其它网站淘宝-商品销量信息采集-多价格版淘宝-商品销量信息采集-多
+                    </p>
                 </li>
             </ul>
         </div>

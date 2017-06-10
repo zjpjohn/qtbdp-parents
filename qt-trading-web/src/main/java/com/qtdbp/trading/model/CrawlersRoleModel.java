@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class CrawlersRoleModel extends BaseModel{
 
-    private Integer typeId;            //所属类目ID
+    private int typeId;            //所属类目ID
     private String roleType;           //规则类型
     private String name;                //规则名称
     private String introduction;        //规则简介
@@ -46,11 +46,14 @@ public class CrawlersRoleModel extends BaseModel{
     @Transient
     private String username;               //创建规则的用户名
 
-    public Integer getTypeId() {
+    @Transient
+    private String dataTypes;           //数据类目集合
+
+    public int getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Integer typeId) {
+    public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
 
@@ -300,5 +303,13 @@ public class CrawlersRoleModel extends BaseModel{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getDataTypes() {
+        return dataTypes;
+    }
+
+    public void setDataTypes(String dataTypes) {
+        this.dataTypes = dataTypes;
     }
 }
