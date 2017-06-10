@@ -185,7 +185,7 @@ var App = function () {
         // 爬虫规则市场数据加载
         initCrawlers: function () {
 
-            options._url = "/api/crawlers" ; // 重置请求地址
+            options._url = "/api/crawlers/role" ; // 重置请求地址
             initType();
             initOrderByCond() ;
             initFilter() ;
