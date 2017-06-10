@@ -391,13 +391,13 @@ var App = function () {
             initDatas({productId:id}) ;
         },
         // 数据定制数据加载
-        initCustom: function () {
+        initCustom: function (type) {
 
             options._url = "/api/customized" ; // 重置请求地址
             initType();
             initOrderByCond() ;
             initFilter() ;
-            initDatas() ;
+            initDatas({serviceType:type}) ;
         }
     };
 }() ;

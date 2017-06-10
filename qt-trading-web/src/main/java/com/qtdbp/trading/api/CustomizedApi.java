@@ -8,6 +8,7 @@ import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CustomizedService;
+import com.qtdbp.trading.service.DataTypeService;
 import com.qtdbp.trading.service.security.model.SysUser;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class CustomizedApi extends BaseController {
     private CustomizedService customizedService ;
 
     @Autowired
-    private DataTypeMapper dataTypeMapper;
+    private DataTypeService dataTypeService;
 
     //===================================================================
     // 定制服务API接口
@@ -57,26 +58,13 @@ public class CustomizedApi extends BaseController {
     public ModelMap loadCustomizedData(CustomServiceModel custom, Integer dataType) throws GlobalException {
 
         if (custom.getOrderBy() == null || "".equals(custom.getOrderBy())) custom.setOrderBy("create_time");
-        if (dataType == null)   dataType = 0;
-        List<Integer> list = getAllDataTypeIds(dataType);
-        if (list != null && list.size() != 0){
-            String dataTypes = "";
-            for (int i = 0; i<list.size(); i++){
-                if (i == (list.size()-1)){
-                    dataTypes = dataTypes + list.get(i) ;
-                }else {
-                    dataTypes = dataTypes + list.get(i) + ",";
-                }
-            }
-            custom.setDataTypes(dataTypes);
-        }else {
-            if (dataType != 0 ) {
-                custom.setDataTypes(dataType+"");
-            }
-        }
         ModelMap map = new ModelMap() ;
         // 设置默认每页显示记录数
         try {
+            if (dataType != null && dataType != 0) {
+                String dataTypes = dataTypeService.getDataTypes(dataType);
+                if (dataTypes != null && !"".equals(dataTypes)) custom.setDataTypes(dataTypes);
+            }
             if(custom.getRows() == null || custom.getRows() == 0) custom.setRows(10);
             List<CustomServiceModel> customList = customizedService.findCustomizedDataForPage(custom);
             map.put("pageInfo", new PageInfo<>(customList));
@@ -160,24 +148,4 @@ public class CustomizedApi extends BaseController {
         return map;
     }
 
-    /**
-     * 递归查询数据类型某一节点下所有的叶子节点
-     * @param dataType
-     * @return
-     */
-    private List getAllDataTypeIds(Integer dataType) {
-
-        if (dataType == 0 || dataType == null) return null;
-
-        List<Integer> dataTypeIdsList = new ArrayList<>();
-
-        List<DataTypeModel> list = dataTypeMapper.findDataTypeByParentId(dataType);
-        if (list == null || list.size() == 0) return dataTypeIdsList;
-        for(DataTypeModel model : list){
-            dataTypeIdsList.add(model.getId());
-            List<Integer> idsList = getAllDataTypeIds(model.getId());
-            if(idsList != null && idsList.size() != 0) dataTypeIdsList.addAll(idsList);
-        }
-        return dataTypeIdsList;
-    }
 }
