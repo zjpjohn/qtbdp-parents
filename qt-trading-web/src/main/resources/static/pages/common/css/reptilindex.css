@@ -102,12 +102,12 @@
     padding:6px 20px;
     background-color: #fff;
 }
-.webtype>a{
+.webtype>span>a{
     color:#999;
     display:inline-block;
     padding:4px 10px;
 }
-.webtype>a:hover,.webtype>a.active{
+.webtype>span>a:hover,.webtype>span>a.active{
     background-color: #05A9FE;
     color:#fff;
 }
