@@ -100,11 +100,23 @@ var App = function () {
         });
     }
 
+    /**
+     *
+     */
+    var initRules = function () {
+        
+    }
+
     return {
         // 处理数据商城页面数据加载
         initDatamart: function () {
             initType();
             initProducts() ;
+        },
+
+        initCrawlers:function () {
+            initType();
+            initRules() ;
         }
     };
 }() ;
