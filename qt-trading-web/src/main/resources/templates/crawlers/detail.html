@@ -14,7 +14,7 @@
 
     <!-- 内容 -->
     <p class="bazaar_top">
-        <a href="/crawlers">爬虫市场</a> > <span>淘宝-商品销量信息采集-多价格版</span>
+        <a href="/crawlers">爬虫市场</a> > <span th:text="${prod.name}"></span>
     </p>
 
     <div class="reptile_all floating">
@@ -22,7 +22,7 @@
             <div class="floating">
                 <img th:src="@{${prod.logo}}" alt="" class="lf leimg"/>
                 <div class="lf">
-                    <p class="letitle"  th:text="${prod.introduction}">食品药品监督局-北京-医疗机构之极品种信息</p>
+                    <p class="letitle"  th:text="${prod.name}">食品药品监督局-北京-医疗机构之极品种信息</p>
                     <p class="leprice" th:text="'￥'+${#numbers.formatDecimal(prod.price , 0, 2)}">￥38.00</p>
                     <p class="lenum">
                         <span>近30天 <i th:text="${prod.buyCount}">5</i>次下载 </span>

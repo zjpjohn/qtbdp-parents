@@ -389,6 +389,15 @@ var App = function () {
             options._tmpl = "#tmpl_items" ;
             options._rows = 20 ; //每页20条记录
             initDatas({productId:id}) ;
+        },
+        // 数据定制数据加载
+        initCustom: function () {
+
+            options._url = "/api/customized" ; // 重置请求地址
+            initType();
+            initOrderByCond() ;
+            initFilter() ;
+            initDatas() ;
         }
     };
 }() ;

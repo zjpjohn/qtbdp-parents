@@ -64,10 +64,8 @@ public class CrawlersRoleApi {
     public ModelMap findByCondition(CrawlersRoleModel crawlersRoleModel, Integer dataType) {
 
         if(crawlersRoleModel.getRows() == null || crawlersRoleModel.getRows() == 0) crawlersRoleModel.setRows(12);
-        if (crawlersRoleModel.getOrderBy() == null) crawlersRoleModel.setOrderBy("create_time");
-        if (dataType == null){
-            dataType = 0;
-        }
+        if (crawlersRoleModel.getOrderBy() == null || "".equals(crawlersRoleModel.getOrderBy())) crawlersRoleModel.setOrderBy("create_time");
+        if (dataType == null)   dataType = 0;
         List<Integer> list = getAllDataTypeIds(dataType);
         if (list != null && list.size() != 0){
             String dataTypes = "";

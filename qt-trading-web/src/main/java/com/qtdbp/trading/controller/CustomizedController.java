@@ -1,9 +1,14 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.model.CustomServiceModel;
+import com.qtdbp.trading.service.CustomizedService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 定制服务
@@ -21,6 +26,8 @@ public class CustomizedController extends BaseController {
     public static final String PAGE_CUSTOMIZED_DATA_DETAIL = "customized/data-detail";
     public static final String PAGE_CUSTOMIZED_ROLE_DETAIL = "customized/rule-detail";
 
+    @Autowired
+    private CustomizedService customizedService;
     /**
      * 定制数据列表
      * @return
@@ -36,9 +43,13 @@ public class CustomizedController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/customized/data/detail/{id}", method = RequestMethod.GET)
-    public String customizedDataDetail(@PathVariable Integer id) {
+    public ModelAndView customizedDataDetail(@PathVariable Integer id) throws GlobalException {
 
-        return PAGE_CUSTOMIZED_DATA_DETAIL;
+        ModelAndView result = new ModelAndView(PAGE_CUSTOMIZED_DATA_DETAIL);
+        CustomServiceModel serviceModel = customizedService.findCustomizedDataById(id);
+        if (serviceModel == null) throw new GlobalException("404 数据定制为空");
+        result.addObject("prod", serviceModel);
+        return result;
     }
 
     /**

@@ -66,9 +66,7 @@ public class DataProductApi extends BaseController{
     public ModelMap loadDataProducts(DataProductModel productModel) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
-        if(productModel.getOrderBy() == null){
-            productModel.setOrderBy("addtime");
-        }
+        if(productModel.getOrderBy() == null || "".equals(productModel.getOrderBy())) productModel.setOrderBy("addtime");
 
         List<Integer> list = getAllDataTypeIds(productModel.getDataType());
         if (list != null && list.size() != 0){
