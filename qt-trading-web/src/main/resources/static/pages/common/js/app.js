@@ -6,10 +6,11 @@ var App = function () {
 
     var options = {
         _url:"/api/product",
-        _container: "#data-container",// 数据容器
-        _tmpl: "#tmpl_products", // 内容模板
-        _pager: "#pageTool", // 分页插件ID
-        _rows:12    // 默认每页条数
+        _container: "#data-container",  // 数据容器
+        _tmpl: "#tmpl_products",        // 内容模板
+        _pager: "#pageTool",            // 分页插件ID
+        _rows:12,                       // 默认每页条数
+        _total: 0                       // 记录总数
     }
 
     // 请求数据
@@ -91,29 +92,34 @@ var App = function () {
 
             // 清空容器
             $(options._container).html("") ;
-            $(options._pager).html("") ;
 
             $(options._tmpl).tmpl(data.pageInfo).appendTo(options._container);
 
-            // 给参数赋数据总数，分页方法paging()用到
-            $(options._pager).Paging({
-                pagesize: options._rows,
-                count: data.pageInfo.total,
-                toolbar:true,
-                callback:function(page,size,count){
+            // 查询条件变更，重新生成分页组件，并清空容器
+            var _count = data.pageInfo.total ;
+            if(_count != options._total) {
+                options._total = _count ;
 
-                    // 请求参数赋值
-                    params.page = page;
-                    params.rows = size;
+                $(options._pager).html("") ;
+                // 给参数赋数据总数，分页方法paging()用到
+                $(options._pager).Paging({
+                    pagesize: options._rows,
+                    count: options._total,
+                    toolbar:true,
+                    callback:function(page,size,count){
 
-                    initDatas(params) ;
+                        // 请求参数赋值
+                        params.page = page;
+                        params.rows = size;
 
-                    // console.log(page);//当前页
-                    // console.log(size);//每页条数
-                    // console.log(count);//总页数
-                }
-            });
+                        initDatas(params) ;
 
+                        // console.log(page);//当前页
+                        // console.log(size);//每页条数
+                        // console.log(count);//总页数
+                    }
+                });
+            }
         });
     }
 
