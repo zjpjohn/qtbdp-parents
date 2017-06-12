@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
@@ -22,15 +22,16 @@
         </div>
 
         <!-- 表单 -->
+
         <div class="main_content floating">
             <h2 class="form_title">发布爬虫规则</h2>
-            <form class="trade_form">
+            <form class="trade_form" id="ruleupload" method="post" action="/rule/add1">
                 <div class="form_group">
                     <p class="group_title">
                         <b>规则名称</b> <i>*</i><span>8-50个字符</span>
                     </p>
                     <div class="form_control">
-                        <input type="text" class="large_input" name=""/>
+                        <input type="text" class="large_input" name="name"/>
                     </div>
                 </div>
 
@@ -39,7 +40,7 @@
                         <b>规则价格</b> <i>*</i>
                     </p>
                     <div class="form_control">
-                        <input type="number" class="small_input" name="" placeholder="市场价："/>
+                        <input type="number" class="small_input" name="market_price" placeholder="市场价："/>
                     </div>
                 </div>
 
@@ -48,7 +49,7 @@
                         <b>采集网站</b> <i>*</i>
                     </p>
                     <div class="form_control">
-                        <input type="text" class="large_input" name=""/>
+                        <input type="text" class="large_input" name="web_site"/>
                         <p class="form_tips">例如：www.qtbigdata.com</p>
                     </div>
                 </div>
@@ -58,22 +59,22 @@
                         <b>网站类型</b> <i>*</i>
                     </p>
                     <div class="form_control">
-                        <label><input type="radio" name="type" class="radio_input" value=""/>社交网站</label>
-                        <label><input type="radio" name="type" class="radio_input" value=""/>电商网站</label>
-                        <label><input type="radio" name="type" class="radio_input" value=""/>金融网站</label>
-                        <label><input type="radio" name="type" class="radio_input" value=""/>生活网站</label>
-                        <label><input type="radio" name="type" class="radio_input" value=""/>行业网站</label>
-                        <label><input type="radio" name="type" class="radio_input" value=""/>新闻网站</label>
-                        <label><input type="radio" name="type" class="radio_input" value=""/>其他网站</label>
+                        <label><input type="radio" name="web_type" class="radio_input" value="1"/>社交网站</label>
+                        <label><input type="radio" name="web_type" class="radio_input" value="2"/>电商网站</label>
+                        <label><input type="radio" name="web_type" class="radio_input" value="3"/>金融网站</label>
+                        <label><input type="radio" name="web_type" class="radio_input" value="4"/>生活网站</label>
+                        <label><input type="radio" name="web_type" class="radio_input" value="5"/>行业网站</label>
+                        <label><input type="radio" name="web_type" class="radio_input" value="6"/>新闻网站</label>
+                        <label><input type="radio" name="web_type" class="radio_input" value="0"/>其他网站</label>
                     </div>
                 </div>
 
                 <div class="form_group">
                     <p class="group_title">
-                        <b>采集字段</b> <i>*</i>
+                        <b>采集字段</b> <i>*</i> <span>每个字段以","隔开</span>
                     </p>
                     <div class="form_control">
-                        <input type="text" class="large_input" name=""/>
+                        <input type="text" class="large_input" name="collection_field"/>
                     </div>
                 </div>
 
@@ -102,7 +103,7 @@
                         <b>规则文件</b> <i>*</i>
                     </p>
                     <div class="form_control floating">
-                        <input type="text" class="middle_input" name=""/>
+                        <input type="text" class="middle_input" name="file_path"/>
                         <a href="javascript:;" class="upload_a">上传<input type="file" class="uploadRuleFile"/></a>
                     </div>
                 </div>
@@ -121,8 +122,17 @@
                         <b>规则描述</b> <i>*</i>
                     </p>
                     <div class="form_control ">
-                        <textarea name="" class="textarea_control"></textarea>
+                        <textarea name="introduction" class="textarea_control"></textarea>
                     </div>
+                </div>
+
+                <!-- 页脚发布按钮 -->
+                <div class="form_btm">
+                    <input type="submit" class="submit_control" id="submitBtn" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>
+
+                    <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
+                        <span class="ladda-label">发布</span>
+                    </button>-->
                 </div>
             </form>
             <!-- 右侧注意事项 -->
@@ -132,17 +142,87 @@
                 </p>
             </div>
             <div class="clear"></div>
-
-            <!-- 页脚发布按钮 -->
-            <div class="form_btm">
-                <input type="button" class="submit_control" id="submitBtn" value="发布"/>
-            </div>
         </div>
-    </section>
 
+    </section>
 <!--页脚-->
 <footer th:replace="layout/footer"></footer>
 <!--页脚结束-->
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-validation/js/messages_zh.js" type="text/javascript"></script>
+
+<script src="/assets/global/plugins/ladda/spin.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/ladda/ladda.min.js" type="text/javascript"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/assets/pages/scripts/form-validation-md.js" type="text/javascript"></script>
+
+<script>
+    $(document).ready(function() {
+        var options = {
+            _form: "#ruleupload",
+            _rules: {
+                name: {
+                    required: true,//规则名称
+                    rangelength: [8, 50]//长度为8-50之间
+                },
+
+                market_price: {
+                    required: true,//规则价格
+                    number: true,//必须输入数字
+                    digits: true//必须输入整数
+
+                },
+                web_site: {//采集网站
+                    url: true,//正确的网址
+                    required: true
+
+                },
+                //网站类型
+                large_input: "required",//采集字段
+                //数据类别
+                //file_path: "required",//规则文件
+                //封面图
+                introduction: "required"//规则描述
+
+            },
+            _messages: {
+                name: {
+                    required: "请输入规则名称",//规则名称
+                    rangelength: "字符长度为8-50之间"//长度为8-50之间
+                },
+
+                market_price: {
+                    required: "请输入规则价格",//规则价格
+                    number: "请输入数字",//必须输入数字
+                    digits: "请输入整数"//必须输入整数
+
+                },
+                web_site: {//采集网站
+                    url: "请输入正确网址",//正确的网址
+                    required: "请输入采集网站"
+
+                },
+                //网站类型
+                large_input: "请输入采集字段，以','隔开",//采集字段
+                //数据类别
+                file_path: "请输入规则文件",//规则文件
+                //封面图
+                introduction: "请输入规则描述"//规则描述
+            }
+        }
+
+        FormValidationMd.init(options);
+    });
+</script>
+
+
+
 
 </body>
 </html>
