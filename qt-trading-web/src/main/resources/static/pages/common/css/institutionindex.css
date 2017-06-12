@@ -3,6 +3,53 @@
     background:#FAFAFA;
 }
 
+.data_store{
+    width:1200px;
+    margin:0px auto;
+    margin-top:30px;
+}
+.dataclassify{
+    box-sizing: border-box;
+    padding:0px  20px;
+    border:1px solid #ddd;
+    width:1200px;
+    background-color: #fff;
+}
+.repclissify{
+    padding:10px 0px;
+}
+.repclissify a{
+    color:#999;
+    display:inline-block;
+    padding:4px 10px;
+    font-size: 14px;
+    margin-right:10px;
+}
+.repclissify a:hover,.repclissify a.active{
+    color:#fff;
+    display:inline-block;
+    padding:4px 10px;
+    background-color: #05A9FE;
+}
+.datarep{
+    color:#333;
+    margin-right: 20px;
+}
+.repdataall>p{
+    border-top: 1px solid #eee;
+    padding-top:10px;
+    display:none;
+}
+.repdataall>p>a{
+    color:#999;
+    display:inline-block;
+    padding:4px 10px;
+    margin-bottom:10px;
+}
+.repdataall>p>a:hover,.repdataall>p>a.active{
+    background-color: #05A9FE;
+    color:#fff;
+}
 
 
 .sales{
@@ -11,8 +58,8 @@
     height:40px;
     border:1px solid #ddd;
     background-color: #fff;
-    margin:30px auto;
-
+    margin-top: 10px;
+    margin-bottom: 26px;
 }
 .sales>a{
     padding:0px 20px;

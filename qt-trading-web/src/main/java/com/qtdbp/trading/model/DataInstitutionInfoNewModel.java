@@ -18,6 +18,7 @@ public class DataInstitutionInfoNewModel extends BaseModel {
     private Integer institutionType ;// 服务商类型，1企业 2个人
     private String name;            // 服务商名称
     private String designation;     // 服务领域
+    private String content;         // 服务说明和描述
     private String logo;            // 服务商logo
     private Integer infoId;         // 资料ID， 对应个人资料或者企业资料（通过服务商类型判断）
     private Integer isSys ;         // 是否自营 0否 1是
@@ -41,6 +42,9 @@ public class DataInstitutionInfoNewModel extends BaseModel {
     private Integer isUsed;         // 是否可用 0否 1是
     @ApiModelProperty(hidden=true)
     private String auditFailReason ;// 审核不通过原因
+
+    private String orderBy ;    // 排序字段
+    private String dataTypes ;  // 数据类型ID集合
 
     @Transient
     private PersonalInfoModel personalInfoModel ;   // 个人资料
@@ -205,5 +209,29 @@ public class DataInstitutionInfoNewModel extends BaseModel {
 
     public void setCompanyInfoModel(CompanyInfoModel companyInfoModel) {
         this.companyInfoModel = companyInfoModel;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getDataTypes() {
+        return dataTypes;
+    }
+
+    public void setDataTypes(String dataTypes) {
+        this.dataTypes = dataTypes;
     }
 }
