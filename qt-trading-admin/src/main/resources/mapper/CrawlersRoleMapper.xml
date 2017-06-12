@@ -5,7 +5,7 @@
     <select id="findRulesByCondition" resultMap="CrawlersRoleMap">
         select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price, c.buy_count, c.web_type,
          c.web_site,  c.collection_field, c.is_self_support, c.audit_status, c.create_time, s.name username
-        from crawlers_role as c left join data_institution_info_new s on c.create_id = s.id
+        from crawlers_role as c left join data_institution_info_new s on c.create_id = s.create_id
         <where>
             <if test="isUsed != null">
                 c.is_used = #{isUsed}
@@ -70,7 +70,7 @@
     <!--根据ID查询单条爬虫规则数据-->
     <select id="findRoleById" parameterType="java.lang.Integer" resultMap="CrawlersRoleMap">
         select c.*, s.name username from crawlers_role as c
-        left join data_institution_info_new s on c.create_id = s.id
+        left join data_institution_info_new s on c.create_id = s.create_id
         where c.id = #{id}
     </select>
 </mapper>
