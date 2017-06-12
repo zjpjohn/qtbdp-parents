@@ -1,687 +1,147 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
-    <!-- 引入header布局 -->
-    <top th:replace="layout/top :: top"></top>
-    <!-- 页面自定义css、js  -->
-    <meta name="keywords" content="钱塘大数据交易中心"/>
-    <meta name="description" content="钱塘大数据交易中心"/>
-    <link rel="stylesheet" th:href="@{/tradecenter/css/usercenter.css}"/>
+    <title>概览 | 钱塘数据交易中心-个人中心</title>
+    <div th:replace="layout/top"/>
+
+    <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
+    <!-- 页面数据加载 -->
+    <script src="/pages/common/js/app.js" type="text/javascript"></script>
 </head>
+
 <body>
-    <!--  页头开始 -->
-    <div th:replace="layout/header" /></div>
-    <!--  页头结束 -->
-    <div class="cenAll">
-        <div class="center_main floating">
-            <div class="center_left lf">
-                <div class="headbg">
-                    <a>
-                        <img class="headpic" th:src="@{${user.head} ? ${user.head} : '/tradecenter/images/user_img.png'}" alt=""/>
-                    </a>
-                </div>
-                <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
-                <p class="pername perphone"><a th:text="${user.phone}"></a></p>
-                <p class="perdata">
-                    <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
-                    <a class="preinfo rt" data-class="persinfo"  id="perfectdatum" href="javascript:;">完善资料</a>
-                </p>
+<!-- 页头-->
+<div th:replace="layout/header" /></div>
+<!--页头结束-->
 
-                <ul class="pereach lf floating">
-                    <li data-class="overview" class="active"><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
-                    <li data-class="persinfo"><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
-                    <li data-class="myaccount" style="display:none"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
-                    <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
-                    <li data-class="myrelease"><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
-                    <li data-class="dataservice" id="joinservice2"><a th:href="@{/institution/add}"><span></span> 成为数据服务商 <b></b> </a></li>
+<div class="cenAll">
+    <div class="center_main floating">
 
+        <!-- 个人中心菜单开始 -->
+        <div th:replace="layout/sidebar" /></div>
+        <!-- 个人中心菜单结束 -->
+
+        <div class="center_right rt">
+            <!-- 概览开始-->
+            <div class="overview2 active">
+                <ul class="view_top floating">
+                    <li>
+                        <h1>-</h1>
+                        <p class="color">待付款</p>
+                    </li>
+                    <li>
+                        <h1>-</h1>
+                        <p>余额（元）</p>
+                    </li>
+                    <li>
+                        <h1 class="allorders"></h1>
+                        <p>订单</p>
+                    </li>
+                    <li>
+                        <h1 class="allfabus"></h1>
+                        <p>定制</p>
+                    </li>
                 </ul>
+                <div>
+                    <h2> <a href="javascript:;" id="moreOrder" data-class="myorder">更多</a> 最新订单 </h2>
+                    <table class="center_tb">
+                        <thead>
+                        <tr>
+                            <td>类型</td>
+                            <td>订单名称</td>
+                            <td>价格</td>
+                            <td>状态</td>
+                            <td class="time_btn"> <!--<td class="time_btn nodefault">-->
+                                时间
+                                <i></i>
+                                <i></i>
+                            </td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <!--最新订单-->
+                        <tbody id="orderList1">
+                        <tr>
+                            <td>条目</td>
+                            <td>整包</td>
+                            <td>￥33</td>
+                            <td class="nopaid">待支付</td>
+                            <td class="paid">00：00</td>
+                            <td class="paid">123</td>
+                        </tr>
+                        <tr>
+                            <td>条目</td>
+                            <td>整包</td>
+                            <td>￥33</td>
+                            <td class="nopaid">待支付</td>
+                            <td class="paid">00：00</td>
+                            <td class="paid">123</td>
+                        </tr>
+                        <tr>
+                            <td>条目</td>
+                            <td>整包</td>
+                            <td>￥33</td>
+                            <td class="nopaid">待支付</td>
+                            <td class="paid">00：00</td>
+                            <td class="paid">123</td>
+                        </tr>
 
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h2><a href="javascript:;" id="morefabu" data-class="myrelease">更多</a>最新发布</h2>
+                    <table class="center_tb">
+                        <thead>
+                        <tr>
+                            <td>需求名称</td>
+                            <td>预算</td>
+                            <td>状态</td>
+                            <td class="time_btn now">时间 <i></i>  <i></i> </td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody id="newfabuList">
+                        <tr>
+                            <td>
+                                问问
+                            </td>
+                            <td>34</td>
+
+                            <td class="putaway"> 已上架</td>
+
+                            <td> 12:00</td>
+                            <td>-</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="8" class="noline">
+                                <div class="nodata">
+                                    <img src="/pages/common/images/none.png" alt=""/>
+                                </div>
+                            </td>
+                        </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="center_right rt">
-                <!-- 概览开始-->
-                <div class="overview2 active">
-                    <ul class="view_top floating">
-                        <li>
-                            <h1>-</h1>
-                            <p class="color">积分</p>
-                        </li>
-                        <li>
-                            <h1>-</h1>
-                            <p>余额（元）</p>
-                        </li>
-                        <li>
-                            <h1 class="allorders"></h1>
-                            <p>订单</p>
-                        </li>
-                        <li>
-                            <h1 class="allfabus"></h1>
-                            <p>发布</p>
-                        </li>
-                    </ul>
-                    <div>
-                        <h2> <a href="javascript:;" id="moreOrder" data-class="myorder">更多</a> 最新订单 </h2>
-                        <table class="center_tb">
-                            <thead>
-                            <tr>
-                                <td>类型</td>
-                                <td>订单名称</td>
-                                <td>价格</td>
-                                <td>状态</td>
-                                <td class="time_btn"> <!--<td class="time_btn nodefault">-->
-                                    时间
-                                    <i></i>
-                                    <i></i>
-                                </td>
-                                <td>操作</td>
-                            </tr>
-                            </thead>
-                            <tbody id="orderList1">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <h2><a href="javascript:;" id="morefabu" data-class="myrelease">更多</a>最新发布</h2>
-                        <table class="center_tb">
-                            <thead>
-                            <tr>
-                                <td>需求名称</td>
-                                <td>预算</td>
-                                <td>状态</td>
-                                <td class="time_btn now">时间 <i></i>  <i></i> </td>
-                                <td>操作</td>
-                            </tr>
-                            </thead>
-                            <tbody id="newfabuList">
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- 概览结束-->
-                <!--个人信息-->
-                <div class="persinfo2 " id="personaldata">
-
-                </div>
-                <!-- 我的账户-->
-                <div class="myaccount2" style="display:none">
-                    <p class="cenintegral">积分 : <span>246</span></p>
-                    <div class="balance">
-                        余额 : <span class="gralmoney"><i>35</i>元</span>
-                        <span class="recharge"> 充值</span>
-                        <span class=" deposit"> 提现</span>
-                        <span class=" convert"> 兑换积分</span>
-                        <span class="reminder"> (友情提示 ： 1元=10积分,使用积分更划算) </span>
+            <!-- 概览结束-->
 
 
-                    </div>
-
-                    <div>
-                        <p class="convertye">
-                            <a href="javascript:;"  class="active"  data-index="integralmx">积分明细</a>
-                            <a href="javascript:;" data-index="balancemx">余额明细</a>
-                        </p>
-                        <div class="detailswitcher">
-                            <div class="integralmx2 active">
-                                <table  class="particulars">
-                                    <thead class="pratichead">
-                                    <tr class="particularshead">
-                                        <td class="active">ID</td>
-                                        <td>积分</td>
-                                        <td>项目</td>
-                                        <td>时间</td>
-                                        <td>备注</td>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="praticbody">
-                                    <tr class="particularsbody">
-                                        <td>1</td>
-                                        <td>+50</td>
-                                        <td>注册</td>
-                                        <td>2016-12-01 10:06:34</td>
-                                        <td>赠送积分</td>
-                                    </tr>
-                                    <tr class="particularsbody">
-                                        <td>2</td>
-                                        <td>+50</td>
-                                        <td>注册</td>
-                                        <td>2016-12-01 10:06:34</td>
-                                        <td>赠送积分</td>
-                                    </tr>
-                                    <tr class="particularsbody">
-                                        <td>3</td>
-                                        <td>+50</td>
-                                        <td>注册</td>
-                                        <td>2016-12-01 10:06:34</td>
-                                        <td>赠送积分</td>
-                                    </tr>
-                                    </tbody>
-
-                                    <!--空白页面-->
-                                    <!--<tbody class="praticbody">
-                                    <tr>
-                                        <td colspan="5"><img src="images/none.png" alt="" class="noneimg" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <p class="presentmx">暂时没有明细 / 菜单 / 发布 ...</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <a href="javascript:;" class="leavedata">前往数据商城</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>-->
-                                </table>
-
-                            </div>
-
-                            <div class="balancemx2 ">
-                                <table  class="particulars">
-                                    <thead class="pratichead">
-                                    <tr class="particularshead">
-                                        <td class="active">ID</td>
-                                        <td>余额</td>
-                                        <td>项目</td>
-                                        <td>时间</td>
-                                        <td>备注</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="praticbody">
-                                    <tr>
-                                        <td colspan="5"><img th:src="@{/tradecenter/images/none.png}" alt="" class="noneimg" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <p class="presentmx">暂时没有明细 / 菜单 / 发布 ...</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <a href="/datamart" class="leavedata">前往数据商城</a>
-                                        </td>
-                                    </tr>
-
-                                    </tbody>
-
-
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- 我的订单开始-->
-                <div class= "myorder2 rt_tbs">
-                    <h2>我的订单：<span class="color allorders"></span></h2>
-                    <p>
-                        数据订单：<span class="color dataorders">6</span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        需求订单：<span class="color demandorders"></span>
-                    </p>
-                    <p class="order_filter filter_btn floating">
-                        <a href="javascript:;" class="active" data-class="myorder">数据订单</a>
-                        <a href="javascript:;" data-class="demandorder">需求订单</a>
-                    </p>
-                    <!-- 数据订单开始 -->
-                    <div class="myorder2 order_tb active">
-                        <table class="center_tb">
-                            <thead>
-                                <tr>
-                                    <th class="time_btn id_btn">
-                                        ID
-                                        <i></i>
-                                        <i></i>
-                                    </th>
-                                    <th>类型</th>
-                                    <th>订单名称</th>
-                                    <th>价格</th>
-                                    <th>状态</th>
-                                    <th class="time_btn">
-                                        时间
-                                        <i></i>
-                                        <i></i>
-                                    </th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody id="orderList2">
-
-                            </tbody>
-                        </table>
-                        <!-- 分页开始 -->
-                        <div id="orderPage2"></div>
-                        <!-- 分页结束 -->
-                    </div>
-                    <!-- 数据订单结束 -->
-                    <!-- 需求订单开始 -->
-                    <div class="demandorder2 order_tb">
-                        <table class="center_tb">
-                            <thead>
-                            <tr>
-                                <th class="time_btn id_btn">
-                                    ID
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>类型</th>
-                                <th>订单名称</th>
-                                <th>价格</th>
-                                <th>状态</th>
-                                <th class="time_btn">
-                                    时间
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody id="orderList3">
-
-                            </tbody>
-                        </table>
-                        <!-- 分页开始 -->
-                        <div id="demandPage"></div>
-                        <!-- 分页结束 -->
-                    </div>
-                    <!-- 需求订单结束 -->
-                </div>
-                <!-- 我的订单结束-->
-                <!-- 我的发布开始-->
-                <div class="myrelease2 rt_tbs">
-                    <h2>我的发布：<span class="color allfabus"></span></h2>
-                    <p>
-                        数据众包：<span class="color crowdings"></span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        方案召集：<span class="color schemes"></span>
-                    </p>
-                    <p class="fabu_filter filter_btn floating">
-                        <a href="javascript:;" class="active" data-class="myrelease">数据众包</a>
-                        <a href="javascript:;" data-class="schemes">方案召集</a>
-                    </p>
-                    <!-- 数据众包开始 -->
-                    <div class="myrelease2 order_tb active">
-
-                        <table class="center_tb">
-                            <thead>
-                            <tr>
-                                <th class="time_btn id_btn">
-                                    ID
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>需求名称</th>
-                                <th>预算</th>
-                                <th>状态</th>
-                                <th class="time_btn">
-                                    时间
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody id="replace_crow"></tbody>
-                        </table>
-
-                        <!-- 分页开始 -->
-                        <div id="crowdPage"></div>
-                        <!-- 分页结束 -->
-                    </div>
-                    <!-- 数据众包结束 -->
-                    <!-- 方案召集开始 -->
-                    <div class="order_tb schemes2">
-
-                        <table class="center_tb">
-                            <thead>
-                            <tr>
-                                <th class="time_btn id_btn">
-                                    ID
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>需求名称</th>
-                                <th>预算</th>
-                                <th>状态</th>
-                                <th class="time_btn">
-                                    时间
-                                    <i></i>
-                                    <i></i>
-                                </th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody id="tmpl_project">
-
-                            </tbody>
-                        </table>
-                        <!-- 分页开始 -->
-                        <div id="schemePage"></div>
-                        <!-- 分页结束 -->
-                    </div>
-                    <!-- 方案召集结束 -->
-                </div>
-                <!-- 我的发布结束-->
-                <div >成为数据服务商</div>
-                <!-- 订单支付开始 -->
-                <div class="orderpay rt_tbs" id="orderPay">
-
-                </div>
-                <!-- 订单支付结束 -->
-            </div>
-            <!-- 支付回调 -->
-            <div id="aliBack" style="dispay:none;"></div>
         </div>
+
 
     </div>
-    <script th:src="@{/tradecenter/js/query.js}"></script>
-    <script th:src="@{/tradecenter/js/paging2.js}"></script>
-    <script th:src="@{/tradecenter/js/pagedata.js}"></script>
-    <script th:src="@{/tradecenter/js/jquery-1.11.1.min.js}"></script>
 
+</div>
 
-    <!--个人中心-个人信息-->
-    <script id="tmpl_personals" type="text/x-jquery-tmpl">
-        <form action="" id="perdetail">
-            <input type="hidden" name="id" value="${id}"/>
-            <div class="headimgs">
-                <img src="${head}" onerror="this.src='/tradecenter/images/user_img.png'" alt="" class="peronimg"/>
-                <a href="javascript:;" class="inputimg">上传新的头像
-                    <input type="file"  id="upheadimg"/>
-                    <input type="hidden" name="head" id="realHead">
-                </a>
-                <a href="javascript:;" class="savechange rt" id="savealter">保存更改</a>
-            </div>
+<!--页脚-->
+<footer th:replace="layout/footer"></footer>
+<!--页脚结束-->
 
-            <div class="pars_infor">
-                <p class="personal_name">昵称</p>
-                <input type="text" class="personal_nameval" value="${nick}" name="nick"/>
-
-                <p>手机号</p>
-                <input type="text" class="pers_input" id="phoneNUM" value="${phone}" name="phone"/>
-                <a class="error">请输入正确的手机号码</a>
-
-                <!--<div style="display:none;">
-                    <p class="pers_names">姓名</p>
-                    <input type="text" class="pers_input" name=""/>
-                    <br/> <a href="javascript:;">去实名认证</a>
-
-                    <p class="pers_names">邮箱</p>
-                    <input type="text" class="pers_input" id="person_emal"/>
-                    <a class="error">请输入正确的邮箱</a>
-                </div>-->
-
-                <p class="pers_names">用户类型</p>
-                <p class="pers_input pers_geren">个人</p>
-                <!--<input type="text" class="pers_input" value="${userType}" name="userType"/>-->
-                <a href="/institution/add">成为数据服务商</a>
-
-                <p class="pers_names">密码</p>
-                <input type="password" class="pers_input" value="${pwd}" name="pwd"/>
-                <br/> <a href="javascript:;" style="display:none">重置密码</a>
-
-            </div>
-
-        </form>
-    </script>
-    <!-- 最新订单tpml模板 -->
-    <script id="tmpl_neworder" type="text/x-jquery-tmpl">
-        {{if list.length > 0}}
-            {{each(i,order) list}}
-             <tr>
-                {{if order.productType==1}}
-                <td>条目</td>
-                {{else}}
-                <td>整包</td>
-                {{/if}}
-                <td>${$item._substr(order.orderSubject,18)}</td>
-                <td>￥${order.amount}</td>
-                {{if order.orderState==1}}
-                    <td class="nopaid">待支付</td>
-                    <td>${$item._date(order.addtime)}</td>
-                    <td>
-                        <a href="/selectOrderAndPay/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
-                    </td>
-                {{else order.orderState==2}}
-                     <td class="paid">已撤销</td>
-                     <td>${$item._date(order.addtime)}</td>
-                     <td> - </td>
-                {{else order.orderState==3 }}
-                     <td class="paid">已支付</td>
-                    <td>${$item._date(order.addtime)}</td>
-                    <td>
-                        <a class="download" onclick="orderDownload('${order.orderNo}');">下载</a>
-                    </td>
-                {{/if}}
-            </tr>
-            {{/each}}
-        {{else}}
-            暂时没有最新订单
-        {{/if}}
-    </script>
-    <!-- 概览tpml模板 -->
-    <script id="tmpl_newfabu" type="text/x-jquery-tmpl">
-     {{if list.length>0}}
-        {{each(i,prod) list}}
-        <tr>
-            <td>
-                ${$item._substr(prod.designation,18)}
-            </td>
-            <td>￥${prod.expFee}</td>
-            {{if prod.isUsed==1}}
-                <td class="putaway"> 已上架</td>
-            {{else prod.isUsed==0}}
-                <td class="audting"> 待审核</td>
-            {{else prod.isUsed==2}}
-                 <td class="noaudit"> 审核未通过</td>
-            {{/if}}
-            <td> ${$item._date(prod.addtime)}</td>
-            <td>-</td>
-        </tr>
-        {{/each}}
-    {{else}}
-        暂时没有最新发布
-    {{/if}}
-    </script>
-    <!-- 我的订单数据订单tpml模板 -->
-    <script id="tmpl_dataorder" type="text/x-jquery-tmpl">
-        {{if list.length > 0}}
-            {{each(i,order) list}}
-             <tr>
-                <td>${i+1}</td>
-                {{if order.productType==1}}
-                <td>条目</td>
-                {{else}}
-                <td>整包</td>
-                {{/if}}
-                <td>${$item._substr(order.orderSubject,18)}</td>
-                <td>￥${order.amount}</td>
-                {{if order.orderState == 1 }}
-                    <td class="nopaid">待支付</td>
-                    <td>${$item._date(order.addtime)}</td>
-                    <td>
-                        <a href="/selectOrderAndPay/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
-                    </td>
-                {{else order.orderState == 2 }}
-                     <td class="paid">已撤销</td>
-                     <td>${$item._date(order.addtime)}</td>
-                     <td> - </td>
-                {{else order.orderState == 3 }}
-                     <td class="paid">已支付</td>
-                    <td>${$item._date(order.addtime)}</td>
-                    <td>
-                         <a class="download" onclick="orderDownload('${order.orderNo}');">下载</a>
-                    </td>
-                {{/if}}
-            </tr>
-            {{/each}}
-        {{else}}
-            <tr>
-                <td colspan="8" class="noline">
-                     <div class="nodata">
-                        <img src="/tradecenter/images/none.png" alt=""/>
-                            <p>暂时数据订单</p>
-                            <a href="/datamart">前往数据商城</a>
-                    </div>
-                </td>
-            </tr>
-        {{/if}}
-    </script>
-    <!-- 我的订单需求订单tpml模板 -->
-    <script id="tmpl_demandorder" type="text/x-jquery-tmpl">
-        {{if list.length > 0}}
-            {{each(i,order) list}}
-             <tr>
-                <td>${i+1}</td>
-                {{if order.productType==1}}
-                <td>条目</td>
-                {{else}}
-                <td>整包</td>
-                {{/if}}
-                <td>${$item._substr(order.orderSubject,18)}</td>
-                <td>￥${order.amount}</td>
-                {{if order.orderState == 1 }}
-                    <td class="nopaid">待支付</td>
-                    <td>${$item._date(order.addtime)}</td>
-                    <td>
-                        <a href="/selectOrderAndPay/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
-                    </td>
-                {{else order.orderState == 2 }}
-                     <td class="paid">已撤销</td>
-                     <td>${$item._date(order.addtime)}</td>
-                     <td> - </td>
-                {{else order.orderState == 3 }}
-                     <td class="paid">已支付</td>
-                    <td>${$item._date(order.addtime)}</td>
-                    <td>
-                        <a class="download" orderDownload="download('${order.orderNo}');">下载</a>
-                    </td>
-                {{/if}}
-            </tr>
-            {{/each}}
-        {{else}}
-            <tr>
-                <td colspan="8" class="noline">
-                     <div class="nodata">
-                        <img src="/tradecenter/images/none.png" alt=""/>
-                            <p>暂时需求订单</p>
-                            <a href="/demand">前往需求大厅</a>
-                    </div>
-                </td>
-            </tr>
-        {{/if}}
-    </script>
-
-
-    <!--我的发布 -数据众包-->
-    <script id="tmpl_release" type="text/x-jquery-tmpl">
-       {{if list.length>0}}
-        {{each(i,prod) list}}
-        <tr>
-            <td>${prod.id}</td>
-            <td>
-                ${$item._substr(prod.designation,18)}
-            </td>
-            <td>￥${prod.expFee}</td>
-            {{if prod.isUsed==1}}
-                <td class="putaway"> 已上架</td>
-            {{else prod.isUsed==0}}
-                <td class="audting"> 待审核</td>
-            {{else prod.isUsed==2}}
-                 <td class="noaudit"> 审核未通过</td>
-            {{/if}}
-                <td> ${$item._date(prod.addtime)}</td>
-                <td>-</td>
-        </tr>
-        {{/each}}
-    {{else}}
-        <tr>
-            <td colspan="6" class="noline">
-                 <div class="nodata">
-                    <img src="/tradecenter/images/none.png" alt=""/>
-                        <p>暂时没有发布数据众包</p>
-                        <a href="/demand/buy/add">前往发布数据众包</a>
-                </div>
-            </td>
-        </tr>
-    {{/if}}
-    </script>
-    <!--我的发布  方案召集-->
-    <script id="tmpl_scheme" type="text/x-jquery-tmpl">
-    {{if list.length>0}}
-        {{each(i,prod) list}}
-        <tr>
-            <td>${prod.id}</td>
-            <td>
-                ${$item._substr(prod.designation,18)}
-            </td>
-            <td>￥${prod.expFee}</td>
-            {{if prod.isUsed==1}}
-                <td class="putaway"> 已上架</td>
-            {{else prod.isUsed==0}}
-                <td class="audting"> 待审核</td>
-            {{else prod.isUsed==2}}
-                 <td class="noaudit"> 审核未通过</td>
-            {{/if}}
-            <td> ${$item._date(prod.addtime)}</td>
-            <td>-</td>
-        </tr>
-        {{/each}}
-    {{else}}
-        <tr>
-            <td colspan="6" class="noline">
-                 <div class="nodata">
-                    <img src="/tradecenter/images/none.png" alt=""/>
-                        <p>暂时没有发布方案召集</p>
-                        <a href="/demand/sos/add">前往发布方案召集</a>
-                </div>
-            </td>
-        </tr>
-    {{/if}}
-    </script>
-    <script>
-        var userId=$("#userId").val();
-    </script>
-
-    <!-- 订单支付 -->
-    <script id="tmpl_orderpay" type="text/x-jquery-tmpl">
-        <h2>
-            <i></i>
-            订单支付
-        </h2>
-        <div>
-            <h2 id="orderTitle">${orderSubject}</h2>
-            <h1 class="color" id="orderAmount">￥ ${amount}</h1>
-            <p id="orderNo">订单编号：${orderNo}</p>
-            <p>订单类型：订单购买</p>
-            {{if productType==2}}
-            <p>订单详情：<span class="color">整包</span></p>
-            {{else}}
-            <p>订单详情：<span class="color" >条目</span></p>
-            {{/if}}
-            <p>购买数量：<span cladd="color">1</span>份</p>
-            <p class="pay_btns">
-                <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
-                <a href="javascript:;" class="alibtn" onclick="pay('${orderNo}',${amount},'${orderSubject}');">支付宝付款</a>
-            </p>
-        </div>
-    </script>
-
-    <script th:inline="javascript">
-        var isOrder = [[${isOrder}]];
-        var order = [[${order}]];
-        var user = [[${user}]];
-        var orderState=[[${orderState}]];
-
-    </script>
-    <script th:src="@{/tradecenter/js/usercenter.js}"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@ public class CrawlersController {
 
     public static final String PAGE_CRAWLERS = "crawlers/index";
     public static final String PAGE_CRAWLERS_DETAIL = "crawlers/detail";
+    public static final String PAGE_CRAWLERS_PUBLISH = "crawlers/publish";
 
     @Autowired
     private CrawlersRoleService roleService;
@@ -51,4 +52,13 @@ public class CrawlersController {
         return result;
     }
 
+    /**
+     * 发布规则
+     * @return
+     */
+    @RequestMapping(value = "/publish/crawlers", method = RequestMethod.GET)
+    public String publish() {
+
+        return PAGE_CRAWLERS_PUBLISH;
+    }
 }
