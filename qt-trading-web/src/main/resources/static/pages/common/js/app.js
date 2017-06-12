@@ -389,6 +389,39 @@ var App = function () {
             options._tmpl = "#tmpl_items" ;
             options._rows = 20 ; //每页20条记录
             initDatas({productId:id}) ;
+        },
+        // 服务商数据加载
+        initInstitution: function () {
+            nav(6);
+
+            options._url = "/api/institutionV2" ; // 重置请求地址
+            options._rows = 20 ; //每页20条记录
+            initType();
+            initOrderByCond() ;
+            initDatas() ;
+        },
+        // 服务商主页
+        initInstitutionHome: function (id) {
+            nav(6);
+
+            // 加载服务商明细
+            LoadingData.request({url: "/api/institutionV2/"+id}, function(data){
+                $("#tmpl_institution").tmpl(data.pageInfo,{
+                    _date : function (date) {
+                        return _tmp_formatedate(date)
+                    },
+                    _num : function (num) {
+                        return _tmp_formatnum(num) ;
+                    },
+                    _def : function (v,t) {
+                        return _tmp_defaultvalue(v,t) ;
+                    }
+                }).appendTo("#institution-container");
+            });
+
+            // 加载数据包产品
+            options._url = "/api/institutionV2" ; // 重置请求地址
+            initDatas() ;
         }
     };
 }() ;
