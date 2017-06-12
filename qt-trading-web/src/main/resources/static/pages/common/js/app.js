@@ -102,6 +102,9 @@ var App = function () {
                 },
                 _num : function (num) {
                     return _tmp_formatnum(num) ;
+                },
+                _timeChange : function (time) {
+                    return _calculateTime(time);
                 }
             }).appendTo(options._container);
 
@@ -296,6 +299,11 @@ var App = function () {
         return num.toFixed(2) ;
     }
 
+    //计算数据众包截至时间
+    var _calculateTime = function (time){
+        var calculateTime=getDateDiff(time);
+        return calculateTime;
+    }
     /**
      * 默认值
      * @param v

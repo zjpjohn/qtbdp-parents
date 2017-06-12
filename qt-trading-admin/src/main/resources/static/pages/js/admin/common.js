@@ -490,6 +490,18 @@ var Common = {
                 }
             }
         })
+    },
+    typeSelect:function (dataTypeJson,typeId) {
+        var id = typeId;
+        for(var k in dataTypeJson){
+            if(typeId == k){
+                typeId = dataTypeJson[k];
+
+            }else {
+                id = "其他";
+            }
+        }
+        return id;
     }
 };
 

@@ -18,7 +18,7 @@
         p.data_status,
         p.audit_status
         FROM
-        data_product as p left join data_institution_info_new s on p.user_id = s.id
+        data_product as p left join data_institution_info_new s on p.user_id = s.create_id
         <where>
             <if test="dataType != null and dataType != 0">
                 p.data_type = #{dataType}
@@ -101,7 +101,7 @@
         p.audit_fail_reason,
         s.name
         from data_product as p
-        left join data_institution_info_new s on p.user_id = s.id
+        left join data_institution_info_new s on p.user_id = s.create_id
         where p.id = #{id}
     </select>
 

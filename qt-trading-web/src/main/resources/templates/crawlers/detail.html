@@ -26,7 +26,7 @@
                     <p class="leprice" th:text="'￥'+${#numbers.formatDecimal(prod.price , 0, 2)}">￥38.00</p>
                     <p class="lenum">
                         <span>近30天 <i th:text="${prod.buyCount}">5</i>次下载 </span>
-                        <span th:text="'于'+${#dates.format(prod.createTime,'yyyy/MM/dd HH:mm')}+'发布'"> <i>shdfisdjh</i>于2017-05-31发布  </span>
+                        <span><i th:text="${prod.username}+'   '">shdfisdjh</i>于<i th:text="${#dates.format(prod.createTime,'yyyy/MM/dd HH:mm')}">2017-05-31</i>发布</span>
                     </p>
                     <p class="employ">
                         <a href="javascript:;" class="lebuy">购买规则</a>

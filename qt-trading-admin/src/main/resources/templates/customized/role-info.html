@@ -181,7 +181,22 @@ Author: caidchen
 <script src="/pages/js/admin/common.js"></script>
 <script src="/pages/js/customized/roleInfo.js"></script>
 
+<script th:inline="javascript">
+    var dataTypeJson = {};
+    $.ajax({
+        url: "/api/dataType",
+        type: "get",
+        success: function (result){
+            if (result != null){
+                dataTypeJson = result.pageInfo;
+            }
+        },
+        error: function (result) {
 
+        }
+
+    });
+</script>
 <!-- END SCRIPT -->
 </body>
 
