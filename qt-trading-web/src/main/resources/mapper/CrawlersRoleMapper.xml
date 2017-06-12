@@ -67,15 +67,18 @@
     <select id="findRulesByCondition" resultMap="CrawlersRoleMap">
         select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price, c.buy_count, c.web_type,
          c.web_site,  c.collection_field, c.create_time, s.name username  from crawlers_role as c
-        left join data_institution_info_new s on c.create_id = s.id
+        left join data_institution_info_new s on c.create_id = s.create_id
         where c.is_used = 1 and c.audit_status = 1
         <if test="dataTypes != null ">
             AND c.type_id in (${dataTypes})
         </if>
           <if test="webType != null ">
-              and web_type = #{webType}
+            AND web_type = #{webType}
           </if>
-          order by ${orderBy} desc
+        <if test="createId != null and createId !=0">
+           AND c.create_id = #{createId}
+        </if>
+        order by ${orderBy} desc
     </select>
 
     <resultMap id="CrawlersRoleMap" type="com.qtdbp.trading.model.CrawlersRoleModel">
@@ -145,7 +148,9 @@
     </update>
 
     <select id="findRuleById" parameterType="java.lang.Integer" resultMap="CrawlersRoleMap">
-        select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price,  c.`desc`, c.buy_count, c.view_count, c.web_type,
-         c.web_site,  c.collection_field, c.create_time  from crawlers_role as c where id = #{id}
+        select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price,
+          c.`desc`, c.buy_count, c.view_count, c.web_type,c.web_site,  c.collection_field,
+          c.create_time, s.name username  from crawlers_role as c
+         left join data_institution_info_new s on c.create_id = s.create_id where c.id = #{id}
     </select>
 </mapper>

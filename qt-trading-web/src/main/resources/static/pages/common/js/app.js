@@ -102,6 +102,9 @@ var App = function () {
                 },
                 _num : function (num) {
                     return _tmp_formatnum(num) ;
+                },
+                _timeChange : function (time) {
+                    return _calculateTime(time);
                 }
             }).appendTo(options._container);
 
@@ -296,6 +299,11 @@ var App = function () {
         return num.toFixed(2) ;
     }
 
+    //计算数据众包截至时间
+    var _calculateTime = function (time){
+        var calculateTime=getDateDiff(time);
+        return calculateTime;
+    }
     /**
      * 默认值
      * @param v
@@ -398,6 +406,70 @@ var App = function () {
             initOrderByCond() ;
             initFilter() ;
             initDatas({serviceType:type}) ;
+        },
+        // 服务商数据加载
+        initInstitution: function () {
+            nav(6);
+
+            options._url = "/api/institutionV2" ; // 重置请求地址
+            options._rows = 20 ; //每页20条记录
+            initType();
+            initOrderByCond() ;
+            initDatas() ;
+        },
+        // 服务商主页
+        initInstitutionHome: function (id) {
+            nav(6);
+
+            // 加载服务商明细
+            LoadingData.request({url: "/api/institutionV2/"+id}, function(data){
+                $("#tmpl_institution").tmpl(data.pageInfo,{
+                    _date : function (date) {
+                        return _tmp_formatedate(date)
+                    },
+                    _num : function (num) {
+                        return _tmp_formatnum(num) ;
+                    },
+                    _def : function (v,t) {
+                        return _tmp_defaultvalue(v,t) ;
+                    }
+                }).appendTo("#institution-container");
+
+                // 加载数据包产品
+                initDatas({userId:data.pageInfo.createId}) ;
+
+                var _id = $("#tab-container").attr("data-id") ;
+                $("#tab-sub-container > a").each(function () {
+
+                    $(this).click(function () {
+
+                        $("#tab-sub-container > a").removeClass("active") ;
+                        $(this).addClass("active") ;
+
+                        var _type = $(this).attr("data-type") ;
+                        switch (_type) {
+
+                            case "1":
+                                // 加载数据包产品
+                                options._url = "/api/product" ;
+                                options._tmpl = "#tmpl_products" ;
+                                initDatas({userId:_id}) ;
+                                break ;
+
+                            case "2":
+                                // 加载爬虫规则
+                                options._url = "/api/crawlers/role" ;
+                                options._tmpl = "#tmpl_crawlersRules" ;
+                                initDatas({createId:_id}) ;
+                                break ;
+                        }
+
+                    });
+
+                }) ;
+
+            });
+
         }
     };
 }() ;

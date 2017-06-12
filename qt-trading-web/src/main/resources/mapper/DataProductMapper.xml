@@ -29,6 +29,9 @@
         <if test="dataSrc != null">
             AND p.data_src = #{dataSrc}
         </if>
+        <if test="userId != null">
+            AND p.user_id = #{userId}
+        </if>
         <if test="isFree != null">
             <choose>
                 <when test="isFree == 1">

@@ -44,9 +44,15 @@ public class UserCenterController extends BaseController {
      * 数据商城首页
      */
     private static final String PAGE_USER_CENTER = "usercenter/index" ;
+    private static final String PAGE_USER_PERSON = "usercenter/persinfo" ;
+    private static final String PAGE_USER_ACCOUNT = "usercenter/account" ;
+    private static final String PAGE_USER_BUY = "usercenter/buy/index" ;
+    private static final String PAGE_USER_CUSTOMIZED = "usercenter/customized/index" ;
+    private static final String PAGE_USER_PUBLISH = "usercenter/publish/index" ;
+    private static final String PAGE_USER_RECEIVED = "usercenter/received/index" ;
 
     /**
-     * 个人中心首页
+     * 概览
      * @return
      */
     @RequestMapping(value = "/usercenter",method = RequestMethod.GET)
@@ -67,6 +73,80 @@ public class UserCenterController extends BaseController {
         }
 
         return result ;
+    }
+
+    /**
+     * 个人信息
+     * @return
+     */
+    @RequestMapping(value = "/usercenter/person",method = RequestMethod.GET)
+    public String personInfo() {
+        return PAGE_USER_PERSON ;
+    }
+
+    /**
+     * 我的账户
+     * @return
+     */
+    @RequestMapping(value = "/usercenter/account",method = RequestMethod.GET)
+    public String account() {
+        return PAGE_USER_ACCOUNT ;
+    }
+
+    /**
+     * 已购买的商品
+     * @param type 0 数据 1规则
+     * @return
+     */
+    @RequestMapping(value = "/usercenter/buy/{type}",method = RequestMethod.GET)
+    public ModelAndView buy(@PathVariable Integer type) {
+
+        ModelAndView view = new ModelAndView(PAGE_USER_BUY) ;
+        view.addObject("type", type) ;
+
+        return view ;
+    }
+
+    /**
+     * 我的定制
+     * @param type 0 数据 1规则
+     * @return
+     */
+    @RequestMapping(value = "/usercenter/customized/{type}",method = RequestMethod.GET)
+    public ModelAndView customized(@PathVariable Integer type) {
+
+        ModelAndView view = new ModelAndView(PAGE_USER_CUSTOMIZED) ;
+        view.addObject("type", type) ;
+
+        return view ;
+    }
+
+    /**
+     * 我的发布
+     * @param type 0 数据 1规则
+     * @return
+     */
+    @RequestMapping(value = "/usercenter/publich/{type}",method = RequestMethod.GET)
+    public ModelAndView publich(@PathVariable Integer type) {
+
+        ModelAndView view = new ModelAndView(PAGE_USER_PUBLISH) ;
+        view.addObject("type", type) ;
+
+        return view ;
+    }
+
+    /**
+     * 已接单的定制
+     * @param type 0 数据 1规则
+     * @return
+     */
+    @RequestMapping(value = "/usercenter/received/{type}",method = RequestMethod.GET)
+    public ModelAndView received(@PathVariable Integer type) {
+
+        ModelAndView view = new ModelAndView(PAGE_USER_RECEIVED) ;
+        view.addObject("type", type) ;
+
+        return view ;
     }
 
     /**

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+    <title>发布爬虫规则</title>
+    <div th:replace="layout/top"/>
+    <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
+</head>
+<body>
+<!-- 页头-->
+<div th:replace="layout/header" /></div>
+<!--页头结束-->
+
+    <section class="main">
+        <!-- 面包屑导航 -->
+        <div class="header_nav">
+            数据服务商
+            <span class="gt">&gt;</span>
+            <span class="active">发布爬虫规则</span>
+        </div>
+
+        <!-- 表单 -->
+        <div class="main_content floating">
+            <h2 class="form_title">发布爬虫规则</h2>
+            <form class="trade_form">
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>规则名称</b> <i>*</i><span>8-50个字符</span>
+                    </p>
+                    <div class="form_control">
+                        <input type="text" class="large_input" name=""/>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>规则价格</b> <i>*</i>
+                    </p>
+                    <div class="form_control">
+                        <input type="number" class="small_input" name="" placeholder="市场价："/>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>采集网站</b> <i>*</i>
+                    </p>
+                    <div class="form_control">
+                        <input type="text" class="large_input" name=""/>
+                        <p class="form_tips">例如：www.qtbigdata.com</p>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>网站类型</b> <i>*</i>
+                    </p>
+                    <div class="form_control">
+                        <label><input type="radio" name="type" class="radio_input" value=""/>社交网站</label>
+                        <label><input type="radio" name="type" class="radio_input" value=""/>电商网站</label>
+                        <label><input type="radio" name="type" class="radio_input" value=""/>金融网站</label>
+                        <label><input type="radio" name="type" class="radio_input" value=""/>生活网站</label>
+                        <label><input type="radio" name="type" class="radio_input" value=""/>行业网站</label>
+                        <label><input type="radio" name="type" class="radio_input" value=""/>新闻网站</label>
+                        <label><input type="radio" name="type" class="radio_input" value=""/>其他网站</label>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>采集字段</b> <i>*</i>
+                    </p>
+                    <div class="form_control">
+                        <input type="text" class="large_input" name=""/>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>数据类别</b> <i>*</i>
+                    </p>
+                    <div class="form_control">
+                        <select name="" class="small_input">
+                            <option value="">关联数据</option>
+                            <option value="">关联数据</option>
+                            <option value="">关联数据</option>
+                            <option value="">关联数据</option>
+                        </select>
+                        <select name="" class="small_input">
+                            <option value="">关联数据</option>
+                            <option value="">关联数据</option>
+                            <option value="">关联数据</option>
+                            <option value="">关联数据</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>规则文件</b> <i>*</i>
+                    </p>
+                    <div class="form_control floating">
+                        <input type="text" class="middle_input" name=""/>
+                        <a href="javascript:;" class="upload_a">上传<input type="file" class="uploadRuleFile"/></a>
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>封面图片</b> <i>*</i>
+                    </p>
+                    <div class="form_control ">
+
+                    </div>
+                </div>
+
+                <div class="form_group">
+                    <p class="group_title">
+                        <b>规则描述</b> <i>*</i>
+                    </p>
+                    <div class="form_control ">
+                        <textarea name="" class="textarea_control"></textarea>
+                    </div>
+                </div>
+            </form>
+            <!-- 右侧注意事项 -->
+            <div class="attention">
+                <p class="attention_title">
+                    <i>!</i>注意事项
+                </p>
+            </div>
+            <div class="clear"></div>
+
+            <!-- 页脚发布按钮 -->
+            <div class="form_btm">
+                <input type="button" class="submit_control" id="submitBtn" value="发布"/>
+            </div>
+        </div>
+    </section>
+
+<!--页脚-->
+<footer th:replace="layout/footer"></footer>
+<!--页脚结束-->
+
+</body>
+</html>
