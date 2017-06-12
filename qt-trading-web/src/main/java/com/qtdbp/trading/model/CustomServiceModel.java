@@ -52,6 +52,8 @@ public class CustomServiceModel extends BaseModel {
 
     private String dataTypes;           //数据类目过滤集合
 
+    private String typeName;            //数据类目名称
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -266,5 +268,13 @@ public class CustomServiceModel extends BaseModel {
 
     public void setDataTypes(String dataTypes) {
         this.dataTypes = dataTypes;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

@@ -66,9 +66,10 @@
         c.audit_time,
         c.audit_status,
         c.audit_fail_reason,
-        c.desc
+        c.desc,
+        t.name typename
         FROM
-        custom_service AS c
+        custom_service AS c left join data_type t on c.type_id = t.id
         WHERE
         c.is_used = 1 AND c.id = #{id}
     </select>
@@ -97,6 +98,7 @@
         <result column="audit_status" property="auditStatus" />
         <result column="audit_fail_reason" property="auditFailReason" />
         <result column="desc" property="desc" />
+        <result column="typename" property="typeName"/>
     </resultMap>
 
     <!-- 更新定制服务数据 -->

@@ -67,8 +67,12 @@ public class CustomizedController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/customized/rule/detail/{id}", method = RequestMethod.GET)
-    public String customizedRuleDetail(@PathVariable Integer id) {
+    public ModelAndView customizedRuleDetail(@PathVariable Integer id) throws GlobalException {
 
-        return PAGE_CUSTOMIZED_ROLE_DETAIL;
+        ModelAndView result = new ModelAndView(PAGE_CUSTOMIZED_ROLE_DETAIL);
+        CustomServiceModel serviceModel = customizedService.findCustomizedDataById(id);
+        if (serviceModel == null) throw new GlobalException("404 数据定制为空");
+        result.addObject("prod", serviceModel);
+        return result;
     }
 }
