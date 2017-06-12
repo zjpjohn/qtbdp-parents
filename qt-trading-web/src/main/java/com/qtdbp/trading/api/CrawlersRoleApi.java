@@ -8,6 +8,7 @@ import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.CrawlersRoleModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CrawlersRoleService;
+import com.qtdbp.trading.service.DataTypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -31,7 +32,7 @@ public class CrawlersRoleApi {
     private CrawlersRoleService crawlersRoleService;
 
     @Autowired
-    private DataTypeMapper dataTypeMapper;
+    private DataTypeService dataTypeService;
 
     @ApiOperation(value="添加爬虫规则数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -64,28 +65,14 @@ public class CrawlersRoleApi {
     public ModelMap findByCondition(CrawlersRoleModel crawlersRoleModel, Integer dataType) {
 
         if(crawlersRoleModel.getRows() == null || crawlersRoleModel.getRows() == 0) crawlersRoleModel.setRows(12);
-        if (crawlersRoleModel.getOrderBy() == null) crawlersRoleModel.setOrderBy("create_time");
-        if (dataType == null){
-            dataType = 0;
-        }
-        List<Integer> list = getAllDataTypeIds(dataType);
-        if (list != null && list.size() != 0){
-            String dataTypes = "";
-            for (int i = 0; i<list.size(); i++){
-                if (i == (list.size()-1)){
-                    dataTypes = dataTypes + list.get(i) ;
-                }else {
-                    dataTypes = dataTypes + list.get(i) + ",";
-                }
-            }
-            crawlersRoleModel.setDataTypes(dataTypes);
-        }else {
-            if (dataType != 0 ) {
-                crawlersRoleModel.setDataTypes(dataType+"");
-            }
-        }
+        if (crawlersRoleModel.getOrderBy() == null || "".equals(crawlersRoleModel.getOrderBy())) crawlersRoleModel.setOrderBy("create_time");
+
         ModelMap map = new ModelMap();
         try {
+            if (dataType != null && dataType != 0) {
+                String dataTypes = dataTypeService.getDataTypes(dataType);
+                if (dataTypes != null && !"".equals(dataTypes)) crawlersRoleModel.setDataTypes(dataTypes);
+            }
             List<CrawlersRoleModel> Rolelist = crawlersRoleService.findRoleByCondition(crawlersRoleModel);
             map.put("pageInfo", new PageInfo<>(Rolelist));
             map.put("queryParam", crawlersRoleModel);
@@ -132,27 +119,6 @@ public class CrawlersRoleApi {
             e.printStackTrace();
         }
         return map;
-    }
-
-    /**
-     * 递归查询数据类型某一节点下所有的叶子节点
-     * @param dataType
-     * @return
-     */
-    private List getAllDataTypeIds(Integer dataType) {
-
-        if (dataType == 0 || dataType == null) return null;
-
-        List<Integer> dataTypeIdsList = new ArrayList<>();
-
-        List<DataTypeModel> list = dataTypeMapper.findDataTypeByParentId(dataType);
-        if (list == null || list.size() == 0) return dataTypeIdsList;
-        for(DataTypeModel model : list){
-            dataTypeIdsList.add(model.getId());
-            List<Integer> idsList = getAllDataTypeIds(model.getId());
-            if(idsList != null && idsList.size() != 0) dataTypeIdsList.addAll(idsList);
-        }
-        return dataTypeIdsList;
     }
 
 }

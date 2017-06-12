@@ -390,6 +390,15 @@ var App = function () {
             options._rows = 20 ; //每页20条记录
             initDatas({productId:id}) ;
         },
+        // 数据定制数据加载
+        initCustom: function (type) {
+
+            options._url = "/api/customized" ; // 重置请求地址
+            initType();
+            initOrderByCond() ;
+            initFilter() ;
+            initDatas({serviceType:type}) ;
+        },
         // 服务商数据加载
         initInstitution: function () {
             nav(6);

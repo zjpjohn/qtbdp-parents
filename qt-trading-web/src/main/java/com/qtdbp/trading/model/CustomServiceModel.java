@@ -48,6 +48,10 @@ public class CustomServiceModel extends BaseModel {
     @ApiModelProperty(hidden=true)
     private Integer isUsed;             // 是否可用
 
+    private String orderBy;             //排序字段
+
+    private String dataTypes;           //数据类目过滤集合
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -246,5 +250,21 @@ public class CustomServiceModel extends BaseModel {
 
     public void setIsUsed(Integer isUsed) {
         this.isUsed = isUsed;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getDataTypes() {
+        return dataTypes;
+    }
+
+    public void setDataTypes(String dataTypes) {
+        this.dataTypes = dataTypes;
     }
 }
