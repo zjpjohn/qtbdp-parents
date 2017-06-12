@@ -29,7 +29,7 @@
         FROM
         custom_service AS c
         WHERE
-        c.is_used = 1
+        c.is_used = 1 and c.audit_status = 1
         <if test="serviceType != null and serviceType != 0">
             AND c.service_type = #{serviceType}
         </if>
@@ -38,6 +38,9 @@
         </if>
         <if test="dataTypes != null ">
             AND c.type_id in (${dataTypes})
+        </if>
+        <if test="createId != null ">
+            AND c.create_id = #{createId}
         </if>
         ORDER BY ${orderBy} desc
     </select>

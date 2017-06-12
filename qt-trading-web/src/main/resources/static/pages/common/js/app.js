@@ -446,6 +446,7 @@ var App = function () {
                         $("#tab-sub-container > a").removeClass("active") ;
                         $(this).addClass("active") ;
 
+
                         var _type = $(this).attr("data-type") ;
                         switch (_type) {
 
@@ -461,6 +462,36 @@ var App = function () {
                                 options._url = "/api/crawlers/role" ;
                                 options._tmpl = "#tmpl_crawlersRules" ;
                                 initDatas({createId:_id}) ;
+                                break ;
+                        }
+
+                    });
+
+                }) ;
+
+                $("#tab-custom-container > a").each(function () {
+
+                    $(this).click(function () {
+
+                        $("#tab-custom-container > a").removeClass("active") ;
+                        $(this).addClass("active") ;
+
+
+                        var _type = $(this).attr("data-type") ;
+                        switch (_type) {
+
+                            case "1":
+                                // 加载数据定制产品
+                                options._url = "/api/customized" ;
+                                options._tmpl = "#tmpl_data_custom" ;
+                                initDatas({createId:_id,serviceType: 2}) ;
+                                break ;
+
+                            case "2":
+                                // 加载爬虫规则定制产品
+                                options._url = "/api/customized" ;
+                                options._tmpl = "#tmpl_role_custom" ;
+                                initDatas({createId:_id, serviceType: 1}) ;
                                 break ;
                         }
 

@@ -10,6 +10,7 @@
 
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
+    <script src="/tradecenter/js/timeFormat.js" type="text/javascript"></script>
 </head>
 <body>
     <!-- 页头-->
@@ -35,19 +36,19 @@
             <div class="service_main floating">
                 <ul class="sernum rt floating">
                     <li>
-                        <p>6</p>
+                        <p>${countMap.productCount}</p>
                         <p>数据商品</p>
                     </li>
                     <li>
-                        <p>43</p>
+                        <p>${countMap.roleCount}</p>
                         <p>爬虫规则商品</p>
                     </li>
                     <li>
-                        <p>22</p>
+                        <p>${countMap.dataCustomCount}</p>
                         <p>数据定制接单数</p>
                     </li>
                     <li>
-                        <p>33</p>
+                        <p>${countMap.roleCustomCount}</p>
                         <p>爬虫规则定制接单数</p>
                     </li>
                     <li class="oknum">
@@ -75,6 +76,10 @@
                 <p class="sername" id="tab-sub-container">
                     <a href="javascript:;" class="active" data-type="1">数据商品</a>
                     <a href="javascript:;" data-type="2">爬虫规则</a>
+                </p>
+                <p class="sername" id="tab-custom-container">
+                    <a href="javascript:;" class="active" data-type="1">数据定制</a>
+                    <a href="javascript:;" data-type="2">爬虫规则定制</a>
                 </p>
                 <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
                 <div class="store_main floating" id="data-container"></div>
@@ -132,6 +137,54 @@
         {{else}}
         暂无数据
         {{/if}}
+    </script>
+    <!-- 数据定制模板 -->
+    <script id="tmpl_data_custom" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+    {{each(i,prod) list}}
+        <div class="repmain active floating">
+            <div class="lf reptexts">
+                <p class="main_title"><a href="/customized/data/detail/${prod.id}">${prod.name}</a></p>
+                <p class="main_text">${prod.dimension}</p>
+                <p class="main_min">
+                    <span >采集规模: <a class="main_domain">${prod.dimension} 条</a></span>
+                    <span class="main_timeend"> <em></em> 截至倒计时 : <a>${$item._timeChange(prod.endTime)}</a></span>
+                </p>
+            </div>
+            <div class="lf priceright">
+                <p class="repprice">￥${prod.price}</p>
+                <p class="reppeople">32人已接单</p>
+                <p class="repnow">立即接单</p>
+            </div>
+        </div>
+    {{/each}}
+    {{else}}
+    暂无数据
+    {{/if}}
+    </script>
+    <!-- 爬虫规则定制数据模板 -->
+    <script id="tmpl_role_custom" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+    {{each(i,prod) list}}
+        <div class="repmain active floating">
+            <div class="lf reptexts">
+                <p class="main_title"><a href="/customized/rule/detail/${prod.id}">${prod.name}</a></p>
+                <p class="main_text">${prod.dimension}</p>
+                <p class="main_min">
+                    <span >采集规模: <a class="main_domain">${prod.scale} 条</a></span>
+                    <span class="main_timeend"> <em></em> 截至倒计时 : <a>${$item._timeChange(prod.endTime)}</a></span>
+                </p>
+            </div>
+            <div class="lf priceright">
+                <p class="repprice">￥${prod.price}</p>
+                <p class="reppeople">32人已接单</p>
+                <p class="repnow">立即接单</p>
+            </div>
+        </div>
+    {{/each}}
+    {{else}}
+    暂无数据
+    {{/if}}
     </script>
 
     <script th:inline="javascript">

@@ -1,10 +1,16 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.mapper.DataInstitutionInfoNewMapper;
+import com.qtdbp.trading.service.DataInstitutionInfoNewService;
+import com.qtdbp.trading.service.security.model.SysUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
 
 /**
  * 数据合作页面控制类
@@ -16,6 +22,9 @@ public class DataInstitutionController extends BaseController {
     public static final String PAGE_INSTITUTION = "institution/index";
     private static final String PAGE_INSTITUTION_ADD = "institution/add";
     private static final String PAGE_INSTITUTION_HOME = "institution/home";
+
+    @Autowired
+    private DataInstitutionInfoNewService infoNewService;
 
     /**
      * 服务商列表
@@ -46,7 +55,7 @@ public class DataInstitutionController extends BaseController {
 
         ModelAndView result = new ModelAndView(PAGE_INSTITUTION_HOME);
         result.addObject("id", id) ;
-
+        result.addObject("prod", infoNewService.findCount(id));
         return result ;
     }
 }
