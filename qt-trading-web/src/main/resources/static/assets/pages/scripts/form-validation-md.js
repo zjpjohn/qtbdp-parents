@@ -1,5 +1,6 @@
 var FormValidationMd = function() {
 
+
     /**
      * 表单校验
      * @param options
@@ -27,7 +28,7 @@ var FormValidationMd = function() {
             invalidHandler: function(event, validator) { //display error alert on form submit              
                 success.hide();
                 error.show();
-                App.scrollTo(error, -200);
+                scrollTo(error, -200);
             },
 
             errorPlacement: function(error, element) {
@@ -59,7 +60,7 @@ var FormValidationMd = function() {
                 error.hide();
 
                 // 屏蔽提交按钮，防止页面重复提交操作
-                var btn = Ladda.create( document.querySelector( 'button[type=submit]' ) );
+                var btn = Ladda.create( document.querySelector( 'input[type=submit]' ) );
 
                 $(form).ajaxSubmit({
                     dataType:"json",
@@ -68,11 +69,14 @@ var FormValidationMd = function() {
                     },
                     success:function( data ){
 
+                        // 调用回调函数
+                        // if($.isFunction(callback)) callback(data) ;
+
                         // 实际开发中需要删除setTimeout
                         setTimeout(function () {
                             btn.stop();
 
-                            Common.toastr({
+                            LoadingData.toastr({
                                 _type: 'success',
                                 _title: '表单提交',
                                 _msg: '数据提交成功'
@@ -83,7 +87,7 @@ var FormValidationMd = function() {
                     error : function ( data ) {
                         btn.stop();
 
-                        Common.toastr({
+                        LoadingData.toastr({
                             _type: 'error',
                             _title: '表单提交',
                             _msg: '网络超时，请重试或者联系管理员'
@@ -93,6 +97,25 @@ var FormValidationMd = function() {
             }
         });
     }
+
+    var scrollTo = function(el, offeset) {
+        var pos = (el && el.size() > 0) ? el.offset().top : 0;
+
+        if (el) {
+            if ($('body').hasClass('page-header-fixed')) {
+                pos = pos - $('.page-header').height();
+            } else if ($('body').hasClass('page-header-top-fixed')) {
+                pos = pos - $('.page-header-top').height();
+            } else if ($('body').hasClass('page-header-menu-fixed')) {
+                pos = pos - $('.page-header-menu').height();
+            }
+            pos = pos + (offeset ? offeset : -1 * el.height());
+        }
+
+        $('html,body').animate({
+            scrollTop: pos
+        }, 'slow');
+    };
 
     return {
         //main function to initiate the module
