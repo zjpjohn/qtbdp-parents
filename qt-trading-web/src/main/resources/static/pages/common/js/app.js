@@ -426,11 +426,42 @@ var App = function () {
                         return _tmp_defaultvalue(v,t) ;
                     }
                 }).appendTo("#institution-container");
+
+                // 加载数据包产品
+                initDatas({userId:data.pageInfo.createId}) ;
+
+                var _id = $("#tab-container").attr("data-id") ;
+                $("#tab-sub-container > a").each(function () {
+
+                    $(this).click(function () {
+
+                        $("#tab-sub-container > a").removeClass("active") ;
+                        $(this).addClass("active") ;
+
+                        var _type = $(this).attr("data-type") ;
+                        switch (_type) {
+
+                            case "1":
+                                // 加载数据包产品
+                                options._url = "/api/product" ;
+                                options._tmpl = "#tmpl_products" ;
+                                initDatas({userId:_id}) ;
+                                break ;
+
+                            case "2":
+                                // 加载爬虫规则
+                                options._url = "/api/crawlers/role" ;
+                                options._tmpl = "#tmpl_crawlersRules" ;
+                                initDatas({createId:_id}) ;
+                                break ;
+                        }
+
+                    });
+
+                }) ;
+
             });
 
-            // 加载数据包产品
-            options._url = "/api/institutionV2" ; // 重置请求地址
-            initDatas() ;
         }
     };
 }() ;

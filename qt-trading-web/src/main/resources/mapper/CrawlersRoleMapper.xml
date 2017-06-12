@@ -73,9 +73,12 @@
             AND c.type_id in (${dataTypes})
         </if>
           <if test="webType != null ">
-              and web_type = #{webType}
+            AND web_type = #{webType}
           </if>
-          order by ${orderBy} desc
+        <if test="createId != null and createId !=0">
+           AND c.create_id = #{createId}
+        </if>
+        order by ${orderBy} desc
     </select>
 
     <resultMap id="CrawlersRoleMap" type="com.qtdbp.trading.model.CrawlersRoleModel">

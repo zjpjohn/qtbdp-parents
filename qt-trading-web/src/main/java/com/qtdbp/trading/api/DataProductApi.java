@@ -51,6 +51,7 @@ public class DataProductApi extends BaseController{
     @ApiOperation(value="数据包产品数据接口，分页获取")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "数据包产品名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "valIds", value = "属性值Id列表vid1,vid2; 如：1,2", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataStatus", value = "数据类型（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
