@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="keywords" content="钱塘大数据交易中心"/>
+    <meta name="description" content="钱塘大数据交易中心"/>
+    <link rel="stylesheet" href="../css/common.css"/>
+    <link rel="stylesheet" href="../css/usercenter.css"/>
+
+    <title>个人信息</title>
+</head>
+<body>
+
+<div class="cenAll">
+    <div class="center_main floating">
+        <div class="center_left lf">
+            <div class="headbg">
+                <a>
+                    <img class="headpic" th:src="@{${user.head} ? ${user.head} : '/tradecenter/images/user_img.png'}" alt=""/>
+                </a>
+            </div>
+            <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
+            <p class="pername perphone"><a th:text="${user.phone}"></a></p>
+            <p class="perdata">
+                <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
+                <a class="preinfo rt" data-class="persinfo"  id="perfectdatum" href="javascript:;">完善资料</a>
+            </p>
+
+            <ul class="pereach lf floating">
+                <li data-class="overview" ><a href="javascript:;"><span></span> 概览 <b></b>  </a></li>
+                <li data-class="persinfo"  class="active"><a href="javascript:;"><span></span> 个人信息 <b></b> </a></li>
+                <li data-class="myaccount" style="display:none"><a href="javascript:;"><span></span> 我的账户 <b></b> </a></li>
+                <li data-class="myorder"><a href="javascript:;"><span></span> 我的订单 <b></b>  </a></li>
+                <li data-class="myrelease"><a href="javascript:;"><span></span> 我的发布 <b></b> </a></li>
+                <li data-class="dataservice" id="joinservice2"><a th:href="@{/institution/add}"><span></span> 成为数据服务商 <b></b> </a></li>
+            </ul>
+
+        </div>
+        <div class="center_right rt">
+            <!--个人信息-->
+            <div class="persinfo2 active" id="personaldata">
+                <form action="" id="perdetail">
+                    <input type="hidden" name="id" value="${id}"/>
+                    <div class="headimgs">
+                        <img src="images/index_06.png" onerror="this.src='images/index_03.png" alt="" class="peronimg"/>
+                        <a href="javascript:;" class="inputimg">上传新的头像
+                            <input type="file"  id="upheadimg"/>
+                            <input type="hidden" name="head" id="realHead">
+                        </a>
+                        <a href="javascript:;" class="savechange rt" id="savealter">保存更改</a>
+                    </div>
+
+                    <div class="pars_infor">
+                        <p class="personal_name">昵称</p>
+                        <input type="text" class="personal_nameval" value="${nick}" name="nick"/>
+
+                        <p>手机号</p>
+                        <input type="text" class="pers_input" id="phoneNUM" value="${phone}" name="phone"/>
+                        <a class="error">请输入正确的手机号码</a>
+
+                        <!--<div style="display:none;">
+                            <p class="pers_names">姓名</p>
+                            <input type="text" class="pers_input" name=""/>
+                            <br/> <a href="javascript:;">去实名认证</a>
+
+                            <p class="pers_names">邮箱</p>
+                            <input type="text" class="pers_input" id="person_emal"/>
+                            <a class="error">请输入正确的邮箱</a>
+                        </div>-->
+
+                        <p class="pers_names">用户类型</p>
+                        <p class="pers_input pers_geren">个人</p>
+                        <!--<input type="text" class="pers_input" value="${userType}" name="userType"/>-->
+                        <a href="/institution/add">成为数据服务商</a>
+
+                        <p class="pers_names">密码</p>
+                        <input type="password" class="pers_input" value="${pwd}" name="pwd"/>
+                        <br/> <a href="javascript:;" style="display:none">重置密码</a>
+
+                    </div>
+
+                </form>
+            </div>
+            <!--个人信息结束-->
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+
+</body>
+</html>
