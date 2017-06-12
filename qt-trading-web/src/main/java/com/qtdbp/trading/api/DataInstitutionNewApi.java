@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -90,9 +91,12 @@ public class DataInstitutionNewApi extends BaseController {
 
         ModelMap map = new ModelMap();
         DataInstitutionInfoNewModel infoNewModel = null ;
+        HashMap<String, Long> hashMap = null;
         if(id != null) {
             try {
                 infoNewModel = institutionInfoNewService.findInstitutionNewById(id);
+                hashMap = institutionInfoNewService.findCount(infoNewModel.getCreateId());
+                infoNewModel.setCountMap(hashMap);
                 map.put("pageInfo", infoNewModel);
             } catch (Exception e) {
                 logger.error("findInstitutionV2ById has error ,message:" + e.getMessage());

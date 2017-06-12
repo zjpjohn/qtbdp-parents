@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -100,6 +101,16 @@ public class DataInstitutionInfoNewService {
         }
 
         return -1 ;
+    }
+
+    /**
+     * 查询数据服务商数据包商品，爬虫规则商品，数据定制接单数，爬虫规则定制接单数的数量
+     * @param id
+     * @return
+     */
+    public HashMap<String,Long> findCount(Integer id){
+        DataInstitutionInfoNewModel infoNewModel = infoNewMapper.findDataInstitutionInfoNewById(id);
+        return infoNewMapper.findInstitutionInfoCount(infoNewModel.getCreateId());
     }
 
 }

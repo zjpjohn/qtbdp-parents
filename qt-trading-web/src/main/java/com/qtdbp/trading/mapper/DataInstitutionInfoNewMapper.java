@@ -6,6 +6,7 @@ import com.qtdbp.trading.model.PersonalInfoModel;
 import com.qtdbp.trading.utils.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -72,4 +73,11 @@ public interface DataInstitutionInfoNewMapper extends BaseMapper<DataInstitution
      * @return
      */
     Integer insertCompanyInfo(CompanyInfoModel companyInfoModel) ;
+
+    /**
+     * 查询数据服务商数据包商品，爬虫规则商品，数据定制接单数，爬虫规则定制接单数的数量
+     * @param userId
+     * @return
+     */
+    HashMap<String,Long> findInstitutionInfoCount(Integer userId);
 }

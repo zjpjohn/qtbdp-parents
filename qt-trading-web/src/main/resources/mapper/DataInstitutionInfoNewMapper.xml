@@ -170,6 +170,14 @@
         1 )
     </insert>
 
+    <select id="findInstitutionInfoCount" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+        select t1.productCount,t2.roleCount,t3.dataCustomCount,t4.roleCustomCount  from
+          (select count(*) productCount from data_product where user_id=1 ) t1,
+          (select count(*) roleCount from crawlers_role where create_id=1) t2,
+          (select count(*) dataCustomCount from custom_service where create_id=1 and service_type = 2) t3,
+          (select count(*) roleCustomCount from custom_service where create_id=1 and service_type = 1) t4;
+    </select>
+
     <!-- #################################################################### -->
     <!-- ##################################个人资料########################### -->
     <!-- #################################################################### -->

@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Transient;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * 新服务商Model
@@ -50,6 +51,9 @@ public class DataInstitutionInfoNewModel extends BaseModel {
     private PersonalInfoModel personalInfoModel ;   // 个人资料
     @Transient
     private CompanyInfoModel companyInfoModel ;     // 企业资料
+
+    @Transient
+    private HashMap<String, Long> countMap = new HashMap<String, Long>();    //数据包，数据定制，爬虫定制，爬虫规则定制数量map
 
     public Integer getTypeId() {
         return typeId;
@@ -233,5 +237,13 @@ public class DataInstitutionInfoNewModel extends BaseModel {
 
     public void setDataTypes(String dataTypes) {
         this.dataTypes = dataTypes;
+    }
+
+    public HashMap<String, Long> getCountMap() {
+        return countMap;
+    }
+
+    public void setCountMap(HashMap<String, Long> countMap) {
+        this.countMap = countMap;
     }
 }
