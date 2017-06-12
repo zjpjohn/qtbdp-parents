@@ -14,17 +14,17 @@
 
 <!-- 内容 -->
 <p class="bazaar_top">
-    <a href="/customized/rule">爬虫规则定制</a> > <span>食品药品局监督-商品销量信息采集-多价格版</span>
+    <a href="/customized/rule">爬虫规则定制</a> > <span th:text="${prod.name}">食品药品局监督-商品销量信息采集-多价格版</span>
 </p>
 
 <div class="reptile_all floating">
     <div class="reptile_left lf">
         <div class="lfmassage">
-            <p class="letitle">食品药品局监督-商品销量信息采集-多价格版</p>
-            <p class="leatext">食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价</p>
-            <p class="leaprice">悬赏金额 <a> ￥300.00</a> <i>接受议价</i>  </p>
+            <p class="letitle" th:text="${prod.name}">食品药品局监督-商品销量信息采集-多价格版</p>
+            <p class="leatext" th:text="${prod.introduction}">食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价食品药品局监督-商品销量信息采集-多价</p>
+            <p class="leaprice">悬赏金额 <a th:text="'￥'+${#numbers.formatDecimal(prod.price , 0, 2)}"> ￥300.00</a> <i>接受议价</i>  </p>
             <p class="leatimers">
-                <span class="leatimersa"> <em></em> 截止时间 : <i>2017年7月2日</i>  </span>
+                <span class="leatimersa"> <em></em> 截止时间 : <i th:text="${#dates.format(prod.endTime,'yyyy/MM/dd HH:mm')}">2017年7月2日</i>  </span>
                 <span class="leatimersb"> <em></em> 数据类别 : <i>医疗</i>  </span>
             </p>
             <a href="javascript:;" class="order">立即接单</a>
@@ -36,15 +36,15 @@
             </li>
             <li class="femcjwz">
                 <span>采集网站</span>
-                www.baidu.com
+                <p th:text="${prod.website}">www.baidu.com</p>
             </li>
             <li class="demancjgm">
                 <span>采集规模</span>
-                100000条
+                <p th:text="${prod.scale}">100000条</p>
             </li>
             <li class="demancjgm">
                 <span>采集字段</span>
-                批准证号，至极名称，配置单位所属辖区，制剂类别，剂型，规格，配置单位名称
+                <p th:text="${prod.dimension}">批准证号，至极名称，配置单位所属辖区，制剂类别，剂型，规格，配置单位名称</p>
             </li>
         </ul>
     </div>
@@ -63,7 +63,6 @@
     nav(5);
 
 </script>
-
 
 </body>
 </html>

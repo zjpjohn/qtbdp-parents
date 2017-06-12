@@ -3,6 +3,7 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.controller.BaseController;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
@@ -10,17 +11,14 @@ import com.qtdbp.trading.model.DataItemModel;
 import com.qtdbp.trading.model.DataProductModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.DataProductService;
-import com.qtdbp.trading.service.FdfsFileService;
+import com.qtdbp.trading.service.DataTypeService;
 import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.trading.utils.CommonUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import com.qtdbp.trading.utils.Message;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,7 @@ public class DataProductApi extends BaseController{
     private DataProductMapper productMapper;
 
     @Autowired
-    private DataTypeMapper dataTypeMapper;
+    private DataTypeService dataTypeService;
 
     //===================================================================
     // 数据包产品API接口
@@ -67,29 +65,15 @@ public class DataProductApi extends BaseController{
     public ModelMap loadDataProducts(DataProductModel productModel) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
-        if(productModel.getOrderBy() == null){
-            productModel.setOrderBy("addtime");
-        }
-
-        List<Integer> list = getAllDataTypeIds(productModel.getDataType());
-        if (list != null && list.size() != 0){
-            String dataTypes = "";
-            for (int i = 0; i<list.size(); i++){
-                if (i == (list.size()-1)){
-                    dataTypes = dataTypes + list.get(i) ;
-                }else {
-                    dataTypes = dataTypes + list.get(i) + ",";
-                }
-            }
-            productModel.setDataTypes(dataTypes);
-        }else {
-            if (productModel.getDataType() != 0) {
-                productModel.setDataTypes(productModel.getDataType()+"");
-            }
-        }
+        if(productModel.getOrderBy() == null || "".equals(productModel.getOrderBy())) productModel.setOrderBy("addtime");
 
         // 设置默认每页显示记录数
         try {
+            int dataType = productModel.getDataType();
+            if (dataType != 0) {
+                String dataTypes = dataTypeService.getDataTypes(dataType);
+                if (dataTypes != null && !"".equals(dataTypes)) productModel.setDataTypes(dataTypes);
+            }
             if(productModel.getRows() == null || productModel.getRows() == 0) productModel.setRows(12);
             List<DataProductModel> productList = productService.findProductsForPage(productModel);
             map.put("pageInfo", new PageInfo<>(productList));
@@ -144,6 +128,44 @@ public class DataProductApi extends BaseController{
         return map;
     }
 
+    @ApiOperation(value = "根据ID查询单条数据包产品接口")
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public ModelMap findProductById(
+            @ApiParam(name = "id", value = "数据包产品Id", required = true) @PathVariable Integer id) throws GlobalException {
+
+        ModelMap map = new ModelMap() ;
+        try {
+            DataProductModel productModel = productService.findProductById(id);
+            map.put("pageInfo", productModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    @ApiOperation(value = "检查是否可以购买数据包产品")
+    @RequestMapping(value = "/check/{id}/{type}", method = RequestMethod.GET)
+    public ModelMap buyData(
+            @ApiParam(name = "id", value = "数据包产品Id", required = true) @PathVariable("id") Integer productId,
+            @ApiParam(name = "type", value = "产品类型，1数据条目 2数据包", required = true) @PathVariable("type") Integer productType){
+
+        ModelMap map = new ModelMap();
+        Message message = new Message() ;
+        // 未登陆请先登录
+        SysUser user = getPrincipal() ;
+        if(user == null) {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("用户请先登录");
+        } else {
+            message = productService.checkBuyData(productId, productType, user.getId());
+        }
+        map.put("result", message) ;
+
+        return map;
+    }
+
     //===================================================================
     // 数据条目API接口
     //===================================================================
@@ -177,29 +199,5 @@ public class DataProductApi extends BaseController{
         }
         return map ;
     }
-
-
-
-    /**
-     * 递归查询数据类型某一节点下所有的叶子节点
-     * @param dataType
-     * @return
-     */
-    private List getAllDataTypeIds(Integer dataType) {
-
-        if (dataType == 0 || dataType == null) return null;
-
-        List<Integer> dataTypeIdsList = new ArrayList<>();
-
-        List<DataTypeModel> list = dataTypeMapper.findDataTypeByParentId(dataType);
-        if (list == null || list.size() == 0) return dataTypeIdsList;
-        for(DataTypeModel model : list){
-            dataTypeIdsList.add(model.getId());
-            List<Integer> idsList = getAllDataTypeIds(model.getId());
-            if(idsList != null && idsList.size() != 0) dataTypeIdsList.addAll(idsList);
-        }
-        return dataTypeIdsList;
-    }
-
 
 }

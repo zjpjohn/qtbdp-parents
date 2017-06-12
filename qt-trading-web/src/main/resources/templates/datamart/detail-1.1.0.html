@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
+    <!-- 引入header布局 -->
+    <top th:replace="layout/top"></top>
+    <!-- 页面自定义css、js  -->
+    <meta name="keywords" content="钱塘大数据交易中心"/>
+    <meta name="description" content="钱塘大数据交易中心 数据商城"/>
+    <link rel="stylesheet" th:href="@{/tradecenter/css/dataMartDetail.css}" />
+</head>
+<body >
+    <!-- 页头-->
+    <!--<div th:include="layout/header::#head" ></div>-->
+    <!--页头结束-->
+
+    <!-- 页头-->
+    <div th:replace="layout/header" /></div>
+    <!--页头结束-->
+
+    <!--主体-->
+    <section class="mart_main main">
+        <!-- 详情页信息 -->
+        <div class="floating">
+            <p class="lf detail_img">
+               <img th:src="@{${prod.pic}}" alt=""/>
+            </p>
+            <div class="lf detail_info">
+                <p class="rt" th:text="'更新时间：'+${#dates.format(prod.editorTime,'yyyy/MM/dd HH:mm')}"></p>
+                <h2 th:text="${prod.designation}"></h2>
+                <div class="infos" th:utext="${prod.dataProfile}"></div>
+                <p class="p1">
+                    <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')"></span>
+                </p>
+                <div th:class="${prod.price}==0?'show isfree free':'isfree'">
+                    <p class="p3">
+                        <a class="buy1" id="freeDownload">免费下载 <i style="display:none;" th:text=" ${prod.id}"></i></a>
+                        <span>已有 <i th:text="${prod.downloadCount}"></i> 人下载</span>
+                    </p>
+                </div>
+                <div th:class="${prod.price}==0?'isfree':'show isfree'">
+                    <p class="p2">
+                        <i th:text="'￥'+${#numbers.formatDecimal(prod.price, 0, 2)}+' / 整包'"></i>
+                        <span>（-）积分</span>
+                        <i th:text="'￥'+${#numbers.formatDecimal(prod.itemPrice , 0, 2)}+' / 条'"></i>
+                        <span>（-）积分</span>
+                    </p>
+                    <p class="p3">
+                        <a class="buy1" id="buydata">购买数据包</a>
+                        <span>已有   <i th:text="${prod.buyCount}"></i> 人购买</span>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <p class="filter">
+            <b>信息列表</b>
+            <a class="active" data-id="0">最新</a>
+            <a data-id="1">价格</a>
+            <a data-id="2">销量</a>
+        </p>
+
+        <!-- 信息列表 -->
+        <div id="loadding" class="loadding">
+            <img th:src="@{/tradecenter/images/loadding.gif}" alt="" />
+        </div>
+
+        <ul id="item-info" class="infor_list floating"></ul>
+
+
+
+
+
+        <!-- 分页开始 -->
+        <div id="pageTool"></div>
+        <!-- 分页结束 -->
+
+        <!--添加的简介-->
+
+        <div th:utext="${prod.introduce}"></div>
+    </section>
+
+    <!--页脚-->
+    <footer th:replace="layout/footer"></footer>
+    <!--页脚结束-->
+    <script th:src="@{/tradecenter/js/query.js}"></script>
+    <script th:src="@{/tradecenter/js/paging.js}"></script>
+    <script th:src="@{/tradecenter/js/pagedata.js}"></script>
+
+
+    <!-- 数据包产品tpml模板 -->
+    <script id="tmpl_items" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+        {{each(i,item) list}}
+        <li>
+            <h2>${$item._substr(item.itemName,10)}</h2>
+            <p class="list_time">日期：${$item._date(item.editorTime)}</p>
+            <p>
+                <span class="liulan">浏览量：${item.viewCount}</span>
+                <span>销售量：${item.downloadCount}</span>
+            </p>
+            <div class="list_mask">
+                <p><i>￥${item.price}</i>（-）积分</p>
+                <!--<a class="list_buy" onclick="buy(${item.id},1);">购买</a>-->
+                <!--<a href="javacript:;" class="list_see">查看详情</a>-->
+            </div>
+        </li>
+        {{/each}}
+    {{else}}
+        暂时没有相关信息
+    {{/if}}
+    </script>
+
+    <script th:inline="javascript">
+        nav(3);
+        if($(".infos").html().length>120){
+            $(".infos").html($(".infos").html().substring(0,120)+"...");
+        }
+        //$(".numbers").html(parseInt(Math.random()*150)+50);
+
+        // 页面请求参数
+        var settings = {
+            url: "/api/product/item",            // 请求地址
+            tmpl_id: "#tmpl_items" ,     // jquery template 模板元素，如：#div_id 或 .class_name
+            target: "#item-info" ,       // 替换html元素，如：#div_id 或 .class_name
+            pager_id: "#pageTool",           // 分页html元素标签
+            params: [{key:"productId",value:[[${prod.id}]] }],
+            size: 20    // 每页显示20
+        }
+
+        // 初始化数据
+        pageData.products(settings) ;
+
+        //点击购买数据包
+        $("#buydata").unbind().click(function(){
+            buy([[${prod.id}]],2);
+        });
+        function buy(id,n){
+            //判断用户是否登录
+            if(!userId){
+                  loginShow();
+                  return false;
+                //location.href = "/login";
+            }
+            $.ajax({
+                type: 'get',
+                url: '/selectOrder/'+id+'/'+n,
+                success: function (data) {
+                    if(data.errorCode){
+                        //todo 弹出提示框该订单已创建....
+                        layer.confirm(data.errorMsg,
+                            {
+                                btn:["确定"]
+                            },
+                            function(index){
+                                layer.close(index);
+                                location.href="/usercenter?order=3" ;
+                            }
+                        );
+                    }else{
+                        location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
+                    }
+                },
+                error: function (data) {
+                    console.log("查询该用户下是否包含此订单失败");
+                }
+            });
+        }
+        $("#freeDownload").unbind().click(function(){
+         //判断用户是否登录
+            if(!userId){
+                loginShow();
+                return false;
+                 //location.href = "/login";
+            }
+            var id=$(this).children("i").html();
+            $.ajax({
+                url: "/api/upload/file/exist/free?productId="+id,
+                type: "get",
+                xhrFields:{withCredentials:true},
+                success: function (data) {
+                    if(data.success){
+                        window.location.href="/downloadFreeProduct/"+id;
+                    }else{
+                        layer.msg("下载数据失败",{icon:5});
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+        });
+    </script>
+</body>
+</html>

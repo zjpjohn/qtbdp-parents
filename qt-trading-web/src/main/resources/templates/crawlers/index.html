@@ -23,79 +23,46 @@
                 <div class="dataclassify">
                     <div class="repclissify">
                         <span class="datarep">数据分类 : </span>
-                        <a href="javascript:;" class="active" data-attr="sjall">全部</a>
-                        <a href="javascript:;" class="sjgy" data-attr="gysj">工业数据</a>
-                        <a href="javascript:;" data-attr="glsj">关联数据</a>
+                        <!-- 一级类目 -->
+                        <span id="type-container" data-tmpl="#tmpl_types" data-subtype="#subtype-container"></span>
                     </div>
                     <div class="repdataall" >
                         <a class="sjall"></a>
-                        <p class="gysj">
-                            <a href="javascript:;">研发设计</a>
-                            <a href="javascript:;">生产制造</a>
-                            <a href="javascript:;">物联网</a>
-                            <a href="javascript:;">工业产品</a>
-                            <a href="javascript:;">物流运输</a>
-                            <a href="javascript:;">行业综合</a>
-                        </p>
-                        <p class="glsj">
-                            <a href="javascript:;">社交网络</a>
-                            <a href="javascript:;">金融财经</a>
-                            <a href="javascript:;">电子商务</a>
-                            <a href="javascript:;">交通出行</a>
-                            <a href="javascript:;">健康医疗</a>
-                            <a href="javascript:;">科研分析</a>
-                            <a href="javascript:;">生活服务</a>
-                            <a href="javascript:;">产业数据</a>
-                            <a href="javascript:;">社会服务</a>
-                            <a href="javascript:;">教育科研</a>
-                            <a href="javascript:;">企业征信</a>
-                            <a href="javascript:;">新闻资讯</a>
-                        </p>
-
+                        <!-- 二级类目 -->
+                        <p class="gysj" id="subtype-container" data-tmpl="#tmpl_subTypes"></p>
                     </div>
                 </div>
                 <!--网站类型-->
-                <p class="webtype">
-                    <span class="datarep">网站类型 : </span>
-                    <a href="javascript:;" class="active">全部</a>
-                    <a href="javascript:;">社交网站</a>
-                    <a href="javascript:;">电商网站</a>
-                    <a href="javascript:;">金融网站</a>
-                    <a href="javascript:;">生活网站</a>
-                    <a href="javascript:;">行业网站</a>
-                    <a href="javascript:;">新闻网站</a>
+                <p class="webtype" id="filter-container">
+                    <span class="datarep" id="webType">
+                        <i class="datarep">网站类型 : </i>
+                        <a href="javascript:;" class="active" data-id="-1">全部</a>
+                        <a href="javascript:;" data-id="1">社交网站</a>
+                        <a href="javascript:;" data-id="2">电商网站</a>
+                        <a href="javascript:;" data-id="3">金融网站</a>
+                        <a href="javascript:;" data-id="4">生活网站</a>
+                        <a href="javascript:;" data-id="5">行业网站</a>
+                        <a href="javascript:;" data-id="6">新闻网站</a>
+                        <a href="javascript:;" data-id="0">其他</a>
+                    </span>
                 </p>
 
                 <!--销量-->
-                <p class="sales">
-                    <a href="javascript:;">销量 <em></em><i></i> </a>
+                <p class="sales" id="order-container">
+                    <a href="javascript:;" data-by="buy_count" data-desc="0">销量 <em></em><i></i> </a>
                     <span></span>
-                    <a href="javascript:;" class="active">最新 <em></em><i></i> </a>
+                    <a href="javascript:;" data-by="create_time" data-desc="0">最新 <em></em><i></i> </a>
                     <span></span>
-                    <a href="javascript:;">价格 <em></em><i></i> </a>
+                    <a href="javascript:;" data-by="price" data-desc="0">价格 <em></em><i></i> </a>
                     <span></span>
-                    <a href="javascript:;">最热 <em></em><i></i> </a>
+                    <a href="javascript:;" data-by="view_count" data-desc="0">最热 <em></em><i></i> </a>
                 </p>
-
-                <!--被筛选框-->
-
-                <div class="repmain active floating">
-                    <img src="/pages/common/images/reptile_03.png" alt="" class="lf"/>
-                    <div class="lf reptexts">
-                        <p class="main_title"><a href="/crawlers/detail/1">淘宝-商品销量信息采集-多彩价格版</a></p>
-                        <p class="main_text">采集字集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集段采集字段采集字段采集字段字段采集字段采集字段采集字字段采集字段采集字段采集字采集字段采集</p>
-                        <p class="main_min">
-                            <span class="main_domain"><em></em>采集网站: www.hhhh.com</span>
-                            <span>服务商家 : <i>钱塘大数据</i></span>
-                        </p>
-                    </div>
-                    <div class="lf priceright">
-                        <p class="repprice">￥65.00</p>
-                        <p class="reppeople">32人已购买</p>
-                        <p class="repnow">立即购买</p>
-                    </div>
-                </div>
-
+                <!-- 产品内容 -->
+                <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
+                <div class="store_main floating" id="data-container"></div>
+                <!-- 分页开始 -->
+                <div id="pageTool"></div>
+                <!-- 分页结束 -->
                 <em class="mainbottom"></em>
 
             </div>
@@ -122,6 +89,48 @@
 
 
         <!-- 内容结束 -->
+        <!-- 一级类目数据模板 -->
+<script id="tmpl_types" type="text/x-jquery-tmpl">
+    {{if pageInfo.length>0}}
+        <a href="javascript:;" class="active" data-id="0">全部</a>
+        {{each(i,prod) pageInfo}}
+            <a href="javascript:;" data-id="${prod.id}">${prod.name}</a>
+        {{/each}}
+    {{/if}}
+</script>
+        <!-- 二级类目数据模板 -->
+<script id="tmpl_subTypes" type="text/x-jquery-tmpl">
+    {{if pageInfo.length>0}}
+        {{each(i,prod) pageInfo}}
+            <a href="javascript:;" data-id="${prod.id}">${prod.name}</a>
+        {{/each}}
+    {{/if}}
+</script>
+        <!-- 产品数据模板 -->
+<script id="tmpl_products" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+    {{each(i,prod) list}}
+        <div class="repmain active floating">
+            <img src="${prod.logo}" alt="" class="lf"/>
+                <div class="lf reptexts">
+                    <p class="main_title"><a href="/crawlers/detail/${prod.id}">${prod.name}</a></p>
+                    <p class="main_text">${prod.collectionField}</p>
+                    <p class="main_min">
+                        <span class="main_domain"><em></em>采集网站: ${prod.webSite}</span>
+                        <span>服务商家 : <i> ${prod.username}</i></span>
+                    </p>
+                </div>
+                <div class="lf priceright">
+                    <p class="repprice">￥ ${prod.price}</p>
+                    <p class="reppeople">${prod.buyCount}人已购买</p>
+                    <p class="repnow">立即购买</p>
+                </div>
+        </div>
+    {{/each}}
+    {{else}}
+    暂无数据
+    {{/if}}
+</script>
 
         <!-- 页脚 -->
         <footer th:replace="layout/footer"></footer>
@@ -129,9 +138,12 @@
     </body>
 </html>
 
-<script src="/pages/common/js/jquery-1.11.1.min.js"></script>
+<!-- 页面数据加载 -->
+<script src="/pages/common/js/app.js" type="text/javascript"></script>
 <script>
     nav(3);
-
+    jQuery(document).ready(function() {
+        App.initCrawlers();
+    });
 
 </script>

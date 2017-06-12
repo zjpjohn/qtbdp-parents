@@ -2,21 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
-    <!-- 引入header布局 -->
-    <top th:replace="layout/top"></top>
-    <!-- 页面自定义css、js  -->
-    <meta name="keywords" content="钱塘大数据交易中心"/>
-    <meta name="description" content="钱塘大数据交易中心 数据商城"/>
-    <link rel="stylesheet" th:href="@{/tradecenter/css/dataMartDetail.css}" />
-</head>
-<body >
-    <!-- 页头-->
-    <!--<div th:include="layout/header::#head" ></div>-->
-    <!--页头结束-->
+    <title>数据市场 | 钱塘大数据交易中心</title>
+    <div th:replace="layout/top"/>
 
+    <link rel="stylesheet" href="/pages/common/css/datamartdetail.css"/>
+    <!-- 页面数据加载 -->
+    <script src="/pages/common/js/app.js" type="text/javascript"></script>
+</head>
+
+<body class="allindex">
     <!-- 页头-->
     <div th:replace="layout/header" /></div>
     <!--页头结束-->
@@ -24,73 +18,68 @@
     <!--主体-->
     <section class="mart_main main">
         <!-- 详情页信息 -->
-        <div class="floating">
-            <p class="lf detail_img">
-               <img th:src="@{${prod.pic}}" alt=""/>
-            </p>
-            <div class="lf detail_info">
-                <p class="rt" th:text="'更新时间：'+${#dates.format(prod.editorTime,'yyyy/MM/dd HH:mm')}"></p>
-                <h2 th:text="${prod.designation}"></h2>
-                <div class="infos" th:utext="${prod.dataProfile}"></div>
-                <p class="p1">
-                    <span th:each="attr : ${attrModels}" th:text="${attr.name}+'：'+ (${attr.valName} ?:'-')"></span>
-                </p>
-                <div th:class="${prod.price}==0?'show isfree free':'isfree'">
-                    <p class="p3">
-                        <a class="buy1" id="freeDownload">免费下载 <i style="display:none;" th:text=" ${prod.id}"></i></a>
-                        <span>已有 <i th:text="${prod.downloadCount}"></i> 人下载</span>
-                    </p>
-                </div>
-                <div th:class="${prod.price}==0?'isfree':'show isfree'">
-                    <p class="p2">
-                        <i th:text="'￥'+${#numbers.formatDecimal(prod.price, 0, 2)}+' / 整包'"></i>
-                        <span>（-）积分</span>
-                        <i th:text="'￥'+${#numbers.formatDecimal(prod.itemPrice , 0, 2)}+' / 条'"></i>
-                        <span>（-）积分</span>
-                    </p>
-                    <p class="p3">
-                        <a class="buy1" id="buydata">购买数据包</a>
-                        <span>已有   <i th:text="${prod.buyCount}"></i> 人购买</span>
-                    </p>
-                </div>
+        <div id="product-container"></div>
 
-            </div>
-        </div>
-
-        <p class="filter">
+        <!-- 数据项列表开始 -->
+        <p class="filter" id="order-container">
             <b>信息列表</b>
             <a class="active" data-id="0">最新</a>
             <a data-id="1">价格</a>
             <a data-id="2">销量</a>
         </p>
-
-        <!-- 信息列表 -->
-        <div id="loadding" class="loadding">
-            <img th:src="@{/tradecenter/images/loadding.gif}" alt="" />
-        </div>
-
-        <ul id="item-info" class="infor_list floating"></ul>
-
-
-
-
-
-        <!-- 分页开始 -->
+        <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
+        <ul id="data-container" class="infor_list floating"></ul>
         <div id="pageTool"></div>
-        <!-- 分页结束 -->
-
-        <!--添加的简介-->
-
-        <div th:utext="${prod.introduce}"></div>
+        <!-- 数据项列表结束 -->
     </section>
 
     <!--页脚-->
     <footer th:replace="layout/footer"></footer>
     <!--页脚结束-->
-    <script th:src="@{/tradecenter/js/query.js}"></script>
-    <script th:src="@{/tradecenter/js/paging.js}"></script>
-    <script th:src="@{/tradecenter/js/pagedata.js}"></script>
 
+    <!-- 数据产品详情 -->
+    <script id="tmpl_product" type="text/x-jquery-tmpl">
+        <div class="floating">
+            <p class="lf detail_img">
+               <img src="${pic}" alt=""/>
+            </p>
+            <div class="lf detail_info">
+                <p class="rt">更新时间：${$item._date(editorTime)}</p>
+                <h2>${designation}</h2>
+                <div class="infos">${dataProfile}</div>
+                <p class="p1">
+                    <span>产品类型：${$item._def(dataStatus,1)}</span>
+                    <span>数据格式：${$item._def(dataFormat)}</span>
+                    <span>数据规模：${$item._def(dataScale)} 条</span>
+                    <span>数据来源：${$item._def(dataSrc,2)}</span>
+                </p>
+                {{if price == 0}}
+                <div class="show isfree free">
+                    <p class="p3">
+                        <a class="buy1" id="download-container">免费下载</a>
+                        <span>已有 <i>${downloadCount}</i> 人下载</span>
+                    </p>
+                </div>
+                {{else}}
+                <div class="show isfree">
+                    <p class="p2">
+                        <i>￥${$item._num(price)} / 整包</i>
+                        <span>（-）积分</span>
+                        <i>￥${$item._num(itemPrice)} / 条</i>
+                        <span>（-）积分</span>
+                    </p>
+                    <p class="p3">
+                        <a class="buy1" id="buy-container">购买数据包</a>
+                        <span>已有 <i>${buyCount}</i> 人购买</span>
+                    </p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+
+        <p class="filter"><b>数据详情</b></p>
+        <div>{{html introduce}}</div>
+    </script>
 
     <!-- 数据包产品tpml模板 -->
     <script id="tmpl_items" type="text/x-jquery-tmpl">
@@ -116,84 +105,9 @@
     </script>
 
     <script th:inline="javascript">
-        nav(3);
-        if($(".infos").html().length>120){
-            $(".infos").html($(".infos").html().substring(0,120)+"...");
-        }
-        //$(".numbers").html(parseInt(Math.random()*150)+50);
-
-        // 页面请求参数
-        var settings = {
-            url: "/api/product/item",            // 请求地址
-            tmpl_id: "#tmpl_items" ,     // jquery template 模板元素，如：#div_id 或 .class_name
-            target: "#item-info" ,       // 替换html元素，如：#div_id 或 .class_name
-            pager_id: "#pageTool",           // 分页html元素标签
-            params: [{key:"productId",value:[[${prod.id}]] }],
-            size: 20    // 每页显示20
-        }
-
-        // 初始化数据
-        pageData.products(settings) ;
-
-        //点击购买数据包
-        $("#buydata").unbind().click(function(){
-            buy([[${prod.id}]],2);
-        });
-        function buy(id,n){
-            //判断用户是否登录
-            if(!userId){
-                  loginShow();
-                  return false;
-                //location.href = "/login";
-            }
-            $.ajax({
-                type: 'get',
-                url: '/selectOrder/'+id+'/'+n,
-                success: function (data) {
-                    if(data.errorCode){
-                        //todo 弹出提示框该订单已创建....
-                        layer.confirm(data.errorMsg,
-                            {
-                                btn:["确定"]
-                            },
-                            function(index){
-                                layer.close(index);
-                                location.href="/usercenter?order=3" ;
-                            }
-                        );
-                    }else{
-                        location.href="/getOrderInfoAndGoto/"+id+"/"+n+"?order=4" ;
-                    }
-                },
-                error: function (data) {
-                    console.log("查询该用户下是否包含此订单失败");
-                }
-            });
-        }
-        $("#freeDownload").unbind().click(function(){
-         //判断用户是否登录
-            if(!userId){
-                loginShow();
-                return false;
-                 //location.href = "/login";
-            }
-            var id=$(this).children("i").html();
-            $.ajax({
-                url: "/api/upload/file/exist/free?productId="+id,
-                type: "get",
-                xhrFields:{withCredentials:true},
-                success: function (data) {
-                    if(data.success){
-                        window.location.href="/downloadFreeProduct/"+id;
-                    }else{
-                        layer.msg("下载数据失败",{icon:5});
-                    }
-                },
-                error:function(data){
-                    console.log(data);
-                }
-            })
-        });
+        jQuery(document).ready(function() {
+            App.initDatamartDetail([[${id}]]);
+        })
     </script>
 </body>
 </html>

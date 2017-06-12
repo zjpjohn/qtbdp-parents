@@ -102,10 +102,10 @@
         <div class="store_one">
             <!--<a href="/datamart/detail/${prod.id}" class="list_img" target="_blank" style="background:url(${prod.pic}) no-repeat center center;background-size:cover;"> </a>-->
             <img src="${prod.pic}" alt=""/>
-            <h2>${prod.designation}</h2>
+            <h2><a href="/datamart/detail/${prod.id}" class="list_title">${prod.designation}</a></h2>
             <p class="sto_main">${prod.dataProfile}</p>
             <p class="store_small">
-                <span class="lf jtcx">交通出行 | <i>78条</i> </span>
+                <span class="lf jtcx">交通出行 | <i>${prod.dataScale} 条</i> </span>
                 {{if prod.price === 0}}
                     <span class="rt mf" style="color: #26C281;">免费</span>
                 {{else}}
@@ -122,7 +122,6 @@
     jQuery(document).ready(function() {
         App.initDatamart();
     });
-    nav(2);
 </script>
 
 <!-- 内容结束 -->
