@@ -3,6 +3,7 @@ package com.qtdbp.trading.controller;
 import com.qtdbp.trading.mapper.DataInstitutionInfoNewMapper;
 import com.qtdbp.trading.service.DataInstitutionInfoNewService;
 import com.qtdbp.trading.service.security.model.SysUser;
+import org.docx4j.wml.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,10 @@ public class DataInstitutionController extends BaseController {
     public static final String PAGE_INSTITUTION = "institution/index";
     private static final String PAGE_INSTITUTION_ADD = "institution/add";
     private static final String PAGE_INSTITUTION_HOME = "institution/home";
+
+    private static final String PAGE_INSTITUTION_ADD_PRODUCT = "institution/add-product";
+    private static final String PAGE_INSTITUTION_ADD_NEW = "institution/add-new";
+
 
     @Autowired
     private DataInstitutionInfoNewService infoNewService;
@@ -57,5 +62,26 @@ public class DataInstitutionController extends BaseController {
         result.addObject("id", id) ;
         result.addObject("prod", infoNewService.findCount(id));
         return result ;
+    }
+
+    /**
+     * 跳转到数据服务商添加数据包产品页面
+     * @return
+     */
+    @RequestMapping(value = "/institution/add/product", method = RequestMethod.GET)
+    public String addProduct() {
+
+        return PAGE_INSTITUTION_ADD_PRODUCT;
+    }
+
+
+    /**
+     * 个人用户升级成服务商(新)
+     * @return
+     */
+    @RequestMapping(value = "/institution/add/new",method = RequestMethod.GET)
+    public String addInstitution() {
+
+        return PAGE_INSTITUTION_ADD_NEW ;
     }
 }
