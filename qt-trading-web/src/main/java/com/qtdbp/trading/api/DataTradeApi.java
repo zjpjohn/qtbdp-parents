@@ -7,6 +7,7 @@ import com.qtdbp.trading.alipay.util.AlipayNotify;
 import com.qtdbp.trading.alipay.util.AlipaySubmit;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.constants.AppConstants;
+import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
@@ -19,11 +20,11 @@ import com.qtdbp.trading.service.DataProductService;
 import com.qtdbp.trading.service.DataTransactionOrderService;
 import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.trading.utils.AliPayOrderUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import com.qtdbp.trading.utils.Message;
+import io.swagger.annotations.*;
 import org.apache.ibatis.transaction.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,9 @@ import java.util.Map;
 @Api(description = "订单接口 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/trade")
-public class DataTradeApi {
+public class DataTradeApi extends BaseController {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
     @Autowired
     private DataProductService productService;
@@ -75,22 +78,29 @@ public class DataTradeApi {
     //===================================================================
 
     @ApiOperation(value="最新前5条订单数据接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "page", value = "前几条数据（如：5）", defaultValue = "5", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
     @ResponseBody
-    @RequestMapping(value = "/neworders", method = RequestMethod.GET)
-    public ModelMap loadDataNewOrders(int userId, int page) throws GlobalException {
+    @RequestMapping(value = "/orders/{page}", method = RequestMethod.GET)
+    public ModelMap loadDataNewOrders(
+            @ApiParam(name = "page", value = "前几条数据（如：5）") @PathVariable int page) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
-        // 设置默认每页显示记录数
-        try {
-            List<DataTransactionOrderModel> orderModelList = orderService.findNewOrdersByUserId(userId, page);
-            map.put("pageInfo", new PageInfo<>(orderModelList));
-        } catch (Exception e) {
-            throw new GlobalException(e.getMessage()) ;
+
+        Message message = new Message() ;
+        SysUser user = getPrincipal() ;
+        if(user == null) {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("用户请先登录");
+        } else {
+            try {
+                List<DataTransactionOrderModel> orderModelList = orderService.findNewOrdersByUserId(user.getId(), page);
+                map.put("pageInfo", new PageInfo<>(orderModelList));
+            } catch (Exception e) {
+                logger.error("【"+System.currentTimeMillis()+"】 最新前5条订单数据接口(loadDataNewOrders) 错误："+e.getMessage());
+                throw new GlobalException(e.getMessage()) ;
+            }
         }
+        map.put("result", message) ;
 
         return map ;
     }
@@ -98,6 +108,7 @@ public class DataTradeApi {
     @ApiOperation(value="订单数据接口，分页获取")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户ID（如：1）", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "productType", value = "订单类型，1条目 2数据包 3爬虫规则", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "orderState", value = "订单状态（1待支付、2已撤销、3已支付）,不传表示所有", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：10）", defaultValue = "10", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)

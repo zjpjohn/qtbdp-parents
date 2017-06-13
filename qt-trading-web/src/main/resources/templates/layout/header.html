@@ -12,9 +12,9 @@
 		<!--如果已登录-->
 		<div  th:if="${user}">
 			<div class="lf fabu_btns">
-				<p>发布22</p>
-				<a th:href="@{/demand/buy/add}">需求发布</a>
-				<a th:href="@{/institution/add}" >加盟服务</a>
+				<p>发布</p>
+				<a th:href="@{/demand/buy/add}">数据定制</a>
+				<a th:href="@{/institution/add}" >爬虫规则定制</a>
 				<!--<a>数据发布</a>-->
 			</div>
 		</div>
@@ -23,8 +23,8 @@
 		<div  th:unless="${user}">
 			<div class="lf fabu_btns">
 				<p>发布</p>
-				<a href="javascript:;"  onclick="loginShow(this)">需求发布</a>
-				<a href="javascript:;"  onclick="loginShow(this)">加盟服务</a>
+				<a href="javascript:;"  onclick="loginShow(this)">数据定制</a>
+				<a href="javascript:;"  onclick="loginShow(this)">爬虫规则定制</a>
 				<!--<a>数据发布</a>-->
 			</div>
 		</div>

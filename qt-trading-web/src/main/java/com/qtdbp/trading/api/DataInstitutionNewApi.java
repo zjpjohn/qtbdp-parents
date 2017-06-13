@@ -6,6 +6,7 @@ import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataInstitutionInfoNewModel;
 import com.qtdbp.trading.service.DataInstitutionInfoNewService;
+import com.qtdbp.trading.service.DataTypeService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,8 @@ public class DataInstitutionNewApi extends BaseController {
 
     @Autowired
     protected DataInstitutionInfoNewService institutionInfoNewService ;
+    @Autowired
+    private DataTypeService dataTypeService;
 
     //===================================================================
     // 定制服务API接口
@@ -57,22 +60,11 @@ public class DataInstitutionNewApi extends BaseController {
             // 默认时间排序
             if(infoNewModel.getOrderBy() == null) infoNewModel.setOrderBy("create_time");
 
-            /*List<Integer> list = getAllDataTypeIds(infoNewModel.getTypeId());
-            if (list != null && list.size() != 0){
-                String dataTypes = "";
-                for (int i = 0; i<list.size(); i++){
-                    if (i == (list.size()-1)){
-                        dataTypes = dataTypes + list.get(i) ;
-                    }else {
-                        dataTypes = dataTypes + list.get(i) + ",";
-                    }
-                }
-                infoNewModel.setDataTypes(dataTypes);
-            }else {
-                if (infoNewModel.getTypeId() != 0) {
-                    infoNewModel.setDataTypes(infoNewModel.getTypeId().toString());
-                }
-            }*/
+            int dataType = infoNewModel.getTypeId();
+            if (dataType != 0) {
+                String dataTypes = dataTypeService.getDataTypes(dataType);
+                if (dataTypes != null && !"".equals(dataTypes)) infoNewModel.setDataTypes(dataTypes);
+            }
 
             List<DataInstitutionInfoNewModel> infoNewModels = institutionInfoNewService.findInstitutionNewForPage(infoNewModel);
             map.put("pageInfo", new PageInfo<>(infoNewModels));

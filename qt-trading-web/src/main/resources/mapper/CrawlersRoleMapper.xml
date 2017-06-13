@@ -66,9 +66,15 @@
     
     <select id="findRulesByCondition" resultMap="CrawlersRoleMap">
         select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price, c.buy_count, c.web_type,
-         c.web_site,  c.collection_field, c.create_time, s.name username  from crawlers_role as c
+         c.web_site,  c.collection_field, c.create_time, s.name username,c.audit_status,c.is_used  from crawlers_role as c
         left join data_institution_info_new s on c.create_id = s.create_id
-        where c.is_used = 1 and c.audit_status = 1
+        where 1 = 1
+        <if test="isUsed != null">
+            AND c.is_used = #{isUsed}
+        </if>
+        <if test="auditStatus != null">
+            AND c.audit_status = #{auditStatus}
+        </if>
         <if test="dataTypes != null ">
             AND c.type_id in (${dataTypes})
         </if>
