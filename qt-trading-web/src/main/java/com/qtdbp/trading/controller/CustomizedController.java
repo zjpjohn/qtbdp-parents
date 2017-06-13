@@ -26,6 +26,8 @@ public class CustomizedController extends BaseController {
     public static final String PAGE_CUSTOMIZED_DATA_DETAIL = "customized/data-detail";
     public static final String PAGE_CUSTOMIZED_ROLE_DETAIL = "customized/rule-detail";
 
+    public static final String PAGE_CUSTOMIZED_ADD_DATA = "customized/add-data";
+
     @Autowired
     private CustomizedService customizedService;
     /**
@@ -74,5 +76,15 @@ public class CustomizedController extends BaseController {
         if (serviceModel == null) throw new GlobalException("404 数据定制为空");
         result.addObject("prod", serviceModel);
         return result;
+    }
+
+    /**
+     * 跳转到添加数据定制页面
+     * @return
+     */
+    @RequestMapping(value = "/customized/data/insert", method = RequestMethod.GET)
+    public String addBusiness() {
+
+        return PAGE_CUSTOMIZED_ADD_DATA;
     }
 }

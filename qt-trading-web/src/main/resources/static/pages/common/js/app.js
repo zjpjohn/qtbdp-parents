@@ -113,6 +113,8 @@ var App = function () {
             if(_count != options._total) {
                 options._total = _count ;
 
+                if(!$(options._pager)) return ;
+
                 $(options._pager).html("") ;
                 // 给参数赋数据总数，分页方法paging()用到
                 $(options._pager).Paging({
@@ -417,7 +419,6 @@ var App = function () {
             initOrderByCond() ;
             initDatas() ;
         },
-
         // 服务商主页
         initInstitutionHome: function (id) {
             nav(6);
@@ -531,6 +532,52 @@ var App = function () {
                     // 爬虫规则订单
                     break ;
             }
+        },
+        // 个人信息
+        initPersonInfo: function (id) {
+
+            // 加载个人信息
+            LoadingData.request({url: "/api/user/"+id}, function (data) {
+
+                $("#tmpl_userinfo").tmpl(data.pageInfo).appendTo("#data-container");
+
+                var _options = {
+                    _form: "#perdetail",
+                    _rules: {
+                        head: {
+                            url:true
+                        },
+                        nick: {
+                            required: true
+                        },
+                        pwd: {
+                            rangelength: [6, 20]//长度为6-20之间
+                        }
+                    }
+                }
+
+                FormValidationMd.init(_options,function () {
+                    // alert("submit")
+                });
+            });
+
+            // 点击上传头像
+            $(document).on("change","#upheadimg",function() {
+                var formData = new FormData();
+                formData.append("img",$("#upheadimg")[0].files[0]);
+
+                LoadingData.request({
+                    url: "/api/upload/img",
+                    type: "POST",
+                    file: true, // 文件上传标识
+                    data: formData
+                }, function (data) {
+                    $(".peronimg").attr("src", data.img);
+                    $("#realHead").val(data.img);
+                });
+            });
+
+
         }
     };
 }() ;
