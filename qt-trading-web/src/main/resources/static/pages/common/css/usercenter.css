@@ -186,9 +186,9 @@
     width:100%;
     min-height:680px;
     background: #fff;
-    position:absolute;
+    /*position:absolute;
     top:0px;
-    left:0px;
+    left:0px;*/
     display: none;
 }
 .center_right>div.active{
@@ -773,9 +773,11 @@ tbody{
     text-align:left;
 }
 
+/*
 .myorder2 thead tr>th:nth-child(3){
     width:300px;
 }
+*/
 
 
 

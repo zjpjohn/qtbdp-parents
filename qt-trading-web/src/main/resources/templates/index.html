@@ -4,7 +4,7 @@
     <head>
         <title>钱塘大数据交易中心</title>
         <div th:replace="layout/top" /></div>
-
+        <link rel="stylesheet" href="/pages/common/css/nivo-slider.css" />
         <link rel="stylesheet" href="/pages/common/css/index.css" />
     </head>
 <body >
@@ -13,20 +13,31 @@
     <!-- 页头结束 -->
 
     <!-- banner图开始-->
-    <!--<div id="wrapper">
+    <div id="wrapper">
         <div class="slider-wrapper theme-default">
             <div id="slider" class="nivoSlider">
                 <a>
-                    <img th:src="@{/tradecenter/images/banner1.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
+                    <img th:src="@{/pages/common/images/banner10.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
                     <i class="knowmore" onclick="location.href='/datamart';"></i>
                 </a>
                 <a>
-                    <img th:src="@{/tradecenter/images/banner2.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
+                    <img th:src="@{/pages/common/images/banner20.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
                     <i class="joinus" onclick="location.href='/institution/add';"></i>
                 </a>
             </div>
         </div>
-    </div>-->
+        <div class="navinput">
+            <p class="navtop">
+                <a href="javascript:;"> 数据需求</a>
+                <a href="javascript:;"> 商务合作</a>
+            </p>
+            <form action="">
+
+
+            </form>
+
+        </div>
+    </div>
     <!--banner结束-->
 
     <!--工业数据开始-->
@@ -260,7 +271,7 @@
     <footer th:replace="layout/footer"></footer>
     <!-- 页脚结束 -->
 
-    <script src="/assets/global/plugins/jquery.nivo.slider.pack.js"></script>
+    <!--<script src="/assets/global/plugins/jquery.nivo.slider.pack.js"></script>-->
     <script>
         nav(1);
         //合作关系往左移
@@ -290,10 +301,6 @@
         $("#slider>a>i").mouseleave(function(){
             $(this).parent().removeClass("hover");
         });
-
-
-
-
 
     </script>
 </body>

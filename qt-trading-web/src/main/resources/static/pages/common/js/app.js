@@ -417,6 +417,7 @@ var App = function () {
             initOrderByCond() ;
             initDatas() ;
         },
+
         // 服务商主页
         initInstitutionHome: function (id) {
             nav(6);
@@ -501,6 +502,79 @@ var App = function () {
 
             });
 
+        },
+
+        /****************个人中心*****************/
+        //概览 最新订单、最新发布
+
+        initUserCenter: function () {
+            options._url = "/api/trade/neworders" ; // 最新订单
+            options._tmpl = "#tmpl_orders" ;
+            options._container = "#order-container" ;
+            initDatas() ;
+
+
+            options._url = "/api/demand/demandorders" ; // 最新发布
+            options._tmpl = "#tmpl_newfabuList" ;
+            options._container = "#newfabuList" ;
+            initDatas() ;
+        },
+        buyusercenter:function(type){
+            switch (type) {
+                case 0:
+                    options._url = "/api/trade/orders" ; // 数据订单
+                    options._tmpl = "#tmpl_dataorder" ;
+                    options._container = "#dataorder" ;
+                    initDatas() ;
+                    break ;
+                case 1:
+                    // 爬虫规则订单
+                    break ;
+            }
         }
     };
 }() ;
+
+
+
+//订单支付
+function pay(no,amount,subject) {
+    var orderData = {"orderNo":no,"amount":amount,"subject":subject};
+    $.ajax({
+        url: '/api/trade/alipayapi',
+        type: 'post',
+        data: JSON.stringify(orderData),//$.parseJSON( jsonstr );
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data) {
+            if(data != null){
+                $("#aliBack").html(data.pageInfo.sHtmlText);//这里content是一个普通的String
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+//下载函数封装
+function orderDownload(orderId){
+    $.ajax({
+        url: "/api/upload/file/exist?orderNo="+orderId,
+        type: "get",
+        xhrFields:{withCredentials:true},
+        success: function (data) {
+            if(data.success){
+                window.location.href="/download/"+orderId;
+            }else{
+                layer.msg("当前数据已失效",{icon:5});
+            }
+        }
+    })
+}
+
+
+
+
+
+
