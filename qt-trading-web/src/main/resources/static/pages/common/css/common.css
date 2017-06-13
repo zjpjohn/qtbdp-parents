@@ -159,7 +159,11 @@ nav{
 .nav_list{
     font-size: 0px;
 }
-.nav_list>a:hover,.nav_list>a.active{
+/*.nav_list>a:hover,.nav_list>a.active{
+    color:#0076C8;
+    background:#fff;
+}*/
+.nav_list>a.active{
     color:#0076C8;
     background:#fff;
 }
