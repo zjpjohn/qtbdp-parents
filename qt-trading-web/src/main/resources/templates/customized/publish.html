@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+
+    <title>发布需求- 爬虫规则</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <div th:replace="layout/top"/>
+    <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
+
+
+</head>
+<body>
+<!-- 页头-->
+<div th:replace="layout/header" /></div>
+<!--页头结束-->
+<section class="main">
+    <!-- 面包屑导航 -->
+    <div class="header_nav">
+        爬虫规则定制
+        <span class="gt">&gt;</span>
+        <span class="active">发布需求</span>
+    </div>
+
+    <!-- 表单 -->
+    <div class="main_content floating">
+        <h2 class="form_title">发布需求 <span>爬虫规则定制</span> </h2>
+        <form class="trade_form">
+            <div class="form_group">
+                <p class="group_title">
+                    <b>规则名称</b> <i>*</i><span>8-50个字符</span>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="large_input" name=""/>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>规则描述</b> <i>*</i>
+                </p>
+                <div class="form_control">
+                    <textarea name="" class="textarea_control rule_desc"></textarea>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>采集字段</b> <i>*</i><span>每个字段以 "，" 隔开</span>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="large_input" name=""/>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>采集规模</b> <i>*</i><span>期望定制到的数据量</span>
+                </p>
+                <div class="form_control">
+                    <input type="number" class="small_input" name=""/> 条
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据类别</b> <i>*</i>
+                </p>
+                <div class="form_control">
+                    <select name="" class="small_input">
+                        <option value="">关联数据</option>
+                        <option value="">关联数据</option>
+                        <option value="">关联数据</option>
+                        <option value="">关联数据</option>
+                    </select>
+                    <select name="" class="small_input">
+                        <option value="">关联数据</option>
+                        <option value="">关联数据</option>
+                        <option value="">关联数据</option>
+                        <option value="">关联数据</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <div class="group_title">
+                    <b>悬赏金额</b> <i>*</i><span> >=300元 </span> <div class="intro_tips"><span>?</span></div>
+                </div>
+                <div class="form_control reward_amount">
+                    <input type="number" class="small_input" name=""/> 元
+                    <label><input type="checkbox" class="radio_input"/>接受议价</label>
+                    <div  class="intro_tips"><span>?</span> <div class="intro_tips_content"><span class="form_arrow"></span> 什么是议价？</div></div>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>截止时间</b> <i>*</i><span>到期无人投稿将自动下架，可申请退回赏金</span>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="small_input about_time" name=""/>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>采集网站</b> <span>例如：www.qtbigdata.com</span>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="small_input" name=""/>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>联系方式</b> <span>仅显示给接单的服务商</span>
+                </p>
+                <p class="group_sub_title">
+                    <b>手机号码</b> <i>*</i>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="small_input" name=""/>
+                </div>
+                <div class="form_control">
+                    <input type="text" class="code_input" name=""/>
+                    <!-- diabled样式已经写好 -->
+                    <a href="javascript:;" class="get_phone_code ">获取验证码</a>
+                </div>
+
+
+                <p class="group_sub_title">
+                    <b>联系QQ</b>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="small_input" name=""/>
+                </div>
+            </div>
+
+
+        </form>
+        <!-- 右侧注意事项 -->
+        <div class="attention">
+            <p class="attention_title">
+                <i>!</i>注意事项
+            </p>
+        </div>
+        <div class="clear"></div>
+
+        <!-- 页脚发布按钮 -->
+        <div class="form_btm">
+            <input type="button" class="submit_control" id="submitBtn" value="提交"/>
+        </div>
+    </div>
+</section>
+
+<!--页脚-->
+<footer th:replace="layout/footer"></footer>
+<!--页脚结束-->
+</body>
+</html>
