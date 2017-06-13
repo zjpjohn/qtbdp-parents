@@ -6,9 +6,8 @@
 		<input type="text" placeholder="请输入查找内容" class="search_input lf"/>
 		<a href="javascript:;"  class="search_btn rt">搜索</a>
 	</div>
-	<div class="head_fabu  floating">
+	<div class="head_fabu lf floating">
 		<i class="lf icon"></i>
-
 		<!--如果已登录-->
 		<div  th:if="${user}">
 			<div class="lf fabu_btns">
@@ -18,7 +17,6 @@
 				<!--<a>数据发布</a>-->
 			</div>
 		</div>
-
 		<!--如果未登录-->
 		<div  th:unless="${user}">
 			<div class="lf fabu_btns">
@@ -28,7 +26,28 @@
 				<!--<a>数据发布</a>-->
 			</div>
 		</div>
+	</div>
+	<div class="head_fabu  floating">
+		<i class="lf icon"></i>
+		<!--如果已登录-->
+		<div th:if="${user}">
+			<div class="lf fabu_btns">
+				<p>变现</p>
+				<a href="@{/demand/buy/add}">数据变现</a>//上传数据
+				<a href="@{/institution/add}" >规则变现</a>//上传规则  否  请申请认证服务商
+				<!--<a>数据发布</a>-->
+			</div>
+		</div>
 
+		<!--如果未登录-->
+		<div  th:unless="${user}">
+			<div class="lf fabu_btns">
+				<p>发布</p>
+				<a href="javascript:;"  onclick="loginShow(this)">数据变现</a>
+				<a href="javascript:;"  onclick="loginShow(this)">规则变现</a>
+				<!--<a>数据发布</a>-->
+			</div>
+		</div>
 
 	</div>
 </header>
