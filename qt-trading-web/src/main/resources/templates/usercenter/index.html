@@ -61,33 +61,7 @@
                         </tr>
                         </thead>
                         <!--最新订单-->
-                        <tbody id="orderList1">
-                        <tr>
-                            <td>条目</td>
-                            <td>整包</td>
-                            <td>￥33</td>
-                            <td class="nopaid">待支付</td>
-                            <td class="paid">00：00</td>
-                            <td class="paid">123</td>
-                        </tr>
-                        <tr>
-                            <td>条目</td>
-                            <td>整包</td>
-                            <td>￥33</td>
-                            <td class="nopaid">待支付</td>
-                            <td class="paid">00：00</td>
-                            <td class="paid">123</td>
-                        </tr>
-                        <tr>
-                            <td>条目</td>
-                            <td>整包</td>
-                            <td>￥33</td>
-                            <td class="nopaid">待支付</td>
-                            <td class="paid">00：00</td>
-                            <td class="paid">123</td>
-                        </tr>
-
-                        </tbody>
+                        <tbody id="order-container"></tbody>
                     </table>
                 </div>
                 <div>
@@ -102,42 +76,96 @@
                             <td>操作</td>
                         </tr>
                         </thead>
-                        <tbody id="newfabuList">
-                        <tr>
-                            <td>
-                                问问
-                            </td>
-                            <td>34</td>
-
-                            <td class="putaway"> 已上架</td>
-
-                            <td> 12:00</td>
-                            <td>-</td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="8" class="noline">
-                                <div class="nodata">
-                                    <img src="/pages/common/images/none.png" alt=""/>
-                                </div>
-                            </td>
-                        </tr>
-
-
-
-                        </tbody>
+                        <!--最新发布-->
+                        <tbody id="newfabuList"></tbody>
                     </table>
                 </div>
             </div>
             <!-- 概览结束-->
-
-
         </div>
-
-
     </div>
-
 </div>
+
+<!-- 概览最新订单模板 -->
+<script id="tmpl_orders" type="text/x-jquery-tmpl">
+{{if list.length > 0}}
+    {{each(i,order) list}}
+     <tr>
+        {{if order.productType==1}}
+        <td>条目</td>
+        {{else}}
+        <td>整包</td>
+        {{/if}}
+        <td>${$item._substr(order.orderSubject,18)}</td>
+        <td>￥${order.amount}</td>
+        {{if order.orderState==1}}
+            <td class="nopaid">待支付</td>
+            <td>${$item._date(order.addtime)}</td>
+            <td>
+                <a href="/selectOrderAndPay/${order.productId}/${order.productType}?order=4" class="gopay">去支付</a>
+            </td>
+        {{else order.orderState==2}}
+             <td class="paid">已撤销</td>
+             <td>${$item._date(order.addtime)}</td>
+             <td> - </td>
+        {{else order.orderState==3 }}
+             <td class="paid">已支付</td>
+            <td>${$item._date(order.addtime)}</td>
+            <td>
+                <a class="download" onclick="orderDownload('${order.orderNo}');">下载</a>
+            </td>
+        {{/if}}
+    </tr>
+    {{/each}}
+{{else}}
+     <tr>
+        <td colspan="8" class="noline">
+            <div class="nodata">
+                <img src="/pages/common/images/none.png" alt=""/>
+            </div>
+        </td>
+     </tr>
+{{/if}}
+</script>
+
+<!-- 概览最新发布模板 -->
+<script id="tmpl_newfabuList" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
+            <td>
+                ${$item._substr(prod.designation,18)}
+            </td>
+            <td>￥${prod.expFee}</td>
+            {{if prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+            {{else prod.isUsed==0}}
+                <td class="audting"> 待审核</td>
+            {{else prod.isUsed==2}}
+                 <td class="noaudit"> 审核未通过</td>
+            {{/if}}
+            <td> ${$item._date(prod.addtime)}</td>
+            <td>-</td>
+        </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+        <td colspan="8" class="noline">
+            <div class="nodata">
+                <img src="/pages/common/images/none.png" alt=""/>
+            </div>
+        </td>
+     </tr>
+    {{/if}}
+
+</script>
+
+
+<script>
+    jQuery(document).ready(function() {
+        App.initUserCenter();
+    });
+</script>
 
 <!--页脚-->
 <footer th:replace="layout/footer"></footer>
