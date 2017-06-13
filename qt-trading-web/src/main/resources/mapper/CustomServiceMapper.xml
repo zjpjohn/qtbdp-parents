@@ -25,11 +25,18 @@
         c.auditor,
         c.audit_time,
         c.audit_status,
-        c.audit_fail_reason
+        c.audit_fail_reason,
+        c.is_used
         FROM
         custom_service AS c
-        WHERE
-        c.is_used = 1 and c.audit_status = 1
+        WHERE 1=1
+        <if test="isUsed != null">
+            AND c.is_used = #{isUsed}
+        </if>
+
+        <if test="auditStatus != null">
+            AND c.audit_status = #{auditStatus}
+        </if>
         <if test="serviceType != null and serviceType != 0">
             AND c.service_type = #{serviceType}
         </if>

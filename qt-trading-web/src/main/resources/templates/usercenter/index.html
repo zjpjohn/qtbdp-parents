@@ -44,7 +44,7 @@
                     </li>
                 </ul>
                 <div>
-                    <h2> <a href="javascript:;" id="moreOrder" data-class="myorder">更多</a> 最新订单 </h2>
+                    <h2> <a href="/usercenter/buy/0" id="moreOrder" data-class="myorder">更多</a> 最新订单 </h2>
                     <table class="center_tb">
                         <thead>
                         <tr>
@@ -63,22 +63,25 @@
                         <!--最新订单-->
                         <tbody id="order-container"></tbody>
                     </table>
+                    <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
                 </div>
                 <div>
-                    <h2><a href="javascript:;" id="morefabu" data-class="myrelease">更多</a>最新发布</h2>
+                    <h2><a href="/usercenter/customized/0" id="morefabu" data-class="myrelease">更多</a>最新定制</h2>
                     <table class="center_tb">
                         <thead>
                         <tr>
-                            <td>需求名称</td>
-                            <td>预算</td>
+                            <td>类型</td>
+                            <td>定制名称</td>
+                            <td>悬赏金</td>
                             <td>状态</td>
                             <td class="time_btn now">时间 <i></i>  <i></i> </td>
                             <td>操作</td>
                         </tr>
                         </thead>
                         <!--最新发布-->
-                        <tbody id="newfabuList"></tbody>
+                        <tbody id="customized-container"></tbody>
                     </table>
+                    <div id="loadding1" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
                 </div>
             </div>
             <!-- 概览结束-->
@@ -97,7 +100,7 @@
         <td>整包</td>
         {{/if}}
         <td>${$item._substr(order.orderSubject,18)}</td>
-        <td>￥${order.amount}</td>
+        <td>￥${$item._num(order.amount)}</td>
         {{if order.orderState==1}}
             <td class="nopaid">待支付</td>
             <td>${$item._date(order.addtime)}</td>
@@ -128,24 +131,35 @@
 {{/if}}
 </script>
 
-<!-- 概览最新发布模板 -->
-<script id="tmpl_newfabuList" type="text/x-jquery-tmpl">
+<!-- 概览最新定制模板 -->
+<script id="tmpl_customized" type="text/x-jquery-tmpl">
     {{if list.length>0}}
         {{each(i,prod) list}}
         <tr>
             <td>
-                ${$item._substr(prod.designation,18)}
+                {{if prod.serviceType==1}}
+                    爬虫规则
+                {{else}}
+                    数据产品
+                {{/if}}
             </td>
-            <td>￥${prod.expFee}</td>
-            {{if prod.isUsed==1}}
+            <td>
+                ${$item._substr(prod.name,18)}
+            </td>
+            <td>￥${$item._num(prod.price)}</td>
+            {{if prod.auditStatus==1 && prod.isUsed==1}}
                 <td class="putaway"> 已上架</td>
-            {{else prod.isUsed==0}}
+            {{else prod.auditStatus==1 && isUsed == 0}}
+                <td class="audting"> 未上架</td>
+            {{else prod.auditStatus==0}}
                 <td class="audting"> 待审核</td>
-            {{else prod.isUsed==2}}
+            {{else prod.auditStatus == 2}}
                  <td class="noaudit"> 审核未通过</td>
             {{/if}}
-            <td> ${$item._date(prod.addtime)}</td>
-            <td>-</td>
+            <td> ${$item._date(prod.createTime)}</td>
+            <td>
+                <a class="gosee" href="javascript:;">撤销</a>
+            </td>
         </tr>
         {{/each}}
     {{else}}
@@ -161,9 +175,9 @@
 </script>
 
 
-<script>
+<script th:inline="javascript">
     jQuery(document).ready(function() {
-        App.initUserCenter();
+        App.initUserCenter([[${user.id}]]);
     });
 </script>
 

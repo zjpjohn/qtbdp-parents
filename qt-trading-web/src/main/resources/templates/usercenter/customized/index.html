@@ -27,89 +27,141 @@
             <div class= "myorder2 active rt_tbs ">
                 <h2>我接到的定制：<span class="color allorders"></span></h2>
                 <p class="order_filter filter_btn floating">
-                    <a href="/usercenter/customized/0" class="active" data-class="myorder">数据定制</a>
-                    <a href="/usercenter/customized/1" data-class="demandorder">爬虫规则定制</a>
+                    <a href="/usercenter/customized/0" th:class="${type == 0}?active" data-class="myorder">数据定制</a>
+                    <a href="/usercenter/customized/1" th:class="${type == 1}?active" data-class="demandorder">爬虫规则定制</a>
                 </p>
                 <!-- 数据订单开始 -->
-                <div class="myorder2 order_tb active" th:if="${type == 0}">
+                <div class="myorder2 order_tb active" th:if="${type == 0}" style="margin-top: 0px;">
                     <table class="center_tb">
                         <thead>
                         <tr>
-                            <th class="time_btn id_btn">
-                                ID
-                                <i></i>
-                                <i></i>
-                            </th>
+                            <th>类型</th>
                             <th>定制名称</th>
-                            <th>价格</th>
+                            <th>悬赏金</th>
                             <th>状态</th>
-                            <th class="time_btn">
-                                时间
-                                <i></i>
-                                <i></i>
-                            </th>
+                            <th class="time_btn now">时间 <i></i>  <i></i> </th>
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody id="orderList2">
-                            <tr>
-                                <td>条目</td>
-
-                                <td>dfgdfg</td>
-                                <td>56</td>
-
-                                <td class="paid">已撤销</td>
-                                <td>14:00</td>
-                                <td> - </td>
-
-                            </tr>
-                        </tbody>
+                        <!--最新发布-->
+                        <tbody id="customized-data-container"></tbody>
                     </table>
-                    <!-- 分页开始 -->
-                    <div id="orderPage2"></div>
-                    <!-- 分页结束 -->
                 </div>
                 <!-- 数据订单结束 -->
 
                 <!-- 需求订单开始 -->
-                <div class="demandorder2 order_tb" th:if="${type == 1}">
+                <div class="demandorder2 order_tb active" th:if="${type == 1}" style="margin-top: 0px;">
                     <table class="center_tb">
                         <thead>
                         <tr>
-                            <th class="time_btn id_btn">
-                                ID
-                                <i></i>
-                                <i></i>
-                            </th>
-                            <th>数据类型</th>
-                            <th>商品名称</th>
-                            <th>价格</th>
+                            <th>类型</th>
+                            <th>定制名称</th>
+                            <th>悬赏金</th>
                             <th>状态</th>
-                            <th class="time_btn">
-                                时间
-                                <i></i>
-                                <i></i>
-                            </th>
+                            <th class="time_btn now">时间 <i></i>  <i></i> </th>
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody id="orderList3">
-
-                        </tbody>
+                        <!--最新发布-->
+                        <tbody id="customized-rule-container"></tbody>
                     </table>
-                    <!-- 分页开始 -->
-                    <div id="demandPage"></div>
-                    <!-- 分页结束 -->
                 </div>
                 <!-- 需求订单结束 -->
+                <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
+                <!-- 分页开始 -->
+                <div id="pageTool" style="margin-top: 10px;"></div>
+                <!-- 分页结束 -->
             </div>
             <!-- 我发布的商品-数据-->
         </div>
     </div>
 </div>
 
+<!-- 数据定制模板 -->
+<script id="tmpl_customized_data" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
+            <td>
+                数据产品
+            </td>
+            <td>
+                ${$item._substr(prod.name,18)}
+            </td>
+            <td>￥${$item._num(prod.price)}</td>
+            {{if prod.auditStatus==1 && prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+            {{else prod.auditStatus==1 && isUsed == 0}}
+                <td class="audting"> 未上架</td>
+            {{else prod.auditStatus==0}}
+                <td class="audting"> 待审核</td>
+            {{else prod.auditStatus == 2}}
+                 <td class="noaudit"> 审核未通过</td>
+            {{/if}}
+            <td> ${$item._date(prod.createTime)}</td>
+            <td>
+                <a class="gosee" href="javascript:;">撤销</a>
+            </td>
+        </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+        <td colspan="8" class="noline">
+            <div class="nodata">
+                <img src="/pages/common/images/none.png" alt=""/>
+            </div>
+        </td>
+     </tr>
+    {{/if}}
+</script>
+
+<!-- 爬虫规则定制模板 -->
+<script id="tmpl_customized_rule" type="text/x-jquery-tmpl">
+    {{if list.length>0}}
+        {{each(i,prod) list}}
+        <tr>
+            <td>
+                爬虫规则
+            </td>
+            <td>
+                ${$item._substr(prod.name,18)}
+            </td>
+            <td>￥${$item._num(prod.price)}</td>
+            {{if prod.auditStatus==1 && prod.isUsed==1}}
+                <td class="putaway"> 已上架</td>
+            {{else prod.auditStatus==1 && isUsed == 0}}
+                <td class="audting"> 未上架</td>
+            {{else prod.auditStatus==0}}
+                <td class="audting"> 待审核</td>
+            {{else prod.auditStatus == 2}}
+                 <td class="noaudit"> 审核未通过</td>
+            {{/if}}
+            <td> ${$item._date(prod.createTime)}</td>
+            <td>
+                <a class="gosee" href="javascript:;">撤销</a>
+            </td>
+        </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+        <td colspan="8" class="noline">
+            <div class="nodata">
+                <img src="/pages/common/images/none.png" alt=""/>
+            </div>
+        </td>
+     </tr>
+    {{/if}}
+</script>
+
 <!--页脚-->
 <footer th:replace="layout/footer"></footer>
 <!--页脚结束-->
+
+<script th:inline="javascript">
+    jQuery(document).ready(function() {
+        App.initUserCustomized([[${user.id}]],[[${type}]]);
+    });
+</script>
+
 </body>
 </html>
