@@ -88,8 +88,9 @@ input:-ms-input-placeholder {
     background-position: -74px -210px;
 }
 .head_fabu{
-    width:252px;
+    width:220px;
     margin:0px auto;
+    margin-left: 20px;
 }
 .head_fabu>i{
     width:44px;
