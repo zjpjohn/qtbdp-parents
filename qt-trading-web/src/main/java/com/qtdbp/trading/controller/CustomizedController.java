@@ -26,7 +26,8 @@ public class CustomizedController extends BaseController {
     public static final String PAGE_CUSTOMIZED_DATA_DETAIL = "customized/data-detail";
     public static final String PAGE_CUSTOMIZED_ROLE_DETAIL = "customized/rule-detail";
 
-    public static final String PAGE_CUSTOMIZED_PUBLISH = "customized/publish";
+    public static final String PAGE_CUSTOMIZED_PUBLISH_RULE = "customized/publish-rule";
+    public static final String PAGE_CUSTOMIZED_PUBLISH_DATA = "customized/publish-data";
 
     @Autowired
     private CustomizedService customizedService;
@@ -79,16 +80,20 @@ public class CustomizedController extends BaseController {
     }
 
     /**
-     * 添加定制服务
-     * @param type 0 数据定制 1规则定制
+     * 添加数据定制
      * @return
      */
-    @RequestMapping(value = "/publish/customized/{type}", method = RequestMethod.GET)
-    public ModelAndView publish(@PathVariable Integer type) {
+    @RequestMapping(value = "/publish/customized/data", method = RequestMethod.GET)
+    public String publishData() {
+        return PAGE_CUSTOMIZED_PUBLISH_DATA;
+    }
 
-        ModelAndView result = new ModelAndView(PAGE_CUSTOMIZED_ROLE_DETAIL);
-        result.addObject("type", type);
-
-        return result;
+    /**
+     * 添加爬虫规则定制
+     * @return
+     */
+    @RequestMapping(value = "/publish/customized/rule", method = RequestMethod.GET)
+    public String publishRule() {
+        return PAGE_CUSTOMIZED_PUBLISH_RULE;
     }
 }
