@@ -28,12 +28,37 @@
         </div>
         <div class="navinput">
             <p class="navtop">
-                <a href="javascript:;"> 数据需求</a>
-                <a href="javascript:;"> 商务合作</a>
+                <a href="javascript:;" data-attr="dataneed" class="active"> 数据需求<i></i>  </a>
+                <a href="javascript:;" data-attr="business"> 商务合作 <i></i> </a>
             </p>
-            <form action="">
+            <form action="" class="dataneed active">
+                <div class="navmin">
+                    <div class="floating needms">
+                        <span class="lf">需求描述 : </span>
+                        <textarea name="" class="textarea_control lf"></textarea>
 
+                    </div>
+                    <div class="floating needms">
+                        <span class="lf">联系QQ : </span>
+                        <input type="text" class="relationyx" placeholder="请填写您的QQ">
+                    </div>
+                    <input type="button" class="needsubmit" value="提交">
+                </div>
+            </form>
+            <form action=""  class="business ">
+                <div class="navmin">
+                    <div class="floating needms">
+                        <span class="lf">合作需求 : </span>
+                        <textarea name="" class="textarea_control lf"></textarea>
 
+                    </div>
+                    <div class="floating needms">
+                        <span class="lf">联系QQ : </span>
+                        <input type="text" class="relationyx" placeholder="请填写您的QQ">
+                    </div>
+                    <input type="button" class="needsubmit" value="提交">
+
+                </div>
             </form>
 
         </div>
@@ -93,8 +118,6 @@
         </ul>
     </div>
     <!--工业数据结束-->
-
-
     <!-- 关联数据开始-->
     <div class="relevance_data">
         <h2 class="intitle"><i></i>  关联数据 <span >Associated Data</span>  </h2>
@@ -187,9 +210,7 @@
             </li>
         </ul>
     </div>
-
     <!--关联数据结束-->
-
     <!--爬虫市场开始-->
     <div class="reptile_data">
         <h2 class="intitle"><i></i>  爬虫市场 <span >Crawler Market</span>  </h2>
@@ -265,14 +286,20 @@
         <!--数据服务商结束-->
     </div>
     <!--爬虫市场结束-->
-
-
     <!-- 页脚 -->
     <footer th:replace="layout/footer"></footer>
     <!-- 页脚结束 -->
-
     <!--<script src="/assets/global/plugins/jquery.nivo.slider.pack.js"></script>-->
     <script>
+        $(".navtop>a").click(function(){
+            $(this).addClass("active").siblings(".active").removeClass("active");
+            var navtopattr=$(this).attr("data-attr");
+            $("."+navtopattr).addClass("active").siblings(".active").removeClass("active");
+
+        });
+
+
+
         nav(1);
         //合作关系往左移
         var cooperationTimer=null;
@@ -294,7 +321,7 @@
             cooperationTimer=setInterval(cooperationMove,50);
         });
 
-        $('#slider').nivoSlider();
+        //$('#slider').nivoSlider();
         $("#slider>a>i").mouseenter(function(){
             $(this).parent().addClass("hover");
         });

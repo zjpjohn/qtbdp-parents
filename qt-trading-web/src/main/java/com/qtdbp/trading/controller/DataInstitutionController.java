@@ -25,7 +25,7 @@ public class DataInstitutionController extends BaseController {
     private static final String PAGE_INSTITUTION_HOME = "institution/home";
 
     private static final String PAGE_INSTITUTION_ADD_PRODUCT = "institution/add-product";
-    private static final String PAGE_INSTITUTION_ADD_NEW = "institution/add-new";
+    private static final String PAGE_INSTITUTION_ADD_NEW = "usercenter/add-new";
 
 
     @Autowired
@@ -79,7 +79,7 @@ public class DataInstitutionController extends BaseController {
      * 个人用户升级成服务商(新)
      * @return
      */
-    @RequestMapping(value = "/institution/add/new",method = RequestMethod.GET)
+    @RequestMapping(value = "/usercenter/add/new",method = RequestMethod.GET)
     public String addInstitution() {
 
         return PAGE_INSTITUTION_ADD_NEW ;
