@@ -47,6 +47,8 @@ public class CustomizedApi extends BaseController {
     @ApiOperation(value="定制服务数据接口，分页获取")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "服务名称", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "isUsed", value = "上下架状态，1上架 0下架", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "auditStatus", value = "审核状态，0未审核 1已审核 2审核不通过", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "createId", value = "用户ID", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "serviceType", value = "服务类型（1 定制规则，2 定制数据）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "dataType", value = "数据类型ID（如：1）", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY),
