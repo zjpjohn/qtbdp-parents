@@ -86,7 +86,7 @@ public class CustomizedController extends BaseController {
     @RequestMapping(value = "/publish/customized/{type}", method = RequestMethod.GET)
     public ModelAndView publish(@PathVariable Integer type) {
 
-        ModelAndView result = new ModelAndView(PAGE_CUSTOMIZED_ROLE_DETAIL);
+        ModelAndView result = new ModelAndView(PAGE_CUSTOMIZED_PUBLISH);
         result.addObject("type", type);
 
         return result;
