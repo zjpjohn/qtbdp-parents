@@ -522,3 +522,10 @@ body{
     cursor:pointer;
 }
 
+.help-block-error{
+    color: #e73d4a;
+}
+
+.form-group.has-error .form-control {
+    border: 1px solid #e73d4a;
+}

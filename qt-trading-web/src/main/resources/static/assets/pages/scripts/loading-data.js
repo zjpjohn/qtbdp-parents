@@ -19,39 +19,75 @@ var LoadingData = {
 
         if(!options.url) return ;
 
-        var _url = options.url ;
-        var $_loadding = $(options.loadding ? options.loadding : "#loadding") ;
-        var _data = options.data ? options.data : '' ;
-        var _type = options.type ? options.type :'GET' ;
+        var _options = {
+            loadding: "#loadding",
+            data: '',
+            type: 'GET',
+            file: false
+        }
+        $.extend(_options, options) ;
 
-        $.ajax({
-            url: _url,
-            type: _type,
-            dataType:"json",
-            data: _data,
-            async:true,
-            beforeSend:function () {
-                $_loadding.show() ;
-            },
-            success:function (data) {
+        if(_options.file) {
+            // 文件上传
+            $.ajax({
+                url: _options.url,
+                type: _options.type,
+                processData:false,
+                contentType:false,
+                data: _options.data,
+                async:true,
+                beforeSend:function () {
+                    $(_options.loadding).show() ;
+                },
+                success:function (data) {
 
-                // console.log(data);
+                    // console.log(data);
 
-                // 调用回调函数
-                if($.isFunction(callback)) callback(data) ;
+                    // 调用回调函数
+                    if($.isFunction(callback)) callback(data) ;
 
-                $_loadding.hide() ;
-            },
-            error: function () {
-                LoadingData.toastr({
-                    _type: 'error',
-                    _title: '请求数据',
-                    _msg: '网络超时，请重试或者联系管理员'
-                }) ;
+                    $(_options.loadding).hide() ;
+                },
+                error: function () {
+                    LoadingData.toastr({
+                        _type: 'error',
+                        _title: '请求数据',
+                        _msg: '网络超时，请重试或者联系管理员'
+                    }) ;
 
-                $_loadding.hide() ;
-            }
-        });
+                    $(_options.loadding).hide() ;
+                }
+            });
+        } else {
+            $.ajax({
+                url: _options.url,
+                type: _options.type,
+                // dataType:"json",
+                data: _options.data,
+                async:true,
+                beforeSend:function () {
+                    $(_options.loadding).show() ;
+                },
+                success:function (data) {
+
+                    // console.log(data);
+
+                    // 调用回调函数
+                    if($.isFunction(callback)) callback(data) ;
+
+                    $(_options.loadding).hide() ;
+                },
+                error: function () {
+                    LoadingData.toastr({
+                        _type: 'error',
+                        _title: '请求数据',
+                        _msg: '网络超时，请重试或者联系管理员'
+                    }) ;
+
+                    $(_options.loadding).hide() ;
+                }
+            });
+        }
     },
 
     /**

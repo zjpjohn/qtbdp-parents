@@ -10,7 +10,7 @@ var FormValidationMd = function() {
      *     _rules: json         // 表单校验规则
      * }
      */
-    var handleValidation = function(options) {
+    var handleValidation = function(options,callback) {
         // for more info visit the official plugin documentation: 
         // http://docs.jquery.com/Plugins/Validation
         var form = $(options._form);
@@ -60,17 +60,20 @@ var FormValidationMd = function() {
                 error.hide();
 
                 // 屏蔽提交按钮，防止页面重复提交操作
-                var btn = Ladda.create( document.querySelector( 'input[type=submit]' ) );
-
-                $(form).ajaxSubmit({
+                var btn = Ladda.create( document.querySelector( 'button[type=submit]' ) );
+                $.ajax({
+                    url: $(form)[0].action,
+                    type: "post",
+                    // contentType:"application/json; charset=utf-8",
+                    data: $(form).serialize(),
                     dataType:"json",
-                    beforeSubmit : function () {
+                    beforeSend : function () {
                         btn.start() ;
                     },
                     success:function( data ){
 
                         // 调用回调函数
-                        // if($.isFunction(callback)) callback(data) ;
+                        if($.isFunction(callback)) callback(data) ;
 
                         // 实际开发中需要删除setTimeout
                         setTimeout(function () {
@@ -82,7 +85,7 @@ var FormValidationMd = function() {
                                 _msg: '数据提交成功'
                             }) ;
 
-                        },2000);
+                        },500);
                     },
                     error : function ( data ) {
                         btn.stop();
@@ -94,6 +97,41 @@ var FormValidationMd = function() {
                         }) ;
                     }
                 });
+
+                /*$(form).ajaxSubmit({
+                    dataType:"json",
+                    contentType:"application/json; charset=utf-8",
+                    data: $(form).serializeArray(),
+                    beforeSubmit : function () {
+                        btn.start() ;
+                    },
+                    success:function( data ){
+
+                        // 调用回调函数
+                        if($.isFunction(callback)) callback(data) ;
+
+                        // 实际开发中需要删除setTimeout
+                        setTimeout(function () {
+                            btn.stop();
+
+                            LoadingData.toastr({
+                                _type: 'success',
+                                _title: '表单提交',
+                                _msg: '数据提交成功'
+                            }) ;
+
+                        },500);
+                    },
+                    error : function ( data ) {
+                        btn.stop();
+
+                        LoadingData.toastr({
+                            _type: 'error',
+                            _title: '表单提交',
+                            _msg: '网络超时，请重试或者联系管理员'
+                        }) ;
+                    }
+                });*/
             }
         });
     }
@@ -119,8 +157,8 @@ var FormValidationMd = function() {
 
     return {
         //main function to initiate the module
-        init: function(options) {
-            handleValidation(options);
+        init: function(options,callback) {
+            handleValidation(options,callback);
         }
     };
 }();

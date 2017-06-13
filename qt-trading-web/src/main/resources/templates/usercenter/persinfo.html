@@ -6,6 +6,11 @@
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/assets/global/plugins/ladda/ladda.min.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL PLUGINS -->
+
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
 </head>
@@ -23,60 +28,79 @@
 
         <div class="center_right rt">
             <!--个人信息-->
-            <div class="persinfo2 active" id="personaldata">
-                <form action="" id="perdetail">
-                    <input type="hidden" name="id" value="${id}"/>
-                    <div class="headimgs">
-                        <img src="/pages/common/images/index_06.png" onerror="this.src='/pages/common/images/index_03.png'" alt="" class="peronimg"/>
-                        <a href="javascript:;" class="inputimg">上传新的头像
-                            <input type="file"  id="upheadimg"/>
-                            <input type="hidden" name="head" id="realHead">
-                        </a>
-                        <a href="javascript:;" class="savechange rt" id="savealter">保存更改</a>
-                    </div>
-
-                    <div class="pars_infor">
-                        <p class="personal_name">昵称</p>
-                        <input type="text" class="personal_nameval" value="${nick}" name="nick"/>
-
-                        <p>手机号</p>
-                        <input type="text" class="pers_input" id="phoneNUM" value="${phone}" name="phone"/>
-                        <a class="error">请输入正确的手机号码</a>
-
-                        <!--<div style="display:none;">
-                            <p class="pers_names">姓名</p>
-                            <input type="text" class="pers_input" name=""/>
-                            <br/> <a href="javascript:;">去实名认证</a>
-
-                            <p class="pers_names">邮箱</p>
-                            <input type="text" class="pers_input" id="person_emal"/>
-                            <a class="error">请输入正确的邮箱</a>
-                        </div>-->
-
-                        <p class="pers_names">用户类型</p>
-                        <p class="pers_input pers_geren">个人</p>
-                        <!--<input type="text" class="pers_input" value="${userType}" name="userType"/>-->
-                        <a href="/institution/add">成为数据服务商</a>
-
-                        <p class="pers_names">密码</p>
-                        <input type="password" class="pers_input" value="${pwd}" name="pwd"/>
-                        <br/> <a href="javascript:;" style="display:none">重置密码</a>
-
-                    </div>
-
-                </form>
-            </div>
+            <div class="persinfo2 active" id="data-container"></div>
             <!--个人信息结束-->
-
-
         </div>
-
-
     </div>
-
 </div>
 <!--页脚-->
 <footer th:replace="layout/footer"></footer>
 <!--页脚结束-->
+
+<!-- 个人信息模板 -->
+<script id="tmpl_userinfo" type="text/x-jquery-tmpl">
+    <form action="/api/user" id="perdetail" method="post">
+        <input type="hidden" name="id" value="${id}"/>
+        <div class="headimgs">
+            <img src="${head}" onerror="this.src='/pages/common/images/user_img.png'" alt="" class="peronimg"/>
+            <a href="javascript:;" class="inputimg">上传新的头像
+                <input type="file"  id="upheadimg"/>
+                <input type="hidden" name="head" id="realHead">
+            </a>
+            <!--<a href="javascript:;" class="savechange rt" id="savealter">保存更改</a>-->
+
+            <button type="submit" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="float: right;margin-top:8px">
+                保存更改
+            </button>
+        </div>
+
+        <div class="pars_infor">
+            <p class="personal_name">昵称</p>
+            <input type="text" class="personal_nameval" value="${nick}" name="nick"/>
+
+            <p>手机号</p>
+            <input type="text" class="pers_input" id="phoneNUM" value="${phone}" name="phone" disabled="disabled"/>
+            <a class="error">请输入正确的手机号码</a>
+
+            <!--<div style="display:none;">
+                <p class="pers_names">姓名</p>
+                <input type="text" class="pers_input" name=""/>
+                <br/> <a href="javascript:;">去实名认证</a>
+
+                <p class="pers_names">邮箱</p>
+                <input type="text" class="pers_input" id="person_emal"/>
+                <a class="error">请输入正确的邮箱</a>
+            </div>-->
+
+            <p class="pers_names">用户类型</p>
+            <p class="pers_input pers_geren" th:text="${userType} == 2? '个人':'企业'">个人</p>
+            <!--<input type="text" class="pers_input" value="${userType}" name="userType"/>-->
+            <a href="/institution/add">成为数据服务商</a>
+
+            <p class="pers_names">密码</p>
+            <input type="password" class="pers_input" value="${pwd}" name="pwd" disabled="disabled"/>
+            <br/> <a href="javascript:;" style="display:none">重置密码</a>
+        </div>
+    </form>
+</script>
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-validation/js/messages_zh.js" type="text/javascript"></script>
+
+<script src="/assets/global/plugins/ladda/spin.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/ladda/ladda.min.js" type="text/javascript"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/assets/pages/scripts/form-validation-md.js" type="text/javascript"></script>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        App.initPersonInfo([[${user.id}]]) ;
+    });
+</script>
 </body>
 </html>
