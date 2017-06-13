@@ -1,12 +1,12 @@
 package com.qtdbp.trading.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
-import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 数据包产品Model
@@ -30,12 +30,12 @@ public class DataProductModel extends BaseModel {
     private int provinceId ;        // 省份id
     private int isHuadong ;         // 是否华东
     private Integer userId ;            // 添加人
-    private Date addTime ;          // 添加时间
+    private Date addtime ;          // 添加时间
     private int editorId ;          // 编辑人id
     private Date editorTime ;       // 编辑时间
     private int sort ;              // 排序值
     private int rec ;               // 推荐值
-    private int isUsed ;            // 是否可用
+    private Integer isUsed ;            // 是否可用
     private String typeChain ;      // 类型链
     private int downloadCount ;     // 下载次数
     private String dataTypeProps ;  // 数据类型属性串pname:vname:pid:vid;pname1:vname1:pid1:vid1
@@ -178,12 +178,12 @@ public class DataProductModel extends BaseModel {
         this.userId = userId;
     }
 
-    public Date getAddTime() {
-        return addTime;
+    public Date getAddtime() {
+        return addtime;
     }
 
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
+    public void setAddtime(Date addtime) {
+        this.addtime = addtime;
     }
 
     public int getEditorId() {
@@ -218,11 +218,11 @@ public class DataProductModel extends BaseModel {
         this.rec = rec;
     }
 
-    public int getIsUsed() {
+    public Integer getIsUsed() {
         return isUsed;
     }
 
-    public void setIsUsed(int isUsed) {
+    public void setIsUsed(Integer isUsed) {
         this.isUsed = isUsed;
     }
 

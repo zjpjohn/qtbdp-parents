@@ -12,11 +12,22 @@
         p.data_type,
         p.price,
         p.data_profile,
-        p.data_scale
+        p.data_scale,
+        p.is_used,
+        p.audit_status,
+        p.audit_fail_reason,
+        p.addtime,
+        p.data_status
         FROM
         data_product as p
         WHERE
-        p.is_used = 1
+        1=1
+        <if test="isUsed != null ">
+            AND p.is_used = #{isUsed}
+        </if>
+        <if test="auditStatus != null ">
+            AND p.audit_status = #{auditStatus}
+        </if>
         <if test="dataTypes != null ">
             AND p.data_type in (${dataTypes})
         </if>
@@ -63,6 +74,10 @@
         <result column="data_format" property="dataFormat"/>
         <result column="data_status" property="dataStatus"/>
         <result column="data_src" property="dataSrc"/>
+        <result column="is_used" property="isUsed"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="audit_fail_reason" property="auditFailReason"/>
+        <result column="addtime" property="addtime"/>
     </resultMap>
 
     <!-- 单表查询产品 -->

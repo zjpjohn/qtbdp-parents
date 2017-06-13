@@ -43,6 +43,9 @@
         data_transaction_order AS o
         WHERE
         user_id = #{userId}
+        <if test="productType != null and productType != 0">
+            AND o.product_type = #{productType}
+        </if>
         <if test="orderState != null and orderState != 0">
             AND o.order_state = #{orderState}
         </if>

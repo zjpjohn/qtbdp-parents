@@ -18,6 +18,11 @@ public class ErrorCode {
     public static final Integer ERROR_ORDER_CREATE_FAIL = 1001 ;
 
     /**
+     * 订单查询失败
+     */
+    public static final Integer ERROR_ORDER_SELECT_FAIL = 1002 ;
+
+    /**
      * 未登录
      */
     public static final Integer ERROR_LOGIN_NO = 2000 ;

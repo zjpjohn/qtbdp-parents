@@ -27,16 +27,15 @@
             <div class= "myorder2 active rt_tbs ">
                 <h2>我购买的商品：<span class="color allorders"></span></h2>
                 <p class="order_filter filter_btn floating">
-                    <a href="/usercenter/buy/0" class="active" data-class="myorder">数据商品</a>
-                    <a href="/usercenter/buy/1" data-class="demandorder">爬虫规则商品</a>
+                    <a href="/usercenter/buy/0" th:class="${type == 0}?active" data-class="myorder">数据商品</a>
+                    <a href="/usercenter/buy/1" th:class="${type == 1}?active" data-class="demandorder">爬虫规则</a>
                 </p>
                 <!-- 数据商品开始 -->
-                <div class="myorder2 order_tb  active" th:if="${type == 0}">
+                <div class="myorder2 order_tb  active" th:if="${type == 0}" style="margin-top: 0px;">
                     <table class="center_tb">
                         <thead>
                         <tr>
-
-                            <th>数据类型</th>
+                            <th>类型</th>
                             <th>数据名称</th>
                             <th>价格</th>
                             <th>状态</th>
@@ -48,19 +47,18 @@
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody id="dataorder"></tbody>
+                        <tbody id="data-container"></tbody>
                     </table>
-
                 </div>
                 <!-- 数据商品结束 -->
 
 
                 <!-- 爬虫规则商品开始 -->
-                <div class="myorder2 order_tb active" th:if="${type == 1}">
+                <div class="myorder2 order_tb active" th:if="${type == 1}" style="margin-top: 0px;">
                     <table class="center_tb">
                         <thead>
                         <tr>
-                            <th>数据类型</th>
+                            <th>类型</th>
                             <th>规则名称</th>
                             <th>价格</th>
                             <th>状态</th>
@@ -72,11 +70,14 @@
                             <th>操作</th>
                         </tr>
                         </thead>
-                        <tbody id="demandorder"></tbody>
+                        <tbody id="rule-container"></tbody>
                     </table>
-
                 </div>
                 <!-- 爬虫规则商品结束 -->
+                <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
+                <!-- 分页开始 -->
+                <div id="pageTool" style="margin-top: 10px;"></div>
+                <!-- 分页结束 -->
             </div>
             <!-- 我购买的商品-->
         </div>
@@ -96,7 +97,7 @@
                 <td> 整包 </td>
                 {{/if}}
                 <td>${$item._substr(order.orderSubject,18)}</td>
-                <td>￥${order.amount}</td>
+                <td>￥${$item._num(order.amount)}</td>
                 {{if order.orderState == 1 }}
                     <td class="nopaid">待支付</td>
                     <td>${$item._date(order.addtime)}</td>
@@ -130,16 +131,18 @@
     </script>
 <!--数据商品模板结束-->
 <!-- 爬虫规则商品tpml模板 开始-->
-<script id="tmpl_demandorder" type="text/x-jquery-tmpl">
+<script id="tmpl_ruleorder" type="text/x-jquery-tmpl">
         {{if list.length > 0}}
             {{each(i,order) list}}
              <tr>
-                <td>${i+1}</td>
-                {{if order.productType==1}}
-                <td>条目</td>
+                {{if order.productType == 2 }}
+                    <td> 整包 </td>
+                {{else order.productType == 3 }}
+                    <td> 爬虫规则 </td>
                 {{else}}
-                <td>整包</td>
+                    <td> 条目 </td>
                 {{/if}}
+                </td>
                 <td>${$item._substr(order.orderSubject,18)}</td>
                 <td>￥${order.amount}</td>
                 {{if order.orderState == 1 }}
@@ -166,8 +169,6 @@
                 <td colspan="8" class="noline">
                      <div class="nodata">
                         <img src="/pages/common/images/none.png" alt=""/>
-                            <p>暂时需求订单</p>
-                            <a href="/demand">前往需求大厅</a>
                     </div>
                 </td>
             </tr>
@@ -179,7 +180,7 @@
 
 <script th:inline="javascript">
     jQuery(document).ready(function() {
-        App.buyusercenter([[${type}]]);
+        App.initUserBuy([[${user.id}]],[[${type}]]);
     });
 </script>
 

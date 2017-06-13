@@ -105,6 +105,9 @@ var App = function () {
                 },
                 _timeChange : function (time) {
                     return _calculateTime(time);
+                },
+                _def : function (v,t) {
+                    return _tmp_defaultvalue(v,t) ;
                 }
             }).appendTo(options._container);
 
@@ -274,9 +277,11 @@ var App = function () {
      * @private
      */
     var _tmp_formatedate = function (date) {
-        var formatedate=new Date(date);
-        formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
-        return formatedate;
+        var time = new Date(date);
+        var b = 24*60; //分钟数
+        time.setMinutes(time.getMinutes() + b, time.getSeconds(), -1);
+
+        return time.format("yyyy-MM-dd hh:mm:ss") ;
     }
 
     /**
@@ -285,7 +290,7 @@ var App = function () {
      * @private
      */
     var _tmp_substr = function (str,n) {
-        if(str.length>n){
+        if(str && str.length>n){
             str=str.substring(0,n)+"...";
         }
         return str;
@@ -359,7 +364,7 @@ var App = function () {
             initType();
             initOrderByCond() ;
             initFilter() ;
-            initDatas() ;
+            initDatas({isUsed:1,auditStatus:1}) ;
         },
         // 爬虫规则市场数据加载
         initCrawlers: function () {
@@ -368,7 +373,7 @@ var App = function () {
             initType();
             initOrderByCond() ;
             initFilter() ;
-            initDatas() ;
+            initDatas({isUsed:1,auditStatus:1}) ;
         },
         // 数据市场详情页
         initDatamartDetail: function (id) {
@@ -407,7 +412,7 @@ var App = function () {
             initType();
             initOrderByCond() ;
             initFilter() ;
-            initDatas({serviceType:type}) ;
+            initDatas({serviceType:type,auditStatus:1,isUsed:1}) ;
         },
         // 服务商数据加载
         initInstitution: function () {
@@ -507,34 +512,59 @@ var App = function () {
 
         /****************个人中心*****************/
         //概览 最新订单、最新发布
+        initUserCenter: function (id) {
+            // 最新前5条订单
+            LoadingData.request({url: "/api/trade/orders/5"}, function(data){
+                $("#tmpl_orders").tmpl(data.pageInfo,{
+                    _date : function (date) {
+                        return _tmp_formatedate(date)
+                    },
+                    _num : function (num) {
+                        return _tmp_formatnum(num) ;
+                    },
+                    _substr : function (str,n) {
+                        return _tmp_substr(str,n) ;
+                    }
+                }).appendTo("#order-container");
+            });
 
-        initUserCenter: function () {
-            options._url = "/api/trade/neworders" ; // 最新订单
-            options._tmpl = "#tmpl_orders" ;
-            options._container = "#order-container" ;
-            initDatas() ;
+            // 最新前5条定制
+            LoadingData.request({url: "/api/customized",data:{createId:id,rows:5},loadding:"#loadding1"}, function(data){
+                $("#tmpl_customized").tmpl(data.pageInfo,{
+                    _date : function (date) {
+                        return _tmp_formatedate(date)
+                    },
+                    _num : function (num) {
+                        return _tmp_formatnum(num) ;
+                    },
+                    _substr : function (str,n) {
+                        return _tmp_substr(str,n) ;
+                    }
+                }).appendTo("#customized-container");
+            });
 
-
-            options._url = "/api/demand/demandorders" ; // 最新发布
-            options._tmpl = "#tmpl_newfabuList" ;
-            options._container = "#newfabuList" ;
-            initDatas() ;
         },
-        buyusercenter:function(type){
+        // 已购买的商品
+        initUserBuy:function(id,type){
             switch (type) {
                 case 0:
-                    options._url = "/api/trade/orders" ; // 数据订单
+                    // 数据订单
+                    options._url = "/api/trade/orders" ;
                     options._tmpl = "#tmpl_dataorder" ;
-                    options._container = "#dataorder" ;
-                    initDatas() ;
+                    options._container = "#data-container" ;
+                    initDatas({userId:id,productType:2}) ;
                     break ;
                 case 1:
                     // 爬虫规则订单
+                    options._url = "/api/trade/orders" ;
+                    options._tmpl = "#tmpl_ruleorder" ;
+                    options._container = "#rule-container" ;
+                    initDatas({userId:id,productType:3}) ;
                     break ;
             }
         },
         // 个人信息
-        initPersonInfo: function (id) {
+        initPersonInfo:function (id) {
 
             // 加载个人信息
             LoadingData.request({url: "/api/user/"+id}, function (data) {
@@ -549,16 +579,11 @@ var App = function () {
                         },
                         nick: {
                             required: true
-                        },
-                        pwd: {
-                            rangelength: [6, 20]//长度为6-20之间
                         }
                     }
                 }
 
-                FormValidationMd.init(_options,function () {
-                    // alert("submit")
-                });
+                FormValidationMd.init(_options);
             });
 
             // 点击上传头像
@@ -578,6 +603,46 @@ var App = function () {
             });
 
 
+        },
+        // 我的定制
+        initUserCustomized:function (id, type) {
+
+            switch (type) {
+                case 0:
+                    // 数据定制
+                    options._url = "/api/customized" ;
+                    options._tmpl = "#tmpl_customized_data" ;
+                    options._container = "#customized-data-container" ;
+                    initDatas({createId:id,serviceType:2}) ;
+                    break ;
+                case 1:
+                    // 爬虫规则定制
+                    options._url = "/api/customized" ;
+                    options._tmpl = "#tmpl_customized_rule" ;
+                    options._container = "#customized-rule-container" ;
+                    initDatas({createId:id,serviceType:1}) ;
+                    break ;
+            }
+
+        },
+        // 我的发布
+        initUserPublish:function (id,type) {
+            switch (type) {
+                case 0:
+                    // 数据产品
+                    options._url = "/api/product" ;
+                    options._tmpl = "#tmpl_data" ;
+                    options._container = "#data-container" ;
+                    initDatas({userId:id}) ;
+                    break ;
+                case 1:
+                    // 爬虫规则定制
+                    options._url = "/api/crawlers/role" ;
+                    options._tmpl = "#tmpl_rule" ;
+                    options._container = "#rule-container" ;
+                    initDatas({createId:id}) ;
+                    break ;
+            }
         }
     };
 }() ;

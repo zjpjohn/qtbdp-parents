@@ -7,6 +7,10 @@
     <title>发布爬虫规则</title>
     <div th:replace="layout/top"/>
     <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/assets/global/plugins/ladda/ladda.min.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL PLUGINS -->
 </head>
 <body>
 <!-- 页头-->
@@ -25,13 +29,13 @@
 
     <div class="main_content floating">
         <h2 class="form_title">发布爬虫规则</h2>
-        <form class="trade_form" id="ruleupload" method="post" action="/rule/add1">
+        <form class="trade_form" id="ruleupload" method="post" action="/api/crawlers/role">
             <div class="form_group">
                 <p class="group_title">
                     <b>规则名称</b> <i>*</i><span>8-50个字符</span>
                 </p>
-                <div class="form_control">
-                    <input type="text" class="large_input" name="name"/>
+                <div class="form_control form-group">
+                    <input type="text" class="large_input form-control" name="name"/>
                 </div>
             </div>
 
@@ -39,8 +43,8 @@
                 <p class="group_title">
                     <b>规则价格</b> <i>*</i>
                 </p>
-                <div class="form_control">
-                    <input type="number" class="small_input" name="market_price" placeholder="市场价："/>
+                <div class="form_control form-group">
+                    <input type="number" class="small_input form-control" name="market_price" placeholder="市场价："/>
                 </div>
             </div>
 
@@ -48,8 +52,8 @@
                 <p class="group_title">
                     <b>采集网站</b> <i>*</i>
                 </p>
-                <div class="form_control">
-                    <input type="text" class="large_input" name="web_site"/>
+                <div class="form_control form-group">
+                    <input type="text" class="large_input form-control" name="web_site"/>
                     <p class="form_tips">例如：www.qtbigdata.com</p>
                 </div>
             </div>
@@ -58,7 +62,7 @@
                 <p class="group_title">
                     <b>网站类型</b> <i>*</i>
                 </p>
-                <div class="form_control">
+                <div class="form_control form-group">
                     <label><input type="radio" name="web_type" class="radio_input" value="1"/>社交网站</label>
                     <label><input type="radio" name="web_type" class="radio_input" value="2"/>电商网站</label>
                     <label><input type="radio" name="web_type" class="radio_input" value="3"/>金融网站</label>
@@ -73,7 +77,7 @@
                 <p class="group_title">
                     <b>采集字段</b> <i>*</i> <span>每个字段以","隔开</span>
                 </p>
-                <div class="form_control">
+                <div class="form_control form-group">
                     <input type="text" class="large_input" name="collection_field"/>
                 </div>
             </div>
@@ -82,7 +86,7 @@
                 <p class="group_title">
                     <b>数据类别</b> <i>*</i>
                 </p>
-                <div class="form_control">
+                <div class="form_control form-group">
                     <select name="" class="small_input">
                         <option value="">关联数据</option>
                         <option value="">关联数据</option>
@@ -102,8 +106,8 @@
                 <p class="group_title">
                     <b>规则文件</b> <i>*</i>
                 </p>
-                <div class="form_control floating">
-                    <input type="text" class="middle_input" name="file_path"/>
+                <div class="form_control floating form-group">
+                    <input type="text" class="middle_input form-control" name="file_path"/>
                     <a href="javascript:;" class="upload_a">上传<input type="file" class="uploadRuleFile"/></a>
                 </div>
             </div>
@@ -112,7 +116,7 @@
                 <p class="group_title">
                     <b>封面图片</b> <i>*</i>
                 </p>
-                <div class="form_control ">
+                <div class="form_control form-group">
 
                 </div>
             </div>
@@ -121,14 +125,15 @@
                 <p class="group_title">
                     <b>规则描述</b> <i>*</i>
                 </p>
-                <div class="form_control ">
-                    <textarea name="introduction" class="textarea_control"></textarea>
+                <div class="form_control form-group">
+                    <textarea name="introduction" class="textarea_control form-control"></textarea>
                 </div>
             </div>
 
             <!-- 页脚发布按钮 -->
             <div class="form_btm">
-                <input type="submit" class="submit_control" id="submitBtn" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>
+                <!--<input type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>-->
+                <button type="submit" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
 
                 <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
                     <span class="ladda-label">发布</span>
@@ -217,7 +222,9 @@
             }
         }
 
-        FormValidationMd.init(options);
+        FormValidationMd.init(options,function () {
+            alert(11) ;
+        });
     });
 </script>
 
