@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head lang="en">
-    <title>发布爬虫规则</title>
+    <title>发布数据商品</title>
     <div th:replace="layout/top"/>
     <link rel="stylesheet" href="/tradecenter/css/imgCss/dropify.css">
     <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
@@ -25,7 +25,7 @@
     <!-- 表单 -->
     <div class="main_content floating">
         <h2 class="form_title">发布数据商品</h2>
-        <form class="trade_form" id="ruleupload" method="post" action="/rule/add1">
+        <form class="trade_form" id="fromProduct" method="post" action="/rule/add1">
             <div class="form_group">
                 <p class="group_title">
                     <b>数据名称</b> <i>*</i><span>8-50个字符</span>
@@ -71,11 +71,11 @@
                     <b>数据类别</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <select name="" id="typeA" class="small_input">
+                    <select name="typeA" id="typeA" class="small_input">
                         <option value="">关联数据</option>
 
                     </select>
-                    <select name="" id="typeB" class="small_input">
+                    <select name="typeB" id="typeB" class="small_input">
 
                     </select>
                 </div>
@@ -87,7 +87,7 @@
                     <b>数据规模</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <input type="text" class="large_input" id="data_scale" style="width: 257px;" name="web_site"/>
+                    <input type="number" class="large_input" id="data_scale" style="width: 257px;" name="data_scale"/>
                     <span> &nbsp;条 </span>
                 </div>
             </div>
@@ -97,9 +97,9 @@
                     <b>数据类型</b> <i>*</i>
                 </p>
                 <div class="form_control" id="data_type">
-                    <label><input type="radio" name="web_type" class="radio_input" value="1"/>数据包</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="2"/>API接口</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="3"/>数据报告</label>
+                    <label><input type="radio" name="type" class="radio_input" value="1" checked="checked"/>数据包</label>
+                    <label><input type="radio" name="type" class="radio_input" value="2"/>API接口</label>
+                    <label><input type="radio" name="type" class="radio_input" value="3"/>数据报告</label>
                 </div>
             </div>
 
@@ -108,11 +108,11 @@
                     <b>数据来源</b> <i>*</i>
                 </p>
                 <div class="form_control" id="data_source">
-                    <label><input type="radio" name="web_type" class="radio_input" value="1"/>个人</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="2"/>企业</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="3"/>政府</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="4"/>组织机构</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="5"/>互联网</label>
+                    <label><input type="radio" name="source" class="radio_input" value="1" checked="checked"/>个人</label>
+                    <label><input type="radio" name="source" class="radio_input" value="2"/>企业</label>
+                    <label><input type="radio" name="source" class="radio_input" value="3"/>政府</label>
+                    <label><input type="radio" name="source" class="radio_input" value="4"/>组织机构</label>
+                    <label><input type="radio" name="source" class="radio_input" value="5"/>互联网</label>
                 </div>
             </div>
 
@@ -183,14 +183,6 @@
 <script src="/tradecenter/js/institution/dropify.min.js"></script>
 <script src="/tradecenter/js/fromCommon.js"></script>
 <script src="/tradecenter/js/institution/add-product.js"></script>
-
-
-<script>
-    $(document).ready(function() {
-
-    });
-</script>
-
 
 
 
