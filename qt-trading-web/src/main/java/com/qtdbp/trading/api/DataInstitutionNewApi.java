@@ -78,8 +78,10 @@ public class DataInstitutionNewApi extends BaseController {
     }
 
     @ApiOperation(value = "根据ID查询单条服务商数据接口")
+    @ApiImplicitParam(name = "orderBy", value = "排序字段，名称和表中字段一致", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ModelMap findInstitutionV2ById(@ApiParam(name = "id", value = "服务商Id", required = true) @PathVariable Integer id) throws GlobalException {
+    public ModelMap findInstitutionV2ById(
+            @ApiParam(name = "id", value = "服务商Id", required = true) @PathVariable Integer id, Integer userId) throws GlobalException {
 
         ModelMap map = new ModelMap();
         DataInstitutionInfoNewModel infoNewModel = null ;

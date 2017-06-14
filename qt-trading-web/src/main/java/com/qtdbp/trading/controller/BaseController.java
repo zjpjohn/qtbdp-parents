@@ -1,8 +1,11 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.model.DataInstitutionInfoNewModel;
+import com.qtdbp.trading.service.DataInstitutionInfoNewService;
 import com.qtdbp.trading.service.security.model.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -17,6 +20,9 @@ public class BaseController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
+    @Autowired
+    private DataInstitutionInfoNewService institutionInfoNewService ;
+
     @ModelAttribute("user")
     public SysUser getPrincipal() {
 
@@ -25,6 +31,9 @@ public class BaseController {
         SysUser user = null ;
         if (principal instanceof SysUser) {
             user = (SysUser) principal;
+
+            // 服务商
+            user.setInfoNewModel(institutionInfoNewService.findInstitutionNewByCreateId(user.getId()));
 
             logger.info("nick:"+ user.getUserName());
             logger.info("head:"+ user.getHead());

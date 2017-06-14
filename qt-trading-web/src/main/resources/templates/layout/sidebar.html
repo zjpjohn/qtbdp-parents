@@ -6,9 +6,12 @@
     </div>
     <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
     <p class="pername perphone"><a th:text="${user.phone}"></a></p>
-    <p class="perdata">
+    <p class="perdata" th:if="!${user.infoNewModel}">
         <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
         <a class="preinfo rt" data-class="persinfo"  id="perfectdatum" href="/usercenter/add/new">完善资料</a>
+    </p>
+    <p class="perdata" th:if="${user.infoNewModel}">
+        <span class="lf realrz"> <b></b> 服务商：<a th:href="@{/institution/home/}+${user.infoNewModel.id}" th:text="${user.infoNewModel.name}">未实名认证</a> </span>
     </p>
 
     <ul class="pereach lf floating" id="page-sidebar-menu">
@@ -17,10 +20,9 @@
         <li data-class="myaccount" style="display:none;"><a href="/usercenter/account"><span></span> 我的账户 <b></b> </a></li>
         <li data-class="myorder"><a href="/usercenter/buy/0"><span></span> 已买到的商品 <b></b>  </a></li>
         <li data-class="myrelease"><a href="/usercenter/customized/0"><span></span> 我的定制 <b></b> </a></li>
-        <li data-class="dataservice"><a href="/usercenter/add/new"><span></span> 成为数据服务商 <b></b> </a></li>
-
-        <li data-class="publich"><a href="/usercenter/publich/0"><span></span> 我的发布 <b></b> </a></li>
-        <li data-class="received"><a href="/usercenter/received/0"><span></span> 已接单的定制 <b></b> </a></li>
+        <li th:if="!${user.infoNewModel}" data-class="dataservice"><a href="/usercenter/add/new"><span></span> 成为数据服务商 <b></b> </a></li>
+        <li th:if="${user.infoNewModel}" data-class="publich"><a href="/usercenter/publich/0"><span></span> 我的发布 <b></b> </a></li>
+        <li th:if="${user.infoNewModel}" data-class="received"><a href="/usercenter/received/0"><span></span> 已接单的定制 <b></b> </a></li>
     </ul>
 </div>
 <style>
