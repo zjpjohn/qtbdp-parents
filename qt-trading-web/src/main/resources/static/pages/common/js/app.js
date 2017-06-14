@@ -500,6 +500,67 @@ var App = function () {
 
             }) ;
         },
+        // 首页
+        initIndex: function () {
+            $(".navtop>a").click(function(){
+                $(this).addClass("active").siblings(".active").removeClass("active");
+                var navtopattr=$(this).attr("data-attr");
+                $("."+navtopattr).addClass("active").siblings(".active").removeClass("active");
+
+            });
+
+            nav(1);
+            //合作关系往左移
+            var cooperationTimer=null;
+            var cooperationLeft=0;
+            function cooperationMove(){
+                cooperationLeft-=1;
+                if(cooperationLeft==-207){
+                    cooperationLeft=0;
+                    $(".com_list").append($(".com_list>a:first-child"));
+                }
+                $(".com_list").css("left",cooperationLeft);
+            };
+            cooperationTimer=setInterval(cooperationMove,50);
+            $(".com_slide").mouseenter(function(){
+                clearInterval(cooperationTimer);
+                cooperationTimer=null;
+            });
+            $(".com_slide").mouseleave(function(){
+                cooperationTimer=setInterval(cooperationMove,50);
+            });
+
+            //$('#slider').nivoSlider();
+            $("#slider>a>i").mouseenter(function(){
+                $(this).parent().addClass("hover");
+            });
+            $("#slider>a>i").mouseleave(function(){
+                $(this).parent().removeClass("hover");
+            });
+
+            // 提交用户反馈
+            var options = {
+                _form: "#feedback-form",
+                _rules: {
+                    content: {
+                        required:true
+                    },
+                    qq: {
+                        required: true
+                    }
+                }
+            }
+            FormValidationMd.init(options,function () {
+                $("#feedback-form").resetForm() ;
+            });
+
+            // 商务合作
+            options._form = "#feedback-business-form" ;
+            FormValidationMd.init(options,function () {
+                $("#feedback-business-form").resetForm() ;
+            });
+
+        },
 
         /****************个人中心*****************/
         //概览 最新订单、最新发布
