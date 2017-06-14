@@ -27,10 +27,12 @@ public class DataUserFeedbackApi {
 
     @Autowired
     private DataUserFeedbackMapper feedbackMapper;
+    @Autowired
+    private HttpServletRequest request ;
 
     @ApiOperation(value="添加用户反馈数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ModelMap insert(HttpServletRequest request, @RequestBody DataUserFeedbackModel feedbackModel) throws GlobalException {
+    public ModelMap insert(DataUserFeedbackModel feedbackModel) throws GlobalException {
         if (feedbackModel == null) throw new GlobalException("数据不存在，请重新输入");
 
         ModelMap map = new ModelMap();

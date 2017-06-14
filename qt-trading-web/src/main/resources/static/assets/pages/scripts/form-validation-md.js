@@ -60,7 +60,7 @@ var FormValidationMd = function() {
                 error.hide();
 
                 // 屏蔽提交按钮，防止页面重复提交操作
-                var btn = Ladda.create( document.querySelector( 'button[type=submit]' ) );
+                var btn = Ladda.create( form.querySelector( 'button[type=submit]' ) );
                 $.ajax({
                     url: $(form)[0].action,
                     type: "post",

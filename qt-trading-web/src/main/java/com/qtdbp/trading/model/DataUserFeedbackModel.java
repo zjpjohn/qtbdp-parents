@@ -8,20 +8,21 @@ import java.util.Date;
  */
 public class DataUserFeedbackModel extends BaseModel {
 
-    private Integer feedback_type;  //反馈类型
+    private Integer feedbackType;  //反馈类型
     private String email ;          //邮箱
     private String phone ;          //手机号
     private String content ;        //反馈内容
     private Date addtime ;          //反馈时间
     private String ip ;             //IP地址
     private Integer mark ;          //是否查看
+    private String qq;              // 联系QQ
 
-    public Integer getFeedback_type() {
-        return feedback_type;
+    public Integer getFeedbackType() {
+        return feedbackType;
     }
 
-    public void setFeedback_type(Integer feedback_type) {
-        this.feedback_type = feedback_type;
+    public void setFeedbackType(Integer feedbackType) {
+        this.feedbackType = feedbackType;
     }
 
     public String getEmail() {
@@ -72,4 +73,11 @@ public class DataUserFeedbackModel extends BaseModel {
         this.mark = mark;
     }
 
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
 }
