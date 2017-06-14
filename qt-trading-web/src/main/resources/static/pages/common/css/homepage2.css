@@ -2,11 +2,6 @@
 *{
     box-sizing:border-box;
 }
-body{
-    width:100%;
-    min-height:800px;
-    background:url(../images/service_bg.jpg) no-repeat;
-}
 .topimg{
     height:251px;
 
@@ -90,7 +85,6 @@ em{
 .serhead{
     width:1200px;
     margin:0px auto;
-    margin-top: 133px;
 }
 .serhead>img{
     width:130px;
@@ -247,8 +241,8 @@ em{
 }
 em{
     display:inline-block;
-    width:16px;
-    height:16px;
+    width:28px;
+    height:28px;
     background:url(../images/icon_index2.png);
 }
 .main_domain>em{
