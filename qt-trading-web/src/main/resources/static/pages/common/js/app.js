@@ -565,6 +565,7 @@ var App = function () {
         /****************个人中心*****************/
         //概览 最新订单、最新发布
         initUserCenter: function (id) {
+            nav("overview");
             // 最新前5条订单
             LoadingData.request({url: "/api/trade/orders/5"}, function(data){
                 $("#tmpl_orders").tmpl(data.pageInfo,{
@@ -598,6 +599,7 @@ var App = function () {
         },
         // 已购买的商品
         initUserBuy:function(id,type){
+            nav("myorder");
             switch (type) {
                 case 0:
                     // 数据订单
@@ -617,7 +619,7 @@ var App = function () {
         },
         // 个人信息
         initPersonInfo:function (id) {
-
+            nav("persinfo");
             // 加载个人信息
             LoadingData.request({url: "/api/user/"+id}, function (data) {
 
@@ -658,7 +660,7 @@ var App = function () {
         },
         // 我的定制
         initUserCustomized:function (id, type) {
-
+            nav("myrelease");
             switch (type) {
                 case 0:
                     // 数据定制
@@ -679,6 +681,7 @@ var App = function () {
         },
         // 我的发布
         initUserPublish:function (id,type) {
+            nav("publich");
             switch (type) {
                 case 0:
                     // 数据产品

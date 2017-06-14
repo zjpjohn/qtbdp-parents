@@ -32,6 +32,11 @@ function findPwdShow(){
     modelSwitch();
     $("#findPwdModel").show();
 }
+//验证成为服务商
+function infoNewModel2(){
+    console.log(666);
+    layer.msg("您还不是数据服务商");
+}
 /*******************登录***************/
 //验证登录账号
 function checkAccount(type){
