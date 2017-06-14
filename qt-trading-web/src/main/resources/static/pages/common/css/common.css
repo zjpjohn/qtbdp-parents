@@ -409,6 +409,9 @@ nav{
 
 
 /************弹框**************/
+*{
+    box-sizing: border-box;
+}
 body{
     position:relative;
 }
@@ -427,7 +430,7 @@ body{
     left:100px;
     top:100px;
     background:#fff;
-    width:420px;
+    width:500px;
     padding:40px;
 }
 .model_delete{
