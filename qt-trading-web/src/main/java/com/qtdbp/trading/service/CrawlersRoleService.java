@@ -64,4 +64,23 @@ public class CrawlersRoleService {
 
         return crawlersRoleMapper.findRuleById(id);
     }
+
+    /**
+     * 更改数据包产品上下架
+     * @param id
+     * @return
+     * @throws GlobalException
+     */
+    public Integer updateState(Integer id) throws GlobalException {
+        CrawlersRoleModel roleModel = crawlersRoleMapper.findRuleById(id);
+        if (roleModel == null) throw new GlobalException("该数据包已不存在") ;
+        Integer count = 0;
+        if (roleModel.getIsUsed() == 1){ // 上架时改为下架
+            count = crawlersRoleMapper.updateSoldOut(id) ;
+        } else{                             //  下架时改为上架
+            count = crawlersRoleMapper.updatePutaway(id);
+        }
+
+        return count;
+    }
 }

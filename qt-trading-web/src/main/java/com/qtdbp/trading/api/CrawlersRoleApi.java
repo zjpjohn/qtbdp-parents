@@ -2,6 +2,7 @@ package com.qtdbp.trading.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
+import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.CrawlersRoleMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
@@ -9,6 +10,7 @@ import com.qtdbp.trading.model.CrawlersRoleModel;
 import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CrawlersRoleService;
 import com.qtdbp.trading.service.DataTypeService;
+import com.qtdbp.trading.service.security.model.SysUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -26,13 +28,16 @@ import java.util.List;
 @Api(description = "爬虫市场接口 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/crawlers/role")
-public class CrawlersRoleApi {
+public class CrawlersRoleApi extends BaseController{
 
     @Autowired
     private CrawlersRoleService crawlersRoleService;
 
     @Autowired
     private DataTypeService dataTypeService;
+
+    @Autowired
+    private CrawlersRoleMapper roleMapper;
 
     @ApiOperation(value="添加爬虫规则数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -123,5 +128,48 @@ public class CrawlersRoleApi {
         }
         return map;
     }
+
+    @ApiOperation(value = "修改爬虫规则上下架接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "爬虫规则id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "/changeState", method = RequestMethod.GET)
+    public ModelMap changeState(Integer id) throws GlobalException {
+        if (id == null) throw new GlobalException("爬虫规则id为空，请重新输入");
+        ModelMap map = new ModelMap() ;
+        try {
+            Integer count = crawlersRoleService.updateState(id);
+            map.put("success", count>0?true:false);
+        } catch (GlobalException e) {
+            e.printStackTrace();
+        }
+        return  map;
+    }
+
+    @ApiOperation(value = "删除单条爬虫规则接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "爬虫规则id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    public ModelMap deleteCrawlersRole(Integer id) throws GlobalException {
+
+        ModelMap map = new ModelMap();
+
+        if (id != null) {
+            try {
+                SysUser user = getPrincipal() ;
+                if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+                Integer count = roleMapper.deleteCrawlersRole(id);
+                map.put("success", count > 0 ? true : false);
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        } else {
+            map.put("success", false);
+        }
+
+        return map;
+    }
+
 
 }
