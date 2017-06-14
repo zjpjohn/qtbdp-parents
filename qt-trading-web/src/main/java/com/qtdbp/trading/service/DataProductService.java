@@ -152,4 +152,23 @@ public class DataProductService {
         return message ;
     }
 
+    /**
+     * 更改数据包产品上下架
+     * @param productId
+     * @return
+     * @throws GlobalException
+     */
+    public Integer updateState(Integer productId) throws GlobalException {
+        DataProductModel productModel = productMapper.findProductsById(productId);
+        if (productModel == null) throw new GlobalException("该数据包已不存在") ;
+        Integer count = 0;
+        if (productModel.getIsUsed() == 1){ // 上架时改为下架
+            count = productMapper.updateSoldOut(productId) ;
+        } else{                             //  下架时改为上架
+            count = productMapper.updatePutaway(productId);
+        }
+
+        return count;
+    }
+
 }

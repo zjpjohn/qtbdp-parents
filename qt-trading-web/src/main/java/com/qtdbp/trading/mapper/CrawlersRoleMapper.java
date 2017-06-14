@@ -39,4 +39,24 @@ public interface CrawlersRoleMapper extends BaseMapper<CrawlersRoleModel> {
      */
     CrawlersRoleModel findRuleById(@Param("id") Integer id);
 
+    /**
+     * 下架爬虫规则
+     * @param id
+     * @return
+     */
+    Integer updateSoldOut(@Param("id") Integer id) ;
+
+    /**
+     * 上架爬虫规则
+     * @param id
+     * @return
+     */
+    Integer updatePutaway(@Param("id") Integer id) ;
+
+    /**
+     * 删除单条爬虫规则
+     * @param id
+     * @return
+     */
+    Integer deleteCrawlersRole(@Param("id") Integer id);
 }
