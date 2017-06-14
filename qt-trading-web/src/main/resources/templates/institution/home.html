@@ -6,7 +6,9 @@
     <title>服务商主页 | 钱塘数据交易中心</title>
     <div th:replace="layout/top"/>
     <link rel="stylesheet" href="/pages/common/css/homepage.css" />
-    <link rel="stylesheet" href="/pages/common/css/homepage2.css" />
+
+
+
 
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
@@ -44,8 +46,8 @@
 
     <!-- 产品数据模板 -->
     <script id="tmpl_institution" type="text/x-jquery-tmpl">
-        <div class="serhead floating">
-            <img src="${logo}" alt="" class="lf"/>
+        <div class="serhead  floating">
+            <img src="${logo}"  alt="" class="lf" onerror="this.src='/pages/common/images/error.png'"/>
             <div class="lf sertitle">
                 <p>${name}{{if isSys == 1}}<a class="serzy">自营</a>{{/if}} </p>
                 <p class="serletter">
@@ -117,6 +119,7 @@
 
     <!-- 爬虫规则模板 -->
     <script id="tmpl_crawlersRules" type="text/x-jquery-tmpl">
+        <link rel="stylesheet" href="/pages/common/css/homepage2.css" />
         {{if list.length>0}}
         {{each(i, rule) list}}
             <div class="repmain floating lf">
@@ -125,8 +128,8 @@
                     <div class="lf reptexts">
                         <p class="main_title">${rule.name}</p>
                         <p class="main_text">${rule.introduction}</p>
-                        <p class="main_min">
-                            <span class="main_domain"><em></em>采集网站: ${rule.webSite}</span>
+                        <p class="main_min main_domain">
+                            <em ></em>采集网站: ${rule.webSite}
                         </p>
                     </div>
                     <div class="rt priceright">
@@ -143,6 +146,7 @@
     </script>
     <!-- 数据定制模板 -->
     <script id="tmpl_data_custom" type="text/x-jquery-tmpl">
+    <link rel="stylesheet" href="/pages/common/css/homepage3.css" />
     {{if list.length>0}}
     {{each(i,prod) list}}
         <div class="repmain active floating">
@@ -150,12 +154,12 @@
                 <p class="main_title"><a href="/customized/data/detail/${prod.id}">${prod.name}</a></p>
                 <p class="main_text">${prod.dimension}</p>
                 <p class="main_min">
-                    <span >采集规模: <a class="main_domain">${prod.dimension} 条</a></span>
+                    <span >采集规模: <a class="main_domain">${prod.scale}条</a></span>
                     <span class="main_timeend"> <em></em> 截至倒计时 : <a>${$item._timeChange(prod.endTime)}</a></span>
                 </p>
             </div>
             <div class="lf priceright">
-                <p class="repprice">￥${$item._num(prod.price)}</p>
+                <p class="repprice">悬赏￥${$item._num(prod.price)}</p>
                 <p class="reppeople">32人已接单</p>
                 <p class="repnow">立即接单</p>
             </div>
@@ -167,6 +171,7 @@
     </script>
     <!-- 爬虫规则定制数据模板 -->
     <script id="tmpl_role_custom" type="text/x-jquery-tmpl">
+    <link rel="stylesheet" href="/pages/common/css/homepage4.css" />
     {{if list.length>0}}
     {{each(i,prod) list}}
         <div class="repmain active floating">
@@ -179,7 +184,7 @@
                 </p>
             </div>
             <div class="lf priceright">
-                <p class="repprice">￥${$item._num(prod.price)}</p>
+                <p class="repprice">悬赏￥${$item._num(prod.price)}</p>
                 <p class="reppeople">32人已接单</p>
                 <p class="repnow">立即接单</p>
             </div>

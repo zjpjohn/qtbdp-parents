@@ -92,11 +92,11 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "id", value = "数据包产品Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "/changeState", method = RequestMethod.GET)
-    public ModelMap changeState(DataProductModel productModel) throws GlobalException {
-        if (productModel.getId() == null) throw new GlobalException("数据包产品不存在，请重新输入");
+    public ModelMap changeState(Integer id) throws GlobalException {
+        if (id == null) throw new GlobalException("数据包产品id为空，请重新输入");
         ModelMap map = new ModelMap() ;
         try {
-            Integer count = productService.updateState(productModel.getId());
+            Integer count = productService.updateState(id);
             map.put("success", count>0?true:false);
         } catch (GlobalException e) {
             e.printStackTrace();
@@ -124,11 +124,12 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "id", value = "数据包产品Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "findProductById", method = RequestMethod.GET)
-    public ModelMap findProductById(DataProductModel productModel) throws GlobalException {
-        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+    public ModelMap findProductById(Integer id) throws GlobalException {
+        if(id == null) throw new GlobalException("id为空，请重新填入") ;
         ModelMap map = new ModelMap() ;
+        DataProductModel productModel = null;
         try {
-            productModel = productService.findProductById(productModel.getId());
+            productModel = productService.findProductById(id);
             map.put("pageInfo", productModel);
         } catch (Exception e) {
             e.printStackTrace();
