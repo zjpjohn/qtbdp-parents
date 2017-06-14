@@ -17,9 +17,10 @@
         p.audit_status,
         p.audit_fail_reason,
         p.addtime,
-        p.data_status
+        p.data_status,
+        t.name typename
         FROM
-        data_product as p
+        data_product as p left join data_type t on p.data_type = t.id
         WHERE
         1=1
         <if test="isUsed != null ">
@@ -78,6 +79,7 @@
         <result column="audit_status" property="auditStatus"/>
         <result column="audit_fail_reason" property="auditFailReason"/>
         <result column="addtime" property="addtime"/>
+        <result column="typename" property="typeName"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
