@@ -109,6 +109,7 @@
         <result column="audit_fail_reason" property="auditFailReason" />
         <result column="desc" property="desc" />
         <result column="typename" property="typeName"/>
+        <result column="is_used" property="isUsed"/>
     </resultMap>
 
     <!-- 更新定制服务数据 -->
