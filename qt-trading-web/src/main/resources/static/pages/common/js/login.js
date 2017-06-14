@@ -26,7 +26,6 @@ function loginShow(){
 function registerShow(){
     modelSwitch();
     $("#registerModel").show();
-    console.log(33);
 }
 //找回密码出现
 function findPwdShow(){
