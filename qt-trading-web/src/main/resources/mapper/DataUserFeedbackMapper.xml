@@ -14,14 +14,16 @@
           phone,
           content,
           addtime,
-          ip
+          ip,
+          qq
         ) values (
-          #{feedback_type},
+          #{feedbackType},
           #{email},
           #{phone},
           #{content},
           now(),
-          #{ip}
+          #{ip},
+          #{qq}
         )
     </insert>
 

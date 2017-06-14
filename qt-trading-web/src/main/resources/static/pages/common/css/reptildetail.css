@@ -10,6 +10,7 @@
     padding:30px 15px;
     box-sizing: border-box;
     background-color: #fff;
+    margin-bottom: 100px;
 }
 .reptile_right{
     width:320px;
@@ -17,11 +18,9 @@
 /***右侧***/
 .reptile_right {
     width: 320px;
-
 }
 .right_img {
     width:320px;
-    height:254px;
     margin-bottom: 20px;
 }
 .right_img2{

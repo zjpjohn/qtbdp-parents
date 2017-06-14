@@ -408,6 +408,7 @@ create table data_user_feedback
    addtime              datetime                       null,
    ip                   varchar(50)                    null,
    mark                 tinyint                        null default 0,
+   qq                   varchar(50)                    null,
    constraint PK_DATA_USER_FEEDBACK primary key clustered (id)
 );
 

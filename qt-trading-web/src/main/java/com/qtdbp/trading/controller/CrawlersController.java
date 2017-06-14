@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class CrawlersController {
+public class CrawlersController extends BaseController {
 
     public static final String PAGE_CRAWLERS = "crawlers/index";
     public static final String PAGE_CRAWLERS_DETAIL = "crawlers/detail";
