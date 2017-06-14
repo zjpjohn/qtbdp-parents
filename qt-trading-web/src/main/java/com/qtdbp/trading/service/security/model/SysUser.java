@@ -1,6 +1,7 @@
 package com.qtdbp.trading.service.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.qtdbp.trading.model.DataInstitutionInfoNewModel;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -21,6 +22,8 @@ public class SysUser implements java.io.Serializable {
     private Date date;       //时间
     private String phone ;   // 手机号
     private String realName; // 姓名
+
+    private DataInstitutionInfoNewModel infoNewModel ;
 
     @JsonIgnore
     private Set<SysRole> sysRoles = new HashSet<>(0);// 所对应的角色集合
@@ -111,5 +114,13 @@ public class SysUser implements java.io.Serializable {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public DataInstitutionInfoNewModel getInfoNewModel() {
+        return infoNewModel;
+    }
+
+    public void setInfoNewModel(DataInstitutionInfoNewModel infoNewModel) {
+        this.infoNewModel = infoNewModel;
     }
 }
