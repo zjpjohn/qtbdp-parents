@@ -238,6 +238,7 @@ em{
     color:#999;
     font-size: 12px;
     margin-bottom: 0px;
+
 }
 em{
     display:inline-block;
@@ -248,8 +249,10 @@ em{
 .main_domain>em{
     background-position:-96px -34px;
     margin-right: 6px;
-    position:relative;
-    top:2px;
+    height:20px;
+    width: 16px;
+    vertical-align: middle;
+
 }
 .reptexts{
     width:220px;
