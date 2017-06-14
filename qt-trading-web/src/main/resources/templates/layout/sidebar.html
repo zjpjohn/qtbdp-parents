@@ -6,10 +6,12 @@
     </div>
     <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
     <p class="pername perphone"><a th:text="${user.phone}"></a></p>
+
     <p class="perdata" th:if="!${user.infoNewModel}">
         <span class="lf realrz"> <b></b> <a>未实名认证</a> </span>
         <a class="preinfo rt" data-class="persinfo"  id="perfectdatum" href="/usercenter/add/new">完善资料</a>
     </p>
+
     <p class="perdata" th:if="${user.infoNewModel}">
         <span class="lf realrz"> <b></b> 服务商：<a th:href="@{/institution/home/}+${user.infoNewModel.id}" th:text="${user.infoNewModel.name}">未实名认证</a> </span>
     </p>
