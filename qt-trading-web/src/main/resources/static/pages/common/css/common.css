@@ -71,6 +71,9 @@ input:-ms-input-placeholder {
     padding:40px 0px;
 }
 /******页头***********/
+.navimg2>img{
+    width:100%;
+}
 #head{
     background:#fff;
 }
