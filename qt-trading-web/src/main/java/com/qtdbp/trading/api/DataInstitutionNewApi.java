@@ -60,8 +60,8 @@ public class DataInstitutionNewApi extends BaseController {
             // 默认时间排序
             if(infoNewModel.getOrderBy() == null) infoNewModel.setOrderBy("create_time");
 
-            int dataType = infoNewModel.getTypeId();
-            if (dataType != 0) {
+            Integer dataType = infoNewModel.getTypeId();
+            if (dataType != null && dataType != 0) {
                 String dataTypes = dataTypeService.getDataTypes(dataType);
                 if (dataTypes != null && !"".equals(dataTypes)) infoNewModel.setDataTypes(dataTypes);
             }
