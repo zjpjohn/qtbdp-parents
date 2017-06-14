@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+    <title>发布数据产品 | 钱塘大数据交易中心</title>
+    <div th:replace="layout/top"/>
+    <link rel="stylesheet" href="/tradecenter/css/imgCss/dropify.css">
+    <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
+</head>
+<body>
+<!-- 页头-->
+<div th:replace="layout/header" /></div>
+<!--页头结束-->
+
+<section class="main">
+    <!-- 面包屑导航 -->
+    <div class="header_nav">
+        数据服务商
+        <span class="gt">&gt;</span>
+        <span class="active">发布数据商品</span>
+    </div>
+
+    <!-- 表单 -->
+    <div class="main_content floating">
+        <h2 class="form_title">发布数据商品</h2>
+        <form class="trade_form" id="ruleupload" method="post" action="/rule/add1">
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据名称</b> <i>*</i><span>8-50个字符</span>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="large_input" id="data_name" name="name"/>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据简介</b> <i>*</i>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="large_input" id="data_resume" name="resume"/>
+                </div>
+            </div>
+
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>收费方式</b> <i>*</i>
+                </p>
+                <div class="form_control" id="Charge_mode">
+                    <label><input type="radio" name="Charge_mode" class="radio_input" value="1" checked="checked"/>免费</label>
+                    <label><input type="radio" name="Charge_mode" class="radio_input" value="2"/>收费</label>
+                </div>
+                <div id="price" style="display: none">
+                    <div class="form_control">
+                        <input type="number" class="small_input" id="market_price" name="market_price" placeholder="市场价："/>
+                        <input type="number" class="small_input" id="rebate_price" name="rebate_price" placeholder="折扣价："/>
+                    </div>
+                    <div class="form_control">
+                        <input type="number" class="small_input" id="child_price" name="child_price" placeholder="子文件价格："/>
+                        <input type="number" class="small_input" id="commission_price" name="commission_price" placeholder="佣金："/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据类别</b> <i>*</i>
+                </p>
+                <div class="form_control">
+                    <select name="" id="typeA" class="small_input">
+                        <option value="">关联数据</option>
+
+                    </select>
+                    <select name="" id="typeB" class="small_input">
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据规模</b> <i>*</i>
+                </p>
+                <div class="form_control">
+                    <input type="text" class="large_input" id="data_scale" style="width: 257px;" name="web_site"/>
+                    <span> &nbsp;条 </span>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据类型</b> <i>*</i>
+                </p>
+                <div class="form_control" id="data_type">
+                    <label><input type="radio" name="web_type" class="radio_input" value="1"/>数据包</label>
+                    <label><input type="radio" name="web_type" class="radio_input" value="2"/>API接口</label>
+                    <label><input type="radio" name="web_type" class="radio_input" value="3"/>数据报告</label>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据来源</b> <i>*</i>
+                </p>
+                <div class="form_control" id="data_source">
+                    <label><input type="radio" name="web_type" class="radio_input" value="1"/>个人</label>
+                    <label><input type="radio" name="web_type" class="radio_input" value="2"/>企业</label>
+                    <label><input type="radio" name="web_type" class="radio_input" value="3"/>政府</label>
+                    <label><input type="radio" name="web_type" class="radio_input" value="4"/>组织机构</label>
+                    <label><input type="radio" name="web_type" class="radio_input" value="5"/>互联网</label>
+                </div>
+            </div>
+
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>上传数据</b> <i>*</i>
+                </p>
+                <div class="form_control floating uploader">
+                    <input type="text" class="middle_input" id="data_file_path" name="file_path" readonly/>
+                    <a href="javascript:;" class="upload_a">上传<input type="file" id="data_file" class="uploadRuleFile"/></a>
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>上传图片</b> <i>*</i>
+                </p>
+                <div class="form_control" style="width: 50%">
+                    <input type="file" name="uploadImg" id="input-file-now"  class="dropify fileImg" />
+                </div>
+            </div>
+
+            <div class="form_group">
+                <p class="group_title">
+                    <b>数据描述</b> <i>*</i>
+                </p>
+                <div class="form_control ">
+                    <textarea id="introduction" name="introduction" class="textarea_control"></textarea>
+                </div>
+            </div>
+
+            <!-- 页脚发布按钮 -->
+            <div class="form_btm">
+                <input type="submit" class="submit_control" id="submitBtn" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>
+
+                <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
+                    <span class="ladda-label">发布</span>
+                </button>-->
+            </div>
+        </form>
+        <!-- 右侧注意事项 -->
+        <div class="attention">
+            <p class="attention_title">
+                <i>!</i>注意事项
+            </p>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</section>
+<!--页脚-->
+<footer th:replace="layout/footer"></footer>
+<!--页脚结束-->
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-validation/js/messages_zh.js" type="text/javascript"></script>
+
+<script src="/assets/global/plugins/ladda/spin.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/ladda/ladda.min.js" type="text/javascript"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/assets/pages/scripts/form-validation-md.js" type="text/javascript"></script>
+<script src="/tradecenter/js/institution/dropify.min.js"></script>
+<script src="/tradecenter/js/fromCommon.js"></script>
+<script src="/tradecenter/js/institution/add-product.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+
+    });
+</script>
+
+
+
+
+</body>
+</html>
