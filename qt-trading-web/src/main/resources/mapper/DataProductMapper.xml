@@ -207,6 +207,16 @@
         delete from data_product where id = #{id}
     </delete>
 
+    <!--下架数据包产品-->
+    <update id="updateSoldOut" parameterType="java.lang.Integer">
+        UPDATE data_product SET is_used = 0 where id = #{id}
+    </update>
+
+    <!--上架数据包产品-->
+    <update id="updatePutaway" parameterType="java.lang.Integer">
+        UPDATE data_product SET is_used = 1 where id = #{id}
+    </update>
+
     <!-- #################################################################### -->
     <!-- #############################数据条目处理############################# -->
     <!-- #################################################################### -->

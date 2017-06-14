@@ -159,4 +159,19 @@
           c.create_time, s.name username  from crawlers_role as c
          left join data_institution_info_new s on c.create_id = s.create_id where c.id = #{id}
     </select>
+
+    <!--下架数据包产品-->
+    <update id="updateSoldOut" parameterType="java.lang.Integer">
+        UPDATE crawlers_role SET is_used = 0 where id = #{id}
+    </update>
+
+    <!--上架数据包产品-->
+    <update id="updatePutaway" parameterType="java.lang.Integer">
+        UPDATE crawlers_role SET is_used = 1 where id = #{id}
+    </update>
+
+    <!--删除单条爬虫规则-->
+    <delete id="deleteCrawlersRole" parameterType="java.lang.Integer">
+        delete from crawlers_role where id = #{id}
+    </delete>
 </mapper>

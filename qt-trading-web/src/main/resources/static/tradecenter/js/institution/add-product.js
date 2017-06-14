@@ -110,4 +110,53 @@ $(function () {
     });
 
 
+    var options = {
+        _form: "#fromProduct",
+        _rules: {
+            name: {
+                required: true,
+                rangelength: [8, 50]
+            },
+            resume: {
+                required: true
+            },
+            typeA: {
+                required: true
+            },
+            typeB: {
+                required: true
+            },
+            data_scale:{
+                required: true
+            },
+            introduction:{
+                required: true
+            }
+        },
+        _messages: {
+            name: {
+                required: "请输入数据名称",
+                rangelength: "字符长度为8-50之间"//长度为8-50之间
+            },
+            resume: {
+                required: "请输入数据简介"
+            },
+            typeA: {
+                required: "请选择数据类别"
+            },
+            typeB: {
+                required: "请选择数据类别"
+            },
+            data_scale:{
+                required: "请输入数据规模"
+            },
+            introduction:{
+                required: "请输入数据描述"
+            }
+        }
+    };
+
+    FormValidationMd.init(options,function () {
+        alert(11) ;
+    });
 });

@@ -99,11 +99,11 @@ public class DataTypeApi {
     })
     @ResponseBody
     @RequestMapping(value = "findTypeAttr", method = RequestMethod.GET)
-    public ModelMap findTypeAttr (DataTypeModel dataType) throws GlobalException {
-        if (dataType == null) throw new GlobalException("数据类型为空，请重新操作");
+    public ModelMap findTypeAttr (Integer id) throws GlobalException {
+        if (id == null) throw new GlobalException("数据类型id为空，请重新操作");
         ModelMap map = new ModelMap();
         try {
-            List<DataTypeAttrModel> list = dataTypeMapper.findAttrAll(dataType.getId());
+            List<DataTypeAttrModel> list = dataTypeMapper.findAttrAll(id);
             map.put("pageInfo", list);
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,10 +117,10 @@ public class DataTypeApi {
     })
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelMap findAll(DataTypeModel dataTypeModel){
+    public ModelMap findAll(Integer isUsed){
 
         ModelMap map = new ModelMap();
-        List<DataTypeModel> list = dataTypeMapper.findAll(dataTypeModel.getIsUsed());
+        List<DataTypeModel> list = dataTypeMapper.findAll(isUsed);
         Map<Integer, String> data = new HashMap<>();
         if (list.size() > 0) {
             for (DataTypeModel model : list) {
@@ -137,11 +137,13 @@ public class DataTypeApi {
     })
     @ResponseBody
     @RequestMapping(value = "findDataTypById", method = RequestMethod.GET)
-    public ModelMap findDataTypeById(DataTypeModel typeModel) throws GlobalException {
+    public ModelMap findDataTypeById(Integer id) throws GlobalException {
         ModelMap map = new ModelMap();
-        if (typeModel == null) throw new GlobalException("数据为空，请重新操作");
+        if (id == null) throw new GlobalException("id为空，请重新操作");
+
+        DataTypeModel typeModel = null;
         try {
-            typeModel = dataTypeMapper.findDataTypeById(typeModel.getId());
+            typeModel = dataTypeMapper.findDataTypeById(id);
             map.put("pageInfo", typeModel);
         } catch (Exception e) {
             e.printStackTrace();

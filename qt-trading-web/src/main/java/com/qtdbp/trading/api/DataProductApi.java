@@ -169,6 +169,23 @@ public class DataProductApi extends BaseController{
         return map;
     }
 
+    @ApiOperation(value = "修改数据包产品的上下架接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "数据包产品Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "/changeState", method = RequestMethod.GET)
+    public ModelMap changeState(Integer id) throws GlobalException {
+        if (id == null) throw new GlobalException("数据包产品id为空，请重新输入");
+        ModelMap map = new ModelMap() ;
+        try {
+            Integer count = productService.updateState(id);
+            map.put("success", count>0?true:false);
+        } catch (GlobalException e) {
+            e.printStackTrace();
+        }
+        return  map;
+    }
+
     //===================================================================
     // 数据条目API接口
     //===================================================================
