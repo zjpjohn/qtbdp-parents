@@ -277,6 +277,7 @@ var App = function () {
      * @private
      */
     var _tmp_formatedate = function (date) {
+        if(!date) return ;
         var time = new Date(date);
         var b = 24*60; //分钟数
         time.setMinutes(time.getMinutes() + b, time.getSeconds(), -1);

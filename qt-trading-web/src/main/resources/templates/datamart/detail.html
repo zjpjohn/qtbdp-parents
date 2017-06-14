@@ -44,7 +44,13 @@
                <img src="${pic}" alt=""/>
             </p>
             <div class="lf detail_info">
-                <p class="rt">更新时间：${$item._date(editorTime)}</p>
+                <p class="rt">更新时间：
+                    {{if editorTime}}
+                        ${$item._date(editorTime)}
+                    {{else}}
+                        ${$item._date(addtime)}
+                    {{/if}}
+                </p>
                 <h2>${designation}</h2>
                 <div class="infos">${dataProfile}</div>
                 <p class="p1">

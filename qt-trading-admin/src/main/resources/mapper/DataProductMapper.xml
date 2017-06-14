@@ -19,27 +19,22 @@
         p.audit_status
         FROM
         data_product as p left join data_institution_info_new s on p.user_id = s.create_id
-        <where>
-            <if test="dataType != null and dataType != 0">
-                p.data_type = #{dataType}
-            </if>
-            <if test="dataType != null and designation != null">
-                and
-            </if>
-            <if test="designation != null">
-                p.designation like '%${designation}%'
-            </if>
-            <choose>
-                <when test="userId != null and userId == 0">
-                    and p.user_id = 0
-                </when>
-                <otherwise>
-                    and p.user_id != 0
-                </otherwise>
-            </choose>
-        </where>
-        ORDER BY
-        addtime desc
+        where 1=1
+        <if test="dataType != null and dataType != 0">
+            AND p.data_type = #{dataType}
+        </if>
+        <if test="designation != null">
+            AND p.designation like '%${designation}%'
+        </if>
+        <choose>
+            <when test="userId != null and userId != 0">
+                and p.user_id != 0
+            </when>
+            <otherwise>
+                and p.user_id = 0
+            </otherwise>
+        </choose>
+        ORDER BY addtime desc
     </select>
 
     <resultMap id="ProductResultMap" type="com.qtdbp.trading.model.DataProductModel" >
@@ -53,7 +48,7 @@
         <result column="val_name" property="valName" />
         <result column="price" property="price"/>
         <result column="item_price" property="itemPrice" />
-        <result column="addtime" property="addTime" />
+        <result column="addtime" property="addtime" />
         <result column="editor_time" property="editorTime" />
         <result column="data_type" property="dataType" />
         <result column="user_id" property="userId" />
