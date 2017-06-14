@@ -25,12 +25,28 @@ public class DataTypeApi {
 
     @ApiOperation(value="根据父类目Id查询所有子类目数据接口")
     @ResponseBody
-    @RequestMapping(value = "{pid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{pid}", method = RequestMethod.GET)
     public ModelMap findSecondDataType(@ApiParam(name = "pid", value = "父类目id", required = true) @PathVariable Integer pid) throws GlobalException {
 
         ModelMap map = new ModelMap();
         if (pid == null) throw new GlobalException("数据类型为空");
         List<DataTypeModel> list = dataTypeMapper.findDataTypeByParentId(pid);
+        try {
+            map.put("pageInfo", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    @ApiOperation(value="查询一级类目数据接口")
+    @ResponseBody
+    @RequestMapping(value = "/findRootNode", method = RequestMethod.GET)
+    public ModelMap findAll() throws GlobalException {
+
+        ModelMap map = new ModelMap();
+        List<DataTypeModel> list = dataTypeMapper.findAll();
         try {
             map.put("pageInfo", list);
         } catch (Exception e) {
