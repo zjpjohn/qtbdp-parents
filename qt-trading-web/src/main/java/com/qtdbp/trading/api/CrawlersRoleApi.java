@@ -11,10 +11,7 @@ import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CrawlersRoleService;
 import com.qtdbp.trading.service.DataTypeService;
 import com.qtdbp.trading.service.security.model.SysUser;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -147,11 +144,9 @@ public class CrawlersRoleApi extends BaseController{
     }
 
     @ApiOperation(value = "删除单条爬虫规则接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "爬虫规则id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public ModelMap deleteCrawlersRole(Integer id) throws GlobalException {
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ModelMap deleteCrawlersRole(
+            @ApiParam(name = "id", value = "爬虫规则id") @PathVariable Integer id) throws GlobalException {
 
         ModelMap map = new ModelMap();
 

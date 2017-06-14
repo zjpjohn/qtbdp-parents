@@ -42,4 +42,25 @@ public interface CustomizedMapper extends BaseMapper<CustomServiceModel> {
      * @return 记录数，成功返回1
      */
     Integer insertCustomizedData(CustomServiceModel custom) ;
+
+    /**
+     * 下架定制服务
+     * @param id
+     * @return
+     */
+    Integer updateSoldOut(@Param("id") Integer id) ;
+
+    /**
+     * 上架定制服务
+     * @param id
+     * @return
+     */
+    Integer updatePutaway(@Param("id") Integer id) ;
+
+    /**
+     * 删除单条定制服务
+     * @param id
+     * @return
+     */
+    Integer deleteCustom(@Param("id") Integer id);
 }

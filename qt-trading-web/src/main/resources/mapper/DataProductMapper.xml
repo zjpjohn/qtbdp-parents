@@ -99,7 +99,8 @@
             p.market_price,
             p.data_format,
             p.data_status,
-            p.data_src
+            p.data_src,
+            p.is_used
         FROM
         data_product as p
         WHERE p.id = #{id}
@@ -125,6 +126,7 @@
         <result column="data_format" property="dataFormat"/>
         <result column="data_status" property="dataStatus"/>
         <result column="data_src" property="dataSrc"/>
+        <result column="is_used" property="isUsed"/>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
