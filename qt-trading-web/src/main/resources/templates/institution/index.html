@@ -16,7 +16,7 @@
 
 <!--最新-->
 <div>
-    <img src="/pages/common/images/reptile_02.png" alt=""/>
+    <img src="/pages/common/images/banner6.jpg" alt=""/>
 </div>
 
 <div class="data_store" style="min-height: 500px">
@@ -75,7 +75,7 @@
     {{each(i, institution) list}}
         <div class="list_details lf">
             <a href="/institution/home/${institution.id}">
-                <img src="${institution.logo}" class="lf " alt=""/>
+                <img src="${institution.logo}" onerror="this.src='/pages/common/images/error.png'" class="lf " alt=""/>
                 <div class="lf list_right">
                     <p>${institution.name}</p>
                     <p><em></em>${institution.designation}</p>

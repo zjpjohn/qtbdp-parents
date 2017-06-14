@@ -13,7 +13,7 @@ $(function () {
             { "data": "dataType" },
             { "data": "designation" },
             { "data": "username" },
-            { "data": "addTime" },
+            { "data": "addtime" },
             { "data": null }
         ],
         columnDefs:[{

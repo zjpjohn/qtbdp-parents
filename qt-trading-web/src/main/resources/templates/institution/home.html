@@ -6,7 +6,9 @@
     <title>服务商主页 | 钱塘数据交易中心</title>
     <div th:replace="layout/top"/>
     <link rel="stylesheet" href="/pages/common/css/homepage.css" />
-    <link rel="stylesheet" href="/pages/common/css/homepage2.css" />
+
+
+
 
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
@@ -19,12 +21,33 @@
     <div class="bodys">
         <!-- 服务商信息 -->
         <div id="institution-container"></div>
+
+        <div class="service_listall">
+            <div class="service_list">
+                <p class="serlist_title" id="tab-container">
+                    <a th:href="@{/institution/home}+'/'+${id}+'/0'" th:class="${type == 0}?active">商品列表</a>
+                    <a th:href="@{/institution/home}+'/'+${id}+'/1'" th:class="${type == 1}?active">接单记录</a>
+                </p>
+                <p class="sername tab-sub-container"  th:if="${type == 0}">
+                    <a href="javascript:;" class="active" data-id="data" data-type="1">数据商品</a>
+                    <a href="javascript:;" data-id="data" data-type="2">爬虫规则</a>
+                </p>
+                <p class="sername tab-sub-container" th:if="${type == 1}">
+                    <a href="javascript:;" class="active" data-id="customized" data-type="1">数据定制</a>
+                    <a href="javascript:;" data-id="customized" data-type="2" style="width: 110px;">爬虫规则定制</a>
+                </p>
+                <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
+                <div class="store_main floating" id="data-container"></div>
+                <!-- 分页组件-->
+                <div id="pageTool"></div>
+            </div>
+        </div>
     </div>
 
     <!-- 产品数据模板 -->
     <script id="tmpl_institution" type="text/x-jquery-tmpl">
-        <div class="serhead floating">
-            <img src="${logo}" alt="" class="lf"/>
+        <div class="serhead  floating">
+            <img src="${logo}"  alt="" class="lf" onerror="this.src='/pages/common/images/error.png'"/>
             <div class="lf sertitle">
                 <p>${name}{{if isSys == 1}}<a class="serzy">自营</a>{{/if}} </p>
                 <p class="serletter">
@@ -52,8 +75,8 @@
                         <p>爬虫规则定制接单数</p>
                     </li>
                     <li class="oknum">
-                        <p><a>成交数 ( 笔 ) : </a><i>134</i></p>
-                        <p><a>交额 ( 元 ) : </a><i>￥76543.60</i></p>
+                        <p><a>成交数 ( 笔 ) : </a><i>0</i></p>
+                        <p><a>交额 ( 元 ) : </a><i>￥0.00</i></p>
                     </li>
                     <li class="relation">
                         <p><a><em></em></a> <i>{{if institutionType == 1}} ${companyInfoModel.phone} {{else}} ${personalInfoModel.phone} {{/if}}</i></p>
@@ -67,26 +90,8 @@
             </div>
         </div>
 
-        <div class="service_listall">
-            <div class="service_list">
-                <p class="serlist_title" id="tab-container" data-id="${createId}">
-                    <a href="javascript:;" class="active">商品列表</a>
-                    <a href="javascript:;">接单记录</a>
-                </p>
-                <p class="sername" id="tab-sub-container">
-                    <a href="javascript:;" class="active" data-type="1">数据商品</a>
-                    <a href="javascript:;" data-type="2">爬虫规则</a>
-                </p>
-                <p class="sername" id="tab-custom-container">
-                    <a href="javascript:;" class="active" data-type="1">数据定制</a>
-                    <a href="javascript:;" data-type="2">爬虫规则定制</a>
-                </p>
-                <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
-                <div class="store_main floating" id="data-container"></div>
-                <!-- 分页组件-->
-                <div id="pageTool"></div>
-            </div>
-        </div>
+        <input type="hidden" value="${createId}" id="createId">
+
     </script>
 
     <!-- 数据商品模板 -->
@@ -114,6 +119,7 @@
 
     <!-- 爬虫规则模板 -->
     <script id="tmpl_crawlersRules" type="text/x-jquery-tmpl">
+        <link rel="stylesheet" href="/pages/common/css/homepage2.css" />
         {{if list.length>0}}
         {{each(i, rule) list}}
             <div class="repmain floating lf">
@@ -122,8 +128,8 @@
                     <div class="lf reptexts">
                         <p class="main_title">${rule.name}</p>
                         <p class="main_text">${rule.introduction}</p>
-                        <p class="main_min">
-                            <span class="main_domain"><em></em>采集网站: ${rule.webSite}</span>
+                        <p class="main_min main_domain">
+                            <em ></em>采集网站: ${rule.webSite}
                         </p>
                     </div>
                     <div class="rt priceright">
@@ -140,6 +146,7 @@
     </script>
     <!-- 数据定制模板 -->
     <script id="tmpl_data_custom" type="text/x-jquery-tmpl">
+    <link rel="stylesheet" href="/pages/common/css/homepage3.css" />
     {{if list.length>0}}
     {{each(i,prod) list}}
         <div class="repmain active floating">
@@ -147,12 +154,12 @@
                 <p class="main_title"><a href="/customized/data/detail/${prod.id}">${prod.name}</a></p>
                 <p class="main_text">${prod.dimension}</p>
                 <p class="main_min">
-                    <span >采集规模: <a class="main_domain">${prod.dimension} 条</a></span>
+                    <span >采集规模: <a class="main_domain">${prod.scale}条</a></span>
                     <span class="main_timeend"> <em></em> 截至倒计时 : <a>${$item._timeChange(prod.endTime)}</a></span>
                 </p>
             </div>
             <div class="lf priceright">
-                <p class="repprice">￥${prod.price}</p>
+                <p class="repprice">悬赏￥${$item._num(prod.price)}</p>
                 <p class="reppeople">32人已接单</p>
                 <p class="repnow">立即接单</p>
             </div>
@@ -164,6 +171,7 @@
     </script>
     <!-- 爬虫规则定制数据模板 -->
     <script id="tmpl_role_custom" type="text/x-jquery-tmpl">
+    <link rel="stylesheet" href="/pages/common/css/homepage4.css" />
     {{if list.length>0}}
     {{each(i,prod) list}}
         <div class="repmain active floating">
@@ -176,7 +184,7 @@
                 </p>
             </div>
             <div class="lf priceright">
-                <p class="repprice">￥${prod.price}</p>
+                <p class="repprice">悬赏￥${$item._num(prod.price)}</p>
                 <p class="reppeople">32人已接单</p>
                 <p class="repnow">立即接单</p>
             </div>
@@ -189,7 +197,7 @@
 
     <script th:inline="javascript">
         jQuery(document).ready(function() {
-            App.initInstitutionHome([[${id}]]);
+            App.initInstitutionHome([[${id}]],[[${type}]]);
         });
     </script>
 

@@ -33,6 +33,13 @@ public interface DataInstitutionInfoNewMapper extends BaseMapper<DataInstitution
     DataInstitutionInfoNewModel findDataInstitutionInfoNewById(@Param("id") Integer id) ;
 
     /**
+     * 根据用户ID查询服务商
+     * @param createId
+     * @return
+     */
+    DataInstitutionInfoNewModel findDataInstitutionInfoNewByCreateId(Integer createId) ;
+
+    /**
      * 更新服务商
      * @param infoNewModel
      * @return 记录数，成功返回1

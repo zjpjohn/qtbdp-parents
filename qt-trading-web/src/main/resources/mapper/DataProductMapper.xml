@@ -102,9 +102,7 @@
             p.data_src
         FROM
         data_product as p
-        WHERE
-        p.is_used = 1
-        AND p.id = #{id}
+        WHERE p.id = #{id}
     </select>
 
     <resultMap id="ProductDetailResultMap" type="com.qtdbp.trading.model.DataProductModel" >
@@ -114,7 +112,7 @@
         <result column="introduce" property="introduce" />
         <result column="data_scale" property="dataScale"/>
         <result column="data_type" property="dataType"/>
-        <result column="addtime" property="addTime" />
+        <result column="addtime" property="addtime" />
         <result column="editor_time" property="editorTime" />
         <result column="price" property="price" />
         <result column="data_type_props" property="dataTypeProps" />

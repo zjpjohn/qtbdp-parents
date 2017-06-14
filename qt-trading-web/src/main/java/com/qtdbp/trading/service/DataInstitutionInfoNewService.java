@@ -53,6 +53,18 @@ public class DataInstitutionInfoNewService {
     }
 
     /**
+     * 根据用户ID查询服务商明细
+     * @param createId
+     * @return
+     */
+    public DataInstitutionInfoNewModel findInstitutionNewByCreateId(Integer createId) {
+
+        if(createId == null || createId == 0) return null ;
+
+        return infoNewMapper.findDataInstitutionInfoNewByCreateId(createId);
+    }
+
+    /**
      * 新增服务商
      * @param infoNewModel
      * @return id

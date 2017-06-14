@@ -23,7 +23,7 @@
         FROM
         data_institution_info_new AS c
         WHERE
-        c.is_used = 1
+        c.is_used = 1 and c.audit_status = 1
         <if test="institutionType != null and institutionType != 0">
             AND c.institution_type = #{institutionType}
         </if>
@@ -59,7 +59,31 @@
         FROM
         data_institution_info_new AS c
         WHERE
-        c.is_used = 1 AND c.id = #{id}
+        c.is_used = 1 and c.audit_status = 1 AND c.id = #{id}
+    </select>
+
+    <!-- 根据用户ID查询服务商明细 -->
+    <select id="findDataInstitutionInfoNewByCreateId" resultMap="DataInstitutionInfoNewResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.institution_type,
+        c.name,
+        c.designation,
+        c.logo,
+        c.info_id,
+        c.is_sys,
+        c.is_great,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason
+        FROM
+        data_institution_info_new AS c
+        WHERE
+        c.is_used = 1 and c.audit_status = 1 AND c.create_id = #{createId}
     </select>
 
     <!-- 服务商结果集 -->

@@ -100,6 +100,10 @@ input:-ms-input-placeholder {
     background-position: -8px -216px;
     margin-right:10px;
 }
+
+.head_fabu>i.bianxina{
+    background-position: -726px -209px;
+}
 .fabu_btns>p{
     color:#010101;
     line-height:25px;
@@ -240,7 +244,7 @@ nav{
 }
 .footer_main>li{
     float:left;
-    padding:0px 80px;
+    padding:0px 78px;
     height:165px;
     border-right:1px solid #000;
     border-left:1px solid #2D3E50;

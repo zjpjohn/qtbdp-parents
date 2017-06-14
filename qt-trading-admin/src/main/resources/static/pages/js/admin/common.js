@@ -70,9 +70,9 @@ var Common = {
 
                         if(dataChage.length > 0){
                             for ( var i = 0; i<dataChage.length; i++){
-                                var time = dataChage[i].addTime,
+                                var time = dataChage[i].addtime,
                                     createTime = dataChage[i].createTime;
-                                dataChage[i].addTime = Common._formatedate(time);
+                                dataChage[i].addtime = Common._formatedate(time);
                                 var props = dataChage[i].dataTypeProps;
                                 dataChage[i].dataTypeProps = Common._dataTypeProps(props);
                                 var typeId = dataChage[i].dataType;

@@ -28,13 +28,13 @@
 		</div>
 	</div>
 	<div class="head_fabu lf floating">
-		<i class="lf icon"></i>
+		<i class="lf icon bianxina"></i>
 		<!--如果已登录-->
 		<div th:if="${user}">
 			<div class="lf fabu_btns">
 				<p>变现</p>
-				<a href="@{/institution/add/product}">数据变现</a>
-				<a href="@{/publish/crawlers}" >规则变现</a>  <!--否  请申请认证服务商-->
+				<a href="/institution/add/product">数据变现</a>
+				<a href="/publish/crawlers" >规则变现</a>  <!--否  请申请认证服务商-->
 				<!--<a>数据发布</a>-->
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 		<!--如果未登录-->
 		<div  th:unless="${user}">
 			<div class="lf fabu_btns">
-				<p>发布</p>
+				<p>变现</p>
 				<a href="javascript:;"  onclick="loginShow(this)">数据变现</a>
 				<a href="javascript:;"  onclick="loginShow(this)">规则变现</a>
 				<!--<a>数据发布</a>-->
