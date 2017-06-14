@@ -425,89 +425,79 @@ var App = function () {
             initDatas() ;
         },
         // 服务商主页
-        initInstitutionHome: function (id) {
+        initInstitutionHome: function (id,type) {
             nav(6);
 
             // 加载服务商明细
-            LoadingData.request({url: "/api/institutionV2/"+id}, function(data){
-                $("#tmpl_institution").tmpl(data.pageInfo,{
-                    _date : function (date) {
+            LoadingData.request({url: "/api/institutionV2/"+id}, function(data) {
+                $("#tmpl_institution").tmpl(data.pageInfo, {
+                    _date: function (date) {
                         return _tmp_formatedate(date)
                     },
-                    _num : function (num) {
-                        return _tmp_formatnum(num) ;
+                    _num: function (num) {
+                        return _tmp_formatnum(num);
                     },
-                    _def : function (v,t) {
-                        return _tmp_defaultvalue(v,t) ;
+                    _def: function (v, t) {
+                        return _tmp_defaultvalue(v, t);
                     }
                 }).appendTo("#institution-container");
 
-                // 加载数据包产品
-                initDatas({userId:data.pageInfo.createId}) ;
-
-                var _id = $("#tab-container").attr("data-id") ;
-                $("#tab-sub-container > a").each(function () {
-
-                    $(this).click(function () {
-
-                        $("#tab-sub-container > a").removeClass("active") ;
-                        $(this).addClass("active") ;
-
-
-                        var _type = $(this).attr("data-type") ;
-                        switch (_type) {
-
-                            case "1":
-                                // 加载数据包产品
-                                options._url = "/api/product" ;
-                                options._tmpl = "#tmpl_products" ;
-                                initDatas({userId:_id}) ;
-                                break ;
-
-                            case "2":
-                                // 加载爬虫规则
-                                options._url = "/api/crawlers/role" ;
-                                options._tmpl = "#tmpl_crawlersRules" ;
-                                initDatas({createId:_id}) ;
-                                break ;
-                        }
-
-                    });
-
-                }) ;
-
-                $("#tab-custom-container > a").each(function () {
-
-                    $(this).click(function () {
-
-                        $("#tab-custom-container > a").removeClass("active") ;
-                        $(this).addClass("active") ;
-
-
-                        var _type = $(this).attr("data-type") ;
-                        switch (_type) {
-
-                            case "1":
-                                // 加载数据定制产品
-                                options._url = "/api/customized" ;
-                                options._tmpl = "#tmpl_data_custom" ;
-                                initDatas({createId:_id,serviceType: 2}) ;
-                                break ;
-
-                            case "2":
-                                // 加载爬虫规则定制产品
-                                options._url = "/api/customized" ;
-                                options._tmpl = "#tmpl_role_custom" ;
-                                initDatas({createId:_id, serviceType: 1}) ;
-                                break ;
-                        }
-
-                    });
-
-                }) ;
+                switch (type) {
+                    case 0:
+                        // 加载数据包产品
+                        initDatas({userId: data.pageInfo.createId,auditStatus:1,isUsed:1}) ;
+                        break ;
+                    case 1:
+                        // 加载数据规则定制
+                        options._url = "/api/customized" ;
+                        options._tmpl = "#tmpl_data_custom" ;
+                        initDatas({createId: data.pageInfo.createId,serviceType: 2,auditStatus:1,isUsed:1}) ;
+                        break ;
+                }
 
             });
 
+            var _id = $("#createId").val() ;
+
+            $(".tab-sub-container > a").each(function () {
+
+                $(this).click(function () {
+
+                    $(".tab-sub-container > a").removeClass("active") ;
+                    $(this).addClass("active") ;
+
+                    var _container = $(this).attr("data-id") ;
+                    var _type = $(this).attr("data-type") ;
+                    switch (_type) {
+                        case "1":
+                            // 加载数据包产品
+                            if(_container == "data") {
+                                options._url= "/api/product";
+                                options._tmpl= "#tmpl_products";
+                                initDatas({userId:_id,auditStatus:1,isUsed:1}) ;
+                            } else {
+                                options._url = "/api/customized" ;
+                                options._tmpl = "#tmpl_data_custom" ;
+                                initDatas({createId:_id,serviceType: 2,auditStatus:1,isUsed:1}) ;
+                            }
+                            break ;
+                        case "2":
+                            // 加载爬虫规则
+                            if(_container == "data") {
+                                options._url = "/api/crawlers/role" ;
+                                options._tmpl = "#tmpl_crawlersRules" ;
+                                initDatas({createId:_id,auditStatus:1,isUsed:1}) ;
+                            } else {
+                                options._url = "/api/customized" ;
+                                options._tmpl = "#tmpl_role_custom" ;
+                                initDatas({createId:_id, serviceType: 1,auditStatus:1,isUsed:1}) ;
+                            }
+                            break ;
+                    }
+
+                });
+
+            }) ;
         },
 
         /****************个人中心*****************/

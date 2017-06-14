@@ -60,7 +60,18 @@ public class DataInstitutionController extends BaseController {
 
         ModelAndView result = new ModelAndView(PAGE_INSTITUTION_HOME);
         result.addObject("id", id) ;
-        result.addObject("prod", infoNewService.findCount(id));
+        result.addObject("type", 0) ;
+//        result.addObject("prod", infoNewService.findCount(id));
+        return result ;
+    }
+
+    @RequestMapping(value = "/institution/home/{id}/{type}",method = RequestMethod.GET)
+    public ModelAndView home1(@PathVariable Integer id,@PathVariable Integer type) {
+
+        ModelAndView result = new ModelAndView(PAGE_INSTITUTION_HOME);
+        result.addObject("id", id) ;
+        result.addObject("type", type) ;
+//        result.addObject("prod", infoNewService.findCount(id));
         return result ;
     }
 

@@ -19,6 +19,27 @@
     <div class="bodys">
         <!-- 服务商信息 -->
         <div id="institution-container"></div>
+
+        <div class="service_listall">
+            <div class="service_list">
+                <p class="serlist_title" id="tab-container">
+                    <a th:href="@{/institution/home}+'/'+${id}+'/0'" th:class="${type == 0}?active">商品列表</a>
+                    <a th:href="@{/institution/home}+'/'+${id}+'/1'" th:class="${type == 1}?active">接单记录</a>
+                </p>
+                <p class="sername tab-sub-container"  th:if="${type == 0}">
+                    <a href="javascript:;" class="active" data-id="data" data-type="1">数据商品</a>
+                    <a href="javascript:;" data-id="data" data-type="2">爬虫规则</a>
+                </p>
+                <p class="sername tab-sub-container" th:if="${type == 1}">
+                    <a href="javascript:;" class="active" data-id="customized" data-type="1">数据定制</a>
+                    <a href="javascript:;" data-id="customized" data-type="2" style="width: 110px;">爬虫规则定制</a>
+                </p>
+                <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
+                <div class="store_main floating" id="data-container"></div>
+                <!-- 分页组件-->
+                <div id="pageTool"></div>
+            </div>
+        </div>
     </div>
 
     <!-- 产品数据模板 -->
@@ -52,8 +73,8 @@
                         <p>爬虫规则定制接单数</p>
                     </li>
                     <li class="oknum">
-                        <p><a>成交数 ( 笔 ) : </a><i>134</i></p>
-                        <p><a>交额 ( 元 ) : </a><i>￥76543.60</i></p>
+                        <p><a>成交数 ( 笔 ) : </a><i>0</i></p>
+                        <p><a>交额 ( 元 ) : </a><i>￥0.00</i></p>
                     </li>
                     <li class="relation">
                         <p><a><em></em></a> <i>{{if institutionType == 1}} ${companyInfoModel.phone} {{else}} ${personalInfoModel.phone} {{/if}}</i></p>
@@ -67,26 +88,8 @@
             </div>
         </div>
 
-        <div class="service_listall">
-            <div class="service_list">
-                <p class="serlist_title" id="tab-container" data-id="${createId}">
-                    <a href="javascript:;" class="active">商品列表</a>
-                    <a href="javascript:;">接单记录</a>
-                </p>
-                <p class="sername" id="tab-sub-container">
-                    <a href="javascript:;" class="active" data-type="1">数据商品</a>
-                    <a href="javascript:;" data-type="2">爬虫规则</a>
-                </p>
-                <p class="sername" id="tab-custom-container">
-                    <a href="javascript:;" class="active" data-type="1">数据定制</a>
-                    <a href="javascript:;" data-type="2">爬虫规则定制</a>
-                </p>
-                <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
-                <div class="store_main floating" id="data-container"></div>
-                <!-- 分页组件-->
-                <div id="pageTool"></div>
-            </div>
-        </div>
+        <input type="hidden" value="${createId}" id="createId">
+
     </script>
 
     <!-- 数据商品模板 -->
@@ -152,7 +155,7 @@
                 </p>
             </div>
             <div class="lf priceright">
-                <p class="repprice">￥${prod.price}</p>
+                <p class="repprice">￥${$item._num(prod.price)}</p>
                 <p class="reppeople">32人已接单</p>
                 <p class="repnow">立即接单</p>
             </div>
@@ -176,7 +179,7 @@
                 </p>
             </div>
             <div class="lf priceright">
-                <p class="repprice">￥${prod.price}</p>
+                <p class="repprice">￥${$item._num(prod.price)}</p>
                 <p class="reppeople">32人已接单</p>
                 <p class="repnow">立即接单</p>
             </div>
@@ -189,7 +192,7 @@
 
     <script th:inline="javascript">
         jQuery(document).ready(function() {
-            App.initInstitutionHome([[${id}]]);
+            App.initInstitutionHome([[${id}]],[[${type}]]);
         });
     </script>
 
