@@ -156,7 +156,7 @@
     <select id="findRuleById" parameterType="java.lang.Integer" resultMap="CrawlersRoleMap">
         select c.id,  c.type_id,  c.role_type,  c.name, c.introduction, c.logo, c.price,
           c.`desc`, c.buy_count, c.view_count, c.web_type,c.web_site,  c.collection_field,
-          c.create_time, s.name username  from crawlers_role as c
+          c.create_time, c.is_used, s.name username  from crawlers_role as c
          left join data_institution_info_new s on c.create_id = s.create_id where c.id = #{id}
     </select>
 

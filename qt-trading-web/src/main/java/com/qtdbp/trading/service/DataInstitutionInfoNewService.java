@@ -117,12 +117,11 @@ public class DataInstitutionInfoNewService {
 
     /**
      * 查询数据服务商数据包商品，爬虫规则商品，数据定制接单数，爬虫规则定制接单数的数量
-     * @param id
+     * @param userId
      * @return
      */
-    public HashMap<String,Long> findCount(Integer id){
-        DataInstitutionInfoNewModel infoNewModel = infoNewMapper.findDataInstitutionInfoNewById(id);
-        return infoNewMapper.findInstitutionInfoCount(infoNewModel.getCreateId());
+    public HashMap<String,Long> findCount(Integer userId){
+        return infoNewMapper.findInstitutionInfoCount(userId);
     }
 
 }

@@ -79,7 +79,14 @@
                         <p><a>交额 ( 元 ) : </a><i>￥0.00</i></p>
                     </li>
                     <li class="relation">
-                        <p><a><em></em></a> <i>{{if institutionType == 1}} ${companyInfoModel.phone} {{else}} ${personalInfoModel.phone} {{/if}}</i></p>
+                        <p><a><em></em></a> <i>
+                        {{if institutionType == 1 && companyInfoModel}}
+                            ${companyInfoModel.phone}
+                        {{else personalInfoModel}}
+                            ${personalInfoModel.phone}
+                        {{else}}
+                            -
+                        {{/if}}</i></p>
                         <p><i>和我联系</i></p>
                     </li>
                     <li class="serpeople">

@@ -2,6 +2,7 @@ package com.qtdbp.trading.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
+import com.qtdbp.trading.mapper.CustomizedMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.CustomServiceModel;
 import com.qtdbp.trading.controller.BaseController;
@@ -36,6 +37,9 @@ public class CustomizedApi extends BaseController {
 
     @Autowired
     private CustomizedService customizedService ;
+
+    @Autowired
+    private CustomizedMapper customizedMapper;
 
     @Autowired
     private DataTypeService dataTypeService;
@@ -151,4 +155,43 @@ public class CustomizedApi extends BaseController {
         return map;
     }
 
+    @ApiOperation(value = "修改定制服务上下架接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "定制服务id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
+    @RequestMapping(value = "/changeState", method = RequestMethod.GET)
+    public ModelMap changeState(Integer id) throws GlobalException {
+        if (id == null) throw new GlobalException("定制服务id为空，请重新输入");
+        ModelMap map = new ModelMap() ;
+        try {
+            Integer count = customizedService.updateState(id);
+            map.put("success", count>0?true:false);
+        } catch (GlobalException e) {
+            e.printStackTrace();
+        }
+        return  map;
+    }
+
+    @ApiOperation(value = "删除单条定制服务接口")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ModelMap deleteCrawlersRole(
+            @ApiParam(name = "id", value = "定制服务id") @PathVariable Integer id) throws GlobalException {
+
+        ModelMap map = new ModelMap();
+
+        if (id != null) {
+            try {
+                SysUser user = getPrincipal() ;
+                if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+                Integer count = customizedMapper.deleteCustom(id);
+                map.put("success", count > 0 ? true : false);
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        } else {
+            map.put("success", false);
+        }
+
+        return map;
+    }
 }

@@ -107,9 +107,52 @@
 <!--页脚-->
 <footer th:replace="layout/footer"></footer>
 <!--页脚结束-->
-<script>
-    nav("received");
-
+<!-- 数据定制tpml模板 -->
+<script id="tmpl_data_custom" type="text/x-jquery-tmpl">
+        {{if list.length > 0}}
+            {{each(i,prod) list}}
+             <tr>
+                <td>${i+1}</td>
+                <td>${prod.name}</td>
+                <td>￥${prod.price}</td>
+                {{if prod.auditStatus == 0 }}
+                    <td class="nopaid">待审核</td>
+                    <td>${prod.createTime}</td>
+                    <td>
+                        <a href="#" class="gopay">撤销</a>
+                    </td>
+                {{else prod.auditStatus == 1 && prod.isUsed==1}}
+                     <td class="paid">已上架</td>
+                     <td>${prod.createTime}</td>
+                     <td>
+                        <a href="#" class="gopay">撤销</a>
+                     </td>
+				{{else prod.auditStatus==1 && prod.isUsed == 0}}
+					 <td class="paid">未上架</td>
+                     <td>${prod.createTime}</td>
+                     <td>
+                        <a href="#" class="gopay">撤销</a>
+                     </td>
+                {{else prod.auditStatus == 2 }}
+                    <td class="paid">审核不通过</td>
+                    <td>${prod.createTime}</td>
+                    <td>
+                         <a class="download" onclick="");">重新发布</a>
+                    </td>
+                {{/if}}
+            </tr>
+            {{/each}}
+        {{else}}
+            <tr>
+                <td colspan="8" class="noline">
+                     <div class="nodata">
+                        <img src="/tradecenter/images/none.png" alt=""/>
+                            <p>暂时无定制数据</p>
+                            <a href="/datamart">前往数据商城</a>
+                    </div>
+                </td>
+            </tr>
+        {{/if}}
 </script>
 </body>
 </html>

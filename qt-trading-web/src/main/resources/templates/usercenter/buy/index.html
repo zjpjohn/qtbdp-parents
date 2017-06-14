@@ -80,6 +80,13 @@
                 <!-- 分页结束 -->
             </div>
             <!-- 我购买的商品-->
+            <!-- 订单支付开始 -->
+            <div class="orderpay rt_tbs" id="orderPay">
+
+            </div>
+            <!-- 订单支付结束 -->
+            <!-- 支付回调 -->
+            <div id="aliBack" style="dispay:none;"></div>
         </div>
     </div>
 </div>
@@ -179,11 +186,20 @@
 
 
 <script th:inline="javascript">
-
+    var isOrder = [[${isOrder}]];
+    var order = [[${order}]];
     jQuery(document).ready(function() {
         App.initUserBuy([[${user.id}]],[[${type}]]);
+        //如果是支付订单
+        if(isOrder && isOrder=="4"){
+            $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
+            $("#tmpl_orderpay").tmpl(order).appendTo("#orderPay");
+            $(".orderpay").addClass("active").siblings(".active").removeClass("active");
+
+        }
     });
 </script>
+
 
 </body>
 </html>

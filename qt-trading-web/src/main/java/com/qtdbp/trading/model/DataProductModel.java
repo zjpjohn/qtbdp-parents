@@ -82,6 +82,8 @@ public class DataProductModel extends BaseModel {
 
     private Integer isFree;     //是否免费
 
+    private String typeName;    //类目名字
+
     public String getDesignation() {
         return designation;
     }
@@ -485,6 +487,14 @@ public class DataProductModel extends BaseModel {
 
     public void setIsFree(Integer isFree) {
         this.isFree = isFree;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }
 

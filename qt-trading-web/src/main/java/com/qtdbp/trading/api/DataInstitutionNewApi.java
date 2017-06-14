@@ -81,16 +81,17 @@ public class DataInstitutionNewApi extends BaseController {
     @ApiImplicitParam(name = "orderBy", value = "排序字段，名称和表中字段一致", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ModelMap findInstitutionV2ById(
-            @ApiParam(name = "id", value = "服务商Id", required = true) @PathVariable Integer id, Integer userId) throws GlobalException {
+            @ApiParam(name = "id", value = "服务商Id", required = true) @PathVariable Integer id) throws GlobalException {
 
         ModelMap map = new ModelMap();
         DataInstitutionInfoNewModel infoNewModel = null ;
-        HashMap<String, Long> hashMap = null;
         if(id != null) {
             try {
                 infoNewModel = institutionInfoNewService.findInstitutionNewById(id);
-                hashMap = institutionInfoNewService.findCount(infoNewModel.getCreateId());
-                infoNewModel.setCountMap(hashMap);
+                if(infoNewModel != null) {
+                    HashMap<String, Long> hashMap = institutionInfoNewService.findCount(infoNewModel.getCreateId());
+                    infoNewModel.setCountMap(hashMap);
+                }
                 map.put("pageInfo", infoNewModel);
             } catch (Exception e) {
                 logger.error("findInstitutionV2ById has error ,message:" + e.getMessage());
