@@ -16,7 +16,7 @@
 
 <!-- 内容 -->
 <div>
-    <img src="/pages/common/images/reptile_02.png" alt=""/>
+    <img src="/pages/common/images/banner2.jpg" alt=""/>
 </div>
 
 <div class="data_store" style="min-height: 500px">
@@ -99,9 +99,9 @@
 <script id="tmpl_products" type="text/x-jquery-tmpl">
     {{if list.length>0}}
     {{each(i,prod) list}}
-        <div class="store_one">
-            <!--<a href="/datamart/detail/${prod.id}" class="list_img" target="_blank" style="background:url(${prod.pic}) no-repeat center center;background-size:cover;"> </a>-->
-            <img src="${prod.pic}" alt=""/>
+        <div class="store_one" >
+            <a style="background:url(${prod.pic}) no-repeat center center; background-size:cover;"/></a>
+
             <h2><a href="/datamart/detail/${prod.id}" target="_blank" class="list_title">${prod.designation}</a></h2>
             <p class="sto_main">${prod.dataProfile}</p>
             <p class="store_small">

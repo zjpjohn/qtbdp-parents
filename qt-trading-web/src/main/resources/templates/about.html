@@ -2,20 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/tradecenter/images/qiantang.ico}" />
-    <!-- 引入header布局 -->
-    <top th:replace="layout/top :: top"></top>
-    <!-- 页面自定义css、js  -->
-    <meta name="keywords" content="钱塘大数据交易中心"/>
-    <meta name="description" content="钱塘大数据交易中心"/>
-    <link rel="stylesheet" th:href="@{/tradecenter/css/about.css}"/>
-    <script th:src="@{/tradecenter/js/jquery-1.11.1.min.js}"></script>
+    <title>数据市场 | 钱塘数据交易中心</title>
+    <div th:replace="layout/top"/>
+    <link rel="stylesheet" href="/pages/common/css/about.css"/>
 </head>
 <body>
     <!--  页头 -->
-    <div th:replace="layout/header" /></div>
+    <div th:replace="layout/header"></div>
+    <!-- 页头结束 -->
 
     <div class="about_bg1">
         <div class="bg1_con_box">
@@ -111,7 +105,7 @@
                 浙江省杭州市萧山科技城传化科创大厦B座5楼
             </p>
             <p>
-                <img th:src="@{/tradecenter/images/qr_code.png}" alt=""/>
+                <img src="/pages/common/images/qr_code.png" alt=""/>
             </p>
             <p class="btn_p">
                 <a href="javascript:;">用户协议</a>
@@ -137,9 +131,10 @@
         <a href="javascript:;" class="start">开始交易</a>
     </div>
     <div class="about_bg4"></div> -->
-    <script>
-        nav(5);
-    </script>
+
+    <!-- 页脚 -->
+    <footer th:replace="layout/footer" />
+    <!-- 页脚结束 -->
 </body>
 
 </html>
