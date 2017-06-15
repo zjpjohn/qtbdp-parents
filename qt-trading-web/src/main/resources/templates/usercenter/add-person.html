@@ -35,7 +35,8 @@
             <div id="fromContent">
 
                 <!--表单信息-->
-                <form id="fromPerson">
+                <form id="fromPerson" action="/api/institutionV2" method="post">
+                    <input type="text" name="institutionType" value="2" style="display:none;">
                     <!--服务商基本信息-->
                     <div  class="from-top clearfix">
                         <div class="lf">
@@ -46,21 +47,21 @@
                                         <a href="/usercenter/add/person" class="btn btn-default select-button">个人</a>
                                         <a href="/usercenter/add/company" class="btn btn-default">企业</a>
                                     </div>
-                                    <p class="tip">个人服务商</p>
+                                    <p class="tip">企业服务商</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">服务商名称</label>
                                 <div>
-                                    <input id="facilitator" name="facilitator" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="facilitator" name="name" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">服务商名称不可更改，请认真填写</p>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">服务领域</label>
                                 <div>
-                                    <input id="field" name="field" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="field" name="designation" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                             </div>
                         </div>
@@ -72,8 +73,12 @@
                                 <img src="" alt="" id="logo" class="Image"/>
                             </fieldset>
                         </div>
+                        <input type="text" style="display:none;"  name="logo" id="logoContent">
                     </div>
                     <!--服务商基本信息结束-->
+
+
+
 
                     <div class="from-bottom">
                         <!--个人需要的信息-->
@@ -81,14 +86,14 @@
                             <div class="form-group">
                                 <label class="control-label">姓名</label>
                                 <div>
-                                    <input id="name" name="name" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="name" name="personalInfoModel.realName" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的姓名严格一致</p>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">身份证号</label>
                                 <div>
-                                    <input id="ID" name="ID" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="ID" name="personalInfoModel.idNumber" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的号码严格一致</p>
                             </div>
@@ -113,18 +118,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="text" style="display:none;"  name="fullFacePhoto" id="fullFacePhoto">
+                            <input type="text" style="display:none;"  name="negativeSidePhoto" id="negativeSidePhoto">
                         </div>
 
                         <div class="form-group address">
                             <label class="control-label">地区</label>
                             <div class="clearfix" id="Location">
                                 <div class="lf select-div">
-                                    <select  class="form-control prov" name="province" id="provinceId">
+                                    <select  class="form-control prov" name="provinceId" id="provinceId">
                                         <option value="">请选择省份</option>
                                     </select>
                                 </div>
                                 <div class="rt select-div">
-                                    <select  class="form-control city" name="city" id="cityId">
+                                    <select  class="form-control city" name="cityId" id="cityId">
                                         <option value="">请选择市</option>
                                     </select>
                                 </div>
@@ -140,8 +147,14 @@
                         </div>
                     </div>
 
-                    <div class="submit">
-                        <input type="submit" value="提交" id="submit-btn">
+                    <!-- 页脚发布按钮 -->
+                    <div class="form_btm submit">
+                        <!--<input type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>-->
+                        <button type="submit" id="submit-btn" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
+
+                        <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
+                            <span class="ladda-label">发布</span>
+                        </button>-->
                     </div>
                 </form>
                 <!--表单信息结束-->

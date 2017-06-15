@@ -17,9 +17,9 @@ $(function () {
 
 
     //图片显示异步上传
-    fromCommon.RenderImg($(".fileLogo"),$logo,"/api/upload/img");
-    fromCommon.RenderImg($(".fileID1"),$IDFace,"/api/upload/img");
-    fromCommon.RenderImg($(".fileID2"),$IDreverse,"/api/upload/img");
+    fromCommon.RenderImg($(".fileLogo"),$logo,$('#logoContent'));
+    fromCommon.RenderImg($(".fileID1"),$IDFace,$('#fullFacePhoto'));
+    fromCommon.RenderImg($(".fileID2"),$IDreverse,$('#negativeSidePhoto'));
 
 
 
@@ -32,41 +32,39 @@ $(function () {
         nodata:"none" //当子集无数据时，隐藏select
     });
 
-
-
     var options = {
         _form: "#fromPerson",
         _rules: {
-            facilitator: {
+            name: {
                 required: true,//服务商名称
                 rangelength: [8, 50]//长度为8-50之间
             },
-            field: {
+            designation: {
                 required: true//服务领域
             },
-            phone: {
-                required: true//联系电话
-            },
-            name:{
-                required: true//姓名
-            },
-            ID:{
-                required: true//身份证
-            }
+            // phone: {
+            //     required: true//联系电话
+            // },
+            // realName:{
+            //     required: true//姓名
+            // },
+            // ID:{
+            //     required: true//身份证
+            // }
         },
         _messages: {
-            facilitator: {
+            name: {
                 required: "请输入服务商名称",
                 rangelength: "字符长度为8-50之间"//长度为8-50之间
             },
 
-            field: {
+            designation: {
                 required: "请输入服务领域"
             },
             phone: {
                 required: "请输入联系电话"
             },
-            name:{
+            realName:{
                 required: "请输入姓名"//姓名
             },
             ID:{
