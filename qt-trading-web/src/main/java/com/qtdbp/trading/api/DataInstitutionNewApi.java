@@ -3,10 +3,13 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.controller.BaseController;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataInstitutionInfoNewModel;
 import com.qtdbp.trading.service.DataInstitutionInfoNewService;
 import com.qtdbp.trading.service.DataTypeService;
+import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.trading.utils.Message;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,17 +111,34 @@ public class DataInstitutionNewApi extends BaseController {
     public ModelMap insertInstitutionV2(DataInstitutionInfoNewModel infoNewModel) throws GlobalException {
 
         ModelMap map = new ModelMap();
-        Integer id = -1 ;
+        Message message = new Message() ;
+
         if(infoNewModel != null) {
-            try {
-                id = institutionInfoNewService.insertInstitution(infoNewModel);
-            } catch (Exception e) {
-                logger.error("insertInstitutionV2 has error ,message:" + e.getMessage());
-                throw new GlobalException(e.getMessage());
+            SysUser user = getPrincipal() ;
+            if(user == null) {
+                message.setSuccess(false);
+                message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+                message.setMessage("用户请先登录");
+            } else {
+                try {
+                    infoNewModel.setCreateId(user.getId());
+                    Integer id = institutionInfoNewService.insertInstitution(infoNewModel);
+                    if(id != null && id < 0) {
+                        message.setSuccess(true);
+                        message.setData(id);
+                    }
+                } catch (Exception e) {
+                    logger.error("insertInstitutionV2 has error ,message:" + e.getMessage());
+                    throw new GlobalException(e.getMessage());
+                }
             }
+        } else {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("服务商信息不存在，请重新输入");
         }
-        map.put("success", id != null ? true : false);
-        map.put("id", id);
+
+        map.put("result", message);
 
         return map;
     }
