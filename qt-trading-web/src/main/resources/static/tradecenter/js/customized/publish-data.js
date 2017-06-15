@@ -1,5 +1,14 @@
 $(function () {
 
+
+    //数据类别
+    fromCommon.typeSelect($('#typeA'),"/api/type/findRootNode",undefined,'请选择数据类别');
+    $('#typeA').on("change",function () {
+        var val = $(this).val();
+        fromCommon.typeSelect($('#typeB'),"/api/type/"+val,val,'请选择数据类别');
+    });
+
+
     var options = {
         _form: "#fromData",
         _rules: {
@@ -7,7 +16,7 @@ $(function () {
                 required: true,
                 rangelength: [8, 50]
             },
-            describe: {
+            introduction: {
                 required: true
             },
             dimension: {
@@ -19,13 +28,13 @@ $(function () {
             typeA:{
                 required: true
             },
-            typeB: {
+            typeId: {
                 required: true
             },
             price:{
                 required: true
             },
-            endDate:{
+            endTime:{
                 required: true
             },
             website:{
@@ -33,10 +42,6 @@ $(function () {
             },
             phone:{
                 required: true
-            },
-            code:{
-                required: true
-
             },
             qq:{
                 required: true
@@ -60,13 +65,13 @@ $(function () {
             typeA:{
                 required: "请选择数据类别"
             },
-            typeB: {
+            typeId: {
                 required: "请选择数据类别"
             },
             price:{
                 required: "请输入悬赏金额"
             },
-            endDate:{
+            endTime:{
                 required: "请选择截止时间"
             },
             website:{
@@ -74,10 +79,6 @@ $(function () {
             },
             phone:{
                 required: "请输入手机号"
-
-            },
-            code:{
-                required: "请输入验证码"
 
             },
             qq:{
@@ -91,3 +92,14 @@ $(function () {
         alert(11) ;
     });
 });
+
+
+
+
+
+
+
+
+
+
+

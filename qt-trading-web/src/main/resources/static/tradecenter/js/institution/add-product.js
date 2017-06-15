@@ -1,7 +1,6 @@
 $(function () {
     //表单信息
-    var subFlie,
-        $dataName = $('#data_name'),
+    var $dataName = $('#data_name'),
         $dataResume = $('#data_resume'),
         $ChargeMode = $('#Charge_mode'),
         $price = $('#price'),
@@ -39,11 +38,18 @@ $(function () {
                 $price.css('display','block');
             }else {
                 $price.css('display','none');
+                $('#price input').val("0");
             }
         }
     });
 
 
+    //数据类别
+    fromCommon.typeSelect($typeA,"/api/type/findRootNode",undefined,'请选择数据类别');
+    $typeA.on("change",function () {
+        var val = $(this).val();
+        fromCommon.typeSelect($typeB,"/api/type/"+val,val,'请选择数据类别');
+    });
 
 
     // 上传文件
@@ -68,13 +74,7 @@ $(function () {
             success: function (ret) {
                 if (ret.success == true){
                     layer.msg("文件上传成功",{icon:1});
-                    $dataFile.attr("data-src", ret.file);
-                    $dataFile.attr("data-size", ret.dataSize);
-                    if(ret.subFiles){
-                        subFlie = ret.subFiles
-                    }
-                }else {
-                    subFlie = {}
+                    $('#fileContent').val(ret.file);
                 }
             }
         });
@@ -105,6 +105,7 @@ $(function () {
             success: function (ret) {
                 var img = $('.dropify-render>img');
                 img.attr("src",ret.img);
+                $('#imgContent').val(ret.img);
             }
         });
     });
@@ -113,44 +114,44 @@ $(function () {
     var options = {
         _form: "#fromProduct",
         _rules: {
-            name: {
+            designation: {
                 required: true,
                 rangelength: [8, 50]
             },
-            resume: {
+            dataProfile: {
                 required: true
             },
-            typeA: {
+            dataType: {
                 required: true
             },
-            typeB: {
+            dataTypeSub: {
                 required: true
             },
-            data_scale:{
+            dataScale:{
                 required: true
             },
-            introduction:{
+            introduce:{
                 required: true
             }
         },
         _messages: {
-            name: {
+            designation: {
                 required: "请输入数据名称",
                 rangelength: "字符长度为8-50之间"//长度为8-50之间
             },
-            resume: {
+            dataProfile: {
                 required: "请输入数据简介"
             },
-            typeA: {
+            dataType: {
                 required: "请选择数据类别"
             },
-            typeB: {
+            dataTypeSub: {
                 required: "请选择数据类别"
             },
-            data_scale:{
+            dataScale:{
                 required: "请输入数据规模"
             },
-            introduction:{
+            introduce:{
                 required: "请输入数据描述"
             }
         }
@@ -160,3 +161,20 @@ $(function () {
         alert(11) ;
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
