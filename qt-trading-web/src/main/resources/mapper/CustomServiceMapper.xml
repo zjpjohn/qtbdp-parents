@@ -77,11 +77,11 @@
         c.audit_status,
         c.audit_fail_reason,
         c.desc,
+        c.is_used,
         t.name typename
         FROM
         custom_service AS c left join data_type t on c.type_id = t.id
-        WHERE
-        c.is_used = 1 AND c.id = #{id}
+        WHERE c.id = #{id}
     </select>
 
     <!-- 定制服务结果集 -->
@@ -185,4 +185,19 @@
         #{desc},
         1 )
     </insert>
+
+    <!--下架定制产品-->
+    <update id="updateSoldOut" parameterType="java.lang.Integer">
+        UPDATE custom_service SET is_used = 0 where id = #{id}
+    </update>
+
+    <!--上架定制产品-->
+    <update id="updatePutaway" parameterType="java.lang.Integer">
+        UPDATE custom_service SET is_used = 1 where id = #{id}
+    </update>
+
+    <!--删除定制产品-->
+    <delete id="deleteCustom" parameterType="java.lang.Integer">
+        delete from custom_service where id = #{id}
+    </delete>
 </mapper>

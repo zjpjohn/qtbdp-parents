@@ -117,12 +117,12 @@
             <td>
                 <a class="gosee" href="javascript:;">查看</a>
                 {{if prod.auditStatus==1 && prod.isUsed==1}}
-                    <a class="gosee" href="javascript:;">下架</a>
+                    <a class="gosee" href="javascript:;" onclick="changeState(${prod.id}, '/api/product/changeState');">下架</a>
                 {{else prod.auditStatus==1 && isUsed == 0}}
-                    <a class="gosee" href="javascript:;">上架</a>
+                    <a class="gosee" href="javascript:;" onclick="changeState(${prod.id},'/api/product/changeState');">上架</a>
                 {{/if}}
                 <a class="gosee" href="javascript:;">修改</a>
-                <a class="gosee" href="javascript:;">撤销</a>
+                <a class="gosee" href="javascript:;" onclick="deleteOne(${prod.id},'/api/product');">撤销</a>
             </td>
         </tr>
         {{/each}}
@@ -162,12 +162,12 @@
             <td>
                 <a class="gosee" href="javascript:;">查看</a>
                 {{if prod.auditStatus==1 && prod.isUsed==1}}
-                    <a class="gosee" href="javascript:;">下架</a>
+                    <a class="gosee" href="javascript:;" onclick="changeState(${prod.id},'/api/crawlers/role/changeState');">下架</a>
                 {{else prod.auditStatus==1 && isUsed == 0}}
-                    <a class="gosee" href="javascript:;">上架</a>
+                    <a class="gosee" href="javascript:;" onclick="changeState(${prod.id},'/api/crawlers/role/changeState');">上架</a>
                 {{/if}}
                 <a class="gosee" href="javascript:;">修改</a>
-                <a class="gosee" href="javascript:;">撤销</a>
+                <a class="gosee" href="javascript:;" onclick="deleteOne(${prod.id},'/api/crawlers/role');">撤销</a>
             </td>
         </tr>
         {{/each}}
@@ -187,10 +187,63 @@
 <!--页脚结束-->
 
 <script th:inline="javascript">
+    var allType = [[${type}]];
     jQuery(document).ready(function() {
-        App.initUserPublish([[${user.id}]],[[${type}]]);
+        App.initUserPublish([[${user.id}]],allType);
     });
 </script>
+<script>
 
+    /**
+     * 修改上下架状态
+     * @param id
+     * @param _url
+     */
+    function changeState(id, _url) {
+        $.ajax({
+            type:"GET",
+            dataType:"json",
+            url: _url ,
+            ansync:true,
+            data:{
+                id: id
+            },
+            xhrFields:{
+                withCredentials:true
+            },
+            success:function (data) {
+                if (data.success == true) {
+                    layer.msg("修改上下架状态成功",{icon:1},function(){
+                        //do something
+                        App.initUserPublish(userId,allType);
+                    });
+                }
+            },
+            error: function (data) {
+                layer.msg("修改上下架状态失败，请重试",{icon:5});
+            }
+        });
+    }
+
+    function deleteOne(id, _url) {
+        $.ajax({
+            type:"DELETE",
+            dataType:"json",
+            url: _url +'/'+ id ,
+            ansync:true,
+            success:function (data) {
+                if (data.success == true) {
+                    layer.msg("删除成功",{icon:1},function(){
+                        //do something
+                        App.initUserPublish(userId,allType);
+                    });
+                }
+            },
+            error: function (data) {
+                layer.msg("删除失败，请重试",{icon:5});
+            }
+        });
+    }
+</script>
 </body>
 </html>

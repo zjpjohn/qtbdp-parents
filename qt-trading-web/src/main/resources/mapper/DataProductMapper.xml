@@ -17,9 +17,10 @@
         p.audit_status,
         p.audit_fail_reason,
         p.addtime,
-        p.data_status
+        p.data_status,
+        t.name typename
         FROM
-        data_product as p
+        data_product as p left join data_type t on p.data_type = t.id
         WHERE
         1=1
         <if test="isUsed != null ">
@@ -78,6 +79,7 @@
         <result column="audit_status" property="auditStatus"/>
         <result column="audit_fail_reason" property="auditFailReason"/>
         <result column="addtime" property="addtime"/>
+        <result column="typename" property="typeName"/>
     </resultMap>
 
     <!-- 单表查询产品 -->
@@ -99,7 +101,8 @@
             p.market_price,
             p.data_format,
             p.data_status,
-            p.data_src
+            p.data_src,
+            p.is_used
         FROM
         data_product as p
         WHERE p.id = #{id}
@@ -125,6 +128,7 @@
         <result column="data_format" property="dataFormat"/>
         <result column="data_status" property="dataStatus"/>
         <result column="data_src" property="dataSrc"/>
+        <result column="is_used" property="isUsed"/>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>

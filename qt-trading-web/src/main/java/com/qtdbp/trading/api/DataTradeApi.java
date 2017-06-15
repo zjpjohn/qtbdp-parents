@@ -159,7 +159,7 @@ public class DataTradeApi extends BaseController {
 
         ModelMap map = new ModelMap() ;
         try {
-            Map<String, Integer> orderMap = demandOrderService.findAllOrderInfo(orderModel) ;
+            Map<String, Long> orderMap = demandOrderService.findAllOrderInfo(orderModel) ;
             map.put("pageInfo", orderMap);
         } catch (GlobalException e) {
             throw new GlobalException(e.getMessage()) ;

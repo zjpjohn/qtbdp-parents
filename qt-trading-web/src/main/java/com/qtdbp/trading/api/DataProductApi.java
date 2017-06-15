@@ -107,11 +107,9 @@ public class DataProductApi extends BaseController{
     }
 
     @ApiOperation(value = "删除单条数据包产品接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "数据包产品id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
-    })
-    @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public ModelMap deleteProduct(Integer id) throws GlobalException {
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public ModelMap deleteProduct(
+            @ApiParam(name = "id", value = "数据包产品id") @PathVariable Integer id) throws GlobalException {
 
         ModelMap map = new ModelMap();
 

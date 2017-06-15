@@ -35,11 +35,11 @@
                         <p>余额（元）</p>
                     </li>
                     <li>
-                        <h1 class="allorders"></h1>
+                        <h1 class="allorders" th:text="${prod.transactionOrder}"></h1>
                         <p>订单</p>
                     </li>
                     <li>
-                        <h1 class="allfabus"></h1>
+                        <h1 class="allfabus" th:text="${prod.custom}"></h1>
                         <p>定制</p>
                     </li>
                 </ul>
@@ -85,9 +85,16 @@
                 </div>
             </div>
             <!-- 概览结束-->
+            <!-- 订单支付开始 -->
+            <div class="orderpay rt_tbs" id="orderPay">
+
+            </div>
+            <!-- 订单支付结束 -->
+            <!-- 支付回调 -->
+            <div id="aliBack" style="dispay:none;"></div>
         </div>
-    </div>
 </div>
+
 
 <!-- 概览最新订单模板 -->
 <script id="tmpl_orders" type="text/x-jquery-tmpl">
@@ -173,11 +180,42 @@
     {{/if}}
 
 </script>
-
+<!-- 订单支付 -->
+<script id="tmpl_orderpay" type="text/x-jquery-tmpl">
+        <h2>
+            <i></i>
+            订单支付
+        </h2>
+        <div>
+            <h2 id="orderTitle">${orderSubject}</h2>
+            <h1 class="color" id="orderAmount">￥ ${amount}</h1>
+            <p id="orderNo">订单编号：${orderNo}</p>
+            <p>订单类型：订单购买</p>
+            {{if productType==2}}
+            <p>订单详情：<span class="color">整包</span></p>
+            {{else}}
+            <p>订单详情：<span class="color" >条目</span></p>
+            {{/if}}
+            <p>购买数量：<span cladd="color">1</span>份</p>
+            <p class="pay_btns">
+                <!--<a href="javascript:;" class="jifenbtn">积分付款（可用0）</a>-->
+                <a href="javascript:;" class="alibtn" onclick="pay('${orderNo}',${amount},'${orderSubject}');">支付宝付款</a>
+            </p>
+        </div>
+    </script>
 
 <script th:inline="javascript">
+    var isOrder = [[${isOrder}]];
+    var order = [[${order}]];
     jQuery(document).ready(function() {
         App.initUserCenter([[${user.id}]]);
+        //如果是支付订单
+        if(isOrder && isOrder=="4"){
+            $(".pereach>li:nth-child(4)").addClass("active").siblings(".active").removeClass("active");
+            $("#tmpl_orderpay").tmpl(order).appendTo("#orderPay");
+            $(".orderpay").addClass("active").siblings(".active").removeClass("active");
+
+        }
     });
 </script>
 

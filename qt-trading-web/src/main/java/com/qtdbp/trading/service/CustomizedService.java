@@ -84,4 +84,23 @@ public class CustomizedService {
 
         return isSuccess ;
     }
+
+    /**
+     * 更改爬虫规则上下架
+     * @param id
+     * @return
+     * @throws GlobalException
+     */
+    public Integer updateState(Integer id) throws GlobalException {
+        CustomServiceModel roleModel = customizedMapper.findCustomizedDataById(id);
+        if (roleModel == null) throw new GlobalException("该爬虫规则已不存在") ;
+        Integer count = 0;
+        if (roleModel.getIsUsed() == 1){ // 上架时改为下架
+            count = customizedMapper.updateSoldOut(id) ;
+        } else{                             //  下架时改为上架
+            count = customizedMapper.updatePutaway(id);
+        }
+
+        return count;
+    }
 }
