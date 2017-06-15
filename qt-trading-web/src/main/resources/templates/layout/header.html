@@ -11,7 +11,7 @@
 		<!--如果已登录-->
 		<div  th:if="${user}">
 			<div class="lf fabu_btns">
-				<p>发布</p>
+				<p>定制</p>
 				<a th:href="@{/publish/customized/data}">数据定制</a>
 				<a th:href="@{/publish/customized/rule}" >爬虫规则定制</a>
 				<!--<a>数据发布</a>-->
@@ -20,7 +20,7 @@
 		<!--如果未登录-->
 		<div  th:unless="${user}">
 			<div class="lf fabu_btns">
-				<p>发布</p>
+				<p>定制</p>
 				<a href="javascript:;"  onclick="loginShow(this)">数据定制</a>
 				<a href="javascript:;"  onclick="loginShow(this)">爬虫规则定制</a>
 				<!--<a>数据发布</a>-->
@@ -89,7 +89,7 @@
 		<div th:unless="${user}">
 			<p class="rt nav_list nav_rt">
 				<a href="javascript:;"  onclick="loginShow(this)">登录</a>
-				<i>/</i>
+				<a>/</a>
 				<a href="javascript:;"  onclick="registerShow(this)">注册</a>
 			</p>
 		</div>

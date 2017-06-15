@@ -64,6 +64,7 @@
     padding:4px 10px;
     margin-right:8px;
     text-align: center;
+    color: #999;
 }
 .store_price>a:hover,.store_price>a.active{
     color:#fff;
@@ -131,23 +132,20 @@ em{
     float:left;
     border:1px solid #F0F0F0;
     border-top:1px solid #E6E6E6;
-
+    background:#fff;
     margin-right: 21px;
     margin-bottom: 24px;
 }
-.store_main >div:first-child{
-    box-shadow:0px 2px 1px rgba(0,0,0,0.15);
-}
+
 .store_one:hover,.store_one.active{
     box-shadow:0px 2px 1px rgba(0,0,0,0.15);
 }
-.store_one>a{
-    display: inline-block;
-    width:282px;
+.store_one>a>p.storeimgs{
+    width:280px;
     height:190px;
 }
 
-.store_one>h2{
+.store_one>a>h2{
     width:282px;
     font-size: 18px;
     padding:0px 20px;

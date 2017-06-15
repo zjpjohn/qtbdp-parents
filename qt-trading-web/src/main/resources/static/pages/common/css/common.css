@@ -161,8 +161,12 @@ nav{
     line-height:70px;
 }
 .nav_rt>a{
-    margin-right:5px;
+    padding: 23px 4px;
 }
+
+
+
+
 .nav_list{
     font-size: 0px;
 }
