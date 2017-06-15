@@ -94,7 +94,7 @@ public class DataInstitutionInfoNewService {
 
                     PersonalInfoModel personalInfoModel = infoNewModel.getPersonalInfoModel() ;
                     if (personalInfoModel == null) throw new GlobalException("服务商个人资料数据丢失");
-
+                    personalInfoModel.setGender("male");
                     count = infoNewMapper.insertPersonalInfo(personalInfoModel);
                     if (count != null && count > 0) {
                         infoId = personalInfoModel.getId() ;
