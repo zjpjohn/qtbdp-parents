@@ -20,14 +20,18 @@
 </div>
 
 <div class="data_store">
-    <!--右侧悬浮框 如果不是数据服务商-->
-    <div class="positiondata datastrem" th:unless="${user.infoNewModel}">
-        <a  href="javascript:;"  onclick="infoNewModel2(this)"  ><em></em>我要数据变现</a>
+    <!--已登录-->
+    <div class="positiondata datastrem" th:if="${user}">
+        <!--是数据服务商-->
+        <a  href="/institution/add/product" th:if="${user.infoNewModel}" ><em></em>我要数据变现</a>
+        <!--不是数据服务商-->
+        <a  href="javascript:;" th:if="!${user.infoNewModel}"  onclick="infoNewModel2(this)"><em></em>我要数据变现</a>
     </div>
-    <!--右侧悬浮框 如果是数据服务商-->
-    <div class="positiondata datastrem" th:if="${user.infoNewModel}">
-        <a  href="/institution/add/product" ><em></em>我要数据变现</a>
+    <!--未登录-->
+    <div class="positiondata datastrem" th:unless="${user}">
+        <a  href="javascript:;"  onclick="loginShow(this)"  ><em></em>我要数据变现</a>
     </div>
+
     <!--数据分类-->
     <div class="dataclassify">
         <div class="repclissify">

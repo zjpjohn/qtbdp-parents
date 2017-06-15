@@ -561,9 +561,38 @@ body{
     right:280px;
     z-index:999;
 }
+
 .datastrem>a>em{
     background-position:-148px -110px;
 }
+
+
+.stremindex{
+    position:fixed;
+    top:226px;
+    right:310px;
+
+}
+.stremindex2{
+    position:fixed;
+    top:420px;
+    right:310px;
+}
+.stremindex>a>em{
+    display:inline-block;
+    width:20px;
+    height:20px;
+    background:url(../images/icon_index2.png);
+    background-position:-216px -331px;
+}
+.stremindex2>a>em{
+    display:inline-block;
+    width:20px;
+    height:20px;
+    background:url(../images/icon_index2.png);
+    background-position:-284px -331px;
+}
+
 
 
 

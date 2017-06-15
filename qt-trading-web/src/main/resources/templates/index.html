@@ -37,6 +37,8 @@
                 </a>
             </div>
         </div>
+
+        <!--轮播表单开始-->
         <div class="navinput">
             <p class="navtop">
                 <a href="javascript:;" data-attr="dataneed" class="active"> 数据需求<i></i>  </a>
@@ -76,6 +78,42 @@
                 </div>
             </form>
         </div>
+        <!--轮播表单结束-->
+        <!--<div class="positiondata stremindex">
+            <a  href="javascript:;"><em></em>入驻数据服务商</a>
+        </div>-->
+
+
+        <!--已登录  右侧悬浮框-->
+        <div class="positiondata stremindex" th:if="${user}">
+            <!--是数据服务商-->
+            <a  href="javascript:;" onclick="infoNewModel3(this)" th:if="${user.infoNewModel}"><em></em>入驻数据服务商</a>
+            <!--不是数据服务商-->
+            <a  href="/usercenter/add/person" th:if="!${user.infoNewModel}"><em></em>入驻数据服务商</a>
+        </div>
+
+
+        <!--未登录  右侧悬浮框-->
+        <div class="positiondata stremindex" th:unless="${user}">
+            <a  href="javascript:;"  onclick="loginShow(this)"  ><em></em>入驻数据服务商</a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="positiondata stremindex2">
+            <a  href="http://wpa.qq.com/msgrd?v=3&uin=2142920794&site=&menu=yes"><em></em>在线客服</a>
+        </div>
+
+
     </div>
     <!--banner结束-->
 
@@ -281,7 +319,7 @@
             </li>
         </ul>
         <!--数据服务商开始-->
-        <h2 class="intitle"><i class="servicem"></i>  数据服务商 <span >Data Service</span>  </h2>
+        <h2 class="intitle"><i class="servicem"></i>  合作伙伴 <span >Data Service</span>  </h2>
             <div class="servicebox">
                 <div class="com_slide">
                     <p class="com_list floating">
