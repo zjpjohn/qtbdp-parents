@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>已购买的商品 | 钱塘数据交易中心-个人中心</title>
+    <title>我的购买订单 | 钱塘数据交易中心-个人中心</title>
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
@@ -25,7 +25,7 @@
         <div class="center_right rt">
             <!-- 我购买的商品-->
             <div class= "myorder2 active rt_tbs ">
-                <h2>我购买的商品：<span class="color allorders"></span></h2>
+                <h2>我的购买订单：<span class="color allorders"></span></h2>
                 <p class="order_filter filter_btn floating">
                     <a href="/usercenter/buy/0" th:class="${type == 0}?active" data-class="myorder">数据商品</a>
                     <a href="/usercenter/buy/1" th:class="${type == 1}?active" data-class="demandorder">爬虫规则</a>

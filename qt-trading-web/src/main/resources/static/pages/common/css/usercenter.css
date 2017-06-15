@@ -21,7 +21,7 @@
 }
 .headbg{
     width:320px;
-    height:310px;
+    height:290px;
     background: #fff;
     border-bottom: 1px solid #E6E6E6;
 }
@@ -160,7 +160,7 @@
 
 /******移入去状态*******/
 .pereach>li:hover,.pereach>li.active{
-    background: #1A2730;
+    background: #0076C8;
     font-size: 18px;
 }
 
