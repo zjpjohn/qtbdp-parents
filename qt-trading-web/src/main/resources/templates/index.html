@@ -21,10 +21,6 @@
 
     <!-- banner图开始-->
     <div id="wrapper">
-
-
-
-
         <div class="slider-wrapper theme-default">
             <div id="slider" class="nivoSlider">
                 <a>
@@ -49,7 +45,7 @@
                 <div class="navmin">
                     <div class="floating needms">
                         <span class="lf">需求描述 : </span>
-                        <textarea name="content" class="textarea_control lf"></textarea>
+                        <textarea name="content" class="textarea_control lf" placeholder="  简单描述您的数据需求"></textarea>
                     </div>
                     <div class="floating needms">
                         <span class="lf">联系QQ : </span>
@@ -79,10 +75,6 @@
             </form>
         </div>
         <!--轮播表单结束-->
-        <!--<div class="positiondata stremindex">
-            <a  href="javascript:;"><em></em>入驻数据服务商</a>
-        </div>-->
-
 
         <!--已登录  右侧悬浮框-->
         <div class="positiondata stremindex" th:if="${user}">
@@ -91,26 +83,13 @@
             <!--不是数据服务商-->
             <a  href="/usercenter/add/person" th:if="!${user.infoNewModel}"><em></em>入驻数据服务商</a>
         </div>
-
-
         <!--未登录  右侧悬浮框-->
         <div class="positiondata stremindex" th:unless="${user}">
             <a  href="javascript:;"  onclick="loginShow(this)"  ><em></em>入驻数据服务商</a>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
         <div class="positiondata stremindex2">
-            <a  href="http://wpa.qq.com/msgrd?v=3&uin=2142920794&site=&menu=yes"><em></em>在线客服</a>
+            <a  href="http://wpa.qq.com/msgrd?v=3&uin=3475528455&site=&menu=yes"><em></em>在线客服</a>
         </div>
 
 

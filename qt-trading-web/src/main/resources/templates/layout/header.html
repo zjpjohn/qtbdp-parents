@@ -12,8 +12,8 @@
 		<div  th:if="${user}">
 			<div class="lf fabu_btns">
 				<p>定制</p>
-				<a th:href="@{/publish/customized/data}">数据定制</a>
-				<a th:href="@{/publish/customized/rule}" >爬虫规则定制</a>
+				<a th:href="@{/publish/customized/data}" class="datadz">数据定制</a>
+				<a th:href="@{/publish/customized/rule}" class="pacdz">爬虫规则定制</a>
 				<!--<a>数据发布</a>-->
 			</div>
 		</div>
@@ -21,8 +21,8 @@
 		<div  th:unless="${user}">
 			<div class="lf fabu_btns">
 				<p>定制</p>
-				<a href="javascript:;"  onclick="loginShow(this)">数据定制</a>
-				<a href="javascript:;"  onclick="loginShow(this)">爬虫规则定制</a>
+				<a href="javascript:;"  onclick="loginShow(this)" class="datadz">数据定制</a>
+				<a href="javascript:;"  onclick="loginShow(this)" class="pacdz">爬虫规则定制</a>
 				<!--<a>数据发布</a>-->
 			</div>
 		</div>
@@ -35,14 +35,14 @@
 			<div class="lf fabu_btns" th:if="${user.infoNewModel}">
 				<p>变现</p>
 
-				<a href="/institution/add/product">数据变现</a>
-				<a href="/publish/crawlers" >规则变现</a>  <!--否  请申请认证服务商-->
+				<a href="/institution/add/product" class="databx">数据变现</a>
+				<a href="/publish/crawlers" class="datagz">规则变现</a>  <!--否  请申请认证服务商-->
 			</div>
 			<!--如果不是服务商-->
 			<div class="lf fabu_btns" th:unless="${user.infoNewModel}">
 				<p>变现</p>
-				<a href="javascript:;" onclick="infoNewModel2(this)">数据变现</a>
-				<a href="javascript:;" onclick="infoNewModel2(this)">规则变现</a>  <!--否  请申请认证服务商-->
+				<a href="javascript:;" onclick="infoNewModel2(this)" class="databx">数据变现</a>
+				<a href="javascript:;" onclick="infoNewModel2(this)" class="datagz">规则变现</a>  <!--否  请申请认证服务商-->
 
 			</div>
 		</div>
@@ -51,8 +51,8 @@
 		<div  th:unless="${user}">
 			<div class="lf fabu_btns">
 				<p>变现</p>
-				<a href="javascript:;"  onclick="loginShow(this)">数据变现</a>
-				<a href="javascript:;"  onclick="loginShow(this)">规则变现</a>
+				<a href="javascript:;"  onclick="loginShow(this)" class="databx">数据变现</a>
+				<a href="javascript:;"  onclick="loginShow(this)" class="datagz">规则变现</a>
 			</div>
 		</div>
 
@@ -105,7 +105,7 @@
 		$(".nav_list1>a:nth-child("+n+")").addClass("active");
 	}
 	function fabuHover(n){
-		$(".fabu_btns>a:nth-child("+n+")").addClass("active");
+		$(".fabu_btns>a."+n).addClass("active");
 	}
 </script>
 <!--页头结束-->
