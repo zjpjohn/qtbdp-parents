@@ -36,6 +36,6 @@ public interface DataAuthorizeOrderMapper {
      * @param demandOrder
      * @return
      */
-    Map<String, Integer> findAllOrderInfo(DataAuthorizeOrderModel demandOrder);
+    Map<String, Long> findAllOrderInfo(DataAuthorizeOrderModel demandOrder);
 
 }

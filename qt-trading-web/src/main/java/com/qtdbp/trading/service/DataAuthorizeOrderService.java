@@ -55,9 +55,9 @@ public class DataAuthorizeOrderService {
      * @param order
      * @return
      */
-    public Map<String, Integer> findAllOrderInfo(DataAuthorizeOrderModel order) throws GlobalException {
+    public Map<String, Long> findAllOrderInfo(DataAuthorizeOrderModel order) throws GlobalException {
         if(order.getUserId() == null) throw new GlobalException("用户Id为空") ;
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Long> map = new HashMap<String, Long>();
         map = orderMapper.findAllOrderInfo(order);
         return map;
     }

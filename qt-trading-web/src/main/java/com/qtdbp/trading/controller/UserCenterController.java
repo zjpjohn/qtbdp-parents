@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 个人中心Controller
@@ -71,7 +72,14 @@ public class UserCenterController extends BaseController {
 
             orderModel = null;
         }
-
+        // 未登陆请先登录
+        SysUser user = getPrincipal() ;
+        if(user == null) {
+            result.setViewName("login");
+            return result;
+        }
+        Map<String, Long> orderCount = orderMapper.findAllOrderInfo(user.getId());
+        result.addObject("prod", orderCount);
         return result ;
     }
 

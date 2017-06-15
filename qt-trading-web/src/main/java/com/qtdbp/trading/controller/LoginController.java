@@ -2,22 +2,30 @@ package com.qtdbp.trading.controller;
 
 import com.qtdbp.trading.constants.AppConstants;
 import com.qtdbp.trading.constants.SsoConstants;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataUserInfoModel;
 import com.qtdbp.trading.service.DataUserInfoService;
+import com.qtdbp.trading.utils.Des3;
+import com.qtdbp.trading.utils.Message;
 import com.qtdbp.trading.utils.SsoUrlUtil;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.Map;
 
 /**
@@ -43,6 +51,9 @@ public class LoginController {
 
     @Autowired
     private DataUserInfoService userInfoService ;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * sso登陆
@@ -80,16 +91,40 @@ public class LoginController {
      * @return
      * @throws Exception
      */
+    @ResponseBody
     @RequestMapping(value = "/callback", method = RequestMethod.GET)
-    public ModelAndView callback(HttpServletRequest request) throws Exception {
+    public ModelMap callback(HttpServletRequest request) throws Exception {
 
-        String sysUserId = SsoUrlUtil.loginParams(request) ;
+        Message message = new Message() ;
 
-        ModelAndView view = new ModelAndView(PAGE_LOGIN);
-        view.addObject("ssoId", sysUserId) ; // 系统用户ID
-        view.addObject("auto", true) ;     // 自动登录
+        try {
+            String token = request.getParameter("token") ;
+            String descToken = URLEncoder.encode(Des3.DESEncode(token, SsoConstants.DES_KEY), "UTF-8");
 
-        return view ;
+            String sysUserId = null ;
+            String tokenObject = stringRedisTemplate.opsForValue().get(descToken) ;
+            if(tokenObject != null) {
+                JSONObject ssoUser = JSONObject.fromObject(tokenObject) ;
+                if(ssoUser != null && ssoUser.has("id")) sysUserId = ssoUser.getString("id");
+            }
+
+            message.setSuccess(true);
+            message.setData(sysUserId);
+
+        } catch (Exception e) {
+            logger.error("登录回调地址，错误："+e.getMessage());
+
+            message.setMessage("登录回调地址，错误："+e.getMessage());
+            message.setSuccess(false);
+            message.setException(true);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_FAIL);
+        }
+
+
+        ModelMap map = new ModelMap();
+        map.put("result", message) ;
+
+        return map ;
     }
 
     /**
@@ -144,5 +179,36 @@ public class LoginController {
         view.setViewName("redirect:/callback");
         return view;
     }
+
+    /*@RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelMap registerUser(@ModelAttribute(SsoConstants.SSO_USER) DataUserInfoModel user) throws GlobalException {
+
+        Message message = new Message() ;
+        if(user == null) {
+            logger.error("用户注册失败，信息丢失");
+
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_REGISTER_FAIL);
+            message.setMessage("用户注册失败，信息丢失");
+        } else {
+            // 用户类型 - 个人
+            user.setUserType(AppConstants.USER_TYPE_PERSONAL);
+            if (StringUtils.isEmpty(user.getHead())) user.setHead(null);
+
+            int id = userInfoService.insertDataUserInfo(user);
+            if (id < 0) {
+                message.setSuccess(false);
+                message.setErrorCode(ErrorCode.ERROR_REGISTER_FAIL);
+                message.setMessage("用户注册失败，请重新注册");
+            } else {
+                message.setSuccess(true);
+                message.setData(user.getId());
+            }
+        }
+        ModelMap map = new ModelMap();
+        map.put("result", message) ;
+
+        return map ;
+    }*/
 
 }
