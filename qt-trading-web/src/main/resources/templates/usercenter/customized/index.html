@@ -58,7 +58,7 @@
                             <th>定制名称</th>
                             <th>悬赏金</th>
                             <th>状态</th>
-                            <th class="time_btn now">时间 <i></i>  <i></i> </th>
+                            <th class="time_btn">时间 <i></i>  <i></i> </th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -85,9 +85,7 @@
             <td>
                 数据产品
             </td>
-            <td>
-                ${$item._substr(prod.name,18)}
-            </td>
+            <td>${$item._substr(prod.name,18)}</td>
             <td>￥${$item._num(prod.price)}</td>
             {{if prod.auditStatus==1 && prod.isUsed==1}}
                 <td class="putaway"> 已上架</td>
