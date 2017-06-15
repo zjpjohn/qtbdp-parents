@@ -113,11 +113,12 @@
 <script id="tmpl_products" type="text/x-jquery-tmpl">
     {{if list.length>0}}
     {{each(i,prod) list}}
-        <div class="repmain active floating">
-            <img src="${prod.logo}" alt="" class="lf"/>
+        <div class="repmain floating">
+            <a href="/crawlers/detail/${prod.id}">
+                <img src="${prod.logo}" alt="" class="lf"/>
                 <div class="lf reptexts">
-                    <p class="main_title"><a href="/crawlers/detail/${prod.id}">${prod.name}</a></p>
-                    <p class="main_text">${prod.collectionField}</p>
+                    <p class="main_title">${prod.name}</p>
+                    <p class="main_text">采集字段 : ${prod.collectionField}</p>
                     <p class="main_min">
                         <span class="main_domain"><em></em>采集网站: ${prod.webSite}</span>
                         <span>服务商家 : <i> ${prod.username}</i></span>
@@ -128,6 +129,7 @@
                     <p class="reppeople">${prod.buyCount} 人已购买</p>
                     <p class="repnow">立即购买</p>
                 </div>
+            </a>
         </div>
     {{/each}}
     {{else}}
