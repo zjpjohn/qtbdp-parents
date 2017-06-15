@@ -158,7 +158,7 @@ $(function () {
     };
 
     FormValidationMd.init(options,function () {
-        alert(11) ;
+
     });
 });
 

@@ -69,7 +69,7 @@
                             <label class="control-label">服务商Logo</label>
                             <fieldset>
                                 <span>✚</span>
-                                <input name="file" class="fileLogo" type="file">
+                                <input name="fileLogo" class="fileLogo" type="file">
                                 <img src="" alt="" id="logo" class="Image"/>
                             </fieldset>
                         </div>
@@ -78,29 +78,23 @@
                     <!--服务商基本信息结束-->
 
 
-
-
-
-
-
-
-
                     <div class="from-bottom">
                         <!--企业信息-->
                         <div class="company">
                             <div class="form-group">
                                 <label class="control-label">企业名称</label>
                                 <div>
-                                    <input id="companyName" name="companyInfoModel.companyName" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="companyName" name="companyName" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与营业执照上的姓名严格一致</p>
+                                <input type="text" style="display:none;"  name="companyInfoModel.companyName" id="companyNameContent">
                             </div>
 
                             <div class="form-group clearfix">
                                 <label class="control-label">营业执照</label>
                                 <fieldset>
                                     <span>✚</span>
-                                    <input class="fileLicense" type="file">
+                                    <input class="fileLicense" type="file" name="fileLicense">
                                     <img src="" alt="" id="License" class="Image"/>
                                 </fieldset>
                                 <input type="text" style="display:none;"  name="companyInfoModel.license" id="licenseContent">
@@ -109,8 +103,9 @@
                             <div class="form-group">
                                 <label class="control-label">营业执照注册号</label>
                                 <div>
-                                    <input  type="text" id="LicenseNumber" name="companyInfoModel.licenseNumber"  class="form-control borderRadiusIE8">
+                                    <input  type="text" id="LicenseNumber" name="licenseNumber"  class="form-control borderRadiusIE8">
                                 </div>
+                                <input type="text" style="display:none;"  name="companyInfoModel.licenseNumber" id="licenseNumberContent">
                             </div>
                         </div>
 
@@ -134,9 +129,10 @@
                         <div class="form-group">
                             <label class="control-label">联系电话</label>
                             <div>
-                                <input  type="text"  name="companyInfoModel.phone" id="phone" class="form-control borderRadiusIE8">
+                                <input  type="text"  name="phone" id="phone" class="form-control borderRadiusIE8">
                             </div>
                             <p class="tip">请输入有效的手机号码</p>
+                            <input type="text" style="display:none;"   name="companyInfoModel.phone" id="phoneContent">
                         </div>
                     </div>
                     <!--企业信息结束-->
