@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>数据市场 | 钱塘数据交易中心</title>
+    <title>数据商城 | 钱塘数据交易中心</title>
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/datastoreindex.css"/>
@@ -19,7 +19,15 @@
     <img src="/pages/common/images/banner2.jpg" alt=""/>
 </div>
 
-<div class="data_store" style="min-height: 500px">
+<div class="data_store">
+    <!--右侧悬浮框 如果不是数据服务商-->
+    <div class="positiondata datastrem" th:unless="${user.infoNewModel}">
+        <a  href="javascript:;"  onclick="infoNewModel2(this)"  ><em></em>我要数据变现</a>
+    </div>
+    <!--右侧悬浮框 如果是数据服务商-->
+    <div class="positiondata datastrem" th:if="${user.infoNewModel}">
+        <a  href="/institution/add/product" ><em></em>我要数据变现</a>
+    </div>
     <!--数据分类-->
     <div class="dataclassify">
         <div class="repclissify">

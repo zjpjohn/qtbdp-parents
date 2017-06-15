@@ -161,7 +161,6 @@ var consubmit={
             }
             var _data = consubmit._formatparam($("#formsubmits").serializeArray()) ;
             console.log("_data："+_data);
-
             if($(this).attr("class").indexOf("disabled")==-1){
                 var me=this;
                 $.ajax({

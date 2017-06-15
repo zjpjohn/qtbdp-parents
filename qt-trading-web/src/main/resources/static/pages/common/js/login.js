@@ -35,8 +35,14 @@ function findPwdShow(){
 //验证成为服务商
 function infoNewModel2(){
     console.log(666);
-    layer.msg("您还不是数据服务商");
+    layer.confirm('您还不是数据服务商，立即入驻即可开通属于您的数据店铺', {
+        btn: ['立即入驻','取消'] //按钮
+    }, function(){
+        location.href="/usercenter/add/person";
+    });
 }
+
+
 /*******************登录***************/
 //验证登录账号
 function checkAccount(type){
