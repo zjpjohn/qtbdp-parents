@@ -8,6 +8,7 @@
     <div th:replace="layout/top"/>
     <link rel="stylesheet" href="/tradecenter/css/imgCss/dropify.css">
     <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
+    <link rel="stylesheet" href="/tradecenter/css/usercenter.css"/>
 </head>
 <body>
 <!-- 页头-->
@@ -25,13 +26,13 @@
     <!-- 表单 -->
     <div class="main_content floating">
         <h2 class="form_title">发布数据商品</h2>
-        <form class="trade_form" id="fromProduct" method="post" action="/rule/add1">
+        <form class="trade_form" id="fromProduct" method="post" action="/api/product/add">
             <div class="form_group">
                 <p class="group_title">
                     <b>数据名称</b> <i>*</i><span>8-50个字符</span>
                 </p>
                 <div class="form_control">
-                    <input type="text" class="large_input" id="data_name" name="name"/>
+                    <input type="text" class="large_input" id="data_name" name="designation"/>
                 </div>
             </div>
 
@@ -40,7 +41,7 @@
                     <b>数据简介</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <input type="text" class="large_input" id="data_resume" name="resume"/>
+                    <input type="text" class="large_input" id="data_resume" name="dataProfile"/>
                 </div>
             </div>
 
@@ -50,17 +51,17 @@
                     <b>收费方式</b> <i>*</i>
                 </p>
                 <div class="form_control" id="Charge_mode">
-                    <label><input type="radio" name="Charge_mode" class="radio_input" value="1" checked="checked"/>免费</label>
-                    <label><input type="radio" name="Charge_mode" class="radio_input" value="2"/>收费</label>
+                    <label><input type="radio" name="price" class="radio_input" value="1" checked="checked"/>免费</label>
+                    <label><input type="radio" name="price" class="radio_input" value="2"/>收费</label>
                 </div>
                 <div id="price" style="display: none">
                     <div class="form_control">
-                        <input type="number" class="small_input" id="market_price" name="market_price" placeholder="市场价："/>
-                        <input type="number" class="small_input" id="rebate_price" name="rebate_price" placeholder="折扣价："/>
+                        <input type="number" class="small_input" id="market_price" value="0" name="marketPrice" placeholder="市场价："/>
+                        <input type="number" class="small_input" id="rebate_price" value="0" name="price" placeholder="折扣价："/>
                     </div>
                     <div class="form_control">
-                        <input type="number" class="small_input" id="child_price" name="child_price" placeholder="子文件价格："/>
-                        <input type="number" class="small_input" id="commission_price" name="commission_price" placeholder="佣金："/>
+                        <input type="number" class="small_input" id="child_price" value="0" name="itemPrice" placeholder="子文件价格："/>
+                        <!--<input type="number" class="small_input" id="commission_price" name="commission_price" placeholder="佣金："/>-->
                     </div>
                 </div>
             </div>
@@ -71,12 +72,11 @@
                     <b>数据类别</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <select name="typeA" id="typeA" class="small_input">
-                        <option value="">关联数据</option>
+                    <select name="dataType" id="typeA" class="small_input">
 
                     </select>
-                    <select name="typeB" id="typeB" class="small_input">
-
+                    <select name="dataTypeSub" id="typeB" class="small_input">
+                        <option value="">请选择数据类别</option>
                     </select>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <b>数据规模</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <input type="number" class="large_input" id="data_scale" style="width: 257px;" name="data_scale"/>
+                    <input type="number"  class="large_input" id="data_scale" style="width: 257px;" name="dataScale"/>
                     <span> &nbsp;条 </span>
                 </div>
             </div>
@@ -97,9 +97,9 @@
                     <b>数据类型</b> <i>*</i>
                 </p>
                 <div class="form_control" id="data_type">
-                    <label><input type="radio" name="type" class="radio_input" value="1" checked="checked"/>数据包</label>
-                    <label><input type="radio" name="type" class="radio_input" value="2"/>API接口</label>
-                    <label><input type="radio" name="type" class="radio_input" value="3"/>数据报告</label>
+                    <label><input type="radio" name="dataStatus" class="radio_input" value="1" checked="checked"/>数据包</label>
+                    <label><input type="radio" name="dataStatus" class="radio_input" value="2"/>API接口</label>
+                    <label><input type="radio" name="dataStatus" class="radio_input" value="3"/>数据报告</label>
                 </div>
             </div>
 
@@ -108,11 +108,11 @@
                     <b>数据来源</b> <i>*</i>
                 </p>
                 <div class="form_control" id="data_source">
-                    <label><input type="radio" name="source" class="radio_input" value="1" checked="checked"/>个人</label>
-                    <label><input type="radio" name="source" class="radio_input" value="2"/>企业</label>
-                    <label><input type="radio" name="source" class="radio_input" value="3"/>政府</label>
-                    <label><input type="radio" name="source" class="radio_input" value="4"/>组织机构</label>
-                    <label><input type="radio" name="source" class="radio_input" value="5"/>互联网</label>
+                    <label><input type="radio" name="dataSrc" class="radio_input" value="1" checked="checked"/>个人</label>
+                    <label><input type="radio" name="dataSrc" class="radio_input" value="2"/>企业</label>
+                    <label><input type="radio" name="dataSrc" class="radio_input" value="3"/>政府</label>
+                    <label><input type="radio" name="dataSrc" class="radio_input" value="4"/>组织机构</label>
+                    <label><input type="radio" name="dataSrc" class="radio_input" value="5"/>互联网</label>
                 </div>
             </div>
 
@@ -125,6 +125,7 @@
                     <input type="text" class="middle_input" id="data_file_path" name="file_path" readonly/>
                     <a href="javascript:;" class="upload_a">上传<input type="file" id="data_file" class="uploadRuleFile"/></a>
                 </div>
+                <input type="text" style="display:none;"  name="fileUrl" id="fileContent">
             </div>
 
             <div class="form_group">
@@ -134,6 +135,7 @@
                 <div class="form_control" style="width: 50%">
                     <input type="file" name="uploadImg" id="input-file-now"  class="dropify fileImg" />
                 </div>
+                <input type="text" style="display:none;"  name="pic" id="imgContent">
             </div>
 
             <div class="form_group">
@@ -141,13 +143,14 @@
                     <b>数据描述</b> <i>*</i>
                 </p>
                 <div class="form_control ">
-                    <textarea id="introduction" name="introduction" class="textarea_control"></textarea>
+                    <textarea id="introduction" name="introduce" class="textarea_control"></textarea>
                 </div>
             </div>
 
             <!-- 页脚发布按钮 -->
-            <div class="form_btm">
-                <input type="submit" class="submit_control" id="submitBtn" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>
+            <div class="form_btm submit">
+                <!--<input type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>-->
+                <button type="submit" id="submit-btn" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
 
                 <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
                     <span class="ladda-label">发布</span>

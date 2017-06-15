@@ -15,8 +15,8 @@ $(function () {
 
 
     //图片显示异步上传
-    fromCommon.RenderImg($(".fileLogo"),$logo,"/api/upload/img");
-    fromCommon.RenderImg($(".fileLicense"),$License,"/api/upload/img");
+    fromCommon.RenderImg($(".fileLogo"),$logo,"/api/upload/img",$('#logoContent'));
+    fromCommon.RenderImg($(".fileLicense"),$License,"/api/upload/img",$('#licenseContent'));
 
 
 
@@ -34,30 +34,30 @@ $(function () {
     var options = {
         _form: "#fromCompany",
         _rules: {
-            facilitator: {
+            name: {
                 required: true,//服务商名称
                 rangelength: [8, 50]//长度为8-50之间
             },
-            field: {
+            designation: {
                 required: true//服务领域
-            },
-            phone: {
-                required: true//联系电话
-            },
-            companyName:{
-                required: true//企业名称
-            },
-            LicenseNumber:{
-                required: true//营业执照号
             }
+            // phone: {
+            //     required: true//联系电话
+            // },
+            // companyName:{
+            //     required: true//企业名称
+            // },
+            // LicenseNumber:{
+            //     required: true//营业执照号
+            // }
         },
         _messages: {
-            facilitator: {
+            name: {
                 required: "请输入服务商名称",
                 rangelength: "字符长度为8-50之间"//长度为8-50之间
             },
 
-            field: {
+            designation: {
                 required: "请输入服务领域"
             },
             phone: {

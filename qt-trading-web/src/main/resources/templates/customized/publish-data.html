@@ -26,7 +26,7 @@
     <!-- 表单 -->
     <div class="main_content floating">
         <h2 class="form_title">发布需求 <span>数据定制</span> </h2>
-        <form class="trade_form" id="fromData">
+        <form class="trade_form" id="fromData" action="/api/customized" method="post">
             <div class="form_group">
                 <p class="group_title">
                     <b>定制名称</b> <i>*</i><span>8-50个字符</span>
@@ -41,7 +41,7 @@
                     <b>定制描述</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <textarea name="describe" id="describe" class="textarea_control rule_desc"></textarea>
+                    <textarea name="introduction" id="describe" class="textarea_control rule_desc"></textarea>
                 </div>
             </div>
 
@@ -69,18 +69,13 @@
                 </p>
                 <div class="form_control">
                     <select name="typeA" id="typeA" class="small_input">
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
+
                     </select>
-                    <select name="typeB" id="typeB" class="small_input">
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
+                    <select name="typeId" id="typeB" class="small_input">
+                        <option value="">请选择数据类别</option>
                     </select>
                 </div>
+                <input type="text" name="serviceType" value="2" style="display:none;">
             </div>
 
             <div class="form_group">
@@ -99,7 +94,7 @@
                     <b>截止时间</b> <i>*</i><span>到期无人投稿将自动下架，可申请退回赏金</span>
                 </p>
                 <div class="form_control">
-                    <input type="date" class="small_input about_time" id="endDate" name="endDate"/>
+                    <input type="date" class="small_input about_time" id="endDate" name="endTime"/>
                 </div>
             </div>
 
