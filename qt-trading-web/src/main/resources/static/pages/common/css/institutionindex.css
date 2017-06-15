@@ -131,18 +131,10 @@ div.list_right{
     line-height:30px;
 
 }
-em{
-    display:inline-block;
-    width:16px;
-    height:16px;
-    background:url(../images/icon_index2.png);
-}
-.main_domain>em{
-
-}
 
 
-.list_right>p>em{
+
+.list_right>a>p>em{
     display: inline-block;
     width: 18px;
     height:18px;

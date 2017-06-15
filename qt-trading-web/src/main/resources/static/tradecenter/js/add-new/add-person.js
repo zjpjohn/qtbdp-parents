@@ -1,11 +1,7 @@
 $(function () {
 
 //表单元素
-    var $facilitator = $('#facilitator'),//服务商名称
-        $field = $('#field'),//服务领域
-        $logo = $('#logo'),//logo
-        $provinceId = $('#provinceId'),//省份
-        $cityId = $('#cityId'),//城市
+    var $logo = $('#logo'),//logo
         $phone = $('#phone'),//联系电话
 
     //表单个人信息
@@ -17,10 +13,14 @@ $(function () {
 
 
     //图片显示异步上传
-    fromCommon.RenderImg($(".fileLogo"),$logo,$('#logoContent'));
-    fromCommon.RenderImg($(".fileID1"),$IDFace,$('#fullFacePhoto'));
-    fromCommon.RenderImg($(".fileID2"),$IDreverse,$('#negativeSidePhoto'));
+    fromCommon.RenderImg($(".fileLogo"),$logo,"/api/upload/img",$('#logoContent'));
+    fromCommon.RenderImg($(".fileID1"),$IDFace,"/api/upload/img",$('#fullFacePhoto'));
+    fromCommon.RenderImg($(".fileID2"),$IDreverse,"/api/upload/img",$('#negativeSidePhoto'));
 
+
+    fromCommon.inputBind($name,$('#realNameContent'));
+    fromCommon.inputBind($ID,$('#idNumberContent'));
+    fromCommon.inputBind($phone,$('#phoneContent'));
 
 
     ////加载省市下拉菜单
@@ -42,39 +42,40 @@ $(function () {
             designation: {
                 required: true//服务领域
             },
-            // phone: {
-            //     required: true//联系电话
-            // },
-            // realName:{
-            //     required: true//姓名
-            // },
-            // ID:{
-            //     required: true//身份证
-            // }
+            phone: {
+                required: true,//联系电话
+                number:true
+            },
+            realName:{
+                required: true//姓名
+            },
+            idNumber:{
+                required: true//身份证
+            }
         },
         _messages: {
             name: {
                 required: "请输入服务商名称",
                 rangelength: "字符长度为8-50之间"//长度为8-50之间
             },
-
             designation: {
                 required: "请输入服务领域"
             },
             phone: {
-                required: "请输入联系电话"
+                required: "请输入联系电话",
+                number:"请填写正确的电话号码"
             },
             realName:{
                 required: "请输入姓名"//姓名
             },
-            ID:{
+            idNumber:{
                 required: "请输入身份证号"//身份证
             }
         }
     };
 
     FormValidationMd.init(options,function () {
-        alert(11) ;
+
     });
 
 

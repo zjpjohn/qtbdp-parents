@@ -165,7 +165,7 @@
             {{/if}}
             <td> ${$item._date(prod.createTime)}</td>
             <td>
-                <a class="gosee" href="javascript:;">撤销</a>
+                <a class="gosee" href="javascript:;" onclick="deleteOne(${prod.id});">撤销</a>
             </td>
         </tr>
         {{/each}}
@@ -217,6 +217,36 @@
 
         }
     });
+</script>
+<script>
+    function deleteOne(id) {
+        var index = layer.confirm('确定删除该定制？', {
+            btn: ['是', '否'] //可以无限个按钮
+        }, function(index, layero){
+            //按钮【按钮一】的回调
+            $.ajax({
+                type:"DELETE",
+                dataType:"json",
+                url: '/api/customized' +'/'+ id ,
+                ansync:true,
+                success:function (data) {
+                    if (data.success == true) {
+                        layer.msg("删除成功",{icon:1},function(){
+                            //do something
+                            App.initUserCustomized(userId,allType);
+                        });
+                    }
+                },
+                error: function (data) {
+                    layer.msg("删除失败，请重试",{icon:5});
+                }
+            });
+        }, function(index){
+            //按钮【按钮二】的回调
+            layer.close(index);
+        });
+
+    }
 </script>
 
 <!--页脚-->

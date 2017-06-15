@@ -20,9 +20,9 @@ public class PersonalInfoModel extends BaseModel {
     private String negativeSidePhoto ;      // 身份证反面照
     private Date expTime ;                  // 身份证到期时间 null表示长期
     private Integer typeId ;                // 所属类目ID
-    private Integer provinceId ;            // 所在省
-    private Integer cityId ;                // 所在市
-    private Integer districtId ;            // 所在地区
+    private String provinceId ;            // 所在省
+    private String cityId ;                // 所在市
+    private String districtId ;            // 所在地区
     private String address ;                // 详细地址
     private String phone ;                  // 手机号
     private Integer createId ;              // 添加人
@@ -97,30 +97,6 @@ public class PersonalInfoModel extends BaseModel {
 
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;
-    }
-
-    public Integer getProvinceId() {
-        return provinceId;
-    }
-
-    public void setProvinceId(Integer provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public Integer getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
-
-    public Integer getDistrictId() {
-        return districtId;
-    }
-
-    public void setDistrictId(Integer districtId) {
-        this.districtId = districtId;
     }
 
     public String getAddress() {
@@ -209,5 +185,29 @@ public class PersonalInfoModel extends BaseModel {
 
     public void setIsUsed(Integer isUsed) {
         this.isUsed = isUsed;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(String districtId) {
+        this.districtId = districtId;
     }
 }

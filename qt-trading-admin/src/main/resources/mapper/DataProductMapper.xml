@@ -176,6 +176,7 @@
             data_format,
             data_status,
             data_src,
+            audit_time,
             audit_status
         ) VALUES (
             #{designation},
@@ -195,7 +196,7 @@
             null,
             #{sort},
             #{rec},
-            #{isUsed},
+            0,
             NULL ,
             #{dataTypeProps},
             0,
@@ -207,7 +208,8 @@
             #{dataFormat},
             #{dataStatus},
             #{dataSrc},
-            0
+            now(),
+            1
         )
 
     </insert>

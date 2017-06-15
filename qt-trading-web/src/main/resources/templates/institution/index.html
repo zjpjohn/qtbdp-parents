@@ -20,6 +20,19 @@
 </div>
 
 <div class="data_store" style="min-height: 500px">
+
+    <!--已登录  右侧悬浮框-->
+    <div class="positiondata datastrem" th:if="${user}">
+        <!--是数据服务商-->
+        <a  href="javascript:;" onclick="infoNewModel3(this)" th:if="${user.infoNewModel}"><em></em>入驻数据服务商</a>
+        <!--不是数据服务商-->
+        <a  href="/usercenter/add/person" th:if="!${user.infoNewModel}"><em></em>入驻数据服务商</a>
+    </div>
+    <!--未登录  右侧悬浮框-->
+    <div class="positiondata datastrem" th:unless="${user}">
+        <a  href="javascript:;"  onclick="loginShow(this)"  ><em></em>入驻数据服务商</a>
+    </div>
+
     <!--数据分类-->
     <div class="dataclassify">
         <div class="repclissify">
@@ -78,8 +91,8 @@
                 <img src="${institution.logo}" onerror="this.src='/pages/common/images/error.png'" class="lf " alt=""/>
                 <div class="lf list_right">
                     <p>${institution.name}</p>
-                    <p><em></em>${institution.designation}</p>
-                    <p>${institution.content}</p>
+                    <p class="fwly"><em></em>服务领域</p>
+                    <p>${institution.designation}</p>
                     <span class="rjzy_btn">进入主页</a>
                 </div>
             </a>

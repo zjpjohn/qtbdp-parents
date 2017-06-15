@@ -18,12 +18,12 @@
 }
 .right_img {
     width:320px;
-    height:254px;
+
     margin-bottom: 20px;
 }
 .right_img2{
     width:320px;
-    height:165px;
+
     margin-bottom: 20px;
 }
 
@@ -164,6 +164,10 @@ em{
     font-weight: bold;
     color:#0076C8;
     margin-right: 40px;
+    float:left;
+}
+.demanddetail>li>p{
+    float:left;
 }
 
 

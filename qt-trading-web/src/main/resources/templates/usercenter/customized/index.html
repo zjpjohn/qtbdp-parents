@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>我的定制 | 钱塘数据交易中心-个人中心</title>
+    <title>我发布的定制 | 钱塘数据交易中心-个人中心</title>
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
@@ -25,7 +25,7 @@
         <div class="center_right rt">
             <!-- 我发布的商品-数据-->
             <div class= "myorder2 active rt_tbs ">
-                <h2>我接到的定制：<span class="color allorders"></span></h2>
+                <h2>我发布的定制：<span class="color allorders"></span></h2>
                 <p class="order_filter filter_btn floating">
                     <a href="/usercenter/customized/0" th:class="${type == 0}?active" data-class="myorder">数据定制</a>
                     <a href="/usercenter/customized/1" th:class="${type == 1}?active" data-class="demandorder">爬虫规则定制</a>
@@ -211,23 +211,32 @@
     }
 
     function deleteOne(id) {
-        $.ajax({
-            type:"DELETE",
-            dataType:"json",
-            url: '/api/customized' +'/'+ id ,
-            ansync:true,
-            success:function (data) {
-                if (data.success == true) {
-                    layer.msg("删除成功",{icon:1},function(){
-                        //do something
-                        App.initUserCustomized(userId,allType);
-                    });
+        var index = layer.confirm('确定删除该定制？', {
+            btn: ['是', '否'] //可以无限个按钮
+        }, function(index, layero){
+            //按钮【按钮一】的回调
+            $.ajax({
+                type:"DELETE",
+                dataType:"json",
+                url: '/api/customized' +'/'+ id ,
+                ansync:true,
+                success:function (data) {
+                    if (data.success == true) {
+                        layer.msg("删除成功",{icon:1},function(){
+                            //do something
+                            App.initUserCustomized(userId,allType);
+                        });
+                    }
+                },
+                error: function (data) {
+                    layer.msg("删除失败，请重试",{icon:5});
                 }
-            },
-            error: function (data) {
-                layer.msg("删除失败，请重试",{icon:5});
-            }
+            });
+        }, function(index){
+            //按钮【按钮二】的回调
+            layer.close(index);
         });
+
     }
 </script>
 </body>

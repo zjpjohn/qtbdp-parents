@@ -13,7 +13,6 @@
 }
 .center_left{
     width:320px;
-    background: #fff;
 }
 .center_right{
     width:860px;
@@ -21,16 +20,19 @@
 
 }
 .headbg{
-    width:158px;
-    height:158px;
-    background:url("../images/icon.png")-420px -422px no-repeat ;
-    border-radius: 50%;
-    margin:0px auto;
-    margin-top:34px;
-
+    width:320px;
+    height:290px;
+    background: #fff;
+    border-bottom: 1px solid #E6E6E6;
 }
 .headbg>a{
     display: inline-block;
+    width:160px;
+    height:160px;
+    background:url("../images/icon_index2.png")-16px -272px no-repeat ;
+    border-radius: 50%;
+    margin-top:30px;
+    margin-left: 81px;
 }
 .headpic{
     width:130px;
@@ -43,7 +45,7 @@
     text-align: center;
     color:#333;
     font-size: 20px;
-    margin-top: 14px;
+    margin-top: 6px;
 }
 .perphone{
     color:#999;
@@ -51,17 +53,35 @@
     margin-top: 8px;
 }
 .perdata{
-    width:182px;
-    line-height: 22px;
-    margin:0px auto;
-    margin-top: 14px;
-    margin-bottom: 24px;
+    text-align: center;
+}
+.perdata2{
+    color:#F74C4C;
+}
+.perdata>em.noperdata{
+    display:inline-block;
+    width:30px;
+    height:30px;
+    background:url("../images/icon_index2.png") -310px -102px;
+    position:relative;
+    top:10px;
+}
+
+.perdata>em{
+    display:inline-block;
+    width:30px;
+    height:30px;
+    background:url("../images/icon_index2.png") -376px -100px;
+    position:relative;
+    top:10px;
 }
 .realrz{
     display:inline-block;
     width:106px;
     line-height: 22px;
     color:#333;
+    position: relative;
+    top: 4px;
 }
 .realrz>b{
     display:inline-block;
@@ -91,6 +111,7 @@
     line-height:60px;
     box-sizing: border-box;
     font-size: 18px;
+    background:#fff;
 }
 .pereach>li>a{
     color:#666;
@@ -104,30 +125,42 @@
     margin-right: 20px;
     position:relative;
     top:6px;
-    background-image:url("../images/icon.png");
+    background-image:url("../images/icon_index2.png");
 }
-.pereach>li:nth-child(1)>a>span{
-    background-position:-431px -337px ;
+.pereach>li.overview>a>span{
+    background-position:-448px -100px ;
 }
-.pereach>li:nth-child(2)>a>span{
-    background-position:-481px -337px;
+.pereach>li.persinfo>a>span{
+    background-position:-517px -102px;
 }
 .pereach>li:nth-child(3)>a>span{
-    background-position:-531px -337px;
+    background-position:-589px -100px;
 }
-.pereach>li:nth-child(4)>a>span{
-    background-position:-581px -337px;
+.pereach>li.myorder>a>span{
+    background-position:-670px -100px;
 }
-.pereach>li:nth-child(5)>a>span{
-    background-position:-627px -336px;
+
+.pereach>li.myrelease>a>span{
+    background-position:-739px -100px;
 }
-.pereach>li:nth-child(6)>a>span{
-    background-position:-672px -335px;
+.pereach>li.dataservice>a>span{
+    background-position:-16px -166px;
+}
+.pereach>li.dataservice:hover{
+    background-color: #fff;
+}
+
+
+.pereach>li.publich>a>span{
+    background-position:-167px -167px;
+}
+.pereach>li.received>a>span{
+    background-position:-243px -167px;
 }
 
 /******移入去状态*******/
 .pereach>li:hover,.pereach>li.active{
-    background: #1A2730;
+    background: #0076C8;
     font-size: 18px;
 }
 
@@ -148,36 +181,40 @@
 }
 
 /******hover  active********/
-.pereach>li:nth-child(1):hover>a>span,.pereach>li:nth-child(1).active>a>span{
-    background-position:-431px -375px;
+.pereach>li.overview:hover>a>span,.pereach>li.overview.active>a>span{
+    background-position:-448px -166px ;
 }
-.pereach>li:nth-child(2):hover>a>span,.pereach>li:nth-child(2).active>a>span{
-    background-position:-481px -375px;
+.pereach>li.persinfo:hover>a>span,.pereach>li.persinfo.active>a>span{
+    background-position:-518px -166px;
 }
 .pereach>li:nth-child(3):hover>a>span,.pereach>li:nth-child(3).active>a>span{
     background-position:-531px -375px ;
 }
-.pereach>li:nth-child(4):hover>a>span,.pereach>li:nth-child(4).active>a>span{
-    background-position:-581px -375px;
+.pereach>li.myorder:hover>a>span,.pereach>li.myorder.active>a>span{
+    background-position:-671px -165px;
 }
-.pereach>li:nth-child(5):hover>a>span,.pereach>li:nth-child(5).active>a>span{
-    background-position:-627px -375px;
+.pereach>li.myrelease:hover>a>span,.pereach>li.myrelease.active>a>span{
+    background-position:-740px -165px;
 }
-.pereach>li:nth-child(6):hover>a>span,.pereach>li:nth-child(6).active>a>span{
-    background-position:-672px -375px;
+.pereach>li.publich:hover>a>span,.pereach>li.publich.active>a>span{
+    background-position:-310px -165px;
 }
-
-.pereach>li:last-child{
-    background:#e5eef5;
-}
-
-.pereach>li:last-child:hover{
-    background:#3174C2;
-}
-.pereach>li:hover{
-    cursor: pointer;
+.pereach>li.received:hover>a>span,.pereach>li.received.active>a>span{
+    background-position:-387px -165px;
 }
 
+
+
+.pereach>li.dataservice>a{
+    color:#0081cb;
+}
+.pereach>li.sidebarnone{
+    margin-top:5px;
+    margin-bottom:5px;
+    width:100%;
+    height:1px;
+    background-color:#E6E6E6;
+}
 /*****右侧div******/
 .center_right{
     position:relative;

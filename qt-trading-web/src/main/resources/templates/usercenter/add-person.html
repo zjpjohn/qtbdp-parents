@@ -86,17 +86,21 @@
                             <div class="form-group">
                                 <label class="control-label">姓名</label>
                                 <div>
-                                    <input id="name" name="personalInfoModel.realName" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="name" name="realName" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的姓名严格一致</p>
+                                <input type="text" style="display:none;"   name="personalInfoModel.realName" id="realNameContent">
                             </div>
+
                             <div class="form-group">
                                 <label class="control-label">身份证号</label>
                                 <div>
-                                    <input id="ID" name="personalInfoModel.idNumber" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="ID" name="idNumber" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的号码严格一致</p>
+                                <input type="text" style="display:none;"   name="personalInfoModel.idNumber" id="idNumberContent">
                             </div>
+
                             <div class="form-group clearfix">
                                 <label class="control-label">身份证</label>
                                 <div>
@@ -118,20 +122,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" style="display:none;"  name="fullFacePhoto" id="fullFacePhoto">
-                            <input type="text" style="display:none;"  name="negativeSidePhoto" id="negativeSidePhoto">
+                            <input type="text" style="display:none;"  name="personalInfoModel.fullFacePhoto" id="fullFacePhoto">
+                            <input type="text" style="display:none;"  name="personalInfoModel.negativeSidePhoto" id="negativeSidePhoto">
                         </div>
 
                         <div class="form-group address">
-                            <label class="control-label">地区</label>
+                            <label class="control-label">企业所在地</label>
                             <div class="clearfix" id="Location">
                                 <div class="lf select-div">
-                                    <select  class="form-control prov" name="provinceId" id="provinceId">
+                                    <select  class="form-control prov" name="personalInfoModel.provinceId" id="provinceId">
                                         <option value="">请选择省份</option>
                                     </select>
                                 </div>
                                 <div class="rt select-div">
-                                    <select  class="form-control city" name="cityId" id="cityId">
+                                    <select  class="form-control city" name="personalInfoModel.cityId" id="cityId">
                                         <option value="">请选择市</option>
                                     </select>
                                 </div>
@@ -144,6 +148,7 @@
                                 <input  type="text" name="phone" id="phone" class="form-control borderRadiusIE8">
                             </div>
                             <p class="tip">请输入有效的手机号码</p>
+                            <input type="text" style="display:none;"   name="personalInfoModel.phone" id="phoneContent">
                         </div>
                     </div>
 

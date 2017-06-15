@@ -95,19 +95,21 @@
     {{if list.length>0}}
     {{each(i,prod) list}}
         <div class="repmain active floating">
-            <div class="lf reptexts">
-                <p class="main_title"><a href="/customized/rule/detail/${prod.id}">${prod.name}</a></p>
-                <p class="main_text">${prod.dimension}</p>
-                <p class="main_min">
-                    <span >采集规模: <a class="main_domain">${prod.scale} 条</a></span>
-                    <span class="main_timeend"> <em></em> 截至倒计时 : <a>${$item._timeChange(prod.endTime)}</a></span>
-                </p>
-            </div>
-            <div class="lf priceright">
-                <p class="repprice">￥${$item._num(prod.price)}</p>
-                <p class="reppeople">0 人已接单</p>
-                <p class="repnow">立即接单</p>
-            </div>
+            <a href="/customized/rule/detail/${prod.id}">
+                <div class="lf reptexts">
+                    <p class="main_title">${prod.name}</p>
+                    <p class="main_text">采集字段 :  ${prod.dimension}</p>
+                    <p class="main_min">
+                        <span >采集规模: <i class="main_domain">${prod.scale} 条</i></span>
+                        <span class="main_timeend"> <em></em> 截至倒计时 : ${$item._timeChange(prod.endTime)}</span>
+                    </p>
+                </div>
+                <div class="lf priceright">
+                    <p class="repprice">悬赏￥${$item._num(prod.price)}</p>
+                    <p class="reppeople">0 人已接单</p>
+                    <p class="repnow">立即接单</p>
+                </div>
+            </a>
         </div>
     {{/each}}
     {{else}}

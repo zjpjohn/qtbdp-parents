@@ -1,7 +1,7 @@
 /**
  * Created by dell on 2017/6/14.
  */
-var Layout = function () {
+/*var Layout = function () {
 
     var handleSidebarMenuActiveLink = function (mode, el, $state) {
         var url = location.pathname.toLowerCase();
@@ -54,4 +54,4 @@ var Layout = function () {
 
 jQuery(document).ready(function() {
     Layout.initSidebar();
-});
+});*/
