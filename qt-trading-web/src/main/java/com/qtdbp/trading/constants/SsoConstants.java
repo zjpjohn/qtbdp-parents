@@ -38,4 +38,9 @@ public class SsoConstants {
      * 用户授权信息
      */
     public static final String SSO_USER = "user" ;
+
+    /**
+     * 加密解密key
+     */
+    public static final String DES_KEY = "3dbfac1abd334784860723ef2022a92f" ;
 }

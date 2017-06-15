@@ -32,6 +32,17 @@ function findPwdShow(){
     modelSwitch();
     $("#findPwdModel").show();
 }
+//验证成为服务商
+function infoNewModel2(){
+    console.log(666);
+    layer.confirm('您还不是数据服务商，立即入驻即可开通属于您的数据店铺', {
+        btn: ['立即入驻','取消'] //按钮
+    }, function(){
+        location.href="/usercenter/add/person";
+    });
+}
+
+
 /*******************登录***************/
 //验证登录账号
 function checkAccount(type){
@@ -73,17 +84,34 @@ $("#loginSubmit").unbind("click").click(function(){
                 username:username,
                 password:password
             },
-
             xhrFields:{
                 withCredentials:true
             },
             success:function(data){
                 //如果登录成功
-
                 //location.reload();
                 if(data.status==200){
                     $("#loginModel").hide();
-                    location.href="/callback";
+
+                    var _token ;
+                    if(data.data)
+                        _token = data.data.substr(data.data.indexOf("=")+1, data.data.lastIndexOf("=")-15) ;
+
+                    LoadingData.request({url: "/callback",data: {token:_token}},function (data) {
+
+                        var _result = data.result ;
+                        if(_result.success) {
+                            LoadingData.request({url: "/login",type:"post",data: {username:_result.data,password:"123456"}},function (data) {
+                                location.reload() ;
+                            }) ;
+                        } else {
+                            LoadingData.toastr({
+                                _type: 'error',
+                                _title: '登录认证失败',
+                                _msg: "错误编码："+_result.errorCode+"，错误信息："+_result.message
+                            }) ;
+                        }
+                    }) ;
                 }else{
                     $(".error_tip").html("请输入正确的账号及密码");
                 }

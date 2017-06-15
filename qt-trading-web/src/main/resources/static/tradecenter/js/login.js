@@ -17,16 +17,14 @@ function modelSwitch(){
     $(".getCode").html("获取验证码").removeClass("huoqu_success");
     $(".model_form input").val("");
 }
-//验证成为服务商
-function infoNewModel(){
-    layer.msg("您还不是数据服务商");
-}
 
 //登录弹框出现
 function loginShow(){
     modelSwitch();
     $("#loginModel").show();
 }
+
+
 //注册弹框出现
 function registerShow(){
     modelSwitch();

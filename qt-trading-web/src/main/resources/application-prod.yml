@@ -29,6 +29,16 @@ spring:
     filters: stat,wall,log4j         # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
   jmx: # 必须关闭jms，否则启动报错
     enabled: false
+  redis:
+    host: 192.168.36.25 # Redis服务器地址
+    database: 0
+    port: 6379      # Redis服务器连接端口
+    pool:
+      max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+      max-wait: 30000  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 8   # 连接池中的最大空闲连接
+      min-idle: 1   # 连接池中的最小空闲连接
+    timeout: 1000      # 连接超时时间（毫秒）
 
 # ===================================================================
 # Eureka注册中心配置
@@ -54,7 +64,7 @@ sso:
   host: http://sso.qtbigdata.com/
   loginUrl: http://sso.qtbigdata.com/sso/action/goLogin?retUrl=
   registerUrl: http://sso.qtbigdata.com/sso/action/goRegister?retUrl=
-  callback: http://jy.qtbigdata.com/callback
+  callback: http://www.qtjiaoyi.com/callback
 
 # ===================================================================
 # 分布式文件系统FDFS配置

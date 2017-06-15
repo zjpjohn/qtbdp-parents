@@ -544,3 +544,30 @@ body{
 .form-group.has-error .form-control {
     border: 1px solid #e73d4a;
 }
+
+/*****悬浮框******/
+.data_store{
+    position:relative;
+}
+.positiondata{
+    width:36px;
+    text-align: center;
+    color: #5f511e;
+    box-sizing: border-box;
+    padding:15px 10px;
+    background-color:#FBD958;
+    position:fixed;
+    top:460px;
+    right:280px;
+    z-index:999;
+}
+.datastrem>a>em{
+    background-position:-148px -110px;
+}
+
+
+
+
+
+
+
