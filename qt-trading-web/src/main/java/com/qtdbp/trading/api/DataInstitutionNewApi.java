@@ -123,7 +123,7 @@ public class DataInstitutionNewApi extends BaseController {
                 try {
                     infoNewModel.setCreateId(user.getId());
                     Integer id = institutionInfoNewService.insertInstitution(infoNewModel);
-                    if(id != null && id < 0) {
+                    if(id != null && id > 0) {
                         message.setSuccess(true);
                         message.setData(id);
                     }
