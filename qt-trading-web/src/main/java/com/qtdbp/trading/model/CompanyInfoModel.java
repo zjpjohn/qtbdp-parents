@@ -19,9 +19,9 @@ public class CompanyInfoModel extends BaseModel {
     private Integer industryId ;                // 所属行业
     private String license;                     // 营业执照
     private String licenseNumber;               // 营业执照注册号
-    private Integer provinceId ;            // 所在省
-    private Integer cityId ;                // 所在市
-    private Integer districtId ;            // 所在地区
+    private String provinceId ;            // 所在省
+    private String cityId ;                // 所在市
+    private String districtId ;            // 所在地区
     private String address ;                // 详细地址
     private String phone ;                  // 手机号
     private String corporator;              // 企业法人
@@ -89,27 +89,27 @@ public class CompanyInfoModel extends BaseModel {
         this.licenseNumber = licenseNumber;
     }
 
-    public Integer getProvinceId() {
+    public String getProvinceId() {
         return provinceId;
     }
 
-    public void setProvinceId(Integer provinceId) {
+    public void setProvinceId(String provinceId) {
         this.provinceId = provinceId;
     }
 
-    public Integer getCityId() {
+    public String getCityId() {
         return cityId;
     }
 
-    public void setCityId(Integer cityId) {
+    public void setCityId(String cityId) {
         this.cityId = cityId;
     }
 
-    public Integer getDistrictId() {
+    public String getDistrictId() {
         return districtId;
     }
 
-    public void setDistrictId(Integer districtId) {
+    public void setDistrictId(String districtId) {
         this.districtId = districtId;
     }
 

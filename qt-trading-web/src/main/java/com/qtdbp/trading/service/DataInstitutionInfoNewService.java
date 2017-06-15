@@ -85,6 +85,7 @@ public class DataInstitutionInfoNewService {
                     CompanyInfoModel companyInfoModel = infoNewModel.getCompanyInfoModel();
                     if (companyInfoModel == null) throw new GlobalException("服务商企业资料数据丢失");
 
+                    companyInfoModel.setCreateId(infoNewModel.getCreateId());
                     count = infoNewMapper.insertCompanyInfo(companyInfoModel);
                     if (count != null && count > 0) {
                         infoId = companyInfoModel.getId() ;
@@ -95,6 +96,7 @@ public class DataInstitutionInfoNewService {
                     PersonalInfoModel personalInfoModel = infoNewModel.getPersonalInfoModel() ;
                     if (personalInfoModel == null) throw new GlobalException("服务商个人资料数据丢失");
 
+                    personalInfoModel.setCreateId(infoNewModel.getCreateId());
                     count = infoNewMapper.insertPersonalInfo(personalInfoModel);
                     if (count != null && count > 0) {
                         infoId = personalInfoModel.getId() ;

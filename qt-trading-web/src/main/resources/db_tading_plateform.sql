@@ -308,9 +308,9 @@ create table company_info
    industry_id          int                            null,
    license              varchar(500)                   null,
    license_number       varchar(20)                    null,
-   province_id          int                            null,
-   city_id              int                            null,
-   district_id          int                            null,
+   province_id          varchar(50)                    null,
+   city_id              varchar(50)                    null,
+   district_id          varchar(50)                    null,
    address              varchar(200)                   null,
    phone                varchar(50)                    null,
    corporator           varchar(50)                    null,
@@ -335,14 +335,14 @@ create table personal_info
    id                   int                            not null AUTO_INCREMENT,
    real_name            varchar(50)                    not null,
    id_number            varchar(50)                    not null,
-   gender               varchar(10)                    not null,
+   gender               varchar(10)                    null,
    full_face_photo      varchar(500)                   not null,
    negative_side_photo  varchar(500)                   not null,
-   exp_time             date                           not null,
+   exp_time             date                           null,
    type_id              int                            null,
-   province_id          int                            null,
-   city_id              int                            null,
-   district_id          int                            null,
+   province_id          varchar(50)                    null,
+   city_id              varchar(50)                    null,
+   district_id          varchar(50)                    null,
    address              varchar(200)                   null,
    phone                varchar(50)                    null,
    create_id            int                            not null,
@@ -414,3 +414,27 @@ create table data_user_feedback
 
 -- 修改用户Id未int类型
 ALTER TABLE data_product MODIFY user_id int ;
+
+-- 类目初始化数据
+INSERT INTO `data_type` (`id`, `pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (100, 0, '工业数据', 1, 0, null, 1);
+INSERT INTO `data_type` (`id`, `pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, 0, '关联数据', 1, 1, null, 1);
+
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (100, '研发设计', 1, 10, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (100, '生产制造', 1, 11, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (100, '物联网', 1, 12, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (100, '工业产品', 1, 13, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (100, '物流运输', 1, 14, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (100, '行业综合', 1, 15, null, 0);
+
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '社交网络', 1, 20, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '金融财经', 1, 21, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '电子商务', 1, 22, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '交通出行', 1, 23, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '健康医疗', 1, 24, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '科研分析', 1, 25, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '生活服务', 1, 26, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '产业数据', 1, 27, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '社会服务', 1, 28, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '教育科研', 1, 29, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '企业征信', 1, 30, null, 0);
+INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '新闻资讯', 1, 31, null, 0);
