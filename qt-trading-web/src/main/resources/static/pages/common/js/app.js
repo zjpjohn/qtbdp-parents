@@ -458,11 +458,11 @@ var App = function () {
 
             });
 
-            var _id = $("#createId").val() ;
 
             $(".tab-sub-container > a").each(function () {
 
                 $(this).click(function () {
+                    var _id = $("#createId").val() ;
 
                     $(".tab-sub-container > a").removeClass("active") ;
                     $(this).addClass("active") ;

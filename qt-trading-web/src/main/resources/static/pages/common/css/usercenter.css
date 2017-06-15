@@ -561,7 +561,7 @@
     width:100%;
 }
 .center_tb a{
-    display:block;
+    /*display:block;*/
     cursor:pointer;
 }
 .center_tb td,.center_tb th{

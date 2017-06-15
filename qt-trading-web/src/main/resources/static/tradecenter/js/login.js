@@ -25,6 +25,7 @@ function loginShow(){
 }
 
 
+
 //注册弹框出现
 function registerShow(){
     modelSwitch();
