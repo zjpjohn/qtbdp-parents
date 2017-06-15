@@ -158,4 +158,11 @@
         WHERE
             order_no = #{orderNo}
     </select>
+
+    <!-- 统计个人中心我的订单、我的定制数量 -->
+    <select id="findAllOrderInfo" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+        select t1.transactionOrder,t2.custom from
+        (select count(*) transactionOrder from data_transaction_order where user_id=#{userId}) t1,
+        (select count(*) custom from custom_service where create_id=#{userId}) t2;
+    </select>
 </mapper>

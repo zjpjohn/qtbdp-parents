@@ -4,6 +4,7 @@ import com.qtdbp.trading.model.DataTransactionOrderModel;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 订单数据库CRUD操作
@@ -58,4 +59,11 @@ public interface DataTransactionOrderMapper {
      * @return
      */
     DataTransactionOrderModel findOrderByNo(String orderNo) ;
+
+    /**
+     * 获取个人中心我的订单信息
+     * @param userId
+     * @return
+     */
+    Map<String, Long> findAllOrderInfo(Integer userId);
 }
