@@ -197,7 +197,7 @@
             null,
             #{sort},
             #{rec},
-            #{isUsed},
+            0,
             NULL ,
             #{dataTypeProps},
             0,
