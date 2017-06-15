@@ -47,7 +47,6 @@ function infoNewModel3(){
 
 
 
-
 /*******************登录***************/
 //验证登录账号
 function checkAccount(type){
