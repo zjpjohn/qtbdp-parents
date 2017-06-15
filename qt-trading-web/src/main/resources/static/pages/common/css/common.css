@@ -154,8 +154,7 @@ nav{
     width:1200px;
     margin:0px auto;
 }
-.nav_list>a,.nav_rt>a{
-    /*margin-right:40px;*/
+.nav_list>a{
     color:#fff;
     font-size:18px;
     padding:23px 29px;
@@ -167,10 +166,6 @@ nav{
 .nav_list{
     font-size: 0px;
 }
-/*.nav_list>a:hover,.nav_list>a.active{
-    color:#0076C8;
-    background:#fff;
-}*/
 .nav_list>a.active{
     color:#0076C8;
     background:#fff;
@@ -557,8 +552,9 @@ body{
     padding:15px 10px;
     background-color:#FBD958;
     position:fixed;
-    top:460px;
-    right:280px;
+    top:auto;
+    left: 50%;
+    margin-left:602px;
     z-index:999;
 }
 
