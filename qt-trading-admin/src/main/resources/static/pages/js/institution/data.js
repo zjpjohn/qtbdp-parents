@@ -12,7 +12,7 @@ $(function () {
             { "data": "dataTypeProps" },
             { "data": "designation" },
             { "data": "username" },
-            { "data": "addTime" },
+            { "data": "addtime" },
             {"data":"auditStatus"},
             { "data": null }
         ],
