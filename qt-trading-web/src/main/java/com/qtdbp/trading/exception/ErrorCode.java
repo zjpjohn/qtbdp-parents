@@ -33,6 +33,11 @@ public class ErrorCode {
     public static final Integer ERROR_LOGIN_FAIL = 2001 ;
 
     /**
+     * 注册失败
+     */
+    public static final Integer ERROR_REGISTER_FAIL = 2002 ;
+
+    /**
      * 文件下载错误
      */
     public static final Integer ERROR_FILE_DOWNLOAD_FAIL = 3000 ;
