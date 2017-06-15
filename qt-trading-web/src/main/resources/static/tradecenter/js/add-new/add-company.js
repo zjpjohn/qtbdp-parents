@@ -34,7 +34,7 @@ $(function () {
         _rules: {
             name: {
                 required: true,//服务商名称
-                rangelength: [8, 50]//长度为8-50之间
+                rangelength: [5, 50]//长度为8-50之间
             },
             designation: {
                 required: true//服务领域
@@ -53,7 +53,7 @@ $(function () {
         _messages: {
             name: {
                 required: "请输入服务商名称",
-                rangelength: "字符长度为8-50之间"//长度为8-50之间
+                rangelength: "字符长度为5-50之间"//长度为8-50之间
             },
             designation: {
                 required: "请输入服务领域"

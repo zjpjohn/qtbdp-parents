@@ -36,6 +36,7 @@ var fromCommon = {
             })
         })
     },
+    //选择框
     typeSelect:function ($ele,url,value,string) {
         $ele.empty();
         var html = '';
@@ -69,6 +70,7 @@ var fromCommon = {
             })
         }
     },
+
     inputBind:function (showInp,hideInp) {
         showInp.on('change',function () {
             var val = $(this).val();

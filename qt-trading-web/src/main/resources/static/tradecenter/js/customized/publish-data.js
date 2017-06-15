@@ -14,7 +14,7 @@ $(function () {
         _rules: {
             name: {
                 required: true,
-                rangelength: [8, 50]
+                rangelength: [5, 50]
             },
             introduction: {
                 required: true
@@ -51,7 +51,7 @@ $(function () {
         _messages: {
             name: {
                 required: "请输入定制数据名称",
-                rangelength: "字符长度为8-50之间"//长度为8-50之间
+                rangelength: "字符长度为5-50之间"//长度为8-50之间
             },
             describe: {
                 required: "请输入定制描述"

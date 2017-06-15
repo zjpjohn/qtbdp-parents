@@ -64,7 +64,7 @@ var FormValidationMd = function() {
                 $.ajax({
                     url: $(form)[0].action,
                     type: "post",
-                    contentType:"application/json; charset=utf-8",
+                    // contentType:"application/json; charset=utf-8",
                     data: $(form).serialize(),
                     dataType:"json",
                     beforeSend : function () {

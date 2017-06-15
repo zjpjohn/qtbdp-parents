@@ -116,7 +116,7 @@ $(function () {
         _rules: {
             designation: {
                 required: true,
-                rangelength: [8, 50]
+                rangelength: [5, 50]
             },
             dataProfile: {
                 required: true
@@ -137,7 +137,7 @@ $(function () {
         _messages: {
             designation: {
                 required: "请输入数据名称",
-                rangelength: "字符长度为8-50之间"//长度为8-50之间
+                rangelength: "字符长度为5-50之间"//长度为8-50之间
             },
             dataProfile: {
                 required: "请输入数据简介"

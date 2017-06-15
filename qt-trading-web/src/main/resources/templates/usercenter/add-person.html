@@ -36,7 +36,8 @@
 
                 <!--表单信息-->
                 <form id="fromPerson" action="/api/institutionV2" method="post">
-                    <input type="text" name="institutionType" value="2" style="display:none;">
+                    <input type="hidden" name="institutionType" value="2">
+                    <input type="hidden" name="typeId" value="0">
                     <!--服务商基本信息-->
                     <div  class="from-top clearfix">
                         <div class="lf">
@@ -73,7 +74,7 @@
                                 <img src="" alt="" id="logo" class="Image"/>
                             </fieldset>
                         </div>
-                        <input type="text" style="display:none;"  name="logo" id="logoContent">
+                        <input type="hidden"  name="logo" id="logoContent">
                     </div>
                     <!--服务商基本信息结束-->
 
@@ -89,7 +90,7 @@
                                     <input id="name" name="realName" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的姓名严格一致</p>
-                                <input type="text" style="display:none;"   name="personalInfoModel.realName" id="realNameContent">
+                                <input type="hidden"   name="personalInfoModel.realName" id="realNameContent">
                             </div>
 
                             <div class="form-group">
@@ -98,7 +99,7 @@
                                     <input id="ID" name="idNumber" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的号码严格一致</p>
-                                <input type="text" style="display:none;"   name="personalInfoModel.idNumber" id="idNumberContent">
+                                <input type="hidden"   name="personalInfoModel.idNumber" id="idNumberContent">
                             </div>
 
                             <div class="form-group clearfix">
@@ -107,7 +108,7 @@
                                     <div class="lf">
                                         <fieldset>
                                             <span>✚</span>
-                                            <input name="file" class="fileID1" type="file">
+                                            <input name="fullFacePhoto" class="fileID1" type="file">
                                             <img src="" alt="" id="ID1" class="Image"/>
                                         </fieldset>
                                         <p class="tip">身份证正面照</p>
@@ -115,15 +116,15 @@
                                     <div class="rt">
                                         <fieldset>
                                             <span>✚</span>
-                                            <input name="file" class="fileID2" type="file">
+                                            <input name="negativeSidePhoto" class="fileID2" type="file">
                                             <img src="" alt="" id="ID2" class="Image"/>
                                         </fieldset>
                                         <p class="tip">身份证反面照</p>
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" style="display:none;"  name="personalInfoModel.fullFacePhoto" id="fullFacePhoto">
-                            <input type="text" style="display:none;"  name="personalInfoModel.negativeSidePhoto" id="negativeSidePhoto">
+                            <input type="hidden" name="personalInfoModel.fullFacePhoto" id="fullFacePhoto">
+                            <input type="hidden" name="personalInfoModel.negativeSidePhoto" id="negativeSidePhoto">
                         </div>
 
                         <div class="form-group address">
@@ -148,7 +149,7 @@
                                 <input  type="text" name="phone" id="phone" class="form-control borderRadiusIE8">
                             </div>
                             <p class="tip">请输入有效的手机号码</p>
-                            <input type="text" style="display:none;"   name="personalInfoModel.phone" id="phoneContent">
+                            <input type="hidden"   name="personalInfoModel.phone" id="phoneContent">
                         </div>
                     </div>
 

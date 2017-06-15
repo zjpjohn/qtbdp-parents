@@ -37,7 +37,8 @@
                 <!--表单信息-->
                 <form id="fromCompany" action="/api/institutionV2" method="post">
                     <!--服务商基本信息-->
-                    <input type="text" name="institutionType" value="1" style="display:none;">
+                    <input type="hidden" name="institutionType" value="1">
+                    <input type="hidden" name="typeId" value="0">
                     <div  class="from-top clearfix">
                         <div class="lf">
                             <div id="type">
@@ -73,7 +74,7 @@
                                 <img src="" alt="" id="logo" class="Image"/>
                             </fieldset>
                         </div>
-                        <input type="text" style="display:none;"  name="logo" id="logoContent">
+                        <input type="hidden"  name="logo" id="logoContent">
                     </div>
                     <!--服务商基本信息结束-->
 
@@ -97,7 +98,7 @@
                                     <input class="fileLicense" type="file" name="fileLicense">
                                     <img src="" alt="" id="License" class="Image"/>
                                 </fieldset>
-                                <input type="text" style="display:none;"  name="companyInfoModel.license" id="licenseContent">
+                                <input type="hidden"  name="companyInfoModel.companyLogo" id="licenseContent">
                             </div>
 
                             <div class="form-group">
