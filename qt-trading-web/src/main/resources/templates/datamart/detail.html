@@ -16,12 +16,14 @@
     <!--页头结束-->
 
     <!--主体-->
+    <!-- 详情页信息 -->
+    <div id="product-container"></div>
     <section class="mart_main main">
-        <!-- 详情页信息 -->
-        <div id="product-container"></div>
+
 
         <!-- 数据项列表开始 -->
         <p class="filter" id="order-container">
+            <i></i>
             <b>信息列表</b>
             <a class="active" data-id="0">最新</a>
             <a data-id="1">价格</a>
@@ -39,7 +41,9 @@
 
     <!-- 数据产品详情 -->
     <script id="tmpl_product" type="text/x-jquery-tmpl">
-        <div class="floating">
+
+        <div class="marginpro">
+            <div class="floating product_back">
             <p class="lf detail_img">
                <img src="${pic}" alt=""/>
             </p>
@@ -82,9 +86,15 @@
                 {{/if}}
             </div>
         </div>
+        </div>
 
-        <p class="filter"><b>数据详情</b></p>
-        <div>{{html introduce}}</div>
+
+        <div class="filter">
+            <i></i>
+            <b>数据详情</b>
+        </div>
+        <div class="prointroduce">{{html introduce}}</div>
+
     </script>
 
     <!-- 数据包产品tpml模板 -->

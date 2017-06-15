@@ -20,12 +20,30 @@
 </div>
 
 <div class="data_store">
+    <!--未登录-->
+    <div class="positiondata datastrem" th:unless="${user}">
+        <a  href="javascript:;"  onclick="loginShow(this)"  ><em></em>我要数据变现</a>
+    </div>
+    <!--已登录-->
+    <div class="positiondata datastrem" th:if="${user}">
+        <!--是数据服务商-->
+        <a  href="/institution/add/product" th:if="${user.infoNewModel}" ><em></em>我要数据变现</a>
+        <!--不是数据服务商-->
+        <a  href="javascript:;" th:if="!${user.infoNewModel}"  onclick="infoNewModel2(this)"><em></em>我要数据变现</a>
+
+
+    </div>
+
+
+
+
+
     <!--右侧悬浮框 如果不是数据服务商-->
-    <div class="positiondata datastrem" th:unless="${user.infoNewModel}">
+    <div class="positiondata datastrem" th:unless="${user} and ${user.infoNewModel}">
         <a  href="javascript:;"  onclick="infoNewModel2(this)"  ><em></em>我要数据变现</a>
     </div>
     <!--右侧悬浮框 如果是数据服务商-->
-    <div class="positiondata datastrem" th:if="${user.infoNewModel}">
+    <div class="positiondata datastrem" th:if="${user} and ${user.infoNewModel}">
         <a  href="/institution/add/product" ><em></em>我要数据变现</a>
     </div>
     <!--数据分类-->
@@ -107,19 +125,21 @@
 <script id="tmpl_products" type="text/x-jquery-tmpl">
     {{if list.length>0}}
     {{each(i,prod) list}}
-        <div class="store_one" >
-            <a style="background:url(${prod.pic}) no-repeat center center; background-size:cover;"/></a>
+        <div class="store_one" target="_blank" >
+            <a href="/datamart/detail/${prod.id}">
+                <p class="storeimgs" style="background:url(${prod.pic}) no-repeat center center; background-size:cover;"/></p>
 
-            <h2><a href="/datamart/detail/${prod.id}" target="_blank" class="list_title">${prod.designation}</a></h2>
-            <p class="sto_main">${prod.dataProfile}</p>
-            <p class="store_small">
-                <span class="lf jtcx">${prod.typeName} | <i>${prod.dataScale}条</i> </span>
-                {{if prod.price === 0}}
-                    <span class="rt mf" style="color: #26C281;">免费</span>
-                {{else}}
-                    <span class="rt mf" style="color: #e7505a;">￥${prod.price}</span>
-                {{/if}}
-            </p>
+                <h2>${prod.designation}</h2>
+                <p class="sto_main">${prod.dataProfile}</p>
+                <p class="store_small">
+                    <span class="lf jtcx">${prod.typeName} | <i>${prod.dataScale}条</i> </span>
+                    {{if prod.price === 0}}
+                        <span class="rt mf" style="color: #26C281;">免费</span>
+                    {{else}}
+                        <span class="rt mf" style="color: #e7505a;">￥${prod.price}</span>
+                    {{/if}}
+                </p>
+            </a>
         </div>
     {{/each}}
     {{else}}

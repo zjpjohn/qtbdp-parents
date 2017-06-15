@@ -20,8 +20,17 @@
 </div>
 
 <div class="data_store" style="min-height: 500px">
-    <div class="positiondata datastrem">
-        <a  href="javascript:;"  onclick="infoNewModel2(this)"  ><em></em>入驻数据服务商</a>
+
+    <!--已登录  右侧悬浮框-->
+    <div class="positiondata datastrem" th:if="${user}">
+        <!--是数据服务商-->
+        <a  href="javascript:;" onclick="infoNewModel3(this)" th:if="${user.infoNewModel}"><em></em>入驻数据服务商</a>
+        <!--不是数据服务商-->
+        <a  href="/usercenter/add/person" th:if="!${user.infoNewModel}"><em></em>入驻数据服务商</a>
+    </div>
+    <!--未登录  右侧悬浮框-->
+    <div class="positiondata datastrem" th:unless="${user}">
+        <a  href="javascript:;"  onclick="loginShow(this)"  ><em></em>入驻数据服务商</a>
     </div>
 
     <!--数据分类-->
