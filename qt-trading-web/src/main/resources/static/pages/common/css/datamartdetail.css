@@ -30,8 +30,8 @@
 
 
 .detail_img{
-    width:303px;
-    height:205px;
+    width:382px;
+    height:259px;
     margin-right:20px;
     text-align:center;
     line-height:205px;
@@ -47,20 +47,20 @@
     transform:translate(-50%,-50%);
 }
 .infos{
-    width:845px;
+    width:790px;
     height:40px;
-    margin-bottom:15px;
+    margin-bottom:10px;
     overflow:hidden;
 }
 .detail_info{
-    width:845px;
+    width:790px;
 }
 .detail_info>.rt{
   margin-top:5px;
 }
 .detail_info>h2{
     font-weight:normal;
-    margin-bottom:15px;
+    margin-bottom:20px;
 }
 .detail_info p{
     margin-bottom:17px;
@@ -77,9 +77,9 @@
 .infos,.detail_info .p2{
     color:#808080;
 }
-.detail_info .p2>i{
+.pczkj{
     font-size:18px;
-    color:#FF4E00;
+    color:#ff4e00;
 }
 .buy1{
     padding:5px 15px;
@@ -202,3 +202,34 @@
 .free{
     margin-top:60px;
 }
+
+.qtbig>i{
+    color:#0076CB;
+}
+.pcscj{
+    font-size:14px;
+    color:#808080;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
