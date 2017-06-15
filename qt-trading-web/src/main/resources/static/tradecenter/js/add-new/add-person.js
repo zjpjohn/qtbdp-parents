@@ -35,17 +35,17 @@ $(function () {
     var options = {
         _form: "#fromPerson",
         _rules: {
-            // facilitator: {
-            //     required: true,//服务商名称
-            //     rangelength: [8, 50]//长度为8-50之间
-            // },
-            // field: {
-            //     required: true//服务领域
-            // },
+            name: {
+                required: true,//服务商名称
+                rangelength: [8, 50]//长度为8-50之间
+            },
+            designation: {
+                required: true//服务领域
+            },
             // phone: {
             //     required: true//联系电话
             // },
-            // name:{
+            // realName:{
             //     required: true//姓名
             // },
             // ID:{
@@ -53,18 +53,18 @@ $(function () {
             // }
         },
         _messages: {
-            facilitator: {
+            name: {
                 required: "请输入服务商名称",
                 rangelength: "字符长度为8-50之间"//长度为8-50之间
             },
 
-            field: {
+            designation: {
                 required: "请输入服务领域"
             },
             phone: {
                 required: "请输入联系电话"
             },
-            name:{
+            realName:{
                 required: "请输入姓名"//姓名
             },
             ID:{
