@@ -104,6 +104,21 @@ $(function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     var options = {
         _form: "#ruleupload",
         _rules: {

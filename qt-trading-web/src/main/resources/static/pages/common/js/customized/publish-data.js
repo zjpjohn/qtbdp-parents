@@ -16,6 +16,19 @@ $(function () {
        }
     });
 
+
+    $('#endDate').datetimepicker({
+        lang:'ch',
+        format:'Y-m-d',
+        timepicker:false,
+        yearStart:1990,
+        yearEnd:2017,
+        todayButton:true
+    });
+    $.datetimepicker.setLocale('ch');
+
+
+
     var options = {
         _form: "#fromData",
         _rules: {
