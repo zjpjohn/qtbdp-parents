@@ -69,12 +69,5 @@ var fromCommon = {
                 }
             })
         }
-    },
-
-    inputBind:function (showInp,hideInp) {
-        showInp.on('change',function () {
-            var val = $(this).val();
-            hideInp.val(val);
-        })
     }
 };

@@ -23,7 +23,7 @@ $(function () {
                 required: true,
                 rangelength: [5, 50]
             },
-            introduction: {
+            desc: {
                 required: true
             },
             dimension: {
@@ -57,7 +57,7 @@ $(function () {
                 required: "请输入定制数据名称",
                 rangelength: "字符长度为5-50之间"//长度为8-50之间
             },
-            describe: {
+            desc: {
                 required: "请输入定制描述"
             },
             dimension:{

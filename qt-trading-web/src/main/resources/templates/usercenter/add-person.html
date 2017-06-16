@@ -87,19 +87,17 @@
                             <div class="form-group">
                                 <label class="control-label">姓名</label>
                                 <div>
-                                    <input id="name" name="realName" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="name" name="personalInfoModel.realName" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的姓名严格一致</p>
-                                <input type="hidden"   name="personalInfoModel.realName" id="realNameContent">
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">身份证号</label>
                                 <div>
-                                    <input id="ID" name="idNumber" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="ID" name="personalInfoModel.idNumber" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与身份证上的号码严格一致</p>
-                                <input type="hidden"   name="personalInfoModel.idNumber" id="idNumberContent">
                             </div>
 
                             <div class="form-group clearfix">
@@ -112,6 +110,7 @@
                                             <img src="" alt="" id="ID1" class="Image"/>
                                         </fieldset>
                                         <p class="tip">身份证正面照</p>
+                                        <input type="hidden" name="personalInfoModel.fullFacePhoto" id="fullFacePhoto">
                                     </div>
                                     <div class="rt">
                                         <fieldset>
@@ -120,11 +119,10 @@
                                             <img src="" alt="" id="ID2" class="Image"/>
                                         </fieldset>
                                         <p class="tip">身份证反面照</p>
+                                        <input type="hidden" name="personalInfoModel.negativeSidePhoto" id="negativeSidePhoto">
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="personalInfoModel.fullFacePhoto" id="fullFacePhoto">
-                            <input type="hidden" name="personalInfoModel.negativeSidePhoto" id="negativeSidePhoto">
                         </div>
 
                         <div class="form-group address">
@@ -146,10 +144,9 @@
                         <div class="form-group">
                             <label class="control-label">联系电话</label>
                             <div>
-                                <input  type="text" name="phone" id="phone" class="form-control borderRadiusIE8">
+                                <input  type="text" name="personalInfoModel.phone" id="phone" class="form-control borderRadiusIE8">
                             </div>
                             <p class="tip">请输入有效的手机号码</p>
-                            <input type="hidden"   name="personalInfoModel.phone" id="phoneContent">
                         </div>
                     </div>
 

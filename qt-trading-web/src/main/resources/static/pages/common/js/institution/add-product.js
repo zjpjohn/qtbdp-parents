@@ -121,9 +121,6 @@ $(function () {
             dataProfile: {
                 required: true
             },
-            dataType: {
-                required: true
-            },
             dataTypeSub: {
                 required: true
             },
@@ -131,6 +128,12 @@ $(function () {
                 required: true
             },
             introduce:{
+                required: true
+            },
+            fileUrl:{
+                required: true
+            },
+            pic:{
                 required: true
             }
         },
@@ -142,9 +145,6 @@ $(function () {
             dataProfile: {
                 required: "请输入数据简介"
             },
-            dataType: {
-                required: "请选择数据类别"
-            },
             dataTypeSub: {
                 required: "请选择数据类别"
             },
@@ -153,6 +153,12 @@ $(function () {
             },
             introduce:{
                 required: "请输入数据描述"
+            },
+            fileUrl:{
+                required: "请上传数据"
+            },
+            pic:{
+                required: "请上传图片"
             }
         }
     };

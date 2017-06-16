@@ -25,9 +25,6 @@ $(function () {
         nodata:"none" //当子集无数据时，隐藏select
     });
 
-    fromCommon.inputBind($companyName,$('#companyNameContent'));
-    fromCommon.inputBind($LicenseNumber,$('#licenseNumberContent'));
-    fromCommon.inputBind($phone,$('#phoneContent'));
 
     var options = {
         _form: "#fromCompany",
@@ -39,15 +36,21 @@ $(function () {
             designation: {
                 required: true//服务领域
             },
-            phone: {
+            "companyInfoModel.phone": {
                 required: true,//联系电话
                 number:true
             },
-            companyName:{
+            "companyInfoModel.companyName":{
                 required: true//企业名称
             },
-            licenseNumber:{
+            "companyInfoModel.licenseNumber":{
                 required: true//营业执照号
+            },
+            "companyInfoModel.companyLogo":{
+                required: true
+            },
+            logo:{
+                required: true
             }
         },
         _messages: {
@@ -58,15 +61,21 @@ $(function () {
             designation: {
                 required: "请输入服务领域"
             },
-            phone: {
+            "companyInfoModel.phone": {
                 required: "请输入联系电话",
                 number:"请填写正确的电话号码"
             },
-            companyName:{
+            "companyInfoModel.companyName":{
                 required: "请输入企业名称"//姓名
             },
-            licenseNumber:{
+            "companyInfoModel.licenseNumber":{
                 required: "请输入营业执照注册号"//身份证
+            },
+            "companyInfoModel.companyLogo":{
+                required: "请上传营业执照照片"
+            },
+            logo:{
+                required: "请上传服务商logo"
             }
         }
     };
