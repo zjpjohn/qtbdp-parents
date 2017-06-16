@@ -15,7 +15,7 @@ var LoadingData = {
      * }
      * @param callback 方法成功后回调函数
      */
-    request : function (options, callback) {
+    request : function (options, callback) { //
 
         if(!options.url) return ;
 
