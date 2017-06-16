@@ -24,7 +24,7 @@ public class CustomServiceModel extends BaseModel {
     @ApiModelProperty(hidden=true)
     private Integer status ;            // 需求状态 0发布需求1需求审核2服务商交稿3雇主选稿4中标公示5验收并付款6评价
     private Date beginTime ;        // 征集开始时间
-    private Date endTime ;          // 征集截止时间
+    private String endTime ;          // 征集截止时间
     private String dimension ;      // 维度/字段
     private Integer scale ;             // 规模
     private String website ;        // 网站
@@ -94,11 +94,11 @@ public class CustomServiceModel extends BaseModel {
         this.price = price;
     }
 
-    public Integer getBargaining() {
+    public int getBargaining() {
         return bargaining;
     }
 
-    public void setBargaining(Integer bargaining) {
+    public void setBargaining(int bargaining) {
         this.bargaining = bargaining;
     }
 
@@ -134,11 +134,11 @@ public class CustomServiceModel extends BaseModel {
         this.beginTime = beginTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
