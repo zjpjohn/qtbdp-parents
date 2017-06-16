@@ -176,9 +176,13 @@
             rec,
             is_used,
             type_chain,
-            data_type_props,
             download_count,
-            buy_count
+            buy_count,
+            market_price,
+            data_format,
+            data_status,
+            data_src,
+            audit_status
         ) VALUES (
             #{designation},
             #{introduce},
@@ -199,8 +203,12 @@
             #{rec},
             0,
             NULL ,
-            #{dataTypeProps},
             0,
+            0,
+            #{marketPrice},
+            #{dataFormat},
+            #{dataStatus},
+            #{dataSrc},
             0
         )
 
