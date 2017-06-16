@@ -44,6 +44,9 @@ public class CrawlersRoleApi extends BaseController{
         ModelMap map = new ModelMap();
 
         try {
+            String filePath = crawlersRoleModel.getFilePath();
+            String roleType = filePath.substring(filePath.lastIndexOf(".") + 1);
+            crawlersRoleModel.setRoleType(roleType);
             Integer count = crawlersRoleService.insertRole(crawlersRoleModel);
             map.put("success", count > 0 ? true : false);
             map.put("id", crawlersRoleModel.getId());
