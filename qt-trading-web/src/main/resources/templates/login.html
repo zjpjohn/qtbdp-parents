@@ -7,40 +7,21 @@
         <title>钱塘大数据-SSO授权登录</title>
     </head>
     <body>
-        <!-- 通过授权后，自动登陆 -->
-        <div th:if="${auto}">
-            <div th:if="${param.error}">
-                用户名或密码错
+        <div class="model" id="loginModel">
+            <div class="model_content">
+                <i class="model_delete" onclick="modelClose(this)">X</i>
+                <h2 class="model_title">请先登录</h2>
+                <form action="" id="loginForm" class="model_form">
+                    <p class="error_tip"><!--请输入您的账号--></p>
+                    <input type="text" placeholder="账号" name="userAccount" class="user_account">
+                    <input type="password" placeholder="密码" name="userPwd" class="user_pwd">
+                    <a href="javascript:;" id="loginSubmit" class="form_submit">登录</a>
+                </form>
+                <div class="model_bottom floating">
+                    <!--<a href="javascript:;" class="lf" onclick="findPwdShow()">忘记密码？</a>-->
+                    <p class="rt">没有注册？<a href="javascript:;" onclick="registerShow()">注册</a></p>
+                </div>
             </div>
-            <div th:if="${param.logout}">
-                您已注销成功
-            </div>
-
-            <h2>登录跳转中...</h2>
-
-            <form id="login" th:action="@{/login}" method="post" style="display: none">
-                <input type="hidden" name="username" th:value="${ssoId}"/>
-                <input type="hidden" name="password" value="123456"/>
-                <input type="submit"/>
-            </form>
-            <script th:inline="javascript">
-               document.getElementById("login").submit() ;
-            </script>
-        </div>
-        <!-- 首次授权 -->
-        <div th:unless="${auto}">
-            <form id="login" th:action="@{/token}" th:object="${user}" method="post" style="display: none">
-                <label> ssoId:  <input type="hidden" th:field="*{ssoUserId}"/> </label>
-                <label> 账号 :    <input type="hidden" th:field="*{phone}"/> </label>
-                <label> 昵称 :    <input type="hidden" th:field="*{nick}"/> </label>
-                <label> 头像 :    <input type="hidden" th:field="*{head}"/> </label>
-                <input type="submit" value="授权"/>
-            </form>
-            <script th:inline="javascript">
-                document.getElementById("login").submit();
-
-
-            </script>
         </div>
     </body>
 </html>
