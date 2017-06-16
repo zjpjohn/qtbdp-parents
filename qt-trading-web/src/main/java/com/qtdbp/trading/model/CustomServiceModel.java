@@ -18,7 +18,7 @@ public class CustomServiceModel extends BaseModel {
     private String introduction ;   // 简介
     private String logo ;           // logo
     private Double price ;          // 预算
-    private Integer bargaining;         // 是否可议价 0否 1是
+    private int bargaining;         // 是否可议价 0否 1是
     private Integer serviceType ;       // 服务类型 1 规则定制 2 数据定制
     private String desc ;           // 需求描述
     @ApiModelProperty(hidden=true)
