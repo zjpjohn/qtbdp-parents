@@ -112,29 +112,29 @@ $(function () {
                 rangelength: [8, 50]//长度为8-50之间
             },
 
-            market_price: {
+            price: {
                 required: true,//规则价格
                 number: true,//必须输入数字
                 digits: true//必须输入整数
 
             },
-            web_site: {//采集网站
+            webSite: {//采集网站
                 url: true,//正确的网址
                 required: true
             },
-            collection_field:{
+            collectionField:{
                 required: true
             },
-            type_id:{
+            typeId:{
                 required: true
             },
             //网站类型
             large_input: "required",//采集字段
             //数据类别
-            //file_path: "required",//规则文件
+            filePath: "required",//规则文件
             //封面图
-            introduction: "required"//规则描述
-
+            introduction: "required",//规则描述
+            logo:"required"
         },
         _messages: {
             name: {
@@ -142,29 +142,30 @@ $(function () {
                 rangelength: "字符长度为8-50之间"//长度为8-50之间
             },
 
-            market_price: {
+            price: {
                 required: "请输入规则价格",//规则价格
                 number: "请输入数字",//必须输入数字
                 digits: "请输入整数"//必须输入整数
 
             },
-            web_site: {//采集网站
+            webSite: {//采集网站
                 url: "请输入正确网址",//正确的网址
                 required: "请输入采集网站"
 
             },
-            collection_field:{
+            collectionField:{
                 required: "请输入采集字段"
             },
-            type_id:{
+            typeId:{
                 required: "请选择数据类别"
             },
             //网站类型
             large_input: "请输入采集字段，以','隔开",//采集字段
             //数据类别
-            file_path: "请输入规则文件",//规则文件
+            filePath: "请上传规则文件",//规则文件
             //封面图
-            introduction: "请输入规则描述"//规则描述
+            introduction: "请输入规则描述",//规则描述
+            logo:"请上传图片"
         }
     }
 
