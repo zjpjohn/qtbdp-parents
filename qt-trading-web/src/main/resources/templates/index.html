@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
     <head>
         <title>首页 | 钱塘大数据交易中心</title>
         <div th:replace="layout/top" /></div>
@@ -9,6 +9,7 @@
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="/assets/global/plugins/ladda/ladda.min.css" rel="stylesheet" type="text/css">
         <!-- END PAGE LEVEL PLUGINS -->
+
 
     </head>
     <body >
@@ -42,13 +43,13 @@
                     <div class="navmin">
                         <div class="floating needms">
                             <span class="lf">需求描述 : </span>
-                            <textarea name="content" class="textarea_control lf" placeholder="  简单描述您的数据需求"></textarea>
+                            <textarea name="content" class="textarea_control lf" placeholder="  简单描述您的数据需求"></textarea><br/>
                         </div>
                         <div class="floating needms">
                             <span class="lf">联系QQ : </span>
-                            <input type="text" class="relationyx" name="qq" placeholder="请填写您的QQ">
+                            <input type="text" class="relationyx" name="qq" placeholder="请填写您的QQ"><br/>
                         </div>
-                        <button type="submit" class="needsubmit">
+                        <button type="submit" class="needsubmit ladda-button" data-style="slide-right">
                             提交
                         </button>
                     </div>
@@ -56,15 +57,15 @@
                 <form action="/api/feedback" class="business " method="post" id="feedback-business-form">
                     <input type="hidden" value="2" name="feedbackType">
                     <div class="navmin">
-                        <div class="floating needms">
+                        <br class="floating needms">
                             <span class="lf">合作需求 : </span>
-                            <textarea name="content" class="textarea_control lf"></textarea>
+                            <textarea name="content" class="textarea_control lf"></textarea> <br/>
                         </div>
                         <div class="floating needms">
                             <span class="lf">联系QQ : </span>
-                            <input type="text" class="relationyx" name="qq" placeholder="请填写您的QQ">
+                            <input type="text" class="relationyx" name="qq" placeholder="请填写您的QQ"><br/>
                         </div>
-                        <button type="submit" class="needsubmit">
+                        <button type="submit" class="needsubmit ladda-button" data-style="slide-right">
                             提交
                         </button>
                     </div>

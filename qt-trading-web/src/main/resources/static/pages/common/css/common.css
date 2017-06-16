@@ -557,6 +557,9 @@ body{
 
 .help-block-error{
     color: #e73d4a;
+    float:right;
+    margin-right: 40px;
+    text-align: center;
 }
 
 .form-group.has-error .form-control {
