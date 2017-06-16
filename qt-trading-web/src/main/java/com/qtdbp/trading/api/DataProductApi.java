@@ -91,7 +91,7 @@ public class DataProductApi extends BaseController{
 
     @ApiOperation(value="添加数据包产品数据接口")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
+    public ModelMap addProduct(DataProductModel productModel) throws GlobalException {
         if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
         ModelMap map = new ModelMap() ;
         try {
