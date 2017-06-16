@@ -137,7 +137,7 @@ public class CustomizedApi extends BaseController {
 
     @ApiOperation(value="添加定制服务数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ModelMap insertCustomizedData(@RequestBody CustomServiceModel custom) throws GlobalException {
+    public ModelMap insertCustomizedData(CustomServiceModel custom) throws GlobalException {
 
         ModelMap map = new ModelMap();
         Integer id = -1 ;
