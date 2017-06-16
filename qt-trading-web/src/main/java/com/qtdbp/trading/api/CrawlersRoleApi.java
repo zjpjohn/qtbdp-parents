@@ -38,7 +38,7 @@ public class CrawlersRoleApi extends BaseController{
 
     @ApiOperation(value="添加爬虫规则数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ModelMap insert(@RequestBody CrawlersRoleModel crawlersRoleModel) throws GlobalException {
+    public ModelMap insert( CrawlersRoleModel crawlersRoleModel) throws GlobalException {
         if (crawlersRoleModel == null) throw new GlobalException("数据不存在，请重新输入");
 
         ModelMap map = new ModelMap();
