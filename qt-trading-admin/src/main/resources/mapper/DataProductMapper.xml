@@ -27,11 +27,11 @@
             AND p.designation like '%${designation}%'
         </if>
         <choose>
-            <when test="userId != null and userId != 0">
-                and p.user_id != 0
+            <when test="userId == 0">
+                and p.user_id = 0
             </when>
             <otherwise>
-                and p.user_id = 0
+                and p.user_id != 0 and p.user_id is not null
             </otherwise>
         </choose>
         ORDER BY addtime desc
@@ -190,7 +190,7 @@
             #{fileUrl},
             #{provinceId},
             1,
-            #{userId},
+            0,
             now(),
             0,
             null,

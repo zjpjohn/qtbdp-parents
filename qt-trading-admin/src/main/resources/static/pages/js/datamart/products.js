@@ -6,7 +6,7 @@ $(function () {
 
     var settings = {
         container:"#datatable_ajax",
-        url: "/api/product",
+        url: "/api/product?userId=0",
         columns: [
             { "data": "id" },
             { "data": "dataTypeProps" },
