@@ -2,6 +2,7 @@ package com.qtdbp.trading.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.mapper.CustomizedMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
 import com.qtdbp.trading.model.CustomServiceModel;
@@ -11,6 +12,7 @@ import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CustomizedService;
 import com.qtdbp.trading.service.DataTypeService;
 import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.trading.utils.Message;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,17 +142,33 @@ public class CustomizedApi extends BaseController {
     public ModelMap insertCustomizedData(CustomServiceModel custom) throws GlobalException {
 
         ModelMap map = new ModelMap();
+        Message message = new Message() ;
         Integer id = -1 ;
         if(custom != null) {
-            try {
-                id = customizedService.insertCustomizedData(custom);
-            } catch (Exception e) {
-                logger.error("insertCustomizedData has error ,message:" + e.getMessage());
-                throw new GlobalException(e.getMessage());
+            SysUser user = getPrincipal() ;
+            if(user == null) {
+                message.setSuccess(false);
+                message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+                message.setMessage("用户请先登录");
+            } else {
+                try {
+                    custom.setCreateId(user.getId());
+                    id = customizedService.insertCustomizedData(custom);
+                    if(id != null && id > 0) {
+                        message.setSuccess(true);
+                        message.setData(id);
+                    }
+                } catch (Exception e) {
+                    logger.error("customService has error ,message:" + e.getMessage());
+                    throw new GlobalException(e.getMessage());
+                }
             }
+        } else {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("定制服务不存在，请重新输入");
         }
-        map.put("success", id != null ? true : false);
-        map.put("id", id);
+        map.put("result", message);
 
         return map;
     }
