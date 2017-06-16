@@ -61,11 +61,13 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
-        String url = SsoUrlUtil.generateUrl(ssoLoginUrl, ssoCallback) ;
+        /*String url = SsoUrlUtil.generateUrl(ssoLoginUrl, ssoCallback) ;
         logger.info("url: "+url);
 
         ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:" + url);
+        view.setViewName("redirect:" + url);*/
+
+        ModelAndView view = new ModelAndView(PAGE_LOGIN);
 
         return view;
     }
