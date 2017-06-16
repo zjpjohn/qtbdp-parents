@@ -169,7 +169,8 @@ $(function () {
     }
 
     FormValidationMd.init(options,function () {
-
+        //跳转到个人中心我发布的商品
+        location.href = "/usercenter/publich/0";
     });
 });
 

@@ -90,7 +90,8 @@ $(function () {
     };
 
     FormValidationMd.init(options,function () {
-
+        //跳转到个人中心我发布的定制
+        location.href = "/usercenter/customized/0";
     });
 });
 
