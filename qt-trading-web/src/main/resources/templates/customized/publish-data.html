@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <div th:replace="layout/top"/>
     <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
-    <link rel="stylesheet" href="/tradecenter/css/usercenter.css"/>
+    <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
 
 </head>
 <body>
@@ -41,7 +41,7 @@
                     <b>定制描述</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <textarea name="introduction" id="describe" class="textarea_control rule_desc"></textarea>
+                    <textarea name="desc" id="describe" class="textarea_control rule_desc"></textarea>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
                     <b>数据类别</b> <i>*</i>
                 </p>
                 <div class="form_control">
-                    <select name="typeA" id="typeA" class="small_input">
+                    <select id="typeA" class="small_input">
 
                     </select>
                     <select name="typeId" id="typeB" class="small_input">
@@ -84,7 +84,7 @@
                 </div>
                 <div class="form_control reward_amount">
                     <input type="number" class="small_input" id="price" name="price"/> 元
-                    <label><input type="checkbox" class="radio_input"/>接受议价</label>
+                    <label><input type="checkbox" name="bargaining" id="bargaining" value="0" class="radio_input"/>接受议价</label>
                     <div  class="intro_tips"><span>?</span> <div class="intro_tips_content"><span class="form_arrow"></span> 什么是议价？</div></div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                     <input type="text" class="small_input" id="phone" name="phone"/>
                 </div>
                 <div class="form_control">
-                    <input type="text" class="code_input" id="code" name="code"/>
+                    <input type="text" class="code_input" />
                     <a href="javascript:;" class="get_phone_code">获取验证码</a>
                 </div>
 
@@ -176,8 +176,7 @@
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/assets/pages/scripts/form-validation-md.js" type="text/javascript"></script>
-<script src="/tradecenter/js/institution/dropify.min.js"></script>
-<script src="/tradecenter/js/fromCommon.js"></script>
-<script src="/tradecenter/js/customized/publish-data.js"></script>
+<script src="/pages/common/js/fromCommon.js"></script>
+<script src="/pages/common/js/customized/publish-data.js"></script>
 </body>
 </html>
