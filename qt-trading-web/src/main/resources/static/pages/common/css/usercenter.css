@@ -146,11 +146,6 @@
 .pereach>li.dataservice>a>span{
     background-position:-16px -166px;
 }
-.pereach>li.dataservice:hover{
-    background-color: #fff;
-}
-
-
 .pereach>li.publich>a>span{
     background-position:-167px -167px;
 }
@@ -202,12 +197,20 @@
 .pereach>li.received:hover>a>span,.pereach>li.received.active>a>span{
     background-position:-387px -165px;
 }
+.pereach>li.dataservice:hover>a>span,.pereach>li.dataservice.active>a>span{
+    background-position:-93px -167px;
+}
 
 
 
 .pereach>li.dataservice>a{
     color:#0081cb;
 }
+.pereach>li.dataservice:hover>a,.pereach>li.dataservice.active>a{
+    color: #ffffff;
+    text-decoration:none;
+}
+
 .pereach>li.sidebarnone{
     margin-top:5px;
     margin-bottom:5px;
@@ -223,9 +226,6 @@
     width:100%;
     min-height:680px;
     background: #fff;
-    /*position:absolute;
-    top:0px;
-    left:0px;*/
     display: none;
 }
 .center_right>div.active{

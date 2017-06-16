@@ -71,10 +71,7 @@
 }
 .leaprice>i{
     color:#FE9A89;
-    display:inline-block;
-    width:55px;
-    height:20px;
-    line-height:20px;
+    padding:2px 2px;
     border:1px solid #FE9A89;
     border-radius: 4px;
     font-size: 12px;
