@@ -24,6 +24,7 @@
               file_path,
               web_type,
               web_site,
+              collection_field,
               create_id,
               create_time,
               audit_status,
