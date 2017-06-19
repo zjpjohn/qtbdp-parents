@@ -1,12 +1,22 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>钱塘大数据-SSO授权登录</title>
-    </head>
+
+<head lang="en">
+    <title>登录页面</title>
+    <div th:replace="layout/top"/>
+</head>
+
+<style>
+    .model{
+        /*position: relative;*/
+        display:block;
+    }
+
+</style>
     <body>
+        <!-- 登录弹框  -->
         <div class="model" id="loginModel">
             <div class="model_content">
                 <i class="model_delete" onclick="modelClose(this)">X</i>
@@ -23,5 +33,129 @@
                 </div>
             </div>
         </div>
+        <!-- 登录弹框结束  -->
+
     </body>
+
+<script>
+    //定位
+    $(function(){
+        $(".model_content").css("left",window.innerWidth/2-250);
+        $(".model_content").css("top",window.innerHeight/2-230);
+    });
+    /*******************登录***************/
+//验证登录账号
+    function checkAccount(type){
+        var elm=$(type+".user_account");
+        var userAccount=elm.val();
+        if(userAccount==""){
+            elm.parent().children(".error_tip").html("请输入您的账号");
+            return false;
+        }
+        elm.parent().children(".error_tip").html("");
+        return true;
+    }
+    //验证登录密码
+    function checkPwd(type){
+        var elm=$(type+".user_pwd");
+        var userPwd=elm.val();
+        if( (userPwd=="")){
+            elm.parent().children(".error_tip").html("请输入密码");
+            return false;
+        }
+        elm.parent().children(".error_tip").html("");
+        return true;
+    }
+    //登录表单提交
+    $("#loginSubmit").unbind("click").click(function(){
+        var type="#loginModel ";
+        var username=$(".user_account").val();
+        var password=$(".user_pwd").val();
+        if( (!checkAccount(type)) || (!checkPwd(type)) ){
+            return false;
+        }else{
+            //上传表单
+            $.ajax({
+                url:"http://sso.qtbigdata.com/ssoUser/login?ajax=true&sysid=msvtPqZBiqX5qeOaXUEFL5AilgBSA2KTFu0WN74T4MIHjWUMxYbTvQ%3D%3D",
+                type:"POST",
+                dataType:"json",
+                async:true,
+                data:{
+                    username:username,
+                    password:password
+                },
+                xhrFields:{
+                    withCredentials:true
+                },
+                success:function(data){
+                    //如果登录成功
+                    //location.reload();
+                    if(data.status==200){
+                        $("#loginModel").hide();
+
+                        var _token ;
+                        if(data.data)
+                            _token = data.data.substr(data.data.indexOf("=")+1, data.data.lastIndexOf("=")-15) ;
+
+                        LoadingData.request({url: "/callback",data: {token:_token}},function (data) {
+
+                            var _result = data.result ;
+                            if(_result.success) {
+                                LoadingData.request({url: "/login",type:"post",data: {username:_result.data,password:"123456"}},function (data) {
+                                    location.reload() ;
+                                }) ;
+                            } else {
+                                LoadingData.toastr({
+                                    _type: 'error',
+                                    _title: '登录认证失败',
+                                    _msg: "错误编码："+_result.errorCode+"，错误信息："+_result.message
+                                }) ;
+                            }
+                        }) ;
+                    }else{
+                        $(".error_tip").html("请输入正确的账号及密码");
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        }
+    });
+
+
+
+
+</script>
+
+<script src="/pages/common/js/login.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
