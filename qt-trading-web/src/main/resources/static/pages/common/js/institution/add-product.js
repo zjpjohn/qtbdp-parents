@@ -75,6 +75,7 @@ $(function () {
                 if (ret.success == true){
                     layer.msg("文件上传成功",{icon:1});
                     $('#fileContent').val(ret.file);
+                    $('#fileSize').val(ret.dataSize);
                 }
             }
         });
