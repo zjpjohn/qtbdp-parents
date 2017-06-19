@@ -16,6 +16,19 @@ $(function () {
        }
     });
 
+
+    $('#endDate').datetimepicker({
+        lang:'ch',
+        format:'Y-m-d',
+        timepicker:false,
+        yearStart:1990,
+        yearEnd:2017,
+        todayButton:true
+    });
+    $.datetimepicker.setLocale('ch');
+
+
+
     var options = {
         _form: "#fromData",
         _rules: {
@@ -23,7 +36,7 @@ $(function () {
                 required: true,
                 rangelength: [5, 50]
             },
-            introduction: {
+            desc: {
                 required: true
             },
             dimension: {
@@ -45,7 +58,8 @@ $(function () {
                 required: true
             },
             phone:{
-                required: true
+                required: true,
+                isMobile:true
             },
             qq:{
                 required: true
@@ -57,7 +71,7 @@ $(function () {
                 required: "请输入定制数据名称",
                 rangelength: "字符长度为5-50之间"//长度为8-50之间
             },
-            describe: {
+            desc: {
                 required: "请输入定制描述"
             },
             dimension:{
@@ -80,7 +94,6 @@ $(function () {
             },
             phone:{
                 required: "请输入手机号"
-
             },
             qq:{
                 required: "请输入QQ号"
@@ -89,8 +102,19 @@ $(function () {
         }
     };
 
-    FormValidationMd.init(options,function () {
-
+    FormValidationMd.init(options,function (data) {
+        //跳转到个人中心我发布的定制
+        if(data.result.success) {
+            setTimeout(function () {
+                location.href = "/usercenter/customized/0";
+            },3000)
+        }else {
+            LoadingData.toastr({
+                _type: 'error',
+                _title: '表单提交',
+                _msg: '网络超时，请重试或者联系管理员'
+            }) ;
+        }
     });
 });
 

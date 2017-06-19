@@ -1,21 +1,13 @@
 $(function () {
     //表单信息
-    var $dataName = $('#data_name'),
-        $dataResume = $('#data_resume'),
-        $ChargeMode = $('#Charge_mode'),
+    var $ChargeMode = $('#Charge_mode'),
         $price = $('#price'),
-        $marketPrice = $('#market_price'),
-        $rebatePrice = $('#rebate_price'),
-        $child_price = $('#child_price'),
-        $commission = $('#commission_price'),
+
         $typeA = $('#typeA'),
         $typeB = $('#typeB'),
-        $dataScale = $('#data_scale'),
-        $dataType = $('#data_type>input'),
-        $dataSource = $('#data_source>input'),
         $dataFile = $('#data_file'),
-        $fileImg = $('.fileImg'),//上传图片
-        $introduction = $('#introduction');
+        $fileImg = $('.fileImg');//上传图片
+
 
 
 
@@ -112,62 +104,75 @@ $(function () {
 
 
     var options = {
-        _form: "#fromProduct",
+        _form: "#ruleupload",
         _rules: {
-            designation: {
-                required: true,
-                rangelength: [5, 50]
+            name: {
+                required: true,//规则名称
+                rangelength: [8, 50]//长度为8-50之间
             },
-            dataProfile: {
+
+            price: {
+                required: true,//规则价格
+                number: true,//必须输入数字
+                digits: true//必须输入整数
+
+            },
+            webSite: {//采集网站
+                url: true,//正确的网址
                 required: true
             },
-            dataTypeSub: {
+            collectionField:{
                 required: true
             },
-            dataScale:{
+            typeId:{
                 required: true
             },
-            introduce:{
-                required: true
-            },
-            fileUrl:{
-                required: true
-            },
-            pic:{
-                required: true
-            }
+            //网站类型
+            large_input: "required",//采集字段
+            //数据类别
+            filePath: "required",//规则文件
+            //封面图
+            introduction: "required",//规则描述
+            logo:"required"
         },
         _messages: {
-            designation: {
-                required: "请输入数据名称",
-                rangelength: "字符长度为5-50之间"//长度为8-50之间
+            name: {
+                required: "请输入规则名称",//规则名称
+                rangelength: "字符长度为8-50之间"//长度为8-50之间
             },
-            dataProfile: {
-                required: "请输入数据简介"
+
+            price: {
+                required: "请输入规则价格",//规则价格
+                number: "请输入数字",//必须输入数字
+                digits: "请输入整数"//必须输入整数
+
             },
-            dataTypeSub: {
+            webSite: {//采集网站
+                url: "请输入正确网址",//正确的网址
+                required: "请输入采集网站"
+
+            },
+            collectionField:{
+                required: "请输入采集字段"
+            },
+            typeId:{
                 required: "请选择数据类别"
             },
-            dataScale:{
-                required: "请输入数据规模"
-            },
-            introduce:{
-                required: "请输入数据描述"
-            },
-            fileUrl:{
-                required: "请上传数据"
-            },
-            pic:{
-                required: "请上传图片"
-            }
+            //网站类型
+            large_input: "请输入采集字段，以','隔开",//采集字段
+            //数据类别
+            filePath: "请上传规则文件",//规则文件
+            //封面图
+            introduction: "请输入规则描述",//规则描述
+            logo:"请上传图片"
         }
-    };
+    }
 
-    FormValidationMd.init(options,function () {
+    FormValidationMd.init(options,function (data) {
         //跳转到个人中心我发布的商品
         if(data.result.success) {
             setTimeout(function () {
-                location.href = "/usercenter/publich/0";
+                location.href = "/usercenter/publich/1";
             },3000)
         }else {
             LoadingData.toastr({
@@ -176,6 +181,7 @@ $(function () {
                 _msg: '网络超时，请重试或者联系管理员'
             }) ;
         }
+
     });
 });
 

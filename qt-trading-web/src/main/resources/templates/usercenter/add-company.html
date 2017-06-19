@@ -85,10 +85,9 @@
                             <div class="form-group">
                                 <label class="control-label">企业名称</label>
                                 <div>
-                                    <input id="companyName" name="companyName" type="text"  class="form-control borderRadiusIE8">
+                                    <input id="companyName" name="companyInfoModel.companyName" type="text"  class="form-control borderRadiusIE8">
                                 </div>
                                 <p class="tip">需与营业执照上的姓名严格一致</p>
-                                <input type="text" style="display:none;"  name="companyInfoModel.companyName" id="companyNameContent">
                             </div>
 
                             <div class="form-group clearfix">
@@ -104,9 +103,8 @@
                             <div class="form-group">
                                 <label class="control-label">营业执照注册号</label>
                                 <div>
-                                    <input  type="text" id="LicenseNumber" name="licenseNumber"  class="form-control borderRadiusIE8">
+                                    <input  type="text" id="LicenseNumber" name="companyInfoModel.licenseNumber"  class="form-control borderRadiusIE8">
                                 </div>
-                                <input type="text" style="display:none;"  name="companyInfoModel.licenseNumber" id="licenseNumberContent">
                             </div>
                         </div>
 
@@ -130,10 +128,9 @@
                         <div class="form-group">
                             <label class="control-label">联系电话</label>
                             <div>
-                                <input  type="text"  name="phone" id="phone" class="form-control borderRadiusIE8">
+                                <input  type="text"  name="companyInfoModel.phone" id="phone" class="form-control borderRadiusIE8">
                             </div>
                             <p class="tip">请输入有效的手机号码</p>
-                            <input type="text" style="display:none;"   name="companyInfoModel.phone" id="phoneContent">
                         </div>
                     </div>
                     <!--企业信息结束-->
@@ -175,6 +172,7 @@
 
 <script src="/pages/common/js/city.min.js"></script>
 <script src="/pages/common/js/jquery.cityselect.js"></script>
+<script src="/pages/common/js/custom-validation.js"></script>
 <script src="/pages/common/js/fromCommon.js"></script>
 <script src="/pages/common/js/add-new/add-company.js"></script>
 </body>

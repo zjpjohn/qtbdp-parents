@@ -6,7 +6,13 @@
 <head lang="en">
     <title>发布爬虫规则</title>
     <div th:replace="layout/top"/>
+    <link rel="stylesheet" href="/pages/common/css/imgCss/dropify.css">
     <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
+    <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/assets/global/plugins/ladda/ladda.min.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL PLUGINS -->
 </head>
 <body>
 <!-- 页头-->
@@ -40,7 +46,7 @@
                     <b>规则价格</b> <i>*</i>
                 </p>
                 <div class="form_control form-group">
-                    <input type="number" class="small_input form-control" name="market_price" placeholder="市场价："/>
+                    <input type="number" class="small_input form-control" name="price" placeholder="市场价："/>
                 </div>
             </div>
 
@@ -49,8 +55,8 @@
                     <b>采集网站</b> <i>*</i>
                 </p>
                 <div class="form_control form-group">
-                    <input type="text" class="large_input form-control" name="web_site"/>
-                    <p class="form_tips">例如：www.qtbigdata.com</p>
+                    <input type="text" class="large_input form-control" name="webSite"/>
+                    <p class="form_tips">例如：http://www.qtbigdata.com</p>
                 </div>
             </div>
 
@@ -59,13 +65,13 @@
                     <b>网站类型</b> <i>*</i>
                 </p>
                 <div class="form_control form-group">
-                    <label><input type="radio" name="web_type" class="radio_input" value="1"/>社交网站</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="2"/>电商网站</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="3"/>金融网站</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="4"/>生活网站</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="5"/>行业网站</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="6"/>新闻网站</label>
-                    <label><input type="radio" name="web_type" class="radio_input" value="0"/>其他网站</label>
+                    <label><input type="radio" name="webType" class="radio_input" value="1" checked="checked"/>社交网站</label>
+                    <label><input type="radio" name="webType" class="radio_input" value="2"/>电商网站</label>
+                    <label><input type="radio" name="webType" class="radio_input" value="3"/>金融网站</label>
+                    <label><input type="radio" name="webType" class="radio_input" value="4"/>生活网站</label>
+                    <label><input type="radio" name="webType" class="radio_input" value="5"/>行业网站</label>
+                    <label><input type="radio" name="webType" class="radio_input" value="6"/>新闻网站</label>
+                    <label><input type="radio" name="webType" class="radio_input" value="0"/>其他网站</label>
                 </div>
             </div>
 
@@ -74,7 +80,7 @@
                     <b>采集字段</b> <i>*</i> <span>每个字段以","隔开</span>
                 </p>
                 <div class="form_control form-group">
-                    <input type="text" class="large_input" name="collection_field"/>
+                    <input type="text" class="large_input" name="collectionField"/>
                 </div>
             </div>
 
@@ -82,18 +88,13 @@
                 <p class="group_title">
                     <b>数据类别</b> <i>*</i>
                 </p>
-                <div class="form_control form-group">
-                    <select name="" class="small_input">
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
+                <div class="form_control">
+                    <select id="typeA" class="small_input">
+
+
                     </select>
-                    <select name="" class="small_input">
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
-                        <option value="">关联数据</option>
+                    <select name="typeId" id="typeB" class="small_input">
+                        <option value="">请选择数据类别</option>
                     </select>
                 </div>
             </div>
@@ -102,19 +103,21 @@
                 <p class="group_title">
                     <b>规则文件</b> <i>*</i>
                 </p>
-                <div class="form_control floating form-group">
-                    <input type="text" class="middle_input form-control" name="file_path"/>
-                    <a href="javascript:;" class="upload_a">上传<input type="file" class="uploadRuleFile"/></a>
+                <div class="form_control floating uploader">
+                    <input type="text" class="middle_input" id="data_file_path"  readonly/>
+                    <a href="javascript:;" class="upload_a">上传<input type="file" id="data_file" class="uploadRuleFile"/></a>
                 </div>
+                <input type="text" style="display:none;"  name="filePath" id="fileContent">
             </div>
-
+            `
             <div class="form_group">
                 <p class="group_title">
-                    <b>封面图片</b> <i>*</i>
+                    <b>上传图片</b> <i>*</i>
                 </p>
-                <div class="form_control form-group">
-
+                <div class="form_control" style="width: 50%">
+                    <input type="file" name="uploadImg" id="input-file-now"  class="dropify fileImg" />
                 </div>
+                <input type="text" style="display:none;"  name="logo" id="imgContent">
             </div>
 
             <div class="form_group">
@@ -162,70 +165,16 @@
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/assets/pages/scripts/form-validation-md.js" type="text/javascript"></script>
+<script src="/pages/common/js/institution/dropify.min.js"></script>
+<script src="/pages/common/js/custom-validation.js"></script>
+<script src="/pages/common/js/fromCommon.js"></script>
+<script src="/pages/common/js/institution/publish.js"></script>
 
 <script>
     $(document).ready(function() {
         $(".datagz").addClass("active");
-        var options = {
-            _form: "#ruleupload",
-            _rules: {
-                name: {
-                    required: true,//规则名称
-                    rangelength: [8, 50]//长度为8-50之间
-                },
-
-                market_price: {
-                    required: true,//规则价格
-                    number: true,//必须输入数字
-                    digits: true//必须输入整数
-
-                },
-                web_site: {//采集网站
-                    url: true,//正确的网址
-                    required: true
-
-                },
-                //网站类型
-                large_input: "required",//采集字段
-                //数据类别
-                //file_path: "required",//规则文件
-                //封面图
-                introduction: "required"//规则描述
-
-            },
-            _messages: {
-                name: {
-                    required: "请输入规则名称",//规则名称
-                    rangelength: "字符长度为8-50之间"//长度为8-50之间
-                },
-
-                market_price: {
-                    required: "请输入规则价格",//规则价格
-                    number: "请输入数字",//必须输入数字
-                    digits: "请输入整数"//必须输入整数
-
-                },
-                web_site: {//采集网站
-                    url: "请输入正确网址",//正确的网址
-                    required: "请输入采集网站"
-
-                },
-                //网站类型
-                large_input: "请输入采集字段，以','隔开",//采集字段
-                //数据类别
-                file_path: "请输入规则文件",//规则文件
-                //封面图
-                introduction: "请输入规则描述"//规则描述
-            }
-        }
-
-        FormValidationMd.init(options,function () {
-            alert(11) ;
-        });
     });
 </script>
-
-
 
 
 </body>

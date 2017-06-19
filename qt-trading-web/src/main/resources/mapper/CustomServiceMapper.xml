@@ -174,7 +174,7 @@
         #{bargaining},
         #{serviceType},
         0,
-        #{endTime},
+        #{endTime1},
         #{dimension},
         #{scale},
         #{website},

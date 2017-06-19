@@ -54,6 +54,8 @@ public class CustomServiceModel extends BaseModel {
 
     private String typeName;            //数据类目名称
 
+    private String endTime1;            //截止时间的字符串
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -276,5 +278,13 @@ public class CustomServiceModel extends BaseModel {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public String getEndTime1() {
+        return endTime1;
+    }
+
+    public void setEndTime1(String endTime1) {
+        this.endTime1 = endTime1;
     }
 }

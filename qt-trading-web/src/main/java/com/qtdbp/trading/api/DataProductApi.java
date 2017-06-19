@@ -16,6 +16,8 @@ import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.trading.utils.CommonUtil;
 import com.qtdbp.trading.utils.Message;
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/product")
 public class DataProductApi extends BaseController{
+
+    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
     @Autowired
     private DataProductService productService ;
@@ -92,17 +96,35 @@ public class DataProductApi extends BaseController{
     @ApiOperation(value="添加数据包产品数据接口")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelMap addProduct(DataProductModel productModel) throws GlobalException {
-        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
-        ModelMap map = new ModelMap() ;
-        try {
-            Integer id = productService.insertProduct(productModel);
-            map.put("success", id>0?true:false);
-            map.put("id", id);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new GlobalException(e.getMessage()) ;
+        ModelMap map = new ModelMap();
+        Message message = new Message() ;
+        Integer id = -1 ;
+        if(productModel != null) {
+            SysUser user = getPrincipal() ;
+            if(user == null) {
+                message.setSuccess(false);
+                message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+                message.setMessage("用户请先登录");
+            } else {
+                try {
+                    productModel.setUserId(user.getId());
+                    id = productService.insertProduct(productModel);
+                    if(id != null && id > 0) {
+                        message.setSuccess(true);
+                        message.setData(id);
+                    }
+                } catch (Exception e) {
+                    logger.error("productService has error ,message:" + e.getMessage());
+                    throw new GlobalException(e.getMessage());
+                }
+            }
+        } else {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("数据包产品不存在，请重新输入");
         }
+        map.put("result", message);
         return map;
     }
 

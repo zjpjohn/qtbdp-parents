@@ -18,9 +18,6 @@ $(function () {
     fromCommon.RenderImg($(".fileID2"),$IDreverse,"/api/upload/img",$('#negativeSidePhoto'));
 
 
-    fromCommon.inputBind($name,$('#realNameContent'));
-    fromCommon.inputBind($ID,$('#idNumberContent'));
-    fromCommon.inputBind($phone,$('#phoneContent'));
 
 
     ////加载省市下拉菜单
@@ -32,6 +29,10 @@ $(function () {
         nodata:"none" //当子集无数据时，隐藏select
     });
 
+
+
+
+
     var options = {
         _form: "#fromPerson",
         _rules: {
@@ -42,15 +43,25 @@ $(function () {
             designation: {
                 required: true//服务领域
             },
-            phone: {
+            "personalInfoModel.phone": {
                 required: true,//联系电话
-                number:true
+                isMobile:true
             },
-            realName:{
+            "personalInfoModel.realName":{
                 required: true//姓名
             },
-            idNumber:{
+            "personalInfoModel.idNumber":{
+                idcardno:true,
                 required: true//身份证
+            },
+            "personalInfoModel.fullFacePhoto":{
+                required: true
+            },
+            "personalInfoModel.negativeSidePhoto":{
+                required: true
+            },
+            logo:{
+                required: true
             }
         },
         _messages: {
@@ -61,15 +72,23 @@ $(function () {
             designation: {
                 required: "请输入服务领域"
             },
-            phone: {
-                required: "请输入联系电话",
-                number:"请填写正确的电话号码"
+            "personalInfoModel.phone": {
+                required: "请输入联系电话"
             },
-            realName:{
+            "personalInfoModel.realName":{
                 required: "请输入姓名"//姓名
             },
-            idNumber:{
+            "personalInfoModel.idNumber":{
                 required: "请输入身份证号"//身份证
+            },
+            "personalInfoModel.fullFacePhoto":{
+                required: "请上传身份证正面照"
+            },
+            "personalInfoModel.negativeSidePhoto":{
+                required: "请上传身份证反面照"
+            },
+            logo:{
+                required: "请上传服务商logo"
             }
         }
     };
