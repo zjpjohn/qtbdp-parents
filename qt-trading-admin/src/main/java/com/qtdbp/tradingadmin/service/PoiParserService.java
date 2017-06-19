@@ -23,7 +23,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-public class PoiParserService implements IExcelReader, Cloneable {
+public class PoiParserService implements IExcelReader{
 
     private Map<String, String> files ;
 
