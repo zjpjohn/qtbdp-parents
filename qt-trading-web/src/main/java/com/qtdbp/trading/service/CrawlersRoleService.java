@@ -24,7 +24,9 @@ public class CrawlersRoleService {
      * @return
      */
     public Integer insertRole(CrawlersRoleModel crawlersRoleModel) {
-
+        String filePath = crawlersRoleModel.getFilePath();
+        String roleType = filePath.substring(filePath.lastIndexOf(".") + 1);
+        crawlersRoleModel.setRoleType(roleType);
         Integer count = crawlersRoleMapper.insertRole(crawlersRoleModel);
 
         return count > 0 ? count : -1;
