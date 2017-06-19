@@ -36,7 +36,6 @@
 .attention{
     float:right;
     width:277px;
-    height:375px;
     padding:19px;
     border:1px solid #BFDAF2;
     background-color:#E1EFFB;
@@ -45,6 +44,7 @@
 .attention_title{
     color:#5a9eeb;
     font-size:18px;
+    margin-bottom: 10px;
 }
 .attention_title>i{
     color:#fff;
