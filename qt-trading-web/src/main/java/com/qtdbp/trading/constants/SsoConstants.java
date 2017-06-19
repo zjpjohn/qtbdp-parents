@@ -17,22 +17,22 @@ public class SsoConstants {
     /**
      * sso统一授权系统用户ID在Cookie中存储的name
      */
-    public static final String SSO_COOKIE_NAME_USER_ID = "jiupai_userid" ;
+    public static final String SSO_ID = "id" ;
 
     /**
      * sso统一授权系统用户昵称在Cookie中存储的name
      */
-    public static final String SSO_COOKIE_NAME_NICKNAME = "nickname" ;
+    public static final String SSO_NICKNAME = "nickname" ;
 
     /**
      * sso统一授权系统用户头像在Cookie中存储的name
      */
-    public static final String SSO_COOKIE_NAME_HEAD = "head" ;
+    public static final String SSO_HEAD = "mobile" ;
 
     /**
      * sso统一授权系统账号在Cookie中存储的name
      */
-    public static final String SSO_COOKIE_NAME_USER_NAME = "jiupai_username" ;
+    public static final String SSO_USER_NAME = "username" ;
 
     /**
      * 用户授权信息
@@ -43,4 +43,5 @@ public class SsoConstants {
      * 加密解密key
      */
     public static final String DES_KEY = "3dbfac1abd334784860723ef2022a92f" ;
+
 }

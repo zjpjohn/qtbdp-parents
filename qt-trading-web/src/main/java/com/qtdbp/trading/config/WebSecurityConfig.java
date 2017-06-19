@@ -45,12 +45,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority(SysRoleContants.ROLE_ADMIN) //登陆后之后拥有“ADMIN”权限才可以访问/hello方法，否则系统会出现“403”权限不足的提示
-                .antMatchers("/usercenter/**","/publish/**","/getOrderInfoAndGoto/**").hasAuthority(SysRoleContants.ROLE_USER) //登陆后之后拥有“ADMIN”权限才可以访问/hello方法，否则系统会出现“403”权限不足的提示
+                .antMatchers("/usercenter/**","/publish/**","/institution/add/**","/getOrderInfoAndGoto/**").hasAuthority(SysRoleContants.ROLE_USER) //登陆后之后拥有“ADMIN”权限才可以访问/hello方法，否则系统会出现“403”权限不足的提示
 //                .anyRequest().authenticated() // 其他所有资源都需要认证，登陆后访问
                 .and()
                 .formLogin()
                     .loginPage("/login") //指定登录页是”/login”
-                    .failureUrl("/token")
                 .permitAll()
                 .successHandler(loginSuccessHandler()) //登录成功后可使用loginSuccessHandler()存储用户信息，可选。
                 .and()

@@ -30,7 +30,7 @@ public class SsoUrlUtil {
 		String ssoUserId = null ;
 
 		for(Cookie cookie : cookies){
-			if(cookie.getName().equals(SsoConstants.SSO_COOKIE_NAME_USER_ID)){
+			if(cookie.getName().equals(SsoConstants.SSO_ID)){
 				ssoUserId = cookie.getValue();
 				break;
 			}
