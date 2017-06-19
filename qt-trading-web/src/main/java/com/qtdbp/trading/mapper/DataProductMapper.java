@@ -79,4 +79,18 @@ public interface DataProductMapper extends BaseMapper<DataProductModel> {
      * @return
      */
     Integer updatePutaway(@Param("id") Integer id) ;
+
+    /**
+     * 插入数据条目
+     * @param itemModel
+     * @return
+     */
+    Integer insertItem(DataItemModel itemModel);
+
+    /**
+     * 根据productId删除数据条目信息
+     * @param productId
+     * @return
+     */
+    Integer deleteByProductId(Integer productId);
 }
