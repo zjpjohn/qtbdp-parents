@@ -65,6 +65,18 @@ public class DataInstitutionInfoNewService {
     }
 
     /**
+     * 根据用户ID查询服务商明细忽略是否通过审核
+     * @param createId
+     * @return
+     */
+    public DataInstitutionInfoNewModel findInstitutionInfoIgnoreAuditStatusByCreateId(Integer createId) {
+
+        if(createId == null || createId == 0) return null ;
+
+        return infoNewMapper.findInstitutionInfoIgnoreAuditStatusByCreateId(createId);
+    }
+
+    /**
      * 新增服务商
      * @param infoNewModel
      * @return id
