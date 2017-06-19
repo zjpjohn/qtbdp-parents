@@ -108,9 +108,8 @@ $(function () {
         _rules: {
             name: {
                 required: true,//规则名称
-                rangelength: [8, 50]//长度为8-50之间
+                rangelength: [5, 50]//长度为5-50之间
             },
-
             price: {
                 required: true,//规则价格
                 number: true,//必须输入数字
