@@ -29,6 +29,10 @@ $(function () {
         nodata:"none" //当子集无数据时，隐藏select
     });
 
+
+
+
+
     var options = {
         _form: "#fromPerson",
         _rules: {
@@ -41,12 +45,13 @@ $(function () {
             },
             "personalInfoModel.phone": {
                 required: true,//联系电话
-                number:true
+                isMobile:true
             },
             "personalInfoModel.realName":{
                 required: true//姓名
             },
             "personalInfoModel.idNumber":{
+                idcardno:true,
                 required: true//身份证
             },
             "personalInfoModel.fullFacePhoto":{
@@ -68,8 +73,7 @@ $(function () {
                 required: "请输入服务领域"
             },
             "personalInfoModel.phone": {
-                required: "请输入联系电话",
-                number:"请填写正确的电话号码"
+                required: "请输入联系电话"
             },
             "personalInfoModel.realName":{
                 required: "请输入姓名"//姓名

@@ -38,7 +38,7 @@ $(function () {
             },
             "companyInfoModel.phone": {
                 required: true,//联系电话
-                number:true
+                isMobile:true
             },
             "companyInfoModel.companyName":{
                 required: true//企业名称
@@ -62,8 +62,7 @@ $(function () {
                 required: "请输入服务领域"
             },
             "companyInfoModel.phone": {
-                required: "请输入联系电话",
-                number:"请填写正确的电话号码"
+                required: "请输入联系电话"
             },
             "companyInfoModel.companyName":{
                 required: "请输入企业名称"//姓名

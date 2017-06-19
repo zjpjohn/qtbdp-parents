@@ -103,22 +103,6 @@ $(function () {
     });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     var options = {
         _form: "#ruleupload",
         _rules: {
@@ -188,7 +172,7 @@ $(function () {
         //跳转到个人中心我发布的商品
         if(data.result.success) {
             setTimeout(function () {
-                location.href = "/usercenter/publich/0";
+                location.href = "/usercenter/publich/1";
             },3000)
         }else {
             LoadingData.toastr({

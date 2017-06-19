@@ -58,7 +58,8 @@ $(function () {
                 required: true
             },
             phone:{
-                required: true
+                required: true,
+                isMobile:true
             },
             qq:{
                 required: true
@@ -93,7 +94,6 @@ $(function () {
             },
             phone:{
                 required: "请输入手机号"
-
             },
             qq:{
                 required: "请输入QQ号"
