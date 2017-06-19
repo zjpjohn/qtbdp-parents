@@ -104,6 +104,7 @@
     <em class="mainbottom"></em>
 </div>
 
+
 <!-- 一级类目数据模板 -->
 <script id="tmpl_types" type="text/x-jquery-tmpl">
     {{if pageInfo.length>0}}
@@ -148,7 +149,17 @@
 </script>
 <script>
     jQuery(document).ready(function() {
+        //搜索
+        $('.search_btn').on('click',function () {
+            var val = $('.search_input').val();
+
+            if (val && val.trim().length == 0){
+                val = "" ;
+            }
+            App.initDatamart(val);
+        });
         App.initDatamart();
+
     });
 </script>
 
@@ -156,6 +167,7 @@
 
 <!-- 页脚 -->
 <footer th:replace="layout/footer" />
+<script src="/pages/common/js/fromCommon.js"></script>
 <!-- 页脚结束 -->
 </body>
 </html>
