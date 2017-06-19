@@ -40,6 +40,13 @@ public interface DataInstitutionInfoNewMapper extends BaseMapper<DataInstitution
     DataInstitutionInfoNewModel findDataInstitutionInfoNewByCreateId(Integer createId) ;
 
     /**
+     *  根据用户ID查询服务商明细忽略是否通过审核
+     * @param createId
+     * @return
+     */
+    DataInstitutionInfoNewModel findInstitutionInfoIgnoreAuditStatusByCreateId(Integer createId);
+
+    /**
      * 更新服务商
      * @param infoNewModel
      * @return 记录数，成功返回1

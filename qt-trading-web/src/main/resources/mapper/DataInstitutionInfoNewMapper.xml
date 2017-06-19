@@ -86,6 +86,30 @@
         c.is_used = 1 and c.audit_status = 1 AND c.create_id = #{createId}
     </select>
 
+    <!--根据用户ID查询服务商明细忽略是否通过审核-->
+    <select id="findInstitutionInfoIgnoreAuditStatusByCreateId" parameterType="java.lang.Integer" resultMap="DataInstitutionInfoNewResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.institution_type,
+        c.name,
+        c.designation,
+        c.logo,
+        c.info_id,
+        c.is_sys,
+        c.is_great,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason
+        FROM
+        data_institution_info_new AS c
+        WHERE
+        c.create_id = #{createId}
+    </select>
+
     <!-- 服务商结果集 -->
     <resultMap id="DataInstitutionInfoNewResult" type="com.qtdbp.trading.model.DataInstitutionInfoNewModel">
         <id column="id" property="id" />

@@ -32,12 +32,15 @@
             <!--标题结束-->
 
             <!--from表单-->
-            <div id="fromContent">
+            <div th:if="${user.infoNewModel == null or (user.infoNewModel != null and user.infoNewModel.auditStatus == 2)} " id="fromContent">
 
                 <!--表单信息-->
                 <form id="fromPerson" action="/api/institutionV2" method="post">
                     <input type="hidden" name="institutionType" value="2">
                     <input type="hidden" name="typeId" value="0">
+                    <div th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 2}" th:text="${user.infoNewModel.auditFailReason}">
+
+                    </div>
                     <!--服务商基本信息-->
                     <div  class="from-top clearfix">
                         <div class="lf">
@@ -77,9 +80,6 @@
                         <input type="hidden"  name="logo" id="logoContent">
                     </div>
                     <!--服务商基本信息结束-->
-
-
-
 
                     <div class="from-bottom">
                         <!--个人需要的信息-->
@@ -163,6 +163,9 @@
                 <!--表单信息结束-->
             </div>
             <!--from表单结束-->
+            <div  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 0}">
+                服务商资料正在审核中...
+            </div>
         </div>
         <!--认证服务商结束-->
     </div>
