@@ -86,10 +86,11 @@ public class DataInstitutionNewApi extends BaseController {
     @ApiOperation(value="审核服务商接口")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "服务商Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
-            @ApiImplicitParam(name = "status", value = "审核状态，1审核成功 2审核失败", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+            @ApiImplicitParam(name = "status", value = "审核状态，1审核成功 2审核失败", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "reason", value = "审核失败原因", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "audit", method = RequestMethod.POST)
-    public ModelMap auditInstitutionV2(Integer id,Integer status) throws GlobalAdminException {
+    public ModelMap auditInstitutionV2(Integer id,Integer status,String reason) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
         boolean success = false ;
@@ -102,6 +103,7 @@ public class DataInstitutionNewApi extends BaseController {
                 infoNewModel.setId(id);
                 infoNewModel.setAuditor(user.getUserId()); // 系统用户ID
                 infoNewModel.setAuditStatus(status);
+                infoNewModel.setAuditFailReason(reason);
                 success = institutionInfoNewService.auditInstitution(infoNewModel);
             } catch (Exception e) {
                 logger.error("auditInstitutionV2 has error ,message:" + e.getMessage());
