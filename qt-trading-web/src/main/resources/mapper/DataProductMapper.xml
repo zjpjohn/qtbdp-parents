@@ -54,6 +54,9 @@
                 </otherwise>
             </choose>
         </if>
+        <if test="designation != null">
+            AND p.designation like '%${designation}%'
+        </if>
         ORDER BY
         ${orderBy} DESC
     </select>
