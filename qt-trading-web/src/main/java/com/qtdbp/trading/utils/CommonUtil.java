@@ -46,4 +46,18 @@ public class CommonUtil {
         return r.nextInt(max)%(max-min+1) + min ;
     }
 
+    /**
+     * excel2003扩展名
+     */
+    public static final String EXCEL03_EXTENSION = "xls";
+
+    /**
+     * excel2007扩展名
+     */
+    public static final String EXCEL07_EXTENSION = "xlsx";
+
+    /**
+     * zip扩展名
+     */
+    public static final String ZIP_EXTENSION = "zip";
 }
