@@ -163,7 +163,7 @@ $(function () {
         }
     };
 
-    FormValidationMd.init(options,function () {
+    FormValidationMd.init(options,function (data) {
         //跳转到个人中心我发布的商品
         if(data.result.success) {
             setTimeout(function () {
