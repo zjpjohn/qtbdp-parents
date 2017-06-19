@@ -165,7 +165,17 @@ $(function () {
 
     FormValidationMd.init(options,function () {
         //跳转到个人中心我发布的商品
-        location.href = "/usercenter/publich/0";
+        if(data.result.success) {
+            setTimeout(function () {
+                location.href = "/usercenter/publich/0";
+            },3000)
+        }else {
+            LoadingData.toastr({
+                _type: 'error',
+                _title: '表单提交',
+                _msg: '网络超时，请重试或者联系管理员'
+            }) ;
+        }
     });
 });
 

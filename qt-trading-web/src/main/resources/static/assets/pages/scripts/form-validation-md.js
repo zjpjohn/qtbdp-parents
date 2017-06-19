@@ -76,16 +76,18 @@ var FormValidationMd = function() {
                         if($.isFunction(callback)) callback(data) ;
 
                         // 实际开发中需要删除setTimeout
-                        setTimeout(function () {
-                            btn.stop();
+                        if(data.result.success) {
+                            setTimeout(function () {
+                                btn.stop();
 
-                            LoadingData.toastr({
-                                _type: 'success',
-                                _title: '表单提交',
-                                _msg: '数据提交成功'
-                            }) ;
+                                LoadingData.toastr({
+                                    _type: 'success',
+                                    _title: '表单提交',
+                                    _msg: '数据提交成功'
+                                }) ;
 
-                        },500);
+                            },500);
+                        }
                     },
                     error : function ( data ) {
                         btn.stop();

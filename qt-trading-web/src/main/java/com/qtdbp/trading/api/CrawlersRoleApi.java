@@ -3,6 +3,7 @@ package com.qtdbp.trading.api;
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.controller.BaseController;
+import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.CrawlersRoleMapper;
 import com.qtdbp.trading.mapper.DataTypeMapper;
@@ -11,7 +12,10 @@ import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CrawlersRoleService;
 import com.qtdbp.trading.service.DataTypeService;
 import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.trading.utils.Message;
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +31,8 @@ import java.util.List;
 @RequestMapping(value = "/api/crawlers/role")
 public class CrawlersRoleApi extends BaseController{
 
+    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
     @Autowired
     private CrawlersRoleService crawlersRoleService;
 
@@ -39,21 +45,33 @@ public class CrawlersRoleApi extends BaseController{
     @ApiOperation(value="添加爬虫规则数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelMap insert( CrawlersRoleModel crawlersRoleModel) throws GlobalException {
-        if (crawlersRoleModel == null) throw new GlobalException("数据不存在，请重新输入");
-
         ModelMap map = new ModelMap();
-
-        try {
-            String filePath = crawlersRoleModel.getFilePath();
-            String roleType = filePath.substring(filePath.lastIndexOf(".") + 1);
-            crawlersRoleModel.setRoleType(roleType);
-            Integer count = crawlersRoleService.insertRole(crawlersRoleModel);
-            map.put("success", count > 0 ? true : false);
-            map.put("id", crawlersRoleModel.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
+        Message message = new Message() ;
+        if (crawlersRoleModel != null){
+            SysUser user = getPrincipal() ;
+            if(user == null) {
+                message.setSuccess(false);
+                message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+                message.setMessage("用户请先登录");
+            } else {
+                try {
+                    crawlersRoleModel.setCreateId(user.getId());
+                    Integer id = crawlersRoleService.insertRole(crawlersRoleModel);
+                    if(id != null && id > 0) {
+                        message.setSuccess(true);
+                        message.setData(id);
+                    }
+                } catch (Exception e) {
+                    logger.error("customService has error ,message:" + e.getMessage());
+                    throw new GlobalException(e.getMessage());
+                }
+            }
+        } else {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("定制服务不存在，请重新输入");
         }
-
+        map.put("result", message);
         return map;
     }
 
