@@ -93,8 +93,19 @@ $(function () {
         }
     };
 
-    FormValidationMd.init(options,function () {
+    FormValidationMd.init(options,function (data) {
 
+        if(data.result.success) {
+            setTimeout(function () {
+                location.href = "/usercenter";
+            },3000)
+        }else {
+            LoadingData.toastr({
+                _type: 'error',
+                _title: '表单提交',
+                _msg: '网络超时，请重试或者联系管理员'
+            }) ;
+        }
     });
 
 

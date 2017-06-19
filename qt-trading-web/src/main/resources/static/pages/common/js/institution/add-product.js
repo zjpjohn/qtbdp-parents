@@ -125,7 +125,8 @@ $(function () {
                 required: true
             },
             dataScale:{
-                required: true
+                required: true,
+                digits: true
             },
             introduce:{
                 required: true
@@ -140,7 +141,7 @@ $(function () {
         _messages: {
             designation: {
                 required: "请输入数据名称",
-                rangelength: "字符长度为5-50之间"//长度为8-50之间
+                rangelength: "字符长度为5-50之间"//长度为5-50之间
             },
             dataProfile: {
                 required: "请输入数据简介"
@@ -149,7 +150,8 @@ $(function () {
                 required: "请选择数据类别"
             },
             dataScale:{
-                required: "请输入数据规模"
+                required: "请输入数据规模",
+                digits: "请输入整数"//必须输入整数
             },
             introduce:{
                 required: "请输入数据描述"
@@ -163,7 +165,7 @@ $(function () {
         }
     };
 
-    FormValidationMd.init(options,function () {
+    FormValidationMd.init(options,function (data) {
         //跳转到个人中心我发布的商品
         if(data.result.success) {
             setTimeout(function () {
