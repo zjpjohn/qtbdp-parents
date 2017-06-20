@@ -6,11 +6,11 @@
         <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
         <!--<p class="pername perphone"><a th:text="${user.phone}"></a></p>-->
 
-        <p class="perdata perdata2" th:if="!${user.infoNewModel}">
+        <p class="perdata perdata2" th:if="${user.infoNewModel == null or user.infoNewModel.auditStatus != 1}">
             <em class="noperdata"></em>您还不是数据服务商
         </p>
 
-        <p class="perdata " th:if="${user.infoNewModel}">
+        <p class="perdata " th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 1}">
              <em></em> 服务商：<a th:href="@{/institution/home/}+${user.infoNewModel.id}" th:text="${user.infoNewModel.name}"></a>
         </p>
     </div>
