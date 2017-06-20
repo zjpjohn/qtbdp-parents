@@ -19,9 +19,10 @@
         c.auditor,
         c.audit_time,
         c.audit_status,
-        c.audit_fail_reason
+        c.audit_fail_reason,
+        s.nick create_name
         FROM
-        data_institution_info_new AS c
+        data_institution_info_new AS c left join data_user_info s on c.create_id = s.id
         WHERE
         c.is_used = 1
         <if test="institutionType != null and institutionType != 0">
@@ -50,9 +51,10 @@
         c.auditor,
         c.audit_time,
         c.audit_status,
-        c.audit_fail_reason
+        c.audit_fail_reason,
+        s.nick create_name
         FROM
-        data_institution_info_new AS c
+        data_institution_info_new AS c left join data_user_info s on c.create_id = s.id
         WHERE
         c.is_used = 1 AND c.id = #{id}
     </select>
@@ -74,6 +76,7 @@
         <result column="audit_time" property="auditTime" />
         <result column="audit_status" property="auditStatus" />
         <result column="audit_fail_reason" property="auditFailReason" />
+        <result column="create_name" property="createName"/>
     </resultMap>
 
     <!-- 服务商结果集，关联获取资料 -->
@@ -93,6 +96,7 @@
         <result column="audit_time" property="auditTime" />
         <result column="audit_status" property="auditStatus" />
         <result column="audit_fail_reason" property="auditFailReason" />
+        <result column="create_name" property="createName"/>
 
         <!-- 鉴别器，根据服务商类型(institution_type)自动匹配是CompanyInfoModel或者是PersonalInfoModel -->
         <discriminator javaType="int" column="institution_type">

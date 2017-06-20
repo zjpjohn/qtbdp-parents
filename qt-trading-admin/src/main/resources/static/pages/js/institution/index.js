@@ -12,7 +12,7 @@ $(function () {
             { "data": "institutionType" },
             { "data": "name" },
             { "data": "designation" },
-            { "data": "createId" },
+            { "data": "createName" },
             { "data": "createTime" },
             {"data":"auditStatus"},
             { "data": null }
