@@ -2,6 +2,7 @@ package com.qtdbp.trading.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -55,6 +56,9 @@ public class CustomServiceModel extends BaseModel {
     private String typeName;            //数据类目名称
 
     private String endTime1;            //截止时间的字符串
+
+    @Transient
+    private String createName;          //创建人名字
 
     public Integer getTypeId() {
         return typeId;
@@ -286,5 +290,13 @@ public class CustomServiceModel extends BaseModel {
 
     public void setEndTime1(String endTime1) {
         this.endTime1 = endTime1;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
     }
 }
