@@ -255,7 +255,7 @@
     <!-- #################################################################### -->
 
     <select id="findPersonalInfoById" resultMap="PersonalInfoResult">
-        SELECT p.real_name,p.id_number, p.gender, p.full_face_photo, p.negative_side_photo, p.exp_time, p.province_id, p.city_id, p.district_id, p.address, p.phone,p.create_id,p.create_time FROM personal_info AS p WHERE p.is_used = 1 AND p.id = #{id}
+        SELECT p.id,p.real_name,p.id_number, p.gender, p.full_face_photo, p.negative_side_photo, p.exp_time, p.province_id, p.city_id, p.district_id, p.address, p.phone,p.create_id,p.create_time FROM personal_info AS p WHERE p.is_used = 1 AND p.id = #{id}
     </select>
 
     <!-- 添加个人资料insertPersonalInfo -->
@@ -346,7 +346,7 @@
     <!-- #################################################################### -->
 
     <select id="findCompanyInfoById" resultMap="CompanyInfoResult">
-        select company_name,company_logo,company_intro,license,license_number,province_id,city_id,district_id,address,phone,corporator,create_id,create_time from company_info where is_used = 1 and id = #{id}
+        select id,company_name,company_logo,company_intro,license,license_number,province_id,city_id,district_id,address,phone,corporator,create_id,create_time from company_info where is_used = 1 and id = #{id}
     </select>
 
     <!-- 添加企业资料insertCompanyInfo -->
