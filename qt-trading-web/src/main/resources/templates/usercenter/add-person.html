@@ -37,6 +37,7 @@
                 <input type="hidden" name="institutionType" value="2">
                 <input type="hidden" name="typeId" value="0">
                 <input type="hidden" name="id" id="AccountId">
+                <input type="hidden" name="personalInfoModel.id" id="personId">
 
 
                 <div id="feedback" style="margin: 30px 0 50px 0">
@@ -266,6 +267,7 @@
 //
 //                    $('.prov').val(person.provinceId);
 //                    $('.city').val(person.cityId)
+                    $('#personId').val(person.id);
 
                     $('#ID1').attr("src",person.fullFacePhoto);
                     $('#ID1').removeClass('Image');
