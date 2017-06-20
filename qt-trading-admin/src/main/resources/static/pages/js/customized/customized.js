@@ -10,9 +10,9 @@ $(function () {
         columns: [
             { "data": "id" },
             { "data": "name" },
-            { "data": "introduction" },
+            { "data": "dimension" },
             { "data": "price" },
-            { "data": "createId" },
+            { "data": "createName" },
             { "data": "createTime" },
             {"data":"auditStatus"},
             { "data": null }
