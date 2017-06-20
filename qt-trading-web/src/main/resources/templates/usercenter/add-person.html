@@ -5,8 +5,8 @@
     <title>服务商认证（个人） | 钱塘数据交易中心-个人中心</title>
     <div th:replace="layout/top"/>
 
-    <link rel="stylesheet" href="/assets/global/plugins/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/pages/common/css/common.css"/>
+    <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
     <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
@@ -55,22 +55,30 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label">服务商名称</label>
-                                <div>
-                                    <input id="facilitator" name="name" type="text"  class="form-control borderRadiusIE8">
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>服务商名称</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="facilitator" name="name" type="text" style="width: 100%"  class="large_input form-control">
                                 </div>
                                 <p class="tip">服务商名称不可更改，请认真填写</p>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label">服务领域</label>
-                                <div>
-                                    <input id="field" name="designation" type="text"  class="form-control borderRadiusIE8">
+
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>服务领域</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="field" name="designation" type="text"  style="width: 100%"  class="large_input form-control">
                                 </div>
                             </div>
                         </div>
+
                         <div class="rt rt-div">
-                            <label class="control-label">服务商Logo</label>
+                            <p class="group_title">
+                                <b>服务商Logo</b> <i>*</i>
+                            </p>
                             <fieldset>
                                 <span>✚</span>
                                 <input name="file" class="fileLogo" type="file">
@@ -84,24 +92,30 @@
                     <div class="from-bottom">
                         <!--个人需要的信息-->
                         <div class="person block">
-                            <div class="form-group">
-                                <label class="control-label">姓名</label>
-                                <div>
-                                    <input id="name" name="personalInfoModel.realName" type="text"  class="form-control borderRadiusIE8">
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>姓名</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="name" name="personalInfoModel.realName" type="text" style="width: 100%"   class="large_input form-control">
                                 </div>
                                 <p class="tip">需与身份证上的姓名严格一致</p>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label">身份证号</label>
-                                <div>
-                                    <input id="ID" name="personalInfoModel.idNumber" type="text"  class="form-control borderRadiusIE8">
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>身份证号</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="ID" name="personalInfoModel.idNumber" type="text"  style="width: 100%"  class="large_input form-control">
                                 </div>
                                 <p class="tip">需与身份证上的号码严格一致</p>
                             </div>
 
                             <div class="form-group clearfix">
-                                <label class="control-label">身份证</label>
+                                <p class="group_title">
+                                    <b>身份证</b> <i>*</i>
+                                </p>
                                 <div>
                                     <div class="lf">
                                         <fieldset>
@@ -126,32 +140,36 @@
                         </div>
 
                         <div class="form-group address">
-                            <label class="control-label">企业所在地</label>
+                            <p class="group_title">
+                                <b>企业所在地</b> <i>*</i>
+                            </p>
                             <div class="clearfix" id="Location">
-                                <div class="lf select-div">
-                                    <select  class="form-control prov" name="personalInfoModel.provinceId" id="provinceId">
+                                <div class="lf select-div form_control form-group">
+                                    <select  class="small_input prov form-control" style="width: 100%" name="personalInfoModel.provinceId" id="provinceId">
                                         <option value="">请选择省份</option>
                                     </select>
                                 </div>
-                                <div class="rt select-div">
-                                    <select  class="form-control city" name="personalInfoModel.cityId" id="cityId">
+                                <div class="rt select-div form_control form-group">
+                                    <select  class="small_input city form-control" style="width: 100%" name="personalInfoModel.cityId" id="cityId">
                                         <option value="">请选择市</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="control-label">联系电话</label>
-                            <div>
-                                <input  type="text" name="personalInfoModel.phone" id="phone" class="form-control borderRadiusIE8">
+                        <div class="form_group">
+                            <p class="group_title">
+                                <b>联系电话</b> <i>*</i>
+                            </p>
+                            <div class="form_control form-group">
+                                <input  type="text" name="personalInfoModel.phone" id="phone" style="width: 100%"  class="large_input form-control">
                             </div>
                             <p class="tip">请输入有效的手机号码</p>
                         </div>
                     </div>
 
                     <!-- 页脚发布按钮 -->
-                    <div class="form_btm submit">
+                    <div class="submit">
                         <!--<input type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>-->
                         <button type="submit" id="submit-btn" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
 

@@ -53,7 +53,7 @@ $(function () {
                 required: true,
                 digits: true
             },
-            endTime:{
+            endTime1:{
                 required: true
             },
             website:{
@@ -91,7 +91,7 @@ $(function () {
                 required: "请输入悬赏金额",
                 digits: "请输入整数"//必须输入整数
             },
-            endTime:{
+            endTime1:{
                 required: "请选择截止时间"
             },
             website:{
