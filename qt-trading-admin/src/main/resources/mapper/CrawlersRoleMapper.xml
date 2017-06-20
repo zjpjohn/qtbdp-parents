@@ -10,9 +10,6 @@
             <if test="isUsed != null">
                 c.is_used = #{isUsed}
             </if>
-            <if test="typeId != null ">
-                and c.type_id = #{typeId}
-            </if>
             <if test="webType != null ">
                 and c.web_type = #{webType}
             </if>
