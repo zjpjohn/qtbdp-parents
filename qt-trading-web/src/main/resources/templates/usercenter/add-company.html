@@ -207,72 +207,72 @@
 <script src="/pages/common/js/fromCommon.js"></script>
 <script src="/pages/common/js/add-new/add-company.js"></script>
 
-<!--<script th:inline="javascript">-->
-    <!--var user = [[${user}]];-->
-    <!--$(document).ready(function() {-->
+<script th:inline="javascript">
+    var user = [[${user}]];
+    $(document).ready(function() {
 
-        <!--if(user.infoNewModel.auditStatus == 0){-->
-            <!--$('#fromPerson').css('display','none');-->
-            <!--$('#audit').css('display','block');-->
-        <!--}else if(user.infoNewModel.auditStatus == 2){-->
+        if(user.infoNewModel.auditStatus == 0){
+            $('#fromPerson').css('display','none');
+            $('#audit').css('display','block');
+        }else if(user.infoNewModel.auditStatus == 2){
 
-            <!--$('#fromPerson').css('display','block');-->
-            <!--$('#audit').css('display','none');-->
+            $('#fromPerson').css('display','block');
+            $('#audit').css('display','none');
 
-            <!--$.ajax({-->
-                <!--url: "/api/institutionV2/findInstitutionExtend",-->
-                <!--type: "get",-->
-                <!--dataType:"json",-->
-                <!--success:function(ret){-->
-                    <!--var data = ret.pageInfo;-->
-                    <!--$('fieldset > span').css('display','none');-->
+            $.ajax({
+                url: "/api/institutionV2/findInstitutionExtend",
+                type: "get",
+                dataType:"json",
+                success:function(ret){
+                    var data = ret.pageInfo;
+                    $('fieldset > span').css('display','none');
 
-                    <!--$('#AccountId').val(data.id);-->
-                    <!--$('.reason').html(data.auditFailReason);-->
-                    <!--$('#facilitator').val(data.name);-->
-                    <!--$('#field').val(data.designation);-->
+                    $('#AccountId').val(data.id);
+                    $('.reason').html(data.auditFailReason);
+                    $('#facilitator').val(data.name);
+                    $('#field').val(data.designation);
 
-                    <!--$('#logo').attr("src",data.logo);-->
-                    <!--$('#logo').removeClass('Image');-->
-                    <!--$('#logoContent').val(data.logo);-->
-
-
-                    <!--var company = data.companyInfoModel;-->
+                    $('#logo').attr("src",data.logo);
+                    $('#logo').removeClass('Image');
+                    $('#logoContent').val(data.logo);
 
 
-<!--//                    var options = $('.prov').children();-->
-<!--//-->
-<!--//                    for(var i = 0;i < options.length;i++){-->
-<!--//                        if(options[i].value == person.provinceId){-->
-<!--//                            options[i].selected = true;-->
-<!--//                            break-->
-<!--//                        }-->
-<!--//                    }-->
-<!--//-->
-<!--//                    $('.prov').val(person.provinceId);-->
-<!--//                    $('.city').val(person.cityId)-->
-                    <!--$('#personId').val(company.id);-->
-
-                    <!--$('#License').attr("src",company.fullFacePhoto);-->
-                    <!--$('#License').removeClass('Image');-->
-                    <!--$('#licenseContent').val(company.fullFacePhoto);-->
+                    var company = data.companyInfoModel;
 
 
+//                    var options = $('.prov').children();
+//
+//                    for(var i = 0;i < options.length;i++){
+//                        if(options[i].value == person.provinceId){
+//                            options[i].selected = true;
+//                            break
+//                        }
+//                    }
+//
+//                    $('.prov').val(person.provinceId);
+//                    $('.city').val(person.cityId)
+                    $('#personId').val(company.id);
 
-                    <!--$('#companyName').val(company.realName);-->
-                    <!--$('#ID').val(company.idNumber);-->
-                    <!--$('#phone').val(company.phone);-->
-
-                    <!--$('#fromPerson').attr("action","/api/institutionV2/update")-->
-                <!--},-->
-                <!--error : function () {-->
-
-                <!--}-->
-            <!--});-->
-        <!--}-->
+                    $('#License').attr("src",company.companyLogo);
+                    $('#License').removeClass('Image');
+                    $('#licenseContent').val(company.companyLogo);
 
 
-    <!--});-->
-<!--</script>-->
+
+                    $('#companyName').val(company.companyName);
+                    $('#LicenseNumber').val(company.licenseNumber);
+                    $('#phone').val(company.phone);
+
+                    $('#fromPerson').attr("action","/api/institutionV2/update")
+                },
+                error : function () {
+
+                }
+            });
+        }
+
+
+    });
+</script>
 </body>
 </html>
