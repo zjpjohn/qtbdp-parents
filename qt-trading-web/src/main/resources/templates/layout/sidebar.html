@@ -23,8 +23,18 @@
         <li data-class="myorder" class="myorder"><a href="/usercenter/buy/0"><span></span> 我的购买订单 <b></b>  </a></li>
         <li data-class="myrelease" class="myrelease"><a href="/usercenter/customized/0"><span></span> 我发布的定制 <b></b> </a></li>
         <li data-class="dataservice" class="dataservice"  th:if="!${user.infoNewModel}"><a href="/usercenter/add/person"><span></span> 成为数据服务商 <b></b> </a></li>
-        <li data-class="dataservice" class="dataservice"  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 0}"><a href="/usercenter/add/person"><span></span> 成为数据服务商 <b></b> </a></li>
-        <li data-class="dataservice" class="dataservice"  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 2}"><a href="/usercenter/add/person"><span></span> 成为数据服务商 <b></b> </a></li>
+        <li data-class="dataservice" class="dataservice"  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 0 and user.infoNewModel.institutionType == 2}">
+            <a href="/usercenter/add/person"><span></span> 成为数据服务商 <b></b> </a>
+        </li>
+        <li data-class="dataservice" class="dataservice"  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 2 and user.infoNewModel.institutionType == 2}">
+            <a href="/usercenter/add/person"><span></span> 成为数据服务商 <b></b> </a>
+        </li>
+        <li data-class="dataservice" class="dataservice"  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 0 and user.infoNewModel.institutionType == 1}">
+            <a href="/usercenter/add/company"><span></span> 成为数据服务商 <b></b> </a>
+        </li>
+        <li data-class="dataservice" class="dataservice"  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 2 and user.infoNewModel.institutionType == 1}">
+            <a href="/usercenter/add/company"><span></span> 成为数据服务商 <b></b> </a>
+        </li>
 
         <li th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus ==1}" class="sidebarnone"></li>
         <li th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus ==1}" data-class="publich" class="publich"><a href="/usercenter/publich/0"><span></span> 我的发布的商品 <b></b> </a></li>
