@@ -138,4 +138,33 @@ public class DataInstitutionInfoNewService {
         return infoNewMapper.findInstitutionInfoCount(userId);
     }
 
+    /**
+     * 更新服务商信息以及关联的企业或个人资料
+     * @param infoNewModel
+     * @return
+     */
+    @Transactional
+    public Integer updateInstitutionExtend(DataInstitutionInfoNewModel infoNewModel) throws GlobalException {
+        if (infoNewModel == null) throw new GlobalException("服务商信息为空，请重新操作");
+
+        infoNewModel.setAuditStatus(0);
+        Integer count = infoNewMapper.updateDataInstitutionInfoNew(infoNewModel);
+        if (count > 0){
+            PersonalInfoModel personalInfoModel = null;
+            CompanyInfoModel companyInfoModel = null;
+            personalInfoModel = infoNewModel.getPersonalInfoModel();
+            if (personalInfoModel != null) {
+                personalInfoModel.setEditId(infoNewModel.getEditId());
+                Integer personalCount = infoNewMapper.updatePersonalInfo(personalInfoModel);
+                if (!(personalCount > 0)) throw new GlobalException("更新个人资料失败");
+            }
+            if (companyInfoModel != null) {
+                companyInfoModel.setEditId(infoNewModel.getEditId());
+                Integer companyCount = infoNewMapper.updateCompanyInfo(companyInfoModel);
+                if (!(companyCount > 0)) throw new GlobalException("更新企业资料失败");
+            }
+        }
+        return count;
+    }
+
 }

@@ -47,6 +47,13 @@ public interface DataInstitutionInfoNewMapper extends BaseMapper<DataInstitution
     DataInstitutionInfoNewModel findInstitutionInfoIgnoreAuditStatusByCreateId(Integer createId);
 
     /**
+     *  根据用户ID查询服务商明细并且关联个人资料和企业资料忽略是否通过审核
+     * @param createId
+     * @return
+     */
+    DataInstitutionInfoNewModel findInstitutionInfoExtendResultIgnoreAuditStatusByCreateId(Integer createId);
+
+    /**
      * 更新服务商
      * @param infoNewModel
      * @return 记录数，成功返回1
@@ -94,4 +101,18 @@ public interface DataInstitutionInfoNewMapper extends BaseMapper<DataInstitution
      * @return
      */
     HashMap<String,Long> findInstitutionInfoCount(Integer userId);
+
+    /**
+     * 更新企业资料
+     * @param infoModel
+     * @return
+     */
+    Integer updateCompanyInfo(CompanyInfoModel infoModel);
+
+    /**
+     * 更新个人资料
+     * @param infoModel
+     * @return
+     */
+    Integer updatePersonalInfo(PersonalInfoModel infoModel);
 }

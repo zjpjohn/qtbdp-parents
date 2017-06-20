@@ -32,15 +32,12 @@
             <!--标题结束-->
 
             <!--from表单-->
-            <div th:if="${user.infoNewModel == null or (user.infoNewModel != null and user.infoNewModel.auditStatus == 2)} " id="fromContent">
-
+            <div th:if="!${user.infoNewModel}" id="fromContent">
                 <!--表单信息-->
                 <form id="fromPerson" action="/api/institutionV2" method="post">
                     <input type="hidden" name="institutionType" value="2">
                     <input type="hidden" name="typeId" value="0">
-                    <div th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 2}" th:text="${user.infoNewModel.auditFailReason}">
 
-                    </div>
                     <!--服务商基本信息-->
                     <div  class="from-top clearfix">
                         <div class="lf">
@@ -184,6 +181,9 @@
             <div  th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 0}">
                 服务商资料正在审核中...
             </div>
+            <!--表单信息修改-->
+            <div id="fromContent" th:if="${user.infoNewModel != null and user.infoNewModel.auditStatus == 2} ">
+            </div>
         </div>
         <!--认证服务商结束-->
     </div>
@@ -193,6 +193,151 @@
 <!--页脚-->
 <footer th:replace="layout/footer"></footer>
 <!--页脚结束-->
+
+<!--表单模板-->
+<script id="tmpl_institution" type="text/x-jquery-tmpl">
+                <!--表单信息-->
+                <form id="fromPerson" action="/api/institutionV2" method="post">
+                    <input type="hidden" name="institutionType" value="2">
+                    <input type="hidden" name="typeId" value="0">
+                    <input type="hidden" name="id" value=""${id}>
+                    <div>
+                        ${auditFailReason}
+                    </div>
+                    <!--服务商基本信息-->
+                    <div  class="from-top clearfix">
+                        <div class="lf">
+                            <div id="type">
+                                <h6>身份类型</h6>
+                                <div class="type-Content">
+                                    <div class="btn-group type-button">
+                                        <a href="/usercenter/add/person" class="btn btn-default select-button">个人</a>
+                                        <a href="/usercenter/add/company" class="btn btn-default">企业</a>
+                                    </div>
+                                    <p class="tip">企业服务商</p>
+                                </div>
+                            </div>
+
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>服务商名称</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="facilitator" name="name" type="text" value="${name}" style="width: 100%"  class="large_input form-control">
+                                </div>
+                                <p class="tip">服务商名称不可更改，请认真填写</p>
+                            </div>
+
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>服务领域</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="field" name="designation" value="${designation}" type="text"  style="width: 100%"  class="large_input form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rt rt-div">
+                            <p class="group_title">
+                                <b>服务商Logo</b> <i>*</i>
+                            </p>
+                            <fieldset>
+                                <span>✚</span>
+                                <input name="file" class="fileLogo" type="file">
+                                <img src="12345" alt="" id="logo" class="Image"/>
+                            </fieldset>
+                        </div>
+                        <input type="hidden"  name="logo" value="abcd" id="logoContent">
+                    </div>
+                    <!--服务商基本信息结束-->
+
+                    <div class="from-bottom">
+                        <!--个人需要的信息-->
+                        <div class="person block">
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>姓名</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="name" name="personalInfoModel.realName" value="${personalInfoModel.realName}" type="text" style="width: 100%"   class="large_input form-control">
+                                </div>
+                                <p class="tip">需与身份证上的姓名严格一致</p>
+                            </div>
+
+                            <div class="form_group">
+                                <p class="group_title">
+                                    <b>身份证号</b> <i>*</i>
+                                </p>
+                                <div class="form_control form-group">
+                                    <input id="ID" name="personalInfoModel.idNumber" value="${personalInfoModel.idNumber}" type="text"  style="width: 100%"  class="large_input form-control">
+                                </div>
+                                <p class="tip">需与身份证上的号码严格一致</p>
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <p class="group_title">
+                                    <b>身份证</b> <i>*</i>
+                                </p>
+                                <div>
+                                    <div class="lf">
+                                        <fieldset>
+                                            <span>✚</span>
+                                            <input name="fullFacePhoto" class="fileID1" type="file">
+                                            <img src="${personalInfoModel.fullFacePhoto}" alt="" id="ID1" class="Image"/>
+                                        </fieldset>
+                                        <p class="tip">身份证正面照</p>
+                                        <input type="hidden" name="personalInfoModel.fullFacePhoto" value="${personalInfoModel.fullFacePhoto}" id="fullFacePhoto">
+                                    </div>
+                                    <div class="rt">
+                                        <fieldset>
+                                            <span>✚</span>
+                                            <input name="negativeSidePhoto" class="fileID2" type="file">
+                                            <img src="${personalInfoModel.negativeSidePhoto}" alt="" id="ID2" class="Image"/>
+                                        </fieldset>
+                                        <p class="tip">身份证反面照</p>
+                                        <input type="hidden" name="personalInfoModel.negativeSidePhoto" value="${personalInfoModel.negativeSidePhoto}" id="negativeSidePhoto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group address">
+                            <p class="group_title">
+                                <b>企业所在地</b> <i>*</i>
+                            </p>
+                            <div class="clearfix" id="Location">
+                                <div class="lf select-div form_control form-group">
+                                    <select  class="small_input prov form-control" style="width: 100%" name="personalInfoModel.provinceId" id="provinceId">
+                                        <option value="">请选择省份</option>
+                                    </select>
+                                </div>
+                                <div class="rt select-div form_control form-group">
+                                    <select  class="small_input city form-control" style="width: 100%" name="personalInfoModel.cityId" id="cityId">
+                                        <option value="">请选择市</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form_group">
+                            <p class="group_title">
+                                <b>联系电话</b> <i>*</i>
+                            </p>
+                            <div class="form_control form-group">
+                                <input  type="text" name="personalInfoModel.phone" value="${personalInfoModel.phone}" id="phone" style="width: 100%"  class="large_input form-control">
+                            </div>
+                            <p class="tip">请输入有效的手机号码</p>
+                        </div>
+                    </div>
+
+                    <!-- 页脚发布按钮 -->
+                    <div class="submit">
+                        <button type="submit" id="submit-btn" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
+                    </div>
+                </form>
+                <!--表单信息结束-->
+</script>
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
@@ -211,5 +356,11 @@
 <script src="/pages/common/js/custom-validation.js"></script>
 <script src="/pages/common/js/fromCommon.js"></script>
 <script src="/pages/common/js/add-new/add-person.js"></script>
+
+<script th:inline="javascript">
+    $(document).ready(function() {
+        App.initInstitutionExtend() ;
+    });
+</script>
 </body>
 </html>
