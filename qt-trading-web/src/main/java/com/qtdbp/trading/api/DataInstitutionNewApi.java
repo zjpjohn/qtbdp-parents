@@ -172,7 +172,7 @@ public class DataInstitutionNewApi extends BaseController {
     }
 
     @ApiOperation(value="更新服务商数据接口")
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelMap updateInstitutionV2(@RequestBody DataInstitutionInfoNewModel infoNewModel) throws GlobalException {
 
         ModelMap map = new ModelMap();
