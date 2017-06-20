@@ -36,6 +36,8 @@
             <form id="fromPerson" action="/api/institutionV2" method="post">
                 <input type="hidden" name="institutionType" value="2">
                 <input type="hidden" name="typeId" value="0">
+                <input type="hidden" name="id" id="AccountId">
+
 
                 <div id="feedback" style="margin: 30px 0 50px 0">
                     <div class="form_group">
@@ -240,6 +242,7 @@
                     var data = ret.pageInfo;
                     $('fieldset > span').css('display','none');
 
+                    $('#AccountId').val(data.id);
                     $('.reason').html(data.auditFailReason);
                     $('#facilitator').val(data.name);
                     $('#field').val(data.designation);
