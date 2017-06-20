@@ -179,6 +179,9 @@
                 <!--表单信息结束-->
             </div>
             <!--from表单结束-->
+            <div id="audit" style="font-size: 18px;margin-top: 50px">
+                信息正在审核中...
+            </div>
         </div>
         <!--认证服务商结束-->
     </div>
@@ -212,11 +215,11 @@
     $(document).ready(function() {
 
         if(user.infoNewModel.auditStatus == 0){
-            $('#fromPerson').css('display','none');
+            $('#fromCompany').css('display','none');
             $('#audit').css('display','block');
         }else if(user.infoNewModel.auditStatus == 2){
 
-            $('#fromPerson').css('display','block');
+            $('#fromCompany').css('display','block');
             $('#audit').css('display','none');
 
             $.ajax({
@@ -240,17 +243,6 @@
                     var company = data.companyInfoModel;
 
 
-//                    var options = $('.prov').children();
-//
-//                    for(var i = 0;i < options.length;i++){
-//                        if(options[i].value == person.provinceId){
-//                            options[i].selected = true;
-//                            break
-//                        }
-//                    }
-//
-//                    $('.prov').val(person.provinceId);
-//                    $('.city').val(person.cityId)
                     $('#personId').val(company.id);
 
                     $('#License').attr("src",company.companyLogo);
@@ -263,7 +255,7 @@
                     $('#LicenseNumber').val(company.licenseNumber);
                     $('#phone').val(company.phone);
 
-                    $('#fromPerson').attr("action","/api/institutionV2/update")
+                    $('#fromCompany').attr("action","/api/institutionV2/update")
                 },
                 error : function () {
 

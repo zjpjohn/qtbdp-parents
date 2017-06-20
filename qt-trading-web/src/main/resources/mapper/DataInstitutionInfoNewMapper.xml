@@ -425,7 +425,6 @@
             <if test="corporator != null">corporator = #{corporator} ,</if>
             <if test="editId != null">edit_id = #{editId} ,</if>
             <if test="auditStatus != null ">audit_status = #{auditStatus}, </if>
-            <if test="auditFailReason != null ">audit_fail_reason = #{auditFailReason}, </if>
             <if test="isUsed != null ">is_used = #{isUsed}, </if>
         </trim>
         WHERE

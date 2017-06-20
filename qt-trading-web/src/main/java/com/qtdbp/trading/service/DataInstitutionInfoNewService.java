@@ -151,13 +151,14 @@ public class DataInstitutionInfoNewService {
         Integer count = infoNewMapper.updateDataInstitutionInfoNew(infoNewModel);
         if (count > 0){
             PersonalInfoModel personalInfoModel = null;
-            CompanyInfoModel companyInfoModel = null;
             personalInfoModel = infoNewModel.getPersonalInfoModel();
             if (personalInfoModel != null) {
                 personalInfoModel.setEditId(infoNewModel.getEditId());
                 Integer personalCount = infoNewMapper.updatePersonalInfo(personalInfoModel);
                 if (!(personalCount > 0)) throw new GlobalException("更新个人资料失败");
             }
+            CompanyInfoModel companyInfoModel = null;
+            companyInfoModel = infoNewModel.getCompanyInfoModel();
             if (companyInfoModel != null) {
                 companyInfoModel.setEditId(infoNewModel.getEditId());
                 Integer companyCount = infoNewMapper.updateCompanyInfo(companyInfoModel);
