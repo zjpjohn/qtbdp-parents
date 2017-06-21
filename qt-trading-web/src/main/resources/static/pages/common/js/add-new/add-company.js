@@ -51,6 +51,9 @@ $(function () {
             },
             logo:{
                 required: true
+            },
+            agreement:{
+                required: true
             }
         },
         _messages: {
@@ -75,7 +78,11 @@ $(function () {
             },
             logo:{
                 required: "请上传服务商logo"
+            },
+            agreement:{
+                required: "请阅读并同意服务商入驻合作协议"
             }
+
         }
     };
 

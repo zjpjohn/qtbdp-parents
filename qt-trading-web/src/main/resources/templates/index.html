@@ -21,14 +21,25 @@
         <div id="wrapper">
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
-                    <a>
-                        <img th:src="@{/pages/common/images/banner10.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
+                    <a class="banner10">
+
+                        <img th:src="@{/pages/common/images/banner10.jpg}" data-thumb="/pages/common/images/banner10.jpg" alt="" />
                         <i class="knowmore" onclick="location.href='/datamart';"></i>
+                        <b th:href="@{/datamart}" class="knowmore2">加载更多</b>
+                        <!--<div class="cartoon_one">
+                            <img src="/pages/common/images/index_bannebr1.png" alt="">
+                        </div>
+
+                        <div>
+                            <img src="/pages/common/images/index_banner2.png" alt="" class="cartoon_two">
+                        </div>-->
+
                     </a>
                     <a>
                         <img th:src="@{/pages/common/images/banner20.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
                         <i class="joinus" onclick="location.href='/institution/add';"></i>
                     </a>
+
                 </div>
             </div>
 
@@ -70,8 +81,14 @@
                         </button>
                     </div>
                 </form>
+
             </div>
             <!--轮播表单结束-->
+            <!--banner了解更多按钮开始-->
+
+            <!--banner了解更多按钮结束-->
+
+
 
             <!--已登录  右侧悬浮框-->
             <div class="positiondata stremindex" th:if="${user}">
@@ -94,8 +111,8 @@
         <!--工业数据开始-->
         <div class="industrial_data">
             <h2 class="intitle"><i></i>  工业数据 <span >Industry Data</span>  </h2>
-            <ul class="databox">
-                <li class="databox_not"><img th:src="@{/tradecenter/images/index_03.png}" class="boximg" alt=""/></li>
+            <ul class="databox intitle2">
+                <li class="databox_not"><img src="/pages/common/images/index_03.png" class="boximg" alt=""/></li>
 
                 <li>
                     <a th:href="@{/datamart}">
@@ -147,40 +164,46 @@
         <div class="relevance_data">
             <h2 class="intitle"><i></i>  关联数据 <span >Associated Data</span>  </h2>
             <ul class="relevancebox">
-                <li class="databox_not"><img th:src="@{/tradecenter/images/index_06.png}"  class="boximg" alt=""/></li>
-                <li>
+                <div class="databox_not lf"><img src="/pages/common/images/index_06.png"  class="boximg" alt=""/></div>
+
+                <li class="bortop borleft ">
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>社交网络</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <span class="new_box"></span>
                         <p class="new_shade active"></p>
                     </a>
                 </li>
-                <li>
+                <li class="bortop">
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>金融财经</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
-                <li>
+                <li class="bortop">
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>电子商务</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
-                <li>
+                <li class="bortop">
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>产业数据</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
-                <li>
+                <li class="borleft">
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>交通出行</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
@@ -188,6 +211,7 @@
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>健康医疗</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
@@ -195,6 +219,7 @@
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>科研分析</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
@@ -202,13 +227,15 @@
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>生活服务</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
-                <li>
+                <li  class="borleft">
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>企业征信</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
@@ -216,6 +243,7 @@
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>社会服务</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
@@ -223,6 +251,7 @@
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>新闻咨询</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
@@ -230,6 +259,7 @@
                     <a th:href="@{/datamart}">
                         <P></P>
                         <P>教育科研</P>
+                        <p class="sum">累计交易:￥1000.0</p>
                         <p class="new_shade"></p>
                     </a>
                 </li>
@@ -240,47 +270,47 @@
         <div class="reptile_data">
             <h2 class="intitle"><i></i>  爬虫市场 <span >Crawler Market</span>  </h2>
             <ul class="datamart">
-                <li class="databox_not"><img th:src="@{/tradecenter/images/index_08.png}"  class="boximg" alt=""/></li>
-                <li>
+                <li class="databox_not"><img src="/pages/common/images/index_08.png"  class="boximg" alt=""/></li>
+                <li class="rightnone bottomnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
                         <P>社交网站</P>
-                        <p class="social_shade active"></p>
+                        <p>共有7698条规则</p>
                     </a>
                 </li>
-                <li>
+                <li class="rightnone bottomnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
                         <P>金融网站</P>
-                        <p class="social_shade"></p>
+                        <p>共有7698条规则</p>
                     </a>
                 </li>
-                <li>
+                <li class="bottomnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
                         <P>行业网站</P>
-                        <p class="social_shade"></p>
+                        <p>共有7698条规则</p>
                     </a>
                 </li>
-                <li>
+                <li class="rightnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
                         <P>电商网站</P>
-                        <p class="social_shade"></p>
+                        <p>共有7698条规则</p>
                     </a>
                 </li>
-                <li>
+                <li class="rightnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
                         <P>生活网站</P>
-                        <p class="social_shade"></p>
+                        <p>共有7698条规则</p>
                     </a>
                 </li>
                 <li>
                     <a th:href="@{/crawlers}">
                         <P></P>
                         <P>新闻网站</P>
-                        <p class="social_shade"></p>
+                        <p>共有7698条规则</p>
                     </a>
                 </li>
             </ul>
@@ -319,12 +349,25 @@
 
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="/assets/pages/scripts/form-validation-md.js" type="text/javascript"></script>
+
+        <script src="/assets/global/plugins/jquery.nivo.slider.pack.js"></script>
         <script src="/pages/common/js/app.js" type="text/javascript"></script>
 
         <script>
             $(document).ready(function() {
                 App.initIndex() ;
             });
+            $(".cartoon_one").mouseover(function(){
+                $(".cartoon_one").animate({"margin-top":"0px"},400);
+                $(".cartoon_two").animate({"margin-top":"0px"},400);
+            });
+            $(".cartoon_one").mouseleave(function(){
+                $(".cartoon_one").animate({"margin-top":"20px"},400);
+                $(".cartoon_two").animate({"margin-top":"-20px"},400);
+            });
+
+
+
         </script>
     </body>
 </html>

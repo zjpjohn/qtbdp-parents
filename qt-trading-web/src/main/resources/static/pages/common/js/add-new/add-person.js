@@ -62,6 +62,9 @@ $(function () {
             },
             logo:{
                 required: true
+            },
+            agreement:{
+                required: true
             }
         },
         _messages: {
@@ -89,7 +92,11 @@ $(function () {
             },
             logo:{
                 required: "请上传服务商logo"
+            },
+            agreement:{
+                required: "请阅读并同意服务商入驻合作协议"
             }
+
         }
     };
 
@@ -103,8 +110,11 @@ $(function () {
             LoadingData.toastr({
                 _type: 'error',
                 _title: '表单提交',
-                _msg: '网络超时，请重试或者联系管理员'
+                _msg: data.result.message
             }) ;
+            setTimeout(function () {
+                location.href = "/usercenter";
+            },3000)
         }
     });
 

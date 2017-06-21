@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/pages/common/css/common.css"/>
     <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
     <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/assets/global/plugins/ladda/ladda.min.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL PLUGINS -->
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
 </head>
@@ -16,6 +20,64 @@
 <!-- 页头-->
 <div th:replace="layout/header" /></div>
 <!--页头结束-->
+
+
+<!--验证是否同意协议开始-->
+<div class="protocol2">
+    <div class="protocol_contet">
+        <p class="layer_msg2">《钱塘大数据交易中心服务商入驻合作协议》</p>
+
+        <div class="layer_msg">
+            甲方：钱塘大数据交易中心服务商入驻合作协议 <br>
+            乙方： 杭州钱塘大数据交易中心有限公司<br><br>
+            为了更好地为拥有优质内容的商家服务以及保障消费者权益，甲乙双方本着甲、乙双方平等合作、互惠互利的原则，在符合相关法律法规，不违反市场竞争的情况下，甲方须遵循乙方的运营管理规范，经友好协商，甲乙双方签署以下入驻协议。<br><br>
+            一、合作内容
+            1、甲方在乙方钱塘大数据交易中心平台创造服务商进行数据产品销售，乙方提供甲方更好地展现其服务商主页与商品信息，支付渠道代收货款等技术服务。<br>
+            2、本协议自甲方服务商在乙方钱塘大数据交易中心平台上线之日起生效。<br><br>
+            二、甲方权利与义务<br>
+            权利：<br>
+            1、乙方为甲方提供钱塘大数据交易中心平台的网络宣传。<br>
+            2、乙方为甲方在消费群体中做相关宣传介绍并进行相关推广，以提升甲方的曝光量。<br>
+            3、乙方为甲方进行相关的资质认证，并将信息展示给乙方平台用户。<br>
+            4、乙方按照《钱塘大数据交易中心服务协议》 ，每月定期将完成交易的代收款支付给予甲方指定的提现帐号。<br><br>
+            义务：<br>
+            3、甲方全部数据产品均支持基于《钱塘大数据交易中心平台规范》的退款维权。<br>
+            4、甲方有义务在数据产品价值50元人民币以下，如发生用户购买数据产品申请平台介入退款时，配合乙方进行全额退款。高于50元人民币以上，参考《钱塘大数据交易中心平台规范》退款维权准则。<br>
+            5、如因特殊情况，甲方在经营过程对资质或创建服务商进行变更或取消的，甲方至少提前5个工作日告知乙方，并且在双方协议认可下才方可进行变更。<br>
+            6、如乙方用户要求提供发票，由甲方负责提供。<br>
+            7、甲方必须为自身提供数据产品的版权负责，明确该数据产品不涉及任何版权性质，如因此产生任何法律责任与诉讼，甲方全权负责到底，乙方无责。<br>
+            8、甲方必须为自身提供的数据产品负责，不出售，买卖任何涉及公民隐私相关数据，如因此产生任何法律责任与诉讼，甲方全权负责到底，乙方无责<br>
+            9、甲方应及时关注乙方平台的《钱塘大数据交易中心服务协议》与《钱塘大数据交易中心平台规范》的修订与补充，遵守《钱塘大数据交易中心服务协议》与《钱塘大数据交易中心平台规范》的前提下进行运作，任何违反本协议，包括违反《钱塘大数据交易中心服务协议》与《钱塘大数据交易中心平台规范》的行为，甲方必须负责以此引发的法律责任。<br>
+            10、乙方在甲方与用户的交易中不收取交易佣金。<br>
+            11、乙方在甲方与用户的交易中收取技术服务费，具体技术服务费收取办法在《钱塘大数据交易中心服务协议》明确约定。<br>
+            12、甲方应保证需提供有盖章的单位资质证明复印件或个人真实签署的身份证复印件，因资质问题而产生的风险由甲方全部承担。<br><br>
+            三、乙方权利与义务<br>
+            乙方的权利<br>
+            1、如甲方提供数据产品出现严重质量问题，乙方有权对甲方帐户进行临时市场管控。<br>
+            2、甲方在平台运作必须遵守《钱塘大数据交易中心服务协议》与《钱塘大数据交易中心平台规范》，如甲方违反本协议或《钱塘大数据交易中心服务协议》或《钱塘大数据交易中心平台规范》，乙方有权随时终止合作协议。<br>
+            3、甲方作为乙方认证服务商，对自已的数据产品有义务保证数据质量达标。如发生多次因数据质量而发生退款维权，乙方有权保留关闭甲方服务商的权利。<br>
+            4、乙方在《钱塘大数据交易中心服务协议》与《钱塘大数据交易中心平台规范》的基础上，对甲方帐户与交易进行限制。<br><br>
+            乙方的义务<br>
+            1、服务商为经过乙方认证，乙方有义务在整个平台运营为甲方服务商输送流量与排名。<br>
+            2、乙方提供专职的客服，配合甲方经营过程中的各项工作，积极协调双方配合。<br><br>
+            四、合作约定<br>
+            1、双方的品牌归各自所有。<br>
+            甲、乙双方均不可在对方未经授权的情况下使用对方名称、LOGO以及涉及相关内容的销售、促销宣传材料及广告、报纸、杂志、宣传单等。如因此产生的不良后果及损失由违约方自行全部承担。<br>
+            2、任何双方违反本协议所规定的义务导致另一方受到包括但不限于投诉、举报、诉讼或处罚、赔偿等损失，违约方在收到守约方要求纠正其违法行为的书面通知之日，应立即停止其违约行为，并在10日内赔偿守约方因此受到的损失。<br>
+            3、本协议任何一方均应对其获得对方的业务、经营、财务状况和其他保密资料予以严格保密，不得以任何形式向任何第三方披露。如因任何一方未能履行保密义务而给其他方造成任何损失的，应承担赔偿责任。<br>
+            4、为保证更好的服务质量与做好平台管控，甲方在使用乙方平台中，应缴纳平台保证金，具体保证金额标准参考平台规定，以签订补充协议为准。如无违约情况发生，保证金在本协议终止15天之后予以退款。如发生违约情况，视具体罚金予以退款<br>
+            5、乙方可提供促销（满就送，满就减）、引流、推广（优惠券）等增值服务，甲方应无条件予配合。如需甲方支付平台外的推广费用，具体须签订补充协议方可进行。<br><br>
+            五、争议解决<br>
+            本协议项下争议由双方友好协商解决，无法达成一致情形，任何一方有权将整体提交至深圳视界信息技术有限公司所在地有管辖权的人民法院诉讼解决。<br><br>
+            六 协议生效及其他<br>
+            1、本协议由平台用户方阅读并同意后生效。<br>
+            2、本协议正本一式两份，甲乙双方各执一份。<br>
+        </div>
+    </div>
+</div>
+<!--验证是否同意协议结束-->
+
+
 
 <div class="cenAll">
     <div class="center_main floating">
@@ -35,14 +97,14 @@
             <div id="fromContent">
 
                 <!--表单信息-->
-                <form id="fromCompany" class="trade_form" action="/api/institutionV2" method="post">
+                <form id="fromCompany" action="/api/institutionV2" method="post">
                     <!--服务商基本信息-->
                     <input type="hidden" name="institutionType" value="1">
                     <input type="hidden" name="typeId" value="0">
                     <input type="hidden" name="id" id="AccountId">
                     <input type="hidden" name="companyInfoModel.id" id="personId">
 
-                    <div id="feedback" style="margin: 30px 0 50px 0; display: none;">
+                    <div id="feedback" style="margin: 30px 0 50px 0;display: none">
                         <div class="form_group">
                             <p class="group_title" style="font-size:16px; color: red">
                                 <b>不通过原因：</b>
@@ -56,7 +118,9 @@
                     <div  class="from-top clearfix">
                         <div class="lf">
                             <div id="type">
-                                <h6>身份类型</h6>
+                                <p class="group_title">
+                                    <b>身份类型</b> <i>*</i>
+                                </p>
                                 <div class="type-Content">
                                     <div class="type-button">
                                         <a href="/usercenter/add/person" class="">个人</a>
@@ -113,7 +177,7 @@
                                 <p class="tip">需与营业执照上的名称严格一致</p>
                             </div>
 
-                            <div class="form-group clearfix">
+                            <div class="form-group clearfix form_group">
                                 <p class="group_title">
                                     <b>营业执照</b> <i>*</i>
                                 </p>
@@ -125,7 +189,7 @@
                                 <input type="hidden"  name="companyInfoModel.companyLogo" id="licenseContent">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group form_group">
                                 <p class="group_title">
                                     <b>营业执照注册号</b> <i>*</i>
                                 </p>
@@ -136,7 +200,7 @@
                         </div>
 
 
-                        <div class="form-group address">
+                        <div class="form-group address form_group">
                             <p class="group_title">
                                 <b>企业所在地</b> <i>*</i>
                             </p>
@@ -154,7 +218,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form_group">
                             <p class="group_title">
                                 <b>联系电话</b> <i>*</i>
                             </p>
@@ -166,10 +230,18 @@
                     </div>
                     <!--企业信息结束-->
 
+                    <div class="form_group">
+                        <label class="form_control form-group checkbox-inline">
+                            <input type="checkbox" name="agreement" class="agreement form-control" style="display: inline-block;vertical-align: middle;margin-bottom: 2px;" value="">
+                            我已阅读并同意
+                            <a href="javascript:;" class="protocol">《钱塘用户注册协议》</a>
+                        </label>
+                    </div>
+
                     <!-- 页脚发布按钮 -->
-                    <div class="form_btm submit">
+                    <div class="form_btm">
                         <!--<input type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>-->
-                        <button type="submit" id="submit-btn" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
+                        <button type="submit" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">提交</button>
 
                         <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
                             <span class="ladda-label">发布</span>
@@ -179,7 +251,7 @@
                 <!--表单信息结束-->
             </div>
             <!--from表单结束-->
-            <div id="audit" style="font-size: 18px;margin-top: 50px; display: none;">
+            <div id="audit" style="font-size: 18px;margin-top: 50px;display: none">
                 信息正在审核中...
             </div>
         </div>
@@ -210,57 +282,75 @@
 <script src="/pages/common/js/fromCommon.js"></script>
 <script src="/pages/common/js/add-new/add-company.js"></script>
 
+<script>
+    $(".protocol").click(function(){
+        var layermag=$(".layer_msg").html();
+        //页面层
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['1200px', '840px'], //宽高
+            content: layermag
+        });
+    });
+</script>
+
+
+
 <script th:inline="javascript">
     var user = [[${user}]];
     $(document).ready(function() {
 
-        if(user.infoNewModel.auditStatus == 0){
-            $('#fromCompany').css('display','none');
-            $('#audit').css('display','block');
-        }else if(user.infoNewModel.auditStatus == 2){
-            $('#feedback').css('display', 'block');
-            $('#fromCompany').css('display','block');
-            $('#audit').css('display','none');
+        if(user.infoNewModel){
+            if(user.infoNewModel.auditStatus == 0){
+                $('#fromPerson').css('display','none');
+                $('#audit').css('display','block');
+            }else if(user.infoNewModel.auditStatus == 2){
+                $('#feedback').css('display','block');
+                $('#fromPerson').css('display','block');
+                $('#audit').css('display','none');
 
-            $.ajax({
-                url: "/api/institutionV2/findInstitutionExtend",
-                type: "get",
-                dataType:"json",
-                success:function(ret){
-                    var data = ret.pageInfo;
-                    $('fieldset > span').css('display','none');
+                $.ajax({
+                    url: "/api/institutionV2/findInstitutionExtend",
+                    type: "get",
+                    dataType:"json",
+                    success:function(ret){
+                        var data = ret.pageInfo;
+                        $('fieldset > span').css('display','none');
 
-                    $('#AccountId').val(data.id);
-                    $('.reason').html(data.auditFailReason);
-                    $('#facilitator').val(data.name);
-                    $('#field').val(data.designation);
+                        $('#AccountId').val(data.id);
+                        $('.reason').html(data.auditFailReason);
+                        $('#facilitator').val(data.name);
+                        $('#field').val(data.designation);
 
-                    $('#logo').attr("src",data.logo);
-                    $('#logo').removeClass('Image');
-                    $('#logoContent').val(data.logo);
-
-
-                    var company = data.companyInfoModel;
+                        $('#logo').attr("src",data.logo);
+                        $('#logo').removeClass('Image');
+                        $('#logoContent').val(data.logo);
 
 
-                    $('#personId').val(company.id);
+                        var person = data.personalInfoModel;
 
-                    $('#License').attr("src",company.companyLogo);
-                    $('#License').removeClass('Image');
-                    $('#licenseContent').val(company.companyLogo);
+                        $('#personId').val(person.id);
 
+                        $('#ID1').attr("src",person.fullFacePhoto);
+                        $('#ID1').removeClass('Image');
+                        $('#fullFacePhoto').val(person.fullFacePhoto);
 
+                        $('#ID2').attr("src",person.negativeSidePhoto);
+                        $('#ID2').removeClass('Image');
+                        $('#negativeSidePhoto').val(person.negativeSidePhoto);
+                        ;
+                        $('#name').val(person.realName);
+                        $('#ID').val(person.idNumber);
+                        $('#phone').val(person.phone);
 
-                    $('#companyName').val(company.companyName);
-                    $('#LicenseNumber').val(company.licenseNumber);
-                    $('#phone').val(company.phone);
+                        $('#fromPerson').attr("action","/api/institutionV2/update")
+                    },
+                    error : function () {
 
-                    $('#fromCompany').attr("action","/api/institutionV2/update")
-                },
-                error : function () {
-
-                }
-            });
+                    }
+                });
+            }
         }
 
 

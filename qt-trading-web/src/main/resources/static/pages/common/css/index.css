@@ -36,7 +36,6 @@ body{
     height:400px;
     margin:0px auto;
     margin-top: 20px;
-    border-top:1px solid #E9E9E9;
 }
 .databox>li,.datamart>li{
     box-sizing: border-box;
@@ -44,19 +43,22 @@ body{
     width:300px;
     height:200px;
     background: #fff;
-    border-right:1px solid #E9E9E9;
-    border-bottom:1px solid #E9E9E9;
     position:relative;
+}
+.datamart>li{
+    border:1px solid #E9E9E9;
 }
 .databox>li:first-child,.datamart>li:first-child{
     box-sizing: border-box;
     /*border-left:1px solid #E9E9E9;*/
-    width:300px;
+    width:290px;
     height:400px;
+    margin-right: 10px;
 }
 .databox>li>.boximg,.datamart>li>.boximg{
-    width:300px;
+    width:290px;
     height:400px;
+    margin-right: 10px;
 }
 .databox>li>a>p:first-child,.datamart>li>a>p:first-child,.relevancebox>li>a>p:first-child{
     width:70px;
@@ -71,11 +73,36 @@ body{
 }
 .relevancebox>li>a>p:first-child{
     width:70px;
-    margin-top: 35px;
+    margin-top: 30px;
+    margin-bottom: 0px;
 }
 .databox>li>a>p:nth-child(2),.datamart>li>a>p:nth-child(2),.relevancebox>li>a>p:nth-child(2){
     text-align: center;
+    color:#333;
 }
+.sum{
+    text-align: center;
+    color:#F9C659;
+    margin-top:12px;
+}
+.datamart>.rightnone{
+    border-right:none;
+}
+.datamart>.bottomnone{
+    border-bottom: none;
+}
+.datamart>li>a>p:first-child{
+    margin-top:30px;
+    margin-bottom: 10px;
+}
+.datamart>li>a>p:nth-child(3){
+    text-align: center;
+    color:#02CDA0;
+    margin-top:10px;
+
+}
+
+
 
 /*******工业数据开始*********/
 .databox>li:nth-child(2)>a>p:first-child{
@@ -138,16 +165,19 @@ body{
     padding-bottom: 40px;
 }
 .relevance_data .intitle>i{
-    background-image: linear-gradient(to bottom,#FDA081 0%,#FF5C56 100%);
+    background-image: linear-gradient(to bottom,#F9DE00 0%,#FFAF0E 100%);
 }
 .relevancebox{
     width:1200px;
     height:510px;
     margin:0px auto;
     margin-top: 20px;
-    border-top:1px solid #E9E9E9;
     box-sizing: border-box;
 }
+.relevancebox>li:first-child>img{
+    height:510px;
+}
+
 .relevancebox>li{
     box-sizing: border-box;
     float:left;
@@ -158,10 +188,21 @@ body{
     border-bottom:1px solid #E9E9E9;
     position:relative
 }
-.relevancebox>li:first-child{
+.relevancebox>li:hover,.relevancebox>li.active{
+    background-color: #F9C659;
+}
+.relevancebox>li:hover>a>p,.relevancebox>li.active>a>p{
+    color: #fff;
+}
+
+
+
+
+.databox_not>img{
     box-sizing: border-box;
-    width:300px;
+    width:290px;
     height:510px;
+    margin-right: 10px;
 }
 .relevancebox>li:nth-child(2)>a>p:first-child{
     background-position:10px -90px;
@@ -182,30 +223,102 @@ body{
     background-position:-581px -85px;
 }
 .relevancebox>li:nth-child(8)>a>p:first-child{
-    background-position:-725px -80px;
+    background-position:-720px -74px;
 }
 .relevancebox>li:nth-child(9)>a>p:first-child{
-    background-position:-96px -178px;
+    background-position:8px -178px;
 }
 .relevancebox>li:nth-child(10)>a>p:first-child{
-    background-position:-200px -170px;
+    background-position:-98px -176px;
+
 }
 .relevancebox>li:nth-child(11)>a>p:first-child{
-    background-position:-324px -166px;
+    background-position:-200px -170px;
 }
 .relevancebox>li:nth-child(12)>a>p:first-child{
-    background-position:-448px -80px;
+    background-position:-324px -166px;
 }
 .relevancebox>li:nth-child(13)>a>p:first-child{
     background-position:-444px -170px;
 }
+
+
+
+
+
+
+
+
+
+
+
+/****hover背景图******/
+.relevancebox>li:nth-child(2):hover>a>p:first-child,.relevancebox>li:nth-child(2).active>a>p:first-child{
+    background-position:10px -779px;
+}
+.relevancebox>li:nth-child(3):hover>a>p:first-child,.relevancebox>li:nth-child(3).active>a>p:first-child{
+    background-position:-96px -779px;
+}
+.relevancebox>li:nth-child(4):hover>a>p:first-child,.relevancebox>li:nth-child(4).active>a>p:first-child{
+    background-position:-208px -779px;
+}
+.relevancebox>li:nth-child(5):hover>a>p:first-child,.relevancebox>li:nth-child(5).active>a>p:first-child{
+    background-position:-324px -779px;
+}
+.relevancebox>li:nth-child(6):hover>a>p:first-child,.relevancebox>li:nth-child(6).active>a>p:first-child{
+    background-position:-448px -766px;
+}
+.relevancebox>li:nth-child(7):hover>a>p:first-child,.relevancebox>li:nth-child(7).active>a>p:first-child{
+    background-position:-581px -774px;
+}
+.relevancebox>li:nth-child(8):hover>a>p:first-child,.relevancebox>li:nth-child(8).active>a>p:first-child{
+    background-position:-720px -760px;
+}
+.relevancebox>li:nth-child(9):hover>a>p:first-child,.relevancebox>li:nth-child(9).active>a>p:first-child{
+    background-position:8px -854px;
+}
+.relevancebox>li:nth-child(10):hover>a>p:first-child,.relevancebox>li:nth-child(10).active>a>p:first-child{
+    background-position:-98px -854px;
+}
+.relevancebox>li:nth-child(11):hover>a>p:first-child,.relevancebox>li:nth-child(11).active>a>p:first-child{
+    background-position:-200px -854px;
+}
+.relevancebox>li:nth-child(12):hover>a>p:first-child,.relevancebox>li:nth-child(12).active>a>p:first-child{
+    background-position:-324px -854px;
+}
+.relevancebox>li:nth-child(13):hover>a>p:first-child,.relevancebox>li:nth-child(13).active>a>p:first-child{
+    background-position:-444px -854px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .new_box{
     display:inline-block;
     width:50px;
     height:50px;
     background:url(../images/icon_index1.png)-607px -280px;
     position:relative;
-    top:-144px;
+    top:-152px;
     left:0px;
     z-index:2;
 }
@@ -215,15 +328,44 @@ body{
     position: absolute;
     top:0px;
     left:0px;
-    background-color: rgba(255,105,95,0.1);
+    background-color: #F9C659;
     display:none;
 }
+
+
 
 .relevancebox>li:hover>.new_shade,.relevancebox>li>.new_shade.active{
     cursor: pointer;
     display:block;
 
 }
+
+.intitle2>li:nth-child(2){
+    background: url(../images/intitle1.jpg);
+}
+.intitle2>li:nth-child(3){
+    background: url(../images/intitle2.jpg);
+}
+.intitle2>li:nth-child(4){
+    background: url(../images/intitle3.jpg);
+}
+.intitle2>li:nth-child(5){
+    background: url(../images/intitle4.jpg);
+}
+.intitle2>li:nth-child(6){
+    background: url(../images/intitle5.jpg);
+}
+.intitle2>li:nth-child(7){
+    background: url(../images/intitle6.jpg);
+}
+
+.bortop{
+    border-top:1px solid #E9E9E9;
+}
+.borleft{
+    border-left:1px solid #E9E9E9;
+}
+
 
 
 
@@ -258,27 +400,42 @@ body{
 .datamart>li:nth-child(7)>a>p:first-child{
     background-position:-368px -266px;
 }
-.social_shade{
-    width:300px;
-    height:200px;
-    position: absolute;
-    top:0px;
-    left:0px;
-    background-color: rgba(50,177,108,0.1);
-    display:none;
+.datamart>li:hover,.datamart>li.active{
+     background:#00C099;
+ }
+.datamart>li:hover>a>p,.datamart>li.active>a>p{
+    color:#fff;
 }
 
-.datamart>li:hover>.social_shade,.datamart>li>.social_shade.active{
-    cursor: pointer;
-    display:block;
-
+.datamart>li:nth-child(2):hover>a>p:first-child{
+    background-position:-14px -642px;
 }
+.datamart>li:nth-child(3):hover>a>p:first-child{
+    background-position:-140px -642px;
+}
+.datamart>li:nth-child(4):hover>a>p:first-child{
+    background-position:-288px -642px;
+}
+.datamart>li:nth-child(5):hover>a>p:first-child{
+    background-position:-404px -642px;
+}
+.datamart>li:nth-child(6):hover>a>p:first-child{
+    background-position:-542px -642px;
+}
+.datamart>li:nth-child(7):hover>a>p:first-child{
+    background-position:-678px -638px;
+}
+
+
+
+
+
 
 /**************爬虫市场结束***********/
 
 /*****数据服务商开始*******/
 .reptile_data .intitle>i.servicem{
-    background-image: linear-gradient(to bottom,#7EE7FD 0%,#00C28B 100%);
+    background-image: linear-gradient(to bottom,#81E7FD 0%,#2488D3 100%);
     margin-top: 50px;
 }
 .servicebox{
