@@ -43,19 +43,22 @@ $(function () {
                 required: true
             },
             scale:{
+                digits: true,//必须输入整数
                 required: true
             },
             typeId: {
                 required: true
             },
             price:{
-                required: true
+                required: true,
+                digits: true
             },
-            endTime:{
+            endTime1:{
                 required: true
             },
             website:{
-                required: true
+                required: true,
+                url:true
             },
             phone:{
                 required: true,
@@ -78,19 +81,22 @@ $(function () {
                 required: "请输入数据维度"
             },
             scale:{
-                required: "请输入数据规模"
+                required: "请输入数据规模",
+                digits: "请输入整数"//必须输入整数
             },
             typeId: {
                 required: "请选择数据类别"
             },
             price:{
-                required: "请输入悬赏金额"
+                required: "请输入悬赏金额",
+                digits: "请输入整数"//必须输入整数
             },
-            endTime:{
+            endTime1:{
                 required: "请选择截止时间"
             },
             website:{
-                required: "请填写参考网站"
+                required: "请填写参考网站",
+                url:"网站格式不正确"
             },
             phone:{
                 required: "请输入手机号"

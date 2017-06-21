@@ -25,9 +25,10 @@
         c.auditor,
         c.audit_time,
         c.audit_status,
-        c.audit_fail_reason
+        c.audit_fail_reason,
+        d.nick create_name
         FROM
-        custom_service AS c
+        custom_service AS c left join data_user_info d on c.create_id = d.id
         WHERE
         c.is_used = 1
         <if test="serviceType != null and serviceType != 0">
@@ -63,9 +64,10 @@
         c.audit_time,
         c.audit_status,
         c.audit_fail_reason,
-        c.desc
+        c.`desc`,
+        d.nick create_name
         FROM
-        custom_service AS c
+        custom_service AS c left join data_user_info d on c.create_id = d.id
         WHERE
         c.is_used = 1 AND c.id = #{id}
     </select>
@@ -93,6 +95,7 @@
         <result column="audit_time" property="auditTime" />
         <result column="audit_status" property="auditStatus" />
         <result column="audit_fail_reason" property="auditFailReason" />
+        <result column="create_name" property="createName"/>
         <result column="desc" property="desc" />
     </resultMap>
 

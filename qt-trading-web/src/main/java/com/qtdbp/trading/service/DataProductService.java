@@ -12,8 +12,10 @@ import com.qtdbp.trading.model.DataTransactionOrderModel;
 import com.qtdbp.trading.utils.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 数据包产品业务服务
@@ -69,17 +71,33 @@ public class DataProductService {
     }
 
     /**
-     * 新增数据包产品
+     * 新增数据包产品、数据条目表数据
      * @param productModel
      * @return
      * @throws GlobalException
      */
+    @Transactional
     public Integer insertProduct(DataProductModel productModel) throws GlobalException {
 
         if (productModel == null) throw  new GlobalException("数据包产品为空") ;
 
         Integer count = productMapper.insertProduct(productModel) ;
-        if (count != null && count >0) return productModel.getId();
+        if (count != null && count >0){
+            Map<String, String> itemMap = productModel.getSubFiles();
+            if (itemMap != null && itemMap.size() > 0) {
+                for (String key : itemMap.keySet()) {
+                    DataItemModel itemModel = new DataItemModel();
+                    itemModel.setProductId(productModel.getId());
+                    itemModel.setIsUsed(1);
+                    itemModel.setPrice(productModel.getItemPrice());
+                    itemModel.setItemName(key);
+                    itemModel.setFileUrl(itemMap.get(key));
+                    int id = productMapper.insertItem(itemModel);
+                    if (!(id > 0)) throw new GlobalException("插入数据条目失败");
+                }
+            }
+            return productModel.getId();
+        }
         return -1;
     }
 
@@ -171,4 +189,44 @@ public class DataProductService {
         return count;
     }
 
+    /**
+     * 更新数据包产品信息、数据条目信息
+     * @param productModel
+     * @return
+     * @throws GlobalException
+     */
+    @Transactional
+    public Integer updateProduct(DataProductModel productModel) throws GlobalException {
+        Integer count = 0;
+        if (productModel.getId() != null && productModel.getId() != 0) {
+            count = productMapper.updateProduct(productModel);
+            if (count > 0) {
+
+                Map<String, String> itemMap = productModel.getSubFiles();
+                //当数据包产品修改时，数据条目文件也要进行修改
+                if (itemMap != null && itemMap.size() > 0) {
+                    //删除数据条目文件
+                    Integer delCount = productMapper.deleteByProductId(productModel.getId());
+                    //重新插入修改后的数据文件
+                    if (delCount > 0) {
+                        for (String key : itemMap.keySet()) {
+                            DataItemModel itemModel = new DataItemModel();
+                            itemModel.setProductId(productModel.getId());
+                            itemModel.setIsUsed(1);
+                            itemModel.setPrice(productModel.getItemPrice());
+                            itemModel.setItemName(key);
+                            itemModel.setFileUrl(itemMap.get(key));
+                            int id = productMapper.insertItem(itemModel);
+                            if (!(id > 0)) throw new GlobalException("插入数据条目失败");
+                        }
+                    }else {
+                        throw new GlobalException("删除数据条目失败");
+                    }
+                }
+            }
+        } else {
+            throw new GlobalException("产品ID为空，请重新操作");
+        }
+        return count;
+    }
 }

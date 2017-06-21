@@ -69,8 +69,8 @@
         #{productId},
         #{itemName},
         #{itemContent},
-        #{viewCount},
-        #{downloadCount},
+        0,
+        0,
         1,
         #{price},
         #{fileUrl}

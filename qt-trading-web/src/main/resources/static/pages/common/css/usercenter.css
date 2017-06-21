@@ -841,19 +841,31 @@ tbody{
     width: 50%;
 }
 
-.type-button >button {
+
+
+.type-button > a {
     box-sizing: border-box;
     width: 86px;
+    height: 28px;
+    display: inline-block;
+    text-align: center;
+    line-height: 28px;
 }
 
 .type-button {
     margin:10px 0 10px 0;
+    border: 1px solid #CACACA;
+    border-radius: 3px;
+    display: inline-block;
 }
 
 #type .select-button {
     background-color: #0076C8;
     color: #fff;
 }
+
+
+
 
 .tip {
     color: #A0C9E9;

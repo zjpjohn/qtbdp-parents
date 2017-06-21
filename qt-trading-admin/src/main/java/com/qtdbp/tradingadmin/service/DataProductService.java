@@ -56,7 +56,7 @@ public class DataProductService {
     }
 
     /**
-     * 新增数据包产品、数据条目产品以及关联数据表数据
+     * 新增数据包产品、数据条目表数据
      * @param productModel
      * @return
      * @throws GlobalException
@@ -68,7 +68,7 @@ public class DataProductService {
 
         Integer count = productMapper.insertProduct(productModel) ;
         if (count != null && count > 0) {
-            List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
+/*            List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
             if (list != null && list.size() > 0) {
                 for (DataProductAttrRelationModel model : list) {
                     model.setProductId(productModel.getId());
@@ -76,7 +76,7 @@ public class DataProductService {
                     Integer id = productMapper.insertProductAttrRelation(model);
                     if (!(id > 0)) throw new GlobalException("插入关联表数据失败");
                 }
-            }
+            }*/
             Map<String, String> itemMap = productModel.getSubFiles();
             if (itemMap != null && itemMap.size() > 0) {
                 for (String key : itemMap.keySet()) {
@@ -121,12 +121,13 @@ public class DataProductService {
      * @return
      * @throws GlobalException
      */
+    @Transactional
     public Integer updateProduct(DataProductModel productModel) throws GlobalException {
         Integer count = 0;
         if (productModel.getId() != null && productModel.getId() != 0) {
             count = productMapper.updateProduct(productModel);
             if (count > 0) {
-                List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
+/*                List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
                 if (list != null && list.size() > 0) {
                     //删除数据包属性关联表数据
                     Integer delCount = productMapper.deleteAttrByProductId(productModel.getId());
@@ -141,7 +142,7 @@ public class DataProductService {
                     } else {
                         throw new GlobalException("删除数据包属性关联表数据失败");
                     }
-                }
+                }*/
                 Map<String, String> itemMap = productModel.getSubFiles();
                 //当数据包产品修改时，数据条目文件也要进行修改
                 if (itemMap != null && itemMap.size() > 0) {
@@ -171,7 +172,7 @@ public class DataProductService {
     }
 
     /**
-     * 审核爬虫规则
+     * 审核数据包产品
      * @param productModel
      * @return
      * @throws GlobalException

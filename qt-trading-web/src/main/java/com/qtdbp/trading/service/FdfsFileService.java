@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 文件服务 - 下载
@@ -148,5 +149,24 @@ public class FdfsFileService {
             throw new GlobalException("文件："+fileName+"下载失败，错误信息："+e.getMessage()) ;
         }
         return new ResponseEntity<byte[]>(content, headers, HttpStatus.CREATED);
+    }
+
+    /**
+     * 上传文件
+     * @param inputStream 文件流
+     * @param size  大小
+     * @param ext   文件类型
+     * @return
+     * @throws IOException
+     */
+    public String uploadFile(InputStream inputStream, long size, String ext) throws IOException {
+        StorePath storePath = storageClient.uploadFile(inputStream, size, ext,null);
+        return getResAccessUrl(storePath);
+    }
+
+    // 封装图片完整URL地址
+    private String getResAccessUrl(StorePath storePath) {
+        String fileUrl = storePath.getFullPath();
+        return fileUrl;
     }
 }

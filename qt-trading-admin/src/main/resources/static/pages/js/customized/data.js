@@ -12,7 +12,7 @@ $(function () {
             { "data": "name" },
             { "data": "dimension" },
             { "data": "price" },
-            { "data": "createId" },
+            { "data": "createName" },
             { "data": "createTime" },
             {"data":"auditStatus"},
             { "data": null }

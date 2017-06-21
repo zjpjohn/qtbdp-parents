@@ -1,4 +1,4 @@
-package com.qtdbp.tradingadmin.service;
+package com.qtdbp.trading.service;
 
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;

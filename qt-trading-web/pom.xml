@@ -5,12 +5,14 @@
     <parent>
         <artifactId>qtbdp-parents</artifactId>
         <groupId>com.qtbdp.parents</groupId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>qt-trading-web</artifactId>
-    <!--<version>1.2.2.RELEASE</version>-->
+<!--
+    <version>1.2.3.RELEASE</version>
+-->
 
     <dependencies>
         <dependency>
@@ -141,6 +143,18 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- POI解析文件 -->
+        <dependency>
+            <groupId>com.qtbdp.utils</groupId>
+            <artifactId>file-parser</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
     </dependencies>
 
@@ -168,20 +182,21 @@
 
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--<version>1.5.2.RELEASE</version>-->
-                <configuration>
-                    <mainClass>com.qtdbp.trading.WebApplication</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <!--<version>1.5.2.RELEASE</version>-->
+            <configuration>
+                <finalName>qt-trading-web</finalName>
+                <mainClass>com.qtdbp.trading.WebApplication</mainClass>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

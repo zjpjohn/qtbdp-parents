@@ -90,6 +90,9 @@ var Common = {
                                 if(dataChage[i].createId == 0){
                                     dataChage[i].createId = "系统管理员"
                                 }
+                                if(dataChage[i].userId == 0){
+                                    dataChage[i].username = "系统管理员"
+                                }
 
                                 if(dataChage[i].institutionType == 1){
                                     dataChage[i].institutionType = "服务商"

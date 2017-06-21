@@ -29,10 +29,10 @@
         <form class="trade_form" id="fromProduct" method="post" action="/api/product/add">
             <div class="form_group">
                 <p class="group_title">
-                    <b>数据名称</b> <i>*</i><span>8-50个字符</span>
+                    <b>数据名称</b> <i>*</i><span>5-50个字符</span>
                 </p>
-                <div class="form_control">
-                    <input type="text" class="large_input" id="data_name" name="designation"/>
+                <div class="form_control form-group">
+                    <input type="text" class="large_input form-control" id="data_name" name="designation"/>
                 </div>
             </div>
 
@@ -40,8 +40,8 @@
                 <p class="group_title">
                     <b>数据简介</b> <i>*</i>
                 </p>
-                <div class="form_control">
-                    <input type="text" class="large_input" id="data_resume" name="dataProfile"/>
+                <div class="form_control form-group">
+                    <input type="text" class="large_input form-control" id="data_resume" name="dataProfile"/>
                 </div>
             </div>
 
@@ -71,12 +71,12 @@
                 <p class="group_title">
                     <b>数据类别</b> <i>*</i>
                 </p>
-                <div class="form_control">
-                    <select name="dataType" id="typeA" class="small_input">
+                <div class="form_control form-group">
+                    <select name="dataType" id="typeA" class="small_input form-control">
 
 
                     </select>
-                    <select name="dataTypeSub" id="typeB" class="small_input">
+                    <select name="dataTypeSub" id="typeB" class="small_input form-control">
                         <option value="">请选择数据类别</option>
                     </select>
                 </div>
@@ -87,8 +87,8 @@
                 <p class="group_title">
                     <b>数据规模</b> <i>*</i>
                 </p>
-                <div class="form_control">
-                    <input type="number"  class="large_input" id="data_scale" style="width: 257px;" name="dataScale"/>
+                <div class="form_control form-group">
+                    <input type="number"  class="large_input form-control" id="data_scale" style="width: 257px;" name="dataScale"/>
                     <span> &nbsp;条 </span>
                 </div>
             </div>
@@ -126,7 +126,8 @@
                     <input type="text" class="middle_input" id="data_file_path"  readonly/>
                     <a href="javascript:;" class="upload_a">上传<input type="file" id="data_file" class="uploadRuleFile"/></a>
                 </div>
-                <input type="text" style="display:none;"  name="fileUrl" id="fileContent">
+                <input type="hidden"  name="fileUrl" id="fileContent">
+                <input type="hidden"  name="dataSize" id="fileSize">
             </div>
 
             <div class="form_group">
@@ -143,8 +144,8 @@
                 <p class="group_title">
                     <b>数据描述</b> <i>*</i>
                 </p>
-                <div class="form_control ">
-                    <textarea id="introduction" name="introduce" class="textarea_control"></textarea>
+                <div class="form_control form-group">
+                    <textarea id="introduction" name="introduce" class="textarea_control form-control"></textarea>
                 </div>
             </div>
 

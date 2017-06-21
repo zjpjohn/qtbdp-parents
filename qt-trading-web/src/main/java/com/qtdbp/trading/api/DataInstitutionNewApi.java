@@ -5,6 +5,7 @@ import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.DataInstitutionInfoNewMapper;
 import com.qtdbp.trading.model.DataInstitutionInfoNewModel;
 import com.qtdbp.trading.service.DataInstitutionInfoNewService;
 import com.qtdbp.trading.service.DataTypeService;
@@ -38,6 +39,8 @@ public class DataInstitutionNewApi extends BaseController {
     protected DataInstitutionInfoNewService institutionInfoNewService ;
     @Autowired
     private DataTypeService dataTypeService;
+    @Autowired
+    private DataInstitutionInfoNewMapper infoNewMapper;
 
     //===================================================================
     // 定制服务API接口
@@ -138,6 +141,67 @@ public class DataInstitutionNewApi extends BaseController {
             message.setMessage("服务商信息不存在，请重新输入");
         }
 
+        map.put("result", message);
+
+        return map;
+    }
+
+    @ApiOperation(value = "根据用户ID查询服务商信息关联个人或企业信息")
+    @RequestMapping(value = "/findInstitutionExtend", method = RequestMethod.GET)
+    public ModelMap findInstitutionExtend() throws GlobalException {
+        ModelMap map = new ModelMap();
+        Message message = new Message() ;
+        DataInstitutionInfoNewModel infoNewModel = null;
+        SysUser user = getPrincipal() ;
+        if(user == null) {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("用户请先登录");
+        } else {
+            try {
+
+                infoNewModel = infoNewMapper.findInstitutionInfoExtendResultIgnoreAuditStatusByCreateId(user.getId());
+
+            } catch (Exception e) {
+                logger.error("findInstitutionExtend has error ,message:" + e.getMessage());
+                throw new GlobalException(e.getMessage());
+            }
+        }
+        map.put("pageInfo", infoNewModel);
+        return map;
+    }
+
+    @ApiOperation(value="更新服务商数据接口")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ModelMap updateInstitutionV2(DataInstitutionInfoNewModel infoNewModel) throws GlobalException {
+
+        ModelMap map = new ModelMap();
+        Message message = new Message() ;
+
+        if (infoNewModel != null) {
+            SysUser user = getPrincipal();
+            if (user == null) {
+                message.setSuccess(false);
+                message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+                message.setMessage("用户请先登录");
+            } else {
+                try {
+                    infoNewModel.setEditId(user.getId());
+                    Integer id = institutionInfoNewService.updateInstitutionExtend(infoNewModel);
+                    if(id != null && id > 0) {
+                        message.setSuccess(true);
+                        message.setData(id);
+                    }
+                } catch (Exception e) {
+                    logger.error("updateInstitutionV2 has error ,message:" + e.getMessage());
+                    throw new GlobalException(e.getMessage());
+                }
+            }
+        } else {
+            message.setSuccess(false);
+            message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+            message.setMessage("服务商信息不存在，请重新输入");
+        }
         map.put("result", message);
 
         return map;

@@ -62,6 +62,30 @@
         c.is_used = 1 and c.audit_status = 1 AND c.id = #{id}
     </select>
 
+    <!--根据用户ID查询服务商明细, 并关联获取个人资料信息或者企业资料信息-->
+    <select id="findInstitutionInfoExtendResultIgnoreAuditStatusByCreateId" parameterType="java.lang.Integer" resultMap="DataInstitutionInfoNewWithInfoResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.institution_type,
+        c.name,
+        c.designation,
+        c.logo,
+        c.info_id,
+        c.is_sys,
+        c.is_great,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason
+        FROM
+        data_institution_info_new AS c
+        WHERE
+        c.create_id = #{createId}
+    </select>
+
     <!-- 根据用户ID查询服务商明细 -->
     <select id="findDataInstitutionInfoNewByCreateId" resultMap="DataInstitutionInfoNewResult">
         SELECT
@@ -84,6 +108,30 @@
         data_institution_info_new AS c
         WHERE
         c.is_used = 1 and c.audit_status = 1 AND c.create_id = #{createId}
+    </select>
+
+    <!--根据用户ID查询服务商明细忽略是否通过审核-->
+    <select id="findInstitutionInfoIgnoreAuditStatusByCreateId" parameterType="java.lang.Integer" resultMap="DataInstitutionInfoNewResult">
+        SELECT
+        c.id,
+        c.type_id,
+        c.institution_type,
+        c.name,
+        c.designation,
+        c.logo,
+        c.info_id,
+        c.is_sys,
+        c.is_great,
+        c.create_id,
+        c.create_time,
+        c.auditor,
+        c.audit_time,
+        c.audit_status,
+        c.audit_fail_reason
+        FROM
+        data_institution_info_new AS c
+        WHERE
+        c.create_id = #{createId}
     </select>
 
     <!-- 服务商结果集 -->
@@ -207,7 +255,7 @@
     <!-- #################################################################### -->
 
     <select id="findPersonalInfoById" resultMap="PersonalInfoResult">
-        SELECT p.real_name,p.id_number, p.gender, p.full_face_photo, p.negative_side_photo, p.exp_time, p.province_id, p.city_id, p.district_id, p.address, p.phone,p.create_id,p.create_time FROM personal_info AS p WHERE p.is_used = 1 AND p.id = #{id}
+        SELECT p.id,p.real_name,p.id_number, p.gender, p.full_face_photo, p.negative_side_photo, p.exp_time, p.province_id, p.city_id, p.district_id, p.address, p.phone,p.create_id,p.create_time FROM personal_info AS p WHERE p.is_used = 1 AND p.id = #{id}
     </select>
 
     <!-- 添加个人资料insertPersonalInfo -->
@@ -250,6 +298,31 @@
         1 )
     </insert>
 
+    <update id="updatePersonalInfo" parameterType="com.qtdbp.trading.model.PersonalInfoModel">
+        update personal_info
+        <trim prefix="set" suffixOverrides=",">
+            edit_time = now(),
+            <if test="realName != null">real_name = #{realName},</if>
+            <if test="idNumber != null">id_number = #{idNumber},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="fullFacePhoto != null"> full_face_photo = #{fullFacePhoto} ,</if>
+            <if test="negativeSidePhoto != null">negative_side_photo = #{negativeSidePhoto} ,</if>
+            <if test="expTime != null">exp_time = #{expTime} ,</if>
+            <if test="typeId != null">type_id = #{typeId} ,</if>
+            <if test="provinceId != null">province_id = #{provinceId} ,</if>
+            <if test="cityId != null ">city_id = #{cityId}, </if>
+            <if test="districtId != null ">district_id = #{districtId}, </if>
+            <if test="address != null">address = #{address} ,</if>
+            <if test="phone != null">phone = #{phone} ,</if>
+            <if test="editId != null">edit_id = #{editId} ,</if>
+            <if test="auditStatus != null ">audit_status = #{auditStatus}, </if>
+            <if test="auditFailReason != null ">audit_fail_reason = #{auditFailReason}, </if>
+            <if test="isUsed != null ">is_used = #{isUsed}, </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
     <!-- 个人资料结果集 -->
     <resultMap id="PersonalInfoResult" type="com.qtdbp.trading.model.PersonalInfoModel">
         <id column="id" property="id" />
@@ -273,7 +346,7 @@
     <!-- #################################################################### -->
 
     <select id="findCompanyInfoById" resultMap="CompanyInfoResult">
-        select company_name,company_logo,company_intro,license,license_number,province_id,city_id,district_id,address,phone,corporator,create_id,create_time from company_info where is_used = 1 and id = #{id}
+        select id,company_name,company_logo,company_intro,license,license_number,province_id,city_id,district_id,address,phone,corporator,create_id,create_time from company_info where is_used = 1 and id = #{id}
     </select>
 
     <!-- 添加企业资料insertCompanyInfo -->
@@ -334,4 +407,27 @@
         <result column="create_time" property="createTime" />
     </resultMap>
 
+    <update id="updateCompanyInfo" parameterType="com.qtdbp.trading.model.CompanyInfoModel">
+        update company_info
+        <trim prefix="set" suffixOverrides=",">
+            edit_time = now(),
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companyLogo != null">company_logo = #{companyLogo},</if>
+            <if test="companyIntro != null">company_intro = #{companyIntro},</if>
+            <if test="industryId != null"> industry_id = #{industryId} ,</if>
+            <if test="license != null">license = #{license} ,</if>
+            <if test="licenseNumber != null">license_number = #{licenseNumber} ,</if>
+            <if test="provinceId != null">province_id = #{provinceId} ,</if>
+            <if test="cityId != null ">city_id = #{cityId}, </if>
+            <if test="districtId != null ">district_id = #{districtId}, </if>
+            <if test="address != null">address = #{address} ,</if>
+            <if test="phone != null">phone = #{phone} ,</if>
+            <if test="corporator != null">corporator = #{corporator} ,</if>
+            <if test="editId != null">edit_id = #{editId} ,</if>
+            <if test="auditStatus != null ">audit_status = #{auditStatus}, </if>
+            <if test="isUsed != null ">is_used = #{isUsed}, </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
 </mapper>

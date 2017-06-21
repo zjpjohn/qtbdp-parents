@@ -55,6 +55,9 @@ public class DataInstitutionInfoNewModel extends BaseModel {
     @Transient
     private HashMap<String, Long> countMap = new HashMap<String, Long>();    //数据包，数据定制，爬虫定制，爬虫规则定制数量map
 
+    @Transient
+    private String createName;      //创建人名字
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -245,5 +248,13 @@ public class DataInstitutionInfoNewModel extends BaseModel {
 
     public void setCountMap(HashMap<String, Long> countMap) {
         this.countMap = countMap;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
     }
 }

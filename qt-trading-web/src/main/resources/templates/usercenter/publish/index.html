@@ -114,13 +114,17 @@
             {{/if}}
             <td> ${$item._date(prod.addtime)}</td>
             <td>
+<!--
                 <a class="gosee" href="javascript:;">查看</a>
+-->
                 {{if prod.auditStatus==1 && prod.isUsed==1}}
                     <a class="gosee" href="javascript:;" onclick="changeState(${prod.id}, '/api/product/changeState');">下架</a>
                 {{else prod.auditStatus==1 && isUsed == 0}}
                     <a class="gosee" href="javascript:;" onclick="changeState(${prod.id},'/api/product/changeState');">上架</a>
                 {{/if}}
+<!--
                 <a class="gosee" href="javascript:;">修改</a>
+-->
                 <a class="gosee" href="javascript:;" onclick="deleteOne(${prod.id},'/api/product');">撤销</a>
             </td>
         </tr>
@@ -159,13 +163,17 @@
             {{/if}}
             <td> ${$item._date(prod.createTime)}</td>
             <td>
+<!--
                 <a class="gosee" href="javascript:;">查看</a>
+-->
                 {{if prod.auditStatus==1 && prod.isUsed==1}}
                     <a class="gosee" href="javascript:;" onclick="changeState(${prod.id},'/api/crawlers/role/changeState');">下架</a>
                 {{else prod.auditStatus==1 && isUsed == 0}}
                     <a class="gosee" href="javascript:;" onclick="changeState(${prod.id},'/api/crawlers/role/changeState');">上架</a>
                 {{/if}}
+<!--
                 <a class="gosee" href="javascript:;">修改</a>
+-->
                 <a class="gosee" href="javascript:;" onclick="deleteOne(${prod.id},'/api/crawlers/role');">撤销</a>
             </td>
         </tr>

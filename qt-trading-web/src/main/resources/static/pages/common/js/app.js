@@ -360,12 +360,13 @@ var App = function () {
 
     return {
         // 数据市场数据加载
-        initDatamart: function () {
+        initDatamart: function (val) {
+
             nav(2);
             initType();
             initOrderByCond() ;
             initFilter() ;
-            initDatas({isUsed:1,auditStatus:1}) ;
+            initDatas({isUsed:1,auditStatus:1,designation:val}) ;
         },
         // 爬虫规则市场数据加载
         initCrawlers: function () {
@@ -616,6 +617,28 @@ var App = function () {
                     initDatas({userId:id,productType:3}) ;
                     break ;
             }
+        },
+        //个人升级服务商
+        initInstitutionExtend:function () {
+            // 加载服务商信息
+            LoadingData.request({url: "/api/institutionV2/findInstitutionExtend"}, function (data) {
+
+                $("#tmpl_institution").tmpl(data.pageInfo).appendTo("#fromContent");
+                var _options = {
+                    _form: "#fromPerson",
+                    _rules: {
+                        id: {required:true},
+                        name: {
+                            required:true
+                        },
+                        designation: {
+                            required: true
+                        }
+                    }
+                }
+
+                FormValidationMd.init(_options);
+            });
         },
         // 个人信息
         initPersonInfo:function (id) {

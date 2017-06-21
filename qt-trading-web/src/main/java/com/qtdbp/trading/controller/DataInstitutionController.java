@@ -1,6 +1,8 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.DataInstitutionInfoNewMapper;
+import com.qtdbp.trading.model.DataInstitutionInfoNewModel;
 import com.qtdbp.trading.service.DataInstitutionInfoNewService;
 import com.qtdbp.trading.service.security.model.SysUser;
 import org.docx4j.wml.R;
@@ -28,9 +30,6 @@ public class DataInstitutionController extends BaseController {
     private static final String PAGE_INSTITUTION_ADD_PERSON = "usercenter/add-person";
     private static final String PAGE_INSTITUTION_ADD_COMPANY = "usercenter/add-company";
 
-
-    @Autowired
-    private DataInstitutionInfoNewService infoNewService;
 
     /**
      * 服务商列表

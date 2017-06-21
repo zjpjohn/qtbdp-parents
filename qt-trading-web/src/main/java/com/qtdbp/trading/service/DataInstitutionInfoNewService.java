@@ -65,6 +65,18 @@ public class DataInstitutionInfoNewService {
     }
 
     /**
+     * 根据用户ID查询服务商明细忽略是否通过审核
+     * @param createId
+     * @return
+     */
+    public DataInstitutionInfoNewModel findInstitutionInfoIgnoreAuditStatusByCreateId(Integer createId) {
+
+        if(createId == null || createId == 0) return null ;
+
+        return infoNewMapper.findInstitutionInfoIgnoreAuditStatusByCreateId(createId);
+    }
+
+    /**
      * 新增服务商
      * @param infoNewModel
      * @return id
@@ -124,6 +136,36 @@ public class DataInstitutionInfoNewService {
      */
     public HashMap<String,Long> findCount(Integer userId){
         return infoNewMapper.findInstitutionInfoCount(userId);
+    }
+
+    /**
+     * 更新服务商信息以及关联的企业或个人资料
+     * @param infoNewModel
+     * @return
+     */
+    @Transactional
+    public Integer updateInstitutionExtend(DataInstitutionInfoNewModel infoNewModel) throws GlobalException {
+        if (infoNewModel == null) throw new GlobalException("服务商信息为空，请重新操作");
+
+        infoNewModel.setAuditStatus(0);
+        Integer count = infoNewMapper.updateDataInstitutionInfoNew(infoNewModel);
+        if (count > 0){
+            PersonalInfoModel personalInfoModel = null;
+            personalInfoModel = infoNewModel.getPersonalInfoModel();
+            if (personalInfoModel != null) {
+                personalInfoModel.setEditId(infoNewModel.getEditId());
+                Integer personalCount = infoNewMapper.updatePersonalInfo(personalInfoModel);
+                if (!(personalCount > 0)) throw new GlobalException("更新个人资料失败");
+            }
+            CompanyInfoModel companyInfoModel = null;
+            companyInfoModel = infoNewModel.getCompanyInfoModel();
+            if (companyInfoModel != null) {
+                companyInfoModel.setEditId(infoNewModel.getEditId());
+                Integer companyCount = infoNewMapper.updateCompanyInfo(companyInfoModel);
+                if (!(companyCount > 0)) throw new GlobalException("更新企业资料失败");
+            }
+        }
+        return count;
     }
 
 }

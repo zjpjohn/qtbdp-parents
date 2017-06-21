@@ -33,7 +33,7 @@ public class BaseController {
             user = (SysUser) principal;
 
             // 服务商
-            user.setInfoNewModel(institutionInfoNewService.findInstitutionNewByCreateId(user.getId()));
+            user.setInfoNewModel(institutionInfoNewService.findInstitutionInfoIgnoreAuditStatusByCreateId(user.getId()));
 
             logger.info("nick:"+ user.getUserName());
             logger.info("head:"+ user.getHead());
