@@ -21,27 +21,27 @@
         <div id="wrapper">
             <div class="slider-wrapper theme-default">
                 <div id="slider" class="nivoSlider">
-                    <a class="banner10">
-
+                    <a>
                         <img th:src="@{/pages/common/images/banner10.jpg}" data-thumb="/pages/common/images/banner10.jpg" alt="" />
                         <i class="knowmore" onclick="location.href='/datamart';"></i>
-                        <b th:href="@{/datamart}" class="knowmore2">加载更多</b>
-                        <!--<div class="cartoon_one">
-                            <img src="/pages/common/images/index_bannebr1.png" alt="">
-                        </div>
-
-                        <div>
-                            <img src="/pages/common/images/index_banner2.png" alt="" class="cartoon_two">
+                        <!--<div class="cartoonimg">
+                            <img class="cartoon_one" src="/pages/common/images/index_banner1.png" alt="">
+                            <img class="cartoon_two" src="/pages/common/images/index_banner2.png" alt="" >
                         </div>-->
-
                     </a>
                     <a>
                         <img th:src="@{/pages/common/images/banner20.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
                         <i class="joinus" onclick="location.href='/institution/add';"></i>
+                        <!--<div class="cartoonimg">
+                            <img class="cartoon_three" src="/pages/common/images/index_banner3.png" alt="">
+                            <img class="cartoon_four" src="/pages/common/images/index_banner4.png" alt="" >
+                            <img class="cartoon_five" src="/pages/common/images/index_banner5.png" alt="" >
+                        </div>-->
                     </a>
-
                 </div>
             </div>
+
+
 
             <!--轮播表单开始-->
             <div class="navinput">
@@ -365,6 +365,18 @@
                 $(".cartoon_one").animate({"margin-top":"20px"},400);
                 $(".cartoon_two").animate({"margin-top":"-20px"},400);
             });
+            //动效2
+            $(".cartoonimg>img").mouseover(function(){
+                $(".cartoonimg>img").animate({"margin-top":"0px"},400);
+                $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
+            });
+            $(".cartoonimg>img").mouseleave(function(){
+                $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
+                $(".cartoonimg>img").animate({"margin-top":"0px"},400);
+            });
+
+
+
 
 
 
