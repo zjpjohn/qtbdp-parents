@@ -819,11 +819,11 @@ tbody{
 /********************认证服务商个人\企业********************/
 
 .center_right #from {
-    padding: 0 24px 0 24px;
+    padding: 0 24px 30px 24px;
     display: block;
 }
 
-#from-title,.from-top,.from-bottom {
+#from-title,.from-top {
     border-bottom: 1px solid #E6E6E6;
 }
 
@@ -886,10 +886,11 @@ tbody{
 
 fieldset{
     margin-top: 10px;
-    border: 1px solid #A9A9A9;
+    border: 1px solid #E6E6E6;
     width: 177px;
     height: 177px;
     position: relative;
+    padding: 0;
     overflow: hidden;
 }
 fieldset input{
