@@ -7,7 +7,7 @@
     <groupId>com.qtbdp.parents</groupId>
     <artifactId>qtbdp-parents</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <modules>
         <module>eureka-server</module>
         <module>base-service</module>
