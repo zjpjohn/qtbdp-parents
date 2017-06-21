@@ -530,7 +530,7 @@ var App = function () {
                 cooperationTimer=setInterval(cooperationMove,50);
             });
 
-            //$('#slider').nivoSlider();
+            $('#slider').nivoSlider();
             $("#slider>a>i").mouseenter(function(){
                 $(this).parent().addClass("hover");
             });
