@@ -3,6 +3,7 @@ package com.qtdbp.trading.api;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataUserInfoModel;
 import com.qtdbp.trading.service.DataUserInfoService;
+import com.qtdbp.trading.utils.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -50,13 +51,14 @@ public class DataUserInfoApi {
     public ModelMap modifyDataNewOrders(DataUserInfoModel user) throws GlobalException {
 
         ModelMap map = new ModelMap() ;
+        Message message = new Message();
         try {
             boolean result = userInfoService.updateDataUserInfo(user);
-            map.put("success", result);
+            message.setSuccess(result);
         } catch (Exception e) {
             throw new GlobalException(e.getMessage()) ;
         }
-
+        map.put("result", message);
         return map ;
     }
 

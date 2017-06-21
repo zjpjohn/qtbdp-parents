@@ -42,7 +42,7 @@
                     <input type="hidden" name="id" id="AccountId">
                     <input type="hidden" name="companyInfoModel.id" id="personId">
 
-                    <div id="feedback" style="margin: 30px 0 50px 0">
+                    <div id="feedback" style="margin: 30px 0 50px 0; display: none;">
                         <div class="form_group">
                             <p class="group_title" style="font-size:16px; color: red">
                                 <b>不通过原因：</b>
@@ -179,7 +179,7 @@
                 <!--表单信息结束-->
             </div>
             <!--from表单结束-->
-            <div id="audit" style="font-size: 18px;margin-top: 50px">
+            <div id="audit" style="font-size: 18px;margin-top: 50px; display: none;">
                 信息正在审核中...
             </div>
         </div>
@@ -218,7 +218,7 @@
             $('#fromCompany').css('display','none');
             $('#audit').css('display','block');
         }else if(user.infoNewModel.auditStatus == 2){
-
+            $('#feedback').css('display', 'block');
             $('#fromCompany').css('display','block');
             $('#audit').css('display','none');
 
