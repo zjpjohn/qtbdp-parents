@@ -230,9 +230,9 @@
                     </div>
                     <!--企业信息结束-->
 
-                    <div class="from-group form_group">
-                        <label>
-                            <input type="checkbox" name="agreement" class="agreement" style="display: inline-block;vertical-align: middle;margin-bottom: 2px;" value="">
+                    <div class="form_group">
+                        <label class="form_control form-group checkbox-inline">
+                            <input type="checkbox" name="agreement" class="agreement form-control" style="display: inline-block;vertical-align: middle;margin-bottom: 2px;" value="">
                             我已阅读并同意
                             <a href="javascript:;" class="protocol">《钱塘用户注册协议》</a>
                         </label>
@@ -241,7 +241,7 @@
                     <!-- 页脚发布按钮 -->
                     <div class="form_btm">
                         <!--<input type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>-->
-                        <button type="submit" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
+                        <button type="submit" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">提交</button>
 
                         <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
                             <span class="ladda-label">发布</span>
@@ -301,53 +301,56 @@
     var user = [[${user}]];
     $(document).ready(function() {
 
-        if(user.infoNewModel.auditStatus == 0){
-            $('#fromCompany').css('display','none');
-            $('#audit').css('display','block');
-        }else if(user.infoNewModel.auditStatus == 2){
-            $('#feedback').css('display','block');
-            $('#fromCompany').css('display','block');
-            $('#audit').css('display','none');
+        if(user.infoNewModel){
+            if(user.infoNewModel.auditStatus == 0){
+                $('#fromPerson').css('display','none');
+                $('#audit').css('display','block');
+            }else if(user.infoNewModel.auditStatus == 2){
+                $('#feedback').css('display','block');
+                $('#fromPerson').css('display','block');
+                $('#audit').css('display','none');
 
-            $.ajax({
-                url: "/api/institutionV2/findInstitutionExtend",
-                type: "get",
-                dataType:"json",
-                success:function(ret){
-                    var data = ret.pageInfo;
-                    $('fieldset > span').css('display','none');
+                $.ajax({
+                    url: "/api/institutionV2/findInstitutionExtend",
+                    type: "get",
+                    dataType:"json",
+                    success:function(ret){
+                        var data = ret.pageInfo;
+                        $('fieldset > span').css('display','none');
 
-                    $('#AccountId').val(data.id);
-                    $('.reason').html(data.auditFailReason);
-                    $('#facilitator').val(data.name);
-                    $('#field').val(data.designation);
+                        $('#AccountId').val(data.id);
+                        $('.reason').html(data.auditFailReason);
+                        $('#facilitator').val(data.name);
+                        $('#field').val(data.designation);
 
-                    $('#logo').attr("src",data.logo);
-                    $('#logo').removeClass('Image');
-                    $('#logoContent').val(data.logo);
-
-
-                    var company = data.companyInfoModel;
+                        $('#logo').attr("src",data.logo);
+                        $('#logo').removeClass('Image');
+                        $('#logoContent').val(data.logo);
 
 
-                    $('#personId').val(company.id);
+                        var person = data.personalInfoModel;
 
-                    $('#License').attr("src",company.companyLogo);
-                    $('#License').removeClass('Image');
-                    $('#licenseContent').val(company.companyLogo);
+                        $('#personId').val(person.id);
 
+                        $('#ID1').attr("src",person.fullFacePhoto);
+                        $('#ID1').removeClass('Image');
+                        $('#fullFacePhoto').val(person.fullFacePhoto);
 
+                        $('#ID2').attr("src",person.negativeSidePhoto);
+                        $('#ID2').removeClass('Image');
+                        $('#negativeSidePhoto').val(person.negativeSidePhoto);
+                        ;
+                        $('#name').val(person.realName);
+                        $('#ID').val(person.idNumber);
+                        $('#phone').val(person.phone);
 
-                    $('#companyName').val(company.companyName);
-                    $('#LicenseNumber').val(company.licenseNumber);
-                    $('#phone').val(company.phone);
+                        $('#fromPerson').attr("action","/api/institutionV2/update")
+                    },
+                    error : function () {
 
-                    $('#fromCompany').attr("action","/api/institutionV2/update")
-                },
-                error : function () {
-
-                }
-            });
+                    }
+                });
+            }
         }
 
 
