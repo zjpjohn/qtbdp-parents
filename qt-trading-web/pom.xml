@@ -186,6 +186,7 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
             <!--<version>1.5.2.RELEASE</version>-->
             <configuration>
+                <finalName>qt-trading-web</finalName>
                 <mainClass>com.qtdbp.trading.WebApplication</mainClass>
             </configuration>
             <executions>

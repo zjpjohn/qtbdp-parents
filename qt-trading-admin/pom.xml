@@ -207,6 +207,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <!--<version>1.5.2.RELEASE</version>-->
                 <configuration>
+                    <finalName>qt-trading-admin</finalName>
                     <mainClass>com.qtdbp.tradingadmin.AdminApplication</mainClass>
                 </configuration>
                 <executions>
