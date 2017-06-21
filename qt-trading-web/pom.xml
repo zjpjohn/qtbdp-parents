@@ -10,7 +10,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>qt-trading-web</artifactId>
-    <!--<version>1.2.2.RELEASE</version>-->
+<!--
+    <version>1.2.3.RELEASE</version>
+-->
 
     <dependencies>
         <dependency>
@@ -180,20 +182,20 @@
 
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--<version>1.5.2.RELEASE</version>-->
-                <configuration>
-                    <mainClass>com.qtdbp.trading.WebApplication</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <!--<version>1.5.2.RELEASE</version>-->
+            <configuration>
+                <mainClass>com.qtdbp.trading.WebApplication</mainClass>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
