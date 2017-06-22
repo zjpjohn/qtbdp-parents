@@ -1,6 +1,7 @@
 package com.qtdbp.tradingadmin.mapper;
 
 import com.qtdbp.trading.model.SeoSettingsModel;
+import com.qtdbp.trading.model.SysResourcesModel;
 import com.qtdbp.trading.model.SysResourcesSeoRelationModel;
 import com.qtdbp.tradingadmin.utils.BaseMapper;
 
@@ -27,10 +28,10 @@ public interface SeoSettingsMapper extends BaseMapper<SeoSettingsModel> {
 
     /**
      * 分页查询seo数据
-     * @param seoSettingsModel
+     * @param resourcesModel
      * @return
      */
-    List<SeoSettingsModel> findSeoByCondition(SeoSettingsModel seoSettingsModel);
+    List<SysResourcesModel> findResourcesByCondition(SysResourcesModel resourcesModel);
 
     /**
      * 更新seo数据

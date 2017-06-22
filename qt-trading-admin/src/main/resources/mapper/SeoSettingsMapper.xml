@@ -23,16 +23,6 @@
         )
     </insert>
 
-    <!--分页查询seo数据-->
-    <select id="findSeoByCondition" resultMap="SeoResultMap">
-        select * from seo_settings s
-        where 1=1
-        <if test="seoTitle != null">
-            and s.seo_title like '%${seoTitle}%'
-        </if>
-        order by create_time
-    </select>
-
     <resultMap id="SeoResultMap" type="com.qtdbp.trading.model.SeoSettingsModel">
         <id column="id" property="id"/>
         <result column="seo_type" property="seoType"/>
@@ -68,4 +58,26 @@
             #{sysResourcesId}
         )
     </insert>
+
+    <!--分页查询资源数据-->
+    <select id="findResourcesByCondition" parameterType="com.qtdbp.trading.model.SysResourcesModel" resultMap="ResourcesMap">
+        select * from sys_resources s
+        where 1=1
+        <if test="resourceName != null">
+            and s.resource_name like '%${resourceName}%'
+        </if>
+    </select>
+    
+    <resultMap id="ResourcesMap" type="com.qtdbp.trading.model.SysResourcesModel">
+        <id column="resource_id" property="resourceId"/>
+        <result column="enable" property="enable"/>
+        <result column="http_method" property="httpMethod"/>
+        <result column="issys" property="issys"/>
+        <result column="module_id" property="moduleId"/>
+        <result column="priority" property="priority"/>
+        <result column="resource_desc" property="resourceDesc"/>
+        <result column="resource_name" property="resourceName"/>
+        <result column="resource_path" property="resourcePath"/>
+        <result column="resource_type" property="resourceType"/>
+    </resultMap>
 </mapper>

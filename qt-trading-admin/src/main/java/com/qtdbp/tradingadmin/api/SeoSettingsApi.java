@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.model.SeoSettingsModel;
+import com.qtdbp.trading.model.SysResourcesModel;
 import com.qtdbp.trading.utils.Message;
 import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.service.SeoSettingsService;
@@ -64,24 +65,24 @@ public class SeoSettingsApi {
     }
 
 
-    @ApiOperation(value="分页查询SEO优化数据接口")
+    @ApiOperation(value="分页查询导航数据接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "seo网页标题", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "resourceName", value = "seo网页标题", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：10）", defaultValue = "10", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelMap findSeoByCondition(SeoSettingsModel seoModel) throws GlobalAdminException {
+    @RequestMapping(value = "/resources", method = RequestMethod.GET)
+    public ModelMap findSeoByCondition(SysResourcesModel resourcesModel) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
-        if(seoModel.getRows() == null || seoModel.getRows() == 0) seoModel.setRows(10);
+        if(resourcesModel.getRows() == null || resourcesModel.getRows() == 0) resourcesModel.setRows(10);
         try {
-            List<SeoSettingsModel> list = seoSettingsService.findSeoByCondition(seoModel);
+            List<SysResourcesModel> list = seoSettingsService.findSeoByCondition(resourcesModel);
             map.put("pageInfo", new PageInfo<>(list));
-            map.put("page", seoModel.getPage());
-            map.put("rows", seoModel.getRows());
+            map.put("page", resourcesModel.getPage());
+            map.put("rows", resourcesModel.getRows());
         } catch (Exception e) {
-            logger.error("findSeo has error ,message:" + e.getMessage());
+            logger.error("findResources has error ,message:" + e.getMessage());
             throw new GlobalAdminException(e.getMessage());
         }
 

@@ -1,12 +1,16 @@
 package com.qtdbp.trading.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.Transient;
+
 /**
  * 资源model
  * Created by dell on 2017/6/21.
  */
 public class SysResourcesModel {
 
-    private int resourceId;
+    private String resourceId;
     private Integer enable;
     private String httpMethod;
     private Integer issys;
@@ -17,11 +21,19 @@ public class SysResourcesModel {
     private String resourcePath;
     private String resourceType;
 
-    public int getResourceId() {
+    @ApiModelProperty(hidden=true)
+    @Transient
+    private Integer page = 1;
+
+    @ApiModelProperty(hidden=true)
+    @Transient
+    private Integer rows ;
+
+    public String getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(int resourceId) {
+    public void setResourceId(String resourceId) {
         this.resourceId = resourceId;
     }
 
@@ -95,5 +107,21 @@ public class SysResourcesModel {
 
     public void setResourceType(String resourceType) {
         this.resourceType = resourceType;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
     }
 }

@@ -21,7 +21,7 @@ public class SeoSettingsModel extends BaseModel{
     private Date createTime;   //创建时间
 
     @Transient
-    private int resourcesId;     //资源ID
+    private String resourcesId;     //资源ID
 
     public int getSeoType() {
         return seoType;
@@ -63,11 +63,11 @@ public class SeoSettingsModel extends BaseModel{
         this.createTime = createTime;
     }
 
-    public int getResourcesId() {
+    public String getResourcesId() {
         return resourcesId;
     }
 
-    public void setResourcesId(int resourcesId) {
+    public void setResourcesId(String resourcesId) {
         this.resourcesId = resourcesId;
     }
 }

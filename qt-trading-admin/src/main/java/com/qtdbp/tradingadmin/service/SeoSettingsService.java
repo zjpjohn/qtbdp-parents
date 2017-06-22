@@ -2,6 +2,7 @@ package com.qtdbp.tradingadmin.service;
 
 import com.github.pagehelper.PageHelper;
 import com.qtdbp.trading.model.SeoSettingsModel;
+import com.qtdbp.trading.model.SysResourcesModel;
 import com.qtdbp.trading.model.SysResourcesSeoRelationModel;
 import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.mapper.SeoSettingsMapper;
@@ -48,19 +49,25 @@ public class SeoSettingsService {
     }
 
     /**
-     * 分页查询seo数据
-     * @param seoModel
+     * 分页查询导航资源数据
+     * @param resourcesModel
      * @return
      */
-    public List<SeoSettingsModel> findSeoByCondition(SeoSettingsModel seoModel) {
+    public List<SysResourcesModel> findSeoByCondition(SysResourcesModel resourcesModel) {
 
-        if (seoModel.getPage() != null && seoModel.getRows() != null) {
-            PageHelper.startPage(seoModel.getPage(), seoModel.getRows());
+        if (resourcesModel.getPage() != null && resourcesModel.getRows() != null) {
+            PageHelper.startPage(resourcesModel.getPage(), resourcesModel.getRows());
         }
-        List<SeoSettingsModel> list = seoMapper.findSeoByCondition(seoModel);
+        List<SysResourcesModel> list = seoMapper.findResourcesByCondition(resourcesModel);
         return list;
     }
 
+    /**
+     * 更新seo数据
+     * @param seoSettingsModel
+     * @return
+     * @throws GlobalAdminException
+     */
     public Integer updateSeo(SeoSettingsModel seoSettingsModel) throws GlobalAdminException {
         if (seoSettingsModel.getId() != null && seoSettingsModel.getId() != 0){
             Integer count = seoMapper.updateSeo(seoSettingsModel);

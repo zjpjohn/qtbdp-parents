@@ -7,7 +7,7 @@ public class SysResourcesSeoRelationModel {
 
     private int id;
     private int seoId;  //网站SEOid
-    private int sysResourcesId; //网站资源id
+    private String sysResourcesId; //网站资源id
 
     public int getId() {
         return id;
@@ -25,11 +25,11 @@ public class SysResourcesSeoRelationModel {
         this.seoId = seoId;
     }
 
-    public int getSysResourcesId() {
+    public String getSysResourcesId() {
         return sysResourcesId;
     }
 
-    public void setSysResourcesId(int sysResourcesId) {
+    public void setSysResourcesId(String sysResourcesId) {
         this.sysResourcesId = sysResourcesId;
     }
 }
