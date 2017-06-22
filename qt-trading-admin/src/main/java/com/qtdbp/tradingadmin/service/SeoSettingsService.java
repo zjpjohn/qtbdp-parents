@@ -37,7 +37,7 @@ public class SeoSettingsService {
         id = seoMapper.insertSeo(seoModel);
         if (id != null && id > 0) {
             SysResourcesSeoRelationModel relationModel = new SysResourcesSeoRelationModel();
-            relationModel.setSeoId(id);
+            relationModel.setSeoId(seoModel.getId());
             relationModel.setSysResourcesId(seoModel.getResourcesId());
             Integer relationId = seoMapper.insertResourcesSeoRelation(relationModel);
             if (relationId > 0){
