@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.SeoSettingsMapper">
+
+    <!--添加SEO数据-->
+    <insert id="insertSeo" parameterType="com.qtdbp.trading.model.SeoSettingsModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into seo_settings (
+            seo_type,
+            seo_title,
+            seo_description,
+            seo_keywords,
+            create_time
+        ) values (
+            #{seoType},
+            #{seoTitle},
+            #{seoDescription},
+            #{seoKeywords},
+            now()
+        )
+    </insert>
+
+    <!--分页查询seo数据-->
+    <select id="findSeoByCondition" resultMap="SeoResultMap">
+        select * from seo_settings s
+        where 1=1
+        <if test="seoTitle != null">
+            and s.seo_title like '%${seoTitle}%'
+        </if>
+        order by create_time
+    </select>
+
+    <resultMap id="SeoResultMap" type="com.qtdbp.trading.model.SeoSettingsModel">
+        <id column="id" property="id"/>
+        <result column="seo_type" property="seoType"/>
+        <result column="seo_title" property="seoTitle"/>
+        <result column="seo_description" property="seoDescription"/>
+        <result column="seo_keywords" property="seoKeywords"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <update id="updateSeo" parameterType="com.qtdbp.trading.model.SeoSettingsModel">
+        update seo_settings
+        <trim prefix="set" suffixOverrides=",">
+            <if test="seoType != null">seo_type = #{seoType},</if>
+            <if test="seoTitle != null"> seo_title = #{seoTitle} ,</if>
+            <if test="seoDescription != null">seo_description = #{seoDescription} ,</if>
+            <if test="seoKeywords != null">seo_keywords = #{seoKeywords} ,</if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!--添加SEO关联表数据-->
+    <insert id="insertResourcesSeoRelation" parameterType="com.qtdbp.trading.model.SysResourcesSeoRelationModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_resources_seo_relation (
+            seo_id,
+            sys_resources_id
+        ) values (
+            #{seoId},
+            #{sysResourcesId}
+        )
+    </insert>
+</mapper>
