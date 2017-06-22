@@ -68,7 +68,7 @@
 
     <!--分页查询资源数据-->
     <select id="findResourcesByCondition" parameterType="com.qtdbp.trading.model.SysResourcesModel" resultMap="ResourcesMap">
-        select * from sys_resources s
+        select s.*, r.seo_id from sys_resources s left join sys_resources_seo_relation r on s.resource_id = r.sys_resources_id
         where 1=1
         <if test="resourceName != null">
             and s.resource_name like '%${resourceName}%'
@@ -86,5 +86,6 @@
         <result column="resource_name" property="resourceName"/>
         <result column="resource_path" property="resourcePath"/>
         <result column="resource_type" property="resourceType"/>
+        <result column="seo_id" property="seoId"/>
     </resultMap>
 </mapper>

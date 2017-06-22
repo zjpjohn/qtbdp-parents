@@ -29,6 +29,8 @@ public class SysResourcesModel {
     @Transient
     private Integer rows ;
 
+    private Integer seoId;  //seo数据ID
+
     public String getResourceId() {
         return resourceId;
     }
@@ -123,5 +125,13 @@ public class SysResourcesModel {
 
     public void setRows(Integer rows) {
         this.rows = rows;
+    }
+
+    public Integer getSeoId() {
+        return seoId;
+    }
+
+    public void setSeoId(Integer seoId) {
+        this.seoId = seoId;
     }
 }
