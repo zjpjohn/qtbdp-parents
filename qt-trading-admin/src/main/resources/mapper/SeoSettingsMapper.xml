@@ -36,7 +36,7 @@
     <select id="findSeoDetilByResourcesId" parameterType="java.lang.String" resultMap="SeoResultMap">
         select s.* from seo_settings s
         left join sys_resources_seo_relation r on s.id = r.seo_id
-        where r.resources_id = #{resourcesId}
+        where r.sys_resources_id = #{resourcesId}
     </select>
 
     <update id="updateSeo" parameterType="com.qtdbp.trading.model.SeoSettingsModel">
