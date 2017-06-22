@@ -7,19 +7,14 @@ import com.qtdbp.trading.model.SeoSettingsModel;
 import com.qtdbp.trading.model.SysResourcesModel;
 import com.qtdbp.trading.utils.Message;
 import com.qtdbp.tradingadmin.exception.GlobalAdminException;
+import com.qtdbp.tradingadmin.mapper.SeoSettingsMapper;
 import com.qtdbp.tradingadmin.service.SeoSettingsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +30,9 @@ public class SeoSettingsApi {
 
     @Autowired
     private SeoSettingsService seoSettingsService;
+
+    @Autowired
+    private SeoSettingsMapper seoSettingsMapper;
 
     @ApiOperation(value="添加SEO优化数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -112,6 +110,23 @@ public class SeoSettingsApi {
             message.setMessage("SEO优化数据不存在，请重新输入");
         }
         map.put("result", message);
+
+        return map;
+    }
+
+    @ApiOperation(value="根据导航id查询seo数据接口")
+    @RequestMapping(value = "/{resourcesId}", method = RequestMethod.GET)
+    public ModelMap findSeoDetilByResourcesId(
+            @ApiParam(name = "resourcesId", value = "导航Id", required = true) @PathVariable String resourcesId) throws GlobalAdminException {
+
+        ModelMap map = new ModelMap();
+        try {
+            SeoSettingsModel seoSettingsModel = seoSettingsMapper.findSeoDetilByResourcesId(resourcesId);
+            map.put("pageInfo", seoSettingsModel);
+        } catch (Exception e) {
+            logger.error("findSeoDetilByResourcesId has error ,message:" + e.getMessage());
+            throw new GlobalAdminException(e.getMessage());
+        }
 
         return map;
     }

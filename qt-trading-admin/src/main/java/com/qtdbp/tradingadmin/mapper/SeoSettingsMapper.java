@@ -39,4 +39,11 @@ public interface SeoSettingsMapper extends BaseMapper<SeoSettingsModel> {
      * @return
      */
     Integer updateSeo(SeoSettingsModel seoSettingsModel);
+
+    /**
+     * 根据resourcesID查询单条seo信息
+     * @param resourcesId
+     * @return
+     */
+    SeoSettingsModel findSeoDetilByResourcesId(String resourcesId);
 }
