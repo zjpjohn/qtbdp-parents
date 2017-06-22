@@ -460,6 +460,8 @@ create table seo_settings
 /*==============================================================*/
 /* Table: sys_resources_seo_relation  网站资源SEO关联表           */
 /*==============================================================*/
+drop table if exists sys_resources_seo_relation;
+
 create table sys_resources_seo_relation
 (
    id                   int                            not null,
@@ -473,3 +475,26 @@ alter table sys_resources_seo_relation
       references seo_settings (id)
       on update restrict
       on delete restrict;
+
+/*==============================================================*/
+/* Table: api_demand       api需求定制                           */
+/*==============================================================*/
+drop table if exists api_demand;
+
+create table api_demand
+(
+   id                   int                            not null,
+   api_name             varchar(100)                   not null,
+   category_id          int                            null,
+   api_domain           varchar(100)                   null,
+   api_desc             varchar(500)                   null,
+   api_price            decimal(10,2)                  null,
+   contacts             varchar(50)                    null,
+   phone                varchar(50)                    null,
+   create_time          datetime                       null,
+   auditor              varchar(100)                   null,
+   audit_time           datetime                       null,
+   audit_status         tinyint                        null default 0,
+   audit_fail_reason    varchar(100)                   null,
+   constraint PK_API_DEMAND primary key clustered (id)
+);
