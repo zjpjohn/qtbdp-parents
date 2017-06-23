@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.trading.mapper.SeoSettingsMapper">
+
+    <select id="findSeoByResourcePath" parameterType="java.lang.String" resultMap="SeoResultMap">
+        select s.* from seo_settings s
+        left join sys_resources_seo_relation r on s.id = r.seo_id
+        left join sys_resources sr on sr.sys_resources_id = r.resource_id
+        where sr.resource_path = #{resourcesPath}
+    </select>
+    
+    <resultMap id="SeoResultMap" type="com.qtdbp.trading.model.SeoSettingsModel">
+        <id column="id" property="id"/>
+        <result column="seo_type" property="seoType"/>
+        <result column="seo_title" property="seoTitle"/>
+        <result column="seo_description" property="seoDescription"/>
+        <result column="seo_keywords" property="seoKeywords"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+</mapper>
