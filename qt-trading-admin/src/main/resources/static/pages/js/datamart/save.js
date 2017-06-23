@@ -30,72 +30,60 @@ $(document).ready(function(){
     $('.dropify').dropify();//图片预览
 
 
-    $file.fileinput({
-        language: 'zh',
-        showUpload:false,
-        layoutTemplates:{
-            actionUpload:''
-        },
-        uploadUrl: '/api/upload/file'
-    }).on("filebatchselected", function(event, files) {
-        $('.file-caption').html("");
-        $(this).fileinput("upload");
-    }).on('fileerror', function(event, data, msg) {
-        layer.msg("文件上传失败",{icon:5});
-    }).on("fileuploaded", function(event, data, previewId, index) {
-        layer.msg("文件上传成功",{icon:1});
-        var ret = data.response;
-        if (ret.success == true){
-            layer.msg("文件上传成功",{icon:1});
-            $file.attr("data-src", ret.file);
-            $file.attr("data-size", ret.dataSize);
-            if(ret.subFiles){
-                subFlie = ret.subFiles
+
+    $file.ssi_uploader({
+        url:'/api/upload/file',
+        maxFileSize:6,
+        onEachUpload:function (ret) {
+            layer.msg("文件上传成功", {icon: 1});
+            if (ret.success == true) {
+                layer.msg("文件上传成功", {icon: 1});
+                $file.attr("data-src", ret.file);
+                $file.attr("data-size", ret.dataSize);
+                if (ret.subFiles) {
+                    subFlie = ret.subFiles
+                }
+            } else {
+                subFlie = {}
             }
-        }else {
-            subFlie = {}
-        }
+        },
+        maxNumberOfFiles:1
     });
 
-    //上传文件
-    // $file.change(function(){
-    //     $(this).parents(".uploader").find(".filename").val($(this).val());
-    //     var val = this.files[0];
-    //     var formData = new FormData();
-    //     formData.append("file", val);
-    //
-    //     $.ajax({
-    //         url: "/api/upload/file",
-    //         type:"post",
-    //         contentType: false,
-    //         processData: false,
-    //         data:formData,
-    //         beforeSend: function(){
-    //             layer.msg("文件正在上传",{icon:5});
-    //         },
-    //         error:function () {
-    //             layer.msg("文件上传失败",{icon:5});
-    //         },
-    //         success: function (ret) {
-    //             if (ret.success == true){
-    //                 layer.msg("文件上传成功",{icon:1});
-    //                 $file.attr("data-src", ret.file);
-    //                 $file.attr("data-size", ret.dataSize);
-    //                 if(ret.subFiles){
-    //                     subFlie = ret.subFiles
-    //                 }
-    //             }else {
-    //                 subFlie = {}
-    //             }
+
+
+
+
+
+    // $file.fileinput({
+    //     language: 'zh',
+    //     showUpload:false,
+    //     layoutTemplates:{
+    //         actionUpload:''
+    //     },
+    //     uploadUrl: '/api/upload/file'
+    // }).on("filebatchselected", function(event, files) {
+    //     $('.file-caption').html("");
+    //     $(this).fileinput("upload");
+    // }).on('fileerror', function(event, data, msg) {
+    //     layer.msg("文件上传失败",{icon:5});
+    // }).on("fileuploaded", function(event, data, previewId, index) {
+    //     layer.msg("文件上传成功",{icon:1});
+    //     var ret = data.response;
+    //     if (ret.success == true){
+    //         layer.msg("文件上传成功",{icon:1});
+    //         $file.attr("data-src", ret.file);
+    //         $file.attr("data-size", ret.dataSize);
+    //         if(ret.subFiles){
+    //             subFlie = ret.subFiles
     //         }
-    //     });
-    // });
-    // //未选择文件时显示
-    // $file.each(function(){
-    //     if($(this).val()==""){
-    //         $(this).parents(".uploader").find(".filename").val("未选中文件...");
+    //     }else {
+    //         subFlie = {}
     //     }
     // });
+
+
+
 
 
     //图片上传
@@ -481,7 +469,7 @@ $(document).ready(function(){
                        data.dataTypeProps = dataTypeProps;
 
 
-                    // alert("111");
+
 
 
                        $.ajax({
