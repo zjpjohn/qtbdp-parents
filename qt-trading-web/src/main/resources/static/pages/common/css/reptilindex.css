@@ -195,8 +195,16 @@
     font-size: 12px;
     margin-bottom: 0px;
 }
+.main_min>.main_domain{
+    display: inline-block;
+    width:198px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
 .main_domain:first-child{
     margin-right: 40px;
+
 }
 em{
     display:inline-block;

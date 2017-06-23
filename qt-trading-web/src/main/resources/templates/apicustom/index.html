@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/common.css" />
-    <link rel="stylesheet" href="../css/apicustom.css" />
+
+    <div th:replace="layout/top" /></div>
+    <link rel="stylesheet" href="/pages/common/css/apicustom.css" />
     <title>API定制</title>
 </head>
 <body>
+    <!--  页头 -->
+    <div th:replace="layout/header" /></div>
+    <!-- 页头结束 -->
+
 <!--API定制开始-->
     <div class="custonOne">
         <div class="custom_input floating">
@@ -37,7 +43,7 @@
                 <button class="custom_submit"> 发布</button>
             </form>
             <div class="custom_topimg lf">
-                <img src="../images/api_top.png" alt=""/>
+                <img src="/pages/common/images/api_top.png" alt=""/>
             </div>
         </div>
     </div>
@@ -149,33 +155,33 @@
         <div class="custom_process">
             <div class="box">
                 <div>
-                    <span><img src="../images/img1.jpg" alt=""/></span>
+                    <span><img src="/pages/common/images/img1.jpg" alt=""/></span>
                     <h3>提交需求</h3>
                     <p>客户将定制目标、要</p>
                     <p>求等提交给钱塘数据</p>
                     <p>交易中心</p>
                 </div>
                 <div>
-                    <span><img src="../images/img2.jpg" alt=""/></span>
+                    <span><img src="/pages/common/images/img2.jpg" alt=""/></span>
                     <h3>评估需求</h3>
                     <p>与客户进行仔细的需求</p>
                     <p>沟通、评估与确认确</p>
                     <p>保双方认知一致</p>
                 </div>
                 <div>
-                    <span><img src="../images/img3.jpg" alt=""/></span>
+                    <span><img src="/pages/common/images/img3.jpg" alt=""/></span>
                     <h3>实施采集</h3>
                     <p>与客户确认后，实时采</p>
                     <p>集任务</p>
                 </div>
                 <div>
-                    <span><img src="../images/img4.jpg" alt=""/></span>
+                    <span><img src="/pages/common/images/img4.jpg" alt=""/></span>
                     <h3>交付审核</h3>
                     <p>审核完成后为客户交付</p>
                     <p>完整数据</p>
                 </div>
                 <div>
-                    <span><img src="../images/img5.jpg" alt=""/></span>
+                    <span><img src="/pages/common/images/img5.jpg" alt=""/></span>
                     <h3>定制完成</h3>
                     <p>完成客户的定制需求</p>
                     <p>做支付结算</p>
@@ -185,9 +191,14 @@
     </div>
 <!--定制流程结束-->
 
+    <!-- 页脚 -->
+    <footer th:replace="layout/footer"></footer>
 
 
+    <script>
+        nav(6);
 
+    </script>
 
 </body>
 </html>
