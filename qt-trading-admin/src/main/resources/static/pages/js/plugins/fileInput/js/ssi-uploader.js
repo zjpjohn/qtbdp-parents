@@ -821,14 +821,14 @@
         en: {
             success: '上传成功',
             sucUpload: '上传成功',
-            chooseFiles: '上传文件',
+            chooseFiles: '选择文件',
             uploadFailed: '上传失败',
             serverError: '内部服务器错误',
             error: '出现错误',
             abort: '中止',
             aborted: '文件上传种植',
             files: '文件',
-            upload: '上传',
+            upload: '点击上传文件',
             clear: '清除',
             drag: '拖放区域',
             sizeError: '$1 exceed the size limit of $2',// $1=file name ,$2=max ie( example.jpg has has exceed the size limit of 2mb)
