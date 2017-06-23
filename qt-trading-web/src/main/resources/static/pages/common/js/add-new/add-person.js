@@ -110,8 +110,11 @@ $(function () {
             LoadingData.toastr({
                 _type: 'error',
                 _title: '表单提交',
-                _msg: '网络超时，请重试或者联系管理员'
+                _msg: data.result.message
             }) ;
+            setTimeout(function () {
+                location.href = "/usercenter";
+            },3000)
         }
     });
 

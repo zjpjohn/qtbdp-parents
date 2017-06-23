@@ -85,6 +85,11 @@ public class DataInstitutionInfoNewService {
     @Transactional
     public Integer insertInstitution(DataInstitutionInfoNewModel infoNewModel) throws GlobalException {
 
+        DataInstitutionInfoNewModel infoNewModelOld = null;
+        //先查询该用户是否申请过服务商，如果有申请过则抛出异常
+        infoNewModelOld = infoNewMapper.findInstitutionInfoIgnoreAuditStatusByCreateId(infoNewModel.getCreateId());
+        if (infoNewModelOld != null) throw new GlobalException("该用户已进行过添加服务商操作");
+
         if (infoNewModel == null) throw new GlobalException("服务商数据丢失");
 
         Integer infoId = null ;

@@ -50,7 +50,6 @@ var Common = {
             pagingType: "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
             columnDefs:_columnDefs,
             ajax: function (data, callback, settings) {
-
                 //封装请求参数
                 var param = {};
                 param.rows = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
@@ -103,7 +102,9 @@ var Common = {
                                 if(typeId == 0){
                                     typeId = "其他";
                                 }
-                                dataChage[i].dataType = dataTypeJson[typeId]?dataTypeJson[typeId]:typeId;
+                                if(dataTypeJson){
+                                    dataChage[i].dataType = dataTypeJson[typeId]?dataTypeJson[typeId]:typeId;
+                                }
                             }
                         }
 
@@ -505,6 +506,70 @@ var Common = {
             }
         }
         return id;
+    },
+    //提示弹框
+    modal : function(title, callback, label) {
+        var alert =
+            '<div class="modal fade" id="myAlertModal" tabindex="-1" role="dialog" aria-labelledby="myAlertModalLabel" aria-hidden="true">' +
+            '  <div class="modal-dialog modal-sm">' +
+            '    <div class="modal-content">' +
+            '      <div class="modal-header">' +
+            '        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+            '        <h4 class="modal-title" id="myAlertModalLabel">'+ (label !== undefined ? label : '提示') +'</h4>' +
+            '      </div>' +
+            '      <div class="modal-body">' +
+            '       <p>'+ title +'</p>' +
+            '      </div>' +
+            '      <div class="modal-footer">' +
+            '        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>' +
+            '      </div>' +
+            '    </div>' +
+            '  </div>' +
+            '</div>';
+
+        $('body').append($(alert));
+
+        $('#myAlertModal').modal('show');
+
+        $('#myAlertModal').on('hidden.bs.modal', function(e) {
+            $('#myAlertModal').remove();
+            if(callback && typeof callback === 'function'){
+                callback();
+            }
+        });
+    },
+    //确认与否弹框
+    confirmModal : function(id,type, title, callback) {
+        var smodal =
+            '<div class="modal fade confirm-modal-sm" id="myConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+            '    <div class="modal-dialog modal-sm">' +
+            '        <div class="modal-content">' +
+            '            <div class="modal-header">' +
+            '                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>' +
+            '                <h4 class="modal-title" id="myModalLabel">确认提示</h4>' +
+            '            </div>' +
+            '            <div class="modal-body">' +
+            '                <p>确认' + title + '吗？</p>' +
+            '            </div>' +
+            '            <div class="modal-footer">' +
+            '                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>' +
+            '                <button type="button" class="btn btn-primary" id="j_confirm_btn">确认</button>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+
+        var bconfirm = false;
+
+        $('body').append($(smodal));
+
+        $('#myConfirmModal').modal('show');
+
+        $('#myConfirmModal').on('hidden.bs.modal', function(e) {
+            $('#myConfirmModal').remove();
+        });
+
+        $('#j_confirm_btn').on('click', callback);
     }
 };
 

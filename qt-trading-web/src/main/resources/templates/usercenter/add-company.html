@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/pages/common/css/common.css"/>
     <link rel="stylesheet" href="/pages/common/css/ruleUploadForm.css" />
     <link rel="stylesheet" href="/pages/common/css/usercenter.css"/>
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/assets/global/plugins/ladda/ladda.min.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL PLUGINS -->
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
 </head>
@@ -16,6 +20,8 @@
 <!-- 页头-->
 <div th:replace="layout/header" /></div>
 <!--页头结束-->
+
+
 <!--验证是否同意协议开始-->
 <div class="protocol2">
     <div class="protocol_contet">
@@ -69,8 +75,8 @@
         </div>
     </div>
 </div>
-
 <!--验证是否同意协议结束-->
+
 
 
 <div class="cenAll">
@@ -91,14 +97,14 @@
             <div id="fromContent">
 
                 <!--表单信息-->
-                <form id="fromCompany" class="trade_form" action="/api/institutionV2" method="post">
+                <form id="fromCompany" action="/api/institutionV2" method="post">
                     <!--服务商基本信息-->
                     <input type="hidden" name="institutionType" value="1">
                     <input type="hidden" name="typeId" value="0">
                     <input type="hidden" name="id" id="AccountId">
                     <input type="hidden" name="companyInfoModel.id" id="personId">
 
-                    <div id="feedback" style="margin: 30px 0 50px 0; display: none;">
+                    <div id="feedback" style="margin: 30px 0 50px 0;display: none">
                         <div class="form_group">
                             <p class="group_title" style="font-size:16px; color: red">
                                 <b>不通过原因：</b>
@@ -112,7 +118,9 @@
                     <div  class="from-top clearfix">
                         <div class="lf">
                             <div id="type">
-                                <h6>身份类型</h6>
+                                <p class="group_title">
+                                    <b>身份类型</b> <i>*</i>
+                                </p>
                                 <div class="type-Content">
                                     <div class="type-button">
                                         <a href="/usercenter/add/person" class="">个人</a>
@@ -169,7 +177,7 @@
                                 <p class="tip">需与营业执照上的名称严格一致</p>
                             </div>
 
-                            <div class="form-group clearfix">
+                            <div class="form-group clearfix form_group">
                                 <p class="group_title">
                                     <b>营业执照</b> <i>*</i>
                                 </p>
@@ -181,7 +189,7 @@
                                 <input type="hidden"  name="companyInfoModel.companyLogo" id="licenseContent">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group form_group">
                                 <p class="group_title">
                                     <b>营业执照注册号</b> <i>*</i>
                                 </p>
@@ -192,7 +200,7 @@
                         </div>
 
 
-                        <div class="form-group address">
+                        <div class="form-group address form_group">
                             <p class="group_title">
                                 <b>企业所在地</b> <i>*</i>
                             </p>
@@ -210,7 +218,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form_group">
                             <p class="group_title">
                                 <b>联系电话</b> <i>*</i>
                             </p>
@@ -222,16 +230,18 @@
                     </div>
                     <!--企业信息结束-->
 
-                    <label>
-                        <input type="checkbox" name="agreement" class="agreement" value="">
-                        我已阅读并同意
-                        <a href="javascript:;" class="protocol">《钱塘用户注册协议》</a>
-                    </label>
+                    <div class="form_group">
+                        <label class="form_control form-group checkbox-inline">
+                            <input type="checkbox" name="agreement" class="agreement form-control" style="display: inline-block;vertical-align: middle;margin-bottom: 2px;" value="">
+                            我已阅读并同意
+                            <a href="javascript:;" class="protocol">《钱塘用户注册协议》</a>
+                        </label>
+                    </div>
 
                     <!-- 页脚发布按钮 -->
-                    <div class="form_btm submit">
+                    <div class="form_btm">
                         <!--<input type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left" value="发布"/>-->
-                        <button type="submit" id="submit-btn" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">发布</button>
+                        <button type="submit" class="ladda-button" data-color="blue" data-style="expand-right" data-size="s" style="width: 80px">提交</button>
 
                         <!--<button type="submit" data-loading-text="Loading..." class="submit_control ladda-button" data-style="expand-left">
                             <span class="ladda-label">发布</span>
@@ -241,7 +251,7 @@
                 <!--表单信息结束-->
             </div>
             <!--from表单结束-->
-            <div id="audit" style="font-size: 18px;margin-top: 50px; display: none;">
+            <div id="audit" style="font-size: 18px;margin-top: 50px;display: none">
                 信息正在审核中...
             </div>
         </div>
@@ -287,58 +297,60 @@
 
 
 
-
 <script th:inline="javascript">
     var user = [[${user}]];
     $(document).ready(function() {
 
-        if(user.infoNewModel.auditStatus == 0){
-            $('#fromCompany').css('display','none');
-            $('#audit').css('display','block');
-        }else if(user.infoNewModel.auditStatus == 2){
-            $('#feedback').css('display', 'block');
-            $('#fromCompany').css('display','block');
-            $('#audit').css('display','none');
+        if(user.infoNewModel){
+            if(user.infoNewModel.auditStatus == 0){
+                $('#fromPerson').css('display','none');
+                $('#audit').css('display','block');
+            }else if(user.infoNewModel.auditStatus == 2){
+                $('#feedback').css('display','block');
+                $('#fromPerson').css('display','block');
+                $('#audit').css('display','none');
 
-            $.ajax({
-                url: "/api/institutionV2/findInstitutionExtend",
-                type: "get",
-                dataType:"json",
-                success:function(ret){
-                    var data = ret.pageInfo;
-                    $('fieldset > span').css('display','none');
+                $.ajax({
+                    url: "/api/institutionV2/findInstitutionExtend",
+                    type: "get",
+                    dataType:"json",
+                    success:function(ret){
+                        var data = ret.pageInfo;
+                        $('fieldset > span').css('display','none');
 
-                    $('#AccountId').val(data.id);
-                    $('.reason').html(data.auditFailReason);
-                    $('#facilitator').val(data.name);
-                    $('#field').val(data.designation);
+                        $('#AccountId').val(data.id);
+                        $('.reason').html(data.auditFailReason);
+                        $('#facilitator').val(data.name);
+                        $('#field').val(data.designation);
 
-                    $('#logo').attr("src",data.logo);
-                    $('#logo').removeClass('Image');
-                    $('#logoContent').val(data.logo);
-
-
-                    var company = data.companyInfoModel;
+                        $('#logo').attr("src",data.logo);
+                        $('#logo').removeClass('Image');
+                        $('#logoContent').val(data.logo);
 
 
-                    $('#personId').val(company.id);
+                        var person = data.personalInfoModel;
 
-                    $('#License').attr("src",company.companyLogo);
-                    $('#License').removeClass('Image');
-                    $('#licenseContent').val(company.companyLogo);
+                        $('#personId').val(person.id);
 
+                        $('#ID1').attr("src",person.fullFacePhoto);
+                        $('#ID1').removeClass('Image');
+                        $('#fullFacePhoto').val(person.fullFacePhoto);
 
+                        $('#ID2').attr("src",person.negativeSidePhoto);
+                        $('#ID2').removeClass('Image');
+                        $('#negativeSidePhoto').val(person.negativeSidePhoto);
+                        ;
+                        $('#name').val(person.realName);
+                        $('#ID').val(person.idNumber);
+                        $('#phone').val(person.phone);
 
-                    $('#companyName').val(company.companyName);
-                    $('#LicenseNumber').val(company.licenseNumber);
-                    $('#phone').val(company.phone);
+                        $('#fromPerson').attr("action","/api/institutionV2/update")
+                    },
+                    error : function () {
 
-                    $('#fromCompany').attr("action","/api/institutionV2/update")
-                },
-                error : function () {
-
-                }
-            });
+                    }
+                });
+            }
         }
 
 

@@ -132,7 +132,10 @@ public class DataInstitutionNewApi extends BaseController {
                     }
                 } catch (Exception e) {
                     logger.error("insertInstitutionV2 has error ,message:" + e.getMessage());
-                    throw new GlobalException(e.getMessage());
+                    message.setSuccess(false);
+                    message.setErrorCode(ErrorCode.ERROR_LOGIN_NO);
+                    message.setMessage(e.getMessage());
+                //    throw new GlobalException(e.getMessage());
                 }
             }
         } else {

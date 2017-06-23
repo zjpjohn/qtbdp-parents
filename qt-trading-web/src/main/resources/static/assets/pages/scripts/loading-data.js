@@ -107,7 +107,7 @@ var LoadingData = {
             "positionClass": "toast-bottom-right",//弹出窗的位置
             "showDuration": "300",//显示的动画时间
             "hideDuration": "1000",//消失的动画时间
-            "timeOut": "1000", //展现时间
+            "timeOut": "5000", //展现时间
             "extendedTimeOut": "1000",//加长展示时间
             "showEasing": "swing",//显示时的动画缓冲方式
             "hideEasing": "linear",//消失时的动画缓冲方式

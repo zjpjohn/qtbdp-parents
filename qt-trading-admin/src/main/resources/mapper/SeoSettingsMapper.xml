@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qtdbp.tradingadmin.mapper.SeoSettingsMapper">
+
+    <!--添加SEO数据-->
+    <insert id="insertSeo" parameterType="com.qtdbp.trading.model.SeoSettingsModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into seo_settings (
+            seo_type,
+            seo_title,
+            seo_description,
+            seo_keywords,
+            create_time
+        ) values (
+            #{seoType},
+            #{seoTitle},
+            #{seoDescription},
+            #{seoKeywords},
+            now()
+        )
+    </insert>
+
+    <resultMap id="SeoResultMap" type="com.qtdbp.trading.model.SeoSettingsModel">
+        <id column="id" property="id"/>
+        <result column="seo_type" property="seoType"/>
+        <result column="seo_title" property="seoTitle"/>
+        <result column="seo_description" property="seoDescription"/>
+        <result column="seo_keywords" property="seoKeywords"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--根据导航ID查询单条seo信息-->
+    <select id="findSeoDetilByResourcesId" parameterType="java.lang.String" resultMap="SeoResultMap">
+        select s.* from seo_settings s
+        left join sys_resources_seo_relation r on s.id = r.seo_id
+        where r.sys_resources_id = #{resourcesId}
+    </select>
+
+    <update id="updateSeo" parameterType="com.qtdbp.trading.model.SeoSettingsModel">
+        update seo_settings
+        <trim prefix="set" suffixOverrides=",">
+            <if test="seoType != null">seo_type = #{seoType},</if>
+            <if test="seoTitle != null"> seo_title = #{seoTitle} ,</if>
+            <if test="seoDescription != null">seo_description = #{seoDescription} ,</if>
+            <if test="seoKeywords != null">seo_keywords = #{seoKeywords} ,</if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!--添加SEO关联表数据-->
+    <insert id="insertResourcesSeoRelation" parameterType="com.qtdbp.trading.model.SysResourcesSeoRelationModel" useGeneratedKeys="true" keyProperty="id">
+        <!-- mysql插入数据后，获取id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sys_resources_seo_relation (
+            seo_id,
+            sys_resources_id
+        ) values (
+            #{seoId},
+            #{sysResourcesId}
+        )
+    </insert>
+
+    <!--分页查询资源数据-->
+    <select id="findResourcesByCondition" parameterType="com.qtdbp.trading.model.SysResourcesModel" resultMap="ResourcesMap">
+        select s.*, r.seo_id from sys_resources s left join sys_resources_seo_relation r on s.resource_id = r.sys_resources_id
+        where 1=1
+        <if test="moduleId != null">
+            and s.module_id = #{moduleId}
+        </if>
+        <if test="resourceName != null">
+            and s.resource_name like '%${resourceName}%'
+        </if>
+    </select>
+    
+    <resultMap id="ResourcesMap" type="com.qtdbp.trading.model.SysResourcesModel">
+        <id column="resource_id" property="resourceId"/>
+        <result column="enable" property="enable"/>
+        <result column="http_method" property="httpMethod"/>
+        <result column="issys" property="issys"/>
+        <result column="module_id" property="moduleId"/>
+        <result column="priority" property="priority"/>
+        <result column="resource_desc" property="resourceDesc"/>
+        <result column="resource_name" property="resourceName"/>
+        <result column="resource_path" property="resourcePath"/>
+        <result column="resource_type" property="resourceType"/>
+        <result column="seo_id" property="seoId"/>
+    </resultMap>
+</mapper>
