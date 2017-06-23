@@ -14,7 +14,7 @@ public class SysResourcesModel {
     private Integer enable;
     private String httpMethod;
     private Integer issys;
-    private int moduleId;
+    private String moduleId;
     private int priority;
     private String resourceDesc;
     private String resourceName;
@@ -63,11 +63,11 @@ public class SysResourcesModel {
         this.issys = issys;
     }
 
-    public int getModuleId() {
+    public String getModuleId() {
         return moduleId;
     }
 
-    public void setModuleId(int moduleId) {
+    public void setModuleId(String moduleId) {
         this.moduleId = moduleId;
     }
 
