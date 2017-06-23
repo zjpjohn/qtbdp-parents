@@ -213,6 +213,7 @@
 .navtop>a:hover,.navtop>a.active{
 	color:#0076C8;
 	border-bottom: 2px solid #0076C8;
+
 }
 .navtop>a.active>i{
 	display:inline-block;

@@ -418,7 +418,7 @@ var App = function () {
         },
         // 服务商数据加载
         initInstitution: function () {
-            nav(6);
+            nav(7);
 
             options._url = "/api/institutionV2" ; // 重置请求地址
             options._rows = 20 ; //每页20条记录

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <div th:replace="layout/top" /></div>
+    <link rel="stylesheet" href="/pages/common/css/apicustom.css" />
+    <title>API定制</title>
+</head>
+<body>
+    <!--  页头 -->
+    <div th:replace="layout/header" /></div>
+    <!-- 页头结束 -->
+
+<!--API定制开始-->
+    <div class="custonOne">
+        <div class="custom_input floating">
+            <form class="custom_form lf">
+                <p class="custom_title">API定制</p>
+                <div class="custom_every">
+                    <span>接口名称 <i>*</i> : </span> <input type="text" placeholder="请输入定制接口的名称"/>
+                </div>
+                <div class="custom_every">
+                    <span>需求描述 <i>*</i> : </span> <input type="text" placeholder="请详情描述您的定制需求" class=""/>
+                </div>
+                <div class="custom_every describe">
+                    <span>返回字段 <i>*</i> : </span> <input type="text" placeholder="请输入定制接口的返回信息"/>
+                </div>
+                <div class="custom_every">
+                    <span>预  算 <i >*</i> : </span> <input type="text" placeholder="请输入您的定制预算"/>
+                </div>
+                <div class="custom_every">
+                    <span>称  呼 <i>*</i> : </span> <input type="text" placeholder="张先生/李女士"/>
+                </div>
+                <div class="custom_every">
+                    <span>联系电话 <i>*</i> : </span> <input type="text" placeholder="请输入您的联系电话 方便客户人员联系您"/>
+                </div>
+
+                <div class="custom_yes">
+                    <input type="checkbox"/> 我已阅读并同意 <a href="javascripy:;">《xxx协议》</a>
+                </div>
+                <button class="custom_submit"> 发布</button>
+            </form>
+            <div class="custom_topimg lf">
+                <img src="/pages/common/images/api_top.png" alt=""/>
+            </div>
+        </div>
+    </div>
+<!--API定制结束-->
+
+<!--你可能会遇到开始-->
+
+    <div class="custonTwo">
+        <div class="possible">
+            <p class="possible_title">你可能会遇到</p>
+            <p class="possible_border"></p>
+            <ul class="possible_more">
+                <li>
+                    <p class="possiimg"></p>
+                    <p>接口需求规模大</p>
+                </li>
+                <li>
+                    <p class="possiimg"></p>
+                    <p>采集效率低</p>
+                </li>
+                <li>
+                    <p class="possiimg"></p>
+                    <p>研发成本高</p>
+                </li>
+                <li>
+                    <p class="possiimg"></p>
+                    <p>项目周期短</p>
+                </li>
+                <li>
+                    <p class="possiimg"></p>
+                    <p>缺乏数据源</p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+<!--你可能会遇到结束-->
+
+<!--我们的服务开始-->
+    <div class="custonThree">
+        <div class="custonThree_main">
+            <p class="custon3_title">我们的服务</p>
+            <p class="custom_bortop"></p>
+            <div>
+                <h2>数据采集</h2>
+                <p>全网覆盖,分布式高效采集系统,实施精准采集</p>
+            </div>
+            <div>
+                <h2>资源变现</h2>
+                <p>发布数据源，在线交易，平台结算</p>
+            </div>
+            <div>
+                <h2>个性化定制</h2>
+                <p>数据定制、爬虫规则定制、API定制满足您</p>
+                <p>的个性化需求</p>
+            </div>
+            <div>
+                <h2>数据共享</h2>
+                <p>强强整合，汇集多家资源</p>
+            </div>
+        </div>
+    </div>
+<!--我们的服务结束-->
+
+<!--我们的优势开始-->
+    <div class="custonFour">
+        <div class="possible">
+            <p class="possible_title">我们的优势</p>
+            <p class="possible_border"></p>
+            <div class="icon_list">
+                <div>
+                    <span></span>
+                    <h3>资源广泛</h3>
+                    <p>涵盖线上各类数据源，合作机构</p>
+                    <p>提供独家资源</p>
+                </div>
+                <div>
+                    <span></span>
+                    <h3>数据精准</h3>
+                    <p>权威团队实施精准采集</p>
+                </div>
+                <div>
+                    <span></span>
+                    <h3>高效便捷</h3>
+                    <p>分布式高效采集系统</p>
+                </div>
+                <div>
+                    <span></span>
+                    <h3>跟踪服务</h3>
+                    <p>一对一定制指导，个性化定制和</p>
+                    <p>数据技术处理</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<!--我们的优势结束-->
+
+<!--定制流程开始-->
+    <div class="custonFive">
+        <div class="customization">
+            <p class="custon3_title">定制流程</p>
+            <p class="custom_bortop"></p>
+            <!--<div>
+                <p>数据采集</p>
+                <p>全网覆盖,分布式高效采集系统,实施精准采集</p>
+            </div>-->
+        </div>
+        <div class="custom_process">
+            <div class="box">
+                <div>
+                    <span><img src="/pages/common/images/img1.jpg" alt=""/></span>
+                    <h3>提交需求</h3>
+                    <p>客户将定制目标、要</p>
+                    <p>求等提交给钱塘数据</p>
+                    <p>交易中心</p>
+                </div>
+                <div>
+                    <span><img src="/pages/common/images/img2.jpg" alt=""/></span>
+                    <h3>评估需求</h3>
+                    <p>与客户进行仔细的需求</p>
+                    <p>沟通、评估与确认确</p>
+                    <p>保双方认知一致</p>
+                </div>
+                <div>
+                    <span><img src="/pages/common/images/img3.jpg" alt=""/></span>
+                    <h3>实施采集</h3>
+                    <p>与客户确认后，实时采</p>
+                    <p>集任务</p>
+                </div>
+                <div>
+                    <span><img src="/pages/common/images/img4.jpg" alt=""/></span>
+                    <h3>交付审核</h3>
+                    <p>审核完成后为客户交付</p>
+                    <p>完整数据</p>
+                </div>
+                <div>
+                    <span><img src="/pages/common/images/img5.jpg" alt=""/></span>
+                    <h3>定制完成</h3>
+                    <p>完成客户的定制需求</p>
+                    <p>做支付结算</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--定制流程结束-->
+
+    <!-- 页脚 -->
+    <footer th:replace="layout/footer"></footer>
+
+
+    <script>
+        nav(6);
+
+    </script>
+
+</body>
+</html>

@@ -24,19 +24,19 @@
                     <a>
                         <img th:src="@{/pages/common/images/banner10.jpg}" data-thumb="/pages/common/images/banner10.jpg" alt="" />
                         <i class="knowmore" onclick="location.href='/datamart';"></i>
-                        <!--<div class="cartoonimg">
+                        <div class="cartoonimg">
                             <img class="cartoon_one" src="/pages/common/images/index_banner1.png" alt="">
                             <img class="cartoon_two" src="/pages/common/images/index_banner2.png" alt="" >
-                        </div>-->
+                        </div>
                     </a>
                     <a>
                         <img th:src="@{/pages/common/images/banner20.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
                         <i class="joinus" onclick="location.href='/crawlers';"></i>
-                        <!--<div class="cartoonimg">
+                        <div class="cartoonimg">
                             <img class="cartoon_three" src="/pages/common/images/index_banner3.png" alt="">
                             <img class="cartoon_four" src="/pages/common/images/index_banner4.png" alt="" >
                             <img class="cartoon_five" src="/pages/common/images/index_banner5.png" alt="" >
-                        </div>-->
+                        </div>
                     </a>
                 </div>
             </div>
@@ -46,15 +46,15 @@
             <!--轮播表单开始-->
             <div class="navinput">
                 <p class="navtop">
-                    <a href="javascript:;" data-attr="dataneed" class="active"> 数据需求<i></i>  </a>
-                    <a href="javascript:;" data-attr="business"> 商务合作 <i></i> </a>
+                    <a href="javascript:;" data-attr="dataneed" class="active">数据需求<i></i>  </a>
+                    <a href="javascript:;" data-attr="business">商务合作<i></i> </a>
                 </p>
                 <form action="/api/feedback" class="dataneed active" method="post" id="feedback-form">
                     <input type="hidden" value="1" name="feedbackType">
                     <div class="navmin">
                         <div class="floating needms">
                             <span class="lf">需求描述 : </span>
-                            <textarea name="content" class="textarea_control lf" placeholder="  简单描述您的数据需求"></textarea>
+                            <textarea name="content" class="textarea_control lf" placeholder="简单描述您的数据需求"></textarea>
                         </div>
                         <div class="floating needms">
                             <span class="lf">联系QQ : </span>
@@ -70,7 +70,7 @@
                     <div class="navmin">
                         <div class="floating needms">
                             <span class="lf">合作需求 : </span>
-                            <textarea name="content" class="textarea_control lf"></textarea>
+                            <textarea name="content" class="textarea_control lf" placeholder="简单描述您的合作需求"></textarea>
                         </div>
                         <div class="floating needms">
                             <span class="lf">联系QQ : </span>
@@ -374,11 +374,6 @@
                 $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
                 $(".cartoonimg>img").animate({"margin-top":"0px"},400);
             });
-
-
-
-
-
 
         </script>
     </body>
