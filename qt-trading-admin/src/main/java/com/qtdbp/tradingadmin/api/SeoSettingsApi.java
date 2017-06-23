@@ -66,6 +66,7 @@ public class SeoSettingsApi {
     @ApiOperation(value="分页查询导航数据接口")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "resourceName", value = "seo网页标题", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "moduleId", value = "模块ID", dataType = "String", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：10）", defaultValue = "10", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })

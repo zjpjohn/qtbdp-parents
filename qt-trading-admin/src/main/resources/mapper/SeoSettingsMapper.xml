@@ -70,6 +70,9 @@
     <select id="findResourcesByCondition" parameterType="com.qtdbp.trading.model.SysResourcesModel" resultMap="ResourcesMap">
         select s.*, r.seo_id from sys_resources s left join sys_resources_seo_relation r on s.resource_id = r.sys_resources_id
         where 1=1
+        <if test="moduleId != null">
+            and s.module_id = #{moduleId}
+        </if>
         <if test="resourceName != null">
             and s.resource_name like '%${resourceName}%'
         </if>
