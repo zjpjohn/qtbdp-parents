@@ -6,7 +6,7 @@ $(function () {
 
     var settings = {
         container:"#datatable_ajax",
-        url: "/api/customized",
+        url: "/api/customized?serviceType=2",
         columns: [
             { "data": "id" },
             { "data": "name" },
