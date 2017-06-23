@@ -23,7 +23,7 @@
 	left: 50%;
 	transform:translate(-50%,-50%);
 }
-.nivoSlider a img {
+.nivoSlider a>img {
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -56,11 +56,12 @@
 	margin:0;
 	z-index:6;
 	display:none;
-	filter:alpha(opacity=0); 
-	opacity:0;
+	/*filter:alpha(opacity=0);
+	opacity:0;*/
 }
 .nivoSlider a.nivo-imageLink.hover{
-	opacity:1;
+	/*opacity:1;*/
+	display:block;
 }
 .nivo-controlNav a {
 	display:inline-block;
@@ -268,38 +269,58 @@
 	border: none;
 	padding: 0 !important;
 }
-.knowmore2{
+.nivoSlider i{
 	display:inline-block;
 	width:160px;
 	height:40px;
+	cursor: pointer;
 	position:absolute;
+}
+.knowmore{
 	top:238px;
 	left:745px;
-	color: #f00;
-	background: #f00;
 }
-.banner10{
-	position:relative;
+.joinus{
+	top:238px;
+	left:745px;
 }
-
+.cartoonimg{
+	display:block;
+	width:400px;
+	height:400px;
+	opacity:1;
+	position:absolute;
+	top:0px;
+	left:1000px;
+}
 .cartoon_one{
 	position:absolute;
-	top:0px;
-	right:0px;
-	z-index:9;
-	margin-top:20px;
+	top:139px;
+	left:81px;
+	z-index: 1;
 }
 
-/*
 .cartoon_two{
 	position:absolute;
-	top:0px;
-	right:0px;
-	margin-top:-20px;
+	top:56px;
+	right:-141px;
 }
-*/
-
-
+.cartoon_three{
+	position:absolute;
+	top:77px;
+	left:92px;
+}
+.cartoon_four{
+	position:absolute;
+	top:65px;
+	right:-125px;
+}
+.cartoon_five{
+	position:absolute;
+	top:137px;
+	right:-41px;
+	z-index: 1;
+}
 
 
 
