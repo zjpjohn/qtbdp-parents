@@ -5,7 +5,7 @@
     <select id="findSeoByResourcePath" parameterType="java.lang.String" resultMap="SeoResultMap">
         select s.* from seo_settings s
         left join sys_resources_seo_relation r on s.id = r.seo_id
-        left join sys_resources sr on sr.sys_resources_id = r.resource_id
+        left join sys_resources sr on sr.resource_id = r.sys_resources_id
         where sr.resource_path = #{resourcesPath}
     </select>
     

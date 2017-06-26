@@ -58,6 +58,7 @@ $(function () {
                         $('#keyWord').val(ret.pageInfo.seoKeywords);
                         $('#desc').val(ret.pageInfo.seoDescription);
                         $('#Title').val(ret.pageInfo.seoTitle);
+                        $('#confirm_btn').val(seoId);
                     }else {
                         layer.msg("获取信息失败",{icon: 5});
                     }
@@ -69,34 +70,46 @@ $(function () {
 
     //添加SE0
     $('#confirm_btn').on('click', function () {
-        var keyWord = $('#keyWord').val(),
+        var mode,
+            url,
+            keyWord = $('#keyWord').val(),
             desc = $('#desc').val(),
-            title = $('#Title').val();
+            title = $('#Title').val(),
+            seoId = $(this).val();
+
+        if(seoId && seoId != ''){
+            url = "/api/seo/settings/update";
+            mode = "修改";
+        }else {
+            url = '/api/seo/settings';
+            mode = "添加";
+        }
         var data = {
             resourcesId:id,
             seoKeywords:keyWord,
             seoDescription:desc,
-            seoTitle:title
+            seoTitle:title,
+            id:seoId
         };
 
         $.ajax({
             type:"post",
             data:JSON.stringify(data),
             dataType:'json',
-            url:'/api/seo/settings',
+            url:url,
             contentType:'application/json',
             async:true,
             error: function () {
-                layer.msg("添加出现错误",{icon: 5});
+                layer.msg(mode+"出现错误",{icon: 5});
             },
             success: function (ret) {
                 if(ret.result.success == true){
                     $('#SEOModal').modal('hide');
-                    layer.msg("添加成功",{icon: 1},function () {
+                    layer.msg(mode+"成功",{icon: 1},function () {
                         window.location.href = "/seo";
                     });
                 }else {
-                    layer.msg("添加失败",{icon: 5});
+                    layer.msg(mode+"失败",{icon: 5});
                 }
             }
         })

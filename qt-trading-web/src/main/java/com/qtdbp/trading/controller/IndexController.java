@@ -1,10 +1,16 @@
 package com.qtdbp.trading.controller;
 
+import com.qtdbp.trading.mapper.SeoSettingsMapper;
+import com.qtdbp.trading.model.SeoSettingsModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 首页
@@ -16,12 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController extends BaseController {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
-
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index() {
+    public ModelAndView index(HttpServletRequest request) {
 
-        return "index" ;
+        return  getSeoSettings("index",request);
     }
 
 }

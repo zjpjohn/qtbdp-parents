@@ -1,6 +1,8 @@
 package com.qtdbp.trading.controller;
 
 import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.mapper.SeoSettingsMapper;
+import com.qtdbp.trading.model.SeoSettingsModel;
 import com.qtdbp.trading.service.FdfsFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 数据交易平台-数据商城
@@ -31,8 +35,9 @@ public class DatamartController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/datamart", method = RequestMethod.GET)
-    public String index() {
-        return PAGE_DATAMART ;
+    public ModelAndView index(HttpServletRequest request) {
+
+        return  getSeoSettings(PAGE_DATAMART, request);
     }
 
     /**
