@@ -12,6 +12,7 @@ public class ApiDemandModel extends BaseModel{
     private String apiDomain;       //所属行业
     private String apiDesc;         //接口需求描述
     private Double apiPrice;        //需求预算
+    private String apiField;        //返回字段
     private String contacts;        //联系人
     private String phone;           //联系电话
     private Date createTime;        //联系电话
@@ -58,6 +59,14 @@ public class ApiDemandModel extends BaseModel{
 
     public void setApiPrice(Double apiPrice) {
         this.apiPrice = apiPrice;
+    }
+
+    public String getApiField() {
+        return apiField;
+    }
+
+    public void setApiField(String apiField) {
+        this.apiField = apiField;
     }
 
     public String getContacts() {
