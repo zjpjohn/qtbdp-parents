@@ -428,7 +428,7 @@ var App = function () {
         },
         // 服务商主页
         initInstitutionHome: function (id,type) {
-            nav(6);
+            nav(7);
 
             // 加载服务商明细
             LoadingData.request({url: "/api/institutionV2/"+id}, function(data) {
