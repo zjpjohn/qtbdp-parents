@@ -128,9 +128,9 @@ var Common = {
     },
     CorrespondType:function (data) {
         switch (data){
-            case 1 : return "数据包";
-            case 2 : return "API接口" ;
-            case 3 : return "数据报告";
+            case 0 : return "数据包";
+            case 1 : return "API接口" ;
+            case 2 : return "数据报告";
                 default : return "该数据类型不存在";
         }
     },
