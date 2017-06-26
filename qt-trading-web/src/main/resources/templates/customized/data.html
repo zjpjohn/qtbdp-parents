@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>数据定制</title>
+    <title th:if="!${seo}">数据定制</title>
+    <title th:if="${seo}" th:text="${seo.seoTitle}"></title>
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/crawlerindex.css"/>
@@ -102,7 +103,7 @@
                     <p class="main_title">${prod.name}</p>
                     <p class="main_text">数据维度 : ${prod.dimension}</p>
                     <p class="main_min">
-                        <span >采集规模: <i class="main_domain">${prod.scale}</i> 条</span>
+                        <span >数据规模: <i class="main_domain">${prod.scale}</i> 条</span>
                         <span class="main_timeend"> <em></em> 截至倒计时 : ${$item._timeChange(prod.endTime)}</span>
                     </p>
                 </div>

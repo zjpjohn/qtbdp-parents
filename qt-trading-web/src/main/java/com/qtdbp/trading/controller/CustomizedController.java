@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 定制服务
  *
@@ -36,9 +38,9 @@ public class CustomizedController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/customized/data", method = RequestMethod.GET)
-    public String customizedData() {
+    public ModelAndView customizedData(HttpServletRequest request) {
 
-        return PAGE_CUSTOMIZED_DATA;
+        return getSeoSettings(PAGE_CUSTOMIZED_DATA, request);
     }
 
     /**
@@ -60,9 +62,9 @@ public class CustomizedController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/customized/rule", method = RequestMethod.GET)
-    public String customizedRule() {
+    public ModelAndView customizedRule(HttpServletRequest request) {
 
-        return PAGE_CUSTOMIZED_RULE;
+        return getSeoSettings(PAGE_CUSTOMIZED_RULE, request);
     }
 
     /**

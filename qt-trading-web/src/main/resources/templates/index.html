@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>首页 | 钱塘大数据交易中心</title>
+        <title th:if="!${seo}">首页 | 钱塘大数据交易中心</title>
+        <title th:if="${seo}" th:text="${seo.seoTitle}"></title>
         <div th:replace="layout/top" /></div>
         <link rel="stylesheet" href="/pages/common/css/nivo-slider.css" />
         <link rel="stylesheet" href="/pages/common/css/index.css" />

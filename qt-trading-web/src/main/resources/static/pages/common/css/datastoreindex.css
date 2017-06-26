@@ -158,13 +158,12 @@ em{
 .sto_main{
     color:#b3b3b3;
     width:282px;
-    height:54px;
+    height:60px;
     font-size: 14px;
     padding:0px 20px;
     box-sizing: border-box;
     overflow: hidden;
-
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 .jtcx{
     color:#428DD0;
