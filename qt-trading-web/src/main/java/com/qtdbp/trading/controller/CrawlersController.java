@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 爬虫市场
  *
@@ -32,9 +34,9 @@ public class CrawlersController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/crawlers", method = RequestMethod.GET)
-    public String crawlers() {
+    public ModelAndView crawlers(HttpServletRequest request) {
 
-        return PAGE_CRAWLERS;
+        return getSeoSettings(PAGE_CRAWLERS, request);
     }
 
     /**

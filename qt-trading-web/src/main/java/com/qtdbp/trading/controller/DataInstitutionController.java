@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
 /**
@@ -36,9 +37,9 @@ public class DataInstitutionController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/institution", method = RequestMethod.GET)
-    public String institution() {
+    public ModelAndView institution(HttpServletRequest request) {
 
-        return PAGE_INSTITUTION;
+        return getSeoSettings(PAGE_INSTITUTION, request);
     }
 
     /**

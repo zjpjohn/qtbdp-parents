@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>数据定制</title>
+    <title th:if="!${seo}">数据定制</title>
+    <title th:if="${seo}" th:text="${seo.seoTitle}"></title>
     <div th:replace="layout/top"/>
 
     <link rel="stylesheet" href="/pages/common/css/crawlerindex.css"/>
