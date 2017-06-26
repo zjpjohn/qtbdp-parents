@@ -220,9 +220,9 @@ em{
     margin-bottom: 20px;
     width:200px;
     height:24px;
-    /*overflow:hidden;
+    overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap;*/
+    white-space:nowrap;
 }
 .main_text{
     color:#666;
@@ -238,6 +238,10 @@ em{
     color:#999;
     font-size: 12px;
     margin-bottom: 0px;
+    width: 198px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
 }
 em{
