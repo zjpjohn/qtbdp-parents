@@ -72,8 +72,8 @@ var Common = {
                                 var time = dataChage[i].addtime,
                                     createTime = dataChage[i].createTime;
                                 dataChage[i].addtime = Common._formatedate(time);
-                                var props = dataChage[i].dataTypeProps;
-                                dataChage[i].dataTypeProps = Common._dataTypeProps(props);
+                                var props = dataChage[i].dataStatus;
+                                dataChage[i].dataStatus = Common.CorrespondType(props);
                                 var typeId = dataChage[i].dataType;
 
                                 dataChage[i].createTime = Common._formatedate(createTime);
@@ -126,16 +126,13 @@ var Common = {
         }).api();
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
     },
-
-
-    //创建属性对象数据
-    createAttr:function (opt) {
-        var obj = {};
-        obj.attrName = opt.attrName;
-        obj.valName = opt.valName;
-        obj.attrId = opt.attrId;
-        obj.valId = opt.valId;
-        return obj;
+    CorrespondType:function (data) {
+        switch (data){
+            case 1 : return "数据包";
+            case 2 : return "API接口" ;
+            case 3 : return "数据报告";
+                default : return "该数据类型不存在";
+        }
     },
     //获取修改时页面id值
     QueryString:function () {
@@ -158,43 +155,13 @@ var Common = {
         }
         return query_string;
     },
-    attrSelect:function (str,symbols) {
-        if(typeof str != 'string' || str == ""){
-            console.log("参数错误")
-        }else {
-            var newStr = str.split(symbols[0]),
-                arr = [];
-            newStr.pop();
-
-            for(var i = 0;i < newStr.length;i++){
-                var newArr = newStr[i].split(symbols[1]),
-                    obj = {};
-                obj.attrName = newArr[0];
-                obj.valName = newArr[1];
-                obj.attrId = newArr[2];
-                obj.valId = newArr[3];
-                arr.push(obj);
-            }
-            return arr;
-        }
-    },
     //渲染Select
     typeList:function (opt) {
         var ele = opt.ele,
             id = opt.id,
             tmpl = opt.tmpl,
             url = opt.url,
-            CId = opt.CId,
-            selected = opt.selected,
-            attrID = opt.attrId,
-            marketPrice = opt.marketPrice,
-            price = opt.price,
-            PMarket = opt.PMarket,
-            PWhole = opt.PWhole,
-            PChild = opt.PChild,
-            itemPrice = opt.itemPrice,
-            priceName = opt.priceName,
-            attrContent = opt.attrContent;
+            CId = opt.CId;
 
 
         ele.empty();
@@ -220,23 +187,23 @@ var Common = {
                         ele:ele,
                         id:CId
                     });
-
-                    attrID.css("display","block");
-                    Common.attrList({
-                        attrContent:attrContent,
-                        id:CId,
-                        selected:selected,
-                        priceName:priceName,
-                        marketPrice:marketPrice,
-                        price:price,
-                        itemPrice:itemPrice,
-                        PMarket:PMarket,
-                        PWhole:PWhole,
-                        PChild:PChild
-                    });
                 }
             }
         });
+    },
+    radioSelect:function (obj) {
+        var radio = obj.ele,
+            id = obj.id;
+
+        for(var i = 0;i < radio.length;i++){
+
+            if($(radio[i]).val() == id){
+                $(radio[i]).attr('checked','checked');
+                break;
+            }else {
+                continue;
+            }
+        }
     },
     //渲染已选择的option
     optionSelect:function (obj) {
@@ -255,71 +222,6 @@ var Common = {
             }
         }
     },
-    //渲染单选框
-    attrList:function (opt) {
-        var attrContent = opt.attrContent,
-            attrId = opt.attrId,
-            id = opt.id,
-            marketPrice = opt.marketPrice,
-            price = opt.price,
-            itemPrice = opt.itemPrice,
-            PMarket = opt.PMarket,
-            PWhole = opt.PWhole,
-            PChild = opt.PChild,
-            priceName = opt.priceName,
-            selected = opt.selected;
-
-        $.ajax({
-            url: "/api/dataType/findTypeAttr",
-            dataType: "json",
-            type:"get",
-            data:{
-                id:id
-            },
-            error:function () {
-                alert("加载错误")
-            },
-            success: function (ret) {
-                var data = ret.pageInfo;
-                if(attrId){
-                    attrId.css("display","block");
-                }
-
-                $.each(attrContent,function (i,val) {
-                    var tmpl = val.tmpl,
-                        index = val.index,
-                        idName = val.idName,
-                        ele = val.attrN;
-                    ele.empty();
-                    tmpl.tmpl(data[index],{
-                        setId:function (i) {
-                            return idName + i;
-                        }
-                    }).appendTo(ele);
-
-
-                    if(selected){
-                        $.each(selected,function (s,v) {
-                            if(ele.find("input").data("attrid") == v.attrId){
-                                for(var j = 0;j < ele.find("input").length;j++){
-                                    if($(ele.find("input")[j]).val() == v.valId){
-                                        $(ele.find("input")[j]).attr("checked",'checked');
-                                        if(v.attrId == 4 && v.valId == 101){
-                                            priceName.css("display","block");
-                                            PWhole.val(price);
-                                            PChild.val(itemPrice);
-                                            PMarket.val(marketPrice);
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    }
-                });
-
-            }
-        });
-    },
     /**
      * 时间格式转换
      * @param date
@@ -330,6 +232,7 @@ var Common = {
       //  formatedate=formatedate.getFullYear()+"-"+(parseInt(formatedate.getMonth())+1)+"-"+formatedate.getDate()+" "+formatedate.getHours()+":"+formatedate.getMinutes()+":"+formatedate.getSeconds();
         return formatedate.toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
     },
+
 
     //数据商场 具体详情数据格式解析
     _dataTypeProps: function (data) {
