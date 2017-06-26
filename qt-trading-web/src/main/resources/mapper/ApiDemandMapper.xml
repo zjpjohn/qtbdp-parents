@@ -13,6 +13,7 @@
             api_domain,
             api_desc,
             api_price,
+            api_field,
             contacts,
             phone,
             create_time
@@ -22,6 +23,7 @@
             #{apiDomain},
             #{apiDesc},
             #{apiPrice},
+            #{apiField},
             #{contacts},
             #{phone},
             now()

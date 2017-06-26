@@ -89,7 +89,7 @@ public class SeoSettingsApi {
     }
 
     @ApiOperation(value = "更新SEO优化数据接口")
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelMap updateSeo(@RequestBody SeoSettingsModel seoModel) throws GlobalAdminException {
         ModelMap map = new ModelMap();
         Message message = new Message() ;
