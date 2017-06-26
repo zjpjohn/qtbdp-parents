@@ -31,7 +31,7 @@ public class ApiDemandApi {
 
     @ApiOperation(value="添加Api定制数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ModelMap insertApiDemand(@RequestBody ApiDemandModel apiDemandModel) throws GlobalException {
+    public ModelMap insertApiDemand( ApiDemandModel apiDemandModel) throws GlobalException {
 
         ModelMap map = new ModelMap();
         Message message = new Message();

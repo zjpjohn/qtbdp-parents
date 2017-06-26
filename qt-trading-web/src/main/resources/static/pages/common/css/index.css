@@ -50,7 +50,6 @@ body{
 }
 .databox>li:first-child,.datamart>li:first-child{
     box-sizing: border-box;
-    /*border-left:1px solid #E9E9E9;*/
     width:290px;
     height:400px;
     margin-right: 10px;
@@ -99,11 +98,7 @@ body{
     text-align: center;
     color:#02CDA0;
     margin-top:10px;
-
 }
-
-
-
 /*******工业数据开始*********/
 .databox>li:nth-child(2)>a>p:first-child{
     background-position:0px 0px;
@@ -116,15 +111,12 @@ body{
 .databox>li:nth-child(4)>a>p:first-child{
     background-position:-442px 10px;
 }
-
 .databox>li:nth-child(5)>a>p:first-child{
     background-position:-100px 0px;
 }
-
 .databox>li:nth-child(6)>a>p:first-child{
     background-position:-326px 10px;
 }
-
 .databox>li:nth-child(7)>a>p:first-child{
     background-position:-584px 10px;
 }
@@ -147,14 +139,11 @@ body{
     background-color: rgba(0,160,233,0.1);
     display:none;
 }
-
 .databox>li:hover>.box_shade,.databox>li>.box_shade.active{
     cursor: pointer;
     display:block;
 
 }
-
-
 /**********关联数据开始*************/
 .relevance_data{
     background-color:#EEEEEE;
@@ -177,7 +166,6 @@ body{
 .relevancebox>li:first-child>img{
     height:510px;
 }
-
 .relevancebox>li{
     box-sizing: border-box;
     float:left;
@@ -194,10 +182,6 @@ body{
 .relevancebox>li:hover>a>p,.relevancebox>li.active>a>p{
     color: #fff;
 }
-
-
-
-
 .databox_not>img{
     box-sizing: border-box;
     width:290px;
@@ -242,16 +226,6 @@ body{
     background-position:-444px -170px;
 }
 
-
-
-
-
-
-
-
-
-
-
 /****hover背景图******/
 .relevancebox>li:nth-child(2):hover>a>p:first-child,.relevancebox>li:nth-child(2).active>a>p:first-child{
     background-position:10px -779px;
@@ -289,29 +263,6 @@ body{
 .relevancebox>li:nth-child(13):hover>a>p:first-child,.relevancebox>li:nth-child(13).active>a>p:first-child{
     background-position:-444px -854px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .new_box{
     display:inline-block;
     width:50px;
@@ -331,15 +282,10 @@ body{
     background-color: #F9C659;
     display:none;
 }
-
-
-
 .relevancebox>li:hover>.new_shade,.relevancebox>li>.new_shade.active{
     cursor: pointer;
     display:block;
-
 }
-
 .intitle2>li:nth-child(2){
     background: url(../images/intitle1.jpg);
 }
@@ -358,17 +304,15 @@ body{
 .intitle2>li:nth-child(7){
     background: url(../images/intitle6.jpg);
 }
-
+.databox>li:nth-child(2n+1)>a>p{
+    color:#fff;
+}
 .bortop{
     border-top:1px solid #E9E9E9;
 }
 .borleft{
     border-left:1px solid #E9E9E9;
 }
-
-
-
-
 /**************爬虫市场开始***********/
 .reptile_data{
     background-color:#F9F9F9;
@@ -406,7 +350,6 @@ body{
 .datamart>li:hover>a>p,.datamart>li.active>a>p{
     color:#fff;
 }
-
 .datamart>li:nth-child(2):hover>a>p:first-child{
     background-position:-14px -642px;
 }
@@ -425,14 +368,6 @@ body{
 .datamart>li:nth-child(7):hover>a>p:first-child{
     background-position:-678px -638px;
 }
-
-
-
-
-
-
-/**************爬虫市场结束***********/
-
 /*****数据服务商开始*******/
 .reptile_data .intitle>i.servicem{
     background-image: linear-gradient(to bottom,#81E7FD 0%,#2488D3 100%);
@@ -489,7 +424,6 @@ body{
 .com_list>.a9{
     background-position:0px -532px;
 }
-
 /*****数据服务商结束******/
 
 
