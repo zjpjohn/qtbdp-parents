@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by dell on 2017/6/23.
  */
 @Controller
-public class ApiDemandController {
+public class ApiDemandController extends BaseController{
 
     private static final String ADD_API_PAGE = "apicustom/index";
 

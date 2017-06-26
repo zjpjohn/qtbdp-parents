@@ -1,5 +1,6 @@
 package com.qtdbp.trading.api;
 
+import com.qtdbp.trading.controller.BaseController;
 import com.qtdbp.trading.exception.ErrorCode;
 import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.mapper.ApiDemandMapper;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "Api定制 - 业务API接口")
 @RestController
 @RequestMapping(value = "/api/demand")
-public class ApiDemandApi {
+public class ApiDemandApi extends BaseController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
