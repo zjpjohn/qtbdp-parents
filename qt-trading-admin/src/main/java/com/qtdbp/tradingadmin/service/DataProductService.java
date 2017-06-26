@@ -65,7 +65,9 @@ public class DataProductService {
     public Integer insertProduct(DataProductModel productModel) throws GlobalException {
 
         if (productModel == null) throw  new GlobalException("数据包产品为空") ;
-
+        String filePath = productModel.getFileUrl();
+        String dataFormat = filePath.substring(filePath.lastIndexOf(".") + 1);
+        productModel.setDataFormat(dataFormat);
         Integer count = productMapper.insertProduct(productModel) ;
         if (count != null && count > 0) {
 /*            List<DataProductAttrRelationModel> list = productModel.getAttrRelationModels();
