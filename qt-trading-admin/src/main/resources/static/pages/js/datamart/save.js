@@ -12,11 +12,9 @@ $(document).ready(function(){
         $sourceTmpl = $('#source_tmpl'),//数据来源模板
         $chargeTmpl = $('#charge_tmpl'),//收费模板
         $waresTmpl = $('#waresType_tmpl'),//文件类型模板
-        // $fileSizeTmpl = $('#fileSize_tmpl'),//文件大小模板
         $source = $('#source'),//数据来源属性
         $charge = $('#charge'),//收费方式
         $wares = $('#waresType'),//文件类型
-        // $fileSize = $('#fileSize'),//文件大小
         $price = $('#Price'),//价格
         $marketPrice = $("#marketPrice"),//市场价
         $synopsis =$('#synopsis'),//产品简介
@@ -109,13 +107,15 @@ $(document).ready(function(){
     });
 
 
+
+
     //收费价格显示与否
     $charge.on('change','input',function () {
         if(this.type != 'radio'){
             return;
         }else if($(this).is(':checked') === true){
             $price.find("input").val("");
-            if($(this).val() === "101"){
+            if($(this).val() === "2"){
                 $price.css('display','block');
             }else {
                 $price.css('display','none');
@@ -146,58 +146,20 @@ $(document).ready(function(){
     });
     //通过一级展示二级
     $classA.on('change',function () {
-        var id = $(this).val(),
-            isParent = $(this).find("option:selected").attr("data-isParent");
-        $attr.css("display","none");
-        $price.css("display","none");
+        var id = $(this).val();
         if(id == "" || id == undefined || id == null){
             $classB.empty();
             return;
         }else {
-            if(isParent == 0){
-                $classB.empty();
-                $attr.css("display","block");
-                $attr.children().css("display","block");
-                Common.attrList({
-                    id:id,
-                    attrId:$attr,
-                    attrContent:[
-                        {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
-                        {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                        {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
-                    ]
-                });
-            }else {
-                Common.typeList({
-                    ele:$classB,
-                    id:id,
-                    url:"/api/dataType/findNode",
-                    tmpl:$typeTmpl
-                });
-            }
-        }
-    });
-
-
-    //展示类目属性
-    $classB.on('change',function () {
-        $price.css("display","none");
-        var id = $(this).val();
-        if(id == ""|| id == undefined || id == null){
-            $attr.css("display","none");
-            return;
-        }else {
-            Common.attrList({
+            Common.typeList({
+                ele:$classB,
                 id:id,
-                attrId:$attr,
-                attrContent:[
-                    {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
-                    {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
-                ]
+                url:"/api/dataType/findNode",
+                tmpl:$typeTmpl
             });
         }
     });
+
 
 
 
@@ -215,60 +177,53 @@ $(document).ready(function(){
                     id:id
                 },
                 error:function () {
-                    alert("错误")
+                    layer.msg("获取信息时错误",{icon:5});
                 },
                 success: function (ret) {
                     data = ret.pageInfo;
+
                     if(ret.pageInfo){
                         var data = ret.pageInfo,
                             typePath = data.dataTypePath,
-                            type = data.dataType;
+                            type = data.dataType,
+                            status = data.dataStatus,
+                            dataSrc = data.dataSrc;
+
+                        Common.radioSelect({
+                            ele:$('#waresType input'),
+                            id:status
+                        });
+
+                        Common.radioSelect({
+                            ele:$('#source input'),
+                            id:dataSrc
+                        });
+
+                        if(data.price != 0){
+                            $('#mode2').attr('checked','checked');
+                            $('#Price').css('display','block');
+                            $marketPrice.val(data.marketPrice);
+                            $whole.val(data.price);
+                            $child.val(data.itemPrice);
+                        }else {
+                            $('#Price').css('display','none');
+                        }
+
 
                         Common.optionSelect({
                             ele:$classA,
                             id:typePath
                         });
 
-                        if(type == 0){
-                            Common.attrList({
-                                selected:Common.attrSelect(data.dataTypeProps,[';',':']),
-                                marketPrice:data.marketPrice,
-                                price:data.price,
-                                itemPrice:data.itemPrice,
-                                PMarket:$marketPrice,
-                                PWhole:$whole,
-                                PChild:$child,
-                                attrId:$attr,
-                                priceName:$price,
-                                attrContent:[
-                                    {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
-                                    {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
-                                ]
-                            });
-                        }else {
-                            Common.typeList({
-                                id:typePath,
-                                ele:$classB,
-                                CId:type,
-                                url:"/api/dataType/findNode",
-                                tmpl:$typeTmpl,
-                                selected:Common.attrSelect(data.dataTypeProps,[';',':']),
-                                marketPrice:data.marketPrice,
-                                price:data.price,
-                                itemPrice:data.itemPrice,
-                                PMarket:$marketPrice,
-                                PWhole:$whole,
-                                PChild:$child,
-                                attrId:$attr,
-                                priceName:$price,
-                                attrContent:[
-                                    {attrN:$source,index:2,idName:"source",tmpl:$sourceTmpl},
-                                    {attrN:$wares,index:1,idName:"TypeCheck",tmpl:$waresTmpl},
-                                    {attrN:$charge,index:0,idName:"mode",tmpl:$chargeTmpl}
-                                ]
-                            });
-                        }
+                        Common.typeList({
+                            ele:$classB,
+                            id:typePath,
+                            url:"/api/dataType/findNode",
+                            tmpl:$typeTmpl,
+                            CId:type
+                        });
+
+
 
                         $synopsis.val(data.dataProfile);
                         $waresN.val(data.designation);
@@ -276,7 +231,7 @@ $(document).ready(function(){
                         $scale.val(data.dataScale);
                         $file.attr("data-src",data.fileUrl);
                         $file.attr("data-size", data.dataSize);
-                        $('.file-caption').html(data.fileUrl);
+                        $('#tempUrl').html("上次上传文件路径："+data.fileUrl);
                         var img = document.createElement('img');
                         img.setAttribute("src",data.pic);
                         $('.dropify-render').append(img);
@@ -289,6 +244,9 @@ $(document).ready(function(){
 
 
     reviseWares();
+
+
+
 
 
     var FormValidationMd = function () {
@@ -357,19 +315,11 @@ $(document).ready(function(){
                 submitHandler: function (e) {
                     i.show(), r.hide();
 
-                      //
-                      // $("#subBtn").on("click",function () {
-                      //     FormValidationMd.init({
-                      //         isParent:$classA.find("option:selected").attr("data-isParent")
-                      //     });
-                      // });
 
                        // /获取表单信息
                        var ajaxType,
                            mes = '',
                            errorMes = '',
-                           attrRelationModels = [],
-                           dataTypeProps = "",
                            wares = $waresN.val(),
                            describe = $describe.html(),
                            classA = $classA.val(),
@@ -377,19 +327,8 @@ $(document).ready(function(){
                            synopsis = $synopsis.val(),
                            //文件类型信息
                            type = $('#waresType input:radio:checked ').val(),
-                           typeAttrId = $('#waresType input:radio:checked ').data("attrid"),
-                           typeName = $('#waresTypeName').text(),
-                           typeCName = $('#waresType input:radio:checked ').data("name"),
-                           // 收费方式信息
-                           charge = $('#charge input:radio:checked ').val(),
-                           chargeAttrId = $('#charge input:radio:checked ').data("attrid"),
-                           chargeName = $('#chargeName').text(),
-                           chargeCName = $('#charge input:radio:checked ').data("name"),
                            //数据来源信息
                            source = $('#source input:radio:checked ').val(),
-                           sourceAttrId = $('#source input:radio:checked ').data("attrid"),
-                           sourceName = $('#sourceName').text(),
-                           sourceCName = $('#source input:radio:checked ').data("name"),
 
                            scale = $scale.val(),
                            file = $file.data("src"),
@@ -405,7 +344,9 @@ $(document).ready(function(){
                                subFiles:subFlie,
                                dataTypePath:classA,
                                dataType:classB,
-                               dataScale:scale
+                               dataScale:scale,
+                               dataStatus:type,
+                               dataSrc:source
                            };
                        if(id == undefined || id == null || id == ""){
                            ajaxType = "post";
@@ -429,45 +370,6 @@ $(document).ready(function(){
                            data.itemPrice = "0";
                            data.marketPrice = "0";
                        }
-
-
-
-                       attrRelationModels.push(Common.createAttr({
-                           attrName:typeName,
-                           valName:typeCName,
-                           attrId:typeAttrId,
-                           valId:type
-                       }));
-
-                       attrRelationModels.push(Common.createAttr({
-                           attrName:chargeName,
-                           valName:chargeCName,
-                           attrId:chargeAttrId,
-                           valId:charge
-                       }));
-
-                       attrRelationModels.push(Common.createAttr({
-                           attrName:sourceName,
-                           valName:sourceCName,
-                           attrId:sourceAttrId,
-                           valId:source
-
-                       }));
-
-
-
-                       $.each(attrRelationModels,function (i,v) {
-                           for(var k in v){
-                               dataTypeProps += v[k] + ":";
-                           }
-                           dataTypeProps = dataTypeProps.substr(0,dataTypeProps.length-1);
-                           dataTypeProps += ";";
-                       });
-
-
-                       data.attrRelationModels = attrRelationModels;
-                       data.dataTypeProps = dataTypeProps;
-
 
 
 
