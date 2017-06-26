@@ -831,7 +831,7 @@
             upload: '点击上传文件',
             clear: '清除',
             drag: '拖放区域',
-            sizeError: '$1 exceed the size limit of $2',// $1=file name ,$2=max ie( example.jpg has has exceed the size limit of 2mb)
+            sizeError: '$1 超过 $2 尺寸限制 ',// $1=file name ,$2=max ie( example.jpg has has exceed the size limit of 2mb)
             extError: '不支持该文件类型。',//$1=file extension ie(exe files are not supported)
             someErrorsOccurred: 'Some errors occurred!'
         }
