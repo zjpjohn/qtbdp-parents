@@ -84,3 +84,9 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
     var length = value.length;
     return this.optional(element) || (length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(value));
 }, "请正确填写您的手机号码。");
+
+
+jQuery.validator.addMethod("isQQ", function(value, element) {
+    var length = value.length;
+    return this.optional(element) || (/^\d{5,10}$/.test(value));
+}, "请正确填写QQ号。");

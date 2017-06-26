@@ -114,10 +114,8 @@ $(function () {
                 required: true,//规则价格
                 number: true,//必须输入数字
                 digits: true//必须输入整数
-
             },
             webSite: {//采集网站
-                url: true,//正确的网址
                 required: true
             },
             collectionField:{
@@ -147,7 +145,6 @@ $(function () {
 
             },
             webSite: {//采集网站
-                url: "请输入正确网址",//正确的网址
                 required: "请输入采集网站"
 
             },

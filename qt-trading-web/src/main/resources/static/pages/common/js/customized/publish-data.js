@@ -57,16 +57,15 @@ $(function () {
                 required: true
             },
             website:{
-                required: true,
-                url:true
+                required: true
             },
             phone:{
                 required: true,
                 isMobile:true
             },
             qq:{
-                required: true
-
+                required: true,
+                isQQ:true
             }
         },
         _messages: {
@@ -95,8 +94,7 @@ $(function () {
                 required: "请选择截止时间"
             },
             website:{
-                required: "请填写参考网站",
-                url:"网站格式不正确"
+                required: "请填写参考网站"
             },
             phone:{
                 required: "请输入手机号"
