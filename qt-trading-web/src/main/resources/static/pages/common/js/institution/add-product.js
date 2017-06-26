@@ -73,9 +73,16 @@ $(function () {
             },
             success: function (ret) {
                 if (ret.success == true){
+                    $('#subFiles').empty();
                     layer.msg("文件上传成功",{icon:1});
                     $('#fileContent').val(ret.file);
                     $('#fileSize').val(ret.dataSize);
+                    if(ret.subFiles){
+                        for(var k in ret.subFiles){
+                            var input = '<input type="hidden"   name="subFiles[' + k + ']" value="'+ ret.subFiles[k] + '">';
+                            $('#subFiles').append(input);
+                        }
+                    }
                 }
             }
         });

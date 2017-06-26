@@ -45,7 +45,8 @@ $(document).ready(function(){
                 subFlie = {}
             }
         },
-        maxNumberOfFiles:1
+        maxNumberOfFiles:1,
+        maxFileSize:50
     });
 
 
