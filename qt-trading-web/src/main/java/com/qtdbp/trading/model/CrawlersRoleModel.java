@@ -49,6 +49,9 @@ public class CrawlersRoleModel extends BaseModel{
     @Transient
     private String dataTypes;           //数据类目集合
 
+    @Transient
+    private Integer institutionId;         //服务商id
+
     public int getTypeId() {
         return typeId;
     }
@@ -311,5 +314,13 @@ public class CrawlersRoleModel extends BaseModel{
 
     public void setDataTypes(String dataTypes) {
         this.dataTypes = dataTypes;
+    }
+
+    public Integer getInstitutionId() {
+        return institutionId;
+    }
+
+    public void setInstitutionId(Integer institutionId) {
+        this.institutionId = institutionId;
     }
 }
