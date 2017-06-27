@@ -65,7 +65,7 @@
 .lenum>span{
     margin-right: 16px;
 }
-.lenum>span>i{
+.lenum>span>a{
     color:#0076c8;
     padding:0px 2px;
 }
