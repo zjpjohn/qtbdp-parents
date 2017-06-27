@@ -194,6 +194,9 @@
     color:#999;
     font-size: 12px;
     margin-bottom: 0px;
+    position: relative;
+    top: -26px;
+    left: 166px;
 }
 .main_min>.main_domain{
     display: inline-block;
@@ -205,6 +208,9 @@
 .main_domain:first-child{
     margin-right: 40px;
 
+}
+.main_min>span>i{
+    color:#05A9FE;
 }
 em{
     display:inline-block;
