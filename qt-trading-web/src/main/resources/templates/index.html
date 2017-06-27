@@ -24,7 +24,7 @@
                         <!--<img data-src="/pages/common/images/banner10.jpg" alt="" />-->
                         <img th:src="@{/pages/common/images/banner10.jpg}" data-thumb="/pages/common/images/banner10.jpg" alt="" />
                         <i class="knowmore" onclick="location.href='/datamart';"></i>
-                        <div class="cartoonimg">
+                        <div class="cartoonimg2">
                             <img class="cartoon_one" src="/pages/common/images/index_banner1.png" alt="">
                             <img class="cartoon_two" src="/pages/common/images/index_banner2.png" alt="" >
                         </div>
@@ -352,25 +352,25 @@
 
         <script>
             $(document).ready(function() {
-                $('.banner').terseBanner();
+                $('.banner').terseBanner({
+                    arrow: true,
+                    before: function ($banner, $item, currentIndex) {
+                        $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
+                        $(".cartoonimg>img").animate({"margin-top":"0px"},400);
+                    },
+                    after: function ($banner, $item, currentIndex) {
+                        // 第一个切换图
+                        $(".cartoon_one").animate({"margin-top":"20px"},400);
+                        $(".cartoon_two").animate({"margin-top":"-20px"},400);
+                        $(".cartoon_one").animate({"margin-top":"0px"},400);
+                        $(".cartoon_two").animate({"margin-top":"0px"},400);
+
+                        // 第二个切换图
+                        $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
+                        $(".cartoonimg>img").animate({"margin-top":"0px"},400);
+                    }
+                });
                 App.initIndex() ;
-            });
-            $(".cartoon_one").mouseover(function(){
-                $(".cartoon_one").animate({"margin-top":"0px"},400);
-                $(".cartoon_two").animate({"margin-top":"0px"},400);
-            });
-            $(".cartoon_one").mouseleave(function(){
-                $(".cartoon_one").animate({"margin-top":"20px"},400);
-                $(".cartoon_two").animate({"margin-top":"-20px"},400);
-            });
-            //动效2
-            $(".cartoonimg>img").mouseover(function(){
-                $(".cartoonimg>img").animate({"margin-top":"0px"},400);
-                $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
-            });
-            $(".cartoonimg>img").mouseleave(function(){
-                $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
-                $(".cartoonimg>img").animate({"margin-top":"0px"},400);
             });
         </script>
 
