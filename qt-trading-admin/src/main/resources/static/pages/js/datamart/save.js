@@ -24,7 +24,26 @@ $(document).ready(function(){
         $file = $('#fileName'),//上传文件
         $fileImg = $('.fileImg');//上传图片
 
-    $('#describe').trumbowyg();//文本编辑器实例化
+
+    $('#describe').trumbowyg({//文本编辑器实例化
+        btnsDef: {
+            // 设置上传的3种方法，远程上传，本地上传，图片64位加密
+            image: {
+                dropdown: ['insertImage', 'upload','base64'],
+                ico: 'insertImage'
+            }
+        },
+        // Redefine the button pane
+        btns: ['viewHTML',
+            '|', 'formatting',
+            '|', 'btnGrp-semantic',
+            '|', 'link',
+            '|', 'image',
+            '|', 'btnGrp-justify',
+            '|', 'btnGrp-lists',
+            '|', 'horizontalRule']
+    });
+
     $('.dropify').dropify();//图片预览
 
 
