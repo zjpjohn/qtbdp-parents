@@ -150,18 +150,29 @@
 </script>
 <script>
     jQuery(document).ready(function() {
-        //搜索
-        $('.search_btn').on('click',function () {
-            var val = $('.search_input').val();
-
-            if (val && val.trim().length == 0){
-                val = "" ;
-            }
-            App.initDatamart(val);
-        });
-        App.initDatamart();
+        var param = getQueryString("name");
+        if (param != null && param != ""){
+            App.initDatamart(param);
+        }else {
+            App.initDatamart();
+        }
 
     });
+
+    /**
+     * 获取url后拼接的name参数
+     * @param name
+     * @returns {*}
+     */
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if ( r != null ){
+            return decodeURI(r[2]);
+        }else{
+            return null;
+        }
+    }
 </script>
 
 <!-- 内容结束 -->
