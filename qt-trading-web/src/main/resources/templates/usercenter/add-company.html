@@ -300,7 +300,7 @@
 <script th:inline="javascript">
     var user = [[${user}]];
     $(document).ready(function() {
-
+        nav("dataservice");
         if(user.infoNewModel){
             if(user.infoNewModel.auditStatus == 0){
                 $('#fromPerson').css('display','none');
