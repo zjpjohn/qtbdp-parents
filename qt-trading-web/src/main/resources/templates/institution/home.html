@@ -47,7 +47,7 @@
     <!-- 产品数据模板 -->
     <script id="tmpl_institution" type="text/x-jquery-tmpl">
         <div class="serhead  floating">
-            <img src="${logo}"  alt="" class="lf" onerror="this.src='/pages/common/images/error.png'"/>
+            <img src="${logo}?x-oss-process=image/resize,m_mfit,h_130,w_130,color_ffffff/format,png"  alt="" class="lf" onerror="this.src='/pages/common/images/error.png'"/>
             <div class="lf sertitle">
                 <p>${name}{{if isSys == 1}}<a class="serzy">自营</a>{{/if}} </p>
                 <p class="serletter">

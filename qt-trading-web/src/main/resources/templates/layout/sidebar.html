@@ -1,7 +1,7 @@
 <div class="center_left lf" xmlns:th="http://www.thymeleaf.org">
     <div class="headbg">
         <a>
-            <img class="headpic" th:src="@{${user.head} ? ${user.head} : '/pages/common/images/user_img.png'}" alt=""/>
+            <img class="headpic" th:src="@{${user.head} ? ${user.head}+'?x-oss-process=image/resize,m_mfit,h_130,w_130,color_ffffff/format,png' : '/pages/common/images/user_img.png'}" alt=""/>
         </a>
         <p class="pername "><a th:text="${user.userName} ">三生万物</a></p>
         <!--<p class="pername perphone"><a th:text="${user.phone}"></a></p>-->
