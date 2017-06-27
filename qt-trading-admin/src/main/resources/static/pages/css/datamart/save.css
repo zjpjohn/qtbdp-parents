@@ -11,12 +11,28 @@
     margin-top: 50px;
 }
 
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
 /*全局结束*/
 
+.selectDiv>div {
+    width: 35%;
+    float: left;
+    margin: 0;
+}
 
+.selectDiv .selectB {
+    margin-left:20px;
+}
 /*图片上传样式*/
 .dropify-wrapper {
-    width: 45%;
+    width: 30%;
 }
 /*图片上传样式结束*/
 
