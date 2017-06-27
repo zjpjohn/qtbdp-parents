@@ -14,7 +14,7 @@
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                upload: "Upload",
+                upload: "插入并上传图片",
                 file:   "File",
                 uploadError: "Error"
             },
@@ -26,7 +26,7 @@
         },
 
         upload: {
-            serverPath: './trumbowyg/plugins/upload/trumbowyg.upload.php'
+            serverPath: '/api/upload/img'
         },
 
         opts: {
@@ -54,7 +54,7 @@
                             // Callback
                             function(values, fields){
                                 var data = new FormData();
-                                data.append('fileToUpload', file);
+                                data.append('img', file);
 
                                 if($('.' + pfx +'progress', $modal).length == 0)
                                     $('.' + pfx + 'modal-title', $modal)
@@ -85,8 +85,8 @@
                                     },
 
                                     success: function(data){
-                                        if(data.message == "uploadSuccess") {
-                                            tbw.execCommand('insertImage', data.file);
+                                        if(data.success == true) {
+                                            tbw.execCommand('insertImage', data.img);
                                             setTimeout(function(){
                                                 tbw.closeModal();
                                             }, 250);

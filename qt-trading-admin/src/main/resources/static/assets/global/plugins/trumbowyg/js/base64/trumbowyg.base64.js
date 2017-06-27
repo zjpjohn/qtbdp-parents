@@ -10,7 +10,7 @@
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                base64: "Image as base64",
+                base64: "插入图片base64",
                 file:   "File",
                 errFileReaderNotSupported: "FileReader is not supported by your browser."
             },
