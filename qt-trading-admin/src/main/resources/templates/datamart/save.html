@@ -80,34 +80,46 @@ Author: caidchen
                         <div class="portlet-body">
                             <form id="form_sample">
                                 <div class="form-body">
-                                    <!--一级分类-->
-                                    <div class="form-group form-md-line-input">
-                                        <select class="form-control" id="classA" name="type1">
-                                            <option value="">一级分类</option>
-
-                                        </select>
-                                        <label for="classA">所属类别</label>
-                                        <span class="help-block">有些帮助在这里...</span>
+                                    <!--产品名称-->
+                                    <div class="form-group form-md-line-input" style="width:35%">
+                                        <input type="text" class="form-control" name="name" id="waresName" placeholder="请输入产品名称">
+                                        <label for="waresName">产品名称
+                                            <span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <span class="help-block">输入产品名称...</span>
                                     </div>
-                                    <!--一级分类结束-->
-                                    <!--二级分类-->
-                                    <div class="form-group form-md-line-input">
-                                        <select class="form-control" id="classB" name="type2">
-                                            <option value="">二级分类</option>
+                                    <!--产品名称结束-->
 
-                                        </select>
-                                        <label for="classB">所属二级类别</label>
-                                        <span class="help-block">有些帮助在这里...</span>
-                                    </div>
-                                    <!--二级分类结束-->
+
+                                   <div class="selectDiv clearfix">
+                                       <!--一级分类-->
+                                       <div class="form-group form-md-line-input">
+                                           <select class="form-control" id="classA" name="type1">
+                                               <option value="">一级分类</option>
+
+                                           </select>
+                                           <label for="classA">所属类别</label>
+                                           <span class="help-block">有些帮助在这里...</span>
+                                       </div>
+                                       <!--一级分类结束-->
+                                       <!--二级分类-->
+                                       <div class="form-group form-md-line-input selectB">
+                                           <select class="form-control" id="classB" name="type2">
+                                               <option value="">二级分类</option>
+
+                                           </select>
+                                           <span class="help-block">有些帮助在这里...</span>
+                                       </div>
+                                       <!--二级分类结束-->
+                                   </div>
 
                                     <div id="attr">
                                         <!--产品类型-->
-                                        <div class="form-group form-md-radios" id="waresType">
+                                        <div class="form-md-radios" id="waresType">
                                             <label for="TypeCheck1" id="waresTypeName">产品类型</label>
                                             <div class="md-radio-inline">
                                                 <div class="md-radio">
-                                                    <input type="radio" id="TypeCheck1"   name="type" value="1" class="md-radiobtn" checked="checked">
+                                                    <input type="radio" id="TypeCheck1"   name="type" value="0" class="md-radiobtn" checked="checked">
                                                     <label for="TypeCheck1">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -115,7 +127,7 @@ Author: caidchen
                                                     </label>
                                                 </div>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="TypeCheck2"   name="type" value="2" class="md-radiobtn">
+                                                    <input type="radio" id="TypeCheck2"   name="type" value="1" class="md-radiobtn">
                                                     <label for="TypeCheck2">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -123,7 +135,7 @@ Author: caidchen
                                                     </label>
                                                 </div>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="TypeCheck3"   name="type" value="3" class="md-radiobtn">
+                                                    <input type="radio" id="TypeCheck3"   name="type" value="2" class="md-radiobtn">
                                                     <label for="TypeCheck3">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -139,7 +151,7 @@ Author: caidchen
                                             <label for="source1" id="sourceName">数据来源</label>
                                             <div class="md-radio-inline">
                                                 <div class="md-radio">
-                                                    <input type="radio" id="source1"  name="source" value="1" class="md-radiobtn" checked="checked">
+                                                    <input type="radio" id="source1"  name="source" value="0" class="md-radiobtn" checked="checked">
                                                     <label for="source1">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -147,7 +159,7 @@ Author: caidchen
                                                     </label>
                                                 </div>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="source2"  name="source" value="2" class="md-radiobtn">
+                                                    <input type="radio" id="source2"  name="source" value="1" class="md-radiobtn">
                                                     <label for="source2">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -155,7 +167,7 @@ Author: caidchen
                                                     </label>
                                                 </div>
                                                 <div class="md-radio">
-                                                    <input type="radio"  id="source3"  name="source" value="3" class="md-radiobtn">
+                                                    <input type="radio"  id="source3"  name="source" value="2" class="md-radiobtn">
                                                     <label for="source3">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -163,7 +175,7 @@ Author: caidchen
                                                     </label>
                                                 </div>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="source4" name="source" value="4" class="md-radiobtn">
+                                                    <input type="radio" id="source4" name="source" value="3" class="md-radiobtn">
                                                     <label for="source4">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -171,7 +183,7 @@ Author: caidchen
                                                     </label>
                                                 </div>
                                                 <div class="md-radio">
-                                                    <input type="radio" id="source5" name="source" value="5" class="md-radiobtn">
+                                                    <input type="radio" id="source5" name="source" value="4" class="md-radiobtn">
                                                     <label for="source5">
                                                         <span></span>
                                                         <span class="check"></span>
@@ -185,7 +197,7 @@ Author: caidchen
                                         <!--收费方式-->
                                         <div class="form-group form-md-radios" id="charge">
                                             <label for="mode1" id="chargeName">收费方式</label>
-                                            <div class="md-radio-list">
+                                            <div class="md-radio-inline">
                                                 <div class="md-radio">
                                                     <input type="radio" id="mode1"  name="chargeRadio" value="1" class="md-radiobtn" checked="checked">
                                                     <label for="mode1">
@@ -227,12 +239,12 @@ Author: caidchen
                                             </span>
                                             <input type="number" id="child" name="child"  class="form-control" placeholder="子文件价格">
                                         </div>
-                                        <div id="warning" class="alert alert-warning" style="margin-top: 20px">请输入价格。</div>
+                                        <div id="warning" class="alert alert-warning" style="margin-top: 20px;width: 50%;">请输入价格。</div>
                                     </div>
                                     <!--收费价格结束-->
 
                                     <!--数据规模-->
-                                    <div class="form-group input-group" style="margin-top: 50px">
+                                    <div class="form-group input-group" style="margin-top: 50px;">
                                         <label for="scale">数据规模
                                             <span class="required" aria-required="true">*</span>
                                         </label>
@@ -245,19 +257,9 @@ Author: caidchen
                                     </div>
                                     <!--数据规模结束-->
 
-                                    <!--产品名称-->
-                                    <div class="form-group form-md-line-input" style="margin-top: 50px">
-                                        <input type="text" class="form-control" name="name" id="waresName" placeholder="请输入产品名称">
-                                        <label for="waresName">产品名称
-                                            <span class="required" aria-required="true">*</span>
-                                        </label>
-                                        <span class="help-block">输入产品名称...</span>
-                                    </div>
-                                    <!--产品名称结束-->
-
 
                                     <!--简介-->
-                                    <div class="form-group">
+                                    <div class="form-group" style="width: 71%;">
                                         <label for="synopsis">产品简介
                                             <span class="required" aria-required="true">*</span>
                                         </label>
@@ -267,7 +269,7 @@ Author: caidchen
                                     <!--简介结束-->
 
                                     <!--产品描述-->
-                                    <div class="form-group form-md-line-input">
+                                    <div class="form-group form-md-line-input" style="width: 71%;">
                                         <label for="describe" id="describeL">产品描述
                                             <span class="required" aria-required="true">*</span>
                                         </label>
@@ -278,7 +280,7 @@ Author: caidchen
                                     <!--上传数据-->
                                     <div class="form-group form-md-radios">
                                         <label for="fileName">上传数据</label>
-                                        <div class="md-radio-inline" style="width: 50%">
+                                        <div class="md-radio-inline" style="width: 30%">
                                             <input type="file" multiple name="file" id="fileName"/>
                                             <!--<input id="fileName" name="file" type="file" multiple>-->
                                         </div>

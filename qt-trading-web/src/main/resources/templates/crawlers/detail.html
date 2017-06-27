@@ -44,7 +44,13 @@
                 </li>
                 <li>
                     <span>网站类型</span>
-                    <p th:text="${prod.webType}">其它网站</p>
+                    <p th:if="${prod.webType == 0}">其它</p>
+                    <p th:if="${prod.webType == 1}">社交网站</p>
+                    <p th:if="${prod.webType == 2}">电商网站</p>
+                    <p th:if="${prod.webType == 3}">金融网站</p>
+                    <p th:if="${prod.webType == 4}">生活网站</p>
+                    <p th:if="${prod.webType == 5}">行业网站</p>
+                    <p th:if="${prod.webType == 6}">新闻网站</p>
 
                 </li>
                 <li>

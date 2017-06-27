@@ -105,13 +105,15 @@
 
 .ssi-dropZonePreview {
   min-height: 300px;
-  border: 2px dashed #ccc;
+  border: 1px solid #c2cad8;
   content: 'Drag n Drop Files';
+  text-align: center;
 }
 
 #ssi-DropZoneBack {
   z-index: -1;
   overflow: hidden;
+  font-size: 18px;
 }
 
 .ssi-removeBtn {

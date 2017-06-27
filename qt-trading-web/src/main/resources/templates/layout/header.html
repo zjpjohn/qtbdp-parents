@@ -201,37 +201,17 @@
 <script src="/pages/common/js/fromCommon.js"></script>
 <script src="/pages/common/js/app.js"></script>
 <script src="/pages/common/js/login.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>
+	jQuery(document).ready(function() {
+		//搜索
+		$('.search_btn').on('click',function () {
+			var val = $('.search_input').val();
+			if (val == null || val.trim().length == 0){
+				return;
+			}else {
+				window.location.href = "/datamart?name="+val;
+			}
+		});
+	});
+</script>
 
