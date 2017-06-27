@@ -531,13 +531,6 @@ var App = function () {
                 cooperationTimer=setInterval(cooperationMove,50);
             });
 
-            $('#slider').nivoSlider();
-            $("#slider>a>i").mouseenter(function(){
-                $(this).parent().addClass("hover");
-            });
-            $("#slider>a>i").mouseleave(function(){
-                $(this).parent().removeClass("hover");
-            });
 
             // 提交用户反馈
             var options = {

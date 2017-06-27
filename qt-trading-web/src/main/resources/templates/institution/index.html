@@ -88,7 +88,7 @@
     {{if list.length>0}}
     {{each(i, institution) list}}
         <div class="list_details lf">
-            <a href="/institution/home/${institution.id}">
+            <a href="/institution/home/${institution.id}" target="_blank">
                 <img src="${institution.logo}" onerror="this.src='/pages/common/images/error.png'" class="lf " alt=""/>
                 <div class="lf list_right">
                     <p>${institution.name}</p>

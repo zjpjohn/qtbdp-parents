@@ -94,17 +94,17 @@
             <!--已登录  右侧悬浮框-->
             <div class="positiondata stremindex" th:if="${user}">
                 <!--是数据服务商-->
-                <a  href="javascript:;" onclick="infoNewModel3(this)" th:if="${user.infoNewModel}"><em></em>入驻数据服务商</a>
+                <a  href="javascript:;" target="_blank" onclick="infoNewModel3(this)" th:if="${user.infoNewModel}"><em></em>入驻数据服务商</a>
                 <!--不是数据服务商-->
-                <a  href="/usercenter/add/person" th:if="!${user.infoNewModel}"><em></em>入驻数据服务商</a>
+                <a  href="/usercenter/add/person"  target="_blank" th:if="!${user.infoNewModel}"><em></em>入驻数据服务商</a>
             </div>
             <!--未登录  右侧悬浮框-->
             <div class="positiondata stremindex" th:unless="${user}">
-                <a  href="javascript:;"  onclick="loginShow(this)"  ><em></em>入驻数据服务商</a>
+                <a  href="javascript:;" target="_blank"  onclick="loginShow(this)"  ><em></em>入驻数据服务商</a>
             </div>
 
             <div class="positiondata stremindex2">
-                <a  href="http://wpa.qq.com/msgrd?v=3&uin=3475528455&site=&menu=yes"><em></em>在线客服</a>
+                <a  href="http://wpa.qq.com/msgrd?v=3&uin=3475528455&site=&menu=yes" target="_blank"><em></em>在线客服</a>
             </div>
         </div>
         <!--banner结束-->

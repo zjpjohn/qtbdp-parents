@@ -535,12 +535,20 @@ body{
     position:absolute;
 }
 .knowmore{
+    position:absolute;
     top:238px;
     left:745px;
+    width:155px;
+    height:45px;
+    cursor: pointer;
 }
 .joinus{
+    position:absolute;
     top:238px;
     left:745px;
+    width:155px;
+    height:45px;
+    cursor: pointer;
 }
 .cartoonimg{
     display:block;

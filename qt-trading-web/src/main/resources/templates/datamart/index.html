@@ -127,8 +127,8 @@
 <script id="tmpl_products" type="text/x-jquery-tmpl">
     {{if list.length>0}}
     {{each(i,prod) list}}
-        <div class="store_one" target="_blank" >
-            <a href="/datamart/detail/${prod.id}">
+        <div class="store_one" >
+            <a href="/datamart/detail/${prod.id}" target="_blank" >
                 <p class="storeimgs" style="background:url(${prod.pic}) no-repeat center center; background-size:cover;"/></p>
 
                 <h2>${prod.designation}</h2>
