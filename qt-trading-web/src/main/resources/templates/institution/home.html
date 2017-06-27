@@ -26,7 +26,7 @@
             <div class="service_list">
                 <p class="serlist_title" id="tab-container">
                     <a th:href="@{/institution/home}+'/'+${id}+'/0'" th:class="${type == 0}?active">商品列表</a>
-                    <a th:href="@{/institution/home}+'/'+${id}+'/1'" th:class="${type == 1}?active">接单记录</a>
+                    <a th:href="@{/institution/home}+'/'+${id}+'/1'" th:class="${type == 1}?active">定制列表</a>
                 </p>
                 <p class="sername tab-sub-container"  th:if="${type == 0}">
                     <a href="javascript:;" class="active" data-id="data" data-type="1">数据商品</a>
@@ -68,11 +68,11 @@
                     </li>
                     <li>
                         <p>${countMap.dataCustomCount}</p>
-                        <p>数据定制接单数</p>
+                        <p>数据定制数</p>
                     </li>
                     <li>
                         <p>${countMap.roleCustomCount}</p>
-                        <p>爬虫规则定制接单数</p>
+                        <p>爬虫规则定制数</p>
                     </li>
                     <li class="oknum">
                         <p><a>成交数 ( 笔 ) : </a><i>0</i></p>

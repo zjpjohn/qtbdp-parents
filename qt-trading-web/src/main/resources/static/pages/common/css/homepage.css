@@ -36,6 +36,7 @@ body{
     box-sizing: border-box;
     text-align: center;
     color:#808080;
+    height: 65px;
 }
 .sernum>li>p:first-child{
     font-size: 20px;
@@ -43,7 +44,7 @@ body{
     margin-bottom:16px;
 }
 .sernum>li.oknum>p{
-    text-align: left;
+
     color:#808080;
     font-size: 14px;
     position: relative;

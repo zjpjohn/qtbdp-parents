@@ -5,12 +5,12 @@
         <title th:if="!${seo}">首页 | 钱塘大数据交易中心</title>
         <title th:if="${seo}" th:text="${seo.seoTitle}"></title>
         <div th:replace="layout/top" /></div>
-        <link rel="stylesheet" href="/pages/common/css/nivo-slider.css" />
         <link rel="stylesheet" href="/pages/common/css/index.css" />
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="/assets/global/plugins/ladda/ladda.min.css" rel="stylesheet" type="text/css">
         <!-- END PAGE LEVEL PLUGINS -->
     </head>
+
     <body>
         <!--  页头 -->
         <div th:replace="layout/header" /></div>
@@ -18,12 +18,34 @@
 
         <!-- banner图开始-->
         <div id="wrapper">
+            <div class="banner">
+                <ul>
+                    <li>
+                        <!--<img data-src="/pages/common/images/banner10.jpg" alt="" />-->
+                        <img th:src="@{/pages/common/images/banner10.jpg}" data-thumb="/pages/common/images/banner10.jpg" alt="" />
+                        <i class="knowmore" onclick="location.href='/datamart';"></i>
+                        <div class="cartoonimg">
+                            <img class="cartoon_one" src="/pages/common/images/index_banner1.png" alt="">
+                            <img class="cartoon_two" src="/pages/common/images/index_banner2.png" alt="" >
+                        </div>
+
+                    </li>
+                    <li>
+                        <!--<img data-src="/pages/common/images/banner20.jpg">-->
+                        <img th:src="@{/pages/common/images/banner20.jpg}" data-thumb="/tradecenter/images/banner1.jpg" alt="" />
+                        <i class="joinus" onclick="location.href='/crawlers';"></i>
+                        <div class="cartoonimg">
+                            <img class="cartoon_three" src="/pages/common/images/index_banner3.png" alt="">
+                            <img class="cartoon_four" src="/pages/common/images/index_banner4.png" alt="" >
+                            <img class="cartoon_five" src="/pages/common/images/index_banner5.png" alt="" >
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
 
-
-
-            <!--轮播表单开始-->
-            <!--<div class="navinput">
+                <!--轮播表单开始-->
+            <div class="navinput">
                 <p class="navtop">
                     <a href="javascript:;" data-attr="dataneed" class="active">数据需求<i></i></a>
                     <a href="javascript:;" data-attr="business">商务合作<i></i></a>
@@ -61,7 +83,7 @@
                     </div>
                 </form>
 
-            </div>-->
+            </div>
             <!--轮播表单结束-->
             <!--banner了解更多按钮开始-->
 
@@ -254,42 +276,42 @@
                 <li class="rightnone bottomnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
-                        <P>社交网站</P>
+                        <P>社交网站采集</P>
                         <p>共有285条规则</p>
                     </a>
                 </li>
                 <li class="rightnone bottomnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
-                        <P>金融网站</P>
+                        <P>金融网站采集</P>
                         <p>共有190条规则</p>
                     </a>
                 </li>
                 <li class="bottomnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
-                        <P>行业网站</P>
+                        <P>行业网站采集</P>
                         <p>共有324条规则</p>
                     </a>
                 </li>
                 <li class="rightnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
-                        <P>电商网站</P>
+                        <P>电商网站采集</P>
                         <p>共有516条规则</p>
                     </a>
                 </li>
                 <li class="rightnone">
                     <a th:href="@{/crawlers}">
                         <P></P>
-                        <P>生活网站</P>
+                        <P>生活网站采集</P>
                         <p>共有227条规则</p>
                     </a>
                 </li>
                 <li>
                     <a th:href="@{/crawlers}">
                         <P></P>
-                        <P>新闻网站</P>
+                        <P>新闻网站采集</P>
                         <p>共有169条规则</p>
                     </a>
                 </li>
@@ -321,20 +343,16 @@
         <script src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
         <script src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
         <script src="/assets/global/plugins/jquery-validation/js/messages_zh.js" type="text/javascript"></script>
-
         <script src="/assets/global/plugins/ladda/spin.min.js" type="text/javascript"></script>
         <script src="/assets/global/plugins/ladda/ladda.min.js" type="text/javascript"></script>
-
-        <!-- END PAGE LEVEL PLUGINS -->
-
+        <script type="text/javascript" src="/assets/global/plugins/terseBanner/jquery.terseBanner.min.js"></script>
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="/assets/pages/scripts/form-validation-md.js" type="text/javascript"></script>
-
-        <script src="/assets/global/plugins/jquery.nivo.slider.pack.js"></script>
         <script src="/pages/common/js/app.js" type="text/javascript"></script>
 
         <script>
             $(document).ready(function() {
+                $('.banner').terseBanner();
                 App.initIndex() ;
             });
             $(".cartoon_one").mouseover(function(){
@@ -354,7 +372,8 @@
                 $(".cartoonimg>img").animate({"margin-top":"-20px"},400);
                 $(".cartoonimg>img").animate({"margin-top":"0px"},400);
             });
-
         </script>
+
+
     </body>
 </html>
