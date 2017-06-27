@@ -206,6 +206,9 @@
     margin-right: 40px;
 
 }
+.main_min>span>i{
+    color:#05A9FE;
+}
 em{
     display:inline-block;
     width:16px;
