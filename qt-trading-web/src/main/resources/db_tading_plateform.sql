@@ -440,23 +440,6 @@ INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`
 INSERT INTO `data_type` (`pid`, `name`, `is_used`, `sort`, `remark`, `is_parent`) VALUES (101, '新闻资讯', 1, 31, null, 0);
 
 /** v1.3 2017-06-21**/
-
-/*==============================================================*/
-/* Table: seo_settings         网站SEO设置                       */
-/*==============================================================*/
-drop table if exists seo_settings;
-
-create table seo_settings
-(
-   id                   int                            not null,
-   seo_type             tinyint                        not null default 0,
-   seo_title            varchar(200)                   null,
-   seo_description      varchar(500)                   null,
-   seo_keywords         varchar(250)                   null,
-   create_time          datetime                       null,
-   constraint PK_SEO_SETTINGS primary key clustered (id)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
-
 /*==============================================================*/
 /* Table: sys_resources_seo_relation  网站资源SEO关联表           */
 /*==============================================================*/
@@ -464,9 +447,9 @@ drop table if exists sys_resources_seo_relation;
 
 create table sys_resources_seo_relation
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    seo_id               int                            not null,
-   sys_resources_id     int                            not null,
+   sys_resources_id     varchar(100)                            not null,
    constraint PK_SYS_RESOURCES_SEO_RELATION primary key clustered (id)
 );
 
@@ -477,18 +460,35 @@ alter table sys_resources_seo_relation
       on delete restrict;
 
 /*==============================================================*/
+/* Table: seo_settings         网站SEO设置                       */
+/*==============================================================*/
+drop table if exists seo_settings;
+
+create table seo_settings
+(
+   id                   int                            not null AUTO_INCREMENT ,
+   seo_type             tinyint                        not null default 0,
+   seo_title            varchar(200)                   null,
+   seo_description      varchar(500)                   null,
+   seo_keywords         varchar(250)                   null,
+   create_time          datetime                       null,
+   constraint PK_SEO_SETTINGS primary key clustered (id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
+
+/*==============================================================*/
 /* Table: api_demand       api需求定制                           */
 /*==============================================================*/
 drop table if exists api_demand;
 
 create table api_demand
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    api_name             varchar(100)                   not null,
    category_id          int                            null,
    api_domain           varchar(100)                   null,
    api_desc             varchar(500)                   null,
    api_price            decimal(10,2)                  null,
+   api_field            varchar(100)                   null,
    contacts             varchar(50)                    null,
    phone                varchar(50)                    null,
    create_time          datetime                       null,
@@ -498,3 +498,6 @@ create table api_demand
    audit_fail_reason    varchar(100)                   null,
    constraint PK_API_DEMAND primary key clustered (id)
 );
+
+-- 加长爬虫规则
+ALTER TABLE crawlers_role MODIFY COLUMN collection_field  VARCHAR(500) COMMENT '采集字段';
