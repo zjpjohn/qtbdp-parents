@@ -555,9 +555,9 @@ body{
     width:400px;
     height:400px;
     opacity:1;
-    position:absolute;
+    position: relative;
     top:0px;
-    left:1000px;
+    left: 52%;
 }
 .cartoon_one{
     position:absolute;
