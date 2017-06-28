@@ -18,22 +18,7 @@
     <!--主体-->
     <!-- 详情页信息 -->
     <div id="product-container"></div>
-    <section class="mart_main main">
 
-
-        <!-- 数据项列表开始 -->
-        <p class="filter" id="order-container">
-            <i></i>
-            <b>信息列表</b>
-            <a class="active" data-id="0">最新</a>
-            <a data-id="1">价格</a>
-            <a data-id="2">销量</a>
-        </p>
-        <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
-        <ul id="data-container" class="infor_list floating"></ul>
-        <div id="pageTool"></div>
-        <!-- 数据项列表结束 -->
-    </section>
 
     <!--页脚-->
     <footer th:replace="layout/footer"></footer>
@@ -87,12 +72,26 @@
         </div>
 
 
+        <section class="mart_main main">
+            <!-- 数据项列表开始 -->
+            <p class="filter" id="order-container">
+                <i></i>
+                <b>信息列表</b>
+                <a class="active" data-id="0">最新</a>
+                <a data-id="1">价格</a>
+                <a data-id="2">销量</a>
+            </p>
+            <div id="loadding" style="text-align: center;"><img src="/pages/common/images/loadding1.gif"/></div>
+            <ul id="data-container" class="infor_list floating"></ul>
+            <div id="pageTool"></div>
+            <!-- 数据项列表结束 -->
+        </section>
+
         <div class="filter">
             <i></i>
             <b>数据详情</b>
         </div>
         <div class="prointroduce">{{html introduce}}</div>
-
     </script>
 
     <!-- 数据包产品tpml模板 -->

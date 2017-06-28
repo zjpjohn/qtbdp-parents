@@ -399,13 +399,14 @@ var App = function () {
                     bindingDownload(id) ;// 绑定免费下载操作
                 else
                     bindingBuy(id) ;// 绑定购买操作
-            });
 
-            // 加载数据项明细
-            options._url = "/api/product/item" ; // 重置请求地址
-            options._tmpl = "#tmpl_items" ;
-            options._rows = 20 ; //每页20条记录
-            initDatas({productId:id}) ;
+
+                // 加载数据项明细
+                options._url = "/api/product/item" ; // 重置请求地址
+                options._tmpl = "#tmpl_items" ;
+                options._rows = 20 ; //每页20条记录
+                initDatas({productId:id}) ;
+            });
         },
         // 数据定制数据加载
         initCustom: function (type) {
