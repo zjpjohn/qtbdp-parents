@@ -34,12 +34,12 @@
          '<span class="ssi-InputLabel">' +
          '<span class="ssi-button success">' + this.language.chooseFiles + '</span>' +
          '</span>').append(element);
-        var $uploadBtn = $('<button id="ssi-uploadBtn" class="ssi-button success ssi-hidden" >' +
+        var $uploadBtn = $('<span id="ssi-uploadBtn" class="ssi-button success ssi-hidden" >' +
          '<span class="ssi-btnIn">' + this.language.upload + '&nbsp;</span>' +
-         '<div id="ssi-up_loading" class="ssi-btnIn"></div></button>');
-        var $clearBtn = $('<button id="ssi-clearBtn" class="ssi-hidden ssi-button info" >' + this.language.clear +
-         '</button>');
-        var $abortBtn = $('<button id="ssi-abortBtn" class="ssi-button error ssi-cancelAll ssi-hidden" ><span class="inBtn">' + this.language.abort + ' </span></button>');
+         '<div id="ssi-up_loading" class="ssi-btnIn"></div></span>');
+        var $clearBtn = $('<span id="ssi-clearBtn" class="ssi-hidden ssi-button info" >' + this.language.clear +
+         '</span>');
+        var $abortBtn = $('<span id="ssi-abortBtn" class="ssi-button error ssi-cancelAll ssi-hidden" ><span class="inBtn">' + this.language.abort + ' </span></span>');
 
         this.$element.append($('<div class="ssi-buttonWrapper">').append($chooseBtn, $abortBtn, $uploadBtn, $clearBtn));
         var $uploadBox;
@@ -263,7 +263,7 @@
                     return '<table class="ssi-imgToUploadTable ssi-pending">' +
                      '<tr><td class="ssi-upImgTd">' + content + '</td></tr>' +
                      '<tr><td><div id="ssi-uploadProgress' + index + '" class="ssi-hidden ssi-uploadProgress"></div></td></tr>' +
-                     '<tr><td><button data-delete="' + index + '" class=" ssi-button error ssi-removeBtn"><span class="trash10 trash"></span></button></td></tr>' +
+                     '<tr><td><span data-delete="' + index + '" class=" ssi-button error ssi-removeBtn"><span class="trash10 trash"></span></span></td></tr>' +
                      '<tr><td>' + cutFileName(filename, ext, 15) + '</td></tr></table>'
                 };
                 var fileType = file.type.split('/');
