@@ -3,8 +3,8 @@ package com.qtdbp.tradingadmin.service;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.proto.storage.DownloadByteArray;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.CrawlersRoleModel;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.mapper.CrawlersRoleMapper;
 import com.qtdbp.tradingadmin.mapper.DataProductMapper;
 import com.qtdbp.trading.mapper.DataTransactionOrderMapper;
@@ -45,22 +45,22 @@ public class FdfsFileService {
      * 下载免费数据包文件
      * @param productId
      * @return
-     * @throws GlobalException
+     * @throws GlobalAdminException
      */
-    public ResponseEntity<byte[]> downloadFreeFile(Integer productId) throws GlobalException {
+    public ResponseEntity<byte[]> downloadFreeFile(Integer productId) throws GlobalAdminException {
 
-        if (productId == null) throw new GlobalException("获取订单的ID为空");
+        if (productId == null) throw new GlobalAdminException("获取订单的ID为空");
         DataProductModel productModel = productMapper.findProductsById(productId);
-        if (productModel == null) throw new GlobalException("该数据包已不存在");
+        if (productModel == null) throw new GlobalAdminException("该数据包已不存在");
         String filePath = productModel.getFileUrl();
         String fileName = productModel.getDesignation();
         ResponseEntity<byte[]> fileEntity = null ;
 
         try {
             fileEntity = client.downloadFilePublic(filePath, fileName);
-        } catch (GlobalException e) {
+        } catch (GlobalAdminException e) {
             e.printStackTrace();
-            throw new GlobalException(e.getMessage());
+            throw new GlobalAdminException(e.getMessage());
         }
 
         return fileEntity;
@@ -72,22 +72,22 @@ public class FdfsFileService {
      * 下载爬虫规则文件
      * @param roleId
      * @return
-     * @throws GlobalException
+     * @throws GlobalAdminException
      */
-    public ResponseEntity<byte[]> downloadFreeRoleFile(Integer roleId) throws GlobalException {
+    public ResponseEntity<byte[]> downloadFreeRoleFile(Integer roleId) throws GlobalAdminException {
 
-        if (roleId == null) throw new GlobalException("获取订单的ID为空");
+        if (roleId == null) throw new GlobalAdminException("获取订单的ID为空");
         CrawlersRoleModel roleModel = roleMapper.findRoleById(roleId);
-        if (roleModel == null) throw new GlobalException("该爬虫规则已不存在");
+        if (roleModel == null) throw new GlobalAdminException("该爬虫规则已不存在");
         String filePath = roleModel.getFilePath();
         String fileName = roleModel.getName();
         ResponseEntity<byte[]> fileEntity = null ;
 
         try {
             fileEntity = client.downloadFilePublic(filePath, fileName);
-        } catch (GlobalException e) {
+        } catch (GlobalAdminException e) {
             e.printStackTrace();
-            throw new GlobalException(e.getMessage());
+            throw new GlobalAdminException(e.getMessage());
         }
 
         return fileEntity;

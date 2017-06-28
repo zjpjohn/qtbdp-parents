@@ -31,7 +31,7 @@
             </p>
             <p class="leatimers">
                 <span class="leatimersa"> <em></em> 截止时间 : <i th:text="${#dates.format(prod.endTime,'yyyy/MM/dd HH:mm')}">2017年7月2日</i>  </span>
-                <span class="leatimersb"> <em></em> 数据类别 : <i>医疗</i>  </span>
+                <span class="leatimersb"> <em></em> 数据类别 : <i th:text="${prod.typeName}">医疗</i>  </span>
             </p>
             <a href="javascript:;" class="order">立即接单</a>
         </div>

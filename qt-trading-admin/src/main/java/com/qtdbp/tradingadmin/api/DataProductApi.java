@@ -2,7 +2,6 @@ package com.qtdbp.tradingadmin.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.tradingadmin.mapper.DataProductMapper;
 import com.qtdbp.trading.model.DataProductModel;
@@ -52,7 +51,7 @@ public class DataProductApi extends BaseController {
     })
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelMap loadDataProducts(DataProductModel productModel) throws GlobalException {
+    public ModelMap loadDataProducts(DataProductModel productModel) throws GlobalAdminException {
 
         ModelMap map = new ModelMap() ;
         // 设置默认每页显示记录数
@@ -63,15 +62,15 @@ public class DataProductApi extends BaseController {
             map.put("page", productModel.getPage());
             map.put("rows", productModel.getRows());
         } catch (Exception e) {
-            throw new GlobalException(e.getMessage()) ;
+            throw new GlobalAdminException(e.getMessage()) ;
         }
         return map ;
     }
 
     @ApiOperation(value="添加数据包产品数据接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalException {
-        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+    public ModelMap addProduct(@RequestBody DataProductModel productModel) throws GlobalAdminException {
+        if(productModel == null) throw new GlobalAdminException("数据不存在，请重新填入") ;
         productModel.setUserId(0);
         ModelMap map = new ModelMap() ;
 
@@ -82,7 +81,7 @@ public class DataProductApi extends BaseController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new GlobalException(e.getMessage()) ;
+            throw new GlobalAdminException(e.getMessage()) ;
         }
         return map;
     }
@@ -92,13 +91,13 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "id", value = "数据包产品Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "/changeState", method = RequestMethod.GET)
-    public ModelMap changeState(Integer id) throws GlobalException {
-        if (id == null) throw new GlobalException("数据包产品id为空，请重新输入");
+    public ModelMap changeState(Integer id) throws GlobalAdminException {
+        if (id == null) throw new GlobalAdminException("数据包产品id为空，请重新输入");
         ModelMap map = new ModelMap() ;
         try {
             Integer count = productService.updateState(id);
             map.put("success", count>0?true:false);
-        } catch (GlobalException e) {
+        } catch (GlobalAdminException e) {
             e.printStackTrace();
         }
         return  map;
@@ -106,15 +105,15 @@ public class DataProductApi extends BaseController {
 
     @ApiOperation(value="修改数据包产品数据接口")
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    public ModelMap updateProduct(@RequestBody DataProductModel productModel) throws GlobalException {
-        if(productModel == null) throw new GlobalException("数据不存在，请重新填入") ;
+    public ModelMap updateProduct(@RequestBody DataProductModel productModel) throws GlobalAdminException {
+        if(productModel == null) throw new GlobalAdminException("数据不存在，请重新填入") ;
         ModelMap map = new ModelMap() ;
         try {
             Integer count = productService.updateProduct(productModel);
             map.put("success", count>0?true:false);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new GlobalException(e.getMessage()) ;
+            throw new GlobalAdminException(e.getMessage()) ;
         }
         return map;
     }
@@ -124,8 +123,8 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "id", value = "数据包产品Id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "findProductById", method = RequestMethod.GET)
-    public ModelMap findProductById(Integer id) throws GlobalException {
-        if(id == null) throw new GlobalException("id为空，请重新填入") ;
+    public ModelMap findProductById(Integer id) throws GlobalAdminException {
+        if(id == null) throw new GlobalAdminException("id为空，请重新填入") ;
         ModelMap map = new ModelMap() ;
         DataProductModel productModel = null;
         try {
@@ -145,7 +144,7 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "reason", value = "审核失败原因", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "/auditProduct", method = RequestMethod.PUT)
-    public ModelMap auditProduct(Integer id,Integer status,String reason ) throws GlobalException {
+    public ModelMap auditProduct(Integer id,Integer status,String reason ) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
 
@@ -176,13 +175,13 @@ public class DataProductApi extends BaseController {
             @ApiImplicitParam(name = "id", value = "数据包产品id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "", method = RequestMethod.DELETE)
-    public ModelMap deleteProduct(Integer id) throws GlobalException {
+    public ModelMap deleteProduct(Integer id) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
 
         if (id != null) {
             SecurityUser user = getPrincipal() ;
-            if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+            if(user == null) throw new GlobalAdminException("授权过期，请重新登陆") ;
             Integer count = productMapper.deleteProduct(id);
             map.put("success", count > 0 ? true : false);
         } else {

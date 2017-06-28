@@ -202,15 +202,14 @@ public class DataProductService {
         Integer count = 0;
         if (productModel.getId() != null && productModel.getId() != 0) {
             count = productMapper.updateProduct(productModel);
+            //当数据包产品修改时，数据条目文件也要进行修改
             if (count > 0) {
-
-                Map<String, String> itemMap = productModel.getSubFiles();
-                //当数据包产品修改时，数据条目文件也要进行修改
-                if (itemMap != null && itemMap.size() > 0) {
-                    //删除数据条目文件
-                    Integer delCount = productMapper.deleteByProductId(productModel.getId());
+                //删除以前的数据条目文件
+                Integer delCount = productMapper.deleteByProductId(productModel.getId());
+                if (delCount > 0 || delCount == 0) {
                     //重新插入修改后的数据文件
-                    if (delCount > 0) {
+                    Map<String, String> itemMap = productModel.getSubFiles();
+                    if (itemMap != null && itemMap.size() > 0) {
                         for (String key : itemMap.keySet()) {
                             DataItemModel itemModel = new DataItemModel();
                             itemModel.setProductId(productModel.getId());
@@ -221,10 +220,12 @@ public class DataProductService {
                             int id = productMapper.insertItem(itemModel);
                             if (!(id > 0)) throw new GlobalException("插入数据条目失败");
                         }
-                    }else {
-                        throw new GlobalException("删除数据条目失败");
                     }
+                } else {
+                    throw new GlobalException("删除数据条目失败");
                 }
+            } else {
+                throw new GlobalException("更新数据包产品失败");
             }
         } else {
             throw new GlobalException("产品ID为空，请重新操作");

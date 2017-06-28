@@ -1,8 +1,8 @@
 package com.qtdbp.tradingadmin.controller;
 
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.service.FdfsFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -61,20 +61,20 @@ public class DatamartController extends BaseController {
      * 下载免费数据包文件
      * @param productId
      * @return
-     * @throws GlobalException
+     * @throws GlobalAdminException
      */
     @RequestMapping(value = "/downloadFreeProduct/{productId}", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> updateFreeProduct(@PathVariable Integer productId) throws GlobalException {
+    public ResponseEntity<byte[]> updateFreeProduct(@PathVariable Integer productId) throws GlobalAdminException {
 
         SecurityUser user = getPrincipal() ;
 
-        if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+        if(user == null) throw new GlobalAdminException("授权过期，请重新登陆") ;
 
         ResponseEntity<byte[]> file ;
         try {
             file = fileService.downloadFreeFile(productId);
         } catch (Exception e) {
-            throw new GlobalException("下载出错："+e.getMessage()) ;
+            throw new GlobalAdminException("下载出错："+e.getMessage()) ;
         }
 
         return file;
