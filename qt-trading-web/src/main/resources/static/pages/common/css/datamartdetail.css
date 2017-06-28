@@ -16,7 +16,9 @@
     width:1200px ;
     margin:0px auto;
     box-sizing: border-box;
-    padding:4px;
+    padding: 30px;
+    background: #fff;
+    margin-bottom:30px;
 }
 .filter>i{
     display:inline-block;
@@ -99,8 +101,6 @@
     margin:0px auto;
     margin-top:40px;
     padding-bottom:20px;
-    border-bottom:1px solid #ddd;
-
 }
 .infor_list{
     padding:20px 0px;
