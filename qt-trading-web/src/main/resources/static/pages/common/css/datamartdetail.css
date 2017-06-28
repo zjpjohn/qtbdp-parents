@@ -24,14 +24,6 @@
     font-family:  Arial,"microsoft yahei" !important;
     font-size: 16px !important;
 }
-
-
-
-
-
-
-
-
 .filter>i{
     display:inline-block;
     width:4px;
@@ -41,8 +33,6 @@
     top:4px;
     margin-right:4px;
 }
-
-
 .detail_img{
     width:382px;
     height:259px;
@@ -227,24 +217,3 @@
 .prointroduce img{
     max-width: 1192px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
