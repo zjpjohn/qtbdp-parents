@@ -4,6 +4,7 @@ package com.qtdbp.tradingadmin.api;
 import com.qtd.utils.OssUpload;
 import com.qtdbp.poi.excel.ExcelReaderUtil;
 import com.qtdbp.poi.zip.ZipUtil;
+import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
 import com.qtdbp.tradingadmin.controller.BaseController;
@@ -13,6 +14,8 @@ import com.qtdbp.tradingadmin.service.FdfsFileService;
 import com.qtdbp.tradingadmin.service.PoiParserService;
 import com.qtdbp.tradingadmin.utils.CommonUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +59,11 @@ public class DataFileUploadApi extends BaseController {
     //===================================================================
 
     @ApiOperation(value = "上传图片接口，支持jpg/jpeg、gif、png")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "isHandle", value = "图片是否做处理(0:否，1:是)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
     @RequestMapping(value = "/img", method = RequestMethod.POST)
-    public ModelMap imgUpload(@RequestParam MultipartFile img) throws GlobalAdminException {
+    public ModelMap imgUpload(Integer isHandle, @RequestParam MultipartFile img) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
         boolean isSuccess = false ;
@@ -69,7 +75,9 @@ public class DataFileUploadApi extends BaseController {
             imgUrl = OssUpload.uploadFileBytes(img.getBytes(), img.getContentType()) ;
             if(imgUrl != null) {
                 imgUrl = OssUpload.imagepath +"/"+ imgUrl ;
-                imgUrl = CommonUtil.changeImgInfo(imgUrl);
+                if (isHandle != null && isHandle != 0 ) {
+                    imgUrl = CommonUtil.changeImgInfo(imgUrl);
+                }
 
                 isSuccess = true ;
             }
