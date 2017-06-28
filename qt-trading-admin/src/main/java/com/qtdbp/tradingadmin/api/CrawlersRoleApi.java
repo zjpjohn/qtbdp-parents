@@ -2,7 +2,6 @@ package com.qtdbp.tradingadmin.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.tradingadmin.mapper.CrawlersRoleMapper;
 import com.qtdbp.trading.model.CrawlersRoleModel;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
@@ -71,7 +70,7 @@ public class CrawlersRoleApi extends BaseController {
             @ApiImplicitParam(name = "reason", value = "审核失败原因", dataType = "String", paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "/auditCrawlersRole", method = RequestMethod.POST)
-    public ModelMap update(Integer id,Integer status,String reason) throws GlobalException {
+    public ModelMap update(Integer id,Integer status,String reason) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
         if (id != null){

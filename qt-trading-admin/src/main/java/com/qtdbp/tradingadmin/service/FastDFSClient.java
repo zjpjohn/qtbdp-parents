@@ -4,7 +4,7 @@ import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.exception.FdfsUnsupportStorePathException;
 import com.github.tobato.fastdfs.proto.storage.DownloadByteArray;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
-import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -102,7 +102,7 @@ public class FastDFSClient {
      * @param fileName
      * @return
      */
-    public ResponseEntity<byte[]> downloadFilePublic(String fileUrl, String fileName) throws GlobalException {
+    public ResponseEntity<byte[]> downloadFilePublic(String fileUrl, String fileName) throws GlobalAdminException {
         byte[] content = null;
         HttpHeaders headers = null ;
         try {
@@ -117,7 +117,7 @@ public class FastDFSClient {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            throw new GlobalException("文件："+fileName+"下载失败，错误信息："+e.getMessage()) ;
+            throw new GlobalAdminException("文件："+fileName+"下载失败，错误信息："+e.getMessage()) ;
         }
         return new ResponseEntity<byte[]>(content, headers, HttpStatus.CREATED);
     }

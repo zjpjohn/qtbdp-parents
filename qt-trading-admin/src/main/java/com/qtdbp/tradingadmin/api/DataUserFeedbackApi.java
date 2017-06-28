@@ -2,7 +2,7 @@ package com.qtdbp.tradingadmin.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
-import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.mapper.DataUserFeedbackMapper;
 import com.qtdbp.trading.model.DataUserFeedbackModel;
 import com.qtdbp.tradingadmin.service.DataUserFeedbackService;
@@ -59,7 +59,7 @@ public class DataUserFeedbackApi {
             @ApiImplicitParam(name = "id", value = "用户反馈id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    public ModelMap updateFeedback(Integer id) throws GlobalException {
+    public ModelMap updateFeedback(Integer id) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
 
