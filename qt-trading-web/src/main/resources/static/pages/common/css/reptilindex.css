@@ -213,6 +213,11 @@
 }
 .main_min>a>i{
     color:#05A9FE;
+    display:inline-block;
+    width: 96px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 em{
@@ -229,12 +234,13 @@ em{
 }
 .reptexts{
     width:420px;
-    border-right:2px solid #ECECEC;
 }
 
 .priceright{
     width:210px;
+    height: 120px;
     text-align: center;
+    border-left: 2px solid #ECECEC;
 }
 .repprice{
     font-size: 28px;
