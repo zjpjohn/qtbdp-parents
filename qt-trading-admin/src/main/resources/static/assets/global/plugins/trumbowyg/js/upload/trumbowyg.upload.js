@@ -55,7 +55,7 @@
                             function(values, fields){
                                 var data = new FormData();
                                 data.append('img', file);
-
+                                data.append('isHandle', "1");
                                 if($('.' + pfx +'progress', $modal).length == 0)
                                     $('.' + pfx + 'modal-title', $modal)
                                     .after(
