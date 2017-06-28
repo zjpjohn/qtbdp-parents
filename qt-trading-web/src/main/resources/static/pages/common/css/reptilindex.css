@@ -218,6 +218,8 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+    position: relative;
+    top: 2px;
 }
 
 em{
@@ -235,7 +237,6 @@ em{
 .reptexts{
     width:420px;
 }
-
 .priceright{
     width:210px;
     height: 120px;
@@ -271,26 +272,3 @@ em{
     margin:30px 400px 50px 400px;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,7 +4,6 @@
 <head>
     <title>数据市场 | 钱塘大数据交易中心</title>
     <div th:replace="layout/top"/>
-
     <link rel="stylesheet" href="/pages/common/css/datamartdetail.css"/>
     <!-- 页面数据加载 -->
     <script src="/pages/common/js/app.js" type="text/javascript"></script>
@@ -15,18 +14,15 @@
     <div th:replace="layout/header" /></div>
     <!--页头结束-->
 
-    <!--主体-->
+
     <!-- 详情页信息 -->
     <div id="product-container"></div>
-
-
     <!--页脚-->
     <footer th:replace="layout/footer"></footer>
     <!--页脚结束-->
 
     <!-- 数据产品详情 -->
     <script id="tmpl_product" type="text/x-jquery-tmpl">
-
         <div class="marginpro">
             <div class="floating product_back">
             <p class="lf detail_img">
@@ -70,8 +66,6 @@
             </div>
         </div>
         </div>
-
-
         <section class="mart_main main">
             <!-- 数据项列表开始 -->
             <p class="filter" id="order-container">
@@ -93,7 +87,6 @@
         </div>
         <div class="prointroduce">{{html introduce}}</div>
     </script>
-
     <!-- 数据包产品tpml模板 -->
     <script id="tmpl_items" type="text/x-jquery-tmpl">
     {{if list.length>0}}
@@ -118,6 +111,7 @@
     </script>
 
     <script th:inline="javascript">
+
         jQuery(document).ready(function() {
             App.initDatamartDetail([[${id}]]);
         })
