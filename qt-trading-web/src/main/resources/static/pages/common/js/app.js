@@ -280,7 +280,7 @@ var App = function () {
         if(!date) return ;
         var time = new Date(date);
         var b = 24*60; //分钟数
-        time.setMinutes(time.getMinutes() + b, time.getSeconds(), -1);
+        time.setMinutes(time.getMinutes() , time.getSeconds(), -1);
 
         return time.format("yyyy-MM-dd hh:mm:ss") ;
     }
