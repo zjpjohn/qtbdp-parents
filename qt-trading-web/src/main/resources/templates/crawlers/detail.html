@@ -20,19 +20,18 @@
     <div class="reptile_all floating">
         <div class="reptile_left lf">
             <div class="floating">
-                <img th:src="@{${prod.logo}}" alt="" class="lf leimg"/>
+                <img th:src="@{${prod.logo}}+'?x-oss-process=image/resize,m_pad,h_162,w_210,color_ffffff/format,png'" alt="" class="lf leimg"/>
                 <div class="lf">
                     <p class="letitle"  th:text="${prod.name}">食品药品监督局-北京-医疗机构之极品种信息</p>
                     <p class="leprice" th:text="'￥'+${#numbers.formatDecimal(prod.price , 0, 2)}">￥38.00</p>
                     <p class="lenum">
                         <span>近30天 <i th:text="${prod.buyCount}">5</i>次下载 </span>
-                        <span><i th:text="${prod.username}+'   '">shdfisdjh</i>于<i th:text="${#dates.format(prod.createTime,'yyyy/MM/dd HH:mm')}">2017-05-31</i>发布</span>
+                        <span><a th:href="'/institution/home/'+${prod.institutionId}" th:text="${prod.username}"></a>于<a th:text="${#dates.format(prod.createTime,'yyyy/MM/dd HH:mm')}">2017-05-31</a>发布</span>
                     </p>
                     <p class="employ">
                         <a href="javascript:;" class="lebuy">购买规则</a>
                         <a href="javascript:;" class="lecurse">使用教程</a>
                     </p>
-
                 </div>
             </div>
 
@@ -79,12 +78,9 @@
     <footer th:replace="layout/footer" />
     <!-- 页脚结束 -->
 
-    <script src="/pages/common/js/jquery-1.11.1.min.js"></script>
     <script>
         nav(3);
-
     </script>
-
 
 </body>
 </html>

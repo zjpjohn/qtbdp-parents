@@ -45,7 +45,7 @@
     <form action="/api/user" id="perdetail" method="post">
         <input type="hidden" name="id" value="${id}"/>
         <div class="headimgs">
-            <img src="${head}" onerror="this.src='/pages/common/images/user_img.png'" alt="" class="peronimg"/>
+            <img src="${head}?x-oss-process=image/resize,m_mfit,h_50,w_50,color_ffffff/format,png" onerror="this.src='/pages/common/images/user_img.png'" alt="" class="peronimg"/>
             <a href="javascript:;" class="inputimg">上传新的头像
                 <input type="file"  id="upheadimg"/>
                 <input type="hidden" name="head" id="realHead">

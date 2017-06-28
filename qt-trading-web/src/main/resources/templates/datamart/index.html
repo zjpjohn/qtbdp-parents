@@ -129,7 +129,8 @@
     {{each(i,prod) list}}
         <div class="store_one" >
             <a href="/datamart/detail/${prod.id}" target="_blank" >
-                <p class="storeimgs" style="background:url(${prod.pic}) no-repeat center center; background-size:cover;"/></p>
+                <!--<p class="storeimgs" style="background:url(${prod.pic}) no-repeat center center; background-size:cover;"/></p>-->
+                <img class="storeimgs" src="${prod.pic}?x-oss-process=image/resize,m_pad,h_190,w_280,color_ffffff/format,png" />
 
                 <h2>${prod.designation}</h2>
                 <p class="sto_main">${prod.dataProfile}</p>
@@ -138,7 +139,7 @@
                     {{if prod.price === 0}}
                         <span class="rt mf" style="color: #26C281;">免费</span>
                     {{else}}
-                        <span class="rt mf" style="color: #e7505a;">￥${prod.price}</span>
+                        <span class="rt mf" style="color: #e7505a;">￥${$item._num(prod.price)}</span>
                     {{/if}}
                 </p>
             </a>

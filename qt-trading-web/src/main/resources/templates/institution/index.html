@@ -89,7 +89,7 @@
     {{each(i, institution) list}}
         <div class="list_details lf">
             <a href="/institution/home/${institution.id}" target="_blank">
-                <img src="${institution.logo}" onerror="this.src='/pages/common/images/error.png'" class="lf " alt=""/>
+                <img src="${institution.logo}?x-oss-process=image/resize,m_pad,h_120,w_120,color_ffffff/format,png" onerror="this.src='/pages/common/images/error.png'" class="lf " alt=""/>
                 <div class="lf list_right">
                     <p>${institution.name}</p>
                     <p class="fwly"><em></em>服务领域</p>

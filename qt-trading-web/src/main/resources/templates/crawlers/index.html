@@ -115,22 +115,26 @@
     {{if list.length>0}}
     {{each(i,prod) list}}
         <div class="repmain floating">
-            <a href="/crawlers/detail/${prod.id}" target="_blank" class="floating lf" >
-                <img src="${prod.logo}" alt="" class="lf"/>
-                <div class="lf reptexts">
+            <a href="/crawlers/detail/${prod.id}" target="_blank" class="lf" >
+                <img src="${prod.logo}?x-oss-process=image/resize,m_pad,h_120,w_156,color_ffffff/format,png" alt="" class="lf"/>
+            </a>
+            <div  class="lf remain_click">
+                <a href="/crawlers/detail/${prod.id}" target="_blank" class="lf reptexts">
                     <p class="main_title">${prod.name}</p>
                     <p class="main_text">采集字段 : ${prod.collectionField}</p>
-                </div>
-            </a>
-            <p class="main_min lf">
-                <span class="main_domain"><em></em>采集网站: ${prod.webSite}</span>
-                <span onclick="location='/institution/home/${prod.institutionId}'">服务商家 : <i> ${prod.username}</i></span>
-            </p>
-            <div class="rt priceright">
+                </a>
+                <p class="main_min lf">
+                    <span class="main_domain"><em></em>采集网站: ${prod.webSite}</span>
+                    <a href="/institution/home/${prod.institutionId}"> 服务商家 : <i> ${prod.username}</i></a>
+                </p>
+            </div>
+
+            <div class="lf priceright">
                 <p class="repprice">￥${$item._num(prod.price)}</p>
                 <p class="reppeople">${prod.buyCount} 人已购买</p>
                 <p class="repnow">立即购买</p>
             </div>
+
         </div>
     {{/each}}
     {{else}}
