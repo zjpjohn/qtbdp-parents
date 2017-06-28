@@ -69,6 +69,7 @@ public class DataFileUploadApi extends BaseController {
             imgUrl = OssUpload.uploadFileBytes(img.getBytes(), img.getContentType()) ;
             if(imgUrl != null) {
                 imgUrl = OssUpload.imagepath +"/"+ imgUrl ;
+                imgUrl = CommonUtil.changeImgInfo(imgUrl);
 
                 isSuccess = true ;
             }
