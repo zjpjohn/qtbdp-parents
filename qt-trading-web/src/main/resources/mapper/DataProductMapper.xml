@@ -105,9 +105,11 @@
             p.data_format,
             p.data_status,
             p.data_src,
-            p.is_used
+            p.is_used,
+            d.name attr_name,
+            d.id attr_id
         FROM
-        data_product as p
+        data_product as p left join data_institution_info_new d on p.user_id = d.create_id
         WHERE p.id = #{id}
     </select>
 
@@ -132,6 +134,8 @@
         <result column="data_status" property="dataStatus"/>
         <result column="data_src" property="dataSrc"/>
         <result column="is_used" property="isUsed"/>
+        <result column="attr_id" property="attrId"/>
+        <result column="attr_name" property="attrName"/>
 
         <association property="buyCount" column="id" select="findOrdersCountByProductId"></association>
     </resultMap>
@@ -181,6 +185,7 @@
             type_chain,
             download_count,
             buy_count,
+            data_profile,
             market_price,
             data_format,
             data_status,
@@ -208,6 +213,7 @@
             NULL ,
             0,
             0,
+            #{dataProfile},
             #{marketPrice},
             #{dataFormat},
             #{dataStatus},

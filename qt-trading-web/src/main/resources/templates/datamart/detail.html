@@ -44,7 +44,7 @@
                     <span>数据规模：${$item._def(dataScale)} 条</span>
                     <span>数据来源：${$item._def(dataSrc,2)}</span>
                 </p>
-                <p class="qtbig">服务商家 : <i>钱塘大数据</i></p>
+                <p class="qtbig">服务商家 : <i onclick="window.location.href='/institution/home/${attrId}'">${attrName}</i></p>
                 {{if price == 0}}
                 <div class="show isfree free">
                     <p class="p3">
