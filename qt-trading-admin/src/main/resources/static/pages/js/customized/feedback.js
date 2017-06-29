@@ -11,11 +11,14 @@ $(function () {
             { "data": "id" },
             { "data": "feedbackType" },
             { "data": "addtime" },
+            { "data": "content" },
+            { "data": "ip" },
+            { "data": "qq" },
             { "data": "mark" },
             { "data": null }
         ],
         columnDefs:[{
-            targets: 4,
+            targets: 7,
             render: function (data, type, row, meta) {
                 return '<a href="/customized/feedbackInfo?id=' + row.id + '" class="btn btn-sm green btn-outline filter-submit revise" data-value="'+ row.id +'">查看</a>'
             }

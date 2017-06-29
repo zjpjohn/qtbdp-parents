@@ -113,6 +113,10 @@ var Common = {
                                     dataChage[i].feedbackType = "无此类型"
                                 }
 
+                                if(dataChage[i].qq == null){
+                                    dataChage[i].qq = "无";
+                                }
+
                                 if(typeId == 0){
                                     typeId = "其他";
                                 }
