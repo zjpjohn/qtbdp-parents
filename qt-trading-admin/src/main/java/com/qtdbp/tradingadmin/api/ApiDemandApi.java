@@ -1,13 +1,12 @@
 package com.qtdbp.tradingadmin.api;
 
 import com.github.pagehelper.PageInfo;
+import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.model.ApiDemandModel;
 import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.mapper.ApiDemandMapper;
 import com.qtdbp.tradingadmin.service.ApiDemandService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,10 @@ public class ApiDemandApi {
     private ApiDemandMapper apiDemandMapper;
 
     @ApiOperation(value="分页查询api定制数据接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页（如：1）", defaultValue = "1", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY),
+            @ApiImplicitParam(name = "rows", value = "每页显示记录数（如：12）", defaultValue = "12", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelMap findApiDemand( ApiDemandModel apiDemandModel) throws GlobalAdminException {
 
