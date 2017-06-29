@@ -37,4 +37,7 @@
         where id = #{id}
     </update>
 
+    <select id="findUserFeedbackById" parameterType="java.lang.Integer" resultMap="DataUserFeedbackMap">
+        select * from data_user_feedback f where f.id = #{id}
+    </select>
 </mapper>

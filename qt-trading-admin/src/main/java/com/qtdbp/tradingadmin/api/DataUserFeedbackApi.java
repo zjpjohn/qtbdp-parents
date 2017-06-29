@@ -6,10 +6,9 @@ import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.mapper.DataUserFeedbackMapper;
 import com.qtdbp.trading.model.DataUserFeedbackModel;
 import com.qtdbp.tradingadmin.service.DataUserFeedbackService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +22,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/feedback")
 public class DataUserFeedbackApi {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+
 
     @Autowired
     private DataUserFeedbackMapper feedbackMapper;
@@ -38,7 +40,7 @@ public class DataUserFeedbackApi {
     })
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelMap findByCondition(DataUserFeedbackModel feedbackModel) {
+    public ModelMap findFeedbackByCondition(DataUserFeedbackModel feedbackModel) throws GlobalAdminException {
         if(feedbackModel.getRows() == null || feedbackModel.getRows() == 0) feedbackModel.setRows(12);
         ModelMap map = new ModelMap();
 
@@ -49,7 +51,8 @@ public class DataUserFeedbackApi {
             map.put("page", feedbackModel.getPage());
             map.put("rows", feedbackModel.getRows());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("findFeedbackByCondition has error ,message:" + e.getMessage());
+            throw new GlobalAdminException(e.getMessage());
         }
         return map;
     }
@@ -71,9 +74,30 @@ public class DataUserFeedbackApi {
                 Integer count = feedbackMapper.updateFeedback(feedbackModel);
                 map.put("success", count > 0 ? true : false);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("updateFeedback has error ,message:" + e.getMessage());
+                throw new GlobalAdminException(e.getMessage());
             }
         }
+
+        return map;
+    }
+
+    @ApiOperation(value = "根据ID查询单条用户反馈数据接口")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelMap findUserFeedbackById(
+            @ApiParam(name = "id", value = "用户反馈ID", required = true) @PathVariable Integer id) throws GlobalAdminException {
+
+        ModelMap map = new ModelMap();
+        DataUserFeedbackModel feedbackModel = null ;
+        if(id != null) {
+            try {
+                feedbackModel = feedbackMapper.findUserFeedbackById(id);
+            } catch (Exception e) {
+                logger.error("findUserFeedbackById has error ,message:" + e.getMessage());
+                throw new GlobalAdminException(e.getMessage());
+            }
+        }
+        map.put("pageInfo", feedbackModel);
 
         return map;
     }
