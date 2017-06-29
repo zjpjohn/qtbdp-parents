@@ -94,7 +94,7 @@ var Common = {
                                 }
 
                                 if(dataChage[i].institutionType == 1){
-                                    dataChage[i].institutionType = "服务商"
+                                    dataChage[i].institutionType = "企业"
                                 }else {
                                     dataChage[i].institutionType = "个人"
                                 }
