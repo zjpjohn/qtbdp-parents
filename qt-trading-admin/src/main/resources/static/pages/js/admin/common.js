@@ -99,6 +99,20 @@ var Common = {
                                     dataChage[i].institutionType = "个人"
                                 }
 
+                                if(dataChage[i].mark == 1){
+                                    dataChage[i].mark = "已查看"
+                                }else {
+                                    dataChage[i].mark = "未查看"
+                                }
+
+                                if(dataChage[i].feedbackType == 1){
+                                    dataChage[i].feedbackType = "数据需求"
+                                }else if(dataChage[i].feedbackType == 2){
+                                    dataChage[i].feedbackType = "商务合作"
+                                }else {
+                                    dataChage[i].feedbackType = "无此类型"
+                                }
+
                                 if(typeId == 0){
                                     typeId = "其他";
                                 }
