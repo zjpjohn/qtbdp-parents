@@ -152,13 +152,23 @@ em{
     margin-bottom: 20px;
     background-color: #fff;
 }
-.remainall>div:nth-child(2n){
+/*.remainall>div:nth-child(2n){
     border-left: 5px solid #FFA98D;
 }
 .remainall>div:nth-child(3n){
     border-left: 5px solid #C3A5E1;
 }
 .remainall>div:nth-child(4n){
+    border-left: 5px solid #F590A7;
+}*/
+
+.store_main>div:nth-child(2n){
+    border-left: 5px solid #FFA98D;
+}
+.store_main>div:nth-child(3n){
+    border-left: 5px solid #C3A5E1;
+}
+.store_main>div:nth-child(4n){
     border-left: 5px solid #F590A7;
 }
 
