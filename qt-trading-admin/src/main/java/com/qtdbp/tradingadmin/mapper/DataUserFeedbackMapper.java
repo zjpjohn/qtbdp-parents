@@ -2,6 +2,7 @@ package com.qtdbp.tradingadmin.mapper;
 
 import com.qtdbp.trading.model.DataUserFeedbackModel;
 import com.qtdbp.trading.utils.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,5 +24,12 @@ public interface DataUserFeedbackMapper extends BaseMapper<DataUserFeedbackModel
      * @return
      */
     Integer updateFeedback(DataUserFeedbackModel feedbackModel);
+
+    /**
+     * 查询单条用户反馈
+     * @param id
+     * @return
+     */
+    DataUserFeedbackModel findUserFeedbackById(@Param("id") Integer id);
 
 }

@@ -20,6 +20,12 @@ public class CustomizedController extends BaseController {
     public static final String PAGE_CUSTOMIZED_DATA_DETAIL = "customized/data-info";
     public static final String PAGE_CUSTOMIZED_ROLE_DETAIL = "customized/role-info";
 
+    public static final String PAGE_API_DEMAND = "customized/API";
+    public static final String PAGE_FEEDBACK = "customized/feedback";
+
+    public static final String PAGE_API_DEMAND_INFO = "customized/APIInfo";
+    public static final String PAGE_FEEDBACK_INFO = "customized/feedbackInfo";
+
     /**
      * 定制数据列表
      * @return
@@ -59,4 +65,47 @@ public class CustomizedController extends BaseController {
 
         return PAGE_CUSTOMIZED_ROLE_DETAIL;
     }
+
+    /**
+     *  api定制列表页面
+     * @return
+     */
+    @RequestMapping(value = "/customized/apiDemand", method = RequestMethod.GET)
+    public String ApiDemandList(){
+
+        return PAGE_API_DEMAND;
+    }
+
+    /**
+     *  用户反馈列表页面
+     * @return
+     */
+    @RequestMapping(value = "/customized/feedback", method = RequestMethod.GET)
+    public String feedbackList(){
+
+        return PAGE_FEEDBACK;
+    }
+
+    /**
+     *  api定制详情页面
+     * @return
+     */
+    @RequestMapping(value = "/customized/apiDemandInfo", method = RequestMethod.GET)
+    public String ApiDemandById(){
+
+        return PAGE_API_DEMAND_INFO;
+    }
+
+    /**
+     *  用户反馈详情页面
+     * @return
+     */
+    @RequestMapping(value = "/customized/feedbackInfo", method = RequestMethod.GET)
+    public String feedbackById(){
+
+        return PAGE_FEEDBACK_INFO;
+    }
+
+
+
 }
