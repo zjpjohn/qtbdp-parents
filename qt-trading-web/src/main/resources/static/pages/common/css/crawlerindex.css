@@ -9,7 +9,6 @@
 }
 .reptile_right{
     width:320px;
-
 }
 em{
     display:inline-block;
@@ -20,11 +19,9 @@ em{
 /***右侧***/
 .reptile_right {
     width: 320px;
-
 }
 .right_img {
     width:320px;
-
     margin-bottom: 20px;
 }
 .right_img2{
@@ -39,7 +36,6 @@ em{
     width:850px;
     background-color: #fff;
 }
-
 .repclissify{
     padding:10px 0px;
 }
@@ -49,7 +45,6 @@ em{
     padding:4px 10px;
     font-size: 14px;
     margin-right:2px;
-
 }
 .repclissify a:hover,.repclissify a.active{
     color:#fff;
@@ -57,7 +52,6 @@ em{
     padding:4px 10px;
     background-color: #05A9FE;
 }
-
 .datarep{
     color:#333;
     margin-right: 20px;
@@ -70,7 +64,6 @@ em{
     color:#999;
     display:inline-block;
     padding:4px 10px;
-
 }
 .repdataall>p>a:hover,.repdataall>p>a.active{
     background-color: #05A9FE;
@@ -93,7 +86,6 @@ em{
     background-color: #05A9FE;
     color:#fff;
 }
-
 .gysj,.glsj{
     width:814px;
     display:none;
@@ -152,16 +144,6 @@ em{
     margin-bottom: 20px;
     background-color: #fff;
 }
-/*.remainall>div:nth-child(2n){
-    border-left: 5px solid #FFA98D;
-}
-.remainall>div:nth-child(3n){
-    border-left: 5px solid #C3A5E1;
-}
-.remainall>div:nth-child(4n){
-    border-left: 5px solid #F590A7;
-}*/
-
 .store_main>div:nth-child(2n){
     border-left: 5px solid #FFA98D;
 }
@@ -171,8 +153,6 @@ em{
 .store_main>div:nth-child(4n){
     border-left: 5px solid #F590A7;
 }
-
-
 .repmain:hover,.repmain.active{
     box-shadow:0px 0px 5px #ddd ;
 }
@@ -180,7 +160,6 @@ em{
     width:590px;
     border-right:2px solid #ECECEC;
 }
-
 .main_title{
     font-size: 18px;
     color:#333;
@@ -253,17 +232,3 @@ em{
     background-position: 0px -30px;
     margin: 30px 400px 50px 400px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
