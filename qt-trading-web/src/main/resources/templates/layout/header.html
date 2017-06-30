@@ -74,7 +74,7 @@
 		<!--如果已登录-->
 		<div class="rt nav_haslogin floating" th:if="${user}">
 			<a href="javascript:;" class="lf user_img">
-				<img th:src="@{${user.head} ? ${user.head} : '/tradecenter/images/user_img.png'} " alt=""/>
+				<img th:src="@{${user.head} ? ${user.head} : '/pages/common/images/user_img.png'} " alt=""/>
 			</a>
 			<div class="lf user_center">
 				<p class="user_name" th:text="${user.userName}">钱塘数据<i></i></p>
@@ -109,27 +109,7 @@
 	}
 </script>
 <!--页头结束-->
-	<!--悬浮框-->
-	<!--<div class="lqb_slide">
-		<div class="lqb_slk phone">
-			<div class="box">
-				<div class="vipTel">
-					<p class="ogTel">0571-22872877</p>
-					<p>(7×24小时为您服务)</p>
-				</div>
-			</div>
-			<a href="javascript:;"></a>
-		</div>
-		<div class="lqb_slk QQ">
-			<a href="http://wpa.qq.com/msgrd?v=3&uin=2142920794&site=&menu=yes" target="_blank"></a>
-		</div>
-		<div class="lqb_slk weixin">
-			<div class="box box-wx"><img th:src="@{/tradecenter/images/qr_code.png}"></div>
-			<a href="javascript:;"></a>
-		</div>
-	</div>-->
 </div>
-
 
 <!-- 登录弹框  -->
 <div class="model" id="loginModel">
