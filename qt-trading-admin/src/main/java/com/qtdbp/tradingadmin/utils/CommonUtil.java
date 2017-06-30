@@ -72,9 +72,9 @@ public class CommonUtil {
         try {
             BufferedImage sourceImg=ImageIO.read(new URL(imgpath).openStream());
             if (sourceImg.getWidth() > 1200) {
-                imgUrl.append("?x-oss-process=image/resize,m_mfit,w_1200,color_ffffff/format,png/watermark,size_20,text_6ZKx5aGY5aSn5pWw5o2u,shadow_88,color_3763C8");
+                imgUrl.append("?x-oss-process=image/resize,m_mfit,w_1200,color_ffffff/format,png/watermark,size_50,text_6ZKx5aGY5aSn5pWw5o2u,t_50,g_center,color_ffffff");
             } else {
-                imgUrl.append("?x-oss-process=image/watermark,size_20,text_6ZKx5aGY5aSn5pWw5o2u,shadow_88,color_3763C8");
+                imgUrl.append("?x-oss-process=image/watermark,size_50,text_6ZKx5aGY5aSn5pWw5o2u,t_50,g_center,color_ffffff");
             }
         } catch (MalformedURLException e) {
             throw new GlobalAdminException("图片地址错误");
