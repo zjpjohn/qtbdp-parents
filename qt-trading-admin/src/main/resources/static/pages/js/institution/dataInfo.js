@@ -10,7 +10,7 @@ $(function () {
         $('#dataName').val(data.designation);//名称
         $('#synopsis').val(data.dataProfile);//简介
         $('#scale').val(data.dataScale);//规模
-        $('#price').val(data.price);//价格
+        $('#price').val("市场价： " + data.marketPrice +"￥；  折扣价：" + data.price + "￥；  子文件价格：" + data.itemPrice +"￥；");//价格
         var dataStatus = DATA_STATUS[data.dataStatus] ? DATA_STATUS[data.dataStatus] : data.dataStatus;
         $('#dataType').val(dataStatus);//数据类型
         var dataType = dataTypeJson[data.dataType] ? dataTypeJson[data.dataType] : data.dataType;

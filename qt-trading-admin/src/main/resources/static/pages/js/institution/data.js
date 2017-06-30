@@ -9,7 +9,7 @@ $(function () {
         url: "/api/product",
         columns: [
             { "data": "id" },
-            { "data": "dataTypeProps" },
+            { "data": "dataStatus" },
             { "data": "designation" },
             { "data": "username" },
             { "data": "addtime" },

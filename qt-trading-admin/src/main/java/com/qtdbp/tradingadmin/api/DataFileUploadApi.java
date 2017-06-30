@@ -4,15 +4,18 @@ package com.qtdbp.tradingadmin.api;
 import com.qtd.utils.OssUpload;
 import com.qtdbp.poi.excel.ExcelReaderUtil;
 import com.qtdbp.poi.zip.ZipUtil;
-import com.qtdbp.trading.exception.GlobalException;
+import com.qtdbp.trading.constants.ApiConstants;
 import com.qtdbp.trading.service.security.model.SysUser;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
 import com.qtdbp.tradingadmin.controller.BaseController;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.service.FastDFSClient;
 import com.qtdbp.tradingadmin.service.FdfsFileService;
 import com.qtdbp.tradingadmin.service.PoiParserService;
 import com.qtdbp.tradingadmin.utils.CommonUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,24 +59,30 @@ public class DataFileUploadApi extends BaseController {
     //===================================================================
 
     @ApiOperation(value = "上传图片接口，支持jpg/jpeg、gif、png")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "isHandle", value = "图片是否做处理(0:否，1:是)", dataType = "Integer", paramType = ApiConstants.PARAM_TYPE_QUERY)
+    })
     @RequestMapping(value = "/img", method = RequestMethod.POST)
-    public ModelMap imgUpload(@RequestParam MultipartFile img) throws GlobalException {
+    public ModelMap imgUpload(Integer isHandle, @RequestParam MultipartFile img) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
         boolean isSuccess = false ;
         String imgUrl ;
         try {
 
-            if(img == null) throw new GlobalException("图片不存在，请先上传图片") ;
+            if(img == null) throw new GlobalAdminException("图片不存在，请先上传图片") ;
 
             imgUrl = OssUpload.uploadFileBytes(img.getBytes(), img.getContentType()) ;
             if(imgUrl != null) {
                 imgUrl = OssUpload.imagepath +"/"+ imgUrl ;
+                if (isHandle != null && isHandle != 0 ) {
+                    imgUrl = CommonUtil.changeImgInfo(imgUrl);
+                }
 
                 isSuccess = true ;
             }
         } catch (Exception e) {
-            throw new GlobalException(e.getMessage()) ;
+            throw new GlobalAdminException(e.getMessage()) ;
         }
 
         map.put("success", isSuccess) ;
@@ -88,7 +97,7 @@ public class DataFileUploadApi extends BaseController {
 
     @ApiOperation(value = "上传文件接口，格式：xsl、doc、pdf等")
     @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public ModelMap fileUpload(@RequestParam MultipartFile file) throws GlobalException {
+    public ModelMap fileUpload(@RequestParam MultipartFile file) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
         boolean isSuccess = false ;
@@ -96,7 +105,7 @@ public class DataFileUploadApi extends BaseController {
         Map<String, String> subFiles = null ;
         int fileSize = 0;
         try {
-            if(file == null) throw new GlobalException("文件不存在，请先上传文件") ;
+            if(file == null) throw new GlobalAdminException("文件不存在，请先上传文件") ;
 
             fileSize = (int)file.getSize()/1024;
             fileUrl = client.uploadFile(file) ;
@@ -109,7 +118,7 @@ public class DataFileUploadApi extends BaseController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new GlobalException(e.getMessage()) ;
+            throw new GlobalAdminException(e.getMessage()) ;
         }
 
         map.put("success", isSuccess) ;
@@ -175,18 +184,18 @@ public class DataFileUploadApi extends BaseController {
 
     @ApiOperation(value = "数据包文件验证和下载")
     @RequestMapping(value = "/productFile/exist", method = RequestMethod.GET)
-    public ModelMap fileExistFree(Integer productId) throws GlobalException {
+    public ModelMap fileExistFree(Integer productId) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
 
         SecurityUser user = getPrincipal() ;
-        if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+        if(user == null) throw new GlobalAdminException("授权过期，请重新登陆") ;
 
         try {
             ResponseEntity<byte[]> file = fileService.downloadFreeFile(productId);
             if(file != null) map.put("success", true) ;
         } catch (Exception e) {
-            throw new GlobalException("下载出错："+e.getMessage()) ;
+            throw new GlobalAdminException("下载出错："+e.getMessage()) ;
         }
 
         return map;
@@ -194,18 +203,18 @@ public class DataFileUploadApi extends BaseController {
 
     @ApiOperation(value = "爬虫规则文件验证和下载")
     @RequestMapping(value = "/roleFile/exist", method = RequestMethod.GET)
-    public ModelMap RoleFileExistFree(Integer roleId) throws GlobalException {
+    public ModelMap RoleFileExistFree(Integer roleId) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
 
         SecurityUser user = getPrincipal() ;
-        if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+        if(user == null) throw new GlobalAdminException("授权过期，请重新登陆") ;
 
         try {
             ResponseEntity<byte[]> file = fileService.downloadFreeRoleFile(roleId);
             if(file != null) map.put("success", true) ;
         } catch (Exception e) {
-            throw new GlobalException("下载出错："+e.getMessage()) ;
+            throw new GlobalAdminException("下载出错："+e.getMessage()) ;
         }
 
         return map;

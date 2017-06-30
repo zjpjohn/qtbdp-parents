@@ -332,7 +332,6 @@
     text-align: left;
     font-size: 18px;
     WORD-WRAP: break-word;
-
 }
 
 .particularsbody>td{
@@ -342,21 +341,27 @@
     WORD-WRAP: break-word;
 }
 
+.particularsbody>td.paid{
+    color:#00CB94;
+}
+
 .particulars td:nth-child(1){
-    width:60px;
+    width:200px;
+    padding-left:10px;
+    box-sizing: border-box;
 
 }
 
 .particulars td:nth-child(2){
-    width:180px;
+    width:190px;
     padding-left: 50px;
 }
 .particulars td:nth-child(3){
-    width:170px;
+    width:270px;
 }
 
 .particulars td:nth-child(4){
-    width:250px;
+    width:120px;
 
 }
 

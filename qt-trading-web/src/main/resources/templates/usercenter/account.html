@@ -21,79 +21,40 @@
             <!-- 个人中心菜单开始 -->
             <div th:replace="layout/sidebar" /></div>
             <!-- 个人中心菜单结束 -->
-
             <div class="center_right rt">
 
                 <div class="myaccount2" style="display:block">
-                    <p class="cenintegral">积分 : <span>246</span></p>
                     <div class="balance">
                         余额 : <span class="gralmoney"><i>35</i>元</span>
                         <span class="recharge"> 充值</span>
                         <span class=" deposit"> 提现</span>
-                        <span class=" convert"> 兑换积分</span>
-                        <span class="reminder"> (友情提示 ： 1元=10积分,使用积分更划算) </span>
-
-
                     </div>
 
                     <div>
                         <p class="convertye">
                             <a href="javascript:;"  class="active"  data-index="integralmx">积分明细</a>
-                            <a href="javascript:;" data-index="balancemx">余额明细</a>
                         </p>
                         <div class="detailswitcher">
                             <div class="integralmx2 active">
                                 <table  class="particulars">
                                     <thead class="pratichead">
-                                    <tr class="particularshead">
-                                        <td class="active">ID</td>
-                                        <td>积分</td>
-                                        <td>项目</td>
-                                        <td>时间</td>
-                                        <td>备注</td>
-                                    </tr>
+                                        <tr class="particularshead">
+                                            <td>金额</td>
+                                            <td>操作</td>
+                                            <td>时间</td>
+                                            <td>订单号</td>
+                                        </tr>
                                     </thead>
 
                                     <tbody class="praticbody">
-                                    <tr class="particularsbody">
-                                        <td>1</td>
-                                        <td>+50</td>
-                                        <td>注册</td>
-                                        <td>2016-12-01 10:06:34</td>
-                                        <td>赠送积分</td>
-                                    </tr>
-                                    <tr class="particularsbody">
-                                        <td>2</td>
-                                        <td>+50</td>
-                                        <td>注册</td>
-                                        <td>2016-12-01 10:06:34</td>
-                                        <td>赠送积分</td>
-                                    </tr>
-                                    <tr class="particularsbody">
-                                        <td>3</td>
-                                        <td>+50</td>
-                                        <td>注册</td>
-                                        <td>2016-12-01 10:06:34</td>
-                                        <td>赠送积分</td>
-                                    </tr>
-                                    </tbody>
+                                        <tr class="particularsbody">
+                                            <td  class="paid">+50</td>
+                                            <td>-</td>
+                                            <td>2016-12-01 10:06:34</td>
+                                            <td>赠送积分</td>
+                                        </tr>
 
-                                    <!--空白页面-->
-                                    <!--<tbody class="praticbody">
-                                    <tr>
-                                        <td colspan="5"><img src="images/none.png" alt="" class="noneimg" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <p class="presentmx">暂时没有明细 / 菜单 / 发布 ...</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <a href="javascript:;" class="leavedata">前往数据商城</a>
-                                        </td>
-                                    </tr>
-                                    </tbody>-->
+                                    </tbody>
                                 </table>
 
                             </div>

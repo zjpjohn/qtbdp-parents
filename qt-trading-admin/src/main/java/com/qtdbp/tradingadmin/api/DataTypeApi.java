@@ -2,8 +2,8 @@ package com.qtdbp.tradingadmin.api;
 
 import com.github.pagehelper.PageInfo;
 import com.qtdbp.trading.constants.ApiConstants;
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.DataTypeAttrModel;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.mapper.DataTypeMapper;
 import com.qtdbp.tradingadmin.model.DataTypeModel;
 import com.qtdbp.tradingadmin.service.DataTypeService;
@@ -64,8 +64,8 @@ public class DataTypeApi {
 
     @ApiOperation(value = "新增数据类型接口")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ModelMap insertDataType (@RequestBody DataTypeModel dataType) throws GlobalException {
-        if (dataType == null) throw new GlobalException("数据类型为空，请重新操作");
+    public ModelMap insertDataType (@RequestBody DataTypeModel dataType) throws GlobalAdminException {
+        if (dataType == null) throw new GlobalAdminException("数据类型为空，请重新操作");
         ModelMap map = new ModelMap();
         try {
             Integer count = dataTypeMapper.insertType(dataType);
@@ -80,8 +80,8 @@ public class DataTypeApi {
 
     @ApiOperation(value = "修改数据类型接口")
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    public ModelMap updateDataType (@RequestBody DataTypeModel dataType) throws GlobalException {
-        if (dataType == null) throw new GlobalException("数据类型为空，请重新操作");
+    public ModelMap updateDataType (@RequestBody DataTypeModel dataType) throws GlobalAdminException {
+        if (dataType == null) throw new GlobalAdminException("数据类型为空，请重新操作");
         ModelMap map = new ModelMap();
         try {
             Integer count = dataTypeMapper.updateType(dataType);
@@ -99,8 +99,8 @@ public class DataTypeApi {
     })
     @ResponseBody
     @RequestMapping(value = "findTypeAttr", method = RequestMethod.GET)
-    public ModelMap findTypeAttr (Integer id) throws GlobalException {
-        if (id == null) throw new GlobalException("数据类型id为空，请重新操作");
+    public ModelMap findTypeAttr (Integer id) throws GlobalAdminException {
+        if (id == null) throw new GlobalAdminException("数据类型id为空，请重新操作");
         ModelMap map = new ModelMap();
         try {
             List<DataTypeAttrModel> list = dataTypeMapper.findAttrAll(id);
@@ -137,9 +137,9 @@ public class DataTypeApi {
     })
     @ResponseBody
     @RequestMapping(value = "findDataTypById", method = RequestMethod.GET)
-    public ModelMap findDataTypeById(Integer id) throws GlobalException {
+    public ModelMap findDataTypeById(Integer id) throws GlobalAdminException {
         ModelMap map = new ModelMap();
-        if (id == null) throw new GlobalException("id为空，请重新操作");
+        if (id == null) throw new GlobalAdminException("id为空，请重新操作");
 
         DataTypeModel typeModel = null;
         try {

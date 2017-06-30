@@ -87,7 +87,6 @@ input:-ms-input-placeholder {
 .main{
     width:1200px;
     margin:0px auto;
-    padding:40px 0px;
 }
 /******页头***********/
 .navimg2>img{
@@ -614,11 +613,3 @@ body{
     background:url(../images/icon_index2.png);
     background-position:-284px -331px;
 }
-
-
-
-
-
-
-
-

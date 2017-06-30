@@ -1,7 +1,7 @@
 package com.qtdbp.tradingadmin.controller;
 
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.tradingadmin.base.security.SecurityUser;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.service.FdfsFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,20 +39,20 @@ public class CrawlersController extends BaseController {
      * 下载免费爬虫规则文件
      * @param roleId
      * @return
-     * @throws GlobalException
+     * @throws GlobalAdminException
      */
     @RequestMapping(value = "/downloadFreeRole/{roleId}", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> updateFreeProduct(@PathVariable Integer roleId) throws GlobalException {
+    public ResponseEntity<byte[]> updateFreeProduct(@PathVariable Integer roleId) throws GlobalAdminException {
 
         SecurityUser user = getPrincipal() ;
 
-        if(user == null) throw new GlobalException("授权过期，请重新登陆") ;
+        if(user == null) throw new GlobalAdminException("授权过期，请重新登陆") ;
 
         ResponseEntity<byte[]> file ;
         try {
             file = fileService.downloadFreeRoleFile(roleId);
         } catch (Exception e) {
-            throw new GlobalException("下载出错："+e.getMessage()) ;
+            throw new GlobalAdminException("下载出错："+e.getMessage()) ;
         }
 
         return file;

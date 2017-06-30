@@ -1,6 +1,18 @@
 package com.qtdbp.tradingadmin.utils;
 
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 公共工具类
@@ -47,4 +59,29 @@ public class CommonUtil {
         }
         return ip;
     }
+
+
+    /**
+     * 修改图片信息，增加图片水印，限制大图片宽度
+     * @param imgpath
+     * @return
+     * @throws GlobalAdminException
+     */
+    public static String changeImgInfo(String imgpath) throws GlobalAdminException {
+        StringBuilder imgUrl = new StringBuilder(imgpath);
+        try {
+            BufferedImage sourceImg=ImageIO.read(new URL(imgpath).openStream());
+            if (sourceImg.getWidth() > 1200) {
+                imgUrl.append("?x-oss-process=image/resize,m_mfit,w_1200,color_ffffff/format,png/watermark,size_20,text_6ZKx5aGY5aSn5pWw5o2u,shadow_88,color_3763C8");
+            } else {
+                imgUrl.append("?x-oss-process=image/watermark,size_20,text_6ZKx5aGY5aSn5pWw5o2u,shadow_88,color_3763C8");
+            }
+        } catch (MalformedURLException e) {
+            throw new GlobalAdminException("图片地址错误");
+        } catch (IOException e) {
+            throw new GlobalAdminException("计算图片尺寸出错");
+        }
+        return imgUrl.toString();
+    }
+
 }

@@ -2,8 +2,8 @@ package com.qtdbp.tradingadmin.service;
 
 import com.github.pagehelper.PageHelper;
 import com.qtdbp.trading.constants.AuditStatusConstants;
-import com.qtdbp.trading.exception.GlobalException;
 import com.qtdbp.trading.model.CrawlersRoleModel;
+import com.qtdbp.tradingadmin.exception.GlobalAdminException;
 import com.qtdbp.tradingadmin.mapper.CrawlersRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,17 +35,17 @@ public class CrawlersRoleService {
      * 审核爬虫规则
      * @param crawlersRoleModel
      * @return
-     * @throws GlobalException
+     * @throws GlobalAdminException
      */
-    public Integer auditRole(CrawlersRoleModel crawlersRoleModel) throws GlobalException {
-        if (crawlersRoleModel.getId() == null || crawlersRoleModel.getId() == 0) throw new GlobalException("id为空，请重新操作");
+    public Integer auditRole(CrawlersRoleModel crawlersRoleModel) throws GlobalAdminException {
+        if (crawlersRoleModel.getId() == null || crawlersRoleModel.getId() == 0) throw new GlobalAdminException("id为空，请重新操作");
         Integer count = 0;
         //审核通过的时候
         if (crawlersRoleModel.getAuditStatus() == AuditStatusConstants.AUDIT_STATUS_PASS) {
             count = crawlersRoleMapper.updateRule(crawlersRoleModel);
         //审核不通过的时候
         } else if (crawlersRoleModel.getAuditStatus() == AuditStatusConstants.AUDIT_STATUS_NO_PASS) {
-            if (crawlersRoleModel.getAuditFailReason() == null) throw new GlobalException("未填写不通过原因，请重新审核");
+            if (crawlersRoleModel.getAuditFailReason() == null) throw new GlobalAdminException("未填写不通过原因，请重新审核");
             count = crawlersRoleMapper.updateRule(crawlersRoleModel);
         }
         return count > 0 ? count : -1;

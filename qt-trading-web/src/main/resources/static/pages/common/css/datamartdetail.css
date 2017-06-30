@@ -16,7 +16,13 @@
     width:1200px ;
     margin:0px auto;
     box-sizing: border-box;
-    padding:4px;
+    padding: 30px;
+    background: #fff;
+    margin-bottom:30px;
+}
+.prointroduce  span{
+    font-family:  Arial,"microsoft yahei" !important;
+    font-size: 16px !important;
 }
 .filter>i{
     display:inline-block;
@@ -27,8 +33,6 @@
     top:4px;
     margin-right:4px;
 }
-
-
 .detail_img{
     width:382px;
     height:259px;
@@ -99,8 +103,6 @@
     margin:0px auto;
     margin-top:40px;
     padding-bottom:20px;
-    border-bottom:1px solid #ddd;
-
 }
 .infor_list{
     padding:20px 0px;
@@ -202,37 +204,15 @@
 .free{
     margin-top:60px;
 }
-
 .qtbig>i{
     color:#0076CB;
+    cursor:pointer;
 }
 .pcscj{
     font-size:14px;
     color:#808080;
     text-decoration: line-through;
 }
-
 .prointroduce img{
     max-width: 1192px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
