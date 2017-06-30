@@ -18,8 +18,8 @@ public class CrawlersRoleModel extends BaseModel{
     private Double price;               //价格
     private String desc;                //详情
     private Integer userRating;        //用户评分
-    private Integer buyCount;          //购买数
-    private Integer viewCount;         //浏览数
+    private int buyCount;          //购买数
+    private int viewCount;         //浏览数
     private String filePath;           //文件路径
     private Integer webType;           //网站类型
     private String webSite;            //采集网站
@@ -124,19 +124,19 @@ public class CrawlersRoleModel extends BaseModel{
         this.userRating = userRating;
     }
 
-    public Integer getBuyCount() {
+    public int getBuyCount() {
         return buyCount;
     }
 
-    public void setBuyCount(Integer buyCount) {
+    public void setBuyCount(int buyCount) {
         this.buyCount = buyCount;
     }
 
-    public Integer getViewCount() {
+    public int getViewCount() {
         return viewCount;
     }
 
-    public void setViewCount(Integer viewCount) {
+    public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
 

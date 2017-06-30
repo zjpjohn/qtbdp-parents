@@ -60,6 +60,9 @@ public class CustomServiceModel extends BaseModel {
     @Transient
     private String createName;          //创建人名字
 
+    @Transient
+    private int applyCount;             //申请数量
+
     public Integer getTypeId() {
         return typeId;
     }
@@ -298,5 +301,13 @@ public class CustomServiceModel extends BaseModel {
 
     public void setCreateName(String createName) {
         this.createName = createName;
+    }
+
+    public int getApplyCount() {
+        return applyCount;
+    }
+
+    public void setApplyCount(int applyCount) {
+        this.applyCount = applyCount;
     }
 }
