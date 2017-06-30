@@ -6,6 +6,7 @@ qtbdp-parents # 父目录
   |-- eureka-server # 注册中心，提供服务的注册发现；比如：qt-trading-web通过RPC调用base-server服务
   |-- qt-trading-web # 钱塘交易中心，具体的web应用
   |-- qt-trading-admin # 钱塘交易中心后台管理系统
+  |-- boss-service # 钱塘交易中心计费系统
 
 # 运行说明
 1. 启动eureka-server的EureKaServerApplication主函数，成功后直接访问地址：http://localhost:8010/
@@ -13,6 +14,7 @@ qtbdp-parents # 父目录
 3. 启动base-service的BaseServiceApplication主函数，成功后直接访问地址：http://localhost:8030/
 4. 启动qt-trading-web的WebApplication主函数，成功后直接访问地址：http://localhost:8040/
 5. 启动qt-trading-admin的AdminApplication主函数，成功后直接访问地址：http://localhost:8050/
+6. 启动boss-service的BossApplication主函数，成功后直接访问地址：http://localhost:8060/
 
 # 2017-05-01
 交易平台V1.0.0正式发布上线
@@ -26,3 +28,15 @@ qtbdp-parents # 父目录
 3. 支持zip文件上传，内容自动拆分多个数据条目
 4. 优化代码，类目接口、文件上传接口
 5. 优化验证码样式
+
+# 2017-06-27
+交易平台V1.2.0正式发布上线
+1. 支持服务商管理，服务商主页，服务商可以发布数据产品、定制爬虫规则、定制数据包
+2. 支持爬虫市场
+3. 支持定制爬虫规则
+4. 支持定制数据包产品
+5. 个人中心支持相应的添加、编辑、查看功能
+6. 支持导航设置-seo优化
+7. 支持api定制
+8. 首页效果改版
+9. 后台管理系统增加导航管理

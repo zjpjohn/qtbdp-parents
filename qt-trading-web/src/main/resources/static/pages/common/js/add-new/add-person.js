@@ -22,7 +22,7 @@ $(function () {
 
     ////加载省市下拉菜单
     $("#Location").citySelect({
-        url:"/tradecenter/js/city.min.js",
+        url:"/pages/common/js/city.min.js",
         prov:"浙江", //省份
         city:"杭州", //城市
         // dist:"萧山区", //区县

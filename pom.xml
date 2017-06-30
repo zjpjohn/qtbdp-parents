@@ -14,15 +14,12 @@
         <module>qt-trading-web</module>
         <module>config-server</module>
         <module>qt-trading-admin</module>
+        <module>boss-service</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <spring-boot-starter-parent.version>1.5.2.RELEASE</spring-boot-starter-parent.version>
-        <spring-cloud-config.version>Dalston.RELEASE</spring-cloud-config.version>
-        <swagger2.version>2.2.2</swagger2.version>
     </properties>
 
     <dependencyManagement>
@@ -30,7 +27,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${spring-boot-starter-parent.version}</version>
+                <version>1.5.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -38,7 +35,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-config.version}</version>
+                <version>Dalston.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -53,12 +50,12 @@
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
-                <version>2.2.2</version>
+                <version>2.5.0</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
-                <version>2.2.2</version>
+                <version>2.5.0</version>
             </dependency>
             <!-- 依赖mybatis -->
             <dependency>

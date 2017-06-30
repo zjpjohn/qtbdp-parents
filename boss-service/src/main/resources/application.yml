@@ -1,0 +1,50 @@
+server:
+  port: 8060
+
+spring:
+  application:
+    name: boss-service
+  profiles:
+    active: ${package.active} # 默认激活application-dev.yml配置
+  http:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+# ===================================================================
+# mybatis配置，包括分页插件配置如下
+# ===================================================================
+mybatis:
+    type-aliases-package: com.qtdbp.trading.model
+    mapper-locations: classpath:mapper/*.xml
+
+mapper:
+    mappers:
+      - com.qtdbp.tradingadmin.utils.BaseMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+# ===================================================================
+# kaptcha配置，验证码
+# ===================================================================
+kaptcha:
+  border:
+    color: 105,179,90
+  textproducer:
+    font:
+      color: blue
+      names: 宋体,楷体,微软雅黑
+    char:
+      length: 4
+  image:
+    width: 150
+    height: 50
+  session:
+    key: code
