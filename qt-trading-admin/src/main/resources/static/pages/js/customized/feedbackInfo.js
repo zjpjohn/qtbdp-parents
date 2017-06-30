@@ -29,5 +29,21 @@ $(function () {
         $('#phone').val(data.phone);//电话
     });
 
+    $.ajax({
+        type: "put",
+        url: "/api/feedback/changeMark",
+        data: {'id' :  id},
+        dataType: "json",
+        success: function (result) {
+            if (result.success) {
+            }else {
+                layer.msg("修改用户反馈查看状态失败",{icon: 5});
+            }
+        },
+        error: function () {
+            layer.msg("修改用户反馈查看状态失败",{icon: 5});
+        }
+    });
+
 });
 

@@ -61,7 +61,7 @@ public class DataUserFeedbackApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户反馈id", dataType = "Integer", required = true, paramType = ApiConstants.PARAM_TYPE_QUERY)
     })
-    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @RequestMapping(value = "/changeMark", method = RequestMethod.PUT)
     public ModelMap updateFeedback(Integer id) throws GlobalAdminException {
 
         ModelMap map = new ModelMap();
