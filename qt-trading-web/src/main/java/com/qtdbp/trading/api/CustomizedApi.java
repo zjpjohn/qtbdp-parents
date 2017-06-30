@@ -12,6 +12,7 @@ import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CustomizedService;
 import com.qtdbp.trading.service.DataTypeService;
 import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.trading.utils.CommonUtil;
 import com.qtdbp.trading.utils.Message;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -76,6 +77,9 @@ public class CustomizedApi extends BaseController {
             }
             if(custom.getRows() == null || custom.getRows() == 0) custom.setRows(10);
             List<CustomServiceModel> customList = customizedService.findCustomizedDataForPage(custom);
+            for (CustomServiceModel serviceModel : customList) {
+                serviceModel.setApplyCount(CommonUtil.randomNum(serviceModel.getId()));
+            }
             map.put("pageInfo", new PageInfo<>(customList));
             map.put("page", custom.getPage());
             map.put("rows", custom.getRows());

@@ -159,6 +159,8 @@ public class DataProductApi extends BaseController{
         ModelMap map = new ModelMap() ;
         try {
             DataProductModel productModel = productService.findProductById(id);
+            productModel.setDownloadCount(productModel.getDownloadCount()+CommonUtil.randomNum(productModel.getId()));
+            productModel.setBuyCount(productModel.getBuyCount()+CommonUtil.randomNum(productModel.getId()));
             map.put("pageInfo", productModel);
         } catch (Exception e) {
             e.printStackTrace();

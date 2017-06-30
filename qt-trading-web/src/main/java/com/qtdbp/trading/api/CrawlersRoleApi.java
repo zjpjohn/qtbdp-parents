@@ -12,6 +12,7 @@ import com.qtdbp.trading.model.DataTypeModel;
 import com.qtdbp.trading.service.CrawlersRoleService;
 import com.qtdbp.trading.service.DataTypeService;
 import com.qtdbp.trading.service.security.model.SysUser;
+import com.qtdbp.trading.utils.CommonUtil;
 import com.qtdbp.trading.utils.Message;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -100,6 +101,9 @@ public class CrawlersRoleApi extends BaseController{
                 if (dataTypes != null && !"".equals(dataTypes)) crawlersRoleModel.setDataTypes(dataTypes);
             }
             List<CrawlersRoleModel> Rolelist = crawlersRoleService.findRoleByCondition(crawlersRoleModel);
+            for (CrawlersRoleModel roleModel : Rolelist) {
+                roleModel.setBuyCount(roleModel.getBuyCount() + CommonUtil.randomNum(roleModel.getId()));
+            }
             map.put("pageInfo", new PageInfo<>(Rolelist));
             map.put("queryParam", crawlersRoleModel);
             map.put("page", crawlersRoleModel.getPage());
